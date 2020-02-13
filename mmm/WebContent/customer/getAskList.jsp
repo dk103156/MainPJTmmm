@@ -277,7 +277,7 @@
 			category(4);
 		});
 		
-		$("div > div> div > button.store").on("click", function(){
+		$("div > div> div > button.home").on("click", function(){
 
 			$("#category").val(5); //홈페이지
 			category(5);
@@ -302,26 +302,26 @@
 		})
 		
 		ajaxPromise("/customer/json/getAskList", datas).then(
-			data=>{
+			data=> {
 				console.log(data)
 				$(".bb").empty();
 				
 				if(data.askList.length!=0){
 					
-					var html = " <table class='table table-hover table-bordered table-sm' >"
+					var html ="<table class='table table-hover table-bordered table-sm'>"
 			        	html +="<thead class='table-active'><tr>"		
-			         	html += "<th align='center'>구분</th> <th align='left' >질문</th></tr></thead>"
-						html += "<tbody class='getTranInfo'>"
+			         	html +="<th align='center'>구분</th><th align='left'>질문</th></tr></thead>"
+						html +="<tbody class='getTranInfo'>"
 				
 					for (var i = 0; i < data.askList.length; i++) {
 						
-						html += "<tr> <td  align='left'>"+data.askList[i].category
-						html+="</td> <td  align='left'> "  + data.askList[i].articleTitle  
-						html+="  </td></tr>"
+						html +="<tr><td align='left'>"+data.askList[i].category
+						html +="</td><td align='left'>"+data.askList[i].articleTitle  
+						html +="</td></tr>"
 
 					}
 					
-					html += " </tbody></table>"
+					html += "</tbody></table>"
 					
 							$(".bb").append(html);
 							
