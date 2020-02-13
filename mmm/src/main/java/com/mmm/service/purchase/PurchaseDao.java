@@ -12,7 +12,7 @@ public interface PurchaseDao {
 	//구매하기
 	public void addPurchase(Purchase purchase) throws Exception;
 	
-	//선물하기
+	//선물하기		
 	public void addGiftPurchase(Purchase purchase) throws Exception;
 	
 	//구매 상세정보

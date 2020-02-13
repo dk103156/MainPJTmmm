@@ -131,36 +131,17 @@
 		<jsp:include page="/product/prodToolBar.jsp" />
 	
 	
- 		<br/><br/><br/>
+ 		<br/><br/>
  		 	
  			
  <div class="container">
-	<div class="col-lg-6 col-sm-6">
 		
-			<div class="col-md-6">
-				<h3 style="color:#f22e42;">&nbsp;STEP 01</h3>
-	    		<h2 style="color:#f22e42;">장바구니</h2>
+			<div class="col-sm-6">
+				<h2>구매 내역</h2>
 			</div>
-			<div class="col-md-6">
-				<h3>&nbsp;STEP 02</h3>
-	    		<h2>선물하기</h2>
-			</div>
-	</div>
 	
-	<div class="col-lg-6 col-sm-6">
-			 <div class="col-md-6">
-				<h3>&nbsp;STEP 03</h3>
-	    		<h2>결제하기</h2>
-			</div>  		
-			<div class="col-md-6">
-				<h3>&nbsp;STEP 04</h3>
-	    		<h2>결제완료</h2>
-			</div> 
-	</div>
-		<hr/>
- 	</div>	
+ </div>	
  	<div class="container">
- 		<br/>
  		<hr style="background-color:black; height:4px;">
  		
  		<div class="row" style="text-align:center;">
@@ -173,57 +154,46 @@
 							</div>
 							<div class="col-md-1" style="text-align:right;">
 							</div>
-							<div class="col-md-1" style="text-align:center;">
+							<div class="col-md-2" style="text-align:center;">
 										수 량
 							</div>
-							<div class="col-md-2" style="text-align:center;">
-										합계
+							<div class="col-md-3" style="text-align:center;">
+										총 구매 가격
 							</div>
-							<div class="col-md-1" style="text-align:center;">
-							</div>
+							
 							<br><hr>
 		</div>
 		
 		<c:set var="i" value="0" />
-		<c:forEach var="cart" items="${list}">
+		<c:forEach var="purchase" items="${list}">
 		<c:set var="i" value="${i}" />
-		<input type="hidden"  name="cartNo"  id="cartNo" value = "${cart.cartNo}">
+		<input type="hidden"  name="purchaseNo"  id="purchaseNo" value = "${purchase.purchaseNo}">
 		${cart.product.prodNo}  
 				 <div class="row cart" style="padding:0.5em;">	
 							<div class="col-md-2" style="text-align:center;vertical-align:middle;">
-										<input type="hidden" name="cartNo" value="${cart.cartNo}">
-										<img src="/resources/image/${cart.product.prodImage}" width ="auto" height="92"><br/>
+										<input type="hidden" name="purchaseNo" value="${purchase.purchaseNo}">
+										<img src="/resources/image/${purchaseProd.prodImage}" width ="auto" height="92"><br/>
 							</div>
-							<div class="col-md-2" style="text-align:center;vertical-align:middle;">
+							<div class="col-md-3" style="text-align:center;vertical-align:middle;">
 									
-										<h4><strong>${cart.product.prodName}</strong></h4>
+										<h4><strong>${purchaseProd.prodName}</strong></h4>
 										<br>
-										<h5>${cart.product.prodDetail}</h5>
+										<h5>${purchaseProd.prodDetail}</h5>
 							</div>
 							<div class="col-md-3" style="text-align:center;vertical-align:middle;">
 							<br>
-										<h3>${cart.product.prodPrice}원</h3>
+										<h3>${purchaseProd.prodPrice}원</h3>
 							</div>
-							<div class="col-md-1" style="text-align:center;vertical-align:right;">
+							<div class="col-md-2" style="text-align:center;vertical-align:right;">
 							<br>
-										<h3>${cart.quantity}개</h3>
+										<h3>${purchase.purchaseQuantity}개</h3>
 							</div>
-							<div class="col-sm-2" style="text-align:center;vertical-align:right;">
+							<div class="col-md-3" style="text-align:center;vertical-align:right;">
 							<br>
-									<h3> ${cart.product.prodPrice*cart.quantity}원</h3>
+									<h3>${purchase.purchasePrice}원</h3>
 							</div>
-							<div class="col-md-1" style="text-align:center;">
-								<br>
-									<img src="/resources/image/barogoomea.PNG" class="addPurchase" name="addPurchase"  width ="75" height="30">
-									<input type="hidden" name="prodNo" id="prodNo"   value="${cart.product.prodNo}">
-									<input type="hidden" name="quantity" id="quantity"  value="${cart.quantity}">
-									
-									<img src="/resources/image/gift.PNG"  class="addGift"  name="addGift"  width ="75" height="30"><br>
-							</div>
-							<div class="col-md-1" style="text-align:center;">
-							<br><br>
-								<img src="/resources/image/delete.PNG" name="deleteCart"  class="deleteCart" width ="30" height="30">
-							</div>
+							
+							
 					</div>
 					<hr/>
 		</c:forEach>

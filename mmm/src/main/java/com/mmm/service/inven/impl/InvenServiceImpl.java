@@ -32,10 +32,15 @@ public class InvenServiceImpl implements InvenService{
 	public void addInven(Inven inven) throws Exception {
 		invenDao.addInven(inven);
 	}
+	
+	@Override
+	public void addGiftInven(Inven inven) throws Exception {
+		invenDao.addGiftInven(inven);
+	}
 
 	@Override
-	public Inven getInven(int prodPinNo) throws Exception {
-		return invenDao.getInven(prodPinNo);
+	public Inven getInven(int invenNo) throws Exception {
+		return invenDao.getInven(invenNo);
 	}
 
 	@Override

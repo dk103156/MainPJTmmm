@@ -29,8 +29,14 @@ public class InvenDaoImpl implements InvenDao {
 	
 	
 	@Override
-	public Inven getInven(int prodPinNo) throws Exception {
-		return sqlSession.selectOne("InvenMapper.getInven", prodPinNo);
+	public void addGiftInven(Inven inven) throws Exception {
+		sqlSession.insert("InvenMapper.addGiftInven",inven);
+	}
+	
+	
+	@Override
+	public Inven getInven(int invenNo) throws Exception {
+		return sqlSession.selectOne("InvenMapper.getInven", invenNo);
 	}
 	
 	
@@ -46,18 +52,10 @@ public class InvenDaoImpl implements InvenDao {
 	}
 	
 	
-//	@Override
-//	public void deleteInven(Inven inven) throws Exception {
-//		sqlSession.delete("InvenMapper.deleteInven", inven);
-//	}
-	
-	
 	@Override
 	public int getTotalCount(Search search) throws Exception {
 		return sqlSession.selectOne("ProductMapper.getTotalCount", search);
 	}
-	
-	
 	
 	
 }	

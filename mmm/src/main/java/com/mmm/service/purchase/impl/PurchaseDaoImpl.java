@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.mmm.common.Search;
+import com.mmm.service.domain.Cart;
 import com.mmm.service.domain.Purchase;
 import com.mmm.service.purchase.PurchaseDao;
 
@@ -26,8 +27,8 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	@Override
 	public void addPurchase(Purchase purchase) throws Exception {
 		sqlSession.insert("PurchaseMapper.addPurchase",purchase);
-		
 	}
+		
 	
 	@Override
 	public void addGiftPurchase(Purchase purchase) throws Exception {

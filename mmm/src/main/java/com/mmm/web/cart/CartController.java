@@ -25,6 +25,7 @@ import com.mmm.service.inven.impl.InvenServiceImpl;
 import com.mmm.service.product.ProductService;
 import com.mmm.service.product.impl.ProductServiceImpl;
 import com.mmm.service.purchase.impl.PurchaseServiceImpl;
+import com.mmm.service.user.UserService;
 
 //==> 구매관리 Controller
 @Controller
@@ -87,33 +88,40 @@ public class CartController {
 	}
 	
 	@RequestMapping(value="getCartList")
-	public String getCartList(@ModelAttribute("cart") Cart cart , Model model , HttpServletRequest request) throws Exception{
+	public String getCartList(@ModelAttribute("cart") Cart cart , Model model , HttpServletRequest request , HttpSession session) throws Exception{
 		
 		System.out.println("/cart/getCartList : GET / POST");
 		
+		User user = (User)session.getAttribute("user");
+		
+		cart.setCartUser(user.getUserNo());
+		
+		cartService.getCartList(cart);
+			
 		Map<String , Object> map = cartService.getCartList(cart);
 		
+		if(user.getUserNo() ==  cart.getCartUser()) {
+			
 		model.addAttribute("list", map.get("list"));
+
+		}
 		
 		System.out.println("getCartList.jsp로 갑니당!");
-	
-		
-		
 		return "forward:/cart/getCartList.jsp";
 	}
 	
-	@RequestMapping(value="deleteCart",method=RequestMethod.DELETE)
-	public String deleteCart(@ModelAttribute("cart") Cart cart) throws Exception {
+	@RequestMapping(value="deleteCart",method=RequestMethod.GET )
+	public String deleteCart(@ModelAttribute("cart") Cart cart ) throws Exception {
 		
 		System.out.println("/cart/deleteCart : DELETE ");
 		
 		cartService.deleteCart(cart);
+			
 		
 		System.out.println("getCartList.jsp로 갑니당!");
 	
 		
-		
-		return "forward:/cart/getCartList.jsp";
+		return "forward:/cart/getCartList";
 	}
 	
 	

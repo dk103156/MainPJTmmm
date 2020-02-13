@@ -16,7 +16,7 @@ public class Purchase {
 	private String rcPhone;				// 받는사람 휴대전화번호
 	private String rcName;				// 받는사람 이름
 	private String message;				// 선물 메세지
-	private int purchaseQuantity;
+	private int purchaseQuantity;		// 구매 갯수
 	
 	
 	
