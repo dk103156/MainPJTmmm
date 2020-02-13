@@ -114,7 +114,7 @@ insert into Ticketing
 (ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
  seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
 values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10005', '일반,일반,일반', 'standard,standard,standard',
-		'F1,F2,F3',3,30000,'1230982-1324-431413','111-2222-3333',
+		'F1,F2,F3',3,30000,'1230982-1324-431413','010-9551-8074',
 		 SYSDATE, 0);		 
 commit;
 
