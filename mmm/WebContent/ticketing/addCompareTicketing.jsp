@@ -1736,9 +1736,18 @@
 <script>
 
 $(function(){
-	franchiseSelector('first')
-	franchiseSelector('second')
-	franchiseSelector('third')
+	<c:if test="${user.role eq 'user'}">
+		franchiseSelector('first')
+		franchiseSelector('second')
+		franchiseSelector('third')
+	</c:if>
+		
+	<c:if test="${user.role ne 'user'}">
+		franchiseSelectorUnUser('first')
+		franchiseSelectorUnUser('second')
+		franchiseSelectorUnUser('third')
+	</c:if>		
+		
    /* 프랜차이즈 셀렉트 바 이미지 삽입 - 프랜차이즈 이벤트 */	
    function franchiseSelector(sequence){
 		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("click",function(){
@@ -1770,6 +1779,37 @@ $(function(){
 			
 		});//end of franchise-select click 
    }
+   
+   function franchiseSelectorUnUser(sequence){
+		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("click",function(){
+			if(sequence=='first'){
+				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				
+			}else if(sequence=='second'){	
+				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				
+			}else if(sequence=='third'){
+				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				
+			}
+			
+			var display =$("div.franchise-list > ul."+sequence).css("display");
+			if(display == 'none'){
+				$("div.franchise-list > ul."+sequence).css("display","contents");
+				//$("div.franchise-list > ul."+sequence+" > li:nth-child(1)").trigger("click");
+			}else{
+				$("div.franchise-list > ul."+sequence).css("display","none");
+				$("div.theater-list ul.list-group."+sequence).empty();
+			}
+			
+		});//end of franchise-select click 
+  }   
 	
 	arrowEvent('first')
 	arrowEvent('second')
