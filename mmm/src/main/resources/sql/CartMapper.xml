@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="CartMapper">
+ 	
+	<resultMap id="cartSelectMap"				type="cart">
+		<result property="cartNo" 					column="cart_no" 			jdbcType="INTEGER"  />
+		<result property="cartUser.userNo" 	column="user_no" 			jdbcType="INTEGER"  />
+		<result property="quantity"					column="quantity" 			jdbcType="INTEGER"  />
+		<result property="cartDate" 				column="cart_date" 		jdbcType="DATE"/>
+		<result property="cartStatus" 				column="cart_status" 	jdbcType="INTEGER"/>
+		
+		<association property="product"  		javaType="product">
+			<id property="prodNo" 	 				column="prod_no" 			jdbcType="INTEGER"  />
+			<result property="prodName"			column="prod_name" 		jdbcType="VARCHAR"  />
+			<result property="prodDate" 			column="prod_date" 			jdbcType="DATE"/>
+			<result property="prodPrice" 			column="prod_price" 		jdbcType="INTEGER"  />
+			<result property="prodDetail" 		column="prod_detail" 		jdbcType="VARCHAR"  />
+			<result property="prodImage" 		column="prod_image" 		jdbcType="VARCHAR"  />
+			<result property="franType" 			column="fran_type" 			jdbcType="INTEGER"  />
+			<result property="prodType" 			column="prod_type" 			jdbcType="INTEGER"  />
+			<result property="quantity" 			column="quantity" 				jdbcType="INTEGER"  />
+		</association>
+	
+	</resultMap>
+	
+	
+	
+	<insert id="addCart" 	parameterType="cart">
+	 	INSERT
+		INTO cart ( cart_no , cart_user , cart_prod , quantity , cart_date , cart_status) 
+		VALUES	 (
+					seq_cart_cart_no.NEXTVAL,
+					 #{cartUser},
+					 #{product.prodNo},
+					 #{quantity},
+					  SYSTIMESTAMP,
+					  0
+					  )
+	 </insert>
+	
+	<select id="getCartList"	parameterType="cart"	resultMap="cartSelectMap" >
+		SELECT c.cart_no, c.cart_user, p.prod_no, c.quantity, p.prod_name, p.prod_detail, p.prod_price, p.prod_image
+		FROM product p, cart c
+		WHERE p.prod_no = c.CART_PROD 
+		ORDER BY cart_date  
+	</select>
+	
+	<delete id="deleteCart" parameterType="cart">
+		DELETE FROM cart 
+		WHERE cart_no = #{cartNo}	
+	</delete>
+	
+	
+</mapper>

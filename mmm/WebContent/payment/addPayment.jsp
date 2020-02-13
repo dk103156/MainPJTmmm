@@ -1,0 +1,466 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
+
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- 	jQuery...  -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="<c:url value="/resources/javascript/jquery.barrating.min.js" />"></script> 
+    <script src="<c:url value="/resources/javascript/rater.min.js" />"></script> 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- fontawesome CDN -->
+    <script src="https://kit.fontawesome.com/e464a52b8d.js" crossorigin="anonymous"></script>
+     
+    <!--  IMP cdn -->
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+     
+<!--      jQuery Redirect v1.1.3 cdn -->
+	<script src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js" type="text/javascript"></script>
+	
+    <style type="text/css">
+
+/* 	div 안에 element들 가운데 정렬 */
+	.row div {
+		float: none;
+		margin: 0 auto;
+	}
+	
+/* 	하단바 마이너스 모양 흰색으로.. */
+	.whiteSym{
+		color : white;
+	}
+	
+    </style>
+    
+	<script type="text/javascript">
+	
+// 	JavaScript에서 사용하기 위해 전역변수 처리..
+// 	회원정보
+	var userName;
+	var phone;
+
+// 	결제를 위한 변수들
+	var ticketingPrice; 	
+	var purchasePrice;
+	var totalPrice;
+	var partPoint;
+	var totalDiscount;
+	var cash;
+	
+// 	var ticketingNo;
+// 	var purchaseNo;
+	
+	function IMPCard(){
+		
+		IMP.request_pay({
+			pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
+			pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+// 			merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+			amount : cash,
+			buyer_name : userName,
+			buyer_tel : phone, 			//누락되면 이니시스 결제창에서 오류
+			name : 'mmm_Import_Payment'
+		}, function(response) {			//결제 후 호출되는 callback함수	
+			
+			if ( response.success ) { 	// imPort 결제 성공
+				console.log('--- imPort결제 성공.. : '+JSON.stringify(response));
+			
+				// form 양식 없이 POST로 보내는 jQuery.. cdn..
+				$.redirect("/payment/addPayment", 				//보낼 url
+							{	"movieName" : '${movie.movieTitle}',			//properties for Ticking VO 
+								"theaterName" : '${ticketing.theaterName}',
+								"screenTime" : '${ticketing.screenTime}',
+								"audienceType" : '${ticketing.audienceType}',
+								"dateTimeNo" : '${ticketing.dateTimeNo}',
+								"seatType" : '${ticketing.seatType}',
+								"seatNo" : '${ticketing.seatNo}',
+								"headCount" : '${ticketing.headCount}',
+								"ticketingPrice" : '${ticketing.ticketingPrice}',
+								"totalPrice" : totalPrice,						//properties for Payment
+								"usingPoint" : partPoint,
+								"cash" : cash,
+								"impUid" : response.imp_uid
+								},
+								"POST");							//보낼 Http Method
+// 							"_blank");							//새창에 띄울 것인지..
+			
+			
+			
+// // 				[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달.
+// 				$.ajax({
+// 					url : "/payment/addPayment",
+// 					type : "POST",
+// 					dataType : "json",
+// 					data : {
+// 						imp_uid : response.imp_uid
+// // 						기타 필요한 데이터가 있다면 추가 전달
+// 					}
+// 				}).done(function(data){
+// 					if(response.success){
+// 						console.log("done.....");
+// 						console.log("response.imp_uid : "+ response.imp_uid);			//고유 ID
+// 						console.log("response.merchant_uid : "+ response.merchant_uid);	//상점 거래 ID
+// 						console.log("response.paid_amount : "+ response.paid_amount);	//결제 금액
+// 						console.log("response.apply_num : "+ response.apply_num);		//카드 승인번호
+// 					}
+					
+// 				});
+			
+			} else {
+				alert('결제실패 : ' + response.error_msg);
+			}
+		})
+	};
+		
+    
+	$(function(){
+		
+// 		회원 정보 세션에서 가져와서 넣어주자
+		userName = '${user.userName}';
+		phone = '${user.phone}';		
+		
+// // 		예매번호 및 구매번호 넣어주자
+// 		ticketingNo = '${ticketing.ticketingNo}';
+// 		purchaseNo = '${purchase.purchaseNo}';
+		
+		console.log(userName+ " / " + phone);
+// 		var ticketingPrice; 	
+// 		var purchasePrice;
+// 		var totalPrice;
+		
+// 		화면 세팅을 위해 변수처리	
+// 		1-1. 예매 가격
+		if (${!empty ticketing.ticketingPrice}) {
+			ticketingPrice = "${ticketing.ticketingPrice}";
+// 			console.log('inner ? : ' + ticketingPrice);
+			$("span[name='barTicketingPrice']").text(ticketingPrice);	
+		}
+// 		console.log('outer ? : ' + ticketingPrice);
+		
+		if (${empty ticketing.ticketingPrice}) {
+			console.log('${ticketing.ticketingPrice}');			
+			ticketingPrice = 0;
+			$("span[name='barTicketingPrice']").text(ticketingPrice);	
+// 			ticketingPrice = 16500;
+		}
+		
+// 		1-2. 구매 가격
+		if (${!empty purchase.purchasePrice}) {
+			purchasePrice = "${purchase.purchasePrice}";
+			$('span[name="barPurchasePrice"]').text(purchasePrice);
+		}
+		if (${empty purchase.purchasePrice}) {
+			purchasePrice = 0;
+			$('span[name="barPurchasePrice"]').text(purchasePrice);
+// 			purchasePrice = 3500;
+		}
+		
+// 		1-3. 총결제금액
+		totalPrice = ticketingPrice*1 + purchasePrice*1;
+		
+		console.log("   ticketingPrice  : "+ ticketingPrice);
+		console.log("   purchasePrice  : "+ purchasePrice);
+		console.log("   totalPrice  : "+ totalPrice);
+		
+// 		name으로 화면 세팅
+		$('span[name="barTotalPrice"]').text(totalPrice);
+		
+		
+		
+		
+// 		2-1 상품권 금액/////////////////////////////////// 작성해야
+		
+// 		2-2 사용 포인트
+// 		포인트 입력이 끝나고 하단바에 포인트 업데이트(이벤트 blur와 keyup.. blur는 필요 업는듯)
+// 		partPoint;
+		totalDiscount=0;
+		cash = totalPrice;
+		
+// 		하단바 (총할인금액, 최종결제금액) 초기 세팅
+		$("#barPartPoint").text(0);
+		$('#barTotalDiscount').text(totalDiscount);
+		$('#barCash').text(cash);
+		
+
+		$("#partPoint").on("keyup",  function(){
+			console.log("partPoint"+ $(this).val())
+			partPoint = $(this).val();
+			$("#barPartPoint").text(partPoint);
+			
+			
+	// 		2-3 총할인금액
+	// 		할인금액이 없을 경우 0으로 ..
+			if (partPoint != 0) {
+				totalDiscount = partPoint;
+			}
+			$('#barTotalDiscount').text(totalDiscount)
+			
+			console.log("disc  : "+ totalDiscount);
+			
+	// 		3. 최종결제금액
+			cash = totalPrice - totalDiscount;
+			console.log(" cash :  " +cash);
+			$('#barCash').text(cash);
+		});
+		
+	
+// 		상품권 3장까지만 사용 가능하도록..
+		var addVoucherCnt = 0;
+		
+// 		상품권 3장까지 추가하는 function
+// 		$('button[name="addVoucher-btn"]').on("click", function(){
+// 		새로 추가되는 애들은 못잡을 수도 있기 때문에 document안에서 찾도록 .. 두번째 parameter는 이벤트걸리는 대상
+		$(document).on("click", "button[name='addVoucher-btn']", function(){
+			var voucher_btn = $(this);
+			
+			var voucher = "<div class='row  mb-3 justify-content-center align-items-center' >";
+			voucher += "<div class='col-md-4 p-1 justify-content-center'>";
+		    voucher += "<label class='mr-md-3 m-0' for='inlineFormCustomSelect'>상품권</label></div>";
+		    voucher += "<div class='col-md-5'><select class='custom-select custom-select-md-3 custom-select-sm'>";
+		    voucher += "<option selected>사용 가능한 상품권을 선택하세요</option><option value='1'>One</option>";
+		    voucher += "<option value='1'>One</option><option value='2'>Two</option><option value='3'>Three</option>";
+		    voucher += "</select></div><div class='col-md-2' name='voucherPoint' ><button type='button' name='addVoucher-btn' class='btn btn-md'>";
+			voucher += "<i class='far fa-plus-square'></i></button></div>"  
+			
+			if (addVoucherCnt <2) {
+				addVoucherCnt += 1;
+				voucher_btn.parent().parent("div.justify-content-center").append(voucher);
+				console.log('vouCNT  : ' + addVoucherCnt )
+			}else if(addVoucherCnt >1) {
+				alert("상품권은 최대 3장까지 사용이 가능합니다.");
+			}
+		});
+		
+// 		IMP  page onload 시 init 해줘야한다. IMP.init(가맹점식별코드)
+		IMP.init('imp58134678');
+		
+// 		import 모달 띄우는 이벤트
+		$("#imp-btn").on("click", function(){
+			IMPCard();
+		});
+		
+	});
+	
+
+	</script>
+    
+    <title>addPay</title>
+  </head>
+  <body>
+    <h1>addPay</h1>
+    
+    <!--     	임의로 userNo 심어주기... TEST 용  -->
+	<input id="userNo" type="hidden" value="11111">
+    
+	  <div class="album py-5 bg-light">
+	    <div class="container">
+	    
+	    
+	      <div class="col-lg-10" style="margin: 0px 0px 200px 0px">
+	   		<div>
+	   		  <h3>결제하기</h3>
+	   		  <div class="row border-bottom mb-2"></div>
+	   		    <p>결제하시기 전에 예매 및 구매 내용을 확인해주세요.</p>
+	   		</div>
+	   		
+	   		
+<!-- 	   		예매정보 -->
+	   		<div class="card mb-4">
+			  <div class="card-header text-white bg-dark" >
+			    <h5 class="card-title mb-0">1. 예매정보</h5>
+			  </div>
+			  <div class="card-body">
+			     <div class="row mb-3 ">
+				     <div class="col-md-4 text-center">
+				      <c:if test="${movie.poster != null }">
+			        	<img id='poster' height="200" width="144" src="${movie.poster}"/>
+			          </c:if>
+			          <c:if test="${movie.poster == null }">
+			        	<img id='poster' height="200" width="144" src="http://placehold.it/144x200/E8117F/ffffff?text=sample"/>
+			          </c:if> 
+			         </div>
+			         <div class="col-md-6 m-3 ">
+			           <div class="border-bottom p-2">
+			              <span class="col-md-4"><h5 class="d-inline">${movie.movieTitle}</h5></span> 
+			              <span class="col-md-2">${movie.movieRating}</span></div>
+			           <table class="table table-borderless table-sm m-2">
+						  <tbody>
+						    <tr>
+						      <th scope="row">극장</th>
+						      <td>${ticketing.theaterName}</td>
+						    </tr>
+						    <tr>
+						    
+						    
+<!-- 						    규비쓰꺼 날 짜 형식 변환 가져다 쓰기  -->
+						      <th scope="row">상영일시</th>
+						      <td>${ticketing.screenTime}</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">관객 정보</th>
+						      <td>${ticketing.headCount} / ${ticketing.audienceType}</td>
+						    </tr>
+						    <tr>
+						      <th scope="row">좌석 정보</th>
+						      <td> ${ticketing.seatNo}/ ${ticketing.seatType}</td>
+						    </tr>
+						  </tbody>
+						</table>
+			         </div>
+		         </div>
+			  	 <div class="border-bottom m-3"></div>
+			  	 <div>
+				   <h5 class="text-right text-primary">예매 금액 : <span name="barTicketingPrice"></span>원</h5>			  	 
+			  	 </div>
+			  </div>
+			</div>
+	   		
+<!-- 	   		구매정보 -->
+			<div class="card mb-4">
+			  <div class="card-header text-white bg-dark" >
+			    <h5 class="card-title mb-0">2. 구매정보</h5>
+			  </div>
+			  <div class="card-body">
+			  
+<!-- 			  	상품 하나당 하나의 row -->
+			     <div class="row pb-3 mb-3 border-bottom">
+				     <div class="col-md-2 text-center">
+			        	<img src="http://placehold.it/90x90/E8117F/ffffff?text=sample" />
+			         </div>
+			         <div class="row col-md m-3 p-3">
+			            <div class="col-6 d-inline">상품명(프랜차이즈)</div>
+			            <div class="col d-inline">1 개</div>
+			            <div class="col d-inline text-right">원</div>
+			         </div>
+		         </div>
+		         
+		         
+			  	 <div>
+				   <h5 class="text-right text-primary">구매 금액 : <span name="barPurchasePrice"></span>원</h5>			  	 
+			  	 </div>
+			  </div>
+			</div>
+	
+<!-- 	   		자체 결제수단 -->
+			<div class="card mb-5">
+			  <div class="card-header text-white bg-dark" >
+			    <h5 class="card-title mb-0">3. 포인트 및 상품권</h5>
+			  </div>
+			  <div class="card-body">
+			  
+			     <div class="row  mb-3 justify-content-center align-items-center" >
+			       <div class="col-md-4 p-1 justify-content-center">
+			          <label class="mr-md-3 m-0" for="inlineFormInputName">포인트</label>
+			       </div>
+			       <div class="col-md-5">
+				      <input type="text" class="form-control" id="partPoint" placeholder="보유포인트: ${totalPoint}">
+					</div>
+		         </div>
+			  
+			  
+			     <div class="row  mb-3 justify-content-center align-items-center" >
+			       <div class="col-md-4 p-1 justify-content-center">
+			          <label class="mr-md-3 m-0" for="inlineFormCustomSelect">상품권</label>
+			       </div>
+			       
+			       <div class="col-md-5">
+				      <select class="custom-select custom-select-md-3 custom-select-sm">
+						  <option selected>사용 가능한 상품권을 선택하세요</option>
+						  <option value="1">One</option>
+						  <option value="2">Two</option>
+						  <option value="3">Three</option>
+					   </select>
+					</div>
+					
+<!-- 					상품권 추가하는 버튼 최대 3개까지 -->
+					<div class="col-md-2" name="voucherPoint" >
+	                  <button type="button" name="addVoucher-btn" class="btn btn-md ">
+						<i class="far fa-plus-square"></i>
+	                  </button>
+	                </div>
+	                
+						
+					   
+		         </div>
+		         
+		     
+			  </div>
+			</div>
+		  </div>
+			
+<!-- 			하단 진행바 -->
+			<div class="fixed-bottom p-3 bg-dark text-center ">
+	   		  <div class="row col-auto align-items-center">
+	   		  
+<!-- 	    총결제금액 -->
+	   		    <div class="card col-md-3 mb-2 p-0">
+	   		      <h6 class="p-2 border-bottom border-danger"> 총 결제금액 </h6>
+	   		      
+<!-- 	   		      얘네 분기문 처리 해줘야... -->
+				  <div class="text-right border-bottom border-danger">
+	   		        <p class="small m-1">(+) 예매 금액 : <span name="barTicketingPrice"></span>원<p>
+	   		        <p class="small m-1">(+) 구매 금액 : <span name="barPurchasePrice"></span>원<p>
+				  </div>
+				  <div class="p-2 mb-2">
+	   		        <h6 >(+) 총 결제금액 : <span name="barTotalPrice"></span>원<h6>
+				  </div>
+	   		    </div>
+	   		    
+<!-- 	     마이너스  -->
+	   		    <div>
+	   		      <i class="fas fa-minus-circle whiteSym"></i>
+	   		    </div>
+	   		    
+<!-- 	      총할인금액 -->
+	   		    <div class="card col-md-3 mb-2 p-0">
+	   		      <h6 class="p-2 border-bottom border-danger"> 총 할인금액 </h6>
+	   		      
+	   		      <div class="text-right border-bottom border-danger">
+	   		        <p class="small m-1">(-) 상품권 금액 : 10000원<p>
+	   		        <p class="small m-1">(-) 사용 포인트 : <span id="barPartPoint"></span>원<p>
+				  </div>
+				  <div class="p-2 mb-2">
+	   		        <h6 >(-) 총 할인금액 : <span id="barTotalDiscount"></span>원</h6>
+				  </div>
+	   		    </div>
+	   		    
+<!-- 	   	 이퀄 -->
+	   		    <div>
+	   		      <i class="fas fa-equals whiteSym"></i>
+	   		    </div>
+	   		    
+<!-- 	     최종결제금액 -->
+	   		    <div class="card col-md-3 mb-2 pb-4 pt-1">
+	   		      <h6 class="p-2 border-bottom border-danger"> 최종결제금액 </h6>
+	   		      <h5> <span id="barCash"></span>원 </h5>
+	   		      <input type="hidden" id="impPrice">
+	   		      <button type="button" id="imp-btn" class="btn btn-danger btn-sm">결제하기</button>
+	   		    </div>
+	   		    
+	   		  </div>
+	   		</div>
+	   		
+	   		
+	   		
+		</div>
+<!-- 		end of container -->
+      </div>
+
+  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+

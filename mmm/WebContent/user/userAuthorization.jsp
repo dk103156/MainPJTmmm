@@ -1,0 +1,438 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Required meta tags -->
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!--  ///////////////////////// CSS ////////////////////////// -->
+<style>
+</style>
+
+<title>본 인 인 증</title>
+
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+
+$(function(){	
+	
+	
+	function getParam(key) {
+	    var params = location.search.substr(location.search.indexOf("?") + 1);
+	    var value = "";
+	    params = params.split("&");
+	    for (var i = 0; i < params.length; i++) {
+	        temp = params[i].split("=");
+	        if ([temp[0]] == key) { value = temp[1]; }
+	    }
+	    return value;
+	}
+
+	var type = getParam("type");
+	
+	function nextPage(keyword, authType){
+	    var f=document.nextPage; //폼 name
+	    f.keyword.value = keyword; //POST방식으로 넘기고 싶은 값
+	    f.authType.value = authType; //POST방식으로 넘기고 싶은 값
+	    f.action="/user/"+type;//이동할 페이지
+	    f.method="post";//POST방식
+	    f.submit();
+	}
+	
+	if(type=="findUnUserPw" || type=="addUnUserView"){
+		$("#emailArea").hide();
+	}
+	
+	if(type=="addUser"||type=="addUnUserView"){ //회원가입
+		// 휴대폰중복체크(1 = 중복 / 0 != 중복)
+		$('#phone').keyup(function() {
+			console.log("클릭!!!")
+			var phone = $('#phone').val();
+			console.log(phone);
+			$.ajax({
+				url : '/user/json/phoneCheckDupl/'+ phone,
+				type : 'get',
+				success : function(data) {
+					console.log("false = 중복o / true = 중복x : "+ data);							
+					
+					if (data == 0) {
+							// 0 : 휴대폰번호가 중복되는 문구
+							$("#confirmNum1").text("등록된 전화번호입니다 :p");
+							$("#confirmNum1").css("color", "red");
+							$("#smsBtn").attr("disabled", true);
+					}else{
+						$("#confirmNum1").text("");
+						$("#smsBtn").attr("disabled", false);
+					} 
+					}, error : function() {
+							console.log("실패");
+					}
+			})//ajax 끝
+		});//중복체크 끝
+		
+		// 이메일중복체크(1 = 중복 / 0 != 중복)
+		$('#email').keyup(function() {
+			console.log("클릭!!!")
+			var email = $('#email').val();
+			console.log(email);
+			$.ajax({
+				url : '/user/json/emailCheckDupl/',
+				method : "post" ,
+				datatype : "json" ,
+				headers : {
+					"Accept" : "application/json" ,
+					"Content-Type" : "application/json"
+				} ,
+				data : JSON.stringify({
+					email : email
+				}), 
+				success : function(data) {
+					console.log("false = 중복o / true = 중복x : "+ data);							
+					
+					if (data == 0) {
+							// 0 : 이메일이 중복되는 문구
+							$("#confirmNum3").text("등록된 이메일입니다 :p");
+							$("#confirmNum3").css("color", "red");
+							$("#sendBtn").attr("disabled", true);
+					}else{
+						$("#confirmNum3").text("");
+						$("#sendBtn").attr("disabled", false);
+					} 
+				}, error : function() {
+						console.log("실패");
+					}
+				})//ajax 끝
+			});//중복체크 끝
+	} else {// 기존회원의 아이디/비번 찾기
+		// 휴대폰중복체크(1 = 중복 / 0 != 중복)
+		$('#phone').keyup(function() {
+			console.log("클릭!!!")
+			var phone = $('#phone').val();
+			console.log(phone);
+			$.ajax({
+				url : '/user/json/phoneCheckDupl/'+ phone,
+				type : 'get',
+				success : function(data) {
+					console.log("false = 중복o / true = 중복x : "+ data);							
+					
+					if (data == 0) {
+							// 0 : 휴대폰번호가 있는 경우
+							$("#confirmNum1").text("");
+							$("#smsBtn").attr("disabled", false);
+					}else{
+						$("#confirmNum1").text("등록되지 않은 전화번호입니다 :p");
+						$("#confirmNum1").css("color", "red");
+						$("#smsBtn").attr("disabled", true);
+					} 
+					}, error : function() {
+							console.log("실패");
+					}
+			})//ajax 끝
+		});//중복체크 끝
+		
+		// 이메일중복체크(1 = 중복 / 0 != 중복)
+		$('#email').keyup(function() {
+			console.log("클릭!!!")
+			var email = $('#email').val();
+			console.log(email);
+			$.ajax({
+				url : '/user/json/emailCheckDupl/',
+				method : "post" ,
+				datatype : "json" ,
+				headers : {
+					"Accept" : "application/json" ,
+					"Content-Type" : "application/json"
+				} ,
+				data : JSON.stringify({
+					email : email
+				}), 
+				success : function(data) {
+					console.log("false = 중복o / true = 중복x : "+ data);							
+					
+					if (data == 0) {
+						// 0 : 이메일이 중복되는 문구
+						$("#confirmNum3").text("");
+						$("#sendBtn").attr("disabled", false);
+					}else{
+						$("#confirmNum3").text("등록되지 않은 이메일입니다 :p");
+						$("#confirmNum3").css("color", "red");
+						$("#sendBtn").attr("disabled", true);
+					} 
+				}, error : function() {
+						console.log("실패");
+					}
+				})//ajax 끝
+			});//중복체크 끝
+	}
+		
+	///////////////////////휴대폰번호 인증///////////////////////////////////
+	$("#smsBtn").on("click", function(){
+		console.log("클릭!")
+		var phone = $("#phone").val();
+		var re5 = /^(01[016789]{1})([0-9]{3,4})([0-9]{4})$/; //폰번호가 적합한지 검사할 정규식
+		console.log(phone)
+		
+		if(phone == null || phone.length <1){
+			$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
+			return;
+		}else if(phone != "" && phone.length <11 ){
+			$("#confirmNum1").text("휴대폰번호를 확인해주세요.");
+		    return;	
+		}else if(re5.test(phone)){
+				$("#confirmNum1").text("");
+				$("#smsBtn").attr("disabled", false);
+		}else{
+			$("#confirmNum1").text("");
+		}
+
+		
+		$.ajax({ 
+			url : "/user/json/sendSMS/" + phone ,
+			method : "get" ,
+			datatype : "json" ,
+			headers : {
+				"Accept" : "application/json" ,
+				"Content-Type" : "application/json"
+			} ,
+			success : function( JSONData , status ) {
+				console.log("동작");
+				console.log(JSONData.status);
+				$("div").text(JSONData.status); 
+			}
+		})
+	})
+	
+
+		
+	$(document).on("click", "#chkBtn", function() {
+		var numStr = $("#numStr").val();
+		var phone = $('#phone').val();
+		var len = numStr.length
+		if(len != 6){
+			$("#confirmNum2").text("인증번호를 확인해주세요.");
+		}else {
+			$.ajax({ 
+				url : "/user/json/authSMS/" + numStr ,
+				method : "get" ,
+				datatype : "json" ,
+				headers : {
+					"Accept" : "application/json" ,
+					"Content-Type" : "application/json"
+				} ,
+				success : function( JSONData , status ) {
+					console.log("동작");
+					console.log(JSONData.status);
+					console.log(type);
+					//$("div").text(JSONData.status); 
+					
+					if(JSONData == 0){
+						//0: 인증번호가 틀림
+						$('confirmNum2'),text('인증번호를 확인해주세요.');
+						$("#confirmNum2").css("color", "red");
+						$("#chkBtn").attr("disabled", true);
+					}else{
+						$("#confirmNum2").text("인증이 완료되었습니다.");
+						$("#chkBtn").attr("disabled", false);
+						
+						if(type=="addUser"||type=="addUnUserView" ){
+							self.location= "/user/addUnUserView";
+						}else{
+							nextPage(phone, "phone");
+						}
+						
+					}
+				}, error : function() {
+					console.log("실패");
+				}
+			})//ajax 끝 
+		}
+		
+	})//폰번호인증번호 입력후 확인 
+			
+	
+	
+	///////////////////////////////이메일 인증////////////////////////////////////
+	$( "#sendBtn" ).on("click" , function() {
+		console.log("click");
+		var email = $("#email").val();
+		var re2 = /^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{1,5}$/g // 이메일이 적합한지 검사할 정규식
+		console.log(email);
+				
+	// 입력한 이메일 유효성 검사 
+	// 단 존재하지 않는 이메일을 보냈을 때에도 이메일 형식에만 맞는다면 동작한다 
+		if( email == null || email.length <1){
+			$("#confirmNum3").text("이메일은 반드시 입력하셔야 합니다.");
+			return;
+		}else if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+			$("#confirmNum3").text("이메일 형식이 아닙니다.");
+	    	return;
+		}else if(re2.test(email)){
+			$("#confirmNum3").text("");
+			$("#sendBtn").attr("disabled", false);	
+     	}else{
+			$("#confirmNum3").text("");
+		}
+				
+		$.ajax({
+			url : "/user/json/checkMail" ,
+			method : "post" ,
+			datatype : "json" ,
+			headers : {
+				"Accept" : "application/json" ,
+				"Content-Type" : "application/json"
+			} ,
+			data : JSON.stringify({
+				email : email
+			}) , 
+			success : function( result , status ) {
+				console.log("동작");
+				console.log(result);
+				console.log(status);
+				if(result){
+					$("#confirmNum3").text("인증메일이 발송되었습니다."); 
+				}else{
+					$("#confirmNum3").text("메일주소를 확인해주세요.!!!"); 
+				}
+ 			}
+		}) 			
+	}); //이메일 인증 끝
+		
+	$(document).on("click", "#chkBtn2", function() {
+		var emailChkNum = $("#emailChkNum").val();
+		var email = $('#email').val();
+		console.log("click") 
+		
+		$.ajax({ 
+				url : "/user/json/authEmail/" + emailChkNum ,
+				method : "get" ,
+				datatype : "json" ,
+				headers : {
+					"Accept" : "application/json" ,
+					"Content-Type" : "application/json"
+				} ,
+				success : function( JSONData , status ) {
+					console.log("동작");
+					console.log(JSONData.status);
+					console.log(type);
+					//$("div").text(JSONData.status); 
+					
+					if(JSONData == 0){
+						//0: 인증번호가 틀림
+						$('confirmNum2'),text('인증번호를 확인해주세요.');
+						$("#confirmNum2").css("color", "red");
+						$("#chkBtn2").attr("disabled", true);
+					}else{
+						$("#confirmNum2").text("인증이 완료되었습니다.");
+						$("#chkBtn2").attr("disabled", false);
+						
+						if(type=="addUser"||type=="addUnUserView" ){
+							self.location= "/user/addUnUserView";
+						}else{
+							nextPage(email, "email");
+						}
+						
+					}
+				}, error : function() {
+					console.log("실패");
+				}
+			})//ajax 끝
+		
+		
+	})//이메일인증번호 입력후 확인 self.location = "/user/authEmail/" +emailChkNum; 
+	
+	
+	 
+
+});
+
+</script>
+</head>
+<body>
+
+<!-- nextPage Form -->
+<form name="nextPage">
+      <input type="hidden" name="keyword"/>
+      <input type="hidden" name="authType"/>
+</form>
+
+	<!--  화면구성 div Start /////////////////////////////////////-->
+	<div class="container" style="margin-top: 10%;">
+	
+		<h1 class="bg-default text-center">본 인 인 증</h1>
+		<p></p>
+
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;">
+				<strong>휴대폰 인증</strong>
+				<form>
+					<div class="form-group row" style="font-size: 12pt;">
+						<label for="phone" class="col-sm-4 col-form-label">휴대전화번호</label>
+						<div class="input-group sm-4">
+							<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" aria-label="Recipient's username"
+								aria-describedby="basic-addon2">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" id="smsBtn"type="button">문자전송</button>
+							</div>
+						</div>
+						<h6 id="confirmNum1" style="color: red;"></h6>
+					</div>
+					<div class="form-group row">
+						<label for="numStr" class="col-sm-4 col-form-label"style="font-size: 12pt;">인증번호</label>
+						<div class="col-sm-6">
+							<input type="number" id="numStr" class="form-control" placeholder="인증번호 6자리">
+						</div>
+					</div>
+					<h6 id="confirmNum2" style="color: red;"></h6>
+					<div class="col-sm-12" style="text-align: center;">
+						<button type="button" class="btn btn-dark" id="chkBtn">확인</button>
+					</div>
+				</form>
+			</div>
+			&nbsp;&nbsp;&nbsp;
+			<div id ="emailArea" class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;">
+				<strong>이메일 인증</strong>
+				<form>
+					<div class="form-group row" style="font-size: 12pt;">
+						<label for="staticEmail" class="col-sm-4 col-form-label">이메일</label>
+						<div class="input-group sm-4">
+							<input type="text" class="form-control" id="email" name="email"
+								placeholder="이메일을 정확히 입력해주세요." aria-label="Recipient's username"
+								aria-describedby="basic-addon2">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" id="sendBtn" type="button">메일전송</button>
+							</div>
+						</div>
+						<h6 id="confirmNum3" style="color: red;"></h6>
+					</div>
+					<div class="form-group row">
+						<label for="emailChkNum" class="col-sm-4 col-form-label" style="font-size: 12pt;">인증번호</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="emailChkNum" placeholder="인증번호"> 
+						</div>
+					</div>
+					<h6 id="confirmNum4" style="color: red;"></h6>
+					<div class="col-sm-12" style="text-align: center;">
+						<button type="button" class="btn btn-dark" id="chkBtn2">확인</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+
+</body>
+</html>

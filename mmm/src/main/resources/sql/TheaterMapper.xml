@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="TheaterMapper">
+
+	<resultMap type="Theater" id="theaterSelectMap">
+		<result property="theaterNo" 	column="theater_no" 	jdbcType="VARCHAR" />
+		<result property="movieName" 	column="movie_Name" 	jdbcType="VARCHAR" /> 
+	<!-- 	<result property="movieNo" column="movie_no" jdbcType="VARCHAR" />  --> <!-- DB TABLE ALTER로 추가했는지 확인 -->
+		<result property="franchise" 	column="franchise" 		jdbcType="VARCHAR" />
+		<result property="theaterName"	column="theater_name"	jdbcType="VARCHAR" />
+		<result property="screenName" 	column="screen_name" 	jdbcType="VARCHAR" />
+		<result property="totalSeat" 	column="total_seat" 	jdbcType="INTEGER" />
+	</resultMap>
+
+	<insert id="addTheater" parameterType="Theater">
+		INSERT into theater 
+		(theater_no, movie_Name, <!-- movie_no, --> franchise, theater_name, screen_name, total_seat)
+		values 
+		(seq_theater_theater_no.NEXTVAL,
+		#{movieName:VARCHAR},
+	<!-- #{movieNo:INTEGER},  -->
+		#{franchise:VARCHAR},
+		#{theaterName:VARCHAR},
+		#{screenName:VARCHAR},
+		DEFAULT) <!-- 130좌석 -->
+	</insert>
+	
+	<!-- trim태그 사이에 다른 절이 삽입되는경우에, 다른 태그도 Overrides동작을 같이 받는다.. -->
+	<update id="updateTheater" parameterType="Theater">
+		UPDATE Theater
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="movieName !=null">movie_Name = #{movieName},</if>
+		<!-- <if test="movieNo !=null">movie_no = #{movieNo},</if>  -->
+			<if test="franchise !=null">franchise = #{franchise},</if>
+			<if test="theaterName !=null">theater_name = #{theaterName},</if>
+			<if test="screenName !=null">screen_name = #{screenName},</if>
+			<if test="totalSeat !=null">total_seat = #{totalSeat},</if>
+		</trim>
+			<where>
+				theater_no = #{theaterNo}
+			</where>
+
+	</update>
+	
+	<delete id="deleteTheater" parameterType="int">
+		DELETE from theater WHERE theater_no = #{theaterNo}
+	
+	</delete>
+	
+
+	<select id="getTheater" parameterType="String"
+		resultMap="theaterSelectMap">
+		select
+		*
+		from theater 
+		WHERE theater_no = #{theaterNo}
+	</select>
+	
+	<select id="lastTheater" resultType="String">
+		SELECT LAST_NUMBER-1 
+		FROM USER_SEQUENCES 
+		WHERE SEQUENCE_NAME = 'SEQ_THEATER_THEATER_NO'
+		
+	</select>
+	
+	<select id="getTheaterList" parameterType="search" resultMap="theaterSelectMap">
+	<!-- <include refid="front" />  -->
+		SELECT *
+		FROM theater
+		<if test="searchCondition != null">
+			<if test="searchCondition==0">
+					WHERE movie_Name like '%'||#{movieName}||'%'
+			</if>
+			
+			<if test="searchCondition==1">
+					WHERE franchise like '%'||#{franchise}||'%'
+			</if>
+			
+			<if test="searchCondition==2">
+					WHERE movie_Name like '%'||#{movieName}||'%' AND franchise like '%'||#{franchise}||'%'
+			</if>
+			
+			
+		</if>
+		order by theater_No
+	</select>
+	<!-- 	<include refid="back" />  -->		
+<!-- 			
+	<sql id="front">
+  		SELECT * FROM (		SELECT inner_table. * ,  ROWNUM AS row_seq  	FROM (	
+  	</sql>
+  	
+  	 <sql id="back">
+  					) inner_table
+		WHERE ROWNUM <![CDATA[ <= ]]> #{currentPage}*#{pageSize} ) 
+		WHERE row_seq BETWEEN ( (#{currentPage}-1)*#{pageSize}+1) AND (#{currentPage}*#{pageSize})
+  	</sql>
+ -->  	  
+	<!-- 
+	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(			SELECT A.*, B.tran_status_code, B.tran_no
+		FROM product A, transaction B
+		WHERE A.prod_no=B.prod_no(+) and B.tran_status_code IS NOT NULL
+		<if test="searchCondition != null">
+			<if test="searchCondition==0">
+					and A.PROD_NO like '%'||#{searchKeyword}||'%'
+			</if>
+			
+			<if test="searchCondition==1">
+					and A.PROD_NAME like '%'||#{searchKeyword}||'%'
+			</if>
+			
+			<if test="searchCondition==2">
+					and A.price like '%'||#{searchKeyword}||'%'
+			</if>
+		</if>
+		order by A.PROD_NO ) 	
+	 </select>	
+	 -->
+
+</mapper>

@@ -1,0 +1,41 @@
+.allrating {
+    background-position: -230px -110px !important;
+}
+
+.rating12 {
+    background-position: -230px -30px !important;
+    
+}
+
+.rating15 {
+    background-position: -230px -50px !important;
+}
+
+.rating19 {
+    background-position: -230px -70px !important;
+}
+
+.ico_movie {
+    float: right;
+    width: 34px;
+    height: 20px;
+    margin: 3px 0 0 6px;
+}
+
+.ico_movie {
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    background: url(http://t1.daumcdn.net/movie/images/pc/ico_movie_180628.png) 0 0 no-repeat;
+    vertical-align: top;
+    text-indent: -9999px;
+}
+
+body, th, td, input, select, textarea, button {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: AppleSDGothicNeo-Regular, "Malgun Gothic", "¸¼Àº °íµñ", dotum, µ¸¿ò, sans-serif;
+    color: rgb(34, 34, 34);
+    letter-spacing: -0.05em;
+}
+

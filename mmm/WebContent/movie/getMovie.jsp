@@ -1,0 +1,350 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8"%>
+
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- 	jQuery...  -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="<c:url value="/resources/javascript/jquery.barrating.min.js" />"></script> 
+    <script src="<c:url value="/resources/javascript/rater.min.js" />"></script> 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!- Star..Rating..을 위한 fontawesome ..  css.. js...-->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<c:url value="/resources/css/fontawesome-stars.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/fontawesome-stars-o.css" />">
+
+    <!-- fontawesome CDN -->
+    <script src="https://kit.fontawesome.com/e464a52b8d.js" crossorigin="anonymous"></script>
+    
+<!--     daum icon css -->
+    <link rel="stylesheet" href="/resources/css/movieIcon.css">
+     
+     
+    <style type="text/css">
+    	img { max-width: 100%; height: auto; }
+    	
+    	.starR1{
+	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
+	    background-size: auto 100%;
+	    width: 15px;
+	    height: 30px;
+	    float:left;
+	    text-indent: -9999px;
+	    cursor: pointer;
+		}
+		.starR2{
+		    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+		    background-size: auto 100%;
+		    width: 15px;
+		    height: 30px;
+		    float:left;
+		    text-indent: -9999px;
+		    cursor: pointer;
+		}
+		.starR1.on{background-position:0 0;}
+		.starR2.on{background-position:-15px 0;}
+    	
+    </style>
+    
+	<script type="text/javascript">
+	
+// 	평점 내리기
+	function fncDoRating(){
+		var movieNo = $("button[name='wish-btn']").parent().children('input[name="movieNo"]').val();
+		var starByUser = $("#starByUser").val();
+		var starUserFlag = $('#starUserFlag').val();
+		
+		console.log('movieNo : '+ movieNo);
+		console.log('starByUser : ' +  starByUser);
+		console.log('starUserFlag : ' +  starUserFlag);
+		
+		var url;
+		
+// 		평점등록이 처음인 경우(등록)
+		if (starUserFlag == 0) {
+			url = "/movie/json/addStarRating";
+		}
+		
+// 		평점등록을 한적이 있는 경우 (수정 or 삭제)
+		if(starUserFlag == 1){
+			url = "/movie/json/updateStarRating";
+			console.log('updateStarRating')
+		}
+		
+		$.ajax(
+			{
+				url : url,
+				method : "POST",
+				data : JSON.stringify({
+					movieNo : movieNo,
+					userNo : $('#userNo').val(),  // 이후에 고쳐야할  가능성이 다분하다 다분해!!^^^^^^^^
+					starByUser : starByUser
+				}) ,
+				dataType : "json",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				}
+			}
+		).done(function(responseJSON){
+			console.log('responseJSON  : ' + JSON.stringify(responseJSON));
+			console.log('starByUser   : ' + starByUser);
+			console.log('변경 전 starUserFlag   : ' + starUserFlag);
+			console.log(responseJSON.movie);
+			console.log(responseJSON.movie.starRating);
+			
+			$('#starUserFlag').val(responseJSON.movie.starUserFlag);
+			$('#starRating').text(responseJSON.movie.starRating);
+			
+			console.log('변경 후 starUserFlag   : ' + $('#starUserFlag').val());
+		})	
+	}/// end of fncDoRating
+	
+	
+	
+// 	좋아요 활성화 / 비활성화 함수 __________wishUserFlag로 처리한다.	
+	function fncDoWish(wish_btn) {
+// 		console.log(wish_btn);
+		var movieNo = wish_btn.parent().children('input[name="movieNo"]').val();
+		var wishUserFlag = wish_btn.parent().children('input[name=wishUserFlag]').val();
+
+		console.log(movieNo);
+		console.log(wishUserFlag);
+		
+		var url;
+		
+		if (wishUserFlag ==0) {
+			url = "/movie/json/addWish";
+		}if (wishUserFlag != 0) {
+			url = "/movie/json/deleteWish";
+			
+		}
+		
+		$.ajax(
+			{
+				url : url,
+				method : "POST",
+				data : JSON.stringify({
+					movieNo : movieNo,
+					userNo : $("#userNo").val() // 이후에 고쳐야할  가능성이 다분하다 다분해!!^^^^^^
+				}),
+				dataType : "json",	//data를 json으로 받았으면 좋겠다.
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				}
+			}		
+		).done(function(responseJSON){
+			console.log(wish_btn.parent().children("input[name='wishUserFlag']").val());	//기존의 flag
+			console.log(responseJSON.movie.wishUserFlag);	//결과로 받는 flag
+			
+			if (wishUserFlag == 0) {		//좋아요 활성화시킬 경우 하트모양 변경
+				$(wish_btn).html("<i class='fas fa-heart text-danger'></i> "+ responseJSON.movie.wishCnt);
+			}if (wishUserFlag != 0) {		//좋아요 비활성화시킬 경우 하트모양 변경
+				$(wish_btn).html("<i class='far fa-heart text-muted'></i> "+ responseJSON.movie.wishCnt)
+			}
+			
+			
+			$(wish_btn).parent().children("input[name='wishUserFlag']").val(responseJSON.movie.wishUserFlag);
+			console.log(wish_btn.parent().children("input[name='wishUserFlag']").val());	//바뀐 flag
+		}).fail(function(result, status){
+			console.log(result, status);
+		});
+	};// end of fncDoWish()
+	
+	
+// 	예매하기로 넘어가는 함수
+	function fncTicketing(){
+		
+	};
+	
+	
+	
+	$(function(){
+// 		영화 번호 
+		var movieNo = $("button[name='wish-btn']").parent().children('input[name="movieNo"]').val();
+		console.log(' movieNo'+ movieNo)
+		console.log(' starUserFlag : ' + $('#starUserFlag').val());
+		
+// 		load시 영상을 넣도록...
+		$('#player').attr("src","http://www.youtube.com/embed/"+ "${movie.trailer}");
+		
+// 		평점 이벤트
+		$("button[name='rate']").on("click", function(){
+			fncDoRating();
+		});
+		
+		$('.starRev span').click(function(){
+			  $(this).parent().children('span').removeClass('on');
+			  $(this).addClass('on').prevAll('span').addClass('on');
+			  var rateScore = ($(this).parent().children().index(this)+1);	//*****************************************************************************
+			  $('#starByUser').val(rateScore);
+			  return false;
+			});
+		
+		
+// 		좋아요 버튼 이벤트
+		$("button[name='wish-btn']").on("click", function(){
+			var wish_btn = $("button[name='wish-btn']");
+// 			var wish_btn = $(this);
+// 			console.log(userNo);
+// 			console.log( wish_btn );
+			
+// 			if (wishUserFlag == 0) {
+// 				fncAddWish(wish_btn);	
+// 			}if (wishUserFlag == 1) {
+// 				fncDeleteWish(wish_btn);
+// 			}
+
+			fncDoWish(wish_btn);
+		});
+		
+// 		예매 버튼 이벤트
+		$("button[name='ticketing-btn']").on("click", function(){
+			var wish_btn = $(this);		
+// 			console.log(userNo);
+			
+			fncTikecting();
+		});
+		
+	});
+
+	</script>
+    
+    <title>MovieDetail</title>
+  </head>
+  <body>
+    <h1>MovieDetail</h1>
+    
+    <!--     	임의로 userNo 심어주기... TEST 용  -->
+	<input id="userNo" type="hidden" value="11111">
+    
+	  <div class="album py-5 bg-light">
+	    <div class="container">
+	    	<div class="col-lg-9">
+			    <div class="row">
+	   		        <div class="col-md-4 text-center">
+			        	<img id="poster" src="${movie.poster}" alt="">
+			        </div>
+			    
+			        <div class="col-md-8">
+			        	<div class="row border-bottom">
+				        	<div class="col-md">
+					        	<h3 id="movieTitle" class="blog-post-title d-inline">${movie.movieTitle}</h3>
+					        		        	 <!--  					       관람등급 -->
+									<c:choose>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='전체관람가'}">
+											<em class = "ico_movie allrating">${movie.movieRating}</em>
+										</c:when>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='12세이상관람가'}">
+											<em class = "ico_movie rating12">${movie.movieRating}</em>
+										</c:when>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='15세이상관람가'}">
+											<em class = "ico_movie rating15">${movie.movieRating}</em>
+										</c:when>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='청소년관람불가'}">
+											<em class = "ico_movie rating19">${movie.movieRating}</em>
+										</c:when>
+									</c:choose>
+					        	<p class="blog-post-meta">${movie.movieTitleEng }</p>
+					        	
+				        	</div>
+				        	
+<!-- 				        	상영예정작은 평점을 내릴 수 없도록.. 분기문 처리  -->
+				        	<c:if test="${movie.onBoxOfficeFlag == 1}">
+					        	<div class="col-md text-center my-auto">
+						        	<div>
+						        		<div class="starRev">
+										  <span class="starR1 on">별1_왼쪽</span>
+										  <span class="starR2">별1_오른쪽</span>
+										  <span class="starR1">별2_왼쪽</span>
+										  <span class="starR2">별2_오른쪽</span>
+										  <span class="starR1">별3_왼쪽</span>
+										  <span class="starR2">별3_오른쪽</span>
+										  <span class="starR1">별4_왼쪽</span>
+										  <span class="starR2">별4_오른쪽</span>
+										  <span class="starR1">별5_왼쪽</span>
+										  <span class="starR2">별5_오른쪽</span>
+										</div>
+										<div class="rating" data-rate-value=6></div>
+										
+						        		<span id="starRating"> ${movie.starRating}</span>
+						        		 
+						        		<input id="starUserFlag" type="hidden" value="${movie.starUserFlag}">
+						        	   <input id="starByUser" type="text" value="${movie.starByUser}" placeholder="평점 0~10">
+						        	   <button type="button" name="rate">등록</button>
+						        	</div>
+					        	</div>
+				        	</c:if>
+				        </div>
+				        <div class="row">
+							<div class="col-md  text-center" style="margin:10px">
+								<div class="text-left">
+									<p>- <span class="font-weight-bold">감독 :</span> ${movie.director}  
+									/ <span class="font-weight-bold">배우 :</span> ${movie.actor}</p>
+									<p>- <span class="font-weight-bold">장르 :</span> ${movie.genreString} 
+									/ <span class="font-weight-bold">런닝타임 : </span>${movie.runningTime} 분</p>
+									<p>- <span class="font-weight-bold">개봉일자 :</span> ${movie.releaseDate}</p>
+								</div>
+								
+								<div class="btn-group">
+									<input name="movieNo" type="hidden" value="${movie.movieNo}"/>
+									<input name="wishUserFlag" type="hidden" value="${movie.wishUserFlag}"/>
+									<button type="button" name="ticketing-btn" class="btn btn-outline-secondary"><i class="fas fa-ticket-alt"></i>예매</button>
+	<!-- 			                  	좋아요 버튼 --------------------------------------------------------------->
+	<!-- 								wishUserFlag 가 1인 경우==> 좋아요가 눌린 상태 -->
+	<!-- 								wishUserFlag 가 0인 경우==> 좋아요가 눌리지 않은 상태 -->
+									
+				                  	<button type="button" name="wish-btn" class="btn btn-outline-secondary">
+				                 	 <c:if test="${movie.wishUserFlag ne null}">
+					                 	 <c:choose>
+					                 	 	<c:when test="${movie.wishUserFlag eq 1}">
+					                 	 		<i class="fas fa-heart text-danger"></i> ${movie.wishCnt}
+					                 	 	</c:when>
+					                 	 	<c:otherwise><i class="far fa-heart text-muted"></i> ${movie.wishCnt}</c:otherwise>
+					                 	 </c:choose>
+				                 	 </c:if>
+				                  </button>
+								</div>
+							</div>
+				        </div>
+			        </div>
+	
+			    </div>
+			    <div class="border-bottom" style="margin-top:10px">
+			    </div>
+			    <div class="row" style="margin-top:10px">
+			        <div class="col-md-6 embed-responsive embed-responsive-16by9">
+			        	<h4>무비 트레일러</h4>
+			        	<iframe id="player" class="embed-responsive-item" width="640" heigth="390
+			        		src=""></iframe>
+			        </div>
+			        <div class="col-md-6" style="padding:20px">
+			        	<div>
+			        		<p>줄거리</p>
+			        		<p>${movie.summary}</p>
+			        	</div>
+			        </div>
+			    </div>
+			</div>
+		</div>
+		
+      </div>
+
+  	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
