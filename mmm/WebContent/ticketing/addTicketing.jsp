@@ -142,6 +142,7 @@
 	  	opacity : 0.7;
 	  }
 	  
+	  
 	  .list-group{
 	    line-height: 33px;
 	  }	  
@@ -912,13 +913,14 @@ function check(){
 			  for(var j in data){
 				  searchArray.push(data[j].movieName);
 			  }
-	
-			  
+				
+			    
 			  var movieArray =document.querySelectorAll("div.movie-list > ul > li");
+			  console.log(movieArray);
 			  //for(var i in movieArray){ var i in을 하면 native code도 가져온다 뭐지 ㅡㅡ; 원인파악불가
 			  $(movieArray).removeClass("off")
 			  for(var i=0; i<movieArray.length; i++){
-				  if(searchArray.indexOf(movieArray[i].innerText)==-1){
+				  if(searchArray.indexOf($(movieArray[i]).attr("title"))==-1){
 					 $(movieArray[i]).addClass("off")
 				  }
 			  }

@@ -39,7 +39,7 @@ import com.mmm.service.theater.TheaterService;
 public class TicketingController {
 
 	///Field
-	@Autowired
+	@Autowired 
 	private TicketingService ticketingService;
 	
 	@Autowired
