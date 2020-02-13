@@ -223,7 +223,7 @@
                   <div class="movie-list text-md-left">
                   	<ul class="list-group">
 	                  	<c:forEach var="i" items="${movieList}">
-	                      <li class="list-group-item py-2">
+	                      <li class="list-group-item py-2" title="${i.movieName}">
 	                      
 	                       <c:if test= "${ i.rating == '전체'}">	
 	                        	<a href="#">
@@ -881,6 +881,31 @@
  		  		  			
  				  		  theaterFirstCheck = $.trim($(this).text())
  		   			 	  checkFirst();
+ 				  		  
+				 	    	 //극장 선택 div 없애기 
+				 	    	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
+				 	    	 //극장 선택 div 없앤 후 극장명 띄워주기!
+				 	    	 $("#theater").css("display","block");
+				 	         $("#date").css("display","block");
+				 	         $("#screen").css("display","block");
+				 	         $("#number").css("display","block");
+				 	    	
+			    			// 좌석 선택 버튼 "빨간불" 해제하기!
+			    		    $(".btn-right").removeClass("on");
+			    		  	$(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")
+			    		  	
+					        // 상태바 "극장" 찍기! 
+					        $("#theater").children().first().next().text($.trim($(this).text()));
+			    		  	// 상태바 "극장" 타이틀 찍기!
+			    		  	$("#theater").children().first().next().attr("title", $.trim($(this).text()));
+			    		  	
+			    			// 시간 선택 이벤트 해제시 "상영관" 텍스트 "제거"
+			    			$("#screen").children().first().next().text("");
+			    			
+			    			// 시간 선택 이벤트 해제시 "상영시간" 텍스트만 "제거"
+			    			var origin_date = $("#date").children().first().next().text();
+			    			var update_date = origin_date.substring(0,13)
+			    			$("#date").children().first().next().text(update_date)
 		
 					  });//end of click
  
@@ -1096,6 +1121,31 @@
  		  		  			
  				  		  theaterSecondCheck = $.trim($(this).text())
  		   			 	  checkSecond();
+ 				  		  
+				 	    	 //극장 선택 div 없애기 
+				 	    	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
+				 	    	 //극장 선택 div 없앤 후 극장명 띄워주기!
+				 	    	 $("#theater").css("display","block");
+				 	         $("#date").css("display","block");
+				 	         $("#screen").css("display","block");
+				 	         $("#number").css("display","block");
+				 	    	
+			    			// 좌석 선택 버튼 "빨간불" 해제하기!
+			    		    $(".btn-right").removeClass("on");
+			    		  	$(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")
+			    		  	
+					        // 상태바 "극장" 찍기! 
+					        $("#theater").children().first().next().text($.trim($(this).text()));
+			    		  	// 상태바 "극장" 타이틀 찍기!
+			    		  	$("#theater").children().first().next().attr("title", $.trim($(this).text()));
+			    		  	
+			    			// 시간 선택 이벤트 해제시 "상영관" 텍스트 "제거"
+			    			$("#screen").children().first().next().text("");
+			    			
+			    			// 시간 선택 이벤트 해제시 "상영시간" 텍스트만 "제거"
+			    			var origin_date = $("#date").children().first().next().text();
+			    			var update_date = origin_date.substring(0,13)
+			    			$("#date").children().first().next().text(update_date)
 		
 					  });//end of click
 					  
@@ -1311,6 +1361,31 @@
  		  		  			
  				  		  theaterThirdCheck = $.trim($(this).text())
  		   			 	  checkThird();
+ 				  		  
+				 	    	 //극장 선택 div 없애기 
+				 	    	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
+				 	    	 //극장 선택 div 없앤 후 극장명 띄워주기!
+				 	    	 $("#theater").css("display","block");
+				 	         $("#date").css("display","block");
+				 	         $("#screen").css("display","block");
+				 	         $("#number").css("display","block");
+				 	    	
+			    			// 좌석 선택 버튼 "빨간불" 해제하기!
+			    		    $(".btn-right").removeClass("on");
+			    		  	$(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")
+			    		  	
+					        // 상태바 "극장" 찍기! 
+					        $("#theater").children().first().next().text($.trim($(this).text()));
+			    		  	// 상태바 "극장" 타이틀 찍기!
+			    		  	$("#theater").children().first().next().attr("title", $.trim($(this).text()));
+			    		  	
+			    			// 시간 선택 이벤트 해제시 "상영관" 텍스트 "제거"
+			    			$("#screen").children().first().next().text("");
+			    			
+			    			// 시간 선택 이벤트 해제시 "상영시간" 텍스트만 "제거"
+			    			var origin_date = $("#date").children().first().next().text();
+			    			var update_date = origin_date.substring(0,13)
+			    			$("#date").children().first().next().text(update_date)
 		
 					  });//end of click
 					  
@@ -1736,9 +1811,18 @@
 <script>
 
 $(function(){
-	franchiseSelector('first')
-	franchiseSelector('second')
-	franchiseSelector('third')
+	<c:if test="${user.role eq 'user'}">
+		franchiseSelector('first')
+		franchiseSelector('second')
+		franchiseSelector('third')
+	</c:if>
+		
+	<c:if test="${user.role ne 'user'}">
+		franchiseSelectorUnUser('first')
+		franchiseSelectorUnUser('second')
+		franchiseSelectorUnUser('third')
+	</c:if>		
+		
    /* 프랜차이즈 셀렉트 바 이미지 삽입 - 프랜차이즈 이벤트 */	
    function franchiseSelector(sequence){
 		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("click",function(){
@@ -1770,6 +1854,37 @@ $(function(){
 			
 		});//end of franchise-select click 
    }
+   
+   function franchiseSelectorUnUser(sequence){
+		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("click",function(){
+			if(sequence=='first'){
+				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				
+			}else if(sequence=='second'){	
+				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				
+			}else if(sequence=='third'){
+				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				
+			}
+			
+			var display =$("div.franchise-list > ul."+sequence).css("display");
+			if(display == 'none'){
+				$("div.franchise-list > ul."+sequence).css("display","contents");
+				//$("div.franchise-list > ul."+sequence+" > li:nth-child(1)").trigger("click");
+			}else{
+				$("div.franchise-list > ul."+sequence).css("display","none");
+				$("div.theater-list ul.list-group."+sequence).empty();
+			}
+			
+		});//end of franchise-select click 
+  }   
 	
 	arrowEvent('first')
 	arrowEvent('second')
