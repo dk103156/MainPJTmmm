@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!--  ///////////////////////// JSTL  ////////////////////////// -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,15 +41,11 @@
 	</div><!-- end of row -->
 	
 	<div class="row">
-		<div class="col-4">
-			<img src="${dateTime.poster }" width="300" height="350" />
+		<div class="col-4 text-center my-auto">
+			<img src="${movie.poster}" width="200" height="280" />
 		</div>
 		<div class="col-1"></div>
 		<div class="col-7">		
-			<div class="row mb-4">
-				<div class="col-3">예매 번호</div>
-				<div class="col-9">${ticketing.ticketingNo }</div>
-			</div>		
 			<div class="row mb-4">
 				<div class="col-3">예매 PIN NO</div>
 				<div class="col-9">${ticketing.ticketingPinNo }</div>
@@ -54,7 +56,7 @@
 			</div>
 			<div class="row mb-4">
 				<div class="col-3">극장</div>
-				<div class="col-9">${dateTime.theaterName }</div>
+				<div class="col-9">${ticketing.theaterName }</div>
 			</div>
 			<div class="row mb-4">
 				<div class="col-3">예매일시</div>
@@ -70,12 +72,48 @@
 			</div>
 			<div class="row mb-4">
 				<div class="col-3">결제금액</div>
-				<div class="col-9">원</div>
+				<div class="col-9">${payment.totalPrice}원</div>
 			</div>
-			<div class="row">
+			<div class="row mb-4">
 				<div class="col-3">결제수단</div>
-				<div class="col-9">현금 20000원</div>
+				<div class="col-9">
+				<c:choose>
+					<c:when test="${payment.payMethod==0}">
+						<div class="col">현금 ${payment.cash}원</div>
+					</c:when>
+					<c:when test="${payment.payMethod==1}">
+						<div class="col">포인트 ${payment.usingPoint}p</div>
+					</c:when>
+					<c:when test="${payment.payMethod==2}">
+						<div class="col">상품권 ${payment.cash}원</div>
+					</c:when>
+					<c:when test="${payment.payMethod==3}">
+						<div class="col">현금 ${payment.cash}원</div>
+						<div class="col">포인트 ${payment.usingPoint}p</div>
+					</c:when>
+					<c:when test="${payment.payMethod==4}">
+						<div class="col">현금 ${payment.cash}원</div>
+						<div class="col">상품권 ${payment.cash}원</div>
+					</c:when>
+					<c:when test="${payment.payMethod==5}">
+						<div class="col">포인트 ${payment.usingPoint}p</div>
+						<div class="col">상품권 ${payment.cash}원</div>
+					</c:when>
+					<c:when test="${payment.payMethod==6}">
+						<div class="col">현금 ${payment.cash}원</div>
+						<div class="col">포인트 ${payment.usingPoint}p</div>
+						<div class="col">상품권 ${payment.cash}원</div>
+					</c:when>
+				</c:choose>
+				</div>
 			</div>			
+			
+			<c:if test="${payment.payMethod==0 || payment.payMethod==3 || payment.payMethod==4 || payment.payMethod==6}">
+				<div class="row ">
+					<div class="col-3">적립포인트</div>
+					<div class="col-9">${payment.savingPoint}원</div>
+				</div>
+			</c:if>
 		</div>
 	</div><!-- end of row -->
 	
