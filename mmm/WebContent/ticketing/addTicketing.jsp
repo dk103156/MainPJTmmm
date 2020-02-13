@@ -1029,6 +1029,31 @@ function check(){
 	  		  			
 			  		  theaterCheck = $.trim($(this).text())
 	   			 	  check();
+			  		  
+			 	    	 //극장 선택 div 없애기 
+			 	    	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
+			 	    	 //극장 선택 div 없앤 후 극장명 띄워주기!
+			 	    	 $("#theater").css("display","block");
+			 	         $("#date").css("display","block");
+			 	         $("#screen").css("display","block");
+			 	         $("#number").css("display","block");
+			 	    	
+		    			// 좌석 선택 버튼 "빨간불" 해제하기!
+		    		    $(".btn-right").removeClass("on");
+		    		  	$(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")
+		    		  	
+				        // 상태바 "극장" 찍기! 
+				        $("#theater").children().first().next().text($.trim($(this).text()));
+		    		  	// 상태바 "극장" 타이틀 찍기!
+		    		  	$("#theater").children().first().next().attr("title", $.trim($(this).text()));
+		    		  	
+		    			// 시간 선택 이벤트 해제시 "상영관" 텍스트 "제거"
+		    			$("#screen").children().first().next().text("");
+		    			
+		    			// 시간 선택 이벤트 해제시 "상영시간" 텍스트만 "제거"
+		    			var origin_date = $("#date").children().first().next().text();
+		    			var update_date = origin_date.substring(0,13)
+		    			$("#date").children().first().next().text(update_date)
 	
 					  });//end of click
 			  }else if(selectedFranchise.text()=='롯데시네마'){
@@ -1040,6 +1065,31 @@ function check(){
 	  		  			
 			  		  theaterCheck = $.trim($(this).text())
 	   			 	  check();
+			  		  
+			 	    	 //극장 선택 div 없애기 
+			 	    	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
+			 	    	 //극장 선택 div 없앤 후 극장명 띄워주기!
+			 	    	 $("#theater").css("display","block");
+			 	         $("#date").css("display","block");
+			 	         $("#screen").css("display","block");
+			 	         $("#number").css("display","block");
+			 	    	
+		    			// 좌석 선택 버튼 "빨간불" 해제하기!
+		    		    $(".btn-right").removeClass("on");
+		    		  	$(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")
+		    		  	
+				        // 상태바 "극장" 찍기! 
+				        $("#theater").children().first().next().text($.trim($(this).text()));
+		    		  	// 상태바 "극장" 타이틀 찍기!
+		    		  	$("#theater").children().first().next().attr("title", $.trim($(this).text()));
+		    		  	
+		    			// 시간 선택 이벤트 해제시 "상영관" 텍스트 "제거"
+		    			$("#screen").children().first().next().text("");
+		    			
+		    			// 시간 선택 이벤트 해제시 "상영시간" 텍스트만 "제거"
+		    			var origin_date = $("#date").children().first().next().text();
+		    			var update_date = origin_date.substring(0,13)
+		    			$("#date").children().first().next().text(update_date)
 	
 					  });//end of click
 			  }else if(selectedFranchise.text()=='메가박스'){
@@ -1051,6 +1101,31 @@ function check(){
 	  		  			
 			  		  theaterCheck = $.trim($(this).text())
 	   			 	  check();
+			  		  
+			 	    	 //극장 선택 div 없애기 
+			 	    	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
+			 	    	 //극장 선택 div 없앤 후 극장명 띄워주기!
+			 	    	 $("#theater").css("display","block");
+			 	         $("#date").css("display","block");
+			 	         $("#screen").css("display","block");
+			 	         $("#number").css("display","block");
+			 	    	
+		    			// 좌석 선택 버튼 "빨간불" 해제하기!
+		    		    $(".btn-right").removeClass("on");
+		    		  	$(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")
+		    		  	
+				        // 상태바 "극장" 찍기! 
+				        $("#theater").children().first().next().text($.trim($(this).text()));
+		    		  	// 상태바 "극장" 타이틀 찍기!
+		    		  	$("#theater").children().first().next().attr("title", $.trim($(this).text()));
+		    		  	
+		    			// 시간 선택 이벤트 해제시 "상영관" 텍스트 "제거"
+		    			$("#screen").children().first().next().text("");
+		    			
+		    			// 시간 선택 이벤트 해제시 "상영시간" 텍스트만 "제거"
+		    			var origin_date = $("#date").children().first().next().text();
+		    			var update_date = origin_date.substring(0,13)
+		    			$("#date").children().first().next().text(update_date)
 	
 					  });//end of click 
 			  }
