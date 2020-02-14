@@ -53,7 +53,56 @@ $(function(){
 		alert("로그인 정보가 올바르지 않습니다.");
 	}
 	
+	function validate() {
+	    var re =  /^[0-9a-z]{5,15}$/;  // 아이디와 패스워드가 적합한지 검사할 정규식
+	    
+	 	var id= $("#userId").val();  //숫자,영문섞어서 5~15자 이내   	
+		var pw= $("#password").val(); //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력    		
+		
+		if(!check(re,id,"아이디는 5~15자의 영문 소문자와 숫자로만 입력")) {
+			console.log(id);
+			$("#userId").focus();
+		    return;
+		}
+		
+		if(!check(re,pw,"패스워드는 5~15자의 영문 소문자와 숫자로만 입력")) {
+		    return;
+		}
+	}
+	
+	function check(re, what, message) {
+    	if(re.test(what)) {
+        return true;
+    	}
+    	alert(message);
+	}
+	
 	//======================"로그인" Event 연결==========
+		
+	$("#password").on("keydown",function (event) {
+		 if(event.keyCode == 13){//키가 13이면 실행 (엔터는 13)
+			console.log("클릭");
+			id= $('#userId').val();
+			pw= $('#password').val();
+			validate();
+			
+			if(id == '' || id ==null||pw == '' || pw ==null){
+				alert('아이디와 비밀번호를 입력하세요.');
+				$('#loginBtn').attr("disabled", true);
+				location.reload();
+			/* }else if(pw == '' || pw ==null){
+				alert('비밀번호를 입력하세요.');
+				$('#loginBtn').attr("disabled", true); */
+			}else{
+				$('#loginBtn').attr("disabled", false);
+				$('form').attr('method','POST').attr('action','/user/login').submit();	
+			}
+		 }
+	})
+
+			
+		
+	
 	$('#loginBtn').on('click',function(){
 		console.log("클릭");
 		id= $('#userId').val();
@@ -131,7 +180,7 @@ $(function(){
 	  			<a href="/user/userAuthorization?type=findId"  title="아이디 찾기">아이디찾기></a>&nbsp; 
 	  			<a href="/user/userAuthorization?type=findPw"  title="비밀번호 찾기">비밀번호찾기></a>&nbsp; 
 	  			<a href="/user/userAuthorization?type=addUnUserView"  title="비회원 예매">비회원예매></a>&nbsp; 
-	  			<a href="/user/unUserLogin"  title="비회원 로그인">비회원 에매확인></a>&nbsp; 
+	  			<a href="/user/unUserLogin"  title="비회원 로그인">비회원 예매확인></a>&nbsp; 
 	  			<a href="/user/userAuthorization?type=findUnUserPw"  title="비회원 비밀번호찾기">비회원 비밀번호찾기></a>
 	  		</p>
 	  		<div name="naverLogin" class="text-center">
