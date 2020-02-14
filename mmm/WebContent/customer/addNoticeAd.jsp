@@ -155,7 +155,7 @@
 	</div>
 	    
 	  
-<form>
+<form autocomplete="off">
 		<br>	
 			<div class="form-group">
 			  <input type="text" class="form-control" name="articleTitle">

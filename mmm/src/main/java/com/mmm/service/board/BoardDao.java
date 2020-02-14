@@ -39,4 +39,6 @@ public interface BoardDao {
 	
 	public List<Article> getArtBlindList(Search search) throws Exception;
 	
+	public Article getReply(int articleNo) throws Exception;
+	
 }

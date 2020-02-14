@@ -170,7 +170,7 @@ $(document).ready(function() {
 	       <h3>고객센터</h3>
 	       <hr>
 	    </div>
-	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
+	  <div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
 	    <button type="button" name="ask" class="btn btn-outline-secondary">자주찾는질문</button>
 	    <button type="button" name="contact" class="btn btn-outline-secondary active">일대일문의</button>
@@ -180,7 +180,7 @@ $(document).ready(function() {
 
 </div>
 	  
-<form>
+<form autocomplete="off">
 
 	<div class="container">
 	

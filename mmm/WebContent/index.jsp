@@ -41,7 +41,10 @@
 	<li> <a href="event/getPreviewList">이벤트 목록조회</a></li>
 	<li> <a href="event/getQuizList">퀴즈 풀기</a></li>
 </ul>
-
+<ul>
+  <h3>7.customer</h3>	
+	<li> <a href="customer/getContactList">일대일문의 목록조회</a></li>
+</ul>
 	
 </body>
 </html>

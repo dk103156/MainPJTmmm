@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class Article {
 	
 	private int articleNo; 
+	private int replyNo;
+	
 	private String userId;
 	private int articleStatus;
 	private int articleType;
@@ -30,6 +32,12 @@ public class Article {
 	private String previewImage; //시사회 이미지 URI
 	
 	
+	public int getReplyNo() {
+		return replyNo;
+	}
+	public void setReplyNo(int replyNo) {
+		this.replyNo = replyNo;
+	}
 	public String getPreviewImage() {
 		return previewImage;
 	}
