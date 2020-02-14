@@ -28,10 +28,15 @@
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
      
 <!--      jQuery Redirect v1.1.3 cdn -->
-	<script src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js" type="text/javascript"></script>
+	<script src="https://cdn.rawgit.com/mgalante/jquery.redirect/master/jquery.redirect.js" type="text/javascript"/>
+	
+<!-- 	SweetAlert2 CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
+	
+	
 	
     <style type="text/css">
-
 /* 	div 안에 element들 가운데 정렬 */
 	.row div {
 		float: none;
@@ -62,6 +67,7 @@
 	
 // 	var ticketingNo;
 // 	var purchaseNo;
+
 	
 	function IMPCard(){
 		
@@ -130,7 +136,8 @@
 		
 // 		회원 정보 세션에서 가져와서 넣어주자
 		userName = '${user.userName}';
-		phone = '${user.phone}';		
+		phone = '${user.phone}';	
+		totalPoint = '${totalPoint}'
 		
 // // 		예매번호 및 구매번호 넣어주자
 // 		ticketingNo = '${ticketing.ticketingNo}';
@@ -196,15 +203,55 @@
 		
 
 		$("#partPoint").on("keyup",  function(){
-			console.log("partPoint"+ $(this).val())
-			partPoint = $(this).val();
-			$("#barPartPoint").text(partPoint);
 			
+// 			 숫자만 오도록.. 정규 표현식
+			var regexp = /^[0-9]*$/
+			partPoint = $(this).val();
+			if( !regexp.test(partPoint) ) {
+				Swal.fire({
+					text: '숫자만 입력하셔야 해요.',
+					icon: 'error',
+					confirmButtonText: "confirm"
+				});
+				$(this).val('');
+			}
+			
+			
+			console.log("partPoint"+ $(this).val())
+			console.log("totalPoint "+totalPoint);
+
+// 			보유포인트보다 큰 숫자를 쓰지 못하도록
+// 			숫자로 처리... 1을 곱한다
+			if(partPoint*1 > totalPoint*1){
+
+				$(this).val(totalPoint) ;
+				$("#barPartPoint").text(totalPoint);
+				Swal.fire({
+					text: '가지고 계신 포인트보다 많은 숫자를 입력하셨어요.',
+					icon: 'error',
+					confirmButtonText: "confirm"
+				});
+			}
+			
+// 			총 결제금액보다 큰 숫자를 쓰지 못하도록
+			if(partPoint*1 > totalPrice*1){
+
+				$(this).val(totalPrice) ;
+				$("#barPartPoint").text(totalPrice);
+				Swal.fire({
+					text: '총 결제금액보다 더 큰 포인트를 사용하실 수 없어요.',
+					icon: 'error',
+					confirmButtonText: "confirm"
+				});
+			}
+			
+			$("#barPartPoint").text($(this).val());
 			
 	// 		2-3 총할인금액
 	// 		할인금액이 없을 경우 0으로 ..
+// 			나중에 상품권 금액도 더해라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 			if (partPoint != 0) {
-				totalDiscount = partPoint;
+				totalDiscount = $(this).val();
 			}
 			$('#barTotalDiscount').text(totalDiscount)
 			
@@ -216,6 +263,7 @@
 			$('#barCash').text(cash);
 		});
 		
+		
 	
 // 		상품권 3장까지만 사용 가능하도록..
 		var addVoucherCnt = 0;
@@ -226,21 +274,34 @@
 		$(document).on("click", "button[name='addVoucher-btn']", function(){
 			var voucher_btn = $(this);
 			
-			var voucher = "<div class='row  mb-3 justify-content-center align-items-center' >";
-			voucher += "<div class='col-md-4 p-1 justify-content-center'>";
-		    voucher += "<label class='mr-md-3 m-0' for='inlineFormCustomSelect'>상품권</label></div>";
-		    voucher += "<div class='col-md-5'><select class='custom-select custom-select-md-3 custom-select-sm'>";
-		    voucher += "<option selected>사용 가능한 상품권을 선택하세요</option><option value='1'>One</option>";
-		    voucher += "<option value='1'>One</option><option value='2'>Two</option><option value='3'>Three</option>";
-		    voucher += "</select></div><div class='col-md-2' name='voucherPoint' ><button type='button' name='addVoucher-btn' class='btn btn-md'>";
-			voucher += "<i class='far fa-plus-square'></i></button></div>"  
+			var voucher = "<div class='form-inline form-group text-center' >";
+				voucher += "<label for='select-voucher' class='col-sm-4 control-label'>상품권</label>";
+			    voucher += "<div class='col'>";
+			    voucher += "<select class='custom-select custom-select-md-3 custom-select-sm' name='select-voucher'>";
+			    voucher += "<option selected>사용 가능한 상품권을 선택하세요</option>";
+			    voucher += "<option value='1'>One</option>";
+			    voucher += "<option value='2'>Two</option>";
+			    voucher += "<option value='3'>Three</option>";
+			    voucher += "</select>";
+				voucher += "<button type='button' name='addVoucher-btn' class='btn btn-md'>"  
+				voucher += "<i class='far fa-plus-square'></i>"  
+				voucher += "</button>"  
+				voucher += "</div>"  
+				voucher += "</div>"  
 			
+            
 			if (addVoucherCnt <2) {
 				addVoucherCnt += 1;
-				voucher_btn.parent().parent("div.justify-content-center").append(voucher);
+				voucher_btn.parent().parent().parent("div.card-body").append(voucher);
 				console.log('vouCNT  : ' + addVoucherCnt )
 			}else if(addVoucherCnt >1) {
-				alert("상품권은 최대 3장까지 사용이 가능합니다.");
+// 				alert("상품권은 최대 3장까지 사용이 가능합니다.");
+				Swal.fire({
+					text: '상품권은 최대 3장까지 사용이 가능해요.',
+					icon: 'error',
+					confirmButtonText: 'confirm'
+				
+				})
 			}
 		});
 		
@@ -251,6 +312,10 @@
 		$("#imp-btn").on("click", function(){
 			IMPCard();
 		});
+		
+
+		
+		
 		
 	});
 	
@@ -276,123 +341,123 @@
 	   		    <p>결제하시기 전에 예매 및 구매 내용을 확인해주세요.</p>
 	   		</div>
 	   		
+<!-- 	   		각 카드의 header에 넘버링할 숫자  -->
+	   		<c:set var="i" value="0"/>
 	   		
+	   		
+	   		<c:if test="${ticketing.ticketingPrice > 0}">
 <!-- 	   		예매정보 -->
-	   		<div class="card mb-4">
-			  <div class="card-header text-white bg-dark" >
-			    <h5 class="card-title mb-0">1. 예매정보</h5>
-			  </div>
-			  <div class="card-body">
-			     <div class="row mb-3 ">
-				     <div class="col-md-4 text-center">
-				      <c:if test="${movie.poster != null }">
-			        	<img id='poster' height="200" width="144" src="${movie.poster}"/>
-			          </c:if>
-			          <c:if test="${movie.poster == null }">
-			        	<img id='poster' height="200" width="144" src="http://placehold.it/144x200/E8117F/ffffff?text=sample"/>
-			          </c:if> 
+		   		<div class="card mb-4">
+				  <div class="card-header text-white bg-dark" >
+				    <h5 class="card-title mb-0">${i+1}. 예매정보</h5>
+			   		<c:set var="i" value="${i+1}"/>
+				  </div>
+				  <div class="card-body">
+				     <div class="row mb-3 ">
+					     <div class="col-md-4 text-center">
+					      <c:if test="${movie.poster != null }">
+				        	<img id='poster' height="200" width="144" src="${movie.poster}"/>
+				          </c:if>
+				          <c:if test="${movie.poster == null }">
+				        	<img id='poster' height="200" width="144" src="http://placehold.it/144x200/E8117F/ffffff?text=sample"/>
+				          </c:if> 
+				         </div>
+				         <div class="col-md-6 m-3 ">
+				           <div class="border-bottom p-2">
+				              <span class="col-md-4"><h5 class="d-inline">${movie.movieTitle}</h5></span> 
+				              <span class="col-md-2">${movie.movieRating}</span></div>
+				           <table class="table table-borderless table-sm m-2">
+							  <tbody>
+							    <tr>
+							      <th scope="row">극장</th>
+							      <td>${ticketing.theaterName}</td>
+							    </tr>
+							    <tr>
+							    
+							    
+	<!-- 						    규비쓰꺼 날 짜 형식 변환 가져다 쓰기  -->
+							      <th scope="row">상영일시</th>
+							      <td>${ticketing.screenTime}</td>
+							    </tr>
+							    <tr>
+							      <th scope="row">관객 정보</th>
+							      <td>${ticketing.headCount} / ${ticketing.audienceType}</td>
+							    </tr>
+							    <tr>
+							      <th scope="row">좌석 정보</th>
+							      <td> ${ticketing.seatNo}/ ${ticketing.seatType}</td>
+							    </tr>
+							  </tbody>
+							</table>
+				         </div>
 			         </div>
-			         <div class="col-md-6 m-3 ">
-			           <div class="border-bottom p-2">
-			              <span class="col-md-4"><h5 class="d-inline">${movie.movieTitle}</h5></span> 
-			              <span class="col-md-2">${movie.movieRating}</span></div>
-			           <table class="table table-borderless table-sm m-2">
-						  <tbody>
-						    <tr>
-						      <th scope="row">극장</th>
-						      <td>${ticketing.theaterName}</td>
-						    </tr>
-						    <tr>
-						    
-						    
-<!-- 						    규비쓰꺼 날 짜 형식 변환 가져다 쓰기  -->
-						      <th scope="row">상영일시</th>
-						      <td>${ticketing.screenTime}</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">관객 정보</th>
-						      <td>${ticketing.headCount} / ${ticketing.audienceType}</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">좌석 정보</th>
-						      <td> ${ticketing.seatNo}/ ${ticketing.seatType}</td>
-						    </tr>
-						  </tbody>
-						</table>
-			         </div>
-		         </div>
-			  	 <div class="border-bottom m-3"></div>
-			  	 <div>
-				   <h5 class="text-right text-primary">예매 금액 : <span name="barTicketingPrice"></span>원</h5>			  	 
-			  	 </div>
-			  </div>
-			</div>
+				  	 <div class="border-bottom m-3"></div>
+				  	 <div>
+					   <h5 class="text-right text-primary">예매 금액 : <span name="barTicketingPrice"></span>원</h5>			  	 
+				  	 </div>
+				  </div>
+				</div>
+	   		</c:if>
+	   		
 	   		
 <!-- 	   		구매정보 -->
-			<div class="card mb-4">
-			  <div class="card-header text-white bg-dark" >
-			    <h5 class="card-title mb-0">2. 구매정보</h5>
-			  </div>
-			  <div class="card-body">
-			  
-<!-- 			  	상품 하나당 하나의 row -->
-			     <div class="row pb-3 mb-3 border-bottom">
-				     <div class="col-md-2 text-center">
-			        	<img src="http://placehold.it/90x90/E8117F/ffffff?text=sample" />
+	   		<c:if test="${purchase.purchasePrice > 0}">
+				<div class="card mb-4">
+				  <div class="card-header text-white bg-dark" >
+				    <h5 class="card-title mb-0">${i+1}. 구매정보</h5>
+			   		<c:set var="i" value="${i+1}"/>
+				  </div>
+				  <div class="card-body">
+				  
+	<!-- 			  	상품 하나당 하나의 row -->
+				     <div class="row pb-3 mb-3 border-bottom">
+					     <div class="col-md-2 text-center">
+				        	<img src="http://placehold.it/90x90/E8117F/ffffff?text=sample" />
+				         </div>
+				         <div class="row col-md m-3 p-3">
+				            <div class="col-6 d-inline">상품명(프랜차이즈)</div>
+				            <div class="col d-inline">1 개</div>
+				            <div class="col d-inline text-right">원</div>
+				         </div>
 			         </div>
-			         <div class="row col-md m-3 p-3">
-			            <div class="col-6 d-inline">상품명(프랜차이즈)</div>
-			            <div class="col d-inline">1 개</div>
-			            <div class="col d-inline text-right">원</div>
-			         </div>
-		         </div>
-		         
-		         
-			  	 <div>
-				   <h5 class="text-right text-primary">구매 금액 : <span name="barPurchasePrice"></span>원</h5>			  	 
-			  	 </div>
-			  </div>
-			</div>
-	
+			         
+			         
+				  	 <div>
+					   <h5 class="text-right text-primary">구매 금액 : <span name="barPurchasePrice"></span>원</h5>			  	 
+				  	 </div>
+				  </div>
+				</div>
+			</c:if>
+			
 <!-- 	   		자체 결제수단 -->
 			<div class="card mb-5">
 			  <div class="card-header text-white bg-dark" >
-			    <h5 class="card-title mb-0">3. 포인트 및 상품권</h5>
+			    <h5 class="card-title mb-0">${i+1}. 포인트 및 상품권</h5>
 			  </div>
-			  <div class="card-body">
-			  
-			     <div class="row  mb-3 justify-content-center align-items-center" >
-			       <div class="col-md-4 p-1 justify-content-center">
-			          <label class="mr-md-3 m-0" for="inlineFormInputName">포인트</label>
-			       </div>
-			       <div class="col-md-5">
-				      <input type="text" class="form-control" id="partPoint" placeholder="보유포인트: ${totalPoint}">
-					</div>
-		         </div>
-			  
-			  
-			     <div class="row  mb-3 justify-content-center align-items-center" >
-			       <div class="col-md-4 p-1 justify-content-center">
-			          <label class="mr-md-3 m-0" for="inlineFormCustomSelect">상품권</label>
-			       </div>
-			       
-			       <div class="col-md-5">
-				      <select class="custom-select custom-select-md-3 custom-select-sm">
-						  <option selected>사용 가능한 상품권을 선택하세요</option>
-						  <option value="1">One</option>
-						  <option value="2">Two</option>
-						  <option value="3">Three</option>
-					   </select>
-					</div>
-					
-<!-- 					상품권 추가하는 버튼 최대 3개까지 -->
-					<div class="col-md-2" name="voucherPoint" >
-	                  <button type="button" name="addVoucher-btn" class="btn btn-md ">
-						<i class="far fa-plus-square"></i>
-	                  </button>
-	                </div>
-	                
-						
+			  <div class="card-body text-center">
+                  
+                     <div class="form-inline form-group text-center" >
+                      <label for="partPoint" class="col-sm-4 control-label">포인트</label>
+                      <div class="col">
+                       <input type="text" class="form-control" id="partPoint" 
+                       placeholder="보유포인트: ${totalPoint}">
+                      </div>
+                     </div>
+
+                     <div class='form-inline form-group text-center' >
+                      <label for='select-voucher' class='col-sm-4 control-label'>상품권</label>
+                      <div class='col'>
+                          <select class='custom-select custom-select-md-3 custom-select-sm' name='select-voucher'>
+                              <option selected>사용 가능한 상품권을 선택하세요</option>
+                              <option value='1'>One</option>
+                              <option value='2'>Two</option>
+                              <option value='3'>Three</option>
+                           </select>
+                          <button type='button' name='addVoucher-btn' class='btn btn-md'>
+                            <i class='far fa-plus-square'></i>
+                          </button>
+                      </div>
+                     </div>	
 					   
 		         </div>
 		         
