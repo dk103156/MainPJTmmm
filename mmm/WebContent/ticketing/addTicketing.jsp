@@ -56,6 +56,7 @@
 	  
 	  /* 바탕색 */
 	  .steps-body {
+	  	height : 464px;
 	    background-color: #f2f0e4;
 	  }
 	  
@@ -86,9 +87,7 @@
 	  }	
 	  
 	  
-	  a {
-	    color : black;
-	  }
+	  
 	  	  
 	  a {
 		    display: block;
@@ -137,9 +136,9 @@
 	  
 	  
 	  li.off {
-	  	background-color: black;
+	  	
 	  	pointer-events   : none;
-	  	opacity : 0.7;
+	  	opacity : 0.3;
 	  }
 	  
 	  
@@ -193,7 +192,7 @@
 	  
 	   /* (영화 선택) 스크롤바 CSS  */
 	   div.steps > div > div.col-3.px-0.h-100 > div.steps-body > div > div.movie-list.text-md-left > ul	{
-	   		height: 424px;
+	   		height: 464px;
 	   		overflow: auto;
 	   }  
 	   
@@ -209,6 +208,100 @@
 	    border-radius: 10px;
 	    box-shadow: inset 0px 0px 5px white;
 	  }	  
+	  
+	  
+	  /* 2020-02-14 조조, 심야*/
+	  span.timeMorning {
+	  	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+    		background-position: 0px 1px
+	  }
+	  
+	  span.timeNight {
+	 		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+   			background-position: 3px -20px;
+	  }
+	  
+	  ul.theaterList {
+	  		overflow : auto;
+	  		height : 410px;
+	  }
+	  
+	  ul.theaterList::-webkit-scrollbar {
+	  		width: 7px;
+	  }
+	  
+	  ul.theaterList::-webkit-scrollbar-thumb {
+	    background-color: #2f3542;
+	    border-radius: 10px;	  
+	  }
+	  
+	  ul.theaeterList::-webkit-scrollbar-track {
+	    background-color: grey;
+	    border-radius: 10px;
+	    box-shadow: inset 0px 0px 5px white;	  
+	  }
+	  
+	  div.theater-list > ul > li.list-group-item {
+	  	overflow-x: hidden;
+	  	padding : 15px 20px 40px 20px;
+	  }
+	  
+	  div.franchise-list.cgv > ul > li.cgv > img {
+  		position: relative;
+   		top: 4px;
+   		left: 22px;
+	  }
+	  
+	  div.franchise-list.lotte > ul > li.lotte > img {
+  		position: relative;
+   		top: 2px;
+   		left: 22px;
+	  }
+	  
+	  div.franchise-list.megaBox > ul > li.megaBox > img {
+  		position: relative;
+   		top: 2px;
+   		left: 22px;
+	  }
+	  
+	  div.remainingSeat > div > div > ul > li {
+	  	padding-top : 0px;
+	  	padding-bottom : 0px;
+	  }
+	  
+	  div.remainingSeat > div > div > ul {
+	  	overflow : auto;
+	  	height : 384px;
+	  }
+	  
+	  div.remainingSeat > div > div > ul::-webkit-scrollbar {
+	  	width: 7px;
+	  }
+	  
+	  div.remainingSeat > div > div > ul::-webkit-scrollbar-thumb {
+	    background-color: #2f3542;
+	    border-radius: 10px;	  	
+	  }
+	  
+	  div.remainingSeat > div > div > ul::-webkit-scrollbar-track {
+	    background-color: grey;
+	    border-radius: 10px;
+	    box-shadow: inset 0px 0px 5px white;	  	
+	  }
+	  
+	  /* 남은 좌석 수 색깔 */
+	  div.remainingSeat > div > div > ul > li > span.seatcount {
+	  	color : green;
+	  }
+	  
+	  /* 클릭했을 시 색 변화 */
+	  .list-group-item.active {
+	  	background-color : #5c5c5c !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  .list-group-item.active a span {
+	  	color : white
+	  }
 
 </style>
 
@@ -221,8 +314,9 @@ $(function(){
 	
 
 	$("div.steps-body > div > div.movie-list > ul > li").each(function(index, item){ 
-		
-		if(item.innerText=='${movieName}'){
+		//console.log( $(item).attr('title') );
+		//console.log('${movieName}');
+		if($(item).attr('title')=='${movieName}'){
 			$(item).trigger("click");
 		}
 	})
@@ -333,34 +427,34 @@ $(function(){
                     		<hr>
                     	</c:if>
                     		
-                        <div class="row" style="margin-left: 0px; margin-right: 0px;">
-                          <div class="franchise-list cgv col-4">
+                        <div class="row mx-0">
+                          <div class="franchise-list cgv col-4 mx-0">
                            <ul class="list-group cgv">
-                           		<li class="list-group-item cgv">CGV</li>
+                           		<li class="list-group-item cgv"><span>CGV</span><img class="firstHeaderImage" src="../resources/image/logo/CGV.png" alt="" width="30"></li>
 						    </ul>
                           </div>
-                          <div class="franchise-list lotte col-4">
+                          <div class="franchise-list lotte col-4 mx-0">
                             <ul class="list-group lotte">
-                            		<li class="list-group-item lotte">롯데시네마</li>
+                            		<li class="list-group-item lotte"><span>롯데시네마</span><img class="firstHeaderImage" src="../resources/image/logo/LotteCinema.png" alt="" width="30" ></li>
                             </ul>
                           </div>
-                          <div class="franchise-list megaBox col-4">
+                          <div class="franchise-list megaBox col-4 mx-0">
                             <ul class="list-group megaBox">
-                            		<li class="list-group-item megaBox">메가박스</li>
+                            		<li class="list-group-item megaBox"><span>메가박스</span><img class="firstHeaderImage" src="../resources/image/logo/MegaBox.png" alt="" width="30" ></li>
                             </ul>
                           </div>                          
                         </div><!-- end of row -->
                         <div class="row" style="margin-left: 0px; margin-right: 0px;">
                           <div class="theater-list cgv col-4">
-                            <ul class="list-group cgv">
+                            <ul class="list-group cgv theaterList">
                             </ul>
                           </div><!-- end of theater-list -->
                          <div class="theater-list lotte col-4" style="margin-left: 0px; margin-right: 0px;">
-                            <ul class="list-group lotte ml-0" width="102px">
+                            <ul class="list-group lotte theaterList ml-0">
                             </ul>
                           </div><!-- end of theater-list -->
                           <div class="theater-list megaBox col-4" style="margin-left: 0px; margin-right: 0px;">
-                            <ul class="list-group megaBox">
+                            <ul class="list-group megaBox theaterList">
                             </ul>
                           </div><!-- end of theater-list -->
                           </div><!-- end of row -->
@@ -553,6 +647,7 @@ function theaterSelect(element){
 		    	  for( var i in result){ 
 		    		  //console.log(result[i].theaterName)
 	   		    	  $("div.theater-list > ul.cgv").append("<li class='list-group-item cgv'>"+result[i].theaterName+"</li>")
+	   		    	  
 		  		  }//end of for	   		    	  
 		  		  
 		  			  $("div.theater-list > ul > li.list-group-item.cgv").on("click",function(){
@@ -601,7 +696,7 @@ function theaterSelect(element){
 		  		  
 			  		  $("div.theater-list > ul > li.list-group-item").removeClass("active");
 			  		  $(this).addClass("active");
-			  		  
+			  		 
 			 	    	 //극장 선택 div 없애기 
 			 	    	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
 			 	    	 //극장 선택 div 없앤 후 극장명 띄워주기!
@@ -795,7 +890,8 @@ franchiseSelect();
 	   		 }
    	  		}
    	 }
-   	 
+   	dayColorChange() // 2020-02-14
+   	
  	$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").on("click",function(){
 		$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").removeClass("active");
 		
@@ -832,7 +928,27 @@ franchiseSelect();
 		dateCheck=Month+"-"+date; //02-05
 		
 		check();
-	});   	 
+	});
+ 	
+ 	
+ 	//2020-02-14 요일 색깔 바꾸기
+ 	function dayColorChange(){
+	 	$("div.steps-body > div > ul > li > div > span.day").each(function(index, item){ 
+	 		
+	 			if(item.innerText=='토'){
+	 				$(item).css('color','blue')
+	 				$(item).next().css('color','blue')
+	 			}
+	 			
+	 			if(item.innerText=='일'){
+	 				$(item).css('color','red')
+	 				$(item).next().css('color','red')
+	 			}
+	 		
+	 	})
+ 	}
+
+ 	
 </script>
 <!-- 날짜 선택 스크립트 -->
 
@@ -865,6 +981,7 @@ function TimeSelect(){
 	      $("#screen").css("display","block");			  
     	  // 상태바 "상영관" 찍기!
     	  screennn = $("div > div > ul > li.list-group-item.time.active").parent().prev().text()
+    	  screennn = screennn.substring(0,screennn.length-9);
     	  $("#screen").children().first().next().text(screennn);	    	
 		  // 상태바 "상영관" 타이틀 찍기!
 		  $("#screen").children().first().next().attr("title", screennn);	  
@@ -877,7 +994,7 @@ function TimeSelect(){
 		 
 	   	  // "극장명" 변경
 	   	  $("#theater").children().first().next().text(finalTheaterName);
-  	  
+  	   
   	  console.log("선택완료")
   	  console.log("영화 제목 :"+finalMovieName)
   	  console.log("프렌차이즈 : "+finalFranchise)
@@ -916,7 +1033,6 @@ function check(){
 				
 			    
 			  var movieArray =document.querySelectorAll("div.movie-list > ul > li");
-			  console.log(movieArray);
 			  //for(var i in movieArray){ var i in을 하면 native code도 가져온다 뭐지 ㅡㅡ; 원인파악불가
 			  $(movieArray).removeClass("off")
 			  for(var i=0; i<movieArray.length; i++){
@@ -1194,7 +1310,7 @@ function check(){
 		    	  }
 		    	  //1관 .. 2관 Element 추가 
 		    	  for( var i in screenArray){
-		    		  var str ="<div><span class='screen'>"+$.trim(screenArray[i])+"</span><ul class=list-group></ul></div>"
+		    		  var str ="<div><span class='screen'>"+$.trim(screenArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
 		    		  $("div > div.remainingSeat > div").append(str);
 		    	  }
 		    	  
@@ -1204,15 +1320,36 @@ function check(){
 		    	  // 남은 좌석 수 및 시간추가
 		    	  for( var i=0; i<result.length; i++){ 
 		    		  var str="<li class='list-group-item time'><span>"+formatTime(result[i].screenTime)+"</span>";
-		    		  	  str+="<br><span class='seatcount'>남은 좌석 "+result[i].remainingSeat+"</span></li>";  
+		    		  	  str+="<br><span class='seatcount'>"+result[i].remainingSeat+"석</span></li>";  
 		    		  	
 		    		  	  
    		   	  		for(var j=0; j<Elements.length; j++){
-      		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text())){
+      		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text().substring(0,$(Elements[j]).prev().text().length-9))){
       		   	   				$(Elements[j]).append(str);
       		   	   		 	}//end of second if
 		    			  }//end of second for
-		     	}//end of for
+		     	   }//end of for
+		     		
+		     	   
+		     	   //2020-02-14
+		     	   $("div.remainingSeat > div > div > ul > li > span:nth-child(1)").each(function(index, item){ 
+		     		   //조조라면..
+		     		   if(parseInt(item.innerText.substring(0,2))<11){
+		     			   $(item).addClass('timeMorning')
+		     			   $(item).addClass('pl-3')
+		     		   }
+		     		   
+		     		   if(parseInt(item.innerText.substring(0,2))>=23){
+		     			   $(item).addClass('timeNight')
+		     			    $(item).addClass('pl-3')
+		     		   }
+		     			   
+		     		   //심야라면...	   
+		     	   })
+		     	   
+
+		     
+		     		
 		     	TimeSelect(); // <-- 추가된 시간에 이벤트
 		     	
 		      }//end of success
