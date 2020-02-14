@@ -87,9 +87,7 @@
 	  }	
 	  
 	  
-	  a {
-	    color : black;
-	  }
+	  
 	  	  
 	  a {
 		    display: block;
@@ -296,6 +294,14 @@
 	  	color : green;
 	  }
 	  
+	  /* 클릭했을 시 색 변화 */
+	  .list-group-item.active {
+	  	background-color : #5c5c5c !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  .list-group-item.active a span {
+	  	color : white
+	  }
 
 </style>
 
@@ -975,6 +981,7 @@ function TimeSelect(){
 	      $("#screen").css("display","block");			  
     	  // 상태바 "상영관" 찍기!
     	  screennn = $("div > div > ul > li.list-group-item.time.active").parent().prev().text()
+    	  screennn = screennn.substring(0,screennn.length-9);
     	  $("#screen").children().first().next().text(screennn);	    	
 		  // 상태바 "상영관" 타이틀 찍기!
 		  $("#screen").children().first().next().attr("title", screennn);	  
