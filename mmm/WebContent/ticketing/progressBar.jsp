@@ -56,6 +56,7 @@
 	
 	#ticket_tnb{
     	margin-bottom: 25px;
+    	z-index : 2;
 	}
 	
 	#ticket_tnb > div > div.info.theater{
