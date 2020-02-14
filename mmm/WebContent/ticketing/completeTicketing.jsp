@@ -39,7 +39,7 @@
 			<span><h2>예매가 완료 되었습니다.</h2></span>
 		</div>
 	</div><!-- end of row -->
-	
+	 
 	<div class="row">
 		<div class="col-4 text-center my-auto">
 			<img src="${movie.poster}" width="200" height="280" />
@@ -59,8 +59,8 @@
 				<div class="col-9">${ticketing.theaterName }</div>
 			</div>
 			<div class="row mb-4">
-				<div class="col-3">예매일시</div>
-				<div class="col-9">${ticketing.ticketingDate }</div>
+				<div class="col-3">상영일시</div>
+				<div class="col-9">${ticketing.screenTime }</div>
 			</div>	
 			<div class="row mb-4">
 				<div class="col-3">인원수</div>

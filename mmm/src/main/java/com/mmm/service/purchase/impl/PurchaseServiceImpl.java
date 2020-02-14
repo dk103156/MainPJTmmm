@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.mmm.common.Search;
 import com.mmm.service.domain.Purchase;
+import com.mmm.service.domain.User;
 import com.mmm.service.purchase.PurchaseDao;
 import com.mmm.service.purchase.PurchaseService;
 
@@ -36,6 +37,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public void addGiftPurchase(Purchase purchase) throws Exception {
 		purchaseDao.addGiftPurchase(purchase);
 	}
+	
 
 	@Override
 	public Purchase getPurchase(int purchaseNo) throws Exception {
