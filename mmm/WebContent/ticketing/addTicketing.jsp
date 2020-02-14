@@ -994,7 +994,7 @@ function TimeSelect(){
 		 
 	   	  // "극장명" 변경
 	   	  $("#theater").children().first().next().text(finalTheaterName);
-  	  
+  	   
   	  console.log("선택완료")
   	  console.log("영화 제목 :"+finalMovieName)
   	  console.log("프렌차이즈 : "+finalFranchise)
