@@ -28,6 +28,23 @@
 
 $(function(){
 	
+	function getParam(key) {
+	    var params = location.search.substr(location.search.indexOf("?") + 1);
+	    var value = "";
+	    params = params.split("&");
+	    for (var i = 0; i < params.length; i++) {
+	        temp = params[i].split("=");
+	        if ([temp[0]] == key) { value = temp[1]; }
+	    }
+	    return value;
+	}
+
+	var status = getParam("status");
+	
+	if(status=="failed"){
+		alert("로그인 정보가 올바르지 않습니다.");
+	}
+	
 	$("#chkBtn").on("click",function(){
 		console.log("click");
 		validate();
