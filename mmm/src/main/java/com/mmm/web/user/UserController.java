@@ -2,14 +2,17 @@ package com.mmm.web.user;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +33,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mmm.common.CryptoUtil;
 import com.mmm.common.JavaUtil;
@@ -120,11 +125,78 @@ public class UserController {
 	//Business Logic
 	userService.extraAddUser(user);
 	
-	return "redirect:/user/login.jsp";
+	return "redirect:/user/login.jsp";   
 	}
 	
-	@RequestMapping(value = "getUser" , method=RequestMethod.GET)
-	public String getUser(@RequestParam("userNo") int userNo, Model model) throws Exception{
+	@RequestMapping(value = "addProfile" , method=RequestMethod.POST)
+	public String addProfile(@ModelAttribute("user") User user ,Model model , HttpSession session) throws Exception {
+		System.out.println("addProfile POST Start");
+		System.out.println(user);
+		System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+		
+		
+		
+		//다른방법
+//		if(user.getImage().isEmpty()==false) {
+//			MultipartFile mhsr = (MultipartFile)user.getImage();
+//			String path = "C:\\Users\\User\\git\\Euroverse\\ksy\\WebContent\\resources\\images\\userImages";
+//			String originalName = "";
+//			originalName = new String(mhsr.getOriginalFilename().getBytes("8859_1"),"UTF-8");
+//			System.out.println(originalName);
+//			user.setUserImg("\\resources\\images\\userImages\\"+originalName);
+//			System.out.println("유저이미지"+user.getUserImg());
+//			File serverFile = new File(path+File.separator + originalName);
+//			mhsr.transferTo(serverFile);
+//		}else {
+//			user.setUserImg("\\resources\\images\\userImages\\defaultUserImage.jpg");
+//		}
+		MultipartFile mhsr = (MultipartFile)user.getImage();
+		if( mhsr.isEmpty() == false) {	//null 체크로 잡을 수 없음! 
+			String fileName = mhsr.getOriginalFilename();
+			fileName = uploadFile(fileName, mhsr.getBytes());
+			//mpFile.transferTo( new File(path, fileName) );
+			
+			
+			
+			user.setProfile(fileName);
+			
+			System.out.println("프로필 사진~!!!!!"+user.getProfile());
+			
+			
+		}else {
+			user.setProfile("defaultUserImage.jpg");
+		}
+		
+		userService.updateUser(user);
+
+		User newUser = (User)userService.getUser(user.getUserNo());
+		
+		System.out.println(" 업데이트 됐나요? 프로필 사진~!!!!!"+user.getProfile());
+		session.setAttribute("user", newUser);
+		
+		
+		return "redirect:/user/getUser.jsp";
+	}
+
+
+	private String uploadFile(String originalName, byte[] fileData) throws Exception{
+		
+		String uploadPath = "C:\\Users\\user\\git\\MainPJTmmm\\mmm\\WebContent\\resources\\image";
+		
+		//uuid 생성 (Universal Unique IDentifier, 범용 고유 식별자)
+		UUID uuid = UUID.randomUUID();
+		
+		String savedName = uuid.toString()+"_"+originalName;
+		File target = new File(uploadPath, savedName);
+		//임시 디렉토리에 저장된 업로드된 파일을 지정된 디렉토리로 복사
+		FileCopyUtils.copy(fileData, target);
+		
+		return savedName;
+	}
+	
+	
+	@RequestMapping(value = "getUser/{userNo}" , method=RequestMethod.GET)
+	public String getUser(@PathVariable("userNo") int userNo, Model model) throws Exception{
 		
 		System.out.println("/user/getUser : GET ");
 		
@@ -185,18 +257,22 @@ public class UserController {
 		String cryptoPassword = CryptoUtil.cryptoText(password);
 		user.setPassword(cryptoPassword);
 		
-		
+		System.out.println("Userrrrrrrrrrrr"+user);
 		User dbUser = userService.getUserId(user.getUserId());
 		
-		  if(dbUser == null) {
-			  return "redirect:/user/login.jsp?status=failed"; }
+		System.out.println("dbUser!!!"+dbUser.getRole().trim());
+		
+		  if(dbUser == null || dbUser.getRole().trim().equals("unUser") || dbUser.getUserId() ==null) {
+			  
+			  return "redirect:/user/login.jsp?status=failed"; 
+		  }
 		 
 		System.out.println(user);
 		
 		
-		if(user.getPassword().equals(dbUser.getPassword())) {
+		if(user.getPassword().equals(dbUser.getPassword())&& dbUser.getRole().trim().equals("user")) {
 			session.setAttribute("user", dbUser);	
-			System.out.println("!!!!!!"+((User)session.getAttribute("user")).toString());
+			System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 		}else {//로그인 실패시 
 			return "redirect:/user/login.jsp?status=failed";
 		}
@@ -239,7 +315,7 @@ public class UserController {
 			session.setAttribute("user", dbUser);	
 			System.out.println("!!!!!!"+((User)session.getAttribute("user")).toString());
 		}else {//로그인 실패시 
-			return "redirect:/user/login.jsp?status=failed";
+			return "redirect:/user/unUserLogin.jsp?status=failed";
 		}
 		return "redirect:/index.jsp";
 	}
@@ -353,24 +429,24 @@ public class UserController {
 	
 	
 	
-	@RequestMapping(value = "updateUser" , method=RequestMethod.GET)
-	public String updateUser(@RequestParam("userNo") int userNo, Model model) throws Exception{
-		
-		System.out.println("/user/updateUser : GET");
-		
-		//Business Logic
-		User user = userService.getUser(userNo);
-		
-		//Model과 View의 연결
-		model.addAttribute("user",user);
-		
-		return "forward:/user/updateUser.jsp";
-	}
+	//@RequestMapping(value = "updateUser" , method=RequestMethod.GET)
+//	public String updateUser(@RequestParam("userNo") int userNo, Model model) throws Exception{
+//		
+//		System.out.println("/user/updateUser : GET");
+//		
+//		//Business Logic
+//		User user = userService.getUser(userNo);
+//		
+//		//Model과 View의 연결
+//		model.addAttribute("user",user);
+//		
+//		return "forward:/user/updateUser.jsp";
+//	}
 	
-	@RequestMapping(value = "updateUser" , method=RequestMethod.PUT)
+	@RequestMapping(value = "updateUser" , method=RequestMethod.POST)
 	public String updateUser(@ModelAttribute("user") User user, Model model, HttpSession session) throws Exception{
 		
-		System.out.println("/user/updateUser : PUT");
+		System.out.println("/user/updateUser : POST");
 		
 		//Business Logic
 		int sessionNo = ((User)session.getAttribute("user")).getUserNo();
@@ -380,7 +456,7 @@ public class UserController {
 			session.setAttribute("user", user);
 		}
 		
-		return "redirect:/user/getUser?userNo="+user.getUserNo();
+		return "redirect:/mypage/mypage.jsp?userNo="+user.getUserNo();
 	}
 	
 	
@@ -396,10 +472,39 @@ public class UserController {
 		
 		if(sessionNo ==user.getUserNo()) {
 			userService.updateUserStatus(user);
+			//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
 		}
 
 		return "redirect:/index.jsp";
+	}//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+	@RequestMapping(value= "byeUser", method=RequestMethod.GET)
+	public String byeUser(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+		
+		System.out.println("/user/byeUser : GET");
+		
+		//Business Logic
+		User dbUser = userService.getUser(user.getUserNo());
+		if(dbUser.getPassword().equals(user.getPassword())) {
+			userService.updateUserStatus(dbUser);
+			return "forward:/updatePw.jsp";	
+		}else {//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+			return "forward:/updateUser.jsp";	
+		}//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value= "userIdChk", method=RequestMethod.GET)
 	public String userIdChk(@ModelAttribute("user") User user, HttpSession session) throws Exception{
@@ -431,6 +536,9 @@ public class UserController {
 		return "redirect:/user/getUser?userNo="+user.getUserNo();
 		
 	}
+	
+
+		
 	
 		
 

@@ -42,7 +42,9 @@
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-	
+	#ticket_tnb {
+	    z-index : 2;
+	}
 	.tnb .info.movie .row {
 	    float: none;
 	}

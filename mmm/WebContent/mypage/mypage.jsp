@@ -19,7 +19,7 @@
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 body {
-	background-color: #f9fad4;
+	background-color: white;
 	position: absolute;
 	text-align: center;
 	width: 100%;
@@ -32,64 +32,179 @@ body {
 	display: inline-block;
 	vertical-align: middle;
 }
-.col{
-	border: 1px solid #ced4da;
-	border-radius: .25rem;
-}
-.col-left{
-	text-align: left;
+.lnb-area location-fixed{
+    padding-top: 82px;
 }
 
+.lnb-area {
+    float: left;
+    width: 200px;
+    background-color: #fff;
+}
+
+#lnb {
+    margin: 0;
+    padding: 0;
+}
 #contaniner > div > div.col-md-8 > div.top > span{
  font-size: 25px;
 }
 
+#lnb .tit {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px 10px 0 0;
+    background-color: #212529;
+}
 
+* {
+    box-sizing: border-box;
+}
+
+
+#lnb .tit a {
+    display: block;
+    width: 100%;
+    font-size: 1.2em;
+    line-height: 90px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+#lnb>ul>li:first-child {
+    border-top: 0;
+}
+
+#lnb>ul>li>a {
+    display: block;
+    color: #222;
+    padding: 10px 15px;
+    font-weight: 400;
+    background-color: #f2f4f5;
+}
+
+#lnb ul li a {
+    display: block;
+    text-decoration: none;
+    line-height: 1.3;
+}
+
+#lnb .depth3 {
+    padding: 20px 0;
+}
+
+#lnb>ul>li {
+    border-top: 1px solid #d8d9db;
+}
+
+ol, ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+#lnb .depth3 {
+    padding: 20px 0;
+	border-radius: 0 0 10px 10px;
+
+#lnb>ul {
+    border: 1px solid #d8d9db;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-radius: 0 0 10px 10px;
+    
+.inner-wrap {
+	width: 1100px;
+	margin: 0 auto;
+}
+
+.my-magabox-info {
+    overflow: hidden;
+    height: 367px;
+    border-radius: 10px;
+    background-color: #f3f4f6;
+}
+
+.my-magabox-info .top .photo {
+    float: left;
+    width: 200px;
+    padding: 20px 0 0 60px;
+}
+
+.my-magabox-info .top .grade {
+    float: left;
+    padding-top: 20px;
+}
+
+.my-magabox-info .bottom {
+    overflow: hidden;
+    height: calc(100% - 198px);
+    padding: 26px 30px 29px 30px;
+    background-color: #eaebed;
+}
 
 </style> 
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
+<script type="text/javascript">
+$(function(){
+	
 
+	$("a[href='#']:contains('회원정보수정')").on('click',function(){
+		var userNo = $('#userNo').val();
+		console.log(userNo);	
+		$("#plusPage").load("/user/getUser/"+userNo);
+	})
+	
+	$("a[href='#']:contains('예매/구매내역')").on('click',function(){	
+		$("#plusPage").load("/ticketing/getTicketingList");
+	})
+	
+});
+</script>
 </head>
 <body>
-
-
-<!--container-->
-	<div id="contaniner">
-	
-		<div class="row">
-			<div class="col-md-4 ">
-				<div class="col"  id="v-pills-tab" style="background-color: #93aec9; " role="tablist" aria-orientation="vertical">
-					
-						<p><a class="nav-link" href="/user/login.jsp" title="Mypage Home">Mypage Home</a></p>
-				
-							<a class="nav-link" href="/user/login.jsp" title="예매/구매내역">예매/구매내역</a>
-							<a class="nav-link" href="#" title="쿠폰/보관함/선물함">쿠폰/보관함/선물함</a>
-							<a class="nav-link" href="/mypage/movie-coupon" title="구매/구매취소내역">구매/구매취소내역</a>
-							<a class="nav-link" href="/mypage/store-coupon" title="스토어 교환권">포인트 내역</a>
-							<a class="nav-link" href="/mypage/discount-coupon" title="한줄평/내 리뷰 조회">한줄평/내 리뷰 조회</a>
-							<a class="nav-link" href="/mypage/point-list" title="내 응모 내역">내 응모 내역</a>
-							<a class="nav-link" href="/mypage/point-list" title="내 문의 내역">내 문의 내역</a>
-				</div>
-			 </div>
-			 <br>
-			 <div class="col-md-8" >
-			 	<div class="top">
-			 		<img src="/resources/image/profile.PNG" width="150" height="150" style=" padding-bottom: 10px; padding-top: 20px;">
-			 		<span style="margin-left:10px;">oooo님  &nbsp; VIP등급입니다.</span><br>
-			 		<button class="btn btn-primary btn-sm">내 정보 조회/수정</button>
-			 	</div>
-			 	<div class="bottom">
-			 		<span><a></a></span>
-			 	</div>
-			 	
-			 </div>
-		</div>
+<h1>${user.userId}/${user.userNo }</h1>
+<!-- container  -->
+<div class= "container">
+	<div class="row">
+		<!-- left side bar -->
+		<div class="col-md-3" style="padding-left: 50px;">
+			<div class="inner-wrap">
+				<div class="lnb-area">
+					<nav id="lnb">
+						<p class="tit"><a href="/mypage" title="Mypage">Mypage Home</a></p>
+						<input type="hidden" id="userNo" name="userNo" value="${user.userNo}"> 
 			
+						<ul>
+							<li><a href="#" title="회원정보수정">회원정보수정</a></li>
+							<li><a href="#" title="예매/구매내역">예매/구매내역</a></li>
+			                <li><a href="/mypage/movie-coupon" title="쿠폰/보관함/선물함">쿠폰/보관함/선물함</a></li>
+							<li><a href="/mypage/discount-coupon" title="포인트 내역">포인트 내역</a></li>
+							<li><a href="/mypage/point-list" 	title="내가 본 영화">내가 본 영화</a></li>
+							<li><a href="/mypage/moviestory" 	titel="한줄평/내 리뷰 조회">한줄평/내 리뷰 조회</a></li>
+							<li><a href="/mypage/myevent"		title="나의 이벤트 응모내역">나의 이벤트 응모내역</a></li>
+							<li><a href="/mypage/myinquiry"		title="나의 문의내역">나의 문의내역</a></li>
+							<li><a href="/mypage/mydiscount"	title="구매/구매취소내역">구매/구매취소내역</a></li>
+						</ul>
+					</nav>
+				</div>	
+			</div>
+		</div>
+		<!-- left side bar end -->
+		
+		<!-- contents Start -->
+		<div class="col-md-9" style=" height: 200px;" id="plusPage">	
+		<!--다른 페이지 로딩 되는 부분  -->
+		</div>	
+		<!-- contents end -->
+		
+	</div>
 </div>
-<!--container end-->
-
-
-
-
+<!-- container  end-->
 
 
 </body>

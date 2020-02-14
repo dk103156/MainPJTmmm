@@ -83,11 +83,7 @@
     	padding-right: 9px;	 	
     	padding-bottom: 9px;	
 	  }
-	  
-	  a {
-	    color : black;
-	  }
-	 
+	  	 
 	  .btn-right {
 	  	background position : 0 -220px;
 	  }
@@ -97,9 +93,8 @@
 	  }
 	
 	  li.off {
-	  	background-color: black;
 	  	pointer-events   : none;
-	  	opacity : 0.7;
+	  	opacity : 0.3;
 	  }	
 	
 	  .list-group{
@@ -110,7 +105,7 @@
 	  	padding-left: 10px;
 	  }
 
-	  a span.text {
+	  a span.text { 
 		color: #333;
 		font-weight: bold;
 		padding-right: 5px;
@@ -174,25 +169,107 @@
 	  
 	  /* 프랜차이즈셀렉터, 화살표에 커서 이벤트*/	  
 	  div.franchise-select > ul > li > span:nth-child(1),
-	  div > div:nth-child(5) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i, 
-	  div > div:nth-child(5) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i
+	  div > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i, 
+	  div > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i
 	  {
 	  	cursor: pointer;
 	  
 	  }
 	  
 	  .franchiseImage {
-	  	width: 50px;
-	  	height: 50px;
-	  	display: block;
+	  	width: 30px;
+	  	height: 30px;
+	  	display: inline;
 	  }
 	  
 	  
 	  img.firstHeaderImage , img.secondHeaderImage, img.thirdHeaderImage{
-	  	width: 50px;
-	  	height: 50px;
+	  	width: 30px;
+	  	height: 30px;
 	  	display : none;	  
 	  }
+	   
+	  	  /* 클릭했을 시 색 변화 */
+	  .list-group-item.active {
+	  	background-color : #5c5c5c !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  .list-group-item.active a span {
+	  	color : white
+	  }
+	  
+	  /* 극장 목록 */
+	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul {
+  		overflow : auto;
+  		height : 410px;
+	  }
+	  
+	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul::-webkit-scrollbar {
+	  	width: 7px;
+	  }
+	  
+	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul::-webkit-scrollbar-thumb {
+	    background-color: #2f3542;
+	    border-radius: 10px;		  
+	  }
+	  
+	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul::-webkit-scrollbar-track {
+	    background-color: grey;
+	    border-radius: 10px;
+	    box-shadow: inset 0px 0px 5px white;	  
+	  }
+	  
+	  /* 극장 목록 패딩 제거 */
+	  div.steps-body > div > div > div:nth-child(2) > div.franchise-list.text-center > ul > li {
+	  	padding : 0 12 0 10;
+	  }
+	  
+	  div.remainingSeat > div > div > ul > li {
+	  	padding-top : 0px;
+	  	padding-bottom : 0px;
+	  }
+	  
+	  div.remainingSeat > div > div > ul {
+	  	overflow : auto;
+	  	height : 319px;
+	  }
+	  
+	  div.remainingSeat > div > div > ul::-webkit-scrollbar {
+	  	width: 7px;
+	  }
+	  
+	  div.remainingSeat > div > div > ul::-webkit-scrollbar-thumb {
+	    background-color: #2f3542;
+	    border-radius: 10px;	  	
+	  }
+	  
+	  div.remainingSeat > div > div > ul::-webkit-scrollbar-track {
+	    background-color: grey;
+	    border-radius: 10px;
+	    box-shadow: inset 0px 0px 5px white;	  	
+	  }
+	  
+	  /* 남은 좌석 수 색깔 */
+	  div.remainingSeat > div > div > ul > li > span.seatcount {
+	  	color : green;
+	  }	  
+	  
+	  /* 조조, 심야*/
+	  span.timeMorning {
+	  	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+    		background-position: 0px 1px
+	  }
+	  
+	  span.timeNight {
+	 		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+   			background-position: 3px -20px;
+	  }
+	  
+	  /* 프랜차이즈 셀렉트바 크기 수정 */
+	  div.steps-body > div > div > div:nth-child(1) > div > ul > li {
+	  	width : 160px;
+	  }
+	  	  
   </style>
   
   <script>
@@ -267,8 +344,8 @@
                 <p class="text-white text-center  bg-dark mb-0">프랜차이즈 & 극장</p>
               </div>
               <div class="steps-body">
-                <div class="row">
-                    <div class="col-4 pl-4">
+                <div class="row mx-0">
+                    <div class="col-4">
                    	<c:if test="${user.role eq 'user'}">
                     		<div class="row mb-3">
                     			<div class="col-12">	
@@ -291,8 +368,8 @@
                         <div class="row mx-0">
                           <div class="franchise-select">
 	                           <ul class="list-group first">
-	                           		 <li class="list-group-item first">
-	                           		 <span class="firstHeaderName">프랜차이즈</span><img class="firstHeaderImage" src="" alt="" >
+	                           		 <li class="list-group-item first text-center">
+	                           		 <span class="firstHeaderName">프랜차이즈</span><img class="firstHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal" style="position: relative; left: 5px;">
 		                           		 <span class="arrow" style="position : relative; bottom:2px"><i class="fas fa-sort-up"></i></span>
 		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i class="fas fa-sort-down"></i></span>
@@ -300,17 +377,12 @@
 	                           		 </li>
 							    </ul>
                           </div>
-                          <div class="theater-select">
-                            <ul class="list-group first">
-                            		<li class="list-group-item first">극장</li>
-                            </ul>
-                          </div>
                         </div>
                         <div class="row mx-0">
                           <div class="franchise-list text-center">
 	                           <ul class="list-group first">
 				                  	<c:forEach var="i" items="${franchiseList}">
-			   							  <li class="list-group-item first"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" ></li>
+			   							  <li class="list-group-item first"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" width="30" ></li>
 									</c:forEach>     
 							    </ul>
                           </div>
@@ -321,7 +393,7 @@
                           </div>
                         </div>
                     </div>
-                    <div class="col-4 pl-4">
+                    <div class="col-4">
                  	<c:if test="${user.role eq 'user'}">
                     		<div class="row mb-3">
                     			<div class="col-12">	
@@ -344,8 +416,8 @@
                         <div class="row mx-0">
                           <div class="franchise-select">
 	                           <ul class="list-group second">  
-	                           		 <li class="list-group-item second">
-	                           		 <span class="secondHeaderName">프랜차이즈</span><img class="secondHeaderImage" src="" alt="" >
+	                           		 <li class="list-group-item second text-center">
+	                           		 <span class="secondHeaderName">프랜차이즈</span><img class="secondHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
 		                           		 <span class="arrow" style="position : relative; bottom:2px"><i class="fas fa-sort-up"></i></span>
 		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i class="fas fa-sort-down"></i></span>
@@ -353,17 +425,12 @@
 	                           		 </li>
 							    </ul>
                           </div>
-                          <div class="theater-select">
-                            <ul class="list-group second text-center">
-                            		<li class="list-group-item second">극장</li>
-                            </ul>
-                          </div>
                         </div>
                         <div class="row mx-0">
                           <div class="franchise-list text-center">
 	                           <ul class="list-group second">
 				                  	<c:forEach var="i" items="${franchiseList}">
-			   							  <li class="list-group-item second"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" ></li>
+			   							  <li class="list-group-item second"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" width="30" ></li>
 									</c:forEach>     
 							    </ul>
                           </div>
@@ -374,7 +441,7 @@
                           </div>
                         </div>
                     </div>
-                    <div class="col-4 pl-1">
+                    <div class="col-4">
                     	<c:if test="${user.role eq 'user'}">
                     		<div class="row mb-3">
                     			<div class="col-12">	
@@ -397,7 +464,7 @@
                         <div class="row mx-0">
                           <div class="franchise-select">
 	                           <ul class="list-group third">  
-	                           		<li class="list-group-item third">
+	                           		<li class="list-group-item third text-center">
 	                           		 <span class="thirdHeaderName">프랜차이즈</span><img class="thirdHeaderImage" src="" alt="" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
 		                           		 <span class="arrow" style="position : relative; bottom:2px"><i class="fas fa-sort-up"></i></span>
@@ -406,17 +473,12 @@
 									</li>
 							    </ul>
                           </div>
-                          <div class="theater-select">
-                            <ul class="list-group third">
-                            		<li class="list-group-item third">극장</li>
-                            </ul>
-                          </div>
                         </div>
                         <div class="row mx-0">
                           <div class="franchise-list text-center">
 	                           <ul class="list-group third">
 				                  	<c:forEach var="i" items="${franchiseList}">
-			   							  <li class="list-group-item third"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" ></li>
+			   							  <li class="list-group-item third"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" width="30" ></li>
 									</c:forEach>     
 							    </ul>
                           </div>
@@ -625,21 +687,21 @@
 	    		 $("div.franchise-select > ul.first > li > span:nth-child(1)").text(franchiseFirstCheck)
 	    		 $("img.firstHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
 	    		 $("div:nth-child(1) > div:nth-child(5) > div.franchise-select > ul > li > span.arrowTotal").css("top","8px");
-	    		 $("span.firstHeaderName").css("position","relative").css("top","8px");
+	    		 $("span.firstHeaderName").css("position","relative").css("top","1px");
 	    	}else if(index=="second"){
 	    		 theaterSecondCheck=""
 	    		 franchiseSecondCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.second > li > span:nth-child(1)").text(franchiseSecondCheck)
 	    		 $("img.secondHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
 	    		 $("div:nth-child(2) > div:nth-child(5) > div.franchise-select > ul > li > span.arrowTotal").css("top","8px");
-	    		 $("span.secondHeaderName").css("position","relative").css("top","8px");
+	    		 $("span.secondHeaderName").css("position","relative").css("top","1px");
 	    	}else if(index=="third"){
 	    		 theaterThirdCheck=""
 	    		 franchiseThirdCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.third > li > span:nth-child(1)").text(franchiseThirdCheck)
 	    		 $("img.thirdHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
 	    		 $("div:nth-child(3) > div:nth-child(5) > div.franchise-select > ul > li > span.arrowTotal").css("top","8px");
-	    		 $("span.thirdHeaderName").css("position","relative").css("top","8px");
+	    		 $("span.thirdHeaderName").css("position","relative").css("top","1px");
 	    	 }
 	    	 
 	    	  
@@ -968,7 +1030,7 @@
     		    	  }
     		    	  //1관 .. 2관 Element 추가 
     		    	  for( var i in screenFirstArray){
-    		    		  var str ="<div><span class='screen'>"+$.trim(screenFirstArray[i])+"</span><ul class=list-group></ul></div>"
+    		    		  var str ="<div><span class='screen'>"+$.trim(screenFirstArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
     		    		  $("div:nth-child(1) > div.remainingSeat > div").append(str);
     		    	  }
     		    	  
@@ -977,15 +1039,33 @@
     		    	  // 남은 좌석 수 및 시간추가
     		    	  for( var i=0; i<result.length; i++){ 
     		    		  var str="<li class='list-group-item time'><span>"+formatTime(result[i].screenTime)+"</span>";
-    		    		  	  str+="<br><span class='seatcount'>남은 좌석 "+result[i].remainingSeat+"</span></li>";  
+    		    		  	  str+="<br><span class='seatcount'>"+result[i].remainingSeat+"석</span></li>";  
     		    		  	
     		    		  	  
         		   	  		for(var j=0; j<Elements.length; j++){
-           		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text())){
+           		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text().substring(0,$(Elements[j]).prev().text().length-9))){
            		   	   				$(Elements[j]).append(str);
            		   	   		 	}//end of second if
     		    			  }//end of second for
     		     	}//end of for
+		     		
+			     	   
+			     	   //2020-02-14
+			     	   $("div.remainingSeat > div > div > ul > li > span:nth-child(1)").each(function(index, item){ 
+			     		   //조조라면..
+			     		   if(parseInt(item.innerText.substring(0,2))<11){
+			     			   $(item).addClass('timeMorning')
+			     			   $(item).addClass('pl-3')
+			     		   }
+			     		   
+			     		   if(parseInt(item.innerText.substring(0,2))>=23){
+			     			   $(item).addClass('timeNight')
+			     			    $(item).addClass('pl-3')
+			     		   }
+			     			   
+			     		   //심야라면...	   
+			     	   })
+			     	   
     		     	firstTimeSelect(); // <-- 추가된 시간에 이벤트 
     		      }//end of success
     		      
@@ -1208,7 +1288,7 @@
     		    	  }
     		    	  // 1관 ...2관 추가
     		    	  for( var i in screenSecondArray){
-    		    		  var str ="<div><span class='screen'>"+$.trim(screenSecondArray[i])+"</span><ul class=list-group></ul></div>"
+    		    		  var str ="<div><span class='screen'>"+$.trim(screenSecondArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
     		    		  $("div:nth-child(2) > div.remainingSeat > div").append(str);
     		    	  }
     		    	  
@@ -1217,16 +1297,34 @@
     		    	  // 남은 좌석 수 및 시간추가
     		    	  for( var i=0; i<result.length; i++){
     		    		  var str="<li class='list-group-item time'><span>"+formatTime(result[i].screenTime)+"</span>";
-    		    		  	  str+="<br><span class='seatcount'>남은 좌석 "+result[i].remainingSeat+"</span></li>";  
+    		    		  	  str+="<br><span class='seatcount'>"+result[i].remainingSeat+"석</span></li>";  
     		    		  	
     		    		  	  
         		   	  		for(var j=0; j<Elements.length; j++){
         		   	  			
-           		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text())){
+           		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text().substring(0,$(Elements[j]).prev().text().length-9))){
            		   	   				$(Elements[j]).append(str);
            		   	   		 	}//end of third if
     		    			  }//end of third for
     		     		}//end of for
+    		     		
+ 			     	   
+ 			     	   //2020-02-14
+ 			     	   $("div.remainingSeat > div > div > ul > li > span:nth-child(1)").each(function(index, item){ 
+ 			     		   //조조라면..
+ 			     		   if(parseInt(item.innerText.substring(0,2))<11){
+ 			     			   $(item).addClass('timeMorning')
+ 			     			   $(item).addClass('pl-3')
+ 			     		   }
+ 			     		   
+ 			     		   if(parseInt(item.innerText.substring(0,2))>=23){
+ 			     			   $(item).addClass('timeNight')
+ 			     			    $(item).addClass('pl-3')
+ 			     		   }
+ 			     			   
+ 			     		   //심야라면...	   
+ 			     	   })
+ 			     	   
     		     		secondTimeSelect(); // <-- 추가된 시간에 이벤트 
     		    	  }//end of success
     		      });//end of ajax    
@@ -1423,7 +1521,7 @@
     		    	  }
     		    	  // 1관... 2관 추가
     		    	  for( var i in screenThirdArray){
-    		    		  var str ="<div><span class='screen'>"+$.trim(screenThirdArray[i])+"</span><ul class=list-group></ul></div>"
+    		    		  var str ="<div><span class='screen'>"+$.trim(screenThirdArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
     		    		  $("div:nth-child(3) > div.remainingSeat > div").append(str);
     		    	  }
     		    	  
@@ -1432,16 +1530,34 @@
     		    	  // 남은 좌석 수 및 시간추가
     		    	  for(  var i=0; i<result.length; i++){
     		    		  var str="<li class='list-group-item time'><span>"+formatTime(result[i].screenTime)+"</span>";
-    		    		  	  str+="<br><span class='seatcount'>남은 좌석 "+result[i].remainingSeat+"</span></li>";  
+    		    		  	  str+="<br><span class='seatcount'>"+result[i].remainingSeat+"석</span></li>";  
     		    		  	
     		    		  	  
         		   	  		for(var j=0; j<Elements.length; j++){
         		   	  			
-           		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text())){
+           		   	   			 if($.trim(result[i].screenName)==$.trim($(Elements[j]).prev().text().substring(0,$(Elements[j]).prev().text().length-9))){
            		   	   				$(Elements[j]).append(str);
            		   	   		 	}//end of third if
     		    			  }//end of third for
     		     		}//end of for
+    		     		
+    			     	   
+    			     	   //2020-02-14
+    			     	   $("div.remainingSeat > div > div > ul > li > span:nth-child(1)").each(function(index, item){ 
+    			     		   //조조라면..
+    			     		   if(parseInt(item.innerText.substring(0,2))<11){
+    			     			   $(item).addClass('timeMorning')
+    			     			   $(item).addClass('pl-3')
+    			     		   }
+    			     		   
+    			     		   if(parseInt(item.innerText.substring(0,2))>=23){
+    			     			   $(item).addClass('timeNight')
+    			     			    $(item).addClass('pl-3')
+    			     		   }
+    			     			   
+    			     		   //심야라면...	   
+    			     	   })
+    			     	   
     		     		thirdTimeSelect(); // <-- 추가된 시간에 이벤트 
     		    	  }//end of success
     		      });//end of ajax      		 
@@ -1595,7 +1711,7 @@
 	   		 }
    	  		}
    	 }
-   	 
+   	dayColorChange() // 2020-02-14
 	$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").on("click",function(){
 		$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").removeClass("active");
 		
@@ -1640,7 +1756,22 @@
 		 checkThird();
 	});
 
-     
+ 	//2020-02-14 요일 색깔 바꾸기
+ 	function dayColorChange(){
+	 	$("div.steps-body > div > ul > li > div > span.day").each(function(index, item){ 
+	 		
+	 			if(item.innerText=='토'){
+	 				$(item).css('color','blue')
+	 				$(item).next().css('color','blue')
+	 			}
+	 			
+	 			if(item.innerText=='일'){
+	 				$(item).css('color','red')
+	 				$(item).next().css('color','red')
+	 			}
+	 		
+	 	})
+ 	}     
      </script>
 
      
@@ -1825,7 +1956,7 @@ $(function(){
 		
    /* 프랜차이즈 셀렉트 바 이미지 삽입 - 프랜차이즈 이벤트 */	
    function franchiseSelector(sequence){
-		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("click",function(){
+		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("mouseneter",function(){
 			if(sequence=='first'){
 				$("div:nth-child(1) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
 				$("div:nth-child(1) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
@@ -1852,11 +1983,18 @@ $(function(){
 				$("div.theater-list ul.list-group."+sequence).empty();
 			}
 			
+			$("div.franchise-list > ul."+sequence).on("mouseleave",function(){
+				$("div.franchise-list > ul."+sequence).css("display","none")
+				
+				
+			})			
+			
+			
 		});//end of franchise-select click 
    }
    
    function franchiseSelectorUnUser(sequence){
-		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("click",function(){
+		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("mouseenter",function(){
 			if(sequence=='first'){
 				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
 				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
@@ -1883,6 +2021,12 @@ $(function(){
 				$("div.theater-list ul.list-group."+sequence).empty();
 			}
 			
+			$("div.franchise-list > ul."+sequence).on("mouseleave",function(){
+				$("div.franchise-list > ul."+sequence).css("display","none")
+				
+				
+			})
+			
 		});//end of franchise-select click 
   }   
 	
@@ -1904,11 +2048,12 @@ $(function(){
 			number="3";
 			theaterThirdCheck="";
 		}
-		$("div:nth-child("+number+") > div:nth-child(5) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i").off("click")
-		$("div:nth-child("+number+") > div:nth-child(5) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i").on("click",function(){
+		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i").off("click")
+		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i").on("click",function(){
 				var nodeList = $("div.franchise-list > ul."+sequence+" > li.list-group-item");
 				var newArray = Array.prototype.slice.call(nodeList,0);
 				//console.log(newArray)
+
 				
 				if($(newArray[0]).hasClass("active")){
 					$(newArray[0]).removeClass("active")
@@ -1920,6 +2065,11 @@ $(function(){
 					$(newArray[2]).removeClass("active")
 					$(newArray[1]).trigger("click");
 				}
+					
+				if($("div.steps-body > div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").text()=='프랜차이즈'){
+					$("div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").trigger("mouseenter");
+					$($("div.franchise-list > ul."+sequence+" > li.list-group-item")[0]).trigger("click")
+				}				
 				
 				if(sequence=='first'){
 					arrowEvent('first')
@@ -1931,8 +2081,8 @@ $(function(){
 		});
 		
 		//아래쪽 화살표
-		$("div:nth-child("+number+") > div:nth-child(5) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i").off("click")
-		$("div:nth-child("+number+") > div:nth-child(5) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i").on("click",function(){
+		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i").off("click")
+		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i").on("click",function(){
 			var nodeList = $("div.franchise-list > ul."+sequence+" > li.list-group-item");
 			var newArray = Array.prototype.slice.call(nodeList,0);
 			//console.log(newArray)
@@ -1947,6 +2097,13 @@ $(function(){
 				$(newArray[2]).removeClass("active")
 				$(newArray[0]).trigger("click");
 			}
+			
+			if($("div.steps-body > div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").text()=='프랜차이즈'){
+				$("div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").trigger("mouseenter");
+				$($("div.franchise-list > ul."+sequence+" > li.list-group-item")[0]).trigger("click")
+			}				
+			
+			
 			
 			if(sequence=='first'){
 				arrowEvent('first')

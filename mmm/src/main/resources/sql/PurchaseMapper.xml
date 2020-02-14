@@ -9,17 +9,21 @@
  	
 	<resultMap id="purchaseSelectMap" 			type="purchase">
 		<result property="purchaseNo" 				column="purchase_no" 		jdbcType="INTEGER"  />
-		<result property="purchaseUser.userNo" 		column="user_no" 			jdbcType="INTEGER"  />
+		<result property="purchaseUser" 			column="purchase_user" 		jdbcType="INTEGER"  />
 		<result property="purchaseStatus" 			column="purchase_status" 	jdbcType="INTEGER"  />
 		<result property="purchasePrice" 			column="purchase_price" 	jdbcType="INTEGER"  />
-		<result property="purchaseDate" 			column="purchase_date" 		jdbcType="DATE"  />
-		<result property="rcPhone" 					column="rc_phone" 			jdbcType="NUMERIC"  />
+		<result property="rcPhone" 					column="rc_phone" 			jdbcType="INTEGER"  />
 		<result property="rcName" 					column="rc_Name" 			jdbcType="VARCHAR"  />
 		<result property="message" 					column="message" 			jdbcType="VARCHAR"  />
 		<result property="purchaseQuantity" 		column="purchase_quantity" 	jdbcType="INTEGER"  />
+		<result property="issuedDate" 				column="issued_date" 		jdbcType="DATE"  	/>
+		<result property="usedDate" 				column="used_date" 			jdbcType="DATE"  	/>
+		<result property="ownerNo" 					column="owner_no" 			jdbcType="INTEGER"  />
+		<result property="usedStatus" 				column="used_status"		jdbcType="INTEGER"  />
+		<result property="prodPinNo" 				column="prod_pin_no" 		jdbcType="VARCHAR"  />
 		
-		<association property="product" javaType="product">
-			<id property="prodNo" column="prod_no" 			jdbcType="INTEGER"  />
+		<association property="purchaseProd" javaType="product">
+			<id property="prodNo" 				column="prod_no" 			jdbcType="INTEGER"  />
 			<result property="prodName"			column="prod_name" 			jdbcType="VARCHAR"  />
 			<result property="prodDate" 		column="prod_date" 			jdbcType="DATE"/>
 			<result property="prodPrice" 		column="prod_price" 		jdbcType="INTEGER"  />
@@ -36,37 +40,45 @@
 	<insert id="addPurchase"		parameterType= "Purchase" >
 	 	INSERT
 		INTO purchase ( purchase_no  , purchase_user , purchase_prod , purchase_status , purchase_price , 
-						purchase_date ,rc_phone,rc_Name, message ,purchase_quantity) 
+						rc_phone , rc_Name , message ,purchase_quantity , issued_date , used_date , owner_no, used_status , prod_pin_no) 
 		VALUES	 (
 					seq_purchase_purchase_no.NEXTVAL,
-					 #{purchaseUser.userNo},
+					 #{purchaseUser},
 					 #{purchaseProd.prodNo},
-					  0,
-					 #{purchaseProd.prodPrice},
+					  null,
+					 #{purchasePrice},
+					 #{rcPhone},
+					 #{rcName},
+					null,
+					 #{purchaseQuantity},
 					 SYSTIMESTAMP,
-					 null ,
-					 null ,
-					 null ,
-					  #{purchaseQuantity}
+					  null,
+					  #{ownerNo},
+					  0,
+					  #{prodPinNo}
 				)
 	 </insert>
 	
 	
-	<insert id="addGifPurchasae"		parameterType= "Purchase" >
+	<insert id="addGiftPurchase"		parameterType= "Purchase" >
 	 	INSERT
 		INTO purchase ( purchase_no  , purchase_user , purchase_prod , purchase_status , purchase_price , 
-						purchase_date ,rc_phone,rc_Name, message, list_prod) 
+						rc_phone , rc_Name , message ,purchase_quantity , issued_date , used_date , owner_no, used_status , prod_pin_no) 
 		VALUES	 (
 					seq_purchase_purchase_no.NEXTVAL,
-					10000,
-					 #{purchaseProd.prodNo:INTEGER},
-					  0,
+					 #{purchaseUser},
+					 #{purchaseProd.prodNo},
+					  null,
 					 #{purchasePrice},
+					 #{rcPhone},
+					 #{rcName},
+					 #{message},
+					 #{purchaseQuantity},
 					 SYSTIMESTAMP,
-					#{rcPhone}
-					#{rcName}
-					#{message}
-					#{listProd}
+					  null,
+					  #{ownerNo},
+					  0,
+					  #{prodPinNo}
 				)
 	 </insert>
 	
@@ -74,7 +86,8 @@
 	 	SELECT
 	 	*
 	 	FROM PURCHASE	
-	 	WHERE purchase_no = #{purchaseNo}
+	 	WHERE purchase_no = #{purchaseNo} AND purchase_user = #{purchaseUser}
+	 	ORDER BY purchase_date
 	 </select>
 	
 	

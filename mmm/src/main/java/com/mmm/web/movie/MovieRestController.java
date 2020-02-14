@@ -161,8 +161,43 @@ public class MovieRestController {
 			returnMap.put("resultPage", resultPage);
 			
 			return returnMap;			
+		}
+		
+		@RequestMapping(value = "json/getExpectedMovieList", method = RequestMethod.POST)
+		public Map<String, Object> getExpectedMovieList( @RequestBody Search search,
+														HttpSession session)throws Exception{
+			
+//			1. Business Logic Layer의 getBoxOfficeList()의 Parameter 'search' 세팅 작업///////////////////////////// 
+//			만일 Get방식으로 처음 접근해서 currentPage가 없는 경우.. currentPage Default 설정
+			if(search.getCurrentPage() ==0 ) {
+				search.setCurrentPage(1);
+			}
+			
+//			상영예정작 영화 플래그
+			search.setOnBoxOfficeFlag(0);
+			
+			System.out.println("  sessionUser ::" +session.getAttribute("user"));
 			
 			
+//			@Value로 갖고 있는 field pageSize 세팅
+			search.setPageSize(pageSize);
+			System.out.println("------------search"+ search);
+			
+//			2. Business Logic 수행 ///////////////////////////////////////////////////
+//			List<Object> list, int totlaCnt IN MAP 
+			HashMap<String, Object> outputMap = movieService.getBoxOfficeList(search);
+			
+//			3. return Page로 보낼 model 들 작업 //////////////////////////////////////////
+//			페이지 관련  만들어주기
+			Page resultPage = new Page(search.getCurrentPage(), ((Integer)outputMap.get("totalCnt")).intValue(),
+					pageUnit, pageSize);
+			
+			Map<String, Object> returnMap = new HashMap<String, Object>();
+			returnMap.put("list", outputMap.get("list"));
+			returnMap.put("search", search);
+			returnMap.put("resultPage", resultPage);
+			
+			return returnMap;			
 		}
 		
 }
