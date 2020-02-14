@@ -293,6 +293,10 @@
 	  	width: 8px;
 	  }
 	  
+	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div:nth-child(2) > div.theater-list.lotte.col-4 > ul::-webkit-scrollbar {
+	  	width: 8px;
+	  }
+	  
 	  /* 남은 좌석 수 색깔 */
 	  div.remainingSeat > div > div > ul > li > span.seatcount {
 	  	color : green;
@@ -321,6 +325,20 @@
 	  	background-color : white !important; 
 	  	border : 1px solid #5c5c5c !important;
 	  }
+	  body > div.container > div > div.steps > div > div.col-1.pl-0.pr-1.h-100 > div.steps-body.text-center > div > ul > li.month > div > span.month{
+		display: block;
+	    margin-top: -6px;
+	    text-align: center;
+	    color: #666;
+	    font-size: 30px;
+	    font-family: Verdana;
+	    font-weight: bold;
+	    line-height: 30px;
+	 }
+	 
+	div.steps-body.text-center > div > div > div.remainingSeat > div > div > ul > li {
+	    top: 5px;
+	}
 
 </style>
 
@@ -496,7 +514,7 @@ $(function(){
 	                      <fmt:formatDate var="Year" value="${i }" pattern="yyyy"/>
 	                      <fmt:formatDate var="Month" value="${i }" pattern="MM"/>
 		                      <li class="month">
-		                      	<div>
+		                      	<div style="margin-bottom: 10px;">
 		                      		<span class="year">${Year }</span>
 		                      		<span class="month">${Month }</span>
 		                      	</div>
