@@ -832,7 +832,7 @@ $(function(){
 	
 	$("div.resetSelection").on("click",function(){
 	
-		self.location="/ticketing/addTicketing?movieName=${dateTime.movieName}";
+		history.go(-1);
 	});
 });
 	/////////////////////////////////////////

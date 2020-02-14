@@ -235,7 +235,7 @@
 	    border-radius: 10px;	  
 	  }
 	  
-	  ul.theaeterList::-webkit-scrollbar-track {
+	  ul.theaterList::-webkit-scrollbar-track {
 	    background-color: grey;
 	    border-radius: 10px;
 	    box-shadow: inset 0px 0px 5px white;	  
@@ -247,21 +247,21 @@
 	  }
 	  
 	  div.franchise-list.cgv > ul > li.cgv > img {
-  		position: relative;
-   		top: 4px;
-   		left: 22px;
-	  }
-	  
+		position: absolute;
+		top: -12px;
+		left: 16px;
+	  }	
+	  	  
 	  div.franchise-list.lotte > ul > li.lotte > img {
-  		position: relative;
-   		top: 2px;
-   		left: 22px;
+	    position: absolute;
+	    top: -11px;
+	    left: 11px;
 	  }
 	  
 	  div.franchise-list.megaBox > ul > li.megaBox > img {
-  		position: relative;
-   		top: 2px;
-   		left: 22px;
+	    position: absolute;
+	    top: 3px;
+	    left: 11px;
 	  }
 	  
 	  div.remainingSeat > div > div > ul > li {
@@ -289,6 +289,10 @@
 	    box-shadow: inset 0px 0px 5px white;	  	
 	  }
 	  
+	  div.steps-body > div > div > div:nth-child(6) > div.theater-list.lotte.col-4 > ul::-webkit-scrollbar {
+	  	width: 8px;
+	  }
+	  
 	  /* 남은 좌석 수 색깔 */
 	  div.remainingSeat > div > div > ul > li > span.seatcount {
 	  	color : green;
@@ -301,6 +305,21 @@
 	  }
 	  .list-group-item.active a span {
 	  	color : white
+	  }
+	  
+	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div.row.mx-0 > div.franchise-list.lotte.col-4.mx-0 > ul > li{
+	  	background-color : white !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  
+	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div.row.mx-0 > div.franchise-list.cgv.col-4.mx-0 > ul > li {
+	  	background-color : white !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  
+	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div.row.mx-0 > div.franchise-list.megaBox.col-4.mx-0 > ul > li {
+	  	background-color : white !important; 
+	  	border : 1px solid #5c5c5c !important;
 	  }
 
 </style>
@@ -430,17 +449,17 @@ $(function(){
                         <div class="row mx-0">
                           <div class="franchise-list cgv col-4 mx-0">
                            <ul class="list-group cgv">
-                           		<li class="list-group-item cgv"><span>CGV</span><img class="firstHeaderImage" src="../resources/image/logo/CGV.png" alt="" width="30"></li>
+                           		<li class="list-group-item cgv text-center"><span>CGV</span><img class="firstHeaderImage" src="../resources/image/logo/CGV.png" alt="" width="30" style="width: 97px; height: 73px; left: 34px;"></li>
 						    </ul>
                           </div>
                           <div class="franchise-list lotte col-4 mx-0">
                             <ul class="list-group lotte">
-                            		<li class="list-group-item lotte"><span>롯데시네마</span><img class="firstHeaderImage" src="../resources/image/logo/LotteCinema.png" alt="" width="30" ></li>
+                            		<li class="list-group-item lotte text-center"><span>롯데시네마</span><img class="firstHeaderImage" src="../resources/image/logo/LotteCinema.png" alt="" width="30" style="width: 103px; height: 77px; left: 25px;"></li>
                             </ul>
                           </div>
                           <div class="franchise-list megaBox col-4 mx-0">
                             <ul class="list-group megaBox">
-                            		<li class="list-group-item megaBox"><span>메가박스</span><img class="firstHeaderImage" src="../resources/image/logo/MegaBox.png" alt="" width="30" ></li>
+                            		<li class="list-group-item megaBox text-center"><span>메가박스</span><img class="firstHeaderImage" src="../resources/image/logo/MegaBox.jpg" alt="" width="30" style="width: 88px; height: 52px; left: 34px;"></li>
                             </ul>
                           </div>                          
                         </div><!-- end of row -->
@@ -508,6 +527,8 @@ $(function(){
                             	                          		
                             	</div>
                           </div>
+                          
+                          <div class="placeholder" style="margin-top: 165px;">영화, 극장, 날짜를 <br><br>선택해주세요.</div>
            </div><!-- end of col -->
            </div><!-- end of row -->
           </div><!-- end of steps-body -->
@@ -1284,7 +1305,7 @@ function check(){
 	 
 	 //모두 선택됐다면..
 	 if( movieName==true && franchise==true && theaterName==true && screenTime == true){
-		 
+		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "none");
    	 $.ajax({
    		  type: "POST",
    		  url: "/ticketing/json/getTimeList",
@@ -1387,7 +1408,7 @@ function getMovieList(franchiseCheck,theaterCheck,dateCheck){
 		datas = JSON.stringify({
 			 	franchise : franchiseCheck,		  
 		 		 })
-				 		 
+		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");			 		 
 	}else if(franchiseCheck.length!=0 && theaterCheck.length!=0 && dateCheck.length==0){ //프랜차이즈, 극장 클릭했을 경우,
 		datas = JSON.stringify({
 			franchise : franchiseCheck,	
@@ -1408,6 +1429,7 @@ function getMovieList(franchiseCheck,theaterCheck,dateCheck){
 			theaterName : theaterCheck,
 			screenDate : dateCheck,  
 		 		 })
+		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");		
 	}else if(franchiseCheck.length==0 && theaterCheck.length==0 && dateCheck.length==0){
 		return null;
 	}
