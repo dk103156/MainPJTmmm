@@ -210,7 +210,7 @@
 	  }	  
 	  
 	  
-	  /* 2020-02-14 */
+	  /* 2020-02-14 조조, 심야*/
 	  span.timeMorning {
 	  	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
     		background-position: 0px 1px
@@ -1015,7 +1015,7 @@ function TimeSelect(){
 		 
 	   	  // "극장명" 변경
 	   	  $("#theater").children().first().next().text(finalTheaterName);
-  	  
+  	   
   	  console.log("선택완료")
   	  console.log("영화 제목 :"+finalMovieName)
   	  console.log("프렌차이즈 : "+finalFranchise)

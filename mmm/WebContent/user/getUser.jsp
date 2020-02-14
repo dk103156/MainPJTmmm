@@ -593,6 +593,90 @@ label {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
+$(function(){
+	
+	function getParam(key) {
+	    var params = location.search.substr(location.search.indexOf("?") + 1);
+	    var value = "";
+	    params = params.split("&");
+	    for (var i = 0; i < params.length; i++) {
+	        temp = params[i].split("=");
+	        if ([temp[0]] == key) { value = temp[1]; }
+	    }
+	    return value;
+	}
+
+	var status = getParam("status");
+	
+	if(status=="failed"){
+		alert("로그인 정보가 올바르지 않습니다.");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$("#updateImgBtn").on("click",function(){
+		$("#fileForm").attr("action","/user/addProfile").attr("method","post").attr("enctype","multipart/form-data").submit();
+	})
+	
+	
+	$("#updateBtn").on("click",function(){
+		$("#InfoForm").attr("action","/user/updateUser").attr("method","post").submit();
+	})
+	
+	$("#byeBtn").on("click",function(){
+		var userNo= $("#userNo").val();
+		self.location="user/byeUser"+userNo;
+	})
+	
+	// 파일 선택 후 액션
+    $('#profileTarget').on('change', function(e) {
+    	var fileSize = this.files[0].size;
+		var maxSize = 360 * 360;
+ 		if(fileSize > maxSize) {
+			alert("파일용량을 초과하였습니다.");
+			$(".custom-file label").html("<i class='fas fa-camera-retro'>size 360x360</i>");
+			$("#preview").html("");
+			return;
+		}else{
+			
+			readImg(this);
+		}
+	})
+
+	function readImg(input){
+    	
+		var width = 360;
+		var height = 360;
+	
+		if(input.files && input.files[0]){
+			var render = new FileReader();
+			
+			render.onload = function(e){
+				var image = $('#preview').attr('src',e.target.result).attr('width','300px').attr('height','300px').css('overflow' , 'hidden');
+				console.log(e.target.result);
+				 $("#preview").html("<img src="+e.target.result+" style='border-color: #E6E6E6; border: 10px; overflow : hidden'>");
+			}	
+			 render.readAsDataURL(input.files[0]);
+		}
+	}
+
+	
+	// 첨부파일 추가
+	$('#addProfileImgBtn').on('click', function() {
+	    $('#profileTarget').click();
+	});
+	
+
+	
+
+
+});
 
 </script>
 </head>
@@ -600,7 +684,6 @@ label {
 
 <!--container-->
 <div class="container">
-
 	<div id="contents">
 		<h2 class="tit">개인정보 수정</h2>
 
@@ -620,26 +703,59 @@ label {
 						<th scope="row">프로필 사진</th>
 							<td>
 							<div class="profile-photo">
-								<form name="fileForm">
-									<input type="file" id="profileTarget" name="file" style="display: none;">
+								<form name="fileForm" id="fileForm">
+									<input type="file"  class="profileTarget" id="profileTarget" name="image" accept="image/*" style="display: none;">
+									<input type="hidden" name="userNo" id="userNo" value="${user.userNo}">
+									
+									<div class="profile-img" id="preview">
+										<c:if test="${user.profile.trim() eq null}">	
+											<img src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
+										</c:if>
+										<c:if test="${user.profile.trim() ne null}">
+											<img alt="" src="/resources/image/${user.profile}">
+											<input type="hidden" name="profile" value="${user.profile}">
+										</c:if>
+									</div>
 								</form>
-							<div class="profile-img">
-								<img src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
-							</div>
-
-								<button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 등록</button>
-								<a href="https://www.megabox.co.kr/mypage/goodbye-megabox" class="button small member-out" title="회원탈퇴">회원탈퇴</a>
+								
+								<button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 선택</button>
+								<button type="button" class="button small gray-line" id="updateImgBtn">등록</button>
+								<!-- Button trigger modal -->
+								<button type="button" class="button small member-out" data-toggle="modal" data-target="#staticBackdrop" title="회원탈퇴">회원탈퇴</button>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="staticBackdropLabel">회원 탈퇴</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								        ${user.userName}님 탈퇴를 하시겠습니까?
+								        	원한다면 해볼테면 해보슈
+								        <input type="password" name="password" id="password">	
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+								        <button type="button" class="btn btn-primary" id="byeBtn">탈퇴</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
 							</div>
 							</td>
 					</tr>
 					<tr>
 						<th scope="row">아이디</th>
-							<td>${user.userId}</td>
+							<td>${user.userId}</td>	
 					</tr>
 				</tbody>
 			</table>
 		</div>
-
+		
 		<div class="tit-util mt40 mb10">
 			<h3 class="tit">기본정보</h3>
 
@@ -648,14 +764,10 @@ label {
 			</div>
 		</div>
 
-		<form name="mbInfoForm">
+		<form name="mbInfoForm" id="InfoForm">
 			<input type="hidden" name="userNo" value="${user.userNo }" />
 			<input type="hidden" name="phoneNo" value="${user.phone }" />
-			<input type="hidden" name="zipcd" value="" />
-			<input type="hidden" name="mbAddr" value=" " />
-			<input type="hidden" name="mbProfilFileNo" value="0" />
-			<input type="hidden" id="mbByymmdd" value="19920404" />
-
+			
 			<div class="table-wrap mb40">
 				<table class="board-form">
 					<caption>이름, 생년월일, 휴대폰, 이메일, 비밀번호, 주소 항목을 가진 기본정보 표</caption>
@@ -721,7 +833,7 @@ label {
 							        <label for="email">이메일</label> <em class="font-orange">*</em>
 							    </th>
 							    <td>
-							        <input type="text" id="email" name="mbEmail" class="input-text w500px" value="tnwjddl0404@hanmail.net" />
+							        <input type="text" id="email" name="email" class="input-text w500px" value="${user.email}" />
 							    </td>
 							</tr>
 							<tr>
@@ -743,7 +855,74 @@ label {
                       </tbody>
                   </table>
               </div>
+		
+		
+		<div class="tit-util mt40 mb10">
+			<h3 class="tit">추가정보</h3>
+		</div>
+
+			<div class="table-wrap mb40">
+				<table class="board-form">
+					<caption>선호하는 장르, 자주가는 극장을 가진 표</caption>
+					<colgroup>
+						<col style="width:180px;">
+						<col>
+					</colgroup>
+					<tbody>
+						<tr>
+							<th scope="row">
+								선호장르 1
+							</th>
+								<td>
+									<span class="mbNmClass">${user.likeGenre1}</span>
+								</td>
+						</tr>
+						<tr>
+							<th scope="row">
+						    	선호장르 2
+						    </th>
+						    <td>
+						      	<span class="mbNmClass">${user.likeGenre2}</span> 
+						    </td>
+						</tr>
+						<tr>
+							<th scope="row">
+							   선호장르 3
+							</th>
+								<td>
+									<span class="mbNmClass">${user.likeGenre3}</span> 
+								</td>
+							</tr>
+							<tr>
+							    <th scope="row">
+							        자주가는 극장 1
+							    </th>
+							    <td>
+							       <span class="mbNmClass">${user.likeTheater1}</span> 
+							    </td>
+							</tr>
+							<tr>
+							    <th scope="row">
+									자주가는 극장 2
+								</th>
+							    <td>
+							        <span class="mbNmClass">${user.likeTheater2}</span> 
+							    </td>
+							</tr>
+							<tr>
+							  <th scope="row">
+									자주가는 극장 3
+								</th>
+							    <td>
+							        <span class="mbNmClass">${user.likeTheater3}</span> 
+							    </td>
+							</tr>
+                      </tbody>
+                  </table>
+              </div>
 		</form>
+		
+		
 		
           <div class="mt40" style="text-align: center; margin-bottom:20px;">
 			

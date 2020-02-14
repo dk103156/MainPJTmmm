@@ -63,6 +63,7 @@ public class TicketingServiceImpl implements TicketingService {
 		DateTime dateTime = dateTimeDao.getDateTime(cancel.getDateTimeNo());
 		System.out.println("\n"+dateTime);
 		System.out.println("list불러오기");
+		System.out.println("abcd123 :"+dateTime.getSelectedSeat().split(","));
 		List<String> reservedTotal =Arrays.asList(dateTime.getSelectedSeat().split(",")); // 예매된 좌석 전체
 		List<String> reserved=Arrays.asList(cancel.getSeatNo().split(",")); // 티켓 정보에서 가지고 있는 좌석 정보
 		System.out.println("reservedTotal \n"+reservedTotal);

@@ -39,7 +39,7 @@
  	<!-- SQL : SELECT ONE -->
  	<select id="getUser" parameterType="Integer" resultMap="userSelectMap">
 	 	SELECT 
-		 	user_no , user_id , user_name , password , role , birth , gender , phone , email , addr , like_genre1 , like_genre2 , 
+		 	user_no , user_id , user_name , password , profile, role , birth , gender , phone , email , addr , like_genre1 , like_genre2 , 
 		 	like_genre3 , like_theater1 , like_theater2 , like_theater3 , user_date,  user_bye_date, identity , user_status , 
 		 	user_grade, total_point , acc_point
 		 	from users
