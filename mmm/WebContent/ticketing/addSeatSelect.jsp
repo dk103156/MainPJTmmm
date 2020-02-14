@@ -24,9 +24,32 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
   
-<title>Insert title here</title>
+<title></title>
 
 <style>
+
+#numberSelector > div.group.normal > ul {
+    margin-top: 0;
+    margin-bottom: 0rem; 
+}
+
+#numberSelector > div.group.young > ul {
+    margin-top: 0;
+    margin-bottom: 0rem; 
+}
+
+div.steps-header.bg-dark.w-auto > div > div {
+	font-size: 15px;
+    height: 33px;
+    padding-top: 5px;
+}
+
+span.resetAllseats.text-white.mb-0 > img{
+	width: 18px; 
+	height: 16px; 
+	margin-right: 1px; 
+	margin-bottom: 4px;
+}
 
 /* ///////////////////////////////////////////////// */
 
@@ -98,10 +121,10 @@ div.steps-body {
 }
 
 #numberSelector{
-	border-right: 1px solid #d4d3c9;
+	border-right: 2px solid #d4d3c9;
 }
 .top {
-	border-bottom: 1px solid #d4d3c9;
+	border-bottom: 2px solid #d4d3c9;
 }
 
 .mid {
@@ -394,13 +417,16 @@ cursor: pointer;
       	<div class="steps-header bg-dark w-auto">
           	<div class="row mx-0">
 	        	<div class="col-12 text-center">
-	        		<span class="text-white mb-0" style="display : inline">인원 / 좌석</span>
-	        		<span class="resetAllseats text-white mb-0" style="clear:both; float:right;"><img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/step_refresh_btn.png" />선택다시하기</span>
+	        		<span class="text-white mb-0" style="display : inline; font-weight: bold; margin-left: 54px;">인원 / 좌석</span>
+	        		<span class="resetAllseats text-white mb-0" style="clear:both; float:right;">
+	        			<img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step3/step_refresh_btn.png"/>
+	        				다시하기
+	        		</span>
 	        	</div>    
 	        </div>  	
       	</div>
 
-        <div class="steps-body w-auto">
+        <div class="steps-body w-auto" style="height: 146px;">
 
         	<div class="row w-auto h-auto mx-0">    	
 	        	<div class="col-6 px-0 h-auto">
@@ -472,17 +498,18 @@ cursor: pointer;
 		              <div class="steps-body">
 			              <div class="user-select-info pt-3  w-auto">
 								<div class="place-info">
-									<span class="theaterName">${dateTime.theaterName}</span>
-									<span class="screenName">${dateTime.screenName}</span>
-									<span class="seatCount">남은좌석  <b class="restNum">${dateTime.remainingSeat}</b>/<b class="totalNum">130</b></span>
+									<span class="theaterName" style="border-right: 2px solid #ccc; padding-right: 8px;">${dateTime.theaterName}</span>
+									<span class="screenName" style="border-right: 2px solid #ccc; padding-right: 8px; padding-left: 3px;">${dateTime.screenName}</span>
+									<span class="seatCount" style="padding-left: 3px;">남은좌석  <b class="restNum" style="color: #CA4D10">${dateTime.remainingSeat}</b>/<b class="totalNum">130</b></span>
 								</div>
-								<div class="time-info">
+								<div class="time-info" style="font-weight: bold; font-size: 1.3em; color: #5a5a5a; margin-top: 12px;">
 									<fmt:formatDate var="screenDate" value="${dateTime.screenDate}" pattern="yyyy.MM.dd"/>
 									<fmt:formatDate var="screenDay" value="${dateTime.screenDate}" pattern="E"/>
 									<fmt:formatDate var="screenTime" value="${dateTime.screenTime}" pattern="HH:mm"/>
 									<span class="screenDate">${screenDate}</span>
 									<span class="screenDay">(${screenDay})</span>
 									<span class="screenTime">${screenTime}</span>
+									<span class="endTime">~</span>
 								</div>
 						  </div>
 		              </div>
@@ -496,10 +523,10 @@ cursor: pointer;
 		<div class="col-9" >
       	<div class="steps-header">
 	        	<div class="mx-auto w-50">
-	        		<p class="text-black text-center mb-0 screen">SCREEN</p>
+	        		<p class="text-black text-center mb-0 screen" style="width: 670px;">SCREEN</p>
 	        	</div>    
 	        </div>  		
-		<div class="steps-body">
+		<div class="steps-body" style="border-left-width: 0px; margin-left: 232px;">
 			<div id="seatSelector">
 				<table class="">
 					<thead>
@@ -734,14 +761,14 @@ cursor: pointer;
 			</div>
 			</div>
 			<div class="col-3">
-				 <table class="displayInfo">
-				 <tr><th class="icon-info"></th><th>표시정보</th></tr>
-				 <tr><td class="icon-choose mt-2"></td><td>선택</td></tr>
-				 <tr><td class="icon-impossible mt-2"></td><td>선택불가</td></tr>
+				 <table class="displayInfo" style="margin-top: 72px;">
+				 <tr><td class="icon-choose mt-2"></td><td style="text-align: left;">&nbsp;선택</td></tr>
+				 <tr><td class="icon-impossible mt-2"></td><td>&nbsp;예매 완료</td></tr>
+				  <tr><td></td></tr>
 				 <tr><td class="icon-economy mt-2">1</td><td>Economy</td></tr>
 				 <tr><td class="icon-standard mt-2">2</td><td>Standard</td></tr>
-				 <tr><td class="icon-prime mt-2">3</td><td>Prime</td></tr>
-				 <tr><td class="icon-sweetBox mt-2">4</td><td>SweetBox</td></tr>
+				 <tr><td class="icon-prime mt-2">3</td><td style="text-align: left;">&nbsp;Prime</td></tr>
+				 <tr><td class="icon-sweetBox mt-2">4</td><td>&nbsp;SweetBox</td></tr>
 				 </table>
 			</div>
 			</div>		
@@ -805,7 +832,7 @@ $(function(){
 	
 	$("div.resetSelection").on("click",function(){
 	
-		self.location="/ticketing/addTicketing?movieName=${dateTime.movieName}";
+		history.go(-1);
 	});
 });
 	/////////////////////////////////////////

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.mmm.common.Search;
 import com.mmm.service.domain.Purchase;
+import com.mmm.service.domain.User;
 
 public interface PurchaseService {
 	
@@ -16,6 +17,7 @@ public interface PurchaseService {
 	
 	//구매 상세정보
 	public Purchase getPurchase(int purchaseNo) throws Exception;
+	
 	
 	//구매내역 목록
 	public Map<String,Object> getPurchaseList(Purchase purchase) throws Exception;

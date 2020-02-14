@@ -159,7 +159,9 @@ $(function(){
 		$("#plusPage").load("/user/getUser/"+userNo);
 	})
 	
-	//$("#plusPage").load("/user/getUser/10004");
+	$("a[href='#']:contains('예매/구매내역')").on('click',function(){	
+		$("#plusPage").load("/ticketing/getTicketingList");
+	})
 	
 });
 </script>
@@ -179,7 +181,7 @@ $(function(){
 			
 						<ul>
 							<li><a href="#" title="회원정보수정">회원정보수정</a></li>
-							<li><a href="/mypage/bookinglist" title="예매/구매내역">예매/구매내역</a></li>
+							<li><a href="#" title="예매/구매내역">예매/구매내역</a></li>
 			                <li><a href="/mypage/movie-coupon" title="쿠폰/보관함/선물함">쿠폰/보관함/선물함</a></li>
 							<li><a href="/mypage/discount-coupon" title="포인트 내역">포인트 내역</a></li>
 							<li><a href="/mypage/point-list" 	title="내가 본 영화">내가 본 영화</a></li>
