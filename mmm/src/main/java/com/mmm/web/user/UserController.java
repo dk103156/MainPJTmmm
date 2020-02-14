@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -123,8 +124,8 @@ public class UserController {
 	return "redirect:/user/login.jsp";
 	}
 	
-	@RequestMapping(value = "getUser" , method=RequestMethod.GET)
-	public String getUser(@RequestParam("userNo") int userNo, Model model) throws Exception{
+	@RequestMapping(value = "getUser/{userNo}" , method=RequestMethod.GET)
+	public String getUser(@PathVariable("userNo") int userNo, Model model) throws Exception{
 		
 		System.out.println("/user/getUser : GET ");
 		
@@ -185,18 +186,22 @@ public class UserController {
 		String cryptoPassword = CryptoUtil.cryptoText(password);
 		user.setPassword(cryptoPassword);
 		
-		
+		System.out.println("Userrrrrrrrrrrr"+user);
 		User dbUser = userService.getUserId(user.getUserId());
 		
-		  if(dbUser == null) {
-			  return "redirect:/user/login.jsp?status=failed"; }
+		System.out.println("dbUser!!!"+dbUser.getRole().trim());
+		
+		  if(dbUser == null || dbUser.getRole().trim().equals("unUser") || dbUser.getUserId() ==null) {
+			  
+			  return "redirect:/user/login.jsp?status=failed"; 
+		  }
 		 
 		System.out.println(user);
 		
 		
-		if(user.getPassword().equals(dbUser.getPassword())) {
+		if(user.getPassword().equals(dbUser.getPassword())&& dbUser.getRole().trim().equals("user")) {
 			session.setAttribute("user", dbUser);	
-			System.out.println("!!!!!!"+((User)session.getAttribute("user")).toString());
+			System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 		}else {//로그인 실패시 
 			return "redirect:/user/login.jsp?status=failed";
 		}
@@ -239,7 +244,7 @@ public class UserController {
 			session.setAttribute("user", dbUser);	
 			System.out.println("!!!!!!"+((User)session.getAttribute("user")).toString());
 		}else {//로그인 실패시 
-			return "redirect:/user/login.jsp?status=failed";
+			return "redirect:/user/unUserLogin.jsp?status=failed";
 		}
 		return "redirect:/index.jsp";
 	}

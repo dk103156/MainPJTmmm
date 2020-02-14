@@ -5,9 +5,9 @@ import java.sql.Timestamp;
 public class Cart {
 
 		private int 		cartNo;					// 장바구니 관리번호
-		private int		cartUser;				// 회원 참조
+		private int			cartUser;				// 회원 참조
 		private int 		quantity;				// 장바구니 수량
-		private Timestamp 	cartDate;				// 카트 등록 날짜
+		private Timestamp 	cartDate;	// 카트 등록 날짜
 		private int 		cartStatus;				// 장바구니에서 구매하면  삭제 되는 flag 0:장바구니 , 1:구매완료
 		private Product 	product;				// 상품 참조
 		

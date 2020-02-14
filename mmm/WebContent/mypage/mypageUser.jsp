@@ -18,24 +18,25 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<title>마이페이지</title>
+<title>회원정보</title>
+<style>
 
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-       body {
-       		background-color: #f9fad4;
-            margin-top: 100px;
-        }
-     </style> 
+</style>
 </head>
 <body>
 
-	<!--container-->
-	<div id="contaniner" class="bg-bricks">
-	
-	</div>
-	<!--container end-->
 
-		
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

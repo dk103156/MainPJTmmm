@@ -9,10 +9,10 @@
  	
 	<resultMap id="cartSelectMap"				type="cart">
 		<result property="cartNo" 					column="cart_no" 			jdbcType="INTEGER"  />
-		<result property="cartUser.userNo" 	column="user_no" 			jdbcType="INTEGER"  />
+		<result property="cartUser" 			column="cart_no" 			jdbcType="INTEGER"  />
 		<result property="quantity"					column="quantity" 			jdbcType="INTEGER"  />
-		<result property="cartDate" 				column="cart_date" 		jdbcType="DATE"/>
-		<result property="cartStatus" 				column="cart_status" 	jdbcType="INTEGER"/>
+		<result property="cartDate" 				column="cart_date" 			jdbcType="DATE"/>
+		<result property="cartStatus" 				column="cart_status" 		jdbcType="INTEGER"/>
 		
 		<association property="product"  		javaType="product">
 			<id property="prodNo" 	 				column="prod_no" 			jdbcType="INTEGER"  />
@@ -46,14 +46,27 @@
 	<select id="getCartList"	parameterType="cart"	resultMap="cartSelectMap" >
 		SELECT c.cart_no, c.cart_user, p.prod_no, c.quantity, p.prod_name, p.prod_detail, p.prod_price, p.prod_image
 		FROM product p, cart c
-		WHERE p.prod_no = c.CART_PROD 
+		WHERE p.prod_no = c.CART_PROD  AND c.cart_user = #{cartUser}
 		ORDER BY cart_date  
 	</select>
 	
 	<delete id="deleteCart" parameterType="cart">
 		DELETE FROM cart 
-		WHERE cart_no = #{cartNo}	
+		WHERE cart_no = #{cartNo}
 	</delete>
 	
+	
+	<update id="updateCart" parameterType="cart">
+		update cart 
+		<set>
+			cart_status = 1
+		</set>
+		WHERE cart_no = #{cartNo} AND cart_status = 0 
+	</update>
+	
+	<delete id="purchaseCart" parameterType="cart">
+		DELETE FROM cart 
+		WHERE cart_status = 1
+	</delete>
 	
 </mapper>

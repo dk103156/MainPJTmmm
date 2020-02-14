@@ -9,7 +9,7 @@
  	
 	<resultMap id="purchaseSelectMap" 			type="purchase">
 		<result property="purchaseNo" 				column="purchase_no" 		jdbcType="INTEGER"  />
-		<result property="purchaseUser.userNo" 		column="user_no" 			jdbcType="INTEGER"  />
+		<result property="purchaseUser" 			column="purchase_user" 			jdbcType="INTEGER"  />
 		<result property="purchaseStatus" 			column="purchase_status" 	jdbcType="INTEGER"  />
 		<result property="purchasePrice" 			column="purchase_price" 	jdbcType="INTEGER"  />
 		<result property="purchaseDate" 			column="purchase_date" 		jdbcType="DATE"  />
@@ -18,7 +18,7 @@
 		<result property="message" 					column="message" 			jdbcType="VARCHAR"  />
 		<result property="purchaseQuantity" 		column="purchase_quantity" 	jdbcType="INTEGER"  />
 		
-		<association property="product" javaType="product">
+		<association property="purchaseProd" javaType="product">
 			<id property="prodNo" column="prod_no" 			jdbcType="INTEGER"  />
 			<result property="prodName"			column="prod_name" 			jdbcType="VARCHAR"  />
 			<result property="prodDate" 		column="prod_date" 			jdbcType="DATE"/>
@@ -36,37 +36,37 @@
 	<insert id="addPurchase"		parameterType= "Purchase" >
 	 	INSERT
 		INTO purchase ( purchase_no  , purchase_user , purchase_prod , purchase_status , purchase_price , 
-						purchase_date ,rc_phone,rc_Name, message ,purchase_quantity) 
+						purchase_date ,rc_phone , rc_Name , message ,purchase_quantity) 
 		VALUES	 (
 					seq_purchase_purchase_no.NEXTVAL,
-					 #{purchaseUser.userNo},
+					 #{purchaseUser},
 					 #{purchaseProd.prodNo},
 					  0,
-					 #{purchaseProd.prodPrice},
+					 #{purchasePrice},
 					 SYSTIMESTAMP,
-					 null ,
-					 null ,
+					  #{rcPhone},
+					  #{rcName},
 					 null ,
 					  #{purchaseQuantity}
 				)
 	 </insert>
 	
 	
-	<insert id="addGifPurchasae"		parameterType= "Purchase" >
+	<insert id="addGiftPurchase"		parameterType= "Purchase" >
 	 	INSERT
 		INTO purchase ( purchase_no  , purchase_user , purchase_prod , purchase_status , purchase_price , 
-						purchase_date ,rc_phone,rc_Name, message, list_prod) 
+						purchase_date ,rc_phone , rc_Name , message ,purchase_quantity) 
 		VALUES	 (
 					seq_purchase_purchase_no.NEXTVAL,
-					10000,
-					 #{purchaseProd.prodNo:INTEGER},
-					  0,
+					 #{purchaseUser},
+					 #{purchaseProd.prodNo},
+					  2,
 					 #{purchasePrice},
 					 SYSTIMESTAMP,
-					#{rcPhone}
-					#{rcName}
-					#{message}
-					#{listProd}
+					 #{rcPhone},
+					 #{rcName},
+					#{message},
+					 #{purchaseQuantity}
 				)
 	 </insert>
 	
@@ -74,7 +74,8 @@
 	 	SELECT
 	 	*
 	 	FROM PURCHASE	
-	 	WHERE purchase_no = #{purchaseNo}
+	 	WHERE purchase_no = #{purchaseNo} AND purchase_user = #{purchaseUser}
+	 	ORDER BY purchase_date
 	 </select>
 	
 	
