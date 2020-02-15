@@ -165,8 +165,8 @@
 			</div>				
 			
 			<!-- 4. 결제 -->
-			<div class="info payment-ticket" style="display: none;">
-				<div class="row payment-adult" style="display: none;">
+			<div class="info payment-ticket" style="display: block; top: 13px;">
+				<div class="row payment-adult" style="display: none; margin-top: 0px;">
 					<span class="header" style="width: 55px; padding-left: 19px;">일반</span>
 					<span class="data"><span class="price"></span>원 <span class="quantity" style="display: none;"></span></span>
 				</div>			
@@ -218,7 +218,9 @@
 	                
 	      </div>
 	      <div class="modal-footer">
+	      	<!-- 퀵오더 진행 -->
 	      	<button type="button" class="btn btn-primary" onclick='total(0)'></button>
+	      	<!-- 퀵오더 없이 바로 예매 진행 -->
 	        <button type="button" class="btn btn-secondary" onclick='total(1)' data-dismiss="modal"></button>
 	        
 	      </div>
@@ -275,7 +277,7 @@ function modalConfirmCheck(){
 //비회원일경우, 바로
 function unUserCheck(){
 	if(unUserExist && $("a.btn-right").hasClass("on")){
-		$("a.btn-right").attr("onclick","total(1)");
+		$("a.btn-right").attr("onclick","total(1)"); // 퀵오더 없이 바로 예매 진행
 	}
 }
 
