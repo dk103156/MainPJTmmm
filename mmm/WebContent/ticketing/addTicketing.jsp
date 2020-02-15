@@ -347,7 +347,7 @@ $(function(){
 		
 	});
 	
-
+  /* 영화 예매 버튼 통해서 들어오면 클릭*/
 	$("div.steps-body > div > div.movie-list > ul > li").each(function(index, item){ 
 		//console.log( $(item).attr('title') );
 		//console.log('${movieName}');
@@ -639,7 +639,7 @@ function formatDates(x){
  //프랜차이즈 선택 관련
 function franchiseSelect(){
  $("div.franchise-list > ul > li.list-group-item").on("click",function(){
-	 
+	 theaterCheck=""; // 2020-02-15 , 영화관 체크하고 나서 프랜차이즈 변경 시 극장명 유지 방지
 	 $("div.franchise-list > ul > li.list-group-item").removeClass("active");
 	 
 	 $(this).addClass("active");

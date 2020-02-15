@@ -169,11 +169,21 @@
 	  
 	  /* 프랜차이즈셀렉터, 화살표에 커서 이벤트*/	  
 	  div.franchise-select > ul > li > span:nth-child(1),
-	  div > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i, 
-	  div > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i
+	  #firstArrowUp, #secondArrowUp, #thirdArrowUp, 
+	  #firstArrowDown, #secondArrowDown, #thirdArrowDown
 	  {
 	  	cursor: pointer;
 	  
+	  }
+	  
+	  /* 화살표 우측 정렬*/
+	  span.arrowTotal{
+	  	float : right;
+	  }
+	  
+	  /* 프랜차이즈 선택, 목록 창 크기 고정 */
+	  div.franchise-select, div.franchise-list {
+	  	width : 170px;
 	  }
 	  
 	  .franchiseImage {
@@ -371,8 +381,8 @@
 	                           		 <li class="list-group-item first text-center">
 	                           		 <span class="firstHeaderName">프랜차이즈</span><img class="firstHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal" style="position: relative; left: 5px;">
-		                           		 <span class="arrow" style="position : relative; bottom:2px"><i class="fas fa-sort-up"></i></span>
-		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i class="fas fa-sort-down"></i></span>
+		                           		 <span class="arrow" style="position : relative; bottom:2px"><i id="firstArrowUp" class="fas fa-sort-up"></i></span>
+		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i id="firstArrowDown"  class="fas fa-sort-down"></i></span>
 	                           		 </span>
 	                           		 </li>
 							    </ul>
@@ -419,8 +429,8 @@
 	                           		 <li class="list-group-item second text-center">
 	                           		 <span class="secondHeaderName">프랜차이즈</span><img class="secondHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
-		                           		 <span class="arrow" style="position : relative; bottom:2px"><i class="fas fa-sort-up"></i></span>
-		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i class="fas fa-sort-down"></i></span>
+		                           		 <span class="arrow" style="position : relative; bottom:2px"><i id="secondArrowUp"  class="fas fa-sort-up"></i></span>
+		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i id="secondArrowDown" class="fas fa-sort-down"></i></span>
 	                           		 </span>
 	                           		 </li>
 							    </ul>
@@ -467,8 +477,8 @@
 	                           		<li class="list-group-item third text-center">
 	                           		 <span class="thirdHeaderName">프랜차이즈</span><img class="thirdHeaderImage" src="" alt="" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
-		                           		 <span class="arrow" style="position : relative; bottom:2px"><i class="fas fa-sort-up"></i></span>
-		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i class="fas fa-sort-down"></i></span>
+		                           		 <span class="arrow" style="position : relative; bottom:2px"><i id="thirdArrowUp" class="fas fa-sort-up"></i></span>
+		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i id="thirdArrowDown" class="fas fa-sort-down"></i></span>
 	                           		 </span>
 									</li>
 							    </ul>
@@ -686,21 +696,21 @@
 	    		 franchiseFirstCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.first > li > span:nth-child(1)").text(franchiseFirstCheck)
 	    		 $("img.firstHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
-	    		 $("div:nth-child(1) > div:nth-child(5) > div.franchise-select > ul > li > span.arrowTotal").css("top","8px");
+	    		 $("div.franchise-select > ul.first > li > span.arrowTotal").css("top","1px");
 	    		 $("span.firstHeaderName").css("position","relative").css("top","1px");
 	    	}else if(index=="second"){
 	    		 theaterSecondCheck=""
 	    		 franchiseSecondCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.second > li > span:nth-child(1)").text(franchiseSecondCheck)
 	    		 $("img.secondHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
-	    		 $("div:nth-child(2) > div:nth-child(5) > div.franchise-select > ul > li > span.arrowTotal").css("top","8px");
+	    		 $("div.franchise-select > ul.second > li > span.arrowTotal").css("top","1px");
 	    		 $("span.secondHeaderName").css("position","relative").css("top","1px");
 	    	}else if(index=="third"){
 	    		 theaterThirdCheck=""
 	    		 franchiseThirdCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.third > li > span:nth-child(1)").text(franchiseThirdCheck)
 	    		 $("img.thirdHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
-	    		 $("div:nth-child(3) > div:nth-child(5) > div.franchise-select > ul > li > span.arrowTotal").css("top","8px");
+	    		 $("div.franchise-select > ul.third > li > span.arrowTotal").css("top","1px");
 	    		 $("span.thirdHeaderName").css("position","relative").css("top","1px");
 	    	 }
 	    	 
@@ -1942,35 +1952,33 @@
 <script>
 
 $(function(){
+
 	<c:if test="${user.role eq 'user'}">
+		$("div.movie-list > ul").css("height","649px")
+	</c:if>
+		
 		franchiseSelector('first')
 		franchiseSelector('second')
 		franchiseSelector('third')
-	</c:if>
-		
-	<c:if test="${user.role ne 'user'}">
-		franchiseSelectorUnUser('first')
-		franchiseSelectorUnUser('second')
-		franchiseSelectorUnUser('third')
-	</c:if>		
-		
+
+
    /* 프랜차이즈 셀렉트 바 이미지 삽입 - 프랜차이즈 이벤트 */	
    function franchiseSelector(sequence){
-		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("mouseenter",function(){
+		$("span."+sequence+"HeaderName").on("mouseenter",function(){
 			if(sequence=='first'){
-				$("div:nth-child(1) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
-				$("div:nth-child(1) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
-				$("div:nth-child(1) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.jpg")
 				
 			}else if(sequence=='second'){	
-				$("div:nth-child(2) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
-				$("div:nth-child(2) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
-				$("div:nth-child(2) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.jpg")
 				
 			}else if(sequence=='third'){
-				$("div:nth-child(3) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
-				$("div:nth-child(3) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
-				$("div:nth-child(3) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
+				$("div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.jpg")
 				
 			}
 			
@@ -1992,44 +2000,7 @@ $(function(){
 			
 		});//end of franchise-select click 
    }
-   
-   function franchiseSelectorUnUser(sequence){
-		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("mouseenter",function(){
-			if(sequence=='first'){
-				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
-				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
-				$("div:nth-child(1) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
-				
-			}else if(sequence=='second'){	
-				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
-				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
-				$("div:nth-child(2) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
-				
-			}else if(sequence=='third'){
-				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
-				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
-				$("div:nth-child(3) > div:nth-child(2) > div.franchise-list > ul."+sequence+" > li:nth-child(3) > img").attr("src","../resources/image/logo/MegaBox.png")
-				
-			}
-			
-			var display =$("div.franchise-list > ul."+sequence).css("display");
-			if(display == 'none'){
-				$("div.franchise-list > ul."+sequence).css("display","contents");
-				//$("div.franchise-list > ul."+sequence+" > li:nth-child(1)").trigger("click");
-			}else{
-				$("div.franchise-list > ul."+sequence).css("display","none");
-				$("div.theater-list ul.list-group."+sequence).empty();
-			}
-			
-			$("div.franchise-list > ul."+sequence).on("mouseleave",function(){
-				$("div.franchise-list > ul."+sequence).css("display","none")
-				
-				
-			})
-			
-		});//end of franchise-select click 
-  }   
-	
+
 	arrowEvent('first')
 	arrowEvent('second')
 	arrowEvent('third')
@@ -2048,8 +2019,9 @@ $(function(){
 			number="3";
 			theaterThirdCheck="";
 		}
-		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i").off("click")
-		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(1) > i").on("click",function(){
+		$("#"+sequence+"ArrowUp").off("click")
+		$("#"+sequence+"ArrowUp").on("click",function(){
+				
 				var nodeList = $("div.franchise-list > ul."+sequence+" > li.list-group-item");
 				var newArray = Array.prototype.slice.call(nodeList,0);
 				//console.log(newArray)
@@ -2066,8 +2038,8 @@ $(function(){
 					$(newArray[1]).trigger("click");
 				}
 					
-				if($("div.steps-body > div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").text()=='프랜차이즈'){
-					$("div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").trigger("mouseenter");
+				if($("span."+sequence+"HeaderName").text()=='프랜차이즈'){
+					$("span."+sequence+"HeaderName").trigger("mouseenter");
 					$($("div.franchise-list > ul."+sequence+" > li.list-group-item")[0]).trigger("click")
 				}				
 				
@@ -2077,12 +2049,13 @@ $(function(){
 					arrowEvent('second')
 				}else if(sequence=='third'){
 					arrowEvent('third')
-				}			
+				}	
+				
 		});
 		
 		//아래쪽 화살표
-		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i").off("click")
-		$("div:nth-child("+number+") > div:nth-child(1) > div.franchise-select > ul > li > span:nth-child(3) > span:nth-child(2) > i").on("click",function(){
+		$("#"+sequence+"ArrowDown").off("click")
+		$("#"+sequence+"ArrowDown").on("click",function(){		
 			var nodeList = $("div.franchise-list > ul."+sequence+" > li.list-group-item");
 			var newArray = Array.prototype.slice.call(nodeList,0);
 			//console.log(newArray)
@@ -2098,8 +2071,8 @@ $(function(){
 				$(newArray[0]).trigger("click");
 			}
 			
-			if($("div.steps-body > div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").text()=='프랜차이즈'){
-				$("div > div:nth-child("+number+") > div:nth-child(1) > div > ul > li > span."+sequence+"HeaderName").trigger("mouseenter");
+			if($("span."+sequence+"HeaderName").text()=='프랜차이즈'){
+				$("span."+sequence+"HeaderName").trigger("mouseenter");
 				$($("div.franchise-list > ul."+sequence+" > li.list-group-item")[0]).trigger("click")
 			}				
 			
@@ -2111,7 +2084,8 @@ $(function(){
 				arrowEvent('second')
 			}else if(sequence=='third'){
 				arrowEvent('third')
-			}					
+			}	
+			
 		});		
 	}//end of arrowEvent
 });//end of function
@@ -2136,7 +2110,8 @@ function likeTheater(sequence){
 		var check = $("div:nth-child("+number+") > div:nth-child(6) > div.franchise-list.text-center > ul").css("display");
 		
 		if(check=='none'){
-			$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").trigger("click");
+			$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").trigger("mouseenter");
+			
 		}
 		
 		var franchise = $(this).text();
@@ -2147,6 +2122,7 @@ function likeTheater(sequence){
 			    			 //console.log(item.innerText)	//break 는 return false, continue는 return true
 			    			 if(item.innerText==franchise){
 			    				 $(item).trigger("click");
+			    				 $("div.franchise-list > ul."+sequence).trigger("mouseleave"); // 2020-02-15 클릭 후 프랜차이즈 선택 창 끄기
 			    				 return false;
 			    			 }
 			    			 
