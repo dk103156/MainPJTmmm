@@ -126,6 +126,7 @@ public class CustomerController {
 		System.out.println(date);
 		article.setArticleDate(date);
 		
+		
 		model.addAttribute("article", article);
 		
 		return "forward:/customer/getNotice.jsp";
@@ -142,6 +143,8 @@ public class CustomerController {
 		}
 		search.setPageSize(pageSize);
 		search.setArticleType(2);
+		
+		System.out.println("sssssssssssssseeeeeeeeeeeeeeeeaaaaaaaaaaaaaaaaarrrrrrrrrrch"+search);
 		
 		// 1:일대일문의 2:공지사항 3:자주찾는질문 4:리뷰
 		Map<String, Object> map = boardService.getArticleList(search);
@@ -196,6 +199,34 @@ public class CustomerController {
 		return "forward:/customer/getContact.jsp";
 	}
 	
+	
+	@RequestMapping(value="addReContact", method=RequestMethod.POST)
+	public String PostAddReContact(@ModelAttribute("Article") Article article, HttpSession session, Model model) throws Exception {
+		
+		System.out.println("/customer/addReContact : POST");
+		System.out.println("/도오오오오오착##################################");
+		
+		int supArticleNo = article.getSupArticleNo();
+		System.out.println("supArtNo????????????????????"+supArticleNo);
+		
+		User user = (User)session.getAttribute("user"); 
+		article.setUserId(user.getUserId()); 
+		article.setArticleType(5);  //articleType 5 => 1:1문의글의 답변 , articleType 1 => 1:1문의글의 질문
+	
+		Article supArticle = boardService.getArticle(supArticleNo);
+		supArticle.setQnaStatus(1);
+		boardService.updateArticle(supArticle);
+		
+		
+		System.out.println("addReContact에서 article>>" + article);
+		boardService.addArtice(article);
+		
+		model.addAttribute("article", article);
+		
+		return "forward:/customer/getContact.jsp";
+	}
+	
+	
 	@RequestMapping(value="deleteContact", method=RequestMethod.GET)
 	public String deleteContact(@RequestParam int articleNo, HttpSession session, Model model) throws Exception {
 		
@@ -240,15 +271,25 @@ public class CustomerController {
 		System.out.println("/customer/getContact : GET");
 		User user = (User)session.getAttribute("user");
 		
-		System.out.println("[getAsk] session user >>" + user);
+		System.out.println("[getContact] session user >>" + user);
 		Article article = boardService.getArticle(articleNo);
 		
 		String writerId = article.getUserId();
 		User writer = userService.getUserId(writerId);
 		
-		String date = JavaUtil.convertDateFormat(article.getArticleDate());	
+		String date = JavaUtil.convertDateFormat(article.getArticleDate());	 //질문글 등록일시 포맷 바꾸기
 		System.out.println(date);
 		article.setArticleDate(date);
+		
+		
+		Article reArticle = boardService.getReply(article.getArticleNo()); 	//답변글 가져오기
+	
+		if(reArticle!=null) {
+			String reDate2 = JavaUtil.convertDateFormat(reArticle.getArticleDate()); //답변글 등록일시 포맷 바꾸기
+			reArticle.setArticleDate(reDate2);
+			System.out.println("답변 글 !!!!!!!!!!!!!!!!!!!!!!!!!!>>>>>>"+reArticle);
+			model.addAttribute("reArticle", reArticle);
+		}
 		
 		model.addAttribute("article", article);
 		model.addAttribute("writer", writer);

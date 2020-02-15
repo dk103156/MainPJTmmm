@@ -264,8 +264,8 @@ public class MovieController {
 			
 		}
 		
-//		@Value로 갖고 있는 field pageSize 세팅
-		search.setPageSize(pageSize);
+//		@Value로 갖고 있는 field pageSize 세팅	--> 12개 고정
+		search.setPageSize(12);
 		System.out.println("------------search"+ search);
 		
 //		2. Business Logic 수행 ///////////////////////////////////////////////////

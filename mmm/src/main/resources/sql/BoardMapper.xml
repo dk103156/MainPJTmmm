@@ -23,8 +23,18 @@
 		<result property="deleteDate" 					column="delete_date"			jdbcType="TIMESTAMP"/>
 		<result property="supArticleNo" 				column="sup_art_no"				jdbcType="NUMERIC"/>
 		<result property="qnaStatus" 					column="qna_status"				jdbcType="NUMERIC"/>
+
 	</resultMap>
 	
+
+	<resultMap type="Article" id="reply">
+		<result property="articleNo" 					column="supNo"				jdbcType="NUMERIC"/>
+		<result property="replyNo" 						column="reNo"				jdbcType="NUMERIC"/>
+		<result property="articleTitle" 				column="reTitle"				jdbcType="VARCHAR"/>
+		<result property="content" 						column="reContent"				jdbcType="VARCHAR"/>
+		<result property="articleDate" 					column="reDate"				jdbcType="TIMESTAMP"/>
+		<result property="supArticleNo" 				column="reSup"				jdbcType="NUMERIC"/>
+	</resultMap>
 
 
 	<resultMap type="Comment" id="cmtSelectMap">
@@ -73,9 +83,21 @@
 		 article_no, article_status, article_type, category, user_id, sup_art_no, article_title, 
 		 article_content, article_date, file_name, view_count, blind_reason, blind_date, delete_date, qna_status
 		FROM article 
-		WHERE article_no = #{value}
+		WHERE 
+		article_no = #{value}
 	</select>
 	
+<!-- 답변글 가져오기 -->	
+	<select id="getReArticle" parameterType="int" resultMap="reply">
+		SELECT 
+		 a1.ARTICLE_NO supNo,  a2.ARTICLE_NO reNo, a2.ARTICLE_TITLE reTitle, a2.ARTICLE_CONTENT reContent, 
+		 a2.ARTICLE_DATE reDate, a2.SUP_ART_NO reSup 
+		FROM ARTICLE a1, ARTICLE a2 
+		WHERE 
+		a1.ARTICLE_NO = a2.SUP_ART_NO
+		AND
+		a1.ARTICLE_NO = #{value}
+	</select>
 
 <!-- 게시글 목록 조회 -->	
 	<select id="getArticleList" parameterType="Search" resultMap="articleSelectMap" >
@@ -100,7 +122,7 @@
 		 article_type		=		#{articleType:NUMERIC},
 		 category			=		#{category:NUMERIC},
 		 article_title		=		#{articleTitle:VARCHAR},
-		 article_content	=		#{articleContent:VARCHAR},
+		 article_content	=		#{content:VARCHAR},
 		 article_date 		=		SYSDATE,
 		 qna_status			=		#{qnaStatus:NUMERIC}
 		</set>
@@ -283,6 +305,7 @@
 					<if test="category==6 ">
 					    AND	category = 6 </if>
 				</if>
+				AND article_status = 0
 			</where>
 	 </sql>	
 	 
@@ -294,5 +317,6 @@
 			<include refid="article_srch"/>	
 		 	) countTable	
 	 </select>	 
+	 
 	 
 </mapper>

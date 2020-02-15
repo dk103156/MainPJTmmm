@@ -57,6 +57,14 @@
 		.starR1.on{background-position:0 0;}
 		.starR2.on{background-position:-15px 0;}
     	
+/*     	.row { */
+/* 		    width: 1200px;  */
+/* 		    margin: 0 auto; */
+/* 		} */
+		.moviebody {
+		    width: 700px;
+		    margin: 0 auto;
+		}
     </style>
     
 	<script type="text/javascript">
@@ -234,7 +242,7 @@
     
 	  <div class="album py-5 bg-light">
 	    <div class="container">
-	    	<div class="col-lg-9">
+	    	<div class="col moviebody">
 			    <div class="row">
 	   		        <div class="col-md-4 text-center">
 			        	<img id="poster" src="${movie.poster}" alt="">

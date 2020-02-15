@@ -43,4 +43,7 @@ public interface BoardService {
 	public List<Article> getArtBlindList(Search search) throws Exception;
 	
 	public String saveImage(MultipartFile file) throws Exception;
+	
+	public Article getReply(int articleNo) throws Exception;
+	
 }

@@ -44,7 +44,10 @@
 <h3>7.purchase</h3>	
 	<li> <a href="purchase/getPurchaseList">구매내역 (관리자)</a></li>
 </ul>
-
+<ul>
+  <h3>7.customer</h3>	
+	<li> <a href="customer/getContactList">일대일문의 목록조회</a></li>
+</ul>
 	
 </body>
 </html>

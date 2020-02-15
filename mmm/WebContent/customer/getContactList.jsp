@@ -19,7 +19,7 @@
 <script type="text/javascript">
 
 
-	function fncGetList(currentPage) {
+	function Pagination(currentPage) {
 		console.log('fncGetList에 왔거든여');
 		$("#currentPage").val(currentPage);
 		console.log($("#currentPage").val());
@@ -120,8 +120,8 @@
 			  <td  align="left" id="" >  ${notice.articleDate}
 				</td>
 			  <td align="left" id="" > 
-			  <c:if test=" ${notice.qnaStatus==0}">답변전</c:if>
-			  <c:if test=" ${notice.qnaStatus==1}">답변완료</c:if>
+			  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
+			  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
 				</td>
 			</tr>
           </c:forEach>
@@ -131,57 +131,51 @@
           </div>
 <!-- 	  </div> -->
 
-<div class="container text-center">
-		 
-		 <nav>
-		  <!-- 크기조절 :  pagination-lg pagination-sm-->
-		  <ul class="pagination" >
-		    
-		    <!--  <<== 좌측 nav -->
-		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-		 		<li class="disabled">
-			</c:if>
-			<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
-				<li>
-			</c:if>
-			<li>
-		      <a href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    
-		    <!--  중앙  -->
-			<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
-				
-				<c:if test="${ resultPage.currentPage == i }">
-					<!--  현재 page 가르킬경우 : active -->
-				    <li class="active">
-				    	<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
-				    </li>
-				</c:if>	
-				
-				<c:if test="${ resultPage.currentPage != i}">	
-					<li>
-						<a href="javascript:fncGetList('${ i }');">${ i }</a>
-					</li>
-				</c:if>
-			</c:forEach>
-		    
-		     <!--  우측 nav==>> -->
-		     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">
-		  		<li class="disabled">
-			</c:if>
-			<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
-				<li>
-			</c:if>
-			<li>
-		      <a href="javascript:fncGetList('${resultPage.endUnitPage+1}')" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
-		
-</div>
+<div class="ticketingPagination row">
+			  		<div class="col-4"></div>
+			  		<div class="col-4">
+					  <ul class="pagination">
+		   				 <!--  <<== 좌측 nav -->
+		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
+		  					    <li class="page-item disabled">
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+   								 </li>
+		  				</c:if>
+		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
+					   		<li class="page-item">
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
+   							</li>
+						</c:if>
+						
+					    <!--  중앙  -->
+						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
+							<c:if test="${ resultPage.currentPage == i }">
+								<!--  현재 page 가르킬경우 : active -->
+							    <li class="page-item active" aria-current="page">
+      								<a class="page-link" href="javascript:Pagination('${ i }')">${ i }<span class="sr-only">(current)</span></a>
+   								 </li>
+							</c:if>	
+							
+							<c:if test="${ resultPage.currentPage != i}">	
+								<li class="page-item">
+									<a class="page-link" href="javascript:Pagination('${ i }')">${ i }</a>
+								</li>
+							</c:if>
+						</c:forEach>
+					     <!--  우측 nav==>> -->
+					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
+					    	<li class="page-item disabled">
+					    		<a class="page-link" href="#">Next</a>
+    						</li>
+					      </c:if>
+					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
+					      	    <li class="page-item">
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
+    							</li>
+						 </c:if>	
+					  </ul><!-- end of pagination -->
+					 </div><!-- end of middle col --> 
+					 <div class="col-4"></div>
+			  </div><!-- end of ticketingPagination -->
 </body>
 </html>

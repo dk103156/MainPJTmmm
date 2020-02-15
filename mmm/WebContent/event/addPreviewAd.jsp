@@ -128,7 +128,7 @@
 
 <body>
 <div class="container">
-<form enctype="multipart/form-data">
+<form enctype="multipart/form-data" autocomplete="off">
 	<br>
 		<div class="page-header text-secondary">
 	        <h3>시사회이벤트 등록</h3>

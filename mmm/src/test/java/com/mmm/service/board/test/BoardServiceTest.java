@@ -222,5 +222,15 @@ public class BoardServiceTest {
 	  }
 	  
 	  
+	  @Test
+	  public void testGetReply() throws Exception {
+		  
+		  int articleNo = 10042;
+		  Article article = boardService.getReply(articleNo);
+		  
+		  Assert.assertNotNull(article);
+		  System.out.println(">>>>>>>>>>>>>>>>>>>>>>>"+article);
+	  }
+	  
 	  
 	 }

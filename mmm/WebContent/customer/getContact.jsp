@@ -13,6 +13,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+	
 <script type="text/javascript">
 	
 	$(function(){
@@ -29,6 +32,43 @@
 			history.go(-1);
 		});
 		
+		$('#addAnswer').on("click", function(){
+			console.log('addAnswer이 클릭됨');
+			$('#modalBox').modal('show');
+		});
+		
+		$('#closeModalBtn').on('click', function(){
+			$('#modalBox').modal('hide');
+			});
+		
+		$('#upload').on('click', function(){
+			fncAddReply();
+			});
+		
+		$('#modalBox').on('show.bs.modal', function (e) {
+			console.log("show.bs.modal");
+			
+			  $('#summernote').summernote({
+				  height: 300,                 // 에디터 높이
+				  minHeight: null,             // 최소 높이
+				  maxHeight: null,             // 최대 높이
+				  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+				  lang: "ko-KR",					// 한글 설정
+				  placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+				  callbacks:{			//data형태로 이미지가 에디터에 그대로 삽입되면 문자열이 길어지므로 이미지 파일을 서버에 저장하고, 이미지를 호출할 수 있는  url을 리턴받아서 입력하자
+					  onImageUpload: function(files, editor, welEditable) {
+						  for(var i = files.length -1; i>=0; i--){
+							  sendFile(files[i], this);
+						  }
+					  }
+				  }
+			  });
+			
+			
+			});
+
+
+
 		
 		$("button[name='ask']").on("click", function(){
 			self.location="/customer/getAskList";
@@ -43,19 +83,88 @@
 		});
 		
 	});  
+	
+
+	function fncAddReply(){
+		alert('도착?')
+		var articleTitle = $("input[name='articleTitle']").val();
+		var content = $("textarea[name='content']").val();
+		console.log(content);
+		
+		if(articleTitle== null || articleTitle.length<1 || articleTitle == '') {
+			alert("제목은 반드시 입력하셔야 합니다.")
+			return;
+		}
+		
+		if(content== null || content.length<1 || content == '') {
+			alert(content)
+			alert("내용은 반드시 입력하셔야 합니다.")
+			return;
+		}
+		
+		$("form").attr("method","post").attr("action","/customer/addReContact").submit();
+	}
+
+	
+	function sendFile(file, el) {
+		var path = '\\..\\resources\\image\\';
+		var form_data = new FormData(); // 페이지전환없이  form을  제출하고 싶을 때  FormData객체를 쓴다
+		form_data.append('file', file); // key:file, value:file 로 저장된다
+		
+		$.ajax({
+			data: form_data,
+			type: 'POST',
+			url: '/customer/json/uploadImage',	//이미지 업로드 경로
+			cache :false,
+			contentType: false,
+			enctype: 'multipart/form-data',	//멀티파트 
+			processData: false,
+			success: function(img) {	//파일 전송 완료시 이미지 파일 url 
+				alert('성공_'+img);
+				$(el).summernote('insertImage', path+img);	//editor.insertImage기능은 이미지 삽입해주는 것 
+				
+			}
+		});
+	}
 
 </script>
 
 <style>
- #header{ 
+
+	hr{
+	  height: 1px;
+    background: #ccc;
+	}
+	div.inline{
+	
+		display: inline;
+	}
+
+	div.inline.left{
+	
+		float: left;
+	}
+	
+	div.inline.right{
+	
+		float: right;
+	}
+	 .header{ 
       	width:808px;
       	height:auto;
       	padding: 20px;
         margin: 10px auto;
-        border: 1px solid #bcbcbc;
+        border: 1px solid #000000;
         }
         
-	 
+	 .replyBox{ 
+      	width:708px;
+      	height:auto;
+      	padding: 20px;
+        margin: 10px auto;
+        border: 1px solid #000000;
+        }
+         
 		        
 	  th {
 	     width:300px;
@@ -65,9 +174,13 @@
 	  
 	  
 	  .content{
-	  	height:autox;
+	  	height:auto;
 	  }
 	  
+	  p.content.askBox{
+	  
+	   border: 1px solid #000000;
+	  }
 	  		
 		@media (min-width: 768px) {
 	 	 .container {
@@ -82,9 +195,6 @@
 	}
   
   
-  tr.title{
-  background-color:#f2efed;
-  }
 </style>
 
 
@@ -107,73 +217,121 @@
 	</div>
 
 </div>
+
 	<div class="container">
-	<div id="header"> 
+	<div class="header"> 
 	
 	<div>
-					<table class="table table-sm table-borderless">
-				     <tbody>
-				     
-                    <tr class="title">
-                    <td colspan="4">${article.articleTitle}</td>
-                    </tr>
-                    
-                    
-					<tr>
-					<th>이름</th>
-					<td>${writer.userName}</td>
-					
-					
-				
-					<th>아이디</th>
-					<td>${writer.userId}</td>
-					</tr>	
-					
-					<tr>
-					<th>이메일</th>
-					<td>${writer.email}</td>
-					
-					
-					
-					<th>휴대전화번호</th>
-					<td>${writer.phone}</td>
-					</tr>	
-					
-				</tbody>
-				</table>
-				
-	</div>
-		
-	 <div class="noticebox">	
-                        <table class="table table-bordered">
-	                        <tbody>
-	                        </tbody>
-	                        <tbody>
-		                        <tr>
-		                        <td colspan="2">
-			                        <div class="content">
-				                        ${article.content}
-			                        </div>
-		                        </td>
-		                        </tr>
-	                        </tbody>
-	                    </table>
-	                    
-                    </div>
-				
-		
 	
-			</div>
-	 <div class="row">
-		   
+	<div>   <!-- 문의 제목, 일시 -->
+		<div class="inline">${article.articleTitle}</div>
+		<div class="inline"> ${article.articleDate}</div>
+ 	<hr>
+ 	</div>	
+ 	
+ 	
+ 	
+ 	<div class="writerInfo">  <!-- 질문자 정보 -->
+		
+		<div  class="inline left">${writer.userName}</div>
+		<div  class="inline right">${writer.userId}</div><br>
+		<div  class="inline left">${writer.email}</div>
+		<div  class="inline right">${writer.phone}</div>
+	
 	</div>
+	
+	
+	
+	
+	
+	
+	<div class="content askbox">
+	
+		<div>${article.content}</div>
+	
+	</div>
+	<hr>
+	
+	<div>
+	  				<div class="inline"> 
+	  					<c:if test="${reArticle.articleTitle ne null}">
+	                   ${reArticle.articleTitle}
+	                   </c:if> 
+	                </div>
+	                
+	                <div class="inline">
+	               	   	<c:if test="${reArticle.articleDate ne null}">
+	           			${reArticle.articleDate}
+	                    </c:if> 
+	                </div>
+			</div>
+	
+	
+	
+	   <div class="replyBox">
+                				<div>
+	                        <c:if test="${reArticle.content ne null}">
+	                     ${reArticle.content}
+	                        </c:if>
+	                        
+					</div>
+	
+	</div>
+
+
+	
+	
+                 
+				                        
+			                 
+        </div>	
+	<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<h4 class="modal-title" id="myModalLabel">답변달기</h4>
+			</div>
+		
+			<div class="modal-body">
+			<form>
+			<table class="table">
+				 	<tbody>
+					 <tr>
+					 <td  colspan="4"> <input type="text" class="form-control" name="articleTitle"> </td>
+					 </tr>
+					 
+					 <tr>
+					 <td  colspan="4"><textarea class="form-control noresize" rows="10" cols="10"  id="summernote" name="content">
+				  	 	</textarea> </td>
+					 </tr>
+					 </tbody>
+					 </table>
+					 <input type="hidden" name="supArticleNo" value="${article.articleNo}">
+					 </form>
+			</div>
+		
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="upload">확인</button>
+				<button type="button" class="btn btn-default" id="closeModalBtn">취소</button>
+			</div>
+		</div>
+	</div>
+
+	</div>
+
+
+	
 		
 	  
 		<div class="text-center">
 			<button id="delBtn"" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
 			<button id="okBtn" type="button" class="btn btn-secondary write">목 &nbsp;록</button>
+			<button id="addAnswer" type="button" class="btn btn-secondary write">답변추가</button>
 		</div>
 
+	</div>
 	</div>
 
  </body>

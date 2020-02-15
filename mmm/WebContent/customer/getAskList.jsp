@@ -19,25 +19,17 @@
 <script type="text/javascript">
 
 
-	function fncGetList(currentPage) {
-		console.log('fncGetList에 왔거든여');
+	function Pagination(currentPage) {
 		$("#currentPage").val(currentPage);
 		console.log($("#currentPage").val());
-	
-		//document.getElementById("currentPage").value = currentPage;
-// 		console.log('currentPage는? '+ currentPage);
-// 		console.log('currentPage는? '+ $("#currentPage").val());
-		//document.detailForm.submit();
-		$("form").attr("method","POST").attr("action", "/customer/getNoticeList").submit();
-	
-		
+		$("form").attr("method","POST").attr("action", "/customer/getAskList").submit();
 	}
 	
 	
 	$(function(){
 	
 		$(".getTranInfo td:nth-child(2)").on("click",function(){
-			alert("눌렀어");
+			console.log("눌렀어");
 			var articleNo = $(this).parent().find('#articleNo').val();
 			console.log(articleNo);
 			self.location="/customer/getAsk?articleNo="+articleNo;	
@@ -93,7 +85,7 @@
 
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-	    <button type="button" class="btn btn-default">전체</button>
+	    <button type="button" class="btn btn-default all">전체</button>
 	    <button type="button" class="btn btn-default tick" name="">예매&매표</button>
 	    <button type="button" class="btn btn-default store">스토어</button>
 	    <button type="button" class="btn btn-default pay">결제</button>
@@ -195,65 +187,15 @@
 					 	<input type="hidden" id="category" name="category" value="${search.category}"/></form>
 			  </div><!-- end of ticketingPagination -->
 			  
-<!-- <div class="container text-center"> -->
-		 
-<!-- 		 <nav> -->
-<!-- 		  크기조절 :  pagination-lg pagination-sm -->
-<!-- 		  <ul class="pagination" > -->
-		    
-<!-- 		     <<== 좌측 nav -->
-<%-- 		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }"> --%>
-<!-- 		 		<li class="disabled"> -->
-<%-- 			</c:if> --%>
-<%-- 			<c:if test="${ resultPage.currentPage > resultPage.pageUnit }"> --%>
-<!-- 				<li> -->
-<%-- 			</c:if> --%>
-<!-- 			<li> -->
-<%-- 		      <a href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous"> --%>
-<!-- 		        <span aria-hidden="true">&laquo;</span> -->
-<!-- 		      </a> -->
-<!-- 		    </li> -->
-		    
-<!-- 		     중앙  -->
-<%-- 			<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1"> --%>
-				
-<%-- 				<c:if test="${ resultPage.currentPage == i }"> --%>
-<!-- 					 현재 page 가르킬경우 : active -->
-<!-- 				    <li class="active"> -->
-<%-- 				    	<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a> --%>
-<!-- 				    </li> -->
-<%-- 				</c:if>	 --%>
-				
-<%-- 				<c:if test="${ resultPage.currentPage != i}">	 --%>
-<!-- 					<li> -->
-<%-- 						<a href="javascript:fncGetList('${ i }');">${ i }</a> --%>
-<!-- 					</li> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:forEach> --%>
-		    
-<!-- 		      우측 nav==>> -->
-<%-- 		     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }"> --%>
-<!-- 		  		<li class="disabled"> -->
-<%-- 			</c:if> --%>
-<%-- 			<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }"> --%>
-<!-- 				<li> -->
-<%-- 			</c:if> --%>
-<!-- 			<li> -->
-<%-- 		      <a href="javascript:fncGetList('${resultPage.endUnitPage+1}')" aria-label="Next"> --%>
-<!-- 		        <span aria-hidden="true">&raquo;</span> -->
-<!-- 		      </a> -->
-<!-- 		    </li> -->
-<!-- 		  </ul> -->
-<!-- 		</nav> -->
-<!-- 	<form> -->
-<!-- 	  <input type="hidden" id="currentPage" name="currentPage" value=""/>  -->
-<%-- 	  <input type="hidden" id="category" name="category" value="${search.category}"/></form> --%>
-		
-<!-- </div> -->
 
 <script>
 
 	$(function(){
+		
+		$("div > div> div > button.all").on("click", function(){
+			$("#category").val(0);  //예매/매표 카테고리
+			category(0)
+		}); 
 		
 		$("div > div> div > button.tick").on("click", function(){
 			$("#category").val(1);  //예매/매표 카테고리
@@ -308,20 +250,21 @@
 				
 				if(data.askList.length!=0){
 					
-					var html ="<table class='table table-hover table-bordered table-sm'>"
+					var html ="<div class='row'><table class='table table-hover table-bordered table-sm'>"
 			        	html +="<thead class='table-active'><tr>"		
-			         	html +="<th align='center'>구분</th><th align='left'>질문</th></tr></thead>"
+			         	html +="<th class='col-xs-2' align='center'>구분</th><th class='col-xs-10' align='left'>질문</th></tr></thead>"
 						html +="<tbody class='getTranInfo'>"
 				
 					for (var i = 0; i < data.askList.length; i++) {
 						
-						html +="<tr><td align='left'>"+data.askList[i].category
-						html +="</td><td align='left'>"+data.askList[i].articleTitle  
+						html +="<tr><td class='col-xs-2' align='left'>"+data.askList[i].category
+						html +="<input type='hidden' id='articleNo' value='"+data.askList[i].articleNo+"'/>"
+						html +="</td><td class='col-xs-10' align='left'>"+data.askList[i].articleTitle  
 						html +="</td></tr>"
 
 					}
 					
-					html += "</tbody></table>"
+					html += "</tbody></table></div>"
 					
 							$(".bb").append(html);
 							

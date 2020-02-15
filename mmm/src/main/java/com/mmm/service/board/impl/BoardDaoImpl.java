@@ -111,6 +111,12 @@ public class BoardDaoImpl implements BoardDao{
 	public List<Article> getArtBlindList(Search search) throws Exception {
 		return sqlSession.selectList("BoardMapper.getArtBlindList", search);
 	}
+
+
+	@Override
+	public Article getReply(int articleNo) throws Exception {
+		return sqlSession.selectOne("BoardMapper.getReArticle", articleNo);
+	}
 	
 
 }
