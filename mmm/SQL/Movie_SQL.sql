@@ -29,40 +29,40 @@ INCREMENT BY 1 START WITH 10000 maxValue 99999 NOCACHE;
 
 
 CREATE TABLE movie (
-		movie_no			NUMERIC(5)		NOT NULL,
-		MOVIE_title			VARCHAR2(200)	NOT NULL,
-		release_date		DATE			NOT NULL,
-		kmdb_code			VARCHAR2(20)		UNIQUE,
-		movie_rating		VARCHAR2(30),
-		running_time		NUMERIC(3),
-		poster				VARCHAR2(2000),
-		summary				VARCHAR2(4000),
-		onBoxOffice_flag	NUMERIC(2),
-		PRIMARY KEY(movie_no)
+		movie_no 		 	NUMERIC(5)	 	NOT NULL, 
+		MOVIE_title 	  	VARCHAR2(200) 	NOT NULL, 
+		release_date 	 	DATE 			NOT NULL, 
+		kmdb_code 		 	VARCHAR2(20) 		UNIQUE, 
+		movie_rating 	 	VARCHAR2(30),  
+		running_time 	 	NUMERIC(3),  
+		poster 			 	VARCHAR2(2000),   
+		summary 	 	 	VARCHAR2(4000),   
+		onBoxOffice_flag  	NUMERIC(2),   
+		PRIMARY  KEY(movie_no)
 );
 
 CREATE TABLE movie_genre(
-	movie_genre_no		NUMERIC(5)		NOT NULL,
-	movie_no			NUMERIC(5)		NOT NULL	REFERENCES MOVIE(movie_no),
-	genre				VARCHAR2(30)	NOT NULL,
-	PRIMARY	KEY(movie_genre_no)
+	movie_genre_no	 	NUMERIC(5)	 	NOT NULL, 
+	movie_no		 	NUMERIC(5)	 	NOT NULL 	REFERENCES MOVIE(movie_no), 
+	genre			 	VARCHAR2(30) 	NOT NULL, 
+	PRIMARY 	KEY(movie_genre_no)
 );
 
 CREATE TABLE star_rating(
-	star_rating_no		NUMERIC(5)		NOT NULL,
-	movie_no			NUMERIC(5)		NOT NULL REFERENCES MOVIE(movie_no),
-	user_no				NUMERIC(5)		NOT NULL,
-	star_rate			NUMERIC(10)		NOT NULL,
-	rate_date			TIMESTAMP		NOT NULL,
+	star_rating_no	 	NUMERIC(5)	 	NOT NULL, 
+	movie_no		 	NUMERIC(5)	 	NOT NULL REFERENCES MOVIE(movie_no), 
+	user_no			 	NUMERIC(5)	 	NOT NULL,  
+	star_rate		 	NUMERIC(10)	 	NOT NULL,  
+	rate_date		 	TIMESTAMP	 	NOT NULL, 
 	PRIMARY KEY(star_rating_no)
 );
 
 CREATE TABLE wish(
-	wish_no			NUMERIC(5)		NOT NULL,
-	movie_no		NUMERIC(5)		NOT NULL REFERENCES MOVIE(movie_no),
-	user_no			NUMERIC(5)		NOT NULL,
-	wish_date		TIMESTAMP		NOT NULL,
-	PRIMARY	KEY(wish_no)
+	wish_no		 	NUMERIC(5)	 	NOT NULL, 
+	movie_no	 	NUMERIC(5)	 	NOT NULL REFERENCES MOVIE(movie_no), 
+	user_no		 	NUMERIC(5)	 	NOT NULL, 
+	wish_date	 	TIMESTAMP	 	NOT NULL, 
+	PRIMARY 	KEY(wish_no)
 );
 
 /*INSERT INTO movie

@@ -67,56 +67,15 @@ col  ticketer_phone for a15;
 col  ticketing_date for a15;
 col  cancel_date for a15;
 
-insert into Ticketing 
-(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
- seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
-values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10001', '일반,일반,일반', 'standard,standard,standard',
-		'A1,A2,A3',3,30000,'1230982-1324-431413','111-2222-3333',
-		 SYSDATE, 0);
-		 
-insert into Ticketing 
-(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
- seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
-values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10001', '일반,일반,일반', 'standard,standard,standard',
-		'A1,A2,A3',3,30000,'1230982-1324-431413','111-2222-3333',
-		 SYSDATE, 0);
-		 
-		 
-insert into Ticketing 
-(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
- seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
-values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10001', '청소년,청소년,청소년', 'standard,standard,standard',
-		'B1,B2,B3',3,27000,'1230982-1324-431413','111-2222-3333',
-		 SYSDATE, 0);
-		 
-insert into Ticketing 
-(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
- seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
-values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10002', '일반,일반,일반', 'standard,standard,standard',
-		'C1,C2,C3',3,30000,'4325234-4321-234534','444-5555-6666',
-		 SYSDATE, 0);
-		 
-insert into Ticketing 
-(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
- seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
-values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10003', '일반,일반,일반', 'standard,standard,standard',
-		'D1,D2,D3',3,30000,'4325234-4321-234534','444-5555-6666',
-		 SYSDATE, 0);
-		 
-insert into Ticketing 
-(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
- seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
-values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10004', '일반,일반,일반', 'standard,standard,standard',
-		'E1,E2,E3',3,30000,'1230982-1324-431413','111-2222-3333',
-		 SYSDATE, 0);
-		 
-insert into Ticketing 
-(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
- seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
-values (seq_ticketing_ticketing_no.NEXTVAL, '기생충', 'CGV 강남', '10005', '일반,일반,일반', 'standard,standard,standard',
-		'F1,F2,F3',3,30000,'1230982-1324-431413','010-9551-8074',
-		 SYSDATE, 0);		 
 commit;
+
+
+insert into Ticketing 
+(ticketing_no, movie_Name, theater_name, date_time_no, audience_type, seat_type,
+seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
+values 
+(seq_ticketing_ticketing_no.NEXTVAL,
+'버즈 오브 프레이(할리 퀸의 황홀한 해방)', 'CGV 건대입구', '13656', '일반', 'economy', 'A1', 1, 9000, '1231231-32131-1231', '01011111111', SYSDATE, 0)
 
 
 

@@ -199,28 +199,28 @@
 	  }
 	  
 	  /* 극장 목록 */
-	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul {
+	  div.theater-list > ul {
   		overflow : auto;
   		height : 410px;
 	  }
 	  
-	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul::-webkit-scrollbar {
+	  div.theater-list > ul::-webkit-scrollbar {
 	  	width: 7px;
 	  }
 	  
-	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul::-webkit-scrollbar-thumb {
+	  div.theater-list > ul::-webkit-scrollbar-thumb {
 	    background-color: #2f3542;
 	    border-radius: 10px;		  
 	  }
 	  
-	  div.steps-body > div > div > div:nth-child(2) > div.theater-list > ul::-webkit-scrollbar-track {
+	  div.theater-list > ul::-webkit-scrollbar-track {
 	    background-color: grey;
 	    border-radius: 10px;
 	    box-shadow: inset 0px 0px 5px white;	  
 	  }
 	  
 	  /* 극장 목록 패딩 제거 */
-	  div.steps-body > div > div > div:nth-child(2) > div.franchise-list.text-center > ul > li {
+	  div.franchise-list.text-center > ul > li {
 	  	padding : 0 12 0 10;
 	  }
 	  
@@ -1956,7 +1956,7 @@ $(function(){
 		
    /* 프랜차이즈 셀렉트 바 이미지 삽입 - 프랜차이즈 이벤트 */	
    function franchiseSelector(sequence){
-		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("mouseneter",function(){
+		$("div.franchise-select > ul."+sequence+" > li > span:nth-child(1)").on("mouseenter",function(){
 			if(sequence=='first'){
 				$("div:nth-child(1) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(1) > img").attr("src","../resources/image/logo/CGV.png")
 				$("div:nth-child(1) > div:nth-child(6) > div.franchise-list > ul."+sequence+" > li:nth-child(2) > img").attr("src","../resources/image/logo/LotteCinema.png")
