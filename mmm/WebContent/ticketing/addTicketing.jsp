@@ -56,7 +56,7 @@
 	  
 	  /* 바탕색 */
 	  .steps-body {
-	  	height : 464px;
+	  	height : 583px;
 	    background-color: #f2f0e4;
 	  }
 	  
@@ -135,14 +135,14 @@
 	  }
 	  
 	  
-	  li.off {
-	  	
+	  li.off {	  	
 	  	pointer-events   : none;
 	  	opacity : 0.3;
 	  }
 	  
 	  
 	  .list-group{
+	    cursor: pointer;
 	    line-height: 33px;
 	  }	  
 	  
@@ -192,7 +192,7 @@
 	  
 	   /* (영화 선택) 스크롤바 CSS  */
 	   div.steps > div > div.col-3.px-0.h-100 > div.steps-body > div > div.movie-list.text-md-left > ul	{
-	   		height: 464px;
+	   		height: 524px;
 	   		overflow: auto;
 	   }  
 	   
@@ -213,17 +213,23 @@
 	  /* 2020-02-14 조조, 심야*/
 	  span.timeMorning {
 	  	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-    		background-position: 0px 1px
+    		background-position: 14px 1px;
+		    padding-right: 33px; 
+		    border-left-width: 0px;
+		    padding-left: 33px;
 	  }
 	  
 	  span.timeNight {
 	 		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-   			background-position: 3px -20px;
-	  }
+   			background-position: 19px -20px;
+		    padding-right: 33px;
+		    border-left-width: 0px;
+		    padding-left: 33px;
+	  } 
 	  
 	  ul.theaterList {
 	  		overflow : auto;
-	  		height : 410px;
+	  		height : 393px;
 	  }
 	  
 	  ul.theaterList::-webkit-scrollbar {
@@ -271,7 +277,7 @@
 	  
 	  div.remainingSeat > div > div > ul {
 	  	overflow : auto;
-	  	height : 384px;
+	  	height : 336px;
 	  }
 	  
 	  div.remainingSeat > div > div > ul::-webkit-scrollbar {
@@ -290,16 +296,12 @@
 	  }
 	  
 	  div.steps-body > div > div > div:nth-child(6) > div.theater-list.lotte.col-4 > ul::-webkit-scrollbar {
-	  	width: 8px;
-	  }
-	  
-	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div:nth-child(2) > div.theater-list.lotte.col-4 > ul::-webkit-scrollbar {
-	  	width: 8px;
+	  	width: 7px;
 	  }
 	  
 	  /* 남은 좌석 수 색깔 */
 	  div.remainingSeat > div > div > ul > li > span.seatcount {
-	  	color : green;
+	  	color : #45c245;
 	  }
 	  
 	  /* 클릭했을 시 색 변화 */
@@ -336,10 +338,6 @@
 	    line-height: 30px;
 	 }
 	 
-	div.steps-body.text-center > div > div > div.remainingSeat > div > div > ul > li {
-	    top: 5px;
-	}
-
 </style>
 
 <script>
@@ -532,7 +530,7 @@ $(function(){
               </div>
               <div class="steps-body text-center">
                   <div class="row">
-                   	 <div class="col-12">
+                   	 <div class="col-12" style="top: 0px;">
                           <div class="sortmenu">
                             <span class="morning">조조</span>
                             <span class="night">심야</span>
@@ -541,12 +539,12 @@ $(function(){
 
 
                           <div class="remainingSeat">
-                            	<div class="seat">
+                            	<div class="seat" style="margin-top: -14px;">
                             	                          		
                             	</div>
                           </div>
                           
-                          <div class="placeholder" style="margin-top: 165px;">영화, 극장, 날짜를 <br><br>선택해주세요.</div>
+                          <div class="placeholder" style="margin-top: 190px;">영화, 극장, 날짜를 <br><br>선택해주세요.</div>
            </div><!-- end of col -->
            </div><!-- end of row -->
           </div><!-- end of steps-body -->
@@ -685,7 +683,7 @@ function theaterSelect(element){
 	    	  if(element.text()=='CGV'){
 		    	  for( var i in result){ 
 		    		  //console.log(result[i].theaterName)
-	   		    	  $("div.theater-list > ul.cgv").append("<li class='list-group-item cgv'>"+result[i].theaterName+"</li>")
+	   		    	  $("div.theater-list > ul.cgv").append("<li class='list-group-item cgv' title='"+result[i].theaterName+"'>"+result[i].theaterName+"</li>")
 	   		    	  
 		  		  }//end of for	   		    	  
 		  		  
@@ -728,7 +726,7 @@ function theaterSelect(element){
    		      }else if(element.text()=='롯데시네마'){
 		    	  for( var i in result){ 
 		    		  //console.log(result[i].theaterName)
-	   		    	  $("div.theater-list > ul.lotte").append("<li class='list-group-item lotte'>"+result[i].theaterName+"</li>")
+	   		    	  $("div.theater-list > ul.lotte").append("<li class='list-group-item lotte' title='"+result[i].theaterName+"'>"+result[i].theaterName+"</li>")
 		    	  }//end of for 
 		  			  $("div.theater-list > ul > li.list-group-item.lotte").on("click",function(){
 		  		 
@@ -769,7 +767,7 @@ function theaterSelect(element){
 	     	 }else if(element.text()=='메가박스'){
 		    	  for( var i in result){ 
 		    		  //console.log(result[i].theaterName)
-	   		    	  $("div.theater-list > ul.megaBox").append("<li class='list-group-item megaBox'>"+result[i].theaterName+"</li>")
+	   		    	  $("div.theater-list > ul.megaBox").append("<li class='list-group-item megaBox' title='"+result[i].theaterName+"'>"+result[i].theaterName+"</li>")
 		    	  }//end of for
 		  			  $("div.theater-list > ul > li.list-group-item.megaBox").on("click",function(){
 		  		 
@@ -1349,7 +1347,7 @@ function check(){
 		    	  }
 		    	  //1관 .. 2관 Element 추가 
 		    	  for( var i in screenArray){
-		    		  var str ="<div><span class='screen'>"+$.trim(screenArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
+		    		  var str ="<div><div style='padding-bottom: 5px;'><span class='screen'>"+$.trim(screenArray[i])+" (총 130석)</span></div><ul class=list-group></ul></div>"
 		    		  $("div > div.remainingSeat > div").append(str);
 		    	  }
 		    	  
@@ -1375,12 +1373,10 @@ function check(){
 		     		   //조조라면..
 		     		   if(parseInt(item.innerText.substring(0,2))<11){
 		     			   $(item).addClass('timeMorning')
-		     			   $(item).addClass('pl-3')
 		     		   }
 		     		   
 		     		   if(parseInt(item.innerText.substring(0,2))>=23){
 		     			   $(item).addClass('timeNight')
-		     			    $(item).addClass('pl-3')
 		     		   }
 		     			   
 		     		   //심야라면...	   
