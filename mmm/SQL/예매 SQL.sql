@@ -1,12 +1,28 @@
 DROP TABLE ticketing;
 DROP TABLE date_time;
+DROP TABLE theater;
 
 DROP SEQUENCE seq_ticketing_ticketing_no;
 DROP SEQUENCE seq_date_time_date_time_no;
+DROP SEQUENCE seq_theater_theater_no;
 
 CREATE SEQUENCE seq_ticketing_ticketing_no	   	INCREMENT BY 1 START WITH 10000 maxValue 99999 NOCACHE;
 CREATE SEQUENCE seq_date_time_date_time_no    INCREMENT BY 1 START WITH 10000 maxValue 99999 NOCACHE;
+CREATE SEQUENCE seq_theater_theater_no    INCREMENT BY 1 START WITH 10000 maxValue 99999 NOCACHE;
 
+CREATE TABLE theater (
+	theater_no			 VARCHAR2(5)		 NOT NULL,
+	franchise	 	     VARCHAR2(15) 	 	 NOT NULL, 
+	theater_name		 VARCHAR2(50)		 NOT NULL,
+	theater_phone		 VARCHAR2(50), 
+	position_x			 VARCHAR2(50)		 NOT NULL,	
+	position_y			 VARCHAR2(50)		 NOT NULL,	
+	address				 VARCHAR2(100)		 NOT NULL,
+	road_address		 VARCHAR2(100),
+	place_url			 VARCHAR2(200),
+	id					 VARCHAR2(20)		 NOT NULL,
+	PRIMARY KEY(theater_no)	
+);
 
 
 CREATE TABLE date_time ( 
@@ -42,8 +58,6 @@ CREATE TABLE ticketing (
 	PRIMARY KEY(ticketing_no)
 );
 
-set linesize 500;
-set pagesize 500;
 
 col  date_time_no for a15;
 col  movie_Name for a30;
@@ -66,6 +80,20 @@ col  ticketing_pin_no for a16;
 col  ticketer_phone for a15;
 col  ticketing_date for a15;
 col  cancel_date for a15;
+
+col theater_no for a15;		
+col franchise for a15;	 	  
+col theater_name for a15;		
+col theater_phone for a15;		
+col position_x for a15;			
+col position_y for a15;			 
+col address for a15;				
+col road_address for a15;		 
+col place_url for a15;			
+col id for a15;					
+
+set linesize 1000;
+set pagesize 1000;
 
 commit;
 

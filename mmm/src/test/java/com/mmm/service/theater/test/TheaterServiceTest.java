@@ -1,15 +1,23 @@
 package com.mmm.service.theater.test;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.mmm.common.KakaoAPI;
 import com.mmm.common.Search;
 import com.mmm.service.datetime.DateTimeService;
+import com.mmm.service.domain.DateTime;
 import com.mmm.service.domain.Theater;
 import com.mmm.service.theater.TheaterService;
 import com.mmm.service.ticketing.TicketingService;
@@ -39,80 +47,56 @@ public class TheaterServiceTest {
 	public void testAddTheater() throws Exception {
 		
 		
-		theater = new Theater();
 		
-		theater.setMovieName("기생충");
-		theater.setFranchise("CGV");
-		theater.setTheaterName("CGV강남");
-		theater.setScreenName("1관");
+		KakaoAPI api = new KakaoAPI();
 		
-		//theaterService.addTheater(theater);
-		
-		theater = theaterService.getTheater("10001");
-		Assert.assertEquals("기생충", theater.getMovieName());
-		Assert.assertEquals("CGV", theater.getFranchise());
-		Assert.assertEquals("CGV강남", theater.getTheaterName());
-		Assert.assertEquals("1관", theater.getScreenName());
-		Assert.assertEquals(130, theater.getTotalSeat());
-		 
-
-	}	
-	
-	//@Test
-	public void testGetTheater() throws Exception {
-		
-
-		
-		
-		Assert.assertNotNull(theaterService.getTheater("10000"));
-
-		
-	}
-	
-	//@Test
-	 public void testUpdateTheater() throws Exception{
-		
-		
-		theater = theaterService.getTheater("10000");
-		Assert.assertNotNull(theater);
-
-		
-		theater.setMovieName("바바리안");
-		theater.setFranchise("여기요");
-		theater.setScreenName("메가박스 A");
-		theater.setTheaterName("매찬123");
-
-		theaterService.updateTheater(theater);
-		
-		
-		theater = theaterService.getTheater("10000");
-		Assert.assertNotNull(theater);
+		JSONArray theaterArray =api.postHttpClient("http://127.0.0.1:8080/ticketing/json/getTheaterList",new HashMap<String,Object>());
+		System.out.println(theaterArray);
+		Iterator it =theaterArray.listIterator();
+		DateTime dateTime = null;
+		JSONObject jsonObject = null;
+		JSONArray jsonArray = null;
+		String keyword = null;
+		Theater theater = new Theater();
+		while(it.hasNext()) {
+			jsonObject =(JSONObject) it.next();
+			keyword = (String) jsonObject.get("theaterName");
+			System.out.println("검색어는? : "+keyword);
+			if(keyword.equals("롯데시네마 가양관")) {
+				keyword ="롯데시네마 가양";
+			}else if(keyword.equals("롯데시네마 수락산관")) {
+				keyword ="롯데시네마 수락산";
+			}else if(keyword.equals("롯데시네마 신도림(디큐브)")) {
+				keyword ="롯데시네마 신도림";
+			}
+			jsonObject = api.searchPlaceByKeyword(keyword);
+			jsonArray = (JSONArray)jsonObject.get("documents");
+			jsonObject = (JSONObject) jsonArray.get(0);
+			//System.out.println(jsonObject);
 			
-		//==> API 확인
-		Assert.assertEquals("바바리안", theater.getMovieName());
-		Assert.assertEquals("메가박스 A", theater.getScreenName());
-		Assert.assertEquals("여기요",theater.getFranchise());
-		Assert.assertEquals("매찬123", theater.getTheaterName());
+			if(keyword.contains("CGV")) {
+				theater.setFranchise("CGV");
+			}else if(keyword.contains("롯데시네마")) {
+				theater.setFranchise("롯데시네마");
+			}else if(keyword.contains("메가박스")) {
+				theater.setFranchise("메가박스");
+			}
+			
+			theater.setTheaterName(keyword);
+			theater.setTheaterPhone((String)jsonObject.get("phone"));
+			theater.setPositionX((String)jsonObject.get("x"));
+			theater.setPositionY((String)jsonObject.get("y"));
+			theater.setAddress((String)jsonObject.get("address_name"));
+			theater.setRoadAddress((String)jsonObject.get("road_address_name"));
+			theater.setPlaceUrl((String)jsonObject.get("place_url"));
+			theater.setId((String)jsonObject.get("id"));
+			
+			theaterService.addTheater(theater);
+		}//end of while
 		
-	 }
-	 
-	 //@Test
-	 public void testDeleteTheater() throws Exception{
-		 
-		 theaterService.deleteTheater("10000");
-	 }
-	 
-	 
-	
-	 //==>  주석을 풀고 실행하면....
-	 //@Test
-	 public void testGetTheaterList() throws Exception{
-		 
-		 Search search = new Search();
-		 search.setSearchCondition("0");
-		 search.setMovieName("기생충");
-		List<Theater> theater2 =theaterService.getTheaterList(search);
-		System.out.println(theater2);
-	 }	
+
+		
+		
+	}	
 
 }
