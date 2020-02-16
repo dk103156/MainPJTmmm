@@ -119,7 +119,8 @@ public class MovieController {
 	public void addMovie()throws Exception{
 		
 //		1. 크롤링---------------------------------------------------------------------
-		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
 		
 		//Browser 안띄우기
 		ChromeOptions options = new ChromeOptions();
@@ -131,8 +132,8 @@ public class MovieController {
 //		크롤링할 페이지 수 2개로 고정
 		for (int i = 0; i < 2; i++) {
 			//웹페이지 설정하기(자동화된 어쩌구 저쩌구..*************************************************************************************************
-			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));
-//			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));
+			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
+//			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
 			
 	//		Css Selector로 Element 요소 잡아오기 1 ____영화제목
 			List<WebElement> list = webDriver.findElements(By.cssSelector("#mArticle > ul.list_movie.\\#movie > li> div.wrap_movie > div > a"));
@@ -142,8 +143,10 @@ public class MovieController {
 			for(WebElement el : list) {
 				
 				//영화 제목 변수
-				String movieTitleInput =  el.getText().replaceAll(" ","");
-				System.out.println("----- 제목 : "+ movieTitleInput);
+				String movieTitleRaw = el.getText();
+				String movieTitleInput =  movieTitleRaw.replaceAll(" ","");
+				System.out.println("----- 제목(Raw) : "+ movieTitleRaw);
+				System.out.println("----- 제목(replaceAll) : "+ movieTitleInput);
 				
 //				Css Selector로 Element 요소 잡아오기  ____개봉일 처리
 				WebElement rlsDateEl =  webDriver.findElement(By.cssSelector("#mArticle > ul.list_movie.\\#movie > li:nth-child("+j+") > div.wrap_movie > span.info_state"));
@@ -196,6 +199,7 @@ public class MovieController {
 				String releaseDate = JavaUtil.convertDateFormatforKMDB(dateAfterFormat);
 				System.out.println("----- 개봉일 : "+ releaseDate);
 				
+//				KMDB에 다녀올 Movie 
 				Movie inputMovie = new Movie();
 				inputMovie.setMovieTitle(movieTitleInput);
 				inputMovie.setReleaseDate(releaseDate);
@@ -205,7 +209,8 @@ public class MovieController {
 				
 //				만약 해당 영화가 KmDB에 있는 애들만.. 추가
 				if (movieFromKMDB != null) {
-					movieFromKMDB.setMovieTitle(movieTitleInput);
+//					띄워쓰기 한 영화제목이 들어가도록....(movieTitleRaw..)
+					movieFromKMDB.setMovieTitle(movieTitleRaw);
 					if (!rating.equals("")) {
 						movieFromKMDB.setMovieRating(rating);
 					}
@@ -265,7 +270,7 @@ public class MovieController {
 		}
 		
 //		@Value로 갖고 있는 field pageSize 세팅	--> 12개 고정
-		search.setPageSize(12);
+		search.setPageSize(11);
 		System.out.println("------------search"+ search);
 		
 //		2. Business Logic 수행 ///////////////////////////////////////////////////

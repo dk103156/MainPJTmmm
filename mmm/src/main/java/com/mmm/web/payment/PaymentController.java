@@ -112,7 +112,7 @@ public class PaymentController {
 		ticketing.setTicketingStatus(0); 				//상태 0이면 예매완료 1이면 취소
 		ticketing.setTicketerPhone(user.getPhone());	//회원,비회원 포함
 
-//	2.ticketing setting
+//	2.purchase setting
 		
 //	3.payment setting
 //		payMethod 나눠주는 Logic..
