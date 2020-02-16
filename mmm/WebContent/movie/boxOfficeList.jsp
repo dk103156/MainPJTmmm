@@ -42,6 +42,13 @@
 		  padding: 15px;
 		}
 		
+		
+
+		
+		
+		
+		
+		
     </style>
     
 	<script type="text/javascript">
@@ -235,15 +242,15 @@
 			self.location = "/movie/getExpectedMovieList"
 		});
 
-// 	회원일 경우 .. 선호장르 추천..
+// 	회원일 경우 .. 선호장르 추천...  첫줄 4번째에 배치하자 
 		if (${!empty user }) {
-			alert('회원이다 선호장르 넣자')
+// 		console.log('회원이다 선호장르 넣자')
 			
 				var preferMovieDisplay = '';
 				
 				preferMovieDisplay += "<div class='col-sm-6 col-md-3 mb-4'>";
-				preferMovieDisplay += "<div class='card mb-4 shadow-sm text-white bg-dark h-100'>";
-				preferMovieDisplay += "<div class='card-header text-center bg-dark text-white' >";
+				preferMovieDisplay += "<div class='card mb-4 shadow-sm text-white bg-warning h-100'>";
+				preferMovieDisplay += "<div class='card-header text-center bg-warning text-white' >";
 				preferMovieDisplay += "<h5 class='mb-0'> ${user.userId} 님이 좋아할만한 상영작</h5></div>";
 				preferMovieDisplay += "<img name='poster' class='img-thumbnail card-img-top'  src='${preferMovie.poster}' alt=''>";
 				preferMovieDisplay += "<div class='card-body'>";
@@ -263,9 +270,17 @@
 			
 				preferMovieDisplay += "<p class='card-text text-white'><p>장르 : ";
 				
-				var list = new Array(); 
+// 				장르.. c:forEach가 JS 안에서 돌아간다..
+				var genreList = new Array();
 				
-				console.log(list)
+// 				console.log('${genreList}')
+				
+				<c:forEach items="${genreList}" var="genre">
+					genreList.push('${genre}');
+				</c:forEach>
+// 				console.log(genreList)
+				
+				preferMovieDisplay += genreList;
 				
 				preferMovieDisplay += "</p><p class='mb-1 text-muted'>평점 ${preferMovie.starRating}</p>";
 				preferMovieDisplay += "<p class='mb-1 text-muted'>개봉일  ${preferMovie.releaseDate}</p></p>";
@@ -291,8 +306,43 @@
 				preferMovieDisplay += "</div>";
 				preferMovieDisplay += "</div>";
 			
+				$('body > div.album.py-5.bg-light > div > div > div:nth-child(3)').after(preferMovieDisplay);
+				
+// 				console.log('붙으셨습니까?');
+		}// 선호장르 추천 end
+		
+// 		줄거리 보여주는 hover evnet 		
+		$(".hover").mouseleave(
+		  function () {
+		    $(this).removeClass("hover");
+		  }
+		);
+		
+		
+// 		$('img[name="poster"]').hover(function(){
+// 			var movieNo = $(this).parent().find('input[name="movieNo"]').val();
 			
-		}
+// 			console.log('이벤트 걸렸고,,, 영화번호는..   '+movieNo);
+			
+// 			$.ajax(
+// 				{
+// 					url : "/movie/json/getSummary/"+movieNo,
+// 					method : "GET",
+// 					dataType : "json",
+// 					headers : {
+// 						"Accept" : "application/json",
+// 						"Content-Type" : "application/json"
+// 					}
+// 				}
+// 			).done(function(responseJSON){
+// 				console.log(responseJSON.summary);
+// 			}).fail(function(result, status){
+				
+// 			});
+			
+// 		}, function(){
+// 			console.log('나갔')
+// 		});
 		
 		
 		
@@ -320,8 +370,13 @@
 	});
 	
 	
+// 	$(document).on("hover", "img[name='poster']", function(){
+// 		alert('ddddddd');
+// 	});
+	
+	
 //		영화 상세페이지로 이동 이벤트
-	$(document).on("click", "img[name='poster']",function(){
+	$(document).on("click", " .snip1384",function(){
 		var movieNo = $(this).parent().find('input[name="movieNo"]').val();
 		
 		self.location = "getMovie/"+movieNo;
@@ -363,7 +418,16 @@
 	                    <div class="card-header text-center bg-dark text-white" >
 						   <h4 class="mb-0">rank.${i}</h4>
 						</div>
-                	    <img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}"  height="225" alt="">
+
+<!-- 						hover 효과를 위해.. CSS, JS 확 -->
+						<figure class="snip1384">
+							<img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}"  height="225" alt="">
+							
+							<figcaption>
+								<p>${movie.summary}	</p>
+							</figcaption>
+						</figure>
+
                 	    <div class="card-body">
 					       <h5 name="movieTitle" class="card-title font-weight-bold d-inline">
 					          ${movie.movieTitle} 
@@ -417,76 +481,6 @@
 				
 				<c:if test="i%4==0"><br/><br/></c:if>
 				</c:forEach>
-
-<!-- 	추천 영화 -->
-					<div class="col-sm-6 col-md-3">
-			          <div class="card mb-4 shadow-sm h-100 card text-white bg-dark" >
-	                    <div class="card-header text-center" >
-						   userName님이 좋아할만한 상영작
-						</div>
-                	    <img name="poster"  class="img-thumbnail card-img-top"  src="${preferMovie.poster}"  alt="">
-                	    <div class="card-body">
-                	    
-					      
-					      
-					       <h5 name="movieTitle" class="card-title font-weight-bold d-inline">
-					          ${movie.movieTitle} 
- 					       </h5> 
- 					       
-<!--  					       관람등급 -->
-								<c:choose>
-									<c:when test="${movie.movieRating ne null && movie.movieRating=='전체관람가'}">
-										<em class = "ico_movie allrating">${movie.movieRating}</em>
-									</c:when>
-									<c:when test="${movie.movieRating ne null && movie.movieRating=='12세이상관람가'}">
-										<em class = "ico_movie rating12">${movie.movieRating}</em>
-									</c:when>
-									<c:when test="${movie.movieRating ne null && movie.movieRating=='15세이상관람가'}">
-										<em class = "ico_movie rating15">${movie.movieRating}</em>
-									</c:when>
-									<c:when test="${movie.movieRating ne null && movie.movieRating=='청소년관람불가'}">
-										<em class = "ico_movie rating19">${movie.movieRating}</em>
-									</c:when>
-								</c:choose>
-							
-					       <p class="card-text text-white">
-					       
-					       
-					         <p>장르 : 
-  					       	 <c:forEach var="genre" items="${genreList}">
-					       	 	${genre} 
-					       	 </c:forEach>
-					       	 </p>
-					       	 
-					       	 
-  							 <p class="mb-1 text-white">평점 ${preferMovie.starRating}</p>
-							 <p class="mb-1 text-white">개봉일 ${preferMovie.releaseDate}</p>
-					       </p>
-					      
-					       <div class="d-flex justify-content-between align-items-center">
-			                <div class="btn-group">
-			                  <input name="movieNo" type="hidden" value="${preferMovie.movieNo}"/>
-			                  <input name="wishUserFlag" type="hidden" value="${preferMovie.wishUserFlag}"/>
-			                  <button type="button" class="btn btn-sm btn-outline-light"><i class="fas fa-ticket-alt"></i>예매</button>
-<!-- 			                  	좋아요 버튼 --------------------------------------------------------------->
-<!-- 								wishUserFlag 가 1인 경우==> 좋아요가 눌린 상태 -->
-<!-- 								wishUserFlag 가 0인 경우==> 좋아요가 눌리지 않은 상태 -->
-								
-			                  <button type="button" name="wish-btn" class="btn btn-sm btn btn-outline-light">
-			                 	 <c:if test="${preferMovie.wishUserFlag ne null}">
-				                 	 <c:choose>
-				                 	 	<c:when test="${preferMovie.wishUserFlag eq 1}">
-				                 	 		<i class="fas fa-heart text-danger"></i> ${preferMovie.wishCnt}
-				                 	 	</c:when>
-				                 	 	<c:otherwise><i class="far fa-heart text-muted"></i> ${preferMovie.wishCnt}</c:otherwise>
-				                 	 </c:choose>
-			                 	 </c:if>
-			                  </button>
-			                </div>
-			              </div>
-					     </div>
-			          </div>
-			        </div>
 
 		        
 <!-- 		      row   -->

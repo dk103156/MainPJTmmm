@@ -165,7 +165,14 @@
 					
 					display += "<h4 class='mb-0'>D - "+gap+ "</h4></div>";
 					
+					
+					display += "<figure class='snip1384'>";
 					display += "<img name='poster' class='img-thumbnail card-img-top'  src='"+responseJSON.list[i].poster+"'  height='225' alt=''>";
+					display += "<figcaption>";
+					display += "<p>"+responseJSON.list[i].summary+"</p>";
+					display += "</figcaption></figure> ";
+					
+					
 					display += "<div class='card-body'>";
 					display += "<h5 name='movieTitle' class='card-title font-weight-bold d-inline'>";
 					display += responseJSON.list[i].movieTitle+"</h5>";
@@ -246,6 +253,14 @@
 			self.location = "/movie/getExpectedMovieList"
 		});
 
+		
+// // 		줄거리 보여주는 hover evnet 		
+// 		$(".hover").mouseleave(
+// 		  function () {
+// 		    $(this).removeClass("hover");
+// 		  }
+// 		);
+		
 	});
 	
 
@@ -267,7 +282,7 @@
 	
 	
 //		영화 상세페이지로 이동 이벤트
-	$(document).on("click", "img[name='poster']",function(){
+	$(document).on("click", ".snip1384",function(){
 		var movieNo = $(this).parent().find('input[name="movieNo"]').val();
 		
 		self.location = "getMovie/"+movieNo;
@@ -282,6 +297,10 @@
 	});
 	
 	
+// 	줄거리 보여주는 hover Event
+	$(document).on("mouseleave", ".hover", function(){
+		$(this).removeClass("hover");
+	});
 	
 	
 	
@@ -417,12 +436,23 @@
 								
                 	       <h4 class="mb-0">D - ${endDate - strDate+1}</h4>
 						</div>
-						 <c:if test="${movie.poster != null }">
-	                	    <img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}"  height="225" alt="">
-			             </c:if>
-			             <c:if test="${movie.poster == null }">
-	                	    <img name="poster" class="img-thumbnail card-img-top"  src="http://placehold.it/163x225/E8117F/ffffff?text=sample"  height="225" alt="">
-			             </c:if> 
+						
+						<!-- 						hover 효과를 위해.. CSS, JS 확 -->
+						<figure class="snip1384">
+						   <c:if test="${movie.poster != null }">
+	                	      <img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}"  height="225" alt="">
+			               </c:if>
+			               <c:if test="${movie.poster == null }">
+	                	      <img name="poster" class="img-thumbnail card-img-top"  src="http://placehold.it/163x225/E8117F/ffffff?text=sample"  height="225" alt="">
+			               </c:if> 
+							
+						   <figcaption>
+						   	 <p>${movie.summary}	</p>
+						   </figcaption>
+						</figure>
+						
+						 
+			             
                 	    <div class="card-body">
 							<h5 name="movieTitle" class="card-title font-weight-bold d-inline">
 						          ${movie.movieTitle} 

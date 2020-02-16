@@ -66,7 +66,7 @@ public class DateTimeServiceTest {
 
 		long start = System.currentTimeMillis();
         System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
-        
+
         //GUI�� ���� headless option ����
         ChromeOptions options = new ChromeOptions();
         //options.addArguments("headless");
