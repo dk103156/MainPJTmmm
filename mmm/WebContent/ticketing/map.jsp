@@ -301,7 +301,9 @@
 		            showDistance(content, path[path.length-1]);  
 		             
 		        } else {
-
+					markerArray.forEach(
+							marker => {marker.setMap(null);}		
+						)//end of forEach
 		            // 선을 구성하는 좌표의 개수가 1개 이하이면 
 		            // 지도에 표시되고 있는 선과 정보들을 지도에서 제거합니다.
 		            deleteClickLine();
