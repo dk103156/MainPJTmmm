@@ -46,9 +46,13 @@ public class MovieRestController {
 		
 //		보고싶어요 활성화 
 		@RequestMapping(value = "json/addWish", method = RequestMethod.POST )
-		public Map<String, Object> addWish(@RequestBody WishStarRating wishStarRating) throws Exception {
+		public Map<String, Object> addWish(@RequestBody WishStarRating wishStarRating, HttpSession session) throws Exception {
 			System.out.println("--- --- /movie/addWish : POST");
 			System.out.println("wishStarRating    "+wishStarRating);
+			
+//			유저정보 넣어주기 ( From session)
+			User user = (User) session.getAttribute("user");
+			wishStarRating.setUserNo(user.getUserNo());
 			
 //			BL 수행
 			movieService.addWish(wishStarRating);
@@ -71,8 +75,12 @@ public class MovieRestController {
 		
 //		보고싶어요 삭제
 		@RequestMapping(value = "json/deleteWish", method = RequestMethod.POST)
-		public Map<String, Object> deleteWish(@RequestBody WishStarRating wishStarRating) throws Exception{
+		public Map<String, Object> deleteWish(@RequestBody WishStarRating wishStarRating, HttpSession session) throws Exception{
 			System.out.println("--- --- /movie/deleteWish : POST");
+			
+//			유저정보 넣어주기 ( From session)
+			User user = (User) session.getAttribute("user");
+			wishStarRating.setUserNo(user.getUserNo());
 			
 			movieService.deleteWish(wishStarRating);
 			
@@ -91,9 +99,13 @@ public class MovieRestController {
 		
 //		평점 등록
 		@RequestMapping(value = "json/addStarRating", method = RequestMethod.POST)
-		public Map<String, Object> addStarRating(@RequestBody WishStarRating wishStarRating)throws Exception{
+		public Map<String, Object> addStarRating(@RequestBody WishStarRating wishStarRating, HttpSession session)throws Exception{
 			System.out.println("--- --- /movie/addStarRating : POST");
 
+//			유저정보 넣어주기 ( From session)
+			User user = (User) session.getAttribute("user");
+			wishStarRating.setUserNo(user.getUserNo());
+			
 			movieService.addStarRating(wishStarRating);
 			
 			Movie inputMovie = new Movie();
@@ -111,8 +123,12 @@ public class MovieRestController {
 		
 //		평점 수정, 삭제 ( 0 일 경우 삭제... in Dao)
 		@RequestMapping(value = "json/updateStarRating", method = RequestMethod.POST)
-		public Map<String, Object> updateStarRating(@RequestBody WishStarRating wishStarRating)throws Exception{
+		public Map<String, Object> updateStarRating(@RequestBody WishStarRating wishStarRating, HttpSession session)throws Exception{
 			System.out.println("--- --- /movie/updateStarRating : POST");
+			
+//			유저정보 넣어주기 ( From session)
+			User user = (User) session.getAttribute("user");
+			wishStarRating.setUserNo(user.getUserNo());
 			
 			movieService.updateStarRating(wishStarRating);
 			

@@ -37,7 +37,7 @@ public class Movie {
 	
 	//우리 DB에서 가져오는 Data
 	private int rank;	// 순위.......
-	private double bookingRate;	//예매율...
+	private double ticketingRate;	//예매율...
 	private int audienceCnt;
 	private int onBoxOfficeFlag; // null 이라면 예매 가능작, 1인 경우 내린 영화
 	private int dDay;
@@ -45,7 +45,7 @@ public class Movie {
 	private int wishCnt;
 	private int wishUserFlag;
 	private int starByUser;
-	private int starUserFlag;
+	private int starUserFlag;	//해당 유저가 이 영화에 평점을 부여한 적이 있는지..?
 	
 	
 	//Constructor
@@ -257,16 +257,6 @@ public class Movie {
 	}
 
 
-	public double getBookingRate() {
-		return bookingRate;
-	}
-
-
-	public void setBookingRate(double bookingRate) {
-		this.bookingRate = bookingRate;
-	}
-
-
 	public int getAudienceCnt() {
 		return audienceCnt;
 	}
@@ -362,6 +352,15 @@ public class Movie {
 		this.genreList = genreList;
 	}
 
+	
+	public double getTicketingRate() {
+		return ticketingRate;
+	}
+
+	public void setTicketingRate(double ticketingRate) {
+		this.ticketingRate = ticketingRate;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -407,8 +406,8 @@ public class Movie {
 		builder.append(keywordList);
 		builder.append(", rank=");
 		builder.append(rank);
-		builder.append(", bookingRate=");
-		builder.append(bookingRate);
+		builder.append(", ticketingRate=");
+		builder.append(ticketingRate);
 		builder.append(", audienceCnt=");
 		builder.append(audienceCnt);
 		builder.append(", onBoxOfficeFlag=");

@@ -170,6 +170,7 @@
 					display += "<img name='poster' class='img-thumbnail card-img-top'  src='"+responseJSON.list[i].poster+"'  height='225' alt=''>";
 					display += "<figcaption>";
 					display += "<p>"+responseJSON.list[i].summary+"</p>";
+					display += "<i><button type='button' class='btn btn-outline-light btn-sm'>영화정보</button></i>";
 					display += "</figcaption></figure> ";
 					
 					
@@ -281,9 +282,10 @@
 	});
 	
 	
-//		영화 상세페이지로 이동 이벤트
-	$(document).on("click", ".snip1384",function(){
-		var movieNo = $(this).parent().find('input[name="movieNo"]').val();
+//	영화 상세페이지로 이동 이벤트
+	$(document).on("click", ".btn-outline-light",function(){
+		var movieNo = $(this).parent().parent().parent().parent().find('input[name="movieNo"]').val();
+// 		alert("movieNo " + movieNo);
 		
 		self.location = "getMovie/"+movieNo;
 	});
@@ -447,7 +449,8 @@
 			               </c:if> 
 							
 						   <figcaption>
-						   	 <p>${movie.summary}	</p>
+						   	 <p>${movie.summary}</p>
+						   	 <i><button type="button" class="btn btn-outline-light btn-sm">영화정보</button></i>
 						   </figcaption>
 						</figure>
 						
