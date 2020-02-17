@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.CryptoUtil;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Search;
@@ -79,7 +80,6 @@ public class UserController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-
 	@RequestMapping(value ="userAuthorization", method = RequestMethod.GET)
 	public String userAuthorization(@RequestParam("type")String type) throws Exception{
 		
@@ -87,6 +87,7 @@ public class UserController {
 			
 		return "redirect:/user/userAuthorization.jsp?type="+type;
 	}
+	
 	
 	@RequestMapping(value ="addUser", method = RequestMethod.GET)
 	public String addUser() throws Exception{
@@ -195,17 +196,27 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping(value = "getUser/{userNo}" , method=RequestMethod.GET)
-	public String getUser(@PathVariable("userNo") int userNo, Model model) throws Exception{
+	@CheckAuth(role="user")
+	@RequestMapping(value = "getUser" , method=RequestMethod.GET)
+	public String getUser(Model model,HttpSession session) throws Exception{
 		
 		System.out.println("/user/getUser : GET ");
 		
 		//Business Logic
-		User user = userService.getUser(userNo);
+		User user = (User)session.getAttribute("user");
 		
-		//Model 과 View 연결
-		model.addAttribute("user",user);
-		
+		if(user != null) {
+			
+			user = userService.getUser(user.getUserNo());
+			
+			System.out.println(user);
+			//Model 과 View 연결
+			model.addAttribute("user",user);
+		}else {
+			
+			return "forward:/user/login.jsp";
+		}
+
 		return "forward:/user/getUser.jsp";
 		
 	}
@@ -246,36 +257,40 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+	public String login(@ModelAttribute("user") User user, HttpSession session){
 		
-		System.out.println("/user/login : POST");
+		try {
+			System.out.println("/user/login : POST");
+			
+			//System.out.println(user);
+			//Business Logic
+			//비밀번호 암호화
+			String password = user.getPassword();
+			String cryptoPassword = CryptoUtil.cryptoText(password);
+			user.setPassword(cryptoPassword);
+			
+			System.out.println("Userrrrrrrrrrrr"+user);
+			User dbUser = userService.getUserId(user.getUserId());
+				
+			  if(dbUser == null || dbUser.getRole().trim().equals("unUser")) {
+				  
+				  return "redirect:/user/login.jsp?status=failed"; 
+			  }
+			 
+			System.out.println(user);
+			
+			
+			if(user.getPassword().equals(dbUser.getPassword())&& dbUser.getRole().trim().equals("user")) {
+				session.setAttribute("user", dbUser);	
+				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
+			}else {//로그인 실패시 
+				return "redirect:/user/login.jsp?status=failed";
+			}
 		
-		//System.out.println(user);
-		//Business Logic
-		//비밀번호 암호화
-		String password = user.getPassword();
-		String cryptoPassword = CryptoUtil.cryptoText(password);
-		user.setPassword(cryptoPassword);
-		
-		System.out.println("Userrrrrrrrrrrr"+user);
-		User dbUser = userService.getUserId(user.getUserId());
-		
-		System.out.println("dbUser!!!"+dbUser.getRole().trim());
-		
-		  if(dbUser == null || dbUser.getRole().trim().equals("unUser") || dbUser.getUserId() ==null) {
-			  
-			  return "redirect:/user/login.jsp?status=failed"; 
-		  }
-		 
-		System.out.println(user);
-		
-		
-		if(user.getPassword().equals(dbUser.getPassword())&& dbUser.getRole().trim().equals("user")) {
-			session.setAttribute("user", dbUser);	
-			System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
-		}else {//로그인 실패시 
-			return "redirect:/user/login.jsp?status=failed";
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		return "redirect:/index.jsp";
 	}
 	
@@ -461,47 +476,23 @@ public class UserController {
 	
 	
 	@RequestMapping(value = "updateUserStatus", method=RequestMethod.PUT)
-	public String updateUserStatus(@RequestParam("userNo") int userNo, HttpSession session) throws Exception{
+	public String updateUserStatus(HttpSession session) throws Exception{
 		
 		System.out.println("/user/updateUserStatus : PUT");
 		
 		//Business Logic
-		User user = userService.getUser(userNo);
 		
-		int sessionNo = ((User)session.getAttribute("user")).getUserNo();
 		
-		if(sessionNo ==user.getUserNo()) {
-			userService.updateUserStatus(user);
+		User sessionUser = ((User)session.getAttribute("user"));
+		
+		if(sessionUser != null) {
+			userService.updateUserStatus(sessionUser);
 			//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+			return "redirect:/mypage/mypage.jsp";
 		}
 
-		return "redirect:/index.jsp";
+		return "redirect:/user/login.jsp";
 	}//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-	@RequestMapping(value= "byeUser", method=RequestMethod.GET)
-	public String byeUser(@ModelAttribute("user") User user, HttpSession session) throws Exception{
-		
-		System.out.println("/user/byeUser : GET");
-		
-		//Business Logic
-		User dbUser = userService.getUser(user.getUserNo());
-		if(dbUser.getPassword().equals(user.getPassword())) {
-			userService.updateUserStatus(dbUser);
-			return "forward:/updatePw.jsp";	
-		}else {//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-			return "forward:/updateUser.jsp";	
-		}//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
