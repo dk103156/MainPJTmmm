@@ -63,5 +63,8 @@ public interface EventDao {
 	
 	public Participation getQuizRecord(int userNo) throws Exception;
 	
+	public List<Preview> getRandList() throws Exception;
+	
+	public void updatePrevStatus(int previewNo) throws Exception;
 	
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import com.mmm.common.Page;
 import com.mmm.common.Search;
 import com.mmm.service.datetime.DateTimeService;
 import com.mmm.service.domain.DateTime;
+import com.mmm.service.domain.Theater;
 import com.mmm.service.domain.Ticketing;
 import com.mmm.service.domain.User;
 import com.mmm.service.theater.TheaterService;
@@ -135,6 +137,13 @@ public class TicketingRestController {
 		}
 		
 		return dateTimeService.getTheaterList(search);
+	}
+	
+	@RequestMapping( value="json/getTheaterList", method=RequestMethod.GET)
+	public List<Theater> getTheaterList(@ModelAttribute Search search) throws Exception {
+		
+		
+		return theaterService.getTheaterList(search);
 	}	
 	
 	@RequestMapping( value="json/getDateList", method=RequestMethod.POST)
@@ -234,7 +243,6 @@ public class TicketingRestController {
 	public DateTime getDateTimeByMovieName(@PathVariable String movieName ) throws Exception {	
 
 		movieName = new String(movieName.getBytes("8859_1"),"UTF-8").replace("+", " ");
-		System.out.println("영화 제목은 1231231231231231 \n"+movieName);
 		return dateTimeService.getDateTimeByMovieName(movieName);
 	}	
 	
@@ -246,4 +254,5 @@ public class TicketingRestController {
 		
 		return ticketingService.getTicketing(ticketingNo);
 	}
+	
 }

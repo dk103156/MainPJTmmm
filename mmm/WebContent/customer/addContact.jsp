@@ -138,25 +138,27 @@ $(document).ready(function() {
 	  }
 	}
 
- #header{ 
-      	width:940px;
-      	height:auto;
-      	padding: 20px;
-        margin: 10px auto;
-        border: 1px solid #bcbcbc;
-        }
-        
+	 #header{ 
+	      	width:940px;
+	      	height:auto;
+	      	padding: 20px;
+	        margin: 10px auto;
+	        border: 1px solid #bcbcbc;
+	        }
+	        
+	
+	  
+	  .content{
+	  	height:auto;
+	  }
+	  
+	  
+	  th{
+	  	width:300px;
+	  
+	  }
 
-  
-  .content{
-  	height:auto;
-  }
-  
-  
-  th{
-  	width:300px;
-  
-  }
+	   
 </style>
 
 
@@ -181,7 +183,7 @@ $(document).ready(function() {
 </div>
 	  
 <form autocomplete="off">
-
+	<input type="hidden" name="userNo" value="${user.userNo}"/>
 	<div class="container">
 	
 	<div id="header"> 
@@ -209,7 +211,7 @@ $(document).ready(function() {
 					</tr>	
 					
 					 <tr>
-					<td colspan="4"><button name="updtUser" class="btn btn-outline-danger btn-sm">수정</button></td>
+					<button name="updtUser" class="btn btn-outline-danger btn-sm">수정</button></td>
 					 </tr>
 				</tbody>
 				</table>
