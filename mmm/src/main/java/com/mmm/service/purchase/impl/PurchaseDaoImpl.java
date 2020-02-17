@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.mmm.common.Search;
 import com.mmm.service.domain.Cart;
 import com.mmm.service.domain.Purchase;
-import com.mmm.service.domain.User;
 import com.mmm.service.purchase.PurchaseDao;
 
 @Repository("purchaseDaoImpl")
@@ -35,7 +34,6 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	public void addGiftPurchase(Purchase purchase) throws Exception {
 		sqlSession.insert("PurchaseMapper.addGiftPurchase",purchase);
 	}
-	
 	
 	@Override
 	public Purchase getPurchase(int purchaseNo) throws Exception {
