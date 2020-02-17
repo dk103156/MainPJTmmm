@@ -67,11 +67,11 @@
 	  }
 	}
 	
-	
-	span.round.on.red {
-    border: 2px solid #e71a0f;
-    background-color: #e71a0f;
-    color: #ffffff;
+		span.round.on.red {
+		text-align: center;
+	    border: 2px solid #e71a0f;
+	    background-color: #e71a0f;
+	    color: #ffffff;
 	}
 	
 </style>
@@ -82,7 +82,7 @@
 <div class="container">
 
 	<div class="page-header text-dark">
-	       <h3>나의 문의내역</h3>
+	       <h3>관리자 문의내역</h3>
 	       <hr>
 	    </div>
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
@@ -107,12 +107,13 @@
         <thead class="table-active">
           <tr class="row">
             <th class="col-sm-1" align="center">번호</th>
-            <th class="col-sm-7" align="left" >제목</th>
+            <th class="col-sm-5" align="left" >제목</th>
             <th class="col-sm-3"  align="left">등록일시</th>
             <th class="col-sm-1" align="left">상태</th>
+            <th class="col-sm-2" align="left">글쓴이</th>
           </tr>
-        </thead>
-       
+        </thead> 
+        
 		<tbody class="getTranInfo">
 		  <c:set var="i" value="0" />
 		  <c:forEach var="notice" items="${list}">
@@ -121,15 +122,18 @@
 			  <td  class="col-sm-1" align="left" >${ i }
 	  	    	<input type="hidden" id="articleNo" value="${notice.articleNo}"/>
 			  </td>
-			  <td class="col-sm-7" align="left" id="" >  ${notice.articleTitle} 
+			  <td class="col-sm-5" align="left" id="" >  ${notice.articleTitle} 
 			  </td>
 			  <td class="col-sm-3" align="left" id="" >  ${notice.articleDate}
 				</td>
 			  <td class="col-sm-1" align="center" id="" > 
 			  <span class="btn btn-danger btn-sm"><small>
-				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
-				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
-				</small></span>
+			  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
+			  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
+			 	</small>
+			 	</span>  
+				</td>
+				 <td class="col-sm-2" align="left" id="" >${notice.userId}
 				</td>
 			</tr>
           </c:forEach>

@@ -189,16 +189,17 @@ public class EventRestController {
 		int answer = eventService.getQuizAd(quizNo).getAnswer();
 		int result = 0;
 		
-		if(partCnt > 0) {
+		if(partCnt > 0) { //이미 참여했다?
 			result = 2;
-		}else if(partCnt == 0){
-			if(answer==choice) { result = 0;}
-			else if(answer!=choice) {result = 1;}
+		}else if(partCnt == 0){	//아직 참여한 적 없다
+			if(answer==choice) { result = 0;} //답이 같다면?--> 포인트를...적립하자
+			else if(answer!=choice) {result = 1;} //다르다면?
 		}
 		
 		System.out.println("result"+result);
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		returnMap.put("result", result);
+		returnMap.put("partCnt", partCnt);
 		
 		return returnMap;
 		

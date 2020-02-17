@@ -49,7 +49,7 @@
 				
 				
 				$('#regBtn').on("click", function(){
-					alert('눌렸어!!!!!!!!!!!!!!!!!!!!!!!');
+// 					alert('눌렸어!!!!!!!!!!!!!!!!!!!!!!!');
 					fncAddNotice();
 				});
 				
@@ -85,7 +85,7 @@
 			
 			
 			function fncAddNotice(){
-				alert('도착?')
+// 				alert('도착?')
 				var articleTitle = $("input[name='articleTitle']").val();
 			
 				if(articleTitle == null || articleTitle.length<1) {

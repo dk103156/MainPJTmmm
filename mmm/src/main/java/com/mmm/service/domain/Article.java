@@ -11,6 +11,7 @@ public class Article {
 	private int replyNo;
 	
 	private String userId;
+	private int userNo;
 	private int articleStatus;
 	private int articleType;
 	private int category;
@@ -32,6 +33,12 @@ public class Article {
 	private String previewImage; //시사회 이미지 URI
 	
 	
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 	public int getReplyNo() {
 		return replyNo;
 	}
@@ -165,13 +172,18 @@ public class Article {
 		this.qnaStatus = qnaStatus;
 	}
 	
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Article [articleNo=");
 		builder.append(articleNo);
+		builder.append(", replyNo=");
+		builder.append(replyNo);
 		builder.append(", userId=");
 		builder.append(userId);
+		builder.append(", userNo=");
+		builder.append(userNo);
 		builder.append(", articleStatus=");
 		builder.append(articleStatus);
 		builder.append(", articleType=");
@@ -213,6 +225,8 @@ public class Article {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 
 	

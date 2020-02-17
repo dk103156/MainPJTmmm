@@ -166,8 +166,7 @@
 		end_date = #{previewEndDate},  
 		winner_count = #{winnerCount},  
 		winner_date = #{winnerDate},  
-		preview_regdate = SYSDATE, 
-		preview_status =#{previewFlag}	
+		preview_regdate = SYSDATE 
 		</set>
 		WHERE preview_no = #{previewNo}
 	</update>
@@ -238,7 +237,7 @@
 		 SELECT
 		 	preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
 			winner_count, winner_date, preview_regdate, CASE
-				<![CDATA[	WHEN end_date > SYSDATE THEN '진행중'
+				<![CDATA[	WHEN end_date > = SYSDATE THEN '진행중'
 					WHEN end_date <  SYSDATE THEN '응모마감']]>
 					END AS preview_status
 		 FROM preview
@@ -247,12 +246,23 @@
 				<if test="searchCondition == 0 and searchKeyword !='' ">
 					preview_name = #{searchKeyword}
 				</if>
-				<if test="searchCondition == 1 and searchKeyword !='' ">
-	 		 		preview_status = #{searchKeyword}
+				</where>
+			</if>	
+				
+			<if test="previewFlag!= null">
+				<where>
+				<if test="previewFlag == 0">
+				   	
+				  </if>
+				   <if test="previewFlag == 1">
+				   	preview_status = 0
+				  </if>
+				 <if test="previewFlag == 2">
+				    preview_status = 1
 				</if>
 			</where>
-		</if>
-s	 </sql>
+			</if>
+ </sql>
 	 
 	 
 	 
@@ -261,16 +271,18 @@ s	 </sql>
 		 	quiz_no, question, option1, option2, option3, option4, answer, start_date, 
 				end_date, quiz_date, quiz_status
 		 FROM quiz
-			<if test="searchCondition!= null">
 			  <where>
-				<if test="searchCondition == 0 and searchKeyword !='' ">
-					quiz_no = #{searchKeyword}
-				</if>
-				<if test="searchCondition == 1 and searchKeyword !='' ">
-	 		 		quiz_question = #{searchKeyword}
+<!-- 				 end_date <![CDATA[ >= ]]> SYSDATE -->
+				<if test="searchCondition!= null">
+					<if test="searchCondition == 0 and searchKeyword !='' ">
+					 AND quiz_no = #{searchKeyword}
+					</if>
+					<if test="searchCondition == 1 and searchKeyword !='' ">
+	 		 		 AND quiz_question = #{searchKeyword}
+					</if>
 				</if>
 			</where>
-		</if>	  
+				ORDER BY quiz_status
 	 </sql>
 	 
 	 
@@ -296,7 +308,6 @@ s	 </sql>
   					) inner_table
 				WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
-		ORDER BY start_date DESC
  </select>
  
 
@@ -312,7 +323,7 @@ s	 </sql>
 		</foreach>
 	</update>
 	
-	<!-- SQL UPDATE: 당첨시 winning_flag 를 update 해주는 sql -->
+	<!-- SQL UPDATE: 퀴즈 정답시 winning_flag 를 update 해주는 sql -->
 	<update id="updateQuizFlag" parameterType="Map">
 			UPDATE participation
 			SET winning_flag = 1
@@ -374,6 +385,8 @@ s	 </sql>
 	</select>
 	
 	
+	
+	
 	<!-- SQL SELECTONE: 참여 상세조회  -->
 	<select id="getParticipation" parameterType="int" resultMap="partSelectMap">
 		SELECT
@@ -383,7 +396,7 @@ s	 </sql>
 	</select>
 	
 	
-	<!-- SQL SELECTONE: Quiz 기록  -->
+<!--Quiz 기록을 가져온다  -->
 	<select id="getQuizRecord" parameterType="int" resultMap="partSelectMap">
 		  SELECT 
 		  user_no, count(*) total, SUM( DECODE (WINNING_FLAG, 1, 1, 0)) winning
@@ -394,8 +407,23 @@ s	 </sql>
 	</select>
 
 
+<!-- 이벤트 플래그가 0인 시사회 이벤트 리스트를 가져오기-->
+  <select id="getRandList" resultMap="previewSelectMap">
+  		 SELECT 
+  				preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
+				winner_count, winner_date, preview_regdate, preview_status, TO_CHAR(END_DATE, 'yyyyMMdd') 
+		 FROM preview
+		 WHERE preview_status = 0
+		  AND TO_CHAR(END_DATE, 'yyyyMMdd') = TO_CHAR(SYSDATE,'yyyyMMdd') 
+  </select>
 
 
+<!-- 이벤트 마감 플래그로 업데이트 시키기  -->
+  <update id="updatePrevStatus" parameterType="int">
+  		 UPDATE PREVIEW
+		 SET PREVIEW_STATUS = 1
+		 WHERE PREVIEW_NO = #{value}
+  </update>
 
 	
 </mapper>

@@ -6,6 +6,7 @@ public class Comment {
 	private int commentNo;
 	private int commentType;
 	private String userId;
+	private int userNo;
 	private int supCommentNo;
 	private int movieNo;
 	private int articleNo;
@@ -15,6 +16,14 @@ public class Comment {
 	private int commentCount;
 	private int blindStatus;
 	
+	
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 	public int getCommentType() {
 		return commentType;
 	}

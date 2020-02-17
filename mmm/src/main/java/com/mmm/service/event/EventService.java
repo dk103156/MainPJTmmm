@@ -61,6 +61,6 @@ public interface EventService {
 	public int checkPart(Map<String, Object> map) throws Exception; 
 	public int checkQuiz(Map<String, Object> map) throws Exception; 
 
-
+	public List<Preview> getPrepareRand() throws Exception;
 	
 }

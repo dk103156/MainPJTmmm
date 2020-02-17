@@ -26,6 +26,8 @@ public class Search {
 	private int onBoxOfficeFlag;	//0 : 상영예정작, 1: 상영작(박스오피스)
 	private int articleType; //1: 일대일문의,  2: 공지사항,  3: 자주찾는질문,  4: 영화리뷰
 	private int category; //0: 전체, 1: 예매&매표 , 2: 스토어,  3: 결제,  4: 할인혜택,  5: 홈페이지,  6: 이벤트
+	private String userId; 
+	private int previewFlag; //0: 진행중  1:마감
 
 
 	///Constructor
@@ -203,6 +205,23 @@ public class Search {
 		this.category = category;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	
+	public int getPreviewFlag() {
+		return previewFlag;
+	}
+
+	public void setPreviewFlag(int previewFlag) {
+		this.previewFlag = previewFlag;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -246,9 +265,14 @@ public class Search {
 		builder.append(articleType);
 		builder.append(", category=");
 		builder.append(category);
+		builder.append(", userId=");
+		builder.append(userId);
+		builder.append(", previewFlag=");
+		builder.append(previewFlag);
 		builder.append("]");
 		return builder.toString();
 	}
+
 
 
 
