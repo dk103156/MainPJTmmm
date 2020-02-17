@@ -26,7 +26,7 @@ public class KakaoAPI {
 	
 	// "규비" 카카오 REST API KEY
 	private String restAPIKey = "9a333c2afc5b56f5619a374debb3fa5a";
-	
+	 
 	
 	// 키워드로 장소 검색 //
 	public JSONObject searchPlaceByKeyword(String keyword) throws Exception{
