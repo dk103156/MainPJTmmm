@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.mmm.common.Search;
-import com.mmm.service.domain.Inven;
+import com.mmm.service.domain.Inventory;
 import com.mmm.service.inven.InvenDao;
 import com.mmm.service.inven.InvenService;
 
@@ -29,23 +29,23 @@ public class InvenServiceImpl implements InvenService{
 	}
 
 	@Override
-	public void addInven(Inven inven) throws Exception {
+	public void addInven(Inventory inven) throws Exception {
 		invenDao.addInven(inven);
 	}
 	
 	@Override
-	public void addGiftInven(Inven inven) throws Exception {
+	public void addGiftInven(Inventory inven) throws Exception {
 		invenDao.addGiftInven(inven);
 	}
 
 	@Override
-	public Inven getInven(int invenNo) throws Exception {
+	public Inventory getInven(int invenNo) throws Exception {
 		return invenDao.getInven(invenNo);
 	}
 
 	@Override
 	public Map<String, Object> getInvenList(Search search) throws Exception {
-		List<Inven> list = invenDao.getInvenList(search);
+		List<Inventory> list = invenDao.getInvenList(search);
 		int totalCount = invenDao.getTotalCount(search);
 		
 		Map<String , Object> map = new HashMap<String, Object>();
@@ -56,7 +56,7 @@ public class InvenServiceImpl implements InvenService{
 	}
 
 	@Override
-	public void updateInven(Inven inven) throws Exception {
+	public void updateInven(Inventory inven) throws Exception {
 		invenDao.updateInven(inven);
 	}
 

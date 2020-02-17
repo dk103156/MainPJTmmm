@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="InvenMapper">
+ 	
+	<resultMap id="inventorySelectMap" type="Inventory">
+		<result property="inventoryNo" 				column="inventory_no" 			jdbcType="INTEGER"  />
+		<result property="inventoryUserNo"			column="inventory_user_no" 		jdbcType="INTEGER"  />
+		<result property="inventoryProdNo" 			column="inventory_prod_no" 		jdbcType="INTEGER"/>
+		<result property="inventoryPurchaseNo" 		column="inventory_purchase_no" 	jdbcType="INTEGER"  />
+		<result property="inventoryProdPinNo" 		column="inventory_prod_pin_no" 	jdbcType="VARCHAR"  />
+		<result property="inventoryRegDate" 		column="inventory_reg_date" 	jdbcType="TIMESTAMP"  />
+		<result property="inventoryUsedDate" 		column="inventory_used_date" 	jdbcType="TIMESTAMP"  />
+		<result property="inventoryStatus" 			column="inventory_status" 		jdbcType="VARCHAR"  />
+	</resultMap>
+	
+	
+	
+	<insert id="addInven" parameterType="Inventory" >
+	 	INSERT
+		INTO inventory ( inventory_no, inventory_user_no, inventory_prod_no, inventory_purchase_no, 
+						 inventory_prod_pin_no , inventory_reg_date ,  inventory_used_date , inventory_status ) 
+		VALUES	 (
+		 seq_inventory_inventory_no.NEXTVAL,
+		 #{inventoryUserNo:INTEGER},
+		 #{inventoryProdNo:INTEGER},
+		 #{inventoryPurchaseNo:INTEGER},
+		 #{inventoryProdPinNo:INTEGER},
+		 #{inventoryRegDate:TIMESTAMP} 
+		 #{inventoryUsedDate:TIMESTAMP},    
+		 0 )
+	 </insert>
+	
+
+	<select id="getInventory" parameterType="int"  resultMap="inventorySelectMap" >
+	 	SELECT
+	 	*
+	 	FROM inventory	
+	 	WHERE inventory_no = #{val}
+ 	</select>
+ 	
+	<select id="getInventoryList" parameterType="Inventory"  resultMap="inventorySelectMap" >
+	 	SELECT
+	 	*
+	 	FROM inventory	
+		<trim prefix="where" suffixOverrides="and">
+			<if test="inventoryUserNo !=null">inventory_user_no = #{inventoryUserNo} and</if>
+			<if test="inventoryProdNo !=null">inventory_prod_no = #{inventoryProdNo} and</if>
+			<if test="inventoryPurchaseNo !=null">inventory_purchase_no = #{inventoryPurchaseNo} and</if>
+		</trim>	
+ 	</select> 	
+	
+	<update id="updateInventory" parameterType="Search" >
+	 	UPDATE inventory
+	 	<trim prefix="SET" suffixOverrides=",">
+			<if test="inventoryNo !=null">inventory_no = #{inventoryNo},</if>
+			<if test="inventoryUserNo !=null">inventory_user_no = #{inventoryUserNo},</if>
+			<if test="inventoryProdNo !=null">inventory_prod_no = #{inventoryProdNo},</if>
+			<if test="inventoryPurchaseNo !=null">inventory_purchase_no = #{inventoryPurchaseNo},</if>
+			<if test="inventoryProdPinNo !=null">inventory_prod_pin_no = #{inventoryProdPinNo},</if>
+			<if test="inventoryRegDate !=null">inventory_reg_date =#{inventoryRegDate},</if>
+			<if test="inventoryUsedDate !=null">inventory_used_date = #{inventoryUsedDate},</if>
+			<if test="inventoryStatus !=null">inventory_status = #{inventoryStatus},</if>
+		</trim>
+			<where>
+				inventory_no = #{inventoryNo}
+			</where>
+	 </update>
+	
+	<delete id="deleteInventory"  parameterType="int">
+		DELETE from Inventory 
+		WHERE 
+		inventory_no = #{value}	
+	</delete>
+</mapper>
+
+ 
+ 
+ 
+ 

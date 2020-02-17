@@ -7,102 +7,80 @@
 
 <mapper namespace="PurchaseMapper">
  	
-	<resultMap id="purchaseSelectMap" 			type="purchase">
-		<result property="purchaseNo" 				column="purchase_no" 		jdbcType="INTEGER"  />
-		<result property="purchaseUser" 			column="purchase_user" 			jdbcType="INTEGER"  />
-		<result property="purchaseStatus" 			column="purchase_status" 	jdbcType="INTEGER"  />
-		<result property="purchasePrice" 			column="purchase_price" 	jdbcType="INTEGER"  />
-		<result property="purchaseDate" 			column="purchase_date" 		jdbcType="DATE"  />
-		<result property="rcPhone" 					column="rc_phone" 			jdbcType="NUMERIC"  />
-		<result property="rcName" 					column="rc_Name" 			jdbcType="VARCHAR"  />
-		<result property="message" 					column="message" 			jdbcType="VARCHAR"  />
-		<result property="purchaseQuantity" 		column="purchase_quantity" 	jdbcType="INTEGER"  />
-		
-		<association property="purchaseProd" javaType="product">
-			<id property="prodNo" column="prod_no" 			jdbcType="INTEGER"  />
-			<result property="prodName"			column="prod_name" 			jdbcType="VARCHAR"  />
-			<result property="prodDate" 		column="prod_date" 			jdbcType="DATE"/>
-			<result property="prodPrice" 		column="prod_price" 		jdbcType="INTEGER"  />
-			<result property="prodDetail" 		column="prod_detail" 		jdbcType="VARCHAR"  />
-			<result property="prodImage" 		column="prod_image" 		jdbcType="VARCHAR"  />
-			<result property="franType" 		column="fran_type" 			jdbcType="INTEGER"  />
-			<result property="prodType" 		column="prod_type" 			jdbcType="INTEGER"  />
-			<result property="quantity" 		column="quantity" 			jdbcType="INTEGER"  />
-		</association>
-		
+	<resultMap id="purchaseSelectMap" type="purchase">
+		<result property="purchaseNo" 				column="purchase_no" 				jdbcType="INTEGER"  />
+		<result property="purchaseUserNo" 			column="purchase_user_no" 			jdbcType="INTEGER"  />
+		<result property="purchaseProductNo" 		column="purchase_product_No" 		jdbcType="VARCHAR"  />
+		<result property="purchaseProductQuantity" 	column="purchase_product_Quantity" 	jdbcType="VARCHAR"  />
+		<result property="purchaseStatus" 			column="purchase_Status" 			jdbcType="INTEGER"  />
+		<result property="purchasePrice" 			column="purchase_Price" 			jdbcType="INTEGER"  />
+		<result property="purchaseDate" 			column="purchase_Date" 				jdbcType="TIMESTAMP"  />
+		<result property="receiverPhone" 			column="receiver_phone" 			jdbcType="VARCHAR"  />
+		<result property="receiverName" 			column="receiver_name" 				jdbcType="VARCHAR"  />
+		<result property="senderMessage" 			column="sender_message" 					jdbcType="VARCHAR"  />
 	</resultMap>
 	
 	
-	<insert id="addPurchase"		parameterType= "Purchase" >
+	<insert id="addPurchase" parameterType="Purchase">
 	 	INSERT
-		INTO purchase ( purchase_no  , purchase_user , purchase_prod  , purchase_status , purchase_price , 
-						purchase_date ,rc_phone , rc_Name , message ,purchase_quantity) 
-		VALUES	 (
-					seq_purchase_purchase_no.NEXTVAL,
-					 #{purchaseUser},
-					 #{purchaseProd},
-					  0,
-					 #{purchasePrice},
-					 SYSTIMESTAMP,
-					  #{rcPhone},
-					  #{rcName},
-					 null ,
-					  #{purchaseQuantity}
-				)
+		INTO purchase ( purchase_no, purchase_user_no, purchase_product_No, purchase_product_Quantity, purchase_Status,
+						purchase_Price, purchase_Date, receiver_phone, receiver_name, message )
+		VALUES	 
+		( seq_purchase_purchase_no.NEXTVAL,
+		  #{purchaseUserNo:INTEGER},
+		  #{purchaseProductNo:VARCHAR},
+		  #{purchaseProductQuantity:VARCHAR},
+		  #{purchaseStatus:INTEGER},
+		  #{purchasePrice:INTEGER},
+		  SYSTIMESTAMP,
+		  #{receiverPhone:VARCHAR},
+		  #{receiverName:VARCHAR},
+		  #{senderMessage}
+		)
 	 </insert>
-	
-	
-	<insert id="addGiftPurchase"		parameterType= "Purchase" >
-	 	INSERT
-		INTO purchase ( purchase_no  , purchase_user , purchase_prod , purchase_status , purchase_price , 
-						purchase_date ,rc_phone , rc_Name , message ,purchase_quantity) 
-		VALUES	 (
-					seq_purchase_purchase_no.NEXTVAL,
-					 #{purchaseUser},
-					 #{purchaseProd},
-					  2,
-					 #{purchasePrice},
-					 SYSTIMESTAMP,
-					 #{rcPhone},
-					 #{rcName},
-					#{message},
-					 #{purchaseQuantity}
-				)
-	 </insert>
-	
-	<select id="getPurchase" parameterType="INTEGER"  resultMap="purchaseSelectMap" >
+	 
+	<select id="getPurchase" parameterType="int"  resultMap="purchaseSelectMap" >
 	 	SELECT
 	 	*
-	 	FROM PURCHASE	
-	 	WHERE purchase_no = #{purchaseNo} AND purchase_user = #{purchaseUser}
-	 	ORDER BY purchase_date
-	 </select>
-	
-	
-	<select id="getPurchaseList"	parameterType="purchase"	resultMap="purchaseSelectMap" >
-		SELECT
-		*
-		FROM  PURCHASE
-		ORDER BY purchase_no;
+	 	FROM purchase	
+		WHERE 
+		purchase_no = #{value}	
 	</select>
+	 
+	<select id="getPurchaseList" parameterType="Purchase"  resultMap="purchaseSelectMap" >
+	 	SELECT
+	 	*
+	 	FROM purchase
+		<trim prefix="where" suffixOverrides="and">
+			<if test="purchaseUserNo !=null">purchase_user_no = #{purchaseUserNo} and</if>
+			<if test="receiverPhone !=null">receiver_phone = #{receiverPhone} and</if>
+			<if test="purchaseDate !=null">to_char(purchase_Date, 'yyyy-MM-DD') = to_char(#{purchaseDate}, 'yyyy-MM-DD') and</if>
+		</trim>	
+	 </select>	 
 	
-	<update id="updatePurchase" parameterType="INTEGER" >
+	<update id="updatePurchase" parameterType="Purchase" >
 	 	UPDATE purchase
-	 	<set>
-			purchase_status = 1	 	
-	 	</set>
-	 	WHERE purchase_status = 0
+	 	<trim prefix="SET" suffixOverrides=",">
+			<if test="purchaseUserNo !=null">purchase_user_no = #{purchaseUserNo},</if>
+			<if test="purchaseProductNo !=null">purchase_product_No = #{purchaseProductNo},</if>
+			<if test="purchaseProductQuantity !=null">purchase_product_Quantity = #{purchaseProductQuantity},</if>
+			<if test="purchaseStatus !=null">purchase_Status = #{purchaseStatus},</if>
+			<if test="purchasePrice !=null">purchase_Price = #{purchasePrice},</if>
+			<if test="purchaseDate !=null">purchase_Date =#{purchaseDate},</if>
+			<if test="receiverPhone !=null">receiver_Phone = #{receiverPhone},</if>
+			<if test="receiverName !=null">receiver_Name = #{receiverName},</if>
+			<if test="senderMessage !=null">sender_message = #{senderMessage},</if>
+		</trim>
+			<where>
+				purchase_no = #{purchaseNo}
+			</where>
 	 </update>
-	
-	
-	<update id="updateGiftPurchase" parameterType="INTEGER" >
-	 	UPDATE purchase
-	 	<set>
-			purchase_status = 3	 	
-	 	</set>
-	 	WHERE purchase_status = 2
-	 </update>
-	
+	 	
+	<delete id="deletePurchase" parameterType="int">
+		DELETE from purchase 
+		WHERE 
+		purchase_user_no = #{value}
+	</delete>
 	
 	
 </mapper>
