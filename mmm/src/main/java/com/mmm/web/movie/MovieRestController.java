@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -126,6 +128,8 @@ public class MovieRestController {
 			return resultMap;
 		}
 		
+		
+//		안쓰게 되었다...
 		@RequestMapping(value = "json/getBoxOfficeList", method = RequestMethod.POST)
 		public Map<String, Object> getBoxOfficeList( @RequestBody Search search,
 														HttpSession session)throws Exception{
@@ -200,4 +204,17 @@ public class MovieRestController {
 			return returnMap;			
 		}
 		
+		@RequestMapping(value="json/getSummary/{movieNo}", method = RequestMethod.GET)
+		public Map<String, Object> getSummary(@PathVariable("movieNo") int movieNo)throws Exception{
+			
+			Movie inputMovie = new Movie();
+			inputMovie.setMovieNo(movieNo);
+			Movie outputMovie = movieService.getMovieByMovieNo(inputMovie);
+			
+			
+			Map<String, Object> returnMap = new HashMap<String, Object>();
+			returnMap.put("movie", outputMovie);
+			
+			return returnMap;	
+		}
 }

@@ -131,7 +131,7 @@
 			resultMap= "movieSelectMap">
 			
 		SELECT
-		m.movie_no, m.movie_title, m.kmdb_code, m.poster, m.running_time,
+		m.movie_no, m.movie_title, m.kmdb_code, m.poster, m.running_time, m.summary,
 		m.movie_rating, TO_CHAR(release_date, 'YYYY-MM-DD') release_date, m.onBoxOffice_flag, 
 		t.star_RATE, w.WISH_CNT, NVL2(c.wish_no, '1', '0') wish_user_flag,
 		NVL(s.star_rate, '0') star_user, NVL2(s.star_rate, '1', '0') star_flag
@@ -171,7 +171,7 @@
 			resultMap= "movieSelectMap">
 			
 		SELECT
-		m.movie_no, m.movie_title, m.kmdb_code, m.poster, m.running_time,
+		m.movie_no, m.movie_title, m.kmdb_code, m.poster, m.running_time, m.summary,
 		m.movie_rating, TO_CHAR(release_date, 'YYYY-MM-DD') release_date, m.onBoxOffice_flag, 
 		t.star_RATE, w.WISH_CNT, NVL2(c.wish_no, '1', '0') wish_user_flag,
 		NVL(s.star_rate, '0') star_user, NVL2(s.star_rate, '1', '0') star_flag

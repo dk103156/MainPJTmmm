@@ -613,26 +613,19 @@ $(function(){
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
+	//프로필업로드
 	$("#updateImgBtn").on("click",function(){
 		$("#fileForm").attr("action","/user/addProfile").attr("method","post").attr("enctype","multipart/form-data").submit();
 	})
 	
 	
+	//회원정보 수정
 	$("#updateBtn").on("click",function(){
 		$("#InfoForm").attr("action","/user/updateUser").attr("method","post").submit();
 	})
 	
-	$("#byeBtn").on("click",function(){
-		var userNo= $("#userNo").val();
-		self.location="user/byeUser"+userNo;
-	})
+	
 	
 	// 파일 선택 후 액션
     $('#profileTarget').on('change', function(e) {
@@ -672,7 +665,44 @@ $(function(){
 	    $('#profileTarget').click();
 	});
 	
-
+	//회원탈퇴
+	$("#byeBtn").on("click",function(){
+		var password= $("#password").val();
+		
+		$.ajax({
+			url : '/user/json/updateUserStatus/',
+			method : "post" ,
+			datatype : "json" ,
+			headers : {
+				"Accept" : "application/json" ,
+				"Content-Type" : "application/json"
+			} ,
+			data : JSON.stringify({
+				password : password
+			}), 
+			success : function(data) {
+				console.log("false = pw 일치 X / true = pw 일치 : "+ data);							
+				
+				if (data == 0) {
+						// 0 : 비밀번호가 다름
+						$("#passwordChk").text("비밀번호를 확인해주세요.");
+						$("#passwordChk").css("color", "red");
+						$("#byeconfirmBtn").attr("disabled", true);
+				}else{
+					$("#passwordChk").text("");
+					alert("정말 탈퇴 하실?")
+					$("#byeconfirmBtn").attr("disabled", false);
+				} 
+			}, error : function() {
+					console.log("실패");
+				}
+			})//ajax 끝
+		
+		
+		
+	})
+	
+	
 	
 
 
@@ -729,18 +759,21 @@ $(function(){
 								    <div class="modal-content">
 								      <div class="modal-header">
 								        <h5 class="modal-title" id="staticBackdropLabel">회원 탈퇴</h5>
-								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								        <button type="button" class="close" data-dismiss="modal" id="byeBtn" aria-label="Close">
 								          <span aria-hidden="true">&times;</span>
 								        </button>
 								      </div>
 								      <div class="modal-body">
-								        ${user.userName}님 탈퇴를 하시겠습니까?
-								        	원한다면 해볼테면 해보슈
+								        ${user.userName}님 탈퇴를 하시겠습니까?<br/>
+								        	해볼테면 해보슈<br/><br/>
+								        	비밀번호
 								        <input type="password" name="password" id="password">	
+								        <input type="hidden" name="password" id="password" value="${user.">	
+								        <h6 id="passwordChk" style="color: red;"></h6>
 								      </div>
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-								        <button type="button" class="btn btn-primary" id="byeBtn">탈퇴</button>
+								        <button type="button" class="btn btn-primary" id="byeconfirmBtn">탈퇴</button>
 								      </div>
 								    </div>
 								  </div>

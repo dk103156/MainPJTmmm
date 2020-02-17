@@ -66,7 +66,7 @@ public class DateTimeServiceTest {
 
 		long start = System.currentTimeMillis();
         System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
-        
+
         //GUI�� ���� headless option ����
         ChromeOptions options = new ChromeOptions();
         //options.addArguments("headless");
@@ -141,10 +141,10 @@ public class DateTimeServiceTest {
 	            				//System.out.println("맥스무비 : "+mn.getText().trim());
 	            				
 	            				//System.out.println("list 목록 :\n"+movieService.getAllofMovieTitle());
-	            				System.out.println("영화 이름 :"+mn.getText().trim());
-	            				//if(movieService.getAllofMovieTitle().indexOf(mn.getText().trim().replaceAll(" ", ""))==-1) {
-	            					//break;
-	            				//}
+	            				//System.out.println("영화 이름 :"+mn.getText().trim());
+	            				if(movieService.getAllofMovieTitle().indexOf(mn.getText().trim())==-1) {
+	            					break;
+	            				}
 	            				dateTime.setMovieName(mn.getText().trim()); // 상영일시 영화 이름
 	            				
 	            				//관람물 등급
@@ -201,12 +201,16 @@ public class DateTimeServiceTest {
 	            										while(true) {
 	            											try {
 				            									synchronized(lc) {
-				            										lc.wait(500);
+				            										lc.wait(400);
 				            									}			
 			            										lc.click();
             										
 			            										WebElement lcRe = driver.findElement(localRe);
 			            										
+				            									synchronized(lc) {
+				            										lc.wait(100);
+				            									}	
+				            									
 			            										List<WebElement> tName = driver.findElements(theaterName);
 			            										List<WebElement> scName = driver.findElements(screenName);
 			            										

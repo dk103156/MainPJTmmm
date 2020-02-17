@@ -8,37 +8,47 @@
 
 	<resultMap type="Theater" id="theaterSelectMap">
 		<result property="theaterNo" 	column="theater_no" 	jdbcType="VARCHAR" />
-		<result property="movieName" 	column="movie_Name" 	jdbcType="VARCHAR" /> 
-	<!-- 	<result property="movieNo" column="movie_no" jdbcType="VARCHAR" />  --> <!-- DB TABLE ALTER로 추가했는지 확인 -->
-		<result property="franchise" 	column="franchise" 		jdbcType="VARCHAR" />
-		<result property="theaterName"	column="theater_name"	jdbcType="VARCHAR" />
-		<result property="screenName" 	column="screen_name" 	jdbcType="VARCHAR" />
-		<result property="totalSeat" 	column="total_seat" 	jdbcType="INTEGER" />
+		<result property="franchise" 	column="franchise" 	    jdbcType="VARCHAR" /> 
+		<result property="theaterName" 	column="theater_name"   jdbcType="VARCHAR" />
+		<result property="theaterPhone"	column="theater_Phone"	jdbcType="VARCHAR" />
+		<result property="positionX" 	column="position_X" 	jdbcType="VARCHAR" />
+		<result property="positionY" 	column="position_Y" 	jdbcType="VARCHAR" />
+		<result property="address" 		column="address"		jdbcType="VARCHAR" />
+		<result property="roadAddress"  column="road_Address"   jdbcType="VARCHAR" />
+		<result property="placeUrl"     column="place_Url"      jdbcType="VARCHAR" />
+		<result property="id"			column="id"				jdbcType="VARCHAR" />
 	</resultMap>
 
 	<insert id="addTheater" parameterType="Theater">
 		INSERT into theater 
-		(theater_no, movie_Name, <!-- movie_no, --> franchise, theater_name, screen_name, total_seat)
+		(theater_no, franchise, theater_name, theater_Phone, 
+		position_X, position_Y, address, road_Address, place_Url ,id)
 		values 
 		(seq_theater_theater_no.NEXTVAL,
-		#{movieName:VARCHAR},
-	<!-- #{movieNo:INTEGER},  -->
 		#{franchise:VARCHAR},
 		#{theaterName:VARCHAR},
-		#{screenName:VARCHAR},
-		DEFAULT) <!-- 130좌석 -->
+		#{theaterPhone:VARCHAR},
+		#{positionX:VARCHAR},
+		#{positionY:VARCHAR},
+		#{address:VARCHAR},
+		#{roadAddress:VARCHAR},
+		#{placeUrl:VARCHAR},
+		#{id:VARCHAR})
 	</insert>
 	
 	<!-- trim태그 사이에 다른 절이 삽입되는경우에, 다른 태그도 Overrides동작을 같이 받는다.. -->
 	<update id="updateTheater" parameterType="Theater">
 		UPDATE Theater
 		<trim prefix="SET" suffixOverrides=",">
-			<if test="movieName !=null">movie_Name = #{movieName},</if>
-		<!-- <if test="movieNo !=null">movie_no = #{movieNo},</if>  -->
 			<if test="franchise !=null">franchise = #{franchise},</if>
 			<if test="theaterName !=null">theater_name = #{theaterName},</if>
-			<if test="screenName !=null">screen_name = #{screenName},</if>
-			<if test="totalSeat !=null">total_seat = #{totalSeat},</if>
+			<if test="theaterPhone !=null">theater_Phone = #{theaterPhone},</if>
+			<if test="positionX !=null">position_X = #{positionX},</if>
+			<if test="positionY !=null">position_Y = #{positionY},</if>
+			<if test="address !=null">address = #{address},</if>
+			<if test="roadAddress !=null">road_Address = #{roadAddress},</if>
+			<if test="placeUrl !=null">place_Url = #{placeUrl:VARCHAR},</if>
+			<if test="id !=null">id = #{id},</if>
 		</trim>
 			<where>
 				theater_no = #{theaterNo}
@@ -57,7 +67,14 @@
 		select
 		*
 		from theater 
-		WHERE theater_no = #{theaterNo}
+		WHERE 
+		<if test="theaterNo != null">
+		theater_no = #{theaterNo}
+		</if>
+		<if test="id != null">
+				WHERE id = #{id}
+		</if>		
+		
 	</select>
 	
 	<select id="lastTheater" resultType="String">
@@ -72,55 +89,11 @@
 		SELECT *
 		FROM theater
 		<if test="searchCondition != null">
-			<if test="searchCondition==0">
-					WHERE movie_Name like '%'||#{movieName}||'%'
+			<if test="franchise != null">
+					WHERE franchise = #{franchise}
 			</if>
-			
-			<if test="searchCondition==1">
-					WHERE franchise like '%'||#{franchise}||'%'
-			</if>
-			
-			<if test="searchCondition==2">
-					WHERE movie_Name like '%'||#{movieName}||'%' AND franchise like '%'||#{franchise}||'%'
-			</if>
-			
-			
 		</if>
 		order by theater_No
 	</select>
-	<!-- 	<include refid="back" />  -->		
-<!-- 			
-	<sql id="front">
-  		SELECT * FROM (		SELECT inner_table. * ,  ROWNUM AS row_seq  	FROM (	
-  	</sql>
-  	
-  	 <sql id="back">
-  					) inner_table
-		WHERE ROWNUM <![CDATA[ <= ]]> #{currentPage}*#{pageSize} ) 
-		WHERE row_seq BETWEEN ( (#{currentPage}-1)*#{pageSize}+1) AND (#{currentPage}*#{pageSize})
-  	</sql>
- -->  	  
-	<!-- 
-	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
-	  	SELECT COUNT(*)
-	  	FROM(			SELECT A.*, B.tran_status_code, B.tran_no
-		FROM product A, transaction B
-		WHERE A.prod_no=B.prod_no(+) and B.tran_status_code IS NOT NULL
-		<if test="searchCondition != null">
-			<if test="searchCondition==0">
-					and A.PROD_NO like '%'||#{searchKeyword}||'%'
-			</if>
-			
-			<if test="searchCondition==1">
-					and A.PROD_NAME like '%'||#{searchKeyword}||'%'
-			</if>
-			
-			<if test="searchCondition==2">
-					and A.price like '%'||#{searchKeyword}||'%'
-			</if>
-		</if>
-		order by A.PROD_NO ) 	
-	 </select>	
-	 -->
 
 </mapper>

@@ -156,7 +156,7 @@ $(function(){
 	$("a[href='#']:contains('회원정보수정')").on('click',function(){
 		var userNo = $('#userNo').val();
 		console.log(userNo);	
-		$("#plusPage").load("/user/getUser/"+userNo);
+		$("#plusPage").load("/user/getUser/");
 	})
 	
 	$("a[href='#']:contains('예매/구매내역')").on('click',function(){	
@@ -182,13 +182,13 @@ $(function(){
 						<ul>
 							<li><a href="#" title="회원정보수정">회원정보수정</a></li>
 							<li><a href="#" title="예매/구매내역">예매/구매내역</a></li>
-			                <li><a href="/mypage/movie-coupon" title="쿠폰/보관함/선물함">쿠폰/보관함/선물함</a></li>
-							<li><a href="/mypage/discount-coupon" title="포인트 내역">포인트 내역</a></li>
-							<li><a href="/mypage/point-list" 	title="내가 본 영화">내가 본 영화</a></li>
-							<li><a href="/mypage/moviestory" 	titel="한줄평/내 리뷰 조회">한줄평/내 리뷰 조회</a></li>
-							<li><a href="/mypage/myevent"		title="나의 이벤트 응모내역">나의 이벤트 응모내역</a></li>
-							<li><a href="/mypage/myinquiry"		title="나의 문의내역">나의 문의내역</a></li>
-							<li><a href="/mypage/mydiscount"	title="구매/구매취소내역">구매/구매취소내역</a></li>
+			                <li><a href="#" title="쿠폰/보관함/선물함">쿠폰/보관함/선물함</a></li>
+							<li><a href="#" title="포인트 내역">포인트 내역</a></li>
+							<li><a href="#" 	title="내가 본 영화">내가 본 영화</a></li>
+							<li><a href="#" 	titel="한줄평/내 리뷰 조회">한줄평/내 리뷰 조회</a></li>
+							<li><a href="#"		title="나의 이벤트 응모내역">나의 이벤트 응모내역</a></li>
+							<li><a href="#"		title="나의 문의내역">나의 문의내역</a></li>
+							<li><a href="#"	title="구매/구매취소내역">구매/구매취소내역</a></li>
 						</ul>
 					</nav>
 				</div>	
