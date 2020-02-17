@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="InvenMapper">
+ 	
+	<resultMap id="invenSelectMap" 		type="inven">
+		<result property="prodPinNo" 						column="PROD_PIN_NO" 			jdbcType="INTEGER"  />
+		<result property="issuedProdUser.userNo"			column="user_no" 				jdbcType="INTEGER"  />
+		<result property="ownerId" 							column="OWNER_ID" 				jdbcType="VARCHAR"/>
+		<result property="prodStatus" 						column="PROD_STATUS" 			jdbcType="INTEGER"  />
+		<result property="issuedDate" 						column="ISSUED_DATE" 			jdbcType="DATE"  />
+		<result property="usedDate" 						column="USED_DATE" 				jdbcType="DATE"  />
+		<result property="senderId" 						column="SENDER_ID" 				jdbcType="VARCHAR"  />
+		<result property="usedStatus" 						column="USED_STATUS" 			jdbcType="INTEGER"  />
+		<result property="issuedProdPurchase.prodNo" 		column="ISSUED_PROD_PURCHASE" 	jdbcType="INTEGER"  />
+		<result property="invenPrice" 						column="inven_price" 			jdbcType="INTEGER"  />
+		
+		<association property="product"  		javaType="product">
+			<id property="prodNo" 	 				column="prod_no" 			jdbcType="INTEGER"  />
+			<result property="prodName"			column="prod_name" 		jdbcType="VARCHAR"  />
+			<result property="prodDate" 			column="prod_date" 			jdbcType="DATE"/>
+			<result property="prodPrice" 			column="prod_price" 		jdbcType="INTEGER"  />
+			<result property="prodDetail" 		column="prod_detail" 		jdbcType="VARCHAR"  />
+			<result property="prodImage" 		column="prod_image" 		jdbcType="VARCHAR"  />
+			<result property="franType" 			column="fran_type" 			jdbcType="INTEGER"  />
+			<result property="prodType" 			column="prod_type" 			jdbcType="INTEGER"  />
+			<result property="quantity" 			column="quantity" 				jdbcType="INTEGER"  />
+		</association>
+		
+	</resultMap>
+	
+	
+	
+		<insert id="addInven"		parameterType= "inven" >
+		 	INSERT
+			INTO cart ( PROD_PIN_NO , ISSUED_PROD_USER , OWNER_ID  , PROD_STATUS , ISSUED_DATE , USED_DATE ,  SENDER_ID , USED_STATUS , ISSUED_PROD_PURCHASE  , inven_prod , inven_price ) 
+			VALUES	 (
+						seq_issued_prod_PROD_PIN_NO.NEXTVAL,
+						 #{issuedProdUser.userNo:INTEGER},
+						 #{ownerId:VARCHAR},
+									0,
+						   SYSTIMESTAMP,
+							       null,
+						 #{senderId:VARCHAR},    
+						 			0,
+						 #{issuedProdPurchase.prodNo:INTEGER},
+						 #{product.prodNo},
+						 #{invenPrice}
+					 )
+		 </insert>
+	
+		<insert id="addGiftInven"		parameterType= "inven" >
+		 	INSERT
+			INTO cart ( PROD_PIN_NO , ISSUED_PROD_USER , OWNER_ID  , PROD_STATUS , ISSUED_DATE , USED_DATE ,  SENDER_ID , USED_STATUS , ISSUED_PROD_PURCHASE  ) 
+			VALUES	 (
+						seq_issued_prod_PROD_PIN_NO.NEXTVAL,
+						 #{issuedProdUser.userNo:INTEGER},
+						 #{ownerId:VARCHAR},
+									1,
+						   SYSTIMESTAMP,
+							       null,
+						 #{senderId:VARCHAR},    
+						 			0,
+						 #{issuedProdPurchase.prodNo:INTEGER}
+					 )
+		 </insert>
+
+		<select id="getInven" parameterType="INTEGER"  resultMap="invenSelectMap" >
+	 	SELECT
+	 	*
+	 	FROM issued_prod	
+	 	WHERE PROD_PIN_NO = #{prodPinNo}
+	 </select>
+
+
+	<select id="getInvenList"	parameterType="inven"	resultMap="invenSelectMap" >
+		SELECT
+		*
+		FROM  issued_prod
+		ORDER BY issued_prod;
+	</select>
+	
+	<update id="updatePurchase" parameterType="INTEGER" >
+	 	UPDATE issued_prod
+	 	<set>
+			USED_STATUS = 1	 	
+	 	</set>
+	 	WHERE USED_STATUS = 0
+	 </update>
+	
+</mapper>
+
+ 
+ 
+ 
+ 
