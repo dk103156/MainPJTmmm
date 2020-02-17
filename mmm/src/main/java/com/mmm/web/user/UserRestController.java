@@ -44,6 +44,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmm.common.CryptoUtil;
 import com.mmm.common.MailUtils;
 import com.mmm.common.Search;
 import com.mmm.service.domain.User;
@@ -130,6 +131,33 @@ public class UserRestController {
 		return result;
 		
 	}
+	
+//	@RequestMapping(value = "json/updateUserStatus", method=RequestMethod.POST)
+//	public String updateUserStatus(@PathVariable("password")String password, HttpSession session) throws Exception{
+//		
+//		System.out.println("/json/updateUserStatus : POST");
+//		
+//		//Business Logic
+//		String password = user.getPassword();
+//		String cryptoPassword = CryptoUtil.cryptoText(password);
+//		user.setPassword(cryptoPassword);
+//		user.setUserId(user.getPhone());
+//		
+//		User sessionUser = ((User)session.getAttribute("user"));
+//		
+//		
+//		if(sessionUser.getPassword()) {
+//			userService.updateUserStatus(sessionUser);
+//			//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+//			return "redirect:/mypage/mypage.jsp";
+//		}
+//
+//		return "redirect:/user/login.jsp";
+//	}//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+//	
+//	
+	
+	
 	
 	@RequestMapping( value = "json/sendSMS/{phone}" )
 	public Map sendSMS(@PathVariable String phone, Model model, HttpSession session) throws Exception {
