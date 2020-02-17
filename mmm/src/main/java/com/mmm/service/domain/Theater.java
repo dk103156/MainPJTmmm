@@ -3,21 +3,18 @@ package com.mmm.service.domain;
 public class Theater {
 	
 	private String theaterNo;
-	private String movieName;
-	private String dateTimeNo;
 	private String franchise;
 	private String theaterName;
-	private String screenName;
-	private int totalSeat;
+	private String theaterPhone;
+	private String positionX;
+	private String positionY;
+	private String address;
+	private String roadAddress;
+	private String placeUrl;
+	private String id;
 	
 	public String getTheaterNo() {
 		return theaterNo;
-	}
-	public String getMovieName() {
-		return movieName;
-	}
-	public String getDateTimeNo() {
-		return dateTimeNo;
 	}
 	public String getFranchise() {
 		return franchise;
@@ -25,20 +22,29 @@ public class Theater {
 	public String getTheaterName() {
 		return theaterName;
 	}
-	public String getScreenName() {
-		return screenName;
+	public String getTheaterPhone() {
+		return theaterPhone;
 	}
-	public int getTotalSeat() {
-		return totalSeat;
+	public String getPositionX() {
+		return positionX;
+	}
+	public String getPositionY() {
+		return positionY;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public String getRoadAddress() {
+		return roadAddress;
+	}
+	public String getPlaceUrl() {
+		return placeUrl;
+	}
+	public String getId() {
+		return id;
 	}
 	public void setTheaterNo(String theaterNo) {
 		this.theaterNo = theaterNo;
-	}
-	public void setMovieName(String movieName) {
-		this.movieName = movieName;
-	}
-	public void setDateTimeNo(String dateTimeNo) {
-		this.dateTimeNo = dateTimeNo;
 	}
 	public void setFranchise(String franchise) {
 		this.franchise = franchise;
@@ -46,19 +52,38 @@ public class Theater {
 	public void setTheaterName(String theaterName) {
 		this.theaterName = theaterName;
 	}
-	public void setScreenName(String screenName) {
-		this.screenName = screenName;
+	public void setTheaterPhone(String theaterPhone) {
+		this.theaterPhone = theaterPhone;
 	}
-	public void setTotalSeat(int totalSeat) {
-		this.totalSeat = totalSeat;
+	public void setPositionX(String positionX) {
+		this.positionX = positionX;
 	}
+	public void setPositionY(String positionY) {
+		this.positionY = positionY;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public void setRoadAddress(String roadAddress) {
+		this.roadAddress = roadAddress;
+	}
+	public void setPlaceUrl(String placeUrl) {
+		this.placeUrl = placeUrl;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String toString() {
-		return "Theater [theaterNo=" + theaterNo + ", movieName=" + movieName + ", dateTimeNo=" + dateTimeNo
-				+ ", franchise=" + franchise + ", theaterName=" + theaterName + ", screenName=" + screenName
-				+ ", totalSeat=" + totalSeat + "]";
+		return "Theater [theaterNo=" + theaterNo + ", franchise=" + franchise + ", theaterName=" + theaterName
+				+ ", theaterPhone=" + theaterPhone + ", positionX=" + positionX + ", positionY=" + positionY
+				+ ", address=" + address + ", roadAddress=" + roadAddress + ", placeUrl=" + placeUrl + ", id=" + id
+				+ "]";
 	}
 	
 
+	
+	
 	
 }

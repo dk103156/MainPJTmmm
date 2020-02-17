@@ -155,7 +155,7 @@ tr, td {
 
 td.seat {
 	border-style : double;
-	background-color: #4B4F52;
+	background-color: #666;
     font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
     font-size: 10px;
     font-weight: normal;
@@ -243,12 +243,28 @@ tr:nth-child(11) td.seat{
 
 /* L라인(Sweet Box) 좌석 통로제외 */
 tr:nth-child(12) td.seat{
-	border-color : #da1b68;
+    background-color: #da1b68;
+    background-position: -100px 0;
+    background-image: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/seat_icons_20190221.png);
+    background-repeat: no-repeat;
+}
+
+tr:nth-child(12) td.seat.on{
+    background-color: #ad1712;
+    background-position: 0 0;
 }
 
 /* M라인(Sweet Box) 좌석 통로제외 */
 tr:nth-child(13) td.seat{
-	border-color : #da1b68;
+    background-color: #da1b68;
+    background-position: -100px 0;
+    background-image: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/seat_icons_20190221.png);
+    background-repeat: no-repeat;
+}
+
+tr:nth-child(13) td.seat.on{
+    background-color: #ad1712;
+    background-position: 0 0;
 }
 
 div.steps-header > div > p {
@@ -266,16 +282,16 @@ margin-top : 50px;
 }
 
 .icon-choose{
-
+margin-left: 1px;
+padding-right: 13px;
+padding-top: 1px;
 line-height: 1.5;
 box-sizing: border-box;
 width: 16px;
 height: 16px;
 vertical-align: middle;
 text-align: center;
-border: 1px;
-padding: 0px;
-border-style: double;
+border-style: none;
 font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
 font-size: 10px;
 font-weight: normal;
@@ -284,16 +300,16 @@ background-color: red;
 }
 
 .icon-impossible {
-
+margin-left: 1px;
+padding-right: 13px;
+padding-top: 1px;
 line-height: 1.5;
 box-sizing: border-box;
 width: 16px;
 height: 16px;
 vertical-align: middle;
 text-align: center;
-border: 1px;
-padding: 0px;
-border-style: double;
+border-style: none;
 font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
 font-size: 10px;
 font-weight: normal;
@@ -302,17 +318,18 @@ background-color : #bbb;
 
 }
 .icon-economy {
-
+margin-left: 1px;
+padding-right: 10px;
+padding-top: 0px;
 line-height: 1.5;
 box-sizing: border-box;
 width: 16px;
 height: 16px;
 vertical-align: middle;
 text-align: center;
-border: 1px;
-padding: 0px;
+border: 2px;
 border-style: double;
-background-color: #4B4F52;
+/* background-color: #4B4F52; */
 font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
 font-size: 10px;
 font-weight: normal;
@@ -322,17 +339,18 @@ border-color: #ed8c00;
 }
 
 .icon-standard{
-
+margin-left: 1px;
+padding-right: 10px;
+padding-top: 0px;
 line-height: 1.5;
 box-sizing: border-box;
 width: 16px;
 height: 16px;
 vertical-align: middle;
 text-align: center;
-border: 1px;
-padding: 0px;
+border: 2px;
 border-style: double;
-background-color: #4B4F52;
+/* background-color: #4B4F52; */
 font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
 font-size: 10px;
 font-weight: normal;
@@ -342,17 +360,18 @@ border-color: #01c73c;
 }
 
 .icon-prime{
-
+margin-left: 1px;
+padding-right: 10px;
+padding-top: 0px;
 line-height: 1.5;
 box-sizing: border-box;
 width: 16px;
 height: 16px;
 vertical-align: middle;
 text-align: center;
-border: 1px;
-padding: 0px;
+border: 2px;
 border-style: double;
-background-color: #4B4F52;
+/* background-color: #4B4F52; */
 font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
 font-size: 10px;
 font-weight: normal;
@@ -362,23 +381,27 @@ border-color: #0777D9;
 }
 
 .icon-sweetBox{
-
+border-bottom-width: 0px;
+border-left-width: 0px;
+border-top-width: 0px;
+border-right-width: 0px;
 line-height: 1.5;
 box-sizing: border-box;
-width: 16px;
-height: 16px;
-vertical-align: middle;
+width: 0px;
+height: 5px;
+vertical-align: text-top;
 text-align: center;
 border: 1px;
 padding: 0px;
-border-style: double;
-background-color: #4B4F52;
+background-position: -99px 3px;
+/* background-color: #da1b68; */
+background-image: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/step2/seat_icons_20190221.png);
+background-repeat: no-repeat;
 font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
 font-size: 10px;
 font-weight: normal;
 color: #fff;
-border-color: #da1b68;
-
+/* border-color: #da1b68; */
 }
 
 div.resetSelection {
@@ -760,16 +783,16 @@ cursor: pointer;
 			</div>
 			</div>
 			</div>
-			<div class="col-3">
-				 <table class="displayInfo" style="margin-top: 72px;">
-				 <tr><td class="icon-choose mt-2"></td><td style="text-align: left;">&nbsp;선택</td></tr>
-				 <tr><td class="icon-impossible mt-2"></td><td>&nbsp;예매 완료</td></tr>
-				  <tr><td></td></tr>
-				 <tr><td class="icon-economy mt-2">1</td><td>Economy</td></tr>
-				 <tr><td class="icon-standard mt-2">2</td><td>Standard</td></tr>
-				 <tr><td class="icon-prime mt-2">3</td><td style="text-align: left;">&nbsp;Prime</td></tr>
-				 <tr><td class="icon-sweetBox mt-2">4</td><td>&nbsp;SweetBox</td></tr>
-				 </table>
+			<div class="col-3" style="left: 69px; top: 69px;">
+				 <span class="displayInfo" style="margin-top: 72px;">
+					 <span><span class="icon-choose mt-2"></span><span style="text-align: left;">&nbsp;&nbsp;선택</span></span> <br/>
+					 <span><span class="icon-impossible mt-2"></span><span >&nbsp;&nbsp;예매 완료</span></span><br/>
+					 <br/>
+					 <span><span class="icon-economy mt-2"></span><span>&nbsp;&nbsp;Economy</span></span><br/>
+					 <span><span class="icon-standard mt-2"></span><span>&nbsp;&nbsp;Standard</span></span><br/>
+					 <span><span class="icon-prime mt-2"></span><span style="text-align: left;">&nbsp;&nbsp;Prime</span></span><br/>
+					 <span><span class="icon-sweetBox mt-2" style="padding-right: 19px; width: 26px; padding-bottom: 8px;"></span><span>&nbsp;SweetBox</span></span>
+				 </span>
 			</div>
 			</div>		
 			</div>
@@ -832,7 +855,7 @@ $(function(){
 	
 	$("div.resetSelection").on("click",function(){
 	
-		self.location="/ticketing/addTicketing?movieName=${dateTime.movieName}";
+		history.go(-1);
 	});
 });
 	/////////////////////////////////////////
@@ -1089,19 +1112,23 @@ $(function(){
 		progress = result;
 		// 총 인원수가 1이면 좌석을 한개만..
 		if(result==0){
+			$("body > div.container > div > div.mid > div").css("opacity", "0.4");
+			$("body > div.container > div > div.mid > div").css("pointer-events", "none");
 			$("td.seat").on("click",function(){
 				alert("인원수가 0명이라 선택이 불가능합니다");
 			});
 			console.log("선택 인원수는 0명입니다");
 			
 		}else if(result==1){
-
+			$("body > div.container > div > div.mid > div").css("opacity", "1");
+			$("body > div.container > div > div.mid > div").css("pointer-events", "");
 			console.log("인원수 1명입니다");
 			numberOne();	//마우스 온오버 
 			seatClickOne(result);	//클릭 이벤트
 			
 		}else if(result>=2){
-			
+			$("body > div.container > div > div.mid > div").css("opacity", "1");
+			$("body > div.container > div > div.mid > div").css("pointer-events", "");
 			console.log("인원수 "+result+"명입니다");
 			numberTwo(result);		//마우스 온오버
 			seatClickTwo(result);	//클릭 이벤트

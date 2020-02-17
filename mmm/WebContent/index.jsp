@@ -51,13 +51,12 @@ $(function(){
 <ul>
   <h3>1.Users</h3>	
 	<li> <a href="user/login">로그인 UI</a></li>
-	<li> <a href="user/login">로그인 UI</a></li>
-	<li> <a href="mypage/mypage">마이페이지 UI</a></li>
-	<li> <a href="user/login">로그인 UI</a></li>
+	<li> <a href="mypage/mypage.jsp">마이페이지 UI</a></li>
+
 </ul>
 <ul>
  <h3>2.Product</h3>	
-	<li> <a href="product/getProductMainList">상품 목록 UI</a></li>
+	<li> <a href="product/getVoucherList">상품 목록 UI</a></li>
 </ul>
 
 <ul>
@@ -85,7 +84,10 @@ $(function(){
 <h3>7.purchase</h3>	
 	<li> <a href="purchase/getPurchaseList">구매내역 (관리자)</a></li>
 </ul>
-
+<ul>
+  <h3>7.customer</h3>	
+	<li> <a href="customer/getContactList">일대일문의 목록조회</a></li>
+</ul>
 	
 </body>
 </html>

@@ -108,7 +108,7 @@ public class MovieDaoImpl implements MovieDao {
 			genreList.add(user.getLikeGenre3());
 		}
 		
-		System.out.println("--------------------- genreList : "+genreList);
+		System.out.println("--------------------- user's genreList : "+genreList);
 		System.out.println("--------------------- genreList SIZE : "+genreList.size());
 		
 		Map<String, Object> inputMap = new HashMap<String, Object>();

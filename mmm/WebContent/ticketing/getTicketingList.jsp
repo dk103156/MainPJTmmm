@@ -105,6 +105,7 @@ div.ticketingBody div div.ticketingTitle.row div.col-6 {
 									    		</c:if>
 												<c:if test="${ i.ticketingStatus==1 }">
 									    			<span class="contentStatus">예매취소</span>
+									    			<span class="contentCancel">취소일시 : ${cancelDate} (${cancelDay}) ${cancelHM}</span>
 									    		</c:if>									    		
 									    	</div>
 									    	<div class="afterButton col-3">
@@ -252,7 +253,7 @@ $(function(){
 	
 	//기본 화면일때 img추가 하기
 	<c:forEach var="i" items="${ticketingList }" varStatus="status">
-		ajaxPromise("json/getDateTime/"+${i.dateTimeNo}).then(
+		ajaxPromise("/ticketing/json/getDateTime/"+${i.dateTimeNo}).then(
 			data => {
 				$($("span.contentImage img")[${status.index}]).attr("src",data.poster);
 			}
@@ -266,13 +267,13 @@ $(function(){
 			
 			var ticketingNo = $(this).find("span.contentPinNo").text().substring(6);
 			
-			ajaxPromise("json/getTicket/"+ticketingNo).then(
+			ajaxPromise("/ticketing/json/getTicket/"+ticketingNo).then(
 					data => {
 						//예매번호 왼쪽상단
 						$("div.modal-header h5.ticketingNo kbd").text("예매번호 : "+data.ticketingNo);
 						
 						//영화 포스터 
-						ajaxPromise("json/getDateTime/"+data.dateTimeNo).then(
+						ajaxPromise("/ticketing/json/getDateTime/"+data.dateTimeNo).then(
 								data => {
 									console.log(data)
 									$("div.movieImage img").attr("src",data.poster);
@@ -634,15 +635,13 @@ $(function(){
 		);//end of then		
 	});//end of eventHandler
 	
-	
-
-
-});//end of function
+});  
 
 function Pagination(currentPage) {
 	
 	$("#currentPage").val(currentPage)
-	$("form").attr("method","POST").attr("action", "/ticketing/getTicketingList").submit();
+	//$("form").attr("method","POST").attr("action", "/ticketing/getTicketingList").submit();
+	$("#plusPage").load("/ticketing/getTicketingList",$("#currentPage").serialize());
 	
 }
 

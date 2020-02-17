@@ -127,6 +127,11 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	@Override
+	public Article getReply(int articleNo) throws Exception {
+		return boardDao.getReply(articleNo);
+	}
+
 
 //	private String saveFile(MultipartFile file) {
 //		

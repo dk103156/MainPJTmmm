@@ -56,7 +56,7 @@
 	  
 	  /* 바탕색 */
 	  .steps-body {
-	  	height : 464px;
+	  	height : 583px;
 	    background-color: #f2f0e4;
 	  }
 	  
@@ -135,14 +135,14 @@
 	  }
 	  
 	  
-	  li.off {
-	  	
+	  li.off {	  	
 	  	pointer-events   : none;
 	  	opacity : 0.3;
 	  }
 	  
 	  
 	  .list-group{
+	    cursor: pointer;
 	    line-height: 33px;
 	  }	  
 	  
@@ -192,7 +192,7 @@
 	  
 	   /* (영화 선택) 스크롤바 CSS  */
 	   div.steps > div > div.col-3.px-0.h-100 > div.steps-body > div > div.movie-list.text-md-left > ul	{
-	   		height: 464px;
+	   		height: 524px;
 	   		overflow: auto;
 	   }  
 	   
@@ -213,17 +213,23 @@
 	  /* 2020-02-14 조조, 심야*/
 	  span.timeMorning {
 	  	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-    		background-position: 0px 1px
+    		background-position: 14px 1px;
+		    padding-right: 33px; 
+		    border-left-width: 0px;
+		    padding-left: 33px;
 	  }
 	  
 	  span.timeNight {
 	 		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-   			background-position: 3px -20px;
-	  }
+   			background-position: 19px -20px;
+		    padding-right: 33px;
+		    border-left-width: 0px;
+		    padding-left: 33px;
+	  } 
 	  
 	  ul.theaterList {
 	  		overflow : auto;
-	  		height : 410px;
+	  		height : 393px;
 	  }
 	  
 	  ul.theaterList::-webkit-scrollbar {
@@ -235,7 +241,7 @@
 	    border-radius: 10px;	  
 	  }
 	  
-	  ul.theaeterList::-webkit-scrollbar-track {
+	  ul.theaterList::-webkit-scrollbar-track {
 	    background-color: grey;
 	    border-radius: 10px;
 	    box-shadow: inset 0px 0px 5px white;	  
@@ -247,21 +253,21 @@
 	  }
 	  
 	  div.franchise-list.cgv > ul > li.cgv > img {
-  		position: relative;
-   		top: 4px;
-   		left: 22px;
-	  }
-	  
+		position: absolute;
+		top: -12px;
+		left: 16px;
+	  }	
+	  	  
 	  div.franchise-list.lotte > ul > li.lotte > img {
-  		position: relative;
-   		top: 2px;
-   		left: 22px;
+	    position: absolute;
+	    top: -11px;
+	    left: 11px;
 	  }
 	  
 	  div.franchise-list.megaBox > ul > li.megaBox > img {
-  		position: relative;
-   		top: 2px;
-   		left: 22px;
+	    position: absolute;
+	    top: 3px;
+	    left: 11px;
 	  }
 	  
 	  div.remainingSeat > div > div > ul > li {
@@ -271,7 +277,7 @@
 	  
 	  div.remainingSeat > div > div > ul {
 	  	overflow : auto;
-	  	height : 384px;
+	  	height : 336px;
 	  }
 	  
 	  div.remainingSeat > div > div > ul::-webkit-scrollbar {
@@ -289,9 +295,13 @@
 	    box-shadow: inset 0px 0px 5px white;	  	
 	  }
 	  
+	  div.steps-body > div > div > div:nth-child(6) > div.theater-list.lotte.col-4 > ul::-webkit-scrollbar {
+	  	width: 7px;
+	  }
+	  
 	  /* 남은 좌석 수 색깔 */
 	  div.remainingSeat > div > div > ul > li > span.seatcount {
-	  	color : green;
+	  	color : #45c245;
 	  }
 	  
 	  /* 클릭했을 시 색 변화 */
@@ -302,7 +312,32 @@
 	  .list-group-item.active a span {
 	  	color : white
 	  }
-
+	  
+	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div.row.mx-0 > div.franchise-list.lotte.col-4.mx-0 > ul > li{
+	  	background-color : white !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  
+	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div.row.mx-0 > div.franchise-list.cgv.col-4.mx-0 > ul > li {
+	  	background-color : white !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  
+	  body > div.container > div > div.steps > div > div.col-6.px-1.h-100 > div.steps-body > div > div > div.row.mx-0 > div.franchise-list.megaBox.col-4.mx-0 > ul > li {
+	  	background-color : white !important; 
+	  	border : 1px solid #5c5c5c !important;
+	  }
+	  body > div.container > div > div.steps > div > div.col-1.pl-0.pr-1.h-100 > div.steps-body.text-center > div > ul > li.month > div > span.month{
+		display: block;
+	    margin-top: -6px;
+	    text-align: center;
+	    color: #666;
+	    font-size: 30px;
+	    font-family: Verdana;
+	    font-weight: bold;
+	    line-height: 30px;
+	 }
+	 
 </style>
 
 <script>
@@ -312,7 +347,7 @@ $(function(){
 		
 	});
 	
-
+  /* 영화 예매 버튼 통해서 들어오면 클릭*/
 	$("div.steps-body > div > div.movie-list > ul > li").each(function(index, item){ 
 		//console.log( $(item).attr('title') );
 		//console.log('${movieName}');
@@ -430,17 +465,17 @@ $(function(){
                         <div class="row mx-0">
                           <div class="franchise-list cgv col-4 mx-0">
                            <ul class="list-group cgv">
-                           		<li class="list-group-item cgv"><span>CGV</span><img class="firstHeaderImage" src="../resources/image/logo/CGV.png" alt="" width="30"></li>
+                           		<li class="list-group-item cgv text-center"><span>CGV</span><img class="firstHeaderImage" src="../resources/image/logo/CGV.png" alt="" width="30" style="width: 97px; height: 73px; left: 34px;"></li>
 						    </ul>
                           </div>
                           <div class="franchise-list lotte col-4 mx-0">
                             <ul class="list-group lotte">
-                            		<li class="list-group-item lotte"><span>롯데시네마</span><img class="firstHeaderImage" src="../resources/image/logo/LotteCinema.png" alt="" width="30" ></li>
+                            		<li class="list-group-item lotte text-center"><span>롯데시네마</span><img class="firstHeaderImage" src="../resources/image/logo/LotteCinema.png" alt="" width="30" style="width: 103px; height: 77px; left: 25px;"></li>
                             </ul>
                           </div>
                           <div class="franchise-list megaBox col-4 mx-0">
                             <ul class="list-group megaBox">
-                            		<li class="list-group-item megaBox"><span>메가박스</span><img class="firstHeaderImage" src="../resources/image/logo/MegaBox.png" alt="" width="30" ></li>
+                            		<li class="list-group-item megaBox text-center"><span>메가박스</span><img class="firstHeaderImage" src="../resources/image/logo/MegaBox.jpg" alt="" width="30" style="width: 88px; height: 52px; left: 34px;"></li>
                             </ul>
                           </div>                          
                         </div><!-- end of row -->
@@ -477,7 +512,7 @@ $(function(){
 	                      <fmt:formatDate var="Year" value="${i }" pattern="yyyy"/>
 	                      <fmt:formatDate var="Month" value="${i }" pattern="MM"/>
 		                      <li class="month">
-		                      	<div>
+		                      	<div style="margin-bottom: 10px;">
 		                      		<span class="year">${Year }</span>
 		                      		<span class="month">${Month }</span>
 		                      	</div>
@@ -495,7 +530,7 @@ $(function(){
               </div>
               <div class="steps-body text-center">
                   <div class="row">
-                   	 <div class="col-12">
+                   	 <div class="col-12" style="top: 0px;">
                           <div class="sortmenu">
                             <span class="morning">조조</span>
                             <span class="night">심야</span>
@@ -504,10 +539,12 @@ $(function(){
 
 
                           <div class="remainingSeat">
-                            	<div class="seat">
+                            	<div class="seat" style="margin-top: -14px;">
                             	                          		
                             	</div>
                           </div>
+                          
+                          <div class="placeholder" style="margin-top: 190px;">영화, 극장, 날짜를 <br><br>선택해주세요.</div>
            </div><!-- end of col -->
            </div><!-- end of row -->
           </div><!-- end of steps-body -->
@@ -602,7 +639,7 @@ function formatDates(x){
  //프랜차이즈 선택 관련
 function franchiseSelect(){
  $("div.franchise-list > ul > li.list-group-item").on("click",function(){
-	 
+	 theaterCheck=""; // 2020-02-15 , 영화관 체크하고 나서 프랜차이즈 변경 시 극장명 유지 방지
 	 $("div.franchise-list > ul > li.list-group-item").removeClass("active");
 	 
 	 $(this).addClass("active");
@@ -646,7 +683,7 @@ function theaterSelect(element){
 	    	  if(element.text()=='CGV'){
 		    	  for( var i in result){ 
 		    		  //console.log(result[i].theaterName)
-	   		    	  $("div.theater-list > ul.cgv").append("<li class='list-group-item cgv'>"+result[i].theaterName+"</li>")
+	   		    	  $("div.theater-list > ul.cgv").append("<li class='list-group-item cgv' title='"+result[i].theaterName+"'>"+result[i].theaterName+"</li>")
 	   		    	  
 		  		  }//end of for	   		    	  
 		  		  
@@ -689,7 +726,7 @@ function theaterSelect(element){
    		      }else if(element.text()=='롯데시네마'){
 		    	  for( var i in result){ 
 		    		  //console.log(result[i].theaterName)
-	   		    	  $("div.theater-list > ul.lotte").append("<li class='list-group-item lotte'>"+result[i].theaterName+"</li>")
+	   		    	  $("div.theater-list > ul.lotte").append("<li class='list-group-item lotte' title='"+result[i].theaterName+"'>"+result[i].theaterName+"</li>")
 		    	  }//end of for 
 		  			  $("div.theater-list > ul > li.list-group-item.lotte").on("click",function(){
 		  		 
@@ -730,7 +767,7 @@ function theaterSelect(element){
 	     	 }else if(element.text()=='메가박스'){
 		    	  for( var i in result){ 
 		    		  //console.log(result[i].theaterName)
-	   		    	  $("div.theater-list > ul.megaBox").append("<li class='list-group-item megaBox'>"+result[i].theaterName+"</li>")
+	   		    	  $("div.theater-list > ul.megaBox").append("<li class='list-group-item megaBox' title='"+result[i].theaterName+"'>"+result[i].theaterName+"</li>")
 		    	  }//end of for
 		  			  $("div.theater-list > ul > li.list-group-item.megaBox").on("click",function(){
 		  		 
@@ -1284,7 +1321,7 @@ function check(){
 	 
 	 //모두 선택됐다면..
 	 if( movieName==true && franchise==true && theaterName==true && screenTime == true){
-		 
+		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "none");
    	 $.ajax({
    		  type: "POST",
    		  url: "/ticketing/json/getTimeList",
@@ -1310,7 +1347,7 @@ function check(){
 		    	  }
 		    	  //1관 .. 2관 Element 추가 
 		    	  for( var i in screenArray){
-		    		  var str ="<div><span class='screen'>"+$.trim(screenArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
+		    		  var str ="<div><div style='padding-bottom: 5px;'><span class='screen'>"+$.trim(screenArray[i])+" (총 130석)</span></div><ul class=list-group></ul></div>"
 		    		  $("div > div.remainingSeat > div").append(str);
 		    	  }
 		    	  
@@ -1336,12 +1373,10 @@ function check(){
 		     		   //조조라면..
 		     		   if(parseInt(item.innerText.substring(0,2))<11){
 		     			   $(item).addClass('timeMorning')
-		     			   $(item).addClass('pl-3')
 		     		   }
 		     		   
 		     		   if(parseInt(item.innerText.substring(0,2))>=23){
 		     			   $(item).addClass('timeNight')
-		     			    $(item).addClass('pl-3')
 		     		   }
 		     			   
 		     		   //심야라면...	   
@@ -1387,7 +1422,7 @@ function getMovieList(franchiseCheck,theaterCheck,dateCheck){
 		datas = JSON.stringify({
 			 	franchise : franchiseCheck,		  
 		 		 })
-				 		 
+		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");			 		 
 	}else if(franchiseCheck.length!=0 && theaterCheck.length!=0 && dateCheck.length==0){ //프랜차이즈, 극장 클릭했을 경우,
 		datas = JSON.stringify({
 			franchise : franchiseCheck,	
@@ -1408,6 +1443,7 @@ function getMovieList(franchiseCheck,theaterCheck,dateCheck){
 			theaterName : theaterCheck,
 			screenDate : dateCheck,  
 		 		 })
+		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");		
 	}else if(franchiseCheck.length==0 && theaterCheck.length==0 && dateCheck.length==0){
 		return null;
 	}
