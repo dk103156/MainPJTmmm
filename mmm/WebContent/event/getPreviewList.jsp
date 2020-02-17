@@ -17,12 +17,26 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 <script type="text/javascript">
+		
+		
+		function Pagination(currentPage) {
+			$("#currentPage").val(currentPage);
+			console.log($("#currentPage").val());
+			$("form").attr("method","POST").attr("action", "/event/getPreviewList").submit();
+		}	
+		
 
 		$(function(){
 			
+			$("select#order").on("change", function(){
+			var order = $("#order").val();
+			alert(order);
+				Pagination(1);		
+				});
+			
 			$('div[name="thumbImage"]').on('click',function(){
 				console.log('thumbImage클릭')
-				var previewNo = $(this).parent().find("#pn").val();
+				var previewNo = $(this).parent().find("input[name='pn']").val();
 				alert(previewNo)
 				self.location = "/event/getPreview?previewNo="+previewNo;
 				
@@ -181,12 +195,21 @@
 
 
 <div class="container">
+					 <form>
  		<br>
 		<div class="page-header text-secondary">
 	       <h3>시사회 응모 이벤트</h3><hr>
 	       <br>
 	    </div>
-	 	
+	    
+	 	<div class="form-group">
+				    <select class="form-control" name="previewFlag" id="order">
+						<option value="0" ${ ! empty search.previewFlag && search.previewFlag==0 ? "selected" : "" }>정렬</option>
+						<option value="1" ${ ! empty search.previewFlag && search.previewFlag==1 ? "selected" : "" }>진행중</option>
+						<option value="2" ${ ! empty search.previewFlag && search.previewFlag==2 ? "selected" : "" }>마감</option>
+					</select>
+				  </div>
+			   	
 	 	<div class="row">
 	    	
 		<c:set var="i" value="0" />
@@ -206,7 +229,7 @@
 		        	${preview.previewPlace}<br>
 		        	${preview.preDate}
 		        	${preview.previewTime}
-		     <input type="hidden" id="pn" value="${preview.previewNo}">
+		     <input type="hidden" name="pn" value="${preview.previewNo}">
 		        	</div>
 		        </div>
 		 	</figure>
@@ -219,7 +242,56 @@
 		   </c:forEach>
 		</div>
 	    
-	    
+	    <div class="ticketingPagination row">
+			  		<div class="col-4"></div>
+			  		<div class="col-4">
+					  <ul class="pagination">
+		   				 <!--  <<== 좌측 nav -->
+		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
+		  					    <li class="page-item disabled">
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+   								 </li>
+		  				</c:if>
+		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
+					   		<li class="page-item">
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
+   							</li>
+						</c:if>
+						
+					    <!--  중앙  -->
+						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
+							<c:if test="${ resultPage.currentPage == i }">
+								<!--  현재 page 가르킬경우 : active -->
+							    <li class="page-item active" aria-current="page">
+      								<a class="page-link" href="javascript:Pagination('${ i }')">${ i }<span class="sr-only">(current)</span></a>
+   								 </li>
+							</c:if>	
+							
+							<c:if test="${ resultPage.currentPage != i}">	
+								<li class="page-item">
+									<a class="page-link" href="javascript:Pagination('${ i }')">${ i }</a>
+								</li>
+							</c:if>
+						</c:forEach>
+					     <!--  우측 nav==>> -->
+					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
+					    	<li class="page-item disabled">
+					    		<a class="page-link" href="#">Next</a>
+    						</li>
+					      </c:if>
+					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
+					      	    <li class="page-item">
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
+    							</li>
+						 </c:if>	
+					  </ul><!-- end of pagination -->
+					 </div><!-- end of middle col --> 
+					 <div class="col-4"></div>
+					 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
+					 	
+			  </div><!-- end of ticketingPagination -->
+					 	</form>
+			  
 	    
  </div>
 </body>

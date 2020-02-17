@@ -17,7 +17,15 @@ public class Quiz {
 	private int answer; //정답 (1번:1, 2번:2 ...)
 	private Timestamp quizDate; //퀴즈 등록 일시
 	private String qDate;
+	private int partFlag;
 	
+	
+	public int getPartFlag() {
+		return partFlag;
+	}
+	public void setPartFlag(int partFlag) {
+		this.partFlag = partFlag;
+	}
 	public String getqDate() {
 		return qDate;
 	}
@@ -27,6 +35,7 @@ public class Quiz {
 
 
 	private int quizFlag; //퀴즈 상태 (0:진행중 1:마감) 
+	
 	private int earningPoint; //정답을 맞혔을 시 적립될 포인트 
 	public int getQuizNo() {
 		return quizNo;
@@ -122,16 +131,46 @@ public class Quiz {
 	public void setQuizEdDate(String quizEdDate) {
 		this.quizEdDate = quizEdDate;
 	}
-	
-	
 	@Override
 	public String toString() {
-		return "Quiz [quizNo=" + quizNo + ", question=" + question + ", optionFirst=" + optionFirst + ", optionSecond="
-				+ optionSecond + ", optionThird=" + optionThird + ", optionFourth=" + optionFourth + ", quizStartDate="
-				+ quizStartDate + ", quizStDate=" + quizStDate + ", quizEndDate=" + quizEndDate + ", quizEdDate="
-				+ quizEdDate + ", answer=" + answer + ", quizDate=" + quizDate + ", quizFlag=" + quizFlag
-				+ ", earningPoint=" + earningPoint + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Quiz [quizNo=");
+		builder.append(quizNo);
+		builder.append(", question=");
+		builder.append(question);
+		builder.append(", optionFirst=");
+		builder.append(optionFirst);
+		builder.append(", optionSecond=");
+		builder.append(optionSecond);
+		builder.append(", optionThird=");
+		builder.append(optionThird);
+		builder.append(", optionFourth=");
+		builder.append(optionFourth);
+		builder.append(", quizStartDate=");
+		builder.append(quizStartDate);
+		builder.append(", quizStDate=");
+		builder.append(quizStDate);
+		builder.append(", quizEndDate=");
+		builder.append(quizEndDate);
+		builder.append(", quizEdDate=");
+		builder.append(quizEdDate);
+		builder.append(", answer=");
+		builder.append(answer);
+		builder.append(", quizDate=");
+		builder.append(quizDate);
+		builder.append(", qDate=");
+		builder.append(qDate);
+		builder.append(", partFlag=");
+		builder.append(partFlag);
+		builder.append(", quizFlag=");
+		builder.append(quizFlag);
+		builder.append(", earningPoint=");
+		builder.append(earningPoint);
+		builder.append("]");
+		return builder.toString();
 	}
+	
+	
 
 	
 	

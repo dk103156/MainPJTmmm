@@ -45,6 +45,7 @@
 				return;
 			}
 			
+			
 			var previewNo = ${preview.previewNo};
 			self.location="/event/addPartPrev?previewNo="+previewNo;
 		});

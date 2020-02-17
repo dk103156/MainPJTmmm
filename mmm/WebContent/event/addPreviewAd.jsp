@@ -88,7 +88,7 @@
 		$(function(){
 			
 			$('#regBtn').on("click", function(){
-				alert('눌렸어!!!!!!!!!!!!!!!!!!!!!!!');
+		
 				fncAddPreview();
 			});
 			
@@ -140,8 +140,8 @@
  	<div class="row">
  	
 			<div class="col-sm-4">		
-				<label for="title">시사회이미지</label>
-				<input type="file"  name="previewImage" >
+				<label>시사회이미지</label>
+				<input type="file" id="" name="previewImage" >
 			</div>
 			
 			<div class="col-sm-8">

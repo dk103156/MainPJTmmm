@@ -246,7 +246,17 @@ public class EventDaoImpl implements EventDao {
 	@Override
 	public void updateQuizFlag(Map<String, Object> map) throws Exception {
 		sqlSession.update("EventMapper.updateQuizFlag", map);
+	}
+
+	@Override
+	public List<Preview> getRandList() throws Exception {
+		return sqlSession.selectList("EventMapper.getRandList");
+	}
+
+	@Override
+	public void updatePrevStatus(int previewNo) throws Exception {
 		
+		sqlSession.update("EventMapper.updatePrevStatus", previewNo);
 	}
 
 

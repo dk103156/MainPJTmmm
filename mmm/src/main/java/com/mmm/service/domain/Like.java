@@ -8,7 +8,17 @@ public class Like {
 	private int commentNo;
 //	private int onelineNo; //필요없어..
 	private String likeDate;
+	private int userNo;
 	
+	
+	
+	
+	public int getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 	public int getLikeNo() {
 		return likeNo;
 	}

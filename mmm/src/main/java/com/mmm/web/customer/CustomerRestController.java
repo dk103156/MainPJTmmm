@@ -103,7 +103,22 @@ public class CustomerRestController {
 		map.put("search", search);
 		
 		return map;
+	}
+	
+	@RequestMapping(value="json/getAsk", method=RequestMethod.POST)
+	public Map<String,Object> getAsk(@RequestBody Map<String, Object> map, HttpSession session) throws Exception {
 		
+		System.out.println("customer/json/getAsk");
+		User user = (User)session.getAttribute("user");
+		
+		int articleNo = Integer.parseInt((String)map.get("articleNo"));
+		System.out.println("restController에서의 articleNo====>>>>>"+articleNo);
+		Article article = boardService.getArticle(articleNo);
+		System.out.println("restController에서의 article====>>>>>"+article);
+		
+		
+		map.put("article", article);
+		return map;
 		
 	}
 }

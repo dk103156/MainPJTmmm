@@ -26,7 +26,12 @@
 			console.log('응모하기버튼눌렀어요')
 			console.log('userNo  : '+ $("#un").val());
 			console.log('previewNo  : '+ $("#pn").val());
-			
+			if($("#un").val()==0){
+				return;
+			}
+			if($("#pn").val()==null){
+				return;
+			}
 			
 			$.ajax({
 				

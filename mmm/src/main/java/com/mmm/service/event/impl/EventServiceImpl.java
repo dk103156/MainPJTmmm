@@ -187,5 +187,19 @@ public class EventServiceImpl implements EventService {
 	}
 
 
+	@Override
+	public List<Preview> getPrepareRand() throws Exception {
+		
+		List<Preview> list = eventDao.getRandList();
+		
+		for(Preview p : list) {
+			System.out.println(p.getPreviewNo());
+			eventDao.updatePrevStatus(p.getPreviewNo()); 
+		}
+		
+		return list;
+	}
+
+
 
 }
