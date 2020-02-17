@@ -670,7 +670,7 @@ $(function(){
 		var password= $("#password").val();
 		
 		$.ajax({
-			url : '/user/json/emailCheckDupl/',
+			url : '/user/json/updateUserStatus/',
 			method : "post" ,
 			datatype : "json" ,
 			headers : {
@@ -678,19 +678,20 @@ $(function(){
 				"Content-Type" : "application/json"
 			} ,
 			data : JSON.stringify({
-				email : email
+				password : password
 			}), 
 			success : function(data) {
-				console.log("false = 중복o / true = 중복x : "+ data);							
+				console.log("false = pw 일치 X / true = pw 일치 : "+ data);							
 				
 				if (data == 0) {
-						// 0 : 이메일이 중복되는 문구
-						$("#confirmNum3").text("등록된 이메일입니다 :p");
-						$("#confirmNum3").css("color", "red");
-						$("#sendBtn").attr("disabled", true);
+						// 0 : 비밀번호가 다름
+						$("#passwordChk").text("비밀번호를 확인해주세요.");
+						$("#passwordChk").css("color", "red");
+						$("#byeconfirmBtn").attr("disabled", true);
 				}else{
-					$("#confirmNum3").text("");
-					$("#sendBtn").attr("disabled", false);
+					$("#passwordChk").text("");
+					alert("정말 탈퇴 하실?")
+					$("#byeconfirmBtn").attr("disabled", false);
 				} 
 			}, error : function() {
 					console.log("실패");
@@ -767,6 +768,8 @@ $(function(){
 								        	해볼테면 해보슈<br/><br/>
 								        	비밀번호
 								        <input type="password" name="password" id="password">	
+								        <input type="hidden" name="password" id="password" value="${user.">	
+								        <h6 id="passwordChk" style="color: red;"></h6>
 								      </div>
 								      <div class="modal-footer">
 								        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>

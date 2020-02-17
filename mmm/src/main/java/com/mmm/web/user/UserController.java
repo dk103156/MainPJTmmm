@@ -90,9 +90,11 @@ public class UserController {
 	
 	
 	@RequestMapping(value ="addUser", method = RequestMethod.GET)
-	public String addUser() throws Exception{
+	public String addUser(Model model) throws Exception{
 		
 		System.out.println("/user/addUser : GET ");
+		
+		model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			
 		return "redirect:/user/addUser.jsp";
 	}

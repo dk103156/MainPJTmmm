@@ -247,8 +247,12 @@ $(function(){
 						$("#confirmNum2").text("인증이 완료되었습니다.");
 						$("#chkBtn").attr("disabled", false);
 						
-						if(type=="addUser"||type=="addUnUserView" ){
+						if(type=="addUser"){
+							self.location= "/user/addUser";
+						
+						} else if(type=="addUnUserView" ){
 							self.location= "/user/addUnUserView";
+							
 						}else{
 							nextPage(phone, "phone");
 						}
@@ -338,8 +342,12 @@ $(function(){
 						$("#confirmNum2").text("인증이 완료되었습니다.");
 						$("#chkBtn2").attr("disabled", false);
 						
-						if(type=="addUser"||type=="addUnUserView" ){
+						if(type=="addUser"){
+							self.location= "/user/addUser";
+						
+						} else if(type=="addUnUserView" ){
 							self.location= "/user/addUnUserView";
+							
 						}else{
 							nextPage(email, "email");
 						}
