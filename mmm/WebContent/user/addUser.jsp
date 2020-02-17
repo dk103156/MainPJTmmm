@@ -370,22 +370,25 @@ $(function(){
 				<label for="likeTheater1" class="col-sm-2 col-form-label">자주가는 극장</label>
     			<div class="col-sm-2">
 					<select class="form-control" id="likeTheater1" name="likeTheater1">
+							<option selected>극장선택</option>
 						<c:forEach var="i" items="${getTheaterList}">
-			   				<option>${i.theaterName}</option>
+			   				<option value="${i.theaterName}">${i.theaterName}</option>
 						</c:forEach>
 					</select>
 				</div>
 				<div class="col-sm-2">
 					<select class="form-control" id="likeTheater2" name="likeTheater2">
+							<option selected>극장선택</option>
 						<c:forEach var="i" items="${getTheaterList}">
-			   				<option>${i.theaterName}</option>
+			   				<option value="${i.theaterName}">${i.theaterName}</option>
 						</c:forEach>
 					</select>
 				</div>
 				<div class="col-sm-2">
 					<select class="form-control" id="likeTheater3" name="likeTheater3">
+							<option selected>극장선택</option>
 						<c:forEach var="i" items="${getTheaterList}">
-			   				<option>${i.theaterName}</option>
+			   				<option value="${i.theaterName}">${i.theaterName}</option>
 						</c:forEach>
 					</select>
 				</div>
@@ -410,13 +413,12 @@ $(function(){
 	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
 	
-	<div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-xl" id="outerMotdal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
      		<div id="map" style="width:1138px;height:762px;"></div>
 	<script>
-		
-		  
+	
 	/* 맵에 현재 위치 찍기 */
 	if(navigator.geolocation) {
            
@@ -454,6 +456,8 @@ $(function(){
 		}); 
 		// 지도에 마커를 표시합니다
 		marker.setMap(map);
+		
+
 		
 		var cgvLogo ="../resources/image/kakaoMapIcon/CGV.png";
 		var lotteLogo ="../resources/image/kakaoMapIcon/lotte.png";
@@ -534,6 +538,7 @@ $(function(){
 		// 맵에 클릭 이벤트 추가
 		// 지도를 클릭하면 선 그리기가 시작됩니다 그려진 선이 있으면 지우고 다시 그립니다
 		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+			map.relayout();
 			markerArray.forEach(
 				marker => {marker.setMap(null);}		
 			)//end of forEach
@@ -797,38 +802,44 @@ $(function(){
 		
 			
 			$("#addTheater").on("click",function(){
-				console.log("작동은 하는데 말이야 테스트가 필요해")
 				var theaterName = $("#myModalTitle").text();
-				
-				if( $("#likeTheater1 option:selected").val() == null){
+				if( $("#likeTheater1 option:selected").val() == "극장선택"){
+					alert("첫번째 선호극장이 선택되었습니다.")
+					$("#likeTheater1 option:selected").removeAttr("selected");
 					$("#likeTheater1 option").each(
 						option => {
-							if( $(option).text()==theaterName ){
-								$(option).attr("selected",true);
-								alert("첫번째 선호극장이 선택되었습니다.")
+							if( $("#likeTheater1 option")[option].innerText==theaterName ){
+								$($("#likeTheater1 option")[option]).attr("selected",true);
+								
 							}
 						}//end of option		
 					)//end of each
-				}else if( $("#likeTheater2 option:selected").val() == null){
-					$("#likeTheater2 option").each(
+				}else if( $("#likeTheater2 option:selected").val() == "극장선택"){
+						alert("두번째 선호극장이 선택되었습니다.")
+						$("#likeTheater2 option:selected").removeAttr("selected");
+						$("#likeTheater2 option").each(
 							option => {
-								if( $(option).text()==theaterName ){
-									$(option).attr("selected",true);
-									alert("두번째 선호극장이 선택되었습니다.")
+								if( $("#likeTheater2 option")[option].innerText==theaterName ){
+									$($("#likeTheater2 option")[option]).attr("selected",true);
+									
 								}
 							}//end of option		
-						)//end of each				
-				}else if( $("#likeTheater3 option:selected").val() == null){
-					$("#likeTheater3 option").each(
+						)//end of each		
+				}else if( $("#likeTheater3 option:selected").val() == "극장선택"){
+						alert("세번째 선호극장이 선택되었습니다.")
+						$("#likeTheater3 option:selected").removeAttr("selected");
+						$("#likeTheater3 option").each(
 							option => {
-								if( $(option).text()==theaterName ){
-									$(option).attr("selected",true);
-									alert("세번째 선호극장이 선택되었습니다.")
+								if( $("#likeTheater3 option")[option].innerText==theaterName ){
+									$($("#likeTheater3 option")[option]).attr("selected",true);
+									
 								}
 							}//end of option		
-						)//end of each					
+						)//end of each		
 				}else{
 					alert("선호 극장이 모두 선택되었습니다.");
+					$("#myModal").modal('hide')
+					$("#outerMotdal").modal('hide')
 				}
 			});//end of #addtheater click
 	};//end of success
@@ -842,6 +853,14 @@ $(function(){
 	function error(err) {
   		console.warn('ERROR(' + err.code + '): ' + err.message);
 	};	  
+	
+	function otherModal(){
+		$("button[data-dismiss=modal2]").click(function () {
+		    $('#myModal').modal('hide');
+		});
+		
+		$('#myModal').trigger("click");
+	}
 
 	/* 마커 클릭하면 정보 보이고, 버튼 누를시에 선호 극장으로 데이터 전송하기 */
 	</script>
@@ -852,7 +871,7 @@ $(function(){
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="myModalTitle"></h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <button type="button" class="close" data-dismiss="modal2" aria-label="Close" onClick='otherModal()'>
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
@@ -860,7 +879,7 @@ $(function(){
 	        ...
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal2" onClick='otherModal()'>닫기</button>
 	        <button type="button" class="btn btn-primary" id="addTheater">선호극장 추가하기</button>
 	      </div>
 	    </div>

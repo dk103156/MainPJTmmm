@@ -96,7 +96,7 @@ public class UserController {
 		
 		model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			
-		return "redirect:/user/addUser.jsp";
+		return "forward:/user/addUser.jsp";
 	}
 	
 	@RequestMapping(value = "addUser" , method=RequestMethod.POST)
