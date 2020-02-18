@@ -118,6 +118,12 @@ public class BoardDaoImpl implements BoardDao{
 	public Article getReply(int articleNo) throws Exception {
 		return sqlSession.selectOne("BoardMapper.getReArticle", articleNo);
 	}
+
+
+	@Override
+	public void updateViewCnt(int articleNo) throws Exception {
+		sqlSession.update("BoardMapper.updateViewCnt", articleNo);
+	}
 	
 
 }

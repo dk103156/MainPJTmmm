@@ -74,42 +74,7 @@ public class EventController {
 	
 	
 	
-	//@Scheduled(cron = "*/10 * * * * *")
-	public void test() throws Exception{
-		
-		Preview pre = eventService.getPreview(10008);
-		Timestamp et = pre.getPreviewEndDate();
-		
-		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-		Calendar cal = Calendar.getInstance();
-		String today = null;
-		today = formatter.format(cal.getTime());
-		Timestamp ts = Timestamp.valueOf(today);
-		System.out.println(et);
-		
-		int com = ts.compareTo(et);
-		
-		if(com>0) { //현재 날짜가 응모 종료일 이후인 경우
-			System.out.println("a");
-		}else if(com<0) { //현재 날짜가 응모 종료일 이전인 경우
-			System.out.println("b");
-		}else { //현재 날짜가 응모  종료일인 경우 (추첨돌리기)
-			System.out.println("c");
-		}
 
-		System.out.println( " Timestamp : " + ts); //현재시간
-		
-	}
-	
-	
-
-	//@Scheduled(cron = "*/10 * * * * *")
-	public void testGetWin() throws Exception{
-		
-		List<Integer> preList = new ArrayList();
-		
-		
-	}
 	
 	@RequestMapping(value="attendance", method=RequestMethod.GET)
 	public String attendance() throws Exception{ 
@@ -117,15 +82,18 @@ public class EventController {
 		return "redirect:/event/addAttendance.jsp";
 	}
 
+	//시사회이벤트 등록 폼 가져오기
 	@RequestMapping(value="addPreviewAd", method=RequestMethod.GET)
 	public String addPreviewAdView(Model model) throws Exception{ 
 		System.out.println("/event/addPreviewAd:GET");
-		System.out.println("dateTimeService.getTheaterList(new Search())>>>"+dateTimeService.getTheaterList(new Search()));
+		System.out.println("dateTimeService.getTheaterList(new Search())>>>"+dateTimeService.getTheaterList(new Search())); //영화관을 가져오기 위해
+		
 		model.addAttribute("getTheaterList", dateTimeService.getTheaterList(new Search()));
+		
 		return "forward:/event/addPreviewAd.jsp";
 	}
 	
-	
+	//시사회이벤트 등록하기
 	@RequestMapping(value="addPreviewAd", method=RequestMethod.POST)
 	public String addPreviewAd(@RequestParam Map<String, Object> map,@RequestParam("previewImage") MultipartFile[] file, Model model) throws Exception {
 		System.out.println("/event/addPreviewAd:POST");
@@ -181,33 +149,33 @@ public class EventController {
 		return "forward:/event/getPreviewAd.jsp";
 	}
 	
-	
-	@RequestMapping(value="getPreviewListAd")
-	public String getPreviewListAd(@ModelAttribute("search") Search search , Model model) throws Exception {
-	
-		System.out.println("/event/getPreviewListAd:GET");
-		//search = new Search();
-		if(search.getCurrentPage()==0) {
-			search.setCurrentPage(1);
-		}
-		//search.setCurrentPage(2);
-		search.setPageSize(pageSize);
-		
-		Map<String, Object> map = eventService.getPreviewListAd(search);
-		List<Preview> list = (List<Preview>)map.get("list");
-		Page resultPage	= 
-				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-		
-		model.addAttribute("list",list);
-		model.addAttribute("resultPage", resultPage);
-		model.addAttribute("search", search);
-		
-		//String[] fileArr = preview.getPreviewImage();
-		//model.addAttribute("fileArr", fileArr);
-		
-		return "forward:/event/getPreviewListAd.jsp";
-	}
-		
+//	
+//	@RequestMapping(value="getPreviewListAd")
+//	public String getPreviewListAd(@ModelAttribute("search") Search search , Model model) throws Exception {
+//	
+//		System.out.println("/event/getPreviewListAd:GET");
+//		//search = new Search();
+//		if(search.getCurrentPage()==0) {
+//			search.setCurrentPage(1);
+//		}
+//		//search.setCurrentPage(2);
+//		search.setPageSize(pageSize);
+//		
+//		Map<String, Object> map = eventService.getPreviewListAd(search);
+//		List<Preview> list = (List<Preview>)map.get("list");
+//		Page resultPage	= 
+//				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+//		
+//		model.addAttribute("list",list);
+//		model.addAttribute("resultPage", resultPage);
+//		model.addAttribute("search", search);
+//		
+//		//String[] fileArr = preview.getPreviewImage();
+//		//model.addAttribute("fileArr", fileArr);
+//		
+//		return "forward:/event/getPreviewListAd.jsp";
+//	}
+//		
 	
 	
 	
@@ -225,20 +193,24 @@ public class EventController {
 	
 	@RequestMapping(value="updatePreviewAd", method=RequestMethod.GET)
 	public String updatePreviewAdView(@RequestParam int previewNo, Model model) throws Exception{
+		
 		System.out.println("/event/updatePreviewAd:GET");
 		System.out.println("updatePreviewAd:previewNo>>>" + previewNo);
+		
 		Preview preview = eventService.getPreviewAd(previewNo);
+		
 		String hour = preview.getPreviewTime().substring(0, 2);
 		String min = preview.getPreviewTime().substring(3, 5);
 		String[] fileArr = preview.getPreviewImage().split(",");
 
 		System.out.println("dateTimeService.getTheaterList(new Search())>>>"+dateTimeService.getTheaterList(new Search()));
+		
 		model.addAttribute("getTheaterList", dateTimeService.getTheaterList(new Search()));
 		model.addAttribute("preview" , preview);
 		model.addAttribute("fileArr", fileArr);
-
 		model.addAttribute("hour", hour);
 		model.addAttribute("min", min);
+		
 		return "forward:/event/updatePreviewAd.jsp";
 	}
 	
@@ -246,13 +218,13 @@ public class EventController {
 	
 	@RequestMapping(value="updatePreviewAd", method=RequestMethod.POST)
 	public String updatePreviewAd(@RequestParam Map<String, Object> map,@RequestParam("previewImage") MultipartFile[] file, Model model) throws Exception{
+		
 		System.out.println("/event/updatePreviewAd:POST");
 		System.out.println(map);
 	
 		
 		String filesName =System.currentTimeMillis()+"";
 		List<String> fn = new ArrayList();
-		
 		
 		Preview preview2 = new Preview();
 		
@@ -266,7 +238,6 @@ public class EventController {
 		
 		
 		//preview2.setPreviewTime(JavaUtil.hmToTimestamp(previewTime));
-		
 		//preview2.setPreviewImage((String)map.get("previewImage"));
 		preview2.setPreviewStartDate(JavaUtil.ymdToTimestamp((String)map.get("previewStartDate")));
 		preview2.setPreviewEndDate(JavaUtil.ymdToTimestamp((String)map.get("previewEndDate")));
@@ -296,7 +267,7 @@ public class EventController {
 			eventService.updatePreviewAd(preview2);
 			model.addAttribute("preview", preview2);
 			
-		return "forward:/event/getPreviewAd.jsp";
+		return "forward:/event/getPreview.jsp";
 	}
 	
 	
@@ -315,6 +286,7 @@ public class EventController {
 		System.out.println("search에 flag잘 담겨와??????????"+search);
 		Map<String, Object> map = eventService.getPreviewList(search);
 		List<Preview> list = (List<Preview>)map.get("list");
+		
 		System.out.println("#################카운트"+(Integer)map.get("totalCount"));
 		Page resultPage	= 
 				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
@@ -347,7 +319,7 @@ public class EventController {
 		
 	
 	
-	//addPartPrev.jsp 응모페이지 띄워주는거
+	//addPartPrev.jsp 응모하기 띄워주는거
 	@RequestMapping(value="addPartPrev", method=RequestMethod.GET)
 	public String addPartPrevView(@RequestParam int previewNo, HttpSession session, Model model) throws Exception{
 		
@@ -356,8 +328,6 @@ public class EventController {
 		
 		Preview preview = eventService.getPreview(previewNo);
 		User user = (User)session.getAttribute("user");
-		
-		
 		
 		String[] fileArr = preview.getPreviewImage().split(",");
 		
@@ -519,7 +489,8 @@ public class EventController {
 			quiz.setPartFlag(partFlag);
 			returnList.add(quiz);
 		}
-		
+		System.out.println("@@@@@@@@@@@resultPage.getTotalCount()"+resultPage.getTotalCount());
+		System.out.println("@@@@@@@@@@@(int)totalCount"+(int)totalCount);
 		int leftQuiz= resultPage.getTotalCount()-(int)totalCount;
 		System.out.println("파트플래그잘들어갔니????"+returnList);
 		model.addAttribute("totalCount", (int)totalCount);

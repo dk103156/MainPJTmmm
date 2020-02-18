@@ -40,6 +40,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Article getArticle(int articleNo) throws Exception {
+		boardDao.updateViewCnt(articleNo);
 		return boardDao.getArticle(articleNo);
 	}
 

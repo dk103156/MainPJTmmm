@@ -11,7 +11,7 @@
 		<result property="userId"						column="user_id"				jdbcType="VARCHAR"/>
 		<result property="userNo"						column="user_no"				jdbcType="NUMERIC"/>
 		<result property="articleType"					column="article_type"			jdbcType="NUMERIC"/>
-		<result property="category"						column="category"			jdbcType="NUMERIC"/>
+		<result property="category"						column="category"				jdbcType="NUMERIC"/>
 		<result property="articleStatus"				column="article_status"			jdbcType="NUMERIC"/>
 		<result property="articleTitle"					column="article_title"			jdbcType="VARCHAR"/>
 		<result property="content"						column="article_content"		jdbcType="VARCHAR"/>
@@ -67,7 +67,7 @@
 		</selectKey>
 		INSERT INTO article
 				(article_no, article_status, article_type, category, user_id,  sup_art_no,
-				 article_title, article_content, article_date, qna_status)
+				 article_title, article_content, article_date, qna_status, view_count)
 		VALUES( #{articleNo}, 
 				#{articleStatus:NUMERIC},
 				#{articleType:NUMERIC},
@@ -78,7 +78,8 @@
 				#{articleTitle:VARCHAR},
 				#{content:VARCHAR},
 				SYSDATE,
-				#{qnaStatus:NUMERIC}
+				#{qnaStatus:NUMERIC},
+				0
 							)
 	</insert>
 	
@@ -319,6 +320,30 @@
 						AND user_id =#{userId}
 				</if>
 				
+				<if test="searchCondition!= null">
+				<if test="searchCondition == 2 and searchKeyword =='' ">
+				</if>
+					<if test="searchCondition == 0 and searchKeyword =='' ">
+					AND	qna_status = 0
+				</if>
+					<if test="searchCondition == 1 and searchKeyword =='' ">
+					AND	qna_status = 1
+				</if>
+				<if test="searchCondition == 0 and searchKeyword !='' ">
+				AND	qna_status = 0
+				AND	article_title  like '%'||#{searchKeyword}||'%'
+				</if>
+				
+				<if test="searchCondition == 1 and searchKeyword !='' ">
+				AND	qna_status = 1
+				AND article_title like '%'||#{searchKeyword}||'%'
+				</if>
+				<if test="searchCondition == 2 and searchKeyword !='' ">
+				AND article_title like '%'||#{searchKeyword}||'%'
+				</if>
+				
+				
+			</if>	
 				
 			</where>
 	 </sql>	
@@ -332,5 +357,12 @@
 		 	) countTable	
 	 </select>	 
 	 
+	 
+<!-- 조회수 증가시키는 -->
+	<update id="updateViewCnt" parameterType="int" >
+	 	UPDATE article
+	 	set view_count = view_count +1
+	 	where article_no = #{value}
+	</update>	 
 	 
 </mapper>

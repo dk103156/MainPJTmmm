@@ -52,24 +52,12 @@
 
 
 	</resultMap>
-	
 
 	
-	<select id="getPreList" resultMap="previewSelectMap">
-	  		SELECT 
-	  		preview_no
-	  		FROM preview
-			WHERE preview_status = '0'
-	 </select>
-	
-	
-	
-	
-	
-	<!-- SQL : INSERT -->
+	<!--퀴즈추가하기 -->
 	<insert id="addQuiz" parameterType="com.mmm.service.domain.Quiz">
 		INSERT
-		INTO quiz( quiz_no, question, option1, option2, option3, option4, answer, start_date, end_date, quiz_date, quiz_status )
+		INTO quiz( quiz_no, question, option1, option2, option3, option4, answer, start_date, quiz_date )
 		VALUES ( seq_quiz_quiz_no.nextval,
 				 #{question},
 				 #{optionFirst},
@@ -78,13 +66,12 @@
     			 #{optionFourth},
 				 #{answer},
 				 #{quizStartDate},
-                 #{quizEndDate},
-                 SYSDATE,
-                 #{quizFlag}  )
+                 SYSDATE
+                  )
 	</insert>
 
 
-	<!-- SQL : SELECT ONE -->
+	<!-- SQL : 퀴즈 가져오기 -->
 	<select id="getQuizAd" parameterType="int" resultMap="quizSelectMap">
 		SELECT
 		quiz_no, question, option1, option2, option3, option4, 
@@ -105,20 +92,20 @@
 		option4 = #{optionFourth},  
 		answer = #{answer},  
 		start_date = #{quizStartDate},  
-		end_date = #{quizEndDate},  
 		quiz_date = SYSDATE, 
-		quiz_status =#{quizFlag}	
 		</set>
 		WHERE quiz_no = #{quizNo}
 	</update>
 
 
-	<!-- SQL : DELETE -->
-	<delete id="deleteQuiz" parameterType="int">
-		DELETE
-		FROM quiz
-		WHERE quiz_no = #{value}	
-	</delete>
+	<!-- SQL : 퀴즈삭제시 quiz_staus느 -->
+	<update id="deleteQuiz" parameterType="int">
+		update quiz
+		set
+		quiz_status = 1
+		where
+		quiz_no = #{value}	
+	</update>
 	
 	
 	<!-- SQL : INSERT -->
@@ -135,7 +122,7 @@
                  #{winnerCount},
                  #{winnerDate},
                  SYSDATE,
-                 #{previewFlag}  )
+                 0  )
 	</insert>
 	
 	
@@ -144,10 +131,7 @@
 	<select id="getPreviewAd" parameterType="int" resultMap="previewSelectMap">
 		SELECT
 		preview_no, preview_name, preview_place, preview_date, image_file, start_date, 
-		end_date, winner_count, winner_date, preview_regdate, CASE
-					<![CDATA[ WHEN end_date > SYSDATE THEN '0'
-					 WHEN end_date < SYSDATE THEN '1' ]]>
-					 END AS preview_status
+		end_date, winner_count, winner_date, preview_regdate, preview_status
 		FROM preview
 		WHERE preview_no = #{value}
 	</select>
@@ -220,10 +204,7 @@
 		<select  id="getPreviewListAd"  parameterType="com.mmm.common.Search"	resultMap="previewSelectMap">
 	  		SELECT 
 	  		preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
-			winner_count, winner_date, preview_regdate, CASE
-					<![CDATA[ WHEN end_date > SYSDATE THEN '진행중'
-					 WHEN end_date < SYSDATE THEN '마감' ]]>   
-					END AS preview_status
+			winner_count, winner_date, preview_regdate, preview_status
 	  		FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM (	
 	  					<include refid="srchPrev"/>	
@@ -236,10 +217,7 @@
 	 <sql id="srchPrev">	 
 		 SELECT
 		 	preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
-			winner_count, winner_date, preview_regdate, CASE
-				<![CDATA[	WHEN end_date > = SYSDATE THEN '진행중'
-					WHEN end_date <  SYSDATE THEN '응모마감']]>
-					END AS preview_status
+			winner_count, winner_date, preview_regdate, preview_status
 		 FROM preview
 			<if test="searchCondition!= null">
 			  <where>
