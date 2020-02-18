@@ -67,6 +67,13 @@
 	  }
 	}
 	
+	
+	span.round.on.red {
+    border: 2px solid #e71a0f;
+    background-color: #e71a0f;
+    color: #ffffff;
+	}
+	
 </style>
 </head>
 <body>
@@ -75,7 +82,7 @@
 <div class="container">
 
 	<div class="page-header text-dark">
-	       <h3>문의내역</h3>
+	       <h3>나의 문의내역</h3>
 	       <hr>
 	    </div>
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
@@ -90,19 +97,19 @@
 <br>
 
 <div class="container">
-<!-- 		<div class="row"> -->
 	<div><p class="text-dark">
 	전체  ${resultPage.totalCount} 건 </p>
 	</div>
+<!-- 		<div class="row"> -->
 	<form>
 	  <input type="hidden" id="currentPage" name="currentPage" value=""/> 
       <table class="table table-hover table-bordered table-sm" >
         <thead class="table-active">
-          <tr>
-            <th align="center">번호</th>
-            <th align="left" >제목</th>
-            <th  align="left">등록일시</th>
-            <th align="left">상태</th>
+          <tr class="row">
+            <th class="col-sm-1" align="center">번호</th>
+            <th class="col-sm-7" align="left" >제목</th>
+            <th class="col-sm-3"  align="left">등록일시</th>
+            <th class="col-sm-1" align="left">상태</th>
           </tr>
         </thead>
        
@@ -110,18 +117,19 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="notice" items="${list}">
 			<c:set var="i" value="${ i+1 }"/>
-			<tr>
-			 
-			  <td class="" align="left" >${ i }
+			<tr class="row">
+			  <td  class="col-sm-1" align="left" >${ i }
 	  	    	<input type="hidden" id="articleNo" value="${notice.articleNo}"/>
 			  </td>
-			  <td  align="left" id="" >  ${notice.articleTitle} 
+			  <td class="col-sm-7" align="left" id="" >  ${notice.articleTitle} 
 			  </td>
-			  <td  align="left" id="" >  ${notice.articleDate}
+			  <td class="col-sm-3" align="left" id="" >  ${notice.articleDate}
 				</td>
-			  <td align="left" id="" > 
-			  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
-			  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
+			  <td class="col-sm-1" align="center" id="" > 
+			  <span class="btn btn-danger btn-sm"><small>
+				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
+				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
+				</small></span>
 				</td>
 			</tr>
           </c:forEach>

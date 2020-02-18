@@ -30,33 +30,32 @@ public class CartDaoImpl implements CartDao {
 	public void addCart(Cart cart) throws Exception {
 		sqlSession.insert("CartMapper.addCart", cart);
 	}
-	
-	
+
 	@Override
-	public List<Cart> getCartList(Cart cart) throws Exception {
-		return sqlSession.selectList("CartMapper.getCartList", cart);
+	public Cart getCart(int cartNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	
+
+	@Override
+	public Map<String, Object> getCartList(Cart cart) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public void updateCart(Cart cart) throws Exception {
-		sqlSession.update("CartMapper.updateCart", cart);
+		// TODO Auto-generated method stub
+		
 	}
-	
+
 	@Override
-	public void deleteCart(Cart cart) throws Exception {
-		sqlSession.delete("CartMapper.deleteCart", cart);
-	}
-	
-	@Override
-	public int getTotalCount(Map<String, Object> map) throws Exception {
-		return sqlSession.selectOne("CartMapper.getTotalCount", map);
+	public void deleteCart(int cartNo) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
-//	@Override
-//	public int getProdNo(int prodNo) throws Exception {
-//		return sqlSession.selectOne("CartMapper.getProdNo", cartNo);
-//	}
+
 	
 }

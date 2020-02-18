@@ -28,11 +28,14 @@
 	
 	$(function(){
 	
-		$(".getTranInfo td:nth-child(2)").on("click",function(){
-			console.log("눌렀어");
+		$(document).on("click",".getTranInfo td:nth-child(2)" ,function() { //로드 당시에 없었던 요소들도 이벤트 걸어줌
+		
+			console.log("눌렀어"); 
 			var articleNo = $(this).parent().find('#articleNo').val();
-			console.log(articleNo);
-			self.location="/customer/getAsk?articleNo="+articleNo;	
+	//		console.log("11111"+articleNo);
+			
+			getAsk(articleNo)
+// 			self.location="/customer/getAsk?articleNo="+articleNo;	
 		});
 		
 		$("button[name='ask']").on("click", function(){
@@ -107,18 +110,18 @@
 	</div>
       <table class="table table-hover table-bordered table-sm" >
         <thead class="table-active">
-          <tr>
-            <th align="center">구분</th>
-            <th align="left" >질문</th>
+          <tr class="row">
+            <th  class="col-sm-2"align="center">구분</th>
+            <th  class="col-sm-10" align="left" >질문</th>
           </tr>
         </thead>
 		<tbody class="getTranInfo">
 		  <c:set var="i" value="0" />
 		  <c:forEach var="ask" items="${list}">
 			<c:set var="i" value="${ i+1 }"/>
-			<tr>
+			<tr class="row">
 			 
-			  <td  align="left" >
+			  <td class="col-sm-2" align="left" >
 			  <c:if test="${ask.category==1}">예매/매표</c:if>
 			  <c:if test="${ask.category==2}">스토어</c:if>
 			  <c:if test="${ask.category==3}">결제</c:if>
@@ -128,12 +131,13 @@
 			  
 	  	    	<input type="hidden" id="articleNo" value="${ask.articleNo}"/>
 			  </td>
-			  <td  align="left" id="" >  ${ask.articleTitle} 
+			  <td class="col-sm-10" align="left" id="" >  ${ask.articleTitle} 
 			  </td>
 			</tr>
           </c:forEach>
         </tbody>
       </table>
+			  <div class="hee"></div>
        </div>
 
 
@@ -235,7 +239,38 @@
 		
 	}); //end of function
 
-
+	function getAsk(data) {
+		
+		var datas = JSON.stringify ({
+			articleNo : new String(data) //articleNo는 숫자니까..
+		})
+			console.log(datas)
+		
+		
+		ajaxPromise("/customer/json/getAsk", datas).then(
+			data=> {
+				
+				var resultData = data;
+				
+				console.log(resultData) //
+				console.log(data.article.articleNo) //
+				console.log(data.article.articleTitle)
+				console.log(data.article.content)
+			
+				$(".hee").empty();
+				
+				var html ="<div>"+ data.article.content+"</div>"
+			
+				$(".hee").append(html);
+				
+				
+			}
+		
+		
+		)
+		
+	}
+	
 	function category(data) {
 		
 		var datas = JSON.stringify({
@@ -250,26 +285,98 @@
 				
 				if(data.askList.length!=0){
 					
-					var html ="<div class='row'><table class='table table-hover table-bordered table-sm'>"
-			        	html +="<thead class='table-active'><tr>"		
-			         	html +="<th class='col-xs-2' align='center'>구분</th><th class='col-xs-10' align='left'>질문</th></tr></thead>"
+					var html ="	<div><p class='text-dark'>전체  "+ data.resultPage.totalCount+" 건 </p></div>"
+						html +="<div class='row'><table class='table table-hover table-bordered table-sm'>"
+			        	html +="<thead class='table-active'><tr class='row'>"		
+			         	html +="<th class='col-sm-2' align='center'>구분</th><th class='col-sm-10' align='left'>질문</th></tr></thead>"
 						html +="<tbody class='getTranInfo'>"
 				
 					for (var i = 0; i < data.askList.length; i++) {
+						   
+						html +="<tr class='row'><td class='col-sm-2' align='left'>";
 						
-						html +="<tr><td class='col-xs-2' align='left'>"+data.askList[i].category
+						if (data.askList[i].category==1) {
+							html += "예매/매표";
+						}else if (data.askList[i].category==2) {
+							html += "스토어";
+						}else if (data.askList[i].category==3) {
+							html += "결제";
+						}else if (data.askList[i].category==4) {
+							html += "할인혜택";
+						}else if (data.askList[i].category==5) {
+							html += "홈페이지";
+						}else if (data.askList[i].category==6) {
+							html += "이벤트";
+						}
+						
 						html +="<input type='hidden' id='articleNo' value='"+data.askList[i].articleNo+"'/>"
-						html +="</td><td class='col-xs-10' align='left'>"+data.askList[i].articleTitle  
+						html +="</td><td class='col-sm-10' align='left'>"+data.askList[i].articleTitle  
 						html +="</td></tr>"
-
+					
 					}
 					
 					html += "</tbody></table></div>"
 					
 							$(".bb").append(html);
+					
+					
 							
 				} //end of for
-			}//end of arrow function	
+				
+				
+				//페이지네이션 추가
+				$("div.ticketingPagination.row").empty();
+				
+				Element = "<div class='col-4'></div>"
+		  		Element +="<div class='col-4'>"
+				Element +="<ul class='pagination'>"
+	   			if(data.resultPage.currentPage <= data.resultPage.pageUnit){
+	   				Element +="<li class='page-item disabled'>"
+	   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>Previous</a>"
+	   				Element +="</li>"
+	   			}else if(data.resultPage.currentPage > data.resultPage.pageUnit){
+	   				Element +="<li class='page-item'>"
+	   				Element +="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>Previous</a>"
+	   				Element +="</li>"
+	   			}
+				
+	  			for(var i=data.resultPage.beginUnitPage; i<=data.resultPage.endUnitPage; i++){
+	  				if(data.resultPage.currentPage==i){
+	  					Element+="<li class='page-item active' aria-current='page'>"
+	  					Element+="<a class='page-link' href='javascript:Pagination("+i+")'>"+i+"<span class='sr-only'>(current)</span></a>"
+	  					Element+="</li>"
+	  				}else{
+	  					Element+="<li class='page-item'>";
+	  					Element+="<a class='page-link' href='javascript:Pagination("+i+")'>"+i+"</a>"
+	  					Element+="</li>"
+	  				}
+	  				
+	  			}//end of for
+				
+	  			if(data.resultPage.endUnitPage >= data.resultPage.maxPage){
+	  				Element+="<li class='page-item disabled'>"
+	  				Element+="<a class='page-link' href='#'>Next</a>"
+	  				Element+="</li>"
+	  			}else if(data.resultPage.endUnitPage < data.resultPage.maxPage){
+	  				Element+="<li class='page-item'>"
+	  				Element+="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.endUnitPage)+1)+") '>Next</a>"
+	  				Element+="</li>"
+	  			}
+				
+	  			Element+= "</ul>"
+				Element+= "</div>"
+				Element+= "<div class='col-4'></div>"
+				Element+= "<form>"
+				Element+= "<input type='hidden' id='currentPage' name='currentPage' value=''/>"
+				Element+= "<input type='hidden' id='category' name='category' value='"+data.search.category+"'/>"
+				Element+= "</form>"
+				
+				$("div.ticketingPagination").append(Element);
+				
+				$("#searchCondition").val(data.search.category);
+				
+				
+			} //end of arrow function	
 		
 		); //end of then
 		
@@ -291,6 +398,7 @@
 				success : function(result, status) {
 					//데이터를 받으면 resolve()호출
 					resolve(result);
+					console.log(status)
 				}//end of success
 			
 			})//end of ajax

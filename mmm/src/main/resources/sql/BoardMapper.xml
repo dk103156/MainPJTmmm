@@ -9,6 +9,7 @@
 	<resultMap type="Article" id="articleSelectMap">
 		<result property="articleNo"					column="article_no"				jdbcType="NUMERIC"/>
 		<result property="userId"						column="user_id"				jdbcType="VARCHAR"/>
+		<result property="userNo"						column="user_no"				jdbcType="NUMERIC"/>
 		<result property="articleType"					column="article_type"			jdbcType="NUMERIC"/>
 		<result property="category"						column="category"			jdbcType="NUMERIC"/>
 		<result property="articleStatus"				column="article_status"			jdbcType="NUMERIC"/>
@@ -41,6 +42,7 @@
 		<result property="commentNo"				column="cmt_no"				jdbcType="NUMERIC"/>
 		<result property="commentType"				column="cmt_type"			jdbcType="NUMERIC"/>
 		<result property="userId"					column="user_id"			jdbcType="VARCHAR"/>
+		<result property="userNo"						column="user_no"				jdbcType="NUMERIC"/>
 		<result property="supCommentNo"				column="sup_com_no"			jdbcType="NUMERIC"/>
 		<result property="movieNo"					column="movie_no"			jdbcType="NUMERIC"/>
 		<result property="articleNo"				column="article_no"			jdbcType="NUMERIC"/>
@@ -53,16 +55,20 @@
 	<resultMap type="Like" id="likeSelectMap">
 		<result property="likeNo"					column="like_no"			jdbcType="NUMERIC"/>
 		<result property="userId"					column="user_id"			jdbcType="VARCHAR"/>
+		<result property="userNo"						column="user_no"				jdbcType="NUMERIC"/>
 		<result property="articleNo"				column="article_no"			jdbcType="NUMERIC"/>
 		<result property="commentNo"				column="cmt_no"				jdbcType="NUMERIC"/>
 	</resultMap>
 	
 <!-- 	글 추가하기 -->
 	<insert id="addArticle" 	parameterType="Article">
+		<selectKey resultType="int" keyProperty="articleNo" order="BEFORE">
+		SELECT seq_article_article_no.nextval FROM dual
+		</selectKey>
 		INSERT INTO article
-				(article_no, article_status, article_type, category, user_id, sup_art_no,
+				(article_no, article_status, article_type, category, user_id,  sup_art_no,
 				 article_title, article_content, article_date, qna_status)
-		VALUES(seq_article_article_no.nextval, 
+		VALUES( #{articleNo}, 
 				#{articleStatus:NUMERIC},
 				#{articleType:NUMERIC},
 				#{category:NUMERIC},
@@ -149,6 +155,7 @@
 	 seq_commentt_cmt_no.nextval,
 	 #{commentType:NUMERIC},
 	 #{userId:VARCHAR},
+	 #{userNo:NUMERIC},
 	 <if test="supCommentNo==0">null,</if>
 	 <if test="supCommentNo!=0">#{supCommentNo:NUMERIC},</if>
 	 <if test="articleNo==0">null,</if>
@@ -164,7 +171,7 @@
 <!-- 댓글 /한줄평 읽기 -->	
 	<select id="getCommentList" parameterType="Search" resultMap="cmtSelectMap">
 	SELECT 
-	 cmt_no, cmt_type, user_id, sup_cmt_no, article_no, 
+	 cmt_no, cmt_type, user_id, sup_cmt_no, article_no,
 	 movie_no, cmt_content, cmt_date, cmt_count, blind_flag, blind_reason, blind_date
 	FROM commentt
 	</select>
@@ -200,6 +207,7 @@
 	VALUES(
 	seq_likee_like_no.nextval, 
 	#{userId}, 
+	#{userNo}, 
 	<if test="articleNo==0">null,</if> 
 	<if test="articleNo!=0">#{articleNo}</if>
 	<if test="commentNo==0">null</if> 
@@ -272,7 +280,7 @@
 
 	  <sql id="article_srch">	 
 		SELECT 
-		 article_no, article_status, article_type, category, user_id, sup_art_no, article_title, 
+		 article_no, article_status, article_type, category, user_id,  sup_art_no, article_title, 
 		 article_content, article_date, file_name, view_count, blind_reason, blind_date, delete_date, qna_status
 		FROM article 
 			  <where>
@@ -305,7 +313,13 @@
 					<if test="category==6 ">
 					    AND	category = 6 </if>
 				</if>
-				AND article_status = 0
+				
+				<if test="userId!=null">
+						AND article_status = 0
+						AND user_id =#{userId}
+				</if>
+				
+				
 			</where>
 	 </sql>	
 	 

@@ -214,7 +214,7 @@ public class MovieServiceTest {
 //		}
 //	}
 	
-	@Test
+//	@Test
 	public void testGetAllofMovieTitle()throws Exception{
 		
 		List<String> mtList = movieService.getAllofMovieTitle();
@@ -226,4 +226,15 @@ public class MovieServiceTest {
 		}
 		System.out.println("------ cnt : "+ cnt);
 	}
+	
+	@Test
+	public void testSummary()throws Exception{
+		String summmary = "벽장 문이 열리고, 아이가 사라졌다!갑작스러운 사고로 아내를 잃은 상원(하정우)과 그의 딸 이나(허율)상원은 소원해진 이나와의 관계를 회복하기 위해 새집으로 이사를 간다.상원은 이나와 가까워지기 위해 노력하지만 어긋난 사이는 좀처럼 회복되지 않는다.그러던 어느 날 이나가 새로운 친구가 생겼다며 웃기 시작한다.하지만 평온도 잠시39503925295u";
+		String summarySub = summmary.substring(0, 183);
+		summarySub += "...";
+		
+		System.out.println("==============>"+summmary);
+		System.out.println("==============>"+summarySub);
+	}
+	
 }

@@ -1,5 +1,6 @@
 package com.mmm.web.event;
 
+import java.awt.Event;
 import java.io.File;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -302,7 +303,7 @@ public class EventController {
 	
 	@RequestMapping(value="getPreviewList")
 	public String getPreviewList(@ModelAttribute("search") Search search, Model model) throws Exception{
-		
+		System.out.println("프리뷰리스트와따!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		String[] fileArr = null;
 		List<String[]> fileNameArr = new ArrayList<>();
 		
@@ -310,9 +311,11 @@ public class EventController {
 			search.setCurrentPage(1);
 		}
 		search.setPageSize(pageSize);
-		
+
+		System.out.println("search에 flag잘 담겨와??????????"+search);
 		Map<String, Object> map = eventService.getPreviewList(search);
 		List<Preview> list = (List<Preview>)map.get("list");
+		System.out.println("#################카운트"+(Integer)map.get("totalCount"));
 		Page resultPage	= 
 				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
@@ -481,7 +484,8 @@ public class EventController {
 		search.setPageSize(pageSize);
 		
 		Map<String, Object> map = eventService.getQuizListAd(search);
-		List<Preview> list = (List<Preview>)map.get("list");
+		List<Quiz> list = (List<Quiz>)map.get("list");
+		
 		Page resultPage	= 
 				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println("resultPage>>>>>>>>>>"+resultPage);
@@ -499,13 +503,33 @@ public class EventController {
 			 winRate = (winCount/totalCount)*100;
 		}
 		
+		//참여여부를 알기위해...
+				Map<String,Object> partMap = new HashMap<String,Object>();
+				List<Quiz> returnList = new ArrayList<Quiz>();
+				
+		for(Quiz quiz: list) {
+			
+			partMap.put("userNo", userNo);
+			partMap.put("quizNo", quiz.getQuizNo());
+			System.out.println("partMap>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+partMap);
+			
+			
+			int partFlag = eventService.checkQuiz(partMap);
+			System.out.println("참여했는지???참여했으면1, 아니면0"+ partFlag);
+			quiz.setPartFlag(partFlag);
+			returnList.add(quiz);
+		}
 		
+		int leftQuiz= resultPage.getTotalCount()-(int)totalCount;
+		System.out.println("파트플래그잘들어갔니????"+returnList);
 		model.addAttribute("totalCount", (int)totalCount);
 		model.addAttribute("winCount", (int)winCount);
 		model.addAttribute("winRate", winRate);
 		model.addAttribute("user", user);
-		model.addAttribute("list",list);
+		model.addAttribute("list",returnList);
 		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("leftQuiz", leftQuiz);
+		
 		
 		return "forward:/event/getQuizList.jsp";
 	}
@@ -548,8 +572,7 @@ public class EventController {
 		model.addAttribute("quiz", quiz);
 		return "forward:/event/getQuizAd.jsp";
 	}
-	
-	//addPartQuiz.jsp 퀴즈 참여 페이지 띄워주는거
+
 	@RequestMapping(value="addPartQuiz", method=RequestMethod.GET)
 	public String addPartQuizView(@RequestParam int quizNo, HttpSession session,  Model model) throws Exception{
 		
@@ -560,6 +583,15 @@ public class EventController {
 		User user = (User)session.getAttribute("user");
 		int userNo = user.getUserNo();
 		Participation participation = eventService.getQuizRecord(userNo);
+		
+		//참여여부를 알기위해...
+		Map<String,Object> partMap = new HashMap<String,Object>();
+		partMap.put("userNo", userNo);
+		partMap.put("quizNo", quiz.getQuizNo());
+		System.out.println("partMap>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+partMap);
+		
+		int partFlag = eventService.checkQuiz(partMap);
+		System.out.println("참여했는지???참여했으면1, 아니면0"+ partFlag);
 		
 		if(participation!=null) {
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>컨트롤러 participation:::"+ participation);
@@ -573,6 +605,7 @@ public class EventController {
 		model.addAttribute("winCount", (int)winCount);
 		model.addAttribute("winRate", winRate);
 		model.addAttribute("user", user);
+		model.addAttribute("partFlag", partFlag);
 		}else {
 			
 			model.addAttribute("quiz", quiz);
@@ -580,6 +613,7 @@ public class EventController {
 			model.addAttribute("winCount", 0);
 			model.addAttribute("winRate", 0.0);
 			model.addAttribute("user", user);
+			model.addAttribute("partFlag", partFlag);
 		}
 		
 		
@@ -606,6 +640,8 @@ public class EventController {
 		System.out.println("point>>>>>>>>>"+point);
 		
 		paymentService.savePoint(point);
+		
+		
 		
 		updateMap.put("user", participation.getUserNo());
 		updateMap.put("quizNo", participation.getQuizNo());
@@ -685,10 +721,19 @@ public class EventController {
 			return "redirect:/event/getPreviewAd?previewNo="+previewNo;
 	}
 	
-	
+	//@Scheduled(cron = "*/10 * * * * *") //매일 12시로 바꾸기
+	public void doRandWinner() throws Exception{
+		System.out.println("추첨할래!");
+		List<Preview> list = eventService.getPrepareRand();
+		System.out.println("추첨할 애들이다!!!>>>>>>>"+list);
+		
+		for(Preview p : list) {
+			randWinner(p.getPreviewNo());
+		}
+	}
 	
 	//당첨자를 뽑는애 이벤트 종료에 맞춰서 
-	public Map<String, Object> randWinner(int previewNo) throws Exception {
+	public void randWinner(int previewNo) throws Exception {
 
 		Map<String, Object> updateMap = new HashMap<String,Object>();
 
@@ -749,7 +794,7 @@ public class EventController {
 		System.out.println("updateMap>>>>>>>" + updateMap);
 		eventService.updateWinningFlag(updateMap);
 		
-		return updateMap;
+		
 	}
 	
 

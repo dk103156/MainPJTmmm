@@ -43,7 +43,7 @@ public class TheaterServiceTest {
 	
 	private Theater theater;
 	
-	//@Test
+	@Test
 	public void testAddTheater() throws Exception {
 		
 		

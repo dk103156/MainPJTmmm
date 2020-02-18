@@ -340,5 +340,16 @@ public class EventServiceTest {
 		}
 		
 		
+		@Test
+		public void getPreparedRandTest() throws Exception  {
+			
+			List<Preview> list = eventService.getPrepareRand();
+			
+			System.out.println(list.size());
+			for (Preview p : list) {
+				System.out.println("pppppppppppppp>>>>>>>>>>>>>>>>>>>>"+p);
+			}
+		}
+		
 		
 }

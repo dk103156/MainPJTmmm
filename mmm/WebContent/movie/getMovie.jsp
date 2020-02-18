@@ -146,8 +146,8 @@
 				url : url,
 				method : "POST",
 				data : JSON.stringify({
-					movieNo : movieNo,
-					userNo : $("#userNo").val() // 이후에 고쳐야할  가능성이 다분하다 다분해!!^^^^^^
+					movieNo : movieNo
+// 					userNo : $("#userNo").val() // 이후에 고쳐야할  가능성이 다분하다 다분해!!^^^^^^
 				}),
 				dataType : "json",	//data를 json으로 받았으면 좋겠다.
 				headers : {
@@ -238,7 +238,7 @@
     <h1>MovieDetail</h1>
     
     <!--     	임의로 userNo 심어주기... TEST 용  -->
-	<input id="userNo" type="hidden" value="11111">
+<!-- 	<input id="userNo" type="hidden" value="11111"> -->
     
 	  <div class="album py-5 bg-light">
 	    <div class="container">

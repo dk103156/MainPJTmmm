@@ -79,9 +79,9 @@ public class MovieController {
 	private String naverClientSecret = "cSbBOgvfac";
 	
 	//KMDB 인증 Key
-	private String kmdbKey = "VE61R22GGTP493E028O6";
+//	private String kmdbKey = "VE61R22GGTP493E028O6";
 //	private String kmdbKey = "3R3N86K61455468O57JN ";
-//	private String kmdbKey = "07T082A3EZW65K7IZS2D ";
+	private String kmdbKey = "07T082A3EZW65K7IZS2D ";
 	
 	//Kmdb 접근 url
 	String urlKmdb = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=Y&ServiceKey="+kmdbKey;
@@ -119,8 +119,8 @@ public class MovieController {
 	public void addMovie()throws Exception{
 		
 //		1. 크롤링---------------------------------------------------------------------
-//		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-		System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
 		
 		//Browser 안띄우기
 		ChromeOptions options = new ChromeOptions();
@@ -132,8 +132,8 @@ public class MovieController {
 //		크롤링할 페이지 수 2개로 고정
 		for (int i = 0; i < 2; i++) {
 			//웹페이지 설정하기(자동화된 어쩌구 저쩌구..*************************************************************************************************
-			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
-//			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
+//			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
+			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
 			
 	//		Css Selector로 Element 요소 잡아오기 1 ____영화제목
 			List<WebElement> list = webDriver.findElements(By.cssSelector("#mArticle > ul.list_movie.\\#movie > li> div.wrap_movie > div > a"));
@@ -328,9 +328,6 @@ public class MovieController {
 //		상영예정작 플래그 
 		search.setOnBoxOfficeFlag(0);
 		
-		
-//		int userNo = 11111;
-		
 		System.out.println("  sessionUser ::" +session.getAttribute("user"));
 		
 //		세션에서 유저 정보 가져오기
@@ -396,15 +393,18 @@ public class MovieController {
 	
 	@RequestMapping(value = "/getMovie/{movieNo}", method = RequestMethod.GET)
 	public String getMovie(@PathVariable("movieNo") int movieNo,
+							HttpSession session,
 							Model model)throws Exception{
 		System.out.println("--- --- /movie/getMovie : GET");
 		
 		Movie inputMovie = new Movie();
 		inputMovie.setMovieNo(movieNo);
 		
-//		임의로 userNo 넣어주기^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-		inputMovie.setUserNo(11111);
-		
+//		유저 정보 넣어주기
+		if (session.getAttribute("user") != null) {
+			User user = (User)session.getAttribute("user");
+			inputMovie.setUserNo(user.getUserNo());
+		}
 		
 //		우리 DB 다녀오기
 		Movie movie = movieService.getMovieByMovieNo(inputMovie);

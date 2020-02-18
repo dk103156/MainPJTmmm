@@ -22,8 +22,8 @@
 <!--      jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     
-<!--     daum icon css -->
-    <link rel="stylesheet" href="/resources/css/movieIcon.css">
+<!--     movie css -->
+    <link rel="stylesheet" href="/resources/css/movieIcon.css?after">
 
      
        
@@ -252,7 +252,16 @@
 				preferMovieDisplay += "<div class='card mb-4 shadow-sm text-white bg-warning h-100'>";
 				preferMovieDisplay += "<div class='card-header text-center bg-warning text-white' >";
 				preferMovieDisplay += "<h5 class='mb-0'> ${user.userId} 님이 좋아할만한 상영작</h5></div>";
-				preferMovieDisplay += "<img name='poster' class='img-thumbnail card-img-top'  src='${preferMovie.poster}' alt=''>";
+				
+				
+				preferMovieDisplay += "<figure class='snip1384'>";
+				preferMovieDisplay += "<img name='poster' class='img-thumbnail card-img-top'  src='${preferMovie.poster}'  alt=''>";
+				preferMovieDisplay += "<figcaption>";
+				preferMovieDisplay += "<p>${preferMovie.summary}</p>";
+				preferMovieDisplay += "<i><button type='button' class='btn btn-outline-light btn-sm'>영화정보</button></i>";
+				preferMovieDisplay += "</figcaption></figure> ";
+				
+				
 				preferMovieDisplay += "<div class='card-body'>";
 				preferMovieDisplay += "<h5 name='movieTitle' class='card-title font-weight-bold d-inline'>";
 				preferMovieDisplay += "${preferMovie.movieTitle}</h5>";
@@ -370,14 +379,10 @@
 	});
 	
 	
-// 	$(document).on("hover", "img[name='poster']", function(){
-// 		alert('ddddddd');
-// 	});
-	
-	
 //		영화 상세페이지로 이동 이벤트
-	$(document).on("click", " .snip1384",function(){
-		var movieNo = $(this).parent().find('input[name="movieNo"]').val();
+	$(document).on("click", ".btn-outline-light",function(){
+		var movieNo = $(this).parent().parent().parent().parent().find('input[name="movieNo"]').val();
+// 		alert("movieNo " + movieNo);
 		
 		self.location = "getMovie/"+movieNo;
 	});
@@ -425,6 +430,7 @@
 							
 							<figcaption>
 								<p>${movie.summary}	</p>
+								<i><button type="button" class="btn btn-outline-light btn-sm">영화정보</button></i>
 							</figcaption>
 						</figure>
 

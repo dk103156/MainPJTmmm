@@ -63,6 +63,9 @@
 	     width: 940px;
 	  }
 	}
+	
+	.checkBox {float:left; width:30px;}
+	.checkBox input{width:16px; height:16px;}
 
 
 	</style>
@@ -85,6 +88,20 @@
 	<form>
 	
 	  <input type="hidden" id="currentPage" name="currentPage" value=""/> 
+	  <input type="checkbox" name="allCheck" id="allCheck"/><label for="allCheck">모두선택</label>
+	  <button id="delBtn" class="btn btn-secondary write float:right" type="button">삭 &nbsp;제</button>
+	  <script>
+	  
+	  $("#allCheck").click(function(){
+		  var chk = $("#allCheck").prop("checked");
+		  if(chk){
+			  $(".chBox").prop("checked", true);
+		  }else {
+			  $(".chBox").prop("checked", false);
+		  }
+		  
+	  });
+	  </script>
       <table class="table table-hover table-striped" >
         <thead>
           <tr>
@@ -100,9 +117,19 @@
 		  <c:set var="i" value="0" />
 		  <c:forEach var="quiz" items="${list}">
 			<c:set var="i" value="${ i+1 }"/>
+			
 			<tr>
+			
 			 
-			  <td class="col-sm-1"  align="left" id="quizNo" >${ i }
+			  <td class="col-sm-1"  align="left" id="quizNo" >
+			  <input type="checkBox" class="chBox" name="chBox" id="" />${ i }
+			  <script>
+			  
+			  $(".chBox").click(function(){
+				  
+				  $("#")
+			  })
+			  </script>
 			  </td>
 			  <td class="col-sm-5" align="left" id="" >${quiz.question}
 			  	<input type="hidden" id="quizNo" value="${quiz.quizNo}"/>

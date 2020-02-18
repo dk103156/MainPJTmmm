@@ -34,6 +34,9 @@
 	
 	$(function(){
 		
+		
+		
+		
 		$(".getTranInfo td:nth-child(2)").on("click",function(){
 			var previewNo = $(this).children('#previewNo').val();
 			console.log(previewNo);
@@ -100,7 +103,14 @@
 			  </td>
 			  <td class="col-sm-2" align="left" id="" >${preview.preEdDate}
 			  </td>
-			  <td  class="col-sm-1" align="left" id="" >${preview.previewFlag}
+			  <td  class="col-sm-1" align="left" id="" >
+				  <c:if test="${preview.previewFlag eq '진행중'}">
+			     <span class="btn btn-warning btn-sm"><small>진행중</small></span></c:if>
+			     
+			     <c:if test="${preview.previewFlag eq '마감'}">
+			     <span class="btn btn-dark btn-sm"><small>마감</small></span></c:if>
+				  
+				
 			  </td>
 			</tr>
           </c:forEach>
