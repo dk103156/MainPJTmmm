@@ -32,6 +32,7 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public void addArtice(Article article) throws Exception {
 		sqlSession.insert("BoardMapper.addArticle", article);
+		System.out.println("addArticleDao에서 ............."+ article);
 	}
 
 	@Override

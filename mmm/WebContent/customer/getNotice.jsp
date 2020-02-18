@@ -143,7 +143,7 @@
 	  
 		<div class="text-center">
 			<button id="updateBtn"" class="btn btn-secondary write" type="button">수 &nbsp;정</button>
-			<button id="delBtn"" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
+			<button id="delBtn" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
 			<button id="okBtn" type="button" class="btn btn-secondary write">확 &nbsp;인</button>
 		</div>
 

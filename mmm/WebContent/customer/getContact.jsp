@@ -8,20 +8,22 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-<title>getQuizAd</title> 
+<title>getContact</title> 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
-	
+<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
+	  
+	  
+	  
 <script type="text/javascript">
 	
 	$(function(){
 		
 		$('#delBtn').on("click", function(){
-			alert('delBtn버튼이 클릭됨');
 			var articleNo = ${article.articleNo};
 			console.log(articleNo)
 			self.location="/customer/deleteContact?articleNo="+articleNo;
@@ -131,24 +133,13 @@
 
 <style>
 
-	hr{
-	  height: 1px;
-    background: #ccc;
-	}
+	
 	div.inline{
 	
 		display: inline;
 	}
 
-	div.inline.left{
-	
-		float: left;
-	}
-	
-	div.inline.right{
-	
-		float: right;
-	}
+
 	 .header{ 
       	width:808px;
       	height:auto;
@@ -158,29 +149,17 @@
         }
         
 	 .replyBox{ 
-      	width:708px;
+      	width:780px;
       	height:auto;
       	padding: 20px;
         margin: 10px auto;
         border: 1px solid #000000;
         }
          
-		        
-	  th {
-	     width:300px;
-	     padding: 10px;
-	     text-align: center;
-	  }        
-	  
-	  
 	  .content{
 	  	height:auto;
 	  }
 	  
-	  p.content.askBox{
-	  
-	   border: 1px solid #000000;
-	  }
 	  		
 		@media (min-width: 768px) {
 	 	 .container {
@@ -194,7 +173,26 @@
 	  }
 	}
   
-  
+	  .writerInfo{
+	  	width: 100%;
+	  	height: 50px;
+	  }
+	  
+	   div.left{
+	  	width: 50%;
+	  	float: left;
+	  	box-sizing: border-box;
+	  }
+	    div.right{
+	  	width: 50%;
+	  	float: rightt;
+	  	box-sizing: border-box;
+	  	
+	  }
+		div.inline.rightt.date {
+		text-align: right;
+		}
+
 </style>
 
 
@@ -219,72 +217,60 @@
 </div>
 
 	<div class="container">
-	<div class="header"> 
+	<div class="header p-0"> 
 	
-	<div>
 	
-	<div>   <!-- 문의 제목, 일시 -->
-		<div class="inline">${article.articleTitle}</div>
-		<div class="inline"> ${article.articleDate}</div>
- 	<hr>
+	<div class="border-bottom bg-secondary text-white mb-2 p-3 h-100">   <!-- 문의 제목, 일시 -->
+		<div class="inline left">${article.articleTitle}</div>
+		<div class="inline rightt date"> ${article.articleDate}</div>
  	</div>	
  	
  	
  	
- 	<div class="writerInfo">  <!-- 질문자 정보 -->
-		
-		<div  class="inline left">${writer.userName}</div>
-		<div  class="inline right">${writer.userId}</div><br>
-		<div  class="inline left">${writer.email}</div>
+ 	<div class="writerInfo border-bottom mb-2 p-2 h-100">  <!-- 질문자 정보 -->
+		<div  class="inline left ">${writer.userName}</div>
+		<div  class="inline right ">${writer.userId}</div>
+		<br>
+		<div  class="inline left ">${writer.email}</div>
 		<div  class="inline right">${writer.phone}</div>
-	
 	</div>
 	
 	
+	<div class="body p-2">
+	<div class="content askbox mb-2">
 	
-	
-	
-	
-	<div class="content askbox">
-	
-		<div>${article.content}</div>
+		<div class="mb-2">${article.content}</div>
 	
 	</div>
-	<hr>
 	
-	<div>
-	  				<div class="inline"> 
-	  					<c:if test="${reArticle.articleTitle ne null}">
+
+	
+	<c:if test="${reArticle ne null}">
+	   <div class="replyBox p-1">
+	   
+	  			<div class="inline left"> 
+	  				<i class="fab fa-replyd fa-lg" style="color:#b9bdba; text:red" ></i>
+	  				<c:if test="${reArticle.articleTitle ne null}">
 	                   ${reArticle.articleTitle}
 	                   </c:if> 
 	                </div>
 	                
-	                <div class="inline">
+	                <div class="inline rightt date">
 	               	   	<c:if test="${reArticle.articleDate ne null}">
 	           			${reArticle.articleDate}
 	                    </c:if> 
 	                </div>
-			</div>
-	
-	
-	
-	   <div class="replyBox">
-                				<div>
+                			<div class="m-3">
 	                        <c:if test="${reArticle.content ne null}">
 	                     ${reArticle.content}
 	                        </c:if>
 	                        
 					</div>
 	
-	</div>
-
-
-	
-	
-                 
-				                        
-			                 
+			</div>
+			</c:if>
         </div>	
+        
 	<div id="modalBox" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	
 	<div class="modal-dialog" role="document">
@@ -325,7 +311,7 @@
 	
 		
 	  
-		<div class="text-center">
+		<div class="text-center m-2">
 			<button id="delBtn"" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
 			<button id="okBtn" type="button" class="btn btn-secondary write">목 &nbsp;록</button>
 			<button id="addAnswer" type="button" class="btn btn-secondary write">답변추가</button>

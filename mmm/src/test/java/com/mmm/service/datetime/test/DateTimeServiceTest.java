@@ -142,7 +142,7 @@ public class DateTimeServiceTest {
 	            				
 	            				//System.out.println("list 목록 :\n"+movieService.getAllofMovieTitle());
 	            				//System.out.println("영화 이름 :"+mn.getText().trim());
-	            				if(movieService.getAllofMovieTitle().indexOf(mn.getText().trim().replaceAll(" ", ""))==-1) {
+	            				if(movieService.getAllofMovieTitle().indexOf(mn.getText().trim())==-1) {
 	            					break;
 	            				}
 	            				dateTime.setMovieName(mn.getText().trim()); // 상영일시 영화 이름

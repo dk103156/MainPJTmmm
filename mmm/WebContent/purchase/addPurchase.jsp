@@ -80,7 +80,7 @@
 			 console.log(purchaseQuantity);
 			
 			$("form").attr("method" , "POST").attr("action" , "/purchase/addPurchase").submit();		
-	}
+		}
 	
 	 
 		

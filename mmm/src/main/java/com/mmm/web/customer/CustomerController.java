@@ -144,6 +144,8 @@ public class CustomerController {
 		search.setPageSize(pageSize);
 		search.setArticleType(2);
 		
+		
+		
 		System.out.println("sssssssssssssseeeeeeeeeeeeeeeeaaaaaaaaaaaaaaaaarrrrrrrrrrch"+search);
 		
 		// 1:일대일문의 2:공지사항 3:자주찾는질문 4:리뷰
@@ -193,8 +195,17 @@ public class CustomerController {
 		article.setArticleType(1); // 
 		System.out.println("addContact에서 article>>" + article);
 		boardService.addArtice(article);
+	
+		System.out.println("아티클 넘버가 찍히냐!!!!!addContact에서 article>>" + article);
 		
-		model.addAttribute("article", article);
+		Article returnArticle = boardService.getArticle(article.getArticleNo());
+		
+		returnArticle.setArticleDate(JavaUtil.convertDateFormat(returnArticle.getArticleDate()));
+		String writerId = article.getUserId();
+		User writer = userService.getUserId(writerId);
+		
+		model.addAttribute("article", returnArticle);
+		model.addAttribute("writer", writer);
 		
 		return "forward:/customer/getContact.jsp";
 	}
@@ -214,6 +225,7 @@ public class CustomerController {
 		article.setArticleType(5);  //articleType 5 => 1:1문의글의 답변 , articleType 1 => 1:1문의글의 질문
 	
 		Article supArticle = boardService.getArticle(supArticleNo);
+        supArticle.setArticleDate(JavaUtil.convertDateFormat(supArticle.getArticleDate()));	
 		supArticle.setQnaStatus(1);
 		boardService.updateArticle(supArticle);
 		
@@ -221,7 +233,15 @@ public class CustomerController {
 		System.out.println("addReContact에서 article>>" + article);
 		boardService.addArtice(article);
 		
-		model.addAttribute("article", article);
+		User writer =userService.getUserId(supArticle.getUserId());
+		
+				model.addAttribute("article", supArticle);
+				System.out.println("슈퍼아티클.....#####################333"+ supArticle);
+				model.addAttribute("writer", writer);
+				System.out.println("글쓴이.....#####################333"+ writer);
+				model.addAttribute("reArticle", article);
+				System.out.println("답변아티클.....#####################333"+ article);
+				
 		
 		return "forward:/customer/getContact.jsp";
 	}
@@ -300,8 +320,10 @@ public class CustomerController {
 	
 	
 	@RequestMapping(value="getContactList")
-	public String getContactList(@ModelAttribute("search") Search search, Model model) throws Exception {
+	public String getContactList(@ModelAttribute("search") Search search, Model model, HttpSession session) throws Exception {
 		
+		User user = (User)session.getAttribute("user");
+		String returnPage = "";
 		System.out.println("/customer/getContactList");
 
 		if(search.getCurrentPage()==0) {
@@ -310,7 +332,16 @@ public class CustomerController {
 		search.setPageSize(pageSize);
 		search.setArticleType(1);
 		
-		// 1:일대일문의 2:공지사항 3:자주찾는질문 4:리뷰
+		if(!user.getUserId().equals("user02")) {   //admin이 아니면 search조건에 userId를 set해준다
+			search.setUserId(user.getUserId());	
+			returnPage = "forward:/customer/getContactList.jsp";   //나의 문의내역 페이지로 이동한다
+		}else {
+			returnPage = "forward:/customer/getContactListAd.jsp";    //관리자 문의내역 페이지로 이동한다
+		}
+		
+		System.out.println("search>>>>>>>>>>>>>>>>>>>>>>에 userId찍히냐?"+search);
+		
+		
 		Map<String, Object> map = boardService.getArticleList(search);
 		List<Article> list = (List<Article>)map.get("list");
 		
@@ -328,7 +359,7 @@ public class CustomerController {
 		model.addAttribute("list",list);
 		model.addAttribute("resultPage", resultPage);
 		
-		return "forward:/customer/getContactList.jsp";
+		return returnPage;
 	}
 	
 	//===========================================================================일대일문의 끝

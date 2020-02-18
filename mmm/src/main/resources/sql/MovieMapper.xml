@@ -22,6 +22,7 @@
 		<result property="wishUserFlag" 			column="wish_user_flag"			jdbcType="NUMERIC"/>
 		<result property="starByUser" 				column="star_user"				jdbcType="NUMERIC"/>
 		<result property="starUserFlag" 			column="star_flag"				jdbcType="NUMERIC"/>
+		<result property="ticketingRate" 			column="ticketing_rate"				jdbcType="NUMERIC"/>
 	</resultMap>
 	
 	<resultMap type="WishStarRating" id="wishStarRatingMap">
@@ -80,7 +81,7 @@
 		SELECT
 		m.movie_no, m.movie_title, m.kmdb_code,  m.poster, m.running_time, m.summary,
 		m.movie_rating, TO_CHAR(release_date, 'YYYY-MM-DD') release_date, NVL(m.onBoxOffice_flag, 0) onBoxOffice_flag, 
-		t.star_RATE, s.WISH_CNT, NVL2(c.wish_no, '1', '0') wish_user_flag, NVL(r.star_rate, '0') star_user
+		t.star_RATE, s.WISH_CNT, NVL2(c.wish_no, '1', '0') wish_user_flag, NVL(r.star_rate, '0') star_user, tc.ticketing_rate
 		FROM(
 			SELECT 
 			MOVIE_NO, ROUND(AVG(STAR_RATE), 2) STAR_RATE
@@ -103,11 +104,27 @@
 			FROM STAR_RATING
 			WHERE USER_NO = #{userNo:NUMERIC}
 			) r,
+			(
+			SELECT m.movie_no, m.MOVIE_TITLE, NVL(ROUND((s.tic_cnt / t.total_tic_cnt), 3)*100, '0') ticketing_rate
+			FROM MOVIE m,
+				(SELECT  movie_name, count(*) tic_cnt FROM TICKETING WHERE TICKETING_DATE >= (SYSDATE -7) GROUP BY  movie_name) s,
+				(SELECT count(*) total_tic_cnt FROM TICKETING WHERE TICKETING_DATE >= (SYSDATE -7)) t
+			WHERE m.MOVIE_TITLE = s. movie_name(+)
+			) tc,
+			<if test="onBoxOfficeFlag !=null and onBoxOfficeFlag == 1">
+			(
+			SELECT 
+			DISTINCT MOVIE_NAME 
+			FROM DATE_TIME
+			) d ,	
+			</if>
 			movie m
 		WHERE m.MOVIE_NO = t.movie_no(+)
 			AND m.MOVIE_NO = s.movie_no(+)
 			AND m.MOVIE_NO = c.movie_no(+)
 			AND m.MOVIE_NO = r.movie_no(+)
+			AND m.MOVIE_NO = tc.movie_no(+)
+			<if test="onBoxOfficeFlag !=null and onBoxOfficeFlag == 1">AND REPLACE(m.MOVIE_TITLE , ' ','') = REPLACE(d.movie_NAME, ' ' ,'')</if>	
 		<choose>
 <!-- 		0이면 상영예정작 조회 / 1이면 박스오피스 조회 -->
 			<when test="onBoxOfficeFlag !=null and onBoxOfficeFlag == 0">
@@ -120,7 +137,8 @@
 			ORDER BY m.release_date, m.movie_no
 			</when>
 				
-			<otherwise>ORDER BY t.star_RATE DESC NULLS LAST, m.movie_no</otherwise>
+<!-- 				예매율로 정렬 -->
+			<otherwise>ORDER BY  tc.ticketing_rate DESC , t.star_RATE DESC NULLS LAST, m.movie_no</otherwise>
 		</choose>
 	</sql>
 	
@@ -402,7 +420,7 @@
 			parameterType="WishStarRating">
 		INSERT
 		INTO STAR_RATING
-		VALUES(seq_wish_wish_no.nextval, #{movieNo}, #{userNo}, #{starByUser}, SYSDATE)
+		VALUES(seq_star_rating_star_rating_no.nextval, #{movieNo}, #{userNo}, #{starByUser}, SYSDATE)
 	</insert>
 
 <!-- 	별점 업데이트하기  in updateStarRating -->
