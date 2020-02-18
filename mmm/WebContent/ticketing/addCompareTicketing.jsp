@@ -25,6 +25,25 @@
     <title></title>
 
   <style>
+   
+  	  .list-group{
+	    cursor: pointer;
+	    line-height: 33px;
+	  }	  
+  
+	  .list-group-item{
+	  overflow: initial;
+	  }
+    
+      div.theater-list > ul > li {
+	    overflow-x: hidden;
+	    padding: 15px 20px 40px 20px;
+	    display: block;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	    overflow: hidden;
+	    vertical-align: middle;
+      }
   
 	  ul li {
 	    list-style-type:none;
@@ -66,9 +85,13 @@
 	  }
 	  
 	  body > div.container > div > div.row > div.col-9.px-1.h-100 > div.steps-body.text-center{
-	  	padding-top: 9px;
+	  	padding-top: 12px;
 	  	padding-bottom: 9px;	  	
 	  }
+	  
+		div.steps-body.text-center > div > div > hr {
+		    margin-top: 24px;
+		}
 	  
 	  .movie-select {
 	  	padding-top: 9px;
@@ -183,7 +206,7 @@
 	  
 	  /* 프랜차이즈 선택, 목록 창 크기 고정 */
 	  div.franchise-select, div.franchise-list {
-	  	width : 170px;
+	  	width : 200px;
 	  }
 	  
 	  .franchiseImage {
@@ -194,9 +217,11 @@
 	  
 	  
 	  img.firstHeaderImage , img.secondHeaderImage, img.thirdHeaderImage{
-	  	width: 30px;
-	  	height: 30px;
-	  	display : none;	  
+		width: 106px;
+	    height: 56px;
+	    left: 22px;
+	    position: absolute;
+	    top: 0px;
 	  }
 	   
 	  	  /* 클릭했을 시 색 변화 */
@@ -261,23 +286,40 @@
 	  
 	  /* 남은 좌석 수 색깔 */
 	  div.remainingSeat > div > div > ul > li > span.seatcount {
-	  	color : green;
-	  }	  
+	  	color : #45c245;
+	  }
 	  
 	  /* 조조, 심야*/
 	  span.timeMorning {
-	  	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-    		background-position: 0px 1px
+		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+	    background-position: 14px 1px;
+	    padding-right: 33px;
+	    border-left-width: 0px;
+	    padding-left: 33px !important;
 	  }
 	  
 	  span.timeNight {
-	 		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-   			background-position: 3px -20px;
+	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
+	    background-position: 19px -20px;
+	    padding-right: 33px;
+	    border-left-width: 0px;
+	    padding-left: 33px !important;
 	  }
 	  
 	  /* 프랜차이즈 셀렉트바 크기 수정 */
-	  div.steps-body > div > div > div:nth-child(1) > div > ul > li {
-	  	width : 160px;
+/* 	  div.steps-body > div > div > div:nth-child(1) > div > ul > li {
+	  	width : 181px;
+	  } */
+	  
+	  body > div.container > div > div.row > div.col-3.px-0.h-100 > div.steps-body.text-center > div > ul > li.month > div > span.month {
+	    display: block;
+	    margin-top: -6px;
+	    text-align: center;
+	    color: #666;
+	    font-size: 30px;
+	    font-family: Verdana;
+	    font-weight: bold;
+	    line-height: 30px;	  
 	  }
 	  	  
   </style>
@@ -301,7 +343,7 @@
               <div class="steps-header">
                 <p class="text-white text-center bg-dark mb-0">영화</p>
               </div>
-              <div class="steps-body">
+              <div class="steps-body" style="height: auto!important;">
                 <div class="movie-select h-auto">
                   <div class="sortmenu">
                     <a class="btn btn-primary btn-sm" href="#">예매율순</a>
@@ -355,17 +397,17 @@
               </div>
               <div class="steps-body">
                 <div class="row mx-0">
-                    <div class="col-4">
+                    <div class="col-4" style="left: 18px;">
                    	<c:if test="${user.role eq 'user'}">
                     		<div class="row mb-3">
-                    			<div class="col-12">	
+                    			<div class="col-12" style="padding-left: 45px;">	
 		        					<span class="font-weight-bold"><kbd>자주가는 극장</kbd></span><br>
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
-							<hr>
+							<hr style="margin-left: 30px;">
 							<div class="row mb-3">
-								<div class="col-12">
+								<div class="col-12" style="padding-left: 45px; height: 96px;">
 					        		<span class="likeTheater first"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
 					        		<span class="likeTheater first"><kbd>${user.likeTheater2 }</kbd></span><br/><br/>
@@ -373,12 +415,12 @@
 					        		<span class="likeTheater first"><kbd>${user.likeTheater3 }</kbd></span><br/><br/>
                     			</div>
                     		</div>
-                    		<hr>
+                    		<hr style="margin-left: 30px;">
                     	</c:if>                    
                         <div class="row mx-0">
                           <div class="franchise-select">
-	                           <ul class="list-group first">
-	                           		 <li class="list-group-item first text-center">
+	                           <ul class="list-group first" style="padding-left: 30px;">
+	                           		 <li class="list-group-item first text-center" style="width: 160px;">
 	                           		 <span class="firstHeaderName">프랜차이즈</span><img class="firstHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal" style="position: relative; left: 5px;">
 		                           		 <span class="arrow" style="position : relative; bottom:2px"><i id="firstArrowUp" class="fas fa-sort-up"></i></span>
@@ -389,31 +431,31 @@
                           </div>
                         </div>
                         <div class="row mx-0">
-                          <div class="franchise-list text-center">
+                          <div class="franchise-list text-center" style="padding-left: 45px; display: none;" >
 	                           <ul class="list-group first">
 				                  	<c:forEach var="i" items="${franchiseList}">
 			   							  <li class="list-group-item first"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" width="30" ></li>
 									</c:forEach>     
 							    </ul>
                           </div>
-                          <div class="theater-list">
-                            <ul class="list-group first">
+                          <div class="theater-list" style="padding-left: 6px;">
+                            <ul class="list-group first" style="width: 161px; margin-left: 24px;">
                             
                             </ul>
                           </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4" style="left: 8px;">
                  	<c:if test="${user.role eq 'user'}">
                     		<div class="row mb-3">
-                    			<div class="col-12">	
+                    			<div class="col-12" style="padding-left: 55px;">	
 		        					<span class="font-weight-bold"><kbd>자주가는 극장</kbd></span><br>
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
-							<hr>
+							<hr style="margin-left: 40px;">
 							<div class="row mb-3">
-								<div class="col-12">
+								<div class="col-12" style="padding-left: 55px; height: 96px;">
 					        		<span class="likeTheater second"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
 					        		<span class="likeTheater second"><kbd>${user.likeTheater2 }</kbd></span><br/><br/>
@@ -421,11 +463,11 @@
 					        		<span class="likeTheater second"><kbd>${user.likeTheater3 }</kbd></span><br/><br/>
                     			</div>
                     		</div>
-                    		<hr>
+                    		<hr style="margin-left: 40px;">
                     	</c:if>                    
                         <div class="row mx-0">
                           <div class="franchise-select">
-	                           <ul class="list-group second">  
+	                           <ul class="list-group second" style="padding-left: 40px;">  
 	                           		 <li class="list-group-item second text-center">
 	                           		 <span class="secondHeaderName">프랜차이즈</span><img class="secondHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
@@ -437,15 +479,15 @@
                           </div>
                         </div>
                         <div class="row mx-0">
-                          <div class="franchise-list text-center">
+                          <div class="franchise-list text-center" style="padding-left: 40px; display: none;">
 	                           <ul class="list-group second">
 				                  	<c:forEach var="i" items="${franchiseList}">
 			   							  <li class="list-group-item second"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" width="30" ></li>
 									</c:forEach>     
 							    </ul>
                           </div>
-                          <div class="theater-list">
-                            <ul class="list-group second">
+                          <div class="theater-list" style="padding-left: 21px;">
+                            <ul class="list-group second" style="width: 161px; margin-left: 19px;">
                             
                             </ul>
                           </div>
@@ -454,14 +496,14 @@
                     <div class="col-4">
                     	<c:if test="${user.role eq 'user'}">
                     		<div class="row mb-3">
-                    			<div class="col-12">	
+                    			<div class="col-12" style="padding-left: 55px;">
 		        					<span class="font-weight-bold"><kbd>자주가는 극장</kbd></span><br>
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
-							<hr>
+							<hr style="margin-left: 40px;">
 							<div class="row mb-3">
-								<div class="col-12">
+								<div class="col-12" style="padding-left: 55px; height: 96px;">
 					        		<span class="likeTheater third"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
 					        		<span class="likeTheater third"><kbd>${user.likeTheater2 }</kbd></span><br/><br/>
@@ -469,11 +511,11 @@
 					        		<span class="likeTheater third"><kbd>${user.likeTheater3 }</kbd></span><br/><br/>
                     			</div>
                     		</div>
-                    		<hr>
+                    		<hr style="margin-left: 40px;">
                     	</c:if>                    
                         <div class="row mx-0">
                           <div class="franchise-select">
-	                           <ul class="list-group third">  
+	                           <ul class="list-group third" style="padding-left: 40px;">  
 	                           		<li class="list-group-item third text-center">
 	                           		 <span class="thirdHeaderName">프랜차이즈</span><img class="thirdHeaderImage" src="" alt="" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
@@ -485,15 +527,15 @@
                           </div>
                         </div>
                         <div class="row mx-0">
-                          <div class="franchise-list text-center">
+                          <div class="franchise-list text-center" style="padding-left: 40px; display: none;">
 	                           <ul class="list-group third">
 				                  	<c:forEach var="i" items="${franchiseList}">
 			   							  <li class="list-group-item third"><span class="franchiseName">${i.franchise}</span><img class="franchiseImage" src="" alt="" width="30" ></li>
 									</c:forEach>     
 							    </ul>
                           </div>
-                          <div class="theater-list">
-                            <ul class="list-group third">
+                          <div class="theater-list" style="padding-left: 21px;">
+                            <ul class="list-group third" style="width: 161px; margin-left: 19px;">
                             
                             </ul>
                           </div>
@@ -511,14 +553,14 @@
               <div class="steps-header">
                 <p class="text-white text-center  bg-dark mb-0">날짜</p>
               </div>
-              <div class="steps-body text-center">
+              <div class="steps-body text-center" style="height: 397px;">
                     <div class="calendar">
                       <ul class="list-group pl-0">
                       <c:forEach var="i" items="${yearMonthList }">
 	                      <fmt:formatDate var="Year" value="${i }" pattern="yyyy"/>
 	                      <fmt:formatDate var="Month" value="${i }" pattern="MM"/>
 		                      <li class="month">
-		                      	<div>
+		                      	<div style="margin-bottom: 10px;">
 		                      		<span class="year">${Year }</span>
 		                      		<span class="month">${Month }</span>
 		                      	</div>
@@ -534,14 +576,14 @@
               <div class="steps-header">
                 <p class="text-white text-center bg-dark mb-0">시간</p>
               </div>
-              <div class="steps-body text-center">
+              <div class="steps-body text-center" style="height: 397px;">
                   <div class="row">
                    	 <div class="col-4">
-                          <div class="sortmenu">
+                          <div class="sortmenu" style="margin-left: 3px;">
                             <span class="morning">조조</span>
                             <span class="night">심야</span>
                           </div>
-                          <hr>
+                          <hr style="width: 240px;">
 
 
                           <div class="remainingSeat">
@@ -552,11 +594,11 @@
                     </div>
 
                   	  <div class="col-4">
-                          <div class="sortmenu">
+                          <div class="sortmenu" style="margin-left: 3px;">
                             <span class="morning">조조</span>
                             <span class="night">심야</span>
                           </div>
-                          <hr>
+                          <hr style="width: 240px;">
 
 
                           <div class="remainingSeat">
@@ -567,11 +609,11 @@
                         </div>
 
                     <div class="col-4">
-                          <div class="sortmenu">
+                          <div class="sortmenu" style="margin-left: 3px;">
                             <span class="morning">조조</span>
                             <span class="night">심야</span>
                           </div>
-                          <hr>
+                          <hr style="width: 240px;">
 
 
                           <div class="remainingSeat">
@@ -758,7 +800,7 @@
        			    		 checkThird();
        			    	 }	     		    	  
     		    	  for( var i in result){ 
-        		    	  $("div.theater-list ul.list-group."+index).append("<li class='list-group-item "+index+"'>"+result[i].theaterName+"</li>")
+        		    	  $("div.theater-list ul.list-group."+index).append("<li class='list-group-item "+index+"' title='"+result[i].theaterName+"'>"+result[i].theaterName+"</li>")
         		      }
 			    	  $("div.theater-list > ul > li.list-group-item."+index).on("click",function(){
 			    		  
@@ -1040,7 +1082,7 @@
     		    	  }
     		    	  //1관 .. 2관 Element 추가 
     		    	  for( var i in screenFirstArray){
-    		    		  var str ="<div><span class='screen'>"+$.trim(screenFirstArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
+    		    		  var str ="<div><div style='padding-bottom: 5px;'><span class='screen'>"+$.trim(screenFirstArray[i])+" (총 130석)</span></div><ul class=list-group></ul></div>"
     		    		  $("div:nth-child(1) > div.remainingSeat > div").append(str);
     		    	  }
     		    	  
@@ -1298,7 +1340,7 @@
     		    	  }
     		    	  // 1관 ...2관 추가
     		    	  for( var i in screenSecondArray){
-    		    		  var str ="<div><span class='screen'>"+$.trim(screenSecondArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
+    		    		  var str ="<div><div style='padding-bottom: 5px;'><span class='screen'>"+$.trim(screenSecondArray[i])+" (총 130석)</span></div><ul class=list-group></ul></div>"
     		    		  $("div:nth-child(2) > div.remainingSeat > div").append(str);
     		    	  }
     		    	  
@@ -1531,7 +1573,7 @@
     		    	  }
     		    	  // 1관... 2관 추가
     		    	  for( var i in screenThirdArray){
-    		    		  var str ="<div><span class='screen'>"+$.trim(screenThirdArray[i])+" (총 130석)</span><ul class=list-group></ul></div>"
+    		    		  var str ="<div><div style='padding-bottom: 5px;'><span class='screen'>"+$.trim(screenThirdArray[i])+" (총 130석)</span></div><ul class=list-group></ul></div>"
     		    		  $("div:nth-child(3) > div.remainingSeat > div").append(str);
     		    	  }
     		    	  
@@ -1818,6 +1860,7 @@
 		      $("#screen").css("display","block");			  
 	    	  // 상태바 "상영관" 찍기!
 	    	  screennn = $("div > div > ul > li.list-group-item.time.active").parent().prev().text()
+	    	  screennn = screennn.substring(0,screennn.length-9);
 	    	  $("#screen").children().first().next().text(screennn);	    	
 			  // 상태바 "상영관" 타이틀 찍기!
 			  $("#screen").children().first().next().attr("title", screennn);	  
@@ -1865,6 +1908,7 @@
 		      $("#screen").css("display","block");			  
 	    	  // 상태바 "상영관" 찍기!
 	    	  screennn = $("div > div > ul > li.list-group-item.time.active").parent().prev().text()
+	    	  screennn = screennn.substring(0,screennn.length-9);
 	    	  $("#screen").children().first().next().text(screennn);	    	
 			  // 상태바 "상영관" 타이틀 찍기!
 			  $("#screen").children().first().next().attr("title", screennn);	      	  
@@ -1916,6 +1960,7 @@
 		      $("#screen").css("display","block");			  
 	    	  // 상태바 "상영관" 찍기!
 	    	  screennn = $("div > div > ul > li.list-group-item.time.active").parent().prev().text()
+	    	  screennn = screennn.substring(0,screennn.length-9);
 	    	  $("#screen").children().first().next().text(screennn);	    	
 			  // 상태바 "상영관" 타이틀 찍기!
 			  $("#screen").children().first().next().attr("title", screennn);	      	  
@@ -1954,7 +1999,7 @@
 $(function(){
 
 	<c:if test="${user.role eq 'user'}">
-		$("div.movie-list > ul").css("height","649px")
+		$("div.movie-list > ul").css("height","659px")
 	</c:if>
 		
 		franchiseSelector('first')

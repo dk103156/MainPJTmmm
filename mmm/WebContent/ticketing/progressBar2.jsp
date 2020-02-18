@@ -138,7 +138,7 @@
 					<fmt:formatDate var="screenDay" value="${dateTime.screenDate}" pattern="E"/>
 					<fmt:formatDate var="screenTime" value="${dateTime.screenTime}" pattern="HH:mm"/>
 					<span class="header">일시</span>
-					<span class="data" title="">${screenDate}(${screenDay}) ${screenTime}</span>
+					<span class="data" title="">${screenDate}(${screenDay}) </span>
 				</div>			
 				<div id="screen" class="row screen" style="display: block;">
 					<span class="header">상영관</span>

@@ -135,17 +135,11 @@ public class ProductController {
 		
 		User user = (User)session.getAttribute("user");
 		
-		System.out.println("jhhhojojo->"+session.getAttribute("user"));
-		
 		Product product = productService.getProduct(prodNo);
-		System.out.println("getProduct 에 ProdNo 가지고 오나요? -> " + productService.getProduct(prodNo));
-		
-		model.addAttribute("product", product);
-		System.out.println("getProduct 에 modelAttribute Product 가 있나 ->" + product);
-		
-		System.out.println("getProd.jsp로 갑니당!");
 		
 		String[] fileArr = product.getProdImage().split(",");
+		
+		model.addAttribute("product", product);
 		model.addAttribute("fileArr", fileArr);
 		
 		return "forward:/product/getProd.jsp?prodNo="+prodNo;

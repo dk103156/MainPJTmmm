@@ -58,7 +58,23 @@ public class PurchaseController {
 	
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
+	//직접 구매 하는 경우
+	@RequestMapping(value="addPurchaseOne", method=RequestMethod.POST)
+	public String addPurchase(@ModelAttribute("purchase") Purchase purchase, HttpServletRequest request, Model model) throws Exception {
+		
+		System.out.println("/purchase/addPurchaseOne");
+		
+		User user = (User) request.getSession().getAttribute("user");
+		
+		purchase.setPurchaseUserNo(user.getUserNo());
+		purchase.setPurchaseDate(new Timestamp(new Date().getTime()));
+		
+		purchaseService.addPurchase(purchase);
+		
+		model.addAttribute("purchase",purchase);
+		
+		return "forward:/purchase/test.jsp";
+	}
 	
 	@RequestMapping(value="addPurchase" , method=RequestMethod.GET)
 	public String addPurchase(@ModelAttribute("purchase")Purchase purchase, @RequestParam("quantity")String quantity ,@RequestParam(value="prodNo") int prodNo,  HttpServletRequest request,Model model)throws Exception{
@@ -97,13 +113,7 @@ public class PurchaseController {
 		
 		model.addAttribute("purchase",purchase);
 		
-		//예매 정보도 받을 것
-		
-		//구매를 시행하면..
-		//1. 구매 테이블에 들어가야함
-		//2. 인벤토리에 추가되어야함...
-		
-		purchaseService.addPurchase(purchase);
+		 purchaseService.addPurchase(purchase);
 		
 		return "forward:/purchase/test.jsp";
 	}

@@ -17,9 +17,16 @@ public class Quiz {
 	private int answer; //정답 (1번:1, 2번:2 ...)
 	private Timestamp quizDate; //퀴즈 등록 일시
 	private String qDate;
-	private int partFlag;
+	private int partFlag; //참여했는지..
+	private int quizStatus; //삭제했는지.
 	
 	
+	public int getQuizStatus() {
+		return quizStatus;
+	}
+	public void setQuizStatus(int quizStatus) {
+		this.quizStatus = quizStatus;
+	}
 	public int getPartFlag() {
 		return partFlag;
 	}

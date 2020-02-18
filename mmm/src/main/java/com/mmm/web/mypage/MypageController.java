@@ -48,6 +48,13 @@ public class MypageController {
 		return "redirect:/mypage/mypage.jsp";
 	}
 	
-	
+	@CheckAuth(role="user")
+	@RequestMapping(value ="mypageUser", method = RequestMethod.GET)
+	public String mypageUser() throws Exception{
+		
+		System.out.println("/mypage/mypage : GET ");
+			
+		return "redirect:/mypage/mypageUser.jsp";
+	}
 
 }

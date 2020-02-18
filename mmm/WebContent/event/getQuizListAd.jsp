@@ -24,11 +24,6 @@
 		console.log('fncGetList에 왔거든여');
 		$("#currentPage").val(currentPage);
 		console.log($("#currentPage").val());
-	
-		//document.getElementById("currentPage").value = currentPage;
-// 		console.log('currentPage는? '+ currentPage);
-// 		console.log('currentPage는? '+ $("#currentPage").val());
-		//document.detailForm.submit();
 		$("form").attr("method","POST").attr("action", "/event/getQuizListAd").submit();
 	
 		
@@ -42,6 +37,40 @@
 			var quizNo = $(this).children('#quizNo').val();
 			console.log(quizNo);
 			self.location="/event/getQuizAd?quizNo="+quizNo;	
+		});
+		
+		
+		$('#delBtn').on("click", function(){
+			var confirm_val = confirm("정말 삭제하시겠습니까?");
+			
+			if(confirm_val){
+				
+				var checkArr = new Array();
+				 $("input[class='chBox']:checked").each(function(){
+					    checkArr.push($(this).attr("data-quizNo"));
+					   });
+
+				 console.log(checkArr)
+				 
+				 $.ajax({
+					    url : "/event/json/deleteQuiz",
+					    type : "post",
+					    data : { chbox : checkArr },
+					    success : function(result){
+					    	if(result==1){
+					    		alert('삭제완료')
+					    	}else{
+					    		alert('삭제실패')
+					    	}
+					     location.href = "/event/getQuizListAd";
+					    }
+					  });
+			}
+		
+			
+// 			var articleNo = ${article.articleNo};
+// 			console.log(articleNo)
+// 			self.location="/customer/deleteNotice?articleNo="+articleNo;
 		});
 		
 	});
@@ -122,13 +151,11 @@
 			
 			 
 			  <td class="col-sm-1"  align="left" id="quizNo" >
-			  <input type="checkBox" class="chBox" name="chBox" id="" />${ i }
+			  <input type="checkBox" class="chBox" name="chBox" data-quizNo = "${quiz.quizNo}" id="" />${ i }
 			  <script>
-			  
 			  $(".chBox").click(function(){
-				  
-				  $("#")
-			  })
+				  $("#allCheck").prop("checked", false);
+			  });
 			  </script>
 			  </td>
 			  <td class="col-sm-5" align="left" id="" >${quiz.question}

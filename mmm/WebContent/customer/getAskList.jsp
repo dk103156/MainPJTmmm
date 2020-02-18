@@ -30,12 +30,10 @@
 	
 		$(document).on("click",".getTranInfo td:nth-child(2)" ,function() { //로드 당시에 없었던 요소들도 이벤트 걸어줌
 		
-			console.log("눌렀어"); 
+			console.log("눌렀어");
+			console.log($($($(this).parent().parent()).find('.row')).last().html());
 			var articleNo = $(this).parent().find('#articleNo').val();
-	//		console.log("11111"+articleNo);
-			
 			getAsk(articleNo)
-// 			self.location="/customer/getAsk?articleNo="+articleNo;	
 		});
 		
 		$("button[name='ask']").on("click", function(){
@@ -133,6 +131,8 @@
 			  </td>
 			  <td class="col-sm-10" align="left" id="" >  ${ask.articleTitle} 
 			  </td>
+			</tr>
+			<tr class="row" id="${ask.articleNo}">
 			</tr>
           </c:forEach>
         </tbody>
@@ -261,7 +261,8 @@
 				
 				var html ="<div>"+ data.article.content+"</div>"
 			
-				$(".hee").append(html);
+				//$(".hee").append(html);
+				$("#"+data.article.articleNo).html(html)
 				
 				
 			}
