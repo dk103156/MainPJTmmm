@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mmm.service.cart.CartService;
+import com.mmm.service.domain.Product;
 import com.mmm.service.domain.Purchase;
 import com.mmm.service.domain.Ticketing;
 import com.mmm.service.domain.User;
@@ -58,6 +59,30 @@ public class PurchaseController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	
+	@RequestMapping(value="addPurchase" , method=RequestMethod.GET)
+	public String addPurchase(@ModelAttribute("purchase")Purchase purchase, @RequestParam("quantity")String quantity ,@RequestParam(value="prodNo") int prodNo,  HttpServletRequest request,Model model)throws Exception{
+		
+		
+		System.out.println("/purchase/addPurchase : GET");
+		User user = (User) request.getSession().getAttribute("user");
+		
+		System.out.println(purchase);
+		System.out.println("받아온 userNo는? ->"+ user);
+		System.out.println("받아온 prodNo는? ->"+ prodNo);
+		
+		Product product = new Product();
+		product = productService.getProduct(prodNo);
+		
+		purchase.setPurchaseProductQuantity(quantity);
+		purchase.setPurchaseUserNo(user.getUserNo());
+		
+		System.out.println("oioijfowjiofw->"+productService.getProduct(prodNo));
+		
+		System.out.println("forward:/purchase/addPurchase 로 갑니당!");
+		
+		return "forward:/purchase/addPurchase.jsp?prodNo="+prodNo;
+	}
 	
 	@RequestMapping(value="addPurchase" , method=RequestMethod.POST)
 	public String addPurchase(@ModelAttribute("purchase")Purchase purchase, @ModelAttribute("ticketing") Ticketing ticketing, HttpServletRequest request, Model model)throws Exception{

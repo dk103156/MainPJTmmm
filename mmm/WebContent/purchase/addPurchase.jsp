@@ -59,7 +59,6 @@
   	 </style>
   
 
-	<!-- <link rel="stylesheet" href="/css/admin.css" type="text/css"> -->
 
 
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -152,8 +151,8 @@
 	    		<h2>결제완료</h2>
 			</div> 
 	</div>
-		<hr/>
- 	</div>	
+		
+ </div>	
  	<div class="container">
  		<br/>
  		<hr style="background-color:black; height:3px;">
@@ -180,31 +179,30 @@
 		</div>
 		
 		
-		<input type="hidden" value = "${purchase.purchaseProd.prodNo}">
-				 <div class="row cart" style="padding:0.5em;">	
-							
+		<input type="hidden" value = "${purchase.purchaseProductNo}">
+				 <div class="row" style="padding:0.5em;">	
 							<div class="col-md-2" style="text-align:center;vertical-align:middle;">
-										<input type="hidden" name="prodNo" value="${purchase.purchaseProd.prodNo}">
-										<img src="/resources/image/${purchase.purchaseProd.prodImage}" width ="auto" height="92"><br/>
+										<input type="hidden" name="prodNo" value="${purchase.purchaseProductNo}">
+										<img src="/resources/image/${purchase.purchaseProductNo.prodImage}" width ="auto" height="92"><br/>
 							</div>
 							<div class="col-md-2" style="text-align:center;vertical-align:middle;">
-										<h4><strong>${purchase.purchaseProd.prodName}</strong></h4>
+										<h4><strong>${purchase.purchaseProductNo.prodName}</strong></h4>
 										<br>
-										<h5>${purchase.purchaseProd.prodDetail}</h5>
+										<h5>${purchase.purchaseProductNo.prodDetail}</h5>
 							</div>
 							<div class="col-md-3" style="text-align:center;vertical-align:middle;">
 							<br>
-										<h3>${purchase.purchaseProd.prodPrice}원</h3>
+										<h3>${purchase.purchaseProductNo.prodPrice}원</h3>
 							</div>
 							<div class="col-md-2" style="text-align:center;vertical-align:right;">
 							<br>
-										<input type="hidden" name="purchaseQuantity" value="${purchase.purchaseQuantity}">
-										<h3>${purchase.purchaseQuantity}개</h3>
+										<input type="hidden" name="purchaseQuantity" value="${purchase.purchaseProductQuantity}">
+										<h3>${purchase.purchaseProductQuantity}개</h3>
 							</div>
 							<div class="col-md-2" style="text-align:center;vertical-align:right;">
 							<br>		
-										<input type="hidden" name="purchasePrice" value="${purchase.purchaseProd.prodPrice*purchase.purchaseQuantity}">
-										<h3> ${purchase.purchaseProd.prodPrice*purchase.purchaseQuantity}원</h3>
+										<input type="hidden" name="purchasePrice" value="${purchase.purchaseProductNo.prodPrice*purchase.purchaseProductQuantity}">
+										<h3> ${purchase.purchaseProductNo.prodPrice*purchase.purchaseProductQuantity}원</h3>
 							</div>
 					</div>
 					<br>
@@ -230,7 +228,7 @@
 							
 							<div class="col-sm-3" style="text-align:center;vertical-align:right;">
 							<br>
-										<h2> ${purchase.purchaseProd.prodPrice*purchase.purchaseQuantity}원</h2>
+										<h2> ${purchase.purchaseProductNo.prodPrice*purchase.purchaseProductQuantity}원</h2>
 							</div>
 							<div class="col-md-1" style="text-align:center;vertical-align:right;">
 							<br>
@@ -246,7 +244,7 @@
 							</div>
 							<div class="col-sm-3" style="text-align:center;vertical-align:right;">
 							<br>
-										<h2> ${purchase.purchaseProd.prodPrice*purchase.purchaseQuantity}원</h2>
+										<h2> ${purchase.purchaseProductNo.prodPrice*purchase.purchaseProductQuantity}원</h2>
 							</div>
  	</div>
  	

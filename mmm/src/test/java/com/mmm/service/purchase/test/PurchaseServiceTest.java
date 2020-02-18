@@ -93,7 +93,7 @@ public class PurchaseServiceTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void addInventory() throws Exception {
 		
 		Inventory inventory = new Inventory();
