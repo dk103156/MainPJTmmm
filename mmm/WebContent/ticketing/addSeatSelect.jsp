@@ -2438,14 +2438,26 @@ $(function(){
 <script type="text/javascript">
 //console.log( toHM(Date.parse('${dateTime.screenTime}'))().substring(0,2) )
 
-if(parseInt($("span.screenTime").text().substring(0,2))<5 ){
-   $("span.screenTime").text(parseInt($("span.screenTime").text().substring(0,2))+=24)
-}
+		var hr = parseInt($("span.screenTime").text().substring(0,2));
+		var min = parseInt($("span.screenTime").text().substring(3,5));
+		if( hr <5 ){
+			hr = hr+24;
+		}
+		if( hr>=5 && hr<10){
+			hr = "0"+hr;
+		}
+		if( min <10) {
+			min = "0" + min;
+		}	
+		
+		var result = hr+":"+min
+		
+		$("span.screenTime").text(result)
+		$("#date > span.data").append(result)
 
 
-
-//console.log('${dateTime.screenTime}'.substring(11,'${dateTime.screenTime}'.length-5))
-//console.log('${dateTime.screenDate}'.substring(0,10))
+console.log('${dateTime.screenTime}'.substring(14,'${dateTime.screenTime}'.length-5))
+console.log('${dateTime.screenDate}'.substring(0,10))
 //서버에 부하를 너무 많이준다.
 /*
 	setInterval(function() {
