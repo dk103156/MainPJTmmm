@@ -20,15 +20,15 @@
 <title>로그인</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-  body > div.container{
-        	border: 3px solid #D6CDB7;
-            margin-top: 10px;
-            background-color: beige;
-        }
+body > div.container{
+	border: 3px solid #D6CDB7;
+    margin-top: 10px;
+    background-color: beige;
+      }
         
-  p{
-        text-align: center;
-    }
+p{
+      text-align: center;
+  }
 
 </style>
 
