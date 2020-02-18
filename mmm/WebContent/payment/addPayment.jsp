@@ -327,9 +327,6 @@
   <body>
     <h1>addPay</h1>
     
-    <!--     	임의로 userNo 심어주기... TEST 용  -->
-	<input id="userNo" type="hidden" value="11111">
-    
 	  <div class="album py-5 bg-light">
 	    <div class="container">
 	    

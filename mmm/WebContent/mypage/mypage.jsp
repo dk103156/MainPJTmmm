@@ -147,6 +147,15 @@ ol, ul {
     background-color: #eaebed;
 }
 
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+
 </style> 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
@@ -154,14 +163,22 @@ $(function(){
 	
 
 	$("a[href='#']:contains('회원정보수정')").on('click',function(){
-		var userNo = $('#userNo').val();
+		//var userNo = $('#userNo').val();
 		console.log(userNo);	
-		$("#plusPage").load("/user/getUser/");
+		$("#plusPage").load("/user/getUser");
 	})
 	
 	$("a[href='#']:contains('예매/구매내역')").on('click',function(){	
 		$("#plusPage").load("/ticketing/getTicketingList");
 	})
+	
+	
+	$("#MypageHome").on('click',function(){	
+		console.log("zmfflr");
+		$("#plusPage").load("/mypage/mypageUser");
+	})
+	
+	$("#MypageHome").trigger("click");
 	
 });
 </script>
@@ -176,7 +193,7 @@ $(function(){
 			<div class="inner-wrap">
 				<div class="lnb-area">
 					<nav id="lnb">
-						<p class="tit"><a href="/mypage" title="Mypage">Mypage Home</a></p>
+						<p class="tit"><a href="/mypage" id ="MypageHome" title="Mypage">Mypage Home</a></p>
 						<input type="hidden" id="userNo" name="userNo" value="${user.userNo}"> 
 			
 						<ul>
@@ -199,6 +216,7 @@ $(function(){
 		<!-- contents Start -->
 		<div class="col-md-9" style=" height: 200px;" id="plusPage">	
 		<!--다른 페이지 로딩 되는 부분  -->
+
 		</div>	
 		<!-- contents end -->
 		

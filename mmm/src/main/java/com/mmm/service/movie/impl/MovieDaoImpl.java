@@ -158,6 +158,7 @@ public class MovieDaoImpl implements MovieDao {
 
 	@Override
 	public void addStarRating(WishStarRating wishStarRating) throws Exception {
+		System.out.println("----------> wishStarRating   "+ wishStarRating );
 		sqlSession.insert("MovieMapper.addStarRating", wishStarRating);
 	}
 

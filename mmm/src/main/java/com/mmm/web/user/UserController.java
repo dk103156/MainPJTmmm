@@ -96,7 +96,9 @@ public class UserController {
 		
 		model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			
-		return "forward:/user/addUser.jsp";
+
+		return "forword:/user/addUser.jsp";
+
 	}
 	
 	@RequestMapping(value = "addUser" , method=RequestMethod.POST)
@@ -254,12 +256,12 @@ public class UserController {
 	public String login() throws Exception{
 		
 		System.out.println("/user/login : GET");
-	
+
 		return "redirect:/user/login.jsp";
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user, HttpSession session){
+	public String login(@ModelAttribute("user") User user,Model model, HttpSession session){
 		
 		try {
 			System.out.println("/user/login : POST");
@@ -273,16 +275,22 @@ public class UserController {
 			
 			System.out.println("Userrrrrrrrrrrr"+user);
 			User dbUser = userService.getUserId(user.getUserId());
-				
+			
+			//회원정보가 없거나  비회원일 경우
 			  if(dbUser == null || dbUser.getRole().trim().equals("unUser")) {
 				  
 				  return "redirect:/user/login.jsp?status=failed"; 
 			  }
-			 
-			System.out.println(user);
+			  
+			 //탈퇴한 회원일 경우
+			  if(dbUser.getUserStatus() == 0) {
+				  session.setAttribute("user", dbUser);
+				  return "redirect:/user/comebackUser.jsp?status=comeback"; 
+			  }
+		
 			
-			
-			if(user.getPassword().equals(dbUser.getPassword())&& dbUser.getRole().trim().equals("user")) {
+			//회원일 경우
+			if(user.getPassword().equals(dbUser.getPassword())) {
 				session.setAttribute("user", dbUser);	
 				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 			}else {//로그인 실패시 
@@ -473,31 +481,9 @@ public class UserController {
 			session.setAttribute("user", user);
 		}
 		
-		return "redirect:/mypage/mypage.jsp?userNo="+user.getUserNo();
+		return "redirect:/mypage/mypage.jsp";
 	}
-	
-	
-	@RequestMapping(value = "updateUserStatus", method=RequestMethod.PUT)
-	public String updateUserStatus(HttpSession session) throws Exception{
 		
-		System.out.println("/user/updateUserStatus : PUT");
-		
-		//Business Logic
-		
-		
-		User sessionUser = ((User)session.getAttribute("user"));
-		
-		if(sessionUser != null) {
-			userService.updateUserStatus(sessionUser);
-			//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-			return "redirect:/mypage/mypage.jsp";
-		}
-
-		return "redirect:/user/login.jsp";
-	}//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	
-	
 	
 	@RequestMapping(value= "userIdChk", method=RequestMethod.GET)
 	public String userIdChk(@ModelAttribute("user") User user, HttpSession session) throws Exception{

@@ -23,6 +23,7 @@ import com.mmm.common.Page;
 import com.mmm.common.Search;
 import com.mmm.service.domain.Cart;
 import com.mmm.service.domain.Product;
+import com.mmm.service.domain.Ticketing;
 import com.mmm.service.domain.User;
 import com.mmm.service.product.ProductService;
 
@@ -134,17 +135,11 @@ public class ProductController {
 		
 		User user = (User)session.getAttribute("user");
 		
-		System.out.println("jhhhojojo->"+session.getAttribute("user"));
-		
 		Product product = productService.getProduct(prodNo);
-		System.out.println("getProduct 에 ProdNo 가지고 오나요? -> " + productService.getProduct(prodNo));
-		
-		model.addAttribute("product", product);
-		System.out.println("getProduct 에 modelAttribute Product 가 있나 ->" + product);
-		
-		System.out.println("getProd.jsp로 갑니당!");
 		
 		String[] fileArr = product.getProdImage().split(",");
+		
+		model.addAttribute("product", product);
 		model.addAttribute("fileArr", fileArr);
 		
 		return "forward:/product/getProd.jsp?prodNo="+prodNo;
@@ -214,31 +209,31 @@ public class ProductController {
 	
 	
 	
-			//상품목록
-			@RequestMapping(value="listProduct")
-			public String listProduct(@ModelAttribute("product") Product product , @ModelAttribute("search") Search search ,Model model , HttpServletRequest request) throws Exception {
-				
-				System.out.println("/product/listProduct : GET / POST");
-				
-				if(search.getCurrentPage() ==0 ){
-					search.setCurrentPage(1);
-				}
-				search.setPageSize(pageSize);
-				
-				Map<String , Object> map = productService.getProductList(search);
-				
-				Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-				System.out.println(resultPage);
-				
-				model.addAttribute("list", map.get("list"));
-				model.addAttribute("search", search);
-				
-				System.out.println("getProdList.jsp로 갑니당!");
-				
-	
-				
-				return "forward:/product/getProdList.jsp";
-			}
+	//상품목록
+	@RequestMapping(value="listProduct")
+	public String listProduct(@ModelAttribute("product") Product product , @ModelAttribute("search") Search search ,Model model , HttpServletRequest request) throws Exception {
+		
+		System.out.println("/product/listProduct : GET / POST");
+		
+		if(search.getCurrentPage() ==0 ){
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		
+		Map<String , Object> map = productService.getProductList(search);
+		
+		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		System.out.println(resultPage);
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("search", search);
+		
+		System.out.println("getProdList.jsp로 갑니당!");
+		
+
+		
+		return "forward:/product/getProdList.jsp";
+	}
 	
 	
 	
@@ -320,15 +315,17 @@ public class ProductController {
 			return "forward:/product/getProdList.jsp";
 		}
 		
-		@RequestMapping(value="getQuickOrder")
-		public String getQuickOrder(@ModelAttribute("product") Product product , Model model , HttpServletRequest request) throws Exception {
+		@RequestMapping(value="getQuickOrder", method=RequestMethod.POST)
+		public String getQuickOrder(@ModelAttribute() Product product , @ModelAttribute() Ticketing ticketing, Model model , HttpServletRequest request) throws Exception {
 			
-			System.out.println("/product/getQuickOrder : GET / POST");
+			System.out.println("/product/getQuickOrder : POST");
+			
+			System.out.println(ticketing);
 			
 			Map<String , Object> map = productService.getQuickOrder(product);
 			
 			model.addAttribute("list", map.get("list"));
-			
+			model.addAttribute("ticketing",ticketing);
 			System.out.println("getProdList.jsp로 갑니당!");
 			
 			

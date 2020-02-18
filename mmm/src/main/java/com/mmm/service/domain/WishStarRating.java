@@ -11,6 +11,8 @@ public class WishStarRating {
 	private int starByUser;
 	private Timestamp wishDate;
 	private Timestamp ratingDate;
+	
+	
 	public int getWishNo() {
 		return wishNo;
 	}
