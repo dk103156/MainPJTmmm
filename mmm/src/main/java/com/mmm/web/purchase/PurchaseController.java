@@ -1,8 +1,8 @@
 package com.mmm.web.purchase;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mmm.service.cart.CartService;
-import com.mmm.service.domain.Cart;
-import com.mmm.service.domain.Product;
 import com.mmm.service.domain.Purchase;
+import com.mmm.service.domain.Ticketing;
 import com.mmm.service.domain.User;
-import com.mmm.service.inven.InvenService;
+import com.mmm.service.inventory.InventoryService;
 import com.mmm.service.product.ProductService;
 import com.mmm.service.purchase.PurchaseService;
 import com.mmm.service.user.UserService;
@@ -37,20 +36,20 @@ public class PurchaseController {
 	private UserService userService;
 	
 	@Autowired
-	@Qualifier("cartServiceImpl")
-	private CartService cartService;
-	
-	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
 	
 	@Autowired
-	@Qualifier("invenServiceImpl")
-	private InvenService invenService;
-	
-	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	@Qualifier("cartServiceImpl")
+	private CartService cartService;
+	
+	@Autowired
+	@Qualifier("inventoryServiceImpl")
+	private InventoryService invenService;
 	
 	
 	@Value("#{commonProperties['pageUnit']}")
@@ -60,140 +59,28 @@ public class PurchaseController {
 	int pageSize;
 	
 	
-	@RequestMapping(value="addPurchase" , method=RequestMethod.GET)
-	public String addPurchase(@ModelAttribute("purchase")Purchase purchase, @RequestParam("quantity")int quantity ,@RequestParam(value="prodNo") int prodNo,  HttpSession session,Model model)throws Exception{
-		
-		System.out.println("/purchase/addPurchase : GET");
-		
-		
-		User user = (User)session.getAttribute("user");
-		
-		System.out.println("jhhhojojo->"+session.getAttribute("user"));
-		
-		System.out.println("받아온 userNo는? ->"+ user);
-		System.out.println("받아온 prodNo는? ->"+ prodNo);
-		
-		Product product = new Product();
-		product = productService.getProduct(prodNo);
-		
-//		User user =  new User();
-//		user = userService.getUser(userNo);
-		
-		purchase.setPurchaseQuantity(quantity);
-		purchase.setPurchaseUser(user.getUserNo());
-		purchase.setPurchaseProd(product);
-		
-		
-		System.out.println("oioijfowjiofw->"+productService.getProduct(prodNo));
-		
-		System.out.println("forward:/purchase/addPurchase 로 갑니당!");
-		
-		return "forward:/purchase/addPurchase.jsp?prodNo="+prodNo;
-	}
-
 	@RequestMapping(value="addPurchase" , method=RequestMethod.POST)
-	public String addPurchase(@ModelAttribute("purchase")Purchase purchase , @RequestParam(value="prodNo") int prodNo, HttpSession session,Model model)throws Exception{
+	public String addPurchase(@ModelAttribute("purchase")Purchase purchase, @ModelAttribute("ticketing") Ticketing ticketing, HttpServletRequest request, Model model)throws Exception{
 		
-		System.out.println("/purchase/addPurchase : POST");
+		System.out.println("예매 정보 전부 넘어왔나요? : \n"+ticketing);
+		User user = (User) request.getSession().getAttribute("user");
 		
-		User user = (User)session.getAttribute("user");
-		Product product = productService.getProduct(prodNo);
+		System.out.println(purchase);
+		System.out.println(user.getUserNo());
+		purchase.setPurchaseUserNo(user.getUserNo());
+		purchase.setPurchaseDate(new Timestamp(new Date().getTime()));
 		
-		System.out.println("jhhhojojo->"+session.getAttribute("user"));
+		model.addAttribute("purchase",purchase);
 		
-		purchase.setPurchaseUser(user.getUserNo());
-		purchase.setPurchaseProd(product);
-		purchase.setPurchaseQuantity(purchase.getPurchaseQuantity());
-		purchase.setPurchasePrice(purchase.getPurchasePrice());
-//		purchase.setRcName(purchase.getRcName());
-//		purchase.setRcPhone(purchase.getRcPhone());
+		//예매 정보도 받을 것
+		
+		//구매를 시행하면..
+		//1. 구매 테이블에 들어가야함
+		//2. 인벤토리에 추가되어야함...
 		
 		purchaseService.addPurchase(purchase);
 		
-		
-		System.out.println("forward:/purchase/addPurchase에서 결제로 갑니당!");
-		
-		
-		return "forward:/index.jsp";
+		return "forward:/purchase/test.jsp";
 	}
-	
-	@RequestMapping(value="addGiftPurchase" , method=RequestMethod.GET)
-	public String addGiftPurchase(@ModelAttribute("purchase")Purchase purchase, @RequestParam("quantity")int quantity ,@RequestParam(value="prodNo") int prodNo,  HttpSession session,Model model)throws Exception{
-		
-		System.out.println("/purchase/addGiftPurchase : GET");
-		
-		
-		User user = (User)session.getAttribute("user");
-		
-		System.out.println("jhhhojojo->"+session.getAttribute("user"));
-		
-		System.out.println("받아온 userNo는? ->"+ user);
-		System.out.println("받아온 prodNo는? ->"+ prodNo);
-		
-		Product product = new Product();
-		product = productService.getProduct(prodNo);
-		
-//		User user =  new User();
-//		user = userService.getUser(userNo);
-		
-		purchase.setPurchaseQuantity(quantity);
-		purchase.setPurchaseUser(user.getUserNo());
-		purchase.setPurchaseProd(product);
-		
-	//	purchaseService.addGiftPurchase(purchase);
-		
-		System.out.println("oioijfowjiofw->"+productService.getProduct(prodNo));
-		
-		System.out.println("forward:/purchase/addGiftPurchase 로 갑니당!");
-		
-		return "forward:/purchase/addGiftPurchase.jsp?prodNo="+prodNo;
-	}
-	
-	
-	
-	@RequestMapping(value="addGiftPurchase" , method=RequestMethod.POST)
-	public String addGiftPurchase(@ModelAttribute("purchase")Purchase purchase , @RequestParam(value="prodNo") int prodNo, HttpSession session,Model model)throws Exception{
-		
-		System.out.println("/purchase/addPurchase : POST");
-		
-		User user = (User)session.getAttribute("user");
-		Product product = productService.getProduct(prodNo);
-		
-		System.out.println("jhhhojojo->"+session.getAttribute("user"));
-		
-		purchase.setPurchaseUser(user.getUserNo());
-		purchase.setPurchaseProd(product);
-		purchase.setPurchaseQuantity(purchase.getPurchaseQuantity());
-		purchase.setPurchasePrice(purchase.getPurchasePrice());
-//		purchase.setRcName(purchase.getRcName());
-//		purchase.setRcPhone(purchase.getRcPhone());
-		
-		purchaseService.addGiftPurchase(purchase);
-		
-		
-		System.out.println("forward:/purchase/addPurchase에서 결제로 갑니당!");
-		
-		
-		return "forward:/index.jsp";
-	}
-	
-	@RequestMapping(value="getPurchaseList")
-	public String getPurchaseList(@ModelAttribute("purchase")Purchase purchase , Model model , HttpServletRequest request , HttpSession session) throws Exception{
-		
-		System.out.println("/purchase/getPurchaseList : GET / POST");
-		
-		
-		purchaseService.getPurchaseList(purchase);
-			
-		Map<String , Object> map = purchaseService.getPurchaseList(purchase);
-		
-			
-		model.addAttribute("list", map.get("list"));
-
-		
-		System.out.println("getPurchaseList.jsp로 갑니당!");
-		return "forward:/purchase/getPurchaseList.jsp";
-	}
-	
 	
 }

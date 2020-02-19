@@ -8,8 +8,8 @@ public class Purchase {
 	
 	private int purchaseNo;						// 구매관리번호
 	private int purchaseUserNo;					// 회원관리번호
-	private List<String> purchaseProductNo;				// 상품번호
-	private List<Integer> purchaseProductQuantity;		// 구매 갯수
+	private String purchaseProductNo;				// 상품번호
+	private String purchaseProductQuantity;		// 구매 갯수
 	private int purchaseStatus;					// 0:구매, 1:선물
 	private int purchasePrice;					// 구매 총 가격
 	private Timestamp purchaseDate;				// 구매 일시
@@ -23,10 +23,10 @@ public class Purchase {
 	public int getPurchaseUserNo() {
 		return purchaseUserNo;
 	}
-	public List<String> getPurchaseProductNo() {
+	public String getPurchaseProductNo() {
 		return purchaseProductNo;
 	}
-	public List<Integer> getPurchaseProductQuantity() {
+	public String getPurchaseProductQuantity() {
 		return purchaseProductQuantity;
 	}
 	public int getPurchaseStatus() {
@@ -53,10 +53,10 @@ public class Purchase {
 	public void setPurchaseUserNo(int purchaseUserNo) {
 		this.purchaseUserNo = purchaseUserNo;
 	}
-	public void setPurchaseProductNo(List<String> purchaseProductNo) {
+	public void setPurchaseProductNo(String purchaseProductNo) {
 		this.purchaseProductNo = purchaseProductNo;
 	}
-	public void setPurchaseProductQuantity(List<Integer> purchaseProductQuantity) {
+	public void setPurchaseProductQuantity(String purchaseProductQuantity) {
 		this.purchaseProductQuantity = purchaseProductQuantity;
 	}
 	public void setPurchaseStatus(int purchaseStatus) {
@@ -86,6 +86,10 @@ public class Purchase {
 				+ ", receiverPhone=" + receiverPhone + ", receiverName=" + receiverName + ", senderMessage="
 				+ senderMessage + "]";
 	}
+	
+
+	
+
 	
 
 	

@@ -5,7 +5,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="InvenMapper">
+<mapper namespace="InventoryMapper">
  	
 	<resultMap id="inventorySelectMap" type="Inventory">
 		<result property="inventoryNo" 				column="inventory_no" 			jdbcType="INTEGER"  />
@@ -20,17 +20,15 @@
 	
 	
 	
-	<insert id="addInven" parameterType="Inventory" >
+	<insert id="addInventory" parameterType="Inventory" >
 	 	INSERT
 		INTO inventory ( inventory_no, inventory_user_no, inventory_prod_no, inventory_purchase_no, 
 						 inventory_prod_pin_no , inventory_reg_date ,  inventory_used_date , inventory_status ) 
-		VALUES	 (
-		 seq_inventory_inventory_no.NEXTVAL,
-		 #{inventoryUserNo:INTEGER},
+		VALUES	 ( seq_inventory_inventory_no.NEXTVAL, #{inventoryUserNo:INTEGER},
 		 #{inventoryProdNo:INTEGER},
 		 #{inventoryPurchaseNo:INTEGER},
 		 #{inventoryProdPinNo:INTEGER},
-		 #{inventoryRegDate:TIMESTAMP} 
+		 #{inventoryRegDate:TIMESTAMP}, 
 		 #{inventoryUsedDate:TIMESTAMP},    
 		 0 )
 	 </insert>

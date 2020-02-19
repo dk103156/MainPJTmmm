@@ -1,7 +1,7 @@
 DROP TABLE cart;
-DROP TABLE purchase;
 DROP TABLE inventory;
 DROP TABLE product;
+DROP TABLE purchase;
 
 DROP SEQUENCE seq_product_prod_no;
 DROP SEQUENCE seq_cart_cart_no;
@@ -34,11 +34,11 @@ CREATE TABLE product (
 );
 
 CREATE TABLE cart (
-cart_no		 		NUMERIC(5)	 	NOT NULL,
-cart_user_no  	 	NUMERIC(5)	 	NOT NULL REFERENCES users(user_no),
-cart_prod_no 		NUMERIC(5) 	NOT NULL,
-card_prod_quantity 	NUMERIC(1000)     NOT NULL,
-cart_reg_date 		TIMESTAMP        NOT NULL,	
+cart_no		 		 NUMERIC(5)	 	NOT NULL,
+cart_user_no  	 	 NUMERIC(5)	 	NOT NULL REFERENCES users(user_no),
+cart_prod_no 		 NUMERIC(5) 	NOT NULL,
+card_prod_quantity   NUMERIC(5)     NOT NULL,
+cart_reg_date 		 TIMESTAMP        NOT NULL,	
 PRIMARY KEY(cart_no)
 );
 
@@ -66,10 +66,14 @@ inventory_reg_date       TIMESTAMP 		NOT NULL,
 inventory_used_date      TIMESTAMP, 
 inventory_status         VARCHAR(5)     NOT NULL,
 PRIMARY KEY(inventory_no)
-)
+);
 
 commit;
-
+	
+col purchase_Date for a15 		
+col receiver_phone for a15 		
+col receiver_name for a15    
+col sender_message	 for a15
 
 
 

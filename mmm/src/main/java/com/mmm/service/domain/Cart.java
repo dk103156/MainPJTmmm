@@ -7,8 +7,8 @@ public class Cart {
 
 		private int cartNo;							// 장바구니 관리번호
 		private int	cartUserNo;						// 회원관리번호 
-		private int cartProdNo;			// 상품관리번호
-		private int cartProdQuantity;	    // 상품구매수량
+		private int cartProdNo;						// 상품관리번호
+		private int cartProdQuantity;	  		    // 상품구매수량
 		private Timestamp cartRegDate;				// 카트 등록 날짜
 		
 		public int getCartNo() {

@@ -28,51 +28,45 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	public void addPurchase(Purchase purchase) throws Exception {
 		sqlSession.insert("PurchaseMapper.addPurchase",purchase);
 	}
-		
-	
-	@Override
-	public void addGiftPurchase(Purchase purchase) throws Exception {
-		sqlSession.insert("PurchaseMapper.addGiftPurchase",purchase);
-	}
-	
+
+
 	@Override
 	public Purchase getPurchase(int purchaseNo) throws Exception {
-		return sqlSession.selectOne("PurchaseMapper.getPurchse", purchaseNo);
+		
+		return sqlSession.selectOne("PurchaseMapper.getPurchase",purchaseNo);
 	}
 	
 	@Override
-	public List<Purchase> getPurchaseList(Purchase purchase) throws Exception {
-		return sqlSession.selectList("PurchaseMapper.getPurchaseList", purchase);
+	public Purchase recentPurchase() throws Exception {
+		
+		return sqlSession.selectOne("PurchaseMapper.recentPurchase");
 	}
-	
+
+
 	@Override
-	public List<Purchase> getCancelPurchaseList(Purchase purchase) throws Exception {
-		return sqlSession.selectList("PurchaseMapper.getCancelPurchaseList", purchase);
+	public Map<String,Object> getPurchaseList(Purchase purchase) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	@Override
-	public List<Purchase> getSaleList(Search search) throws Exception {
-		return sqlSession.selectList("PurchaseMapper.getSaleList", search);
-	}
-	
+
+
 	@Override
 	public void updatePurchase(Purchase purchase) throws Exception {
-		sqlSession.update("PurchaseMapper.updatePurchase", purchase);
+		// TODO Auto-generated method stub
+		
 	}
-	
+
+
 	@Override
-	public void updateGiftPurchase(Purchase purchase) throws Exception {
-		sqlSession.update("PurchaseMapper.updateGiftPurchase", purchase);
+	public void DeletePurchase(int purchaseNo) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
+
+
+
+		
 	
-	@Override
-	public void updatePurchaseStatus(Purchase purchase) throws Exception {
-		sqlSession.update("PurchaseMapper.updatePurchaseStatus", purchase);
-	}
-	
-	@Override
-	public int getTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("ProductMapper.getTotalCount", search);
-	}
+
 	
 }

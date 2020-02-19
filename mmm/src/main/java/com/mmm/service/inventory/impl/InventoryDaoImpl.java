@@ -1,4 +1,4 @@
-package com.mmm.service.cart.impl;
+package com.mmm.service.inventory.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -11,9 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.mmm.common.Search;
 import com.mmm.service.cart.CartDao;
 import com.mmm.service.domain.Cart;
+import com.mmm.service.domain.Inventory;
+import com.mmm.service.inventory.InventoryDao;
 
-@Repository("cartDaoImpl")
-public class CartDaoImpl implements CartDao {
+@Repository("inventoryDaoImpl")
+public class InventoryDaoImpl implements InventoryDao {
 	
 	@Autowired
 	@Qualifier("sqlSessionTemplate")
@@ -22,38 +24,42 @@ public class CartDaoImpl implements CartDao {
 		this.sqlSession = sqlSession;
 	}
 	
-	public CartDaoImpl() {
+	public InventoryDaoImpl() {
 		System.out.println(this.getClass());
 	}
+
+	@Override
+	public void addInventory(Inventory inventory) throws Exception {
+		
+		sqlSession.insert("InventoryMapper.addInventory",inventory);
+		
+	}
+
+	@Override
+	public Inventory getInventory(int inventoryNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getInventoryList(Inventory inventory) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateInventory(Inventory inventory) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteInventory(int inventoryNo) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	@Override
-	public void addCart(Cart cart) throws Exception {
-		sqlSession.insert("CartMapper.addCart", cart);
-	}
 
-	@Override
-	public Cart getCart(int cartNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> getCartList(Cart cart) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateCart(Cart cart) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteCart(int cartNo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 

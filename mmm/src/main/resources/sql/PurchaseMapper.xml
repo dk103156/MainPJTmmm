@@ -17,14 +17,14 @@
 		<result property="purchaseDate" 			column="purchase_Date" 				jdbcType="TIMESTAMP"  />
 		<result property="receiverPhone" 			column="receiver_phone" 			jdbcType="VARCHAR"  />
 		<result property="receiverName" 			column="receiver_name" 				jdbcType="VARCHAR"  />
-		<result property="senderMessage" 			column="sender_message" 					jdbcType="VARCHAR"  />
+		<result property="senderMessage" 			column="sender_message" 			jdbcType="VARCHAR"  />
 	</resultMap>
 	
 	
 	<insert id="addPurchase" parameterType="Purchase">
 	 	INSERT
 		INTO purchase ( purchase_no, purchase_user_no, purchase_product_No, purchase_product_Quantity, purchase_Status,
-						purchase_Price, purchase_Date, receiver_phone, receiver_name, message )
+						purchase_Price, purchase_Date, receiver_phone, receiver_name, sender_message )
 		VALUES	 
 		( seq_purchase_purchase_no.NEXTVAL,
 		  #{purchaseUserNo:INTEGER},
@@ -35,7 +35,7 @@
 		  SYSTIMESTAMP,
 		  #{receiverPhone:VARCHAR},
 		  #{receiverName:VARCHAR},
-		  #{senderMessage}
+		  #{senderMessage:VARCHAR}
 		)
 	 </insert>
 	 
@@ -45,6 +45,12 @@
 	 	FROM purchase	
 		WHERE 
 		purchase_no = #{value}	
+	</select>
+	
+	<select id="recentPurchase" resultMap="purchaseSelectMap" >
+		SELECT *
+		from purchase							
+		WHERE purchase_no = (SELECT LAST_NUMBER-1 FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_PURCHASE_PURCHASE_NO')
 	</select>
 	 
 	<select id="getPurchaseList" parameterType="Purchase"  resultMap="purchaseSelectMap" >
