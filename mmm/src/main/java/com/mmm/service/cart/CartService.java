@@ -12,7 +12,7 @@ public interface CartService {
 	
 	public Cart getCart(int cartNo) throws Exception;
 	
-	public Map<String,Object> getCartList(Cart cart) throws Exception;
+	public Map<String,Object> getCartList(Search search) throws Exception;
 	
 	public void updateCart(Cart cart) throws Exception;
 	

@@ -11,7 +11,7 @@
 	<resultMap id="productSelectMap" 		type="product">
 		<result property="prodNo" 			column="prod_no" 			jdbcType="INTEGER"  />
 		<result property="prodName"			column="prod_name" 			jdbcType="VARCHAR"  />
-		<result property="prodDate" 		column="prod_date" 			jdbcType="DATE"/>
+		<result property="prodDate" 		column="prod_date" 			jdbcType="TIMESTAMP"/>
 		<result property="prodPrice" 		column="prod_price" 		jdbcType="INTEGER"  />
 		<result property="prodDetail" 		column="prod_detail" 		jdbcType="VARCHAR"  />
 		<result property="prodImage" 		column="prod_image" 		jdbcType="VARCHAR"  />

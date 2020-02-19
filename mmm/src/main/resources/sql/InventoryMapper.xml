@@ -34,21 +34,38 @@
 	 </insert>
 	
 
-	<select id="getInventory" parameterType="int"  resultMap="inventorySelectMap" >
-	 	SELECT
-	 	*
-	 	FROM inventory	
-	 	WHERE inventory_no = #{val}
- 	</select>
- 	
-	<select id="getInventoryList" parameterType="Inventory"  resultMap="inventorySelectMap" >
+	<select id="getInventory" parameterType="Search"  resultMap="inventorySelectMap" >
 	 	SELECT
 	 	*
 	 	FROM inventory	
 		<trim prefix="where" suffixOverrides="and">
-			<if test="inventoryUserNo !=null">inventory_user_no = #{inventoryUserNo} and</if>
-			<if test="inventoryProdNo !=null">inventory_prod_no = #{inventoryProdNo} and</if>
-			<if test="inventoryPurchaseNo !=null">inventory_purchase_no = #{inventoryPurchaseNo} and</if>
+			<if test="inventoryUserNo !=0">inventory_user_no = #{inventoryUserNo} and</if>
+			<if test="inventoryProdNo !=0">inventory_prod_no = #{inventoryProdNo} and</if>
+			<if test="inventoryPurchaseNo !=0">inventory_purchase_no = #{inventoryPurchaseNo} and</if>
+			inventory_Status = #{inventoryStatus} and
+		</trim>	
+ 	</select>
+ 	
+ 	<select id="getInventoryCount" parameterType="Search" resultType="int">
+ 		SELECT COUNT(*)
+ 		FROM (SELECT * FROM INVENTORY 
+		<trim prefix="where" suffixOverrides="and">
+			<if test="inventoryUserNo !=0">inventory_user_no = #{inventoryUserNo} and</if>
+			<if test="inventoryProdNo !=0">inventory_prod_no = #{inventoryProdNo} and</if>
+			<if test="inventoryPurchaseNo !=0">inventory_purchase_no = #{inventoryPurchaseNo} and</if>
+			inventory_Status = #{inventoryStatus} and
+		</trim>	)
+ 	</select>
+ 	
+	<select id="getInventoryList" parameterType="Search"  resultMap="inventorySelectMap" >
+	 	SELECT
+	 	*
+	 	FROM inventory	
+		<trim prefix="where" suffixOverrides="and">
+			<if test="inventoryUserNo !=0">inventory_user_no = #{inventoryUserNo} and</if>
+			<if test="inventoryProdNo !=0">inventory_prod_no = #{inventoryProdNo} and</if>
+			<if test="inventoryPurchaseNo !=0">inventory_purchase_no = #{inventoryPurchaseNo} and</if>
+			inventory_Status = #{inventoryStatus} and
 		</trim>	
  	</select> 	
 	

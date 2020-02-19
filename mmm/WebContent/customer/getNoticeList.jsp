@@ -117,7 +117,7 @@
 			  </td>
 			  <td  align="left" id="" >  ${notice.articleDate}
 				</td>
-			  <td align="left" id="" > 1
+			  <td align="left" id="" > ${notice.viewCount}
 				</td>
 			</tr>
           </c:forEach>

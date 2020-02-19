@@ -17,6 +17,31 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 <title>Insert title here</title>
+<style>
+	#shoppingCart{
+		width : 50px;
+		position:fixed;
+		right:10px;
+		bottom:0px;
+		z-index:1000;
+		cursor : pointer;
+	}
+	
+	div.test{
+		position:fixed;
+		right:-200px;
+		bottom:125px;
+		z-index:1000;
+		transition-property: right;
+		transition-duration: 1s;
+		width : 200px;
+		height : 550px;
+		border : 4px dashed #bcbcbc;
+		overflow : auto;
+	}
+
+	
+</style>
 <script type="text/javascript">
 $(function(){
 	
@@ -57,6 +82,8 @@ $(function(){
 <ul>
  <h3>2.Product</h3>	
 	<li> <a href="product/getVoucherList">상품 목록 UI</a></li>
+	<li> <a href="purchase/getInventoryList">내 인벤토리 목록</a></li>
+	<li> <a href="product/getCartList">장바구니 목록 UI</a></li>
 </ul>
 
 <ul>
@@ -88,6 +115,90 @@ $(function(){
   <h3>7.customer</h3>	
 	<li> <a href="customer/getContactList">일대일문의 목록조회</a></li>
 </ul>
+
+<div class="test" >
+
+</div>
+
+<img id="shoppingCart" src="../resources/image/productIcon/shoppingcart_80945.png">	
+
+<script>
+	$(function(){
+		
+		myCartList();
+		//페이지네이션으로 1페이지 설정했기때문에 8개까지만 나옵니다
+		function myCartList(){
+		 $.ajax({
+			  type: "POST",
+			  url: "/product/json/getCartList",
+			  data: JSON.stringify({ cartUserNo : '${user.userNo}'}),
+			  dataType : "json",
+		      headers: { 
+		        "Accept" : "application/json",
+		        "Content-Type": "application/json"
+		      },
+		 }).done(
+			data => {
+				
+				$("div.test").empty()
+				data.list.forEach( (data,index) => {
+					$.getJSON("/product/json/getProduct/"+data.cartProdNo)
+					.done( x =>{
+							var Image =x.product.prodImage
+							
+							var Element ="<div class='product'><span><img class='prodImage' src='../resources/image/"+Image+"' width=155><img class='removeCart'src='../resources/image/productIcon/close-button.jpg' width=20><span>";
+								Element+="<input class='cartNo' type='hidden' value='"+data.cartNo+"'</div>"
+							$("div.test").append(Element);
+							
+							$("div.product img.prodImage").last().on("click",function(){
+								
+								self.location ="/product/getProduct?prodNo="+x.product.prodNo
+							});
+							var cartNo = $.trim($("input.cartNo").last().val());
+							$("img.removeCart").last().on("click",function(){
+								
+								$.get("/product/json/removeCart/"+cartNo)
+								.done( () =>{
+									 console.log("성공")
+									 myCartList();
+								})//end of $.get
+							});//end of img.removeCart click
+					})//end of $.getJSON
+				}) //end of forEach
+			}) //end of ajax Done
+		}//end of function
+	});// end of function
 	
+	$("#shoppingCart").on("click", function(){
+		if($("div.test").css("right")=="-200px"){
+			$("div.test").css("right","0px");
+			$("#shoppingCart").css("opacity","0.5")
+		}else{
+			$("div.test").css("right","-200px");
+			$("#shoppingCart").css("opacity","1");
+		}
+	});
+	
+	
+    //시간 포맷
+    function formatTime(time) {
+     var d = new Date(time);
+     var month = d.getMonth()+1; //월
+     var date = d.getDate(); // 날짜
+     
+     var result =	zeroFormat(month)+"."+zeroFormat(date)
+     return result;
+  }
+    
+    //1일,2일을 0을 붙여 출력
+    function zeroFormat(x){
+       if(x<10){
+          x = "0"+x;
+       }
+       
+       return String(x);
+    }    
+    
+</script>
 </body>
 </html>

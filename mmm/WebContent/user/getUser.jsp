@@ -595,6 +595,8 @@ label {
 
 $(function(){
 	
+	
+	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -613,17 +615,137 @@ $(function(){
 	}
 	
 	
+	
+	function validate() {
+	    
+	    var re2 = /^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{1,5}$/g // 이메일이 적합한지 검사할 정규식
+	   
+	    var email = $("#email").val(); 
+			
+		if(email=="") {
+		    alert("이메일을 입력해 주세요");
+		    $("#email").focus();
+		    return false;
+		    
+		}
+		
+		if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
+			$("#email").focus();
+		    return false; 
+		}
+		
+		return true;
+	} //validate()
+
+	function check(re, what, message) {
+    	if(re.test(what)) {
+    		return true;
+    	}
+    	alert(message);
+	}	
+	
 
 	//프로필업로드
 	$("#updateImgBtn").on("click",function(){
 		$("#fileForm").attr("action","/user/addProfile").attr("method","post").attr("enctype","multipart/form-data").submit();
-	})
+	});
 	
 	
+	//휴대폰번호 변경
+	$("#phoneChgBtn").on("click",function(){
+		window.open('/user/phoneAuth.jsp',
+				'popWin',
+				'left=700, top=90, width=537, height=400, marginwidth=20, marginheight=20, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
+	});
+	
+	
+	//비밀번호 입력창
+	$("#chgPwBtn").on("click",function(){
+		$("#pwModal").modal("show");
+		
+		
+	});
+	
+	//비밀번호 재설정
+	$("#confirmBtn").on("click",function(){
+		$("#pwModal").modal("hide");
+		window.open('/user/updatePw.jsp',
+				'popWin',
+				'left=700, top=90, width=537, height=400, marginwidth=20, marginheight=20, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
+	});
+	
+	
+	$('#pwd').keyup(function() {
+		console.log("클릭!!!");
+		var pwd = $("pwd").val();
+		
+		$.ajax({
+			url : '/user/json/pwChk/'+ pwd,
+			type : 'get',
+			success : function(data) {
+				console.log("false = 중복o / true = 중복x : "+ data);							
+				
+				if (data == 0) {
+						// 0 : 아이디가 중복되는 문구
+						$("#checkId").text("사용중인 아이디입니다 :p");
+						$("#checkId").css("color", "red");
+						$("#addUserBtn").attr("disabled", true);
+				} else {
+						
+						if(re.test(userId)){
+							// 1 : 아이디 길이 / 문자열 검사
+							$("#checkId").text("");
+							$("#addUserBtn").attr("disabled", false);
+				
+						} else if(userId == ""){
+							
+							$('#checkId').text('아이디를 입력해주세요 :)');
+							$('#checkId').css('color', 'red');
+							$("#addUserBtn").attr("disabled", true);				
+							
+						} else {
+							
+							$('#checkId').text("아이디는 소문자와 숫자 5~15자리만 가능합니다 :) :)");
+							$('#checkId').css('color', 'red');
+							$("#addUserBtn").attr("disabled", true);
+						}
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			}); //ajax 
+		});
+	
+
 	//회원정보 수정
 	$("#updateBtn").on("click",function(){
-		$("#InfoForm").attr("action","/user/updateUser").attr("method","post").submit();
-	})
+		if(!validate()){ //이메일 유효성 오류 : false, 정상 : true
+			return;
+		}
+		var email = $("#email").val();
+		//var userNo = $("#userNo").val();
+		
+		$.ajax({
+			url : '/user/json/updateUser',
+			method : "post" ,
+			datatype : "json" ,
+			headers : {
+				"Accept" : "application/json" ,
+				"Content-Type" : "application/json"
+			} ,
+			data : JSON.stringify({
+				email : email ,
+				userNo: ${user.userNo}
+			}), 
+			success : function(data) {
+				console.log( data);								
+			}, error : function() {
+					console.log("실패");
+				}
+			})//ajax 끝
+		})//회원정보 수정 끝
+	
 	
 	
 	
@@ -633,7 +755,6 @@ $(function(){
 		var maxSize = 360 * 360;
  		if(fileSize > maxSize) {
 			alert("파일용량을 초과하였습니다.");
-			$(".custom-file label").html("<i class='fas fa-camera-retro'>size 360x360</i>");
 			$("#preview").html("");
 			return;
 		}else{
@@ -666,11 +787,11 @@ $(function(){
 	});
 	
 	//회원탈퇴
-	$("#byeBtn").on("click",function(){
+	$("#byeconfirmBtn").on("click",function(){
 		var password= $("#password").val();
-		
+
 		$.ajax({
-			url : '/user/json/updateUserStatus/',
+			url : '/user/json/updateUserStatus',
 			method : "post" ,
 			datatype : "json" ,
 			headers : {
@@ -678,7 +799,7 @@ $(function(){
 				"Content-Type" : "application/json"
 			} ,
 			data : JSON.stringify({
-				password : password
+				password : password		
 			}), 
 			success : function(data) {
 				console.log("false = pw 일치 X / true = pw 일치 : "+ data);							
@@ -691,16 +812,15 @@ $(function(){
 				}else{
 					$("#passwordChk").text("");
 					alert("정말 탈퇴 하실?")
-					$("#byeconfirmBtn").attr("disabled", false);
+					self.location="/index.jsp";
 				} 
 			}, error : function() {
 					console.log("실패");
 				}
 			})//ajax 끝
-		
-		
-		
-	})
+	})//회원탈퇴 끝
+	
+	
 	
 	
 	
@@ -738,10 +858,10 @@ $(function(){
 									<input type="hidden" name="userNo" id="userNo" value="${user.userNo}">
 									
 									<div class="profile-img" id="preview">
-										<c:if test="${user.profile.trim() eq null}">	
+										<c:if test="${empty user.profile.trim()}">	
 											<img src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
 										</c:if>
-										<c:if test="${user.profile.trim() ne null}">
+										<c:if test="${! empty user.profile.trim()}">
 											<img alt="" src="/resources/image/${user.profile}">
 											<input type="hidden" name="profile" value="${user.profile}">
 										</c:if>
@@ -753,22 +873,22 @@ $(function(){
 								<!-- Button trigger modal -->
 								<button type="button" class="button small member-out" data-toggle="modal" data-target="#staticBackdrop" title="회원탈퇴">회원탈퇴</button>
 								
-								<!-- Modal -->
+							<!-- Modal -->
+							 <form>
 								<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 								    <div class="modal-content">
 								      <div class="modal-header">
 								        <h5 class="modal-title" id="staticBackdropLabel">회원 탈퇴</h5>
-								        <button type="button" class="close" data-dismiss="modal" id="byeBtn" aria-label="Close">
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								          <span aria-hidden="true">&times;</span>
 								        </button>
 								      </div>
 								      <div class="modal-body">
 								        ${user.userName}님 탈퇴를 하시겠습니까?<br/>
-								        	해볼테면 해보슈<br/><br/>
+								        	<br/><br/>
 								        	비밀번호
 								        <input type="password" name="password" id="password">	
-								        <input type="hidden" name="password" id="password" value="${user.">	
 								        <h6 id="passwordChk" style="color: red;"></h6>
 								      </div>
 								      <div class="modal-footer">
@@ -778,8 +898,9 @@ $(function(){
 								    </div>
 								  </div>
 								</div>
-							</div>
-							</td>
+							</form>
+						</div>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">아이디</th>
@@ -798,8 +919,8 @@ $(function(){
 		</div>
 
 		<form name="mbInfoForm" id="InfoForm">
-			<input type="hidden" name="userNo" value="${user.userNo }" />
-			<input type="hidden" name="phoneNo" value="${user.phone }" />
+			<input type="hidden" name="userNo" value="${user.userNo}" />
+			<input type="hidden" name="phone" value="${user.phone}" />
 			
 			<div class="table-wrap mb40">
 				<table class="board-form">
@@ -838,27 +959,6 @@ $(function(){
 									        <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
 									    </div>
 									</div>
-								
-								    <div class="change-phone-num-area">
-						        		<div class="position">
-								            <label for="chPhone" class="label">변경할 휴대폰</label>
-								            <input type="text" id="chPhone" class="input-text w160px numType" placeholder="'-'없이 입력해 주세요" title="변경할 휴대폰 번호 입력" maxlength="11" />
-								            <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
-								        </div>
-								
-											<div class="position" style="display: none;">
-												<label for="chkNum" class="label">인증번호 입력</label>
-								
-								            <div class="chk-num small">
-								                <div class="line">
-								                    <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="4">
-								
-								                    	<div class="time-limit" id="timeLimit">3:00</div>
-												</div>
-											</div>
-								            	<button type="button" class="button small gray-line" id="chgBtn">변경완료</button>
-								        	</div>
-									</div>
 								</td>
 							</tr>
 							<tr>
@@ -872,90 +972,48 @@ $(function(){
 							<tr>
 							    <th scope="row">비밀번호 <em class="font-orange">*</em></th>
 							    <td>
-							        <a href="/on/oh/ohh/Mypage/userPwdChangePage.do" class="button small gray-line" title="비밀번호 변경">비밀번호 변경</a>
-							
+							        <button type="button" class="button small gray-line" id="chgPwBtn" title="비밀번호 변경">비밀번호 변경</button>
+									<!-- Modal -->
+									<div class="modal fade" id="pwModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <h5 class="modal-title" id="staticBackdropLabel">비밀번호 입력</h5>
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									          <span aria-hidden="true">&times;</span>
+									        </button>
+									      </div>
+									      <div class="modal-body">
+									        ${user.userName}님 비밀번호 입력해주세요.<br/>
+									        	<br/><br/>
+									        	비밀번호
+									        <input type="password" name="password" id="pwd">	
+									        <h6 id="passwordChk" style="color: red;"></h6>
+									      </div>
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+									        <button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
 							        마지막 비밀번호 변경: 1일전에 함 (2020-02-12 10:44:21)
 							    </td>
-							</tr>
-							<tr>
-							    <th scope="row">주소</th>
-							    <td>
-							        <span></span>
-							        <a href="#" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a>
-							        <p class="reset mt10"> </p>
-							    </td>
-							</tr>
+							</tr>	
+							
+<!-- 							<tr> -->
+<!-- 							    <th scope="row">주소</th> -->
+<!-- 							    <td> -->
+<!-- 							        <span></span> -->
+<!-- 							        <a href="#" id="addrBtn" class="button small gray-line ml10" title="우편번호 검색">우편번호 검색</a> -->
+<!-- 							        <p class="reset mt10"> </p> -->
+<!-- 							    </td> -->
+<!-- 							</tr> -->
                       </tbody>
                   </table>
               </div>
-		
-		
-		<div class="tit-util mt40 mb10">
-			<h3 class="tit">추가정보</h3>
-		</div>
-
-			<div class="table-wrap mb40">
-				<table class="board-form">
-					<caption>선호하는 장르, 자주가는 극장을 가진 표</caption>
-					<colgroup>
-						<col style="width:180px;">
-						<col>
-					</colgroup>
-					<tbody>
-						<tr>
-							<th scope="row">
-								선호장르 1
-							</th>
-								<td>
-									<span class="mbNmClass">${user.likeGenre1}</span>
-								</td>
-						</tr>
-						<tr>
-							<th scope="row">
-						    	선호장르 2
-						    </th>
-						    <td>
-						      	<span class="mbNmClass">${user.likeGenre2}</span> 
-						    </td>
-						</tr>
-						<tr>
-							<th scope="row">
-							   선호장르 3
-							</th>
-								<td>
-									<span class="mbNmClass">${user.likeGenre3}</span> 
-								</td>
-							</tr>
-							<tr>
-							    <th scope="row">
-							        자주가는 극장 1
-							    </th>
-							    <td>
-							       <span class="mbNmClass">${user.likeTheater1}</span> 
-							    </td>
-							</tr>
-							<tr>
-							    <th scope="row">
-									자주가는 극장 2
-								</th>
-							    <td>
-							        <span class="mbNmClass">${user.likeTheater2}</span> 
-							    </td>
-							</tr>
-							<tr>
-							  <th scope="row">
-									자주가는 극장 3
-								</th>
-							    <td>
-							        <span class="mbNmClass">${user.likeTheater3}</span> 
-							    </td>
-							</tr>
-                      </tbody>
-                  </table>
-              </div>
-		</form>
-		
-		
+			</form>
+			
 		
           <div class="mt40" style="text-align: center; margin-bottom:20px;">
 			
