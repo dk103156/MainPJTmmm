@@ -36,6 +36,8 @@ p{
 <script type="text/javascript">
 $(function(){
 	
+
+	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -54,18 +56,19 @@ $(function(){
 	}
 	
 	function validate() {
-	    var re =  /^[0-9a-z]{5,15}$/;  // 아이디와 패스워드가 적합한지 검사할 정규식
+	    var re =  /^[0-9a-z]{5,15}$/;  // 아이디가 적합한지 검사할 정규식
+	    var re3 = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{5,15}$/; 
 	    
 	 	var id= $("#userId").val();  //숫자,영문섞어서 5~15자 이내   	
 		var pw= $("#password").val(); //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력    		
 		
-		if(!check(re,id,"아이디는 5~15자의 영문 소문자와 숫자로만 입력")) {
+		if(!check(re,id,"아이디는 5~15자의 영문 소문자와 숫자로만 입력해주세요.")) {
 			console.log(id);
 			$("#userId").focus();
 		    return;
 		}
 		
-		if(!check(re,pw,"패스워드는 5~15자의 영문 소문자와 숫자로만 입력")) {
+		if(!check(re3,pw,"비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.")) {
 		    return;
 		}
 	}
@@ -112,9 +115,6 @@ $(function(){
 			alert('아이디와 비밀번호를 입력하세요.');
 			$('#loginBtn').attr("disabled", true);
 			location.reload();
-		/* }else if(pw == '' || pw ==null){
-			alert('비밀번호를 입력하세요.');
-			$('#loginBtn').attr("disabled", true); */
 		}else{
 			$('#loginBtn').attr("disabled", false);
 			$('form').attr('method','POST').attr('action','/user/login').submit();	

@@ -72,12 +72,12 @@ $(function(){
 	function validate() {
 	    var re =  /^[0-9a-z]{5,15}$/;  // 아이디와 패스워드가 적합한지 검사할 정규식
 	    var re2 = /^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{1,5}$/g // 이메일이 적합한지 검사할 정규식
-	    var re3 = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/; //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력    
+	    var re3 = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{5,15}$/; //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 5자리 이상 15자입력    
 		var re4 = /^[가-힣]{2,15}$/ //이름이 한글인지 검사할 정규식
 		var re5 = /^(01[016789]{1})([0-9]{3,4})([0-9]{4})$/; //폰번호가 적합한지 검사할 정규식
 	    
 	 	var id= $("#userId").val();  //숫자,영문섞어서 5~15자 이내   	
-		var pw= $("#password").val(); //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력    
+		var pw= $("#password").val(); //숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 5자리 이상 15자입력  
 		var checkPw= $("#password2").val();
 		var name = $("#userName").val();
 		var birth = $("#birth").val(); 
@@ -88,13 +88,13 @@ $(function(){
 		console.log("쳬크빢쓰 : "+isChk)
 		
 		
-		if(!check(re,id,"아이디는 5~15자의 영문 소문자와 숫자로만 입력")) {
+		if(!check(re,id,"아이디는 5~15자의 영문 소문자와 숫자로만 입력해주세요.")) {
 			console.log(id);
 			$("#userId").focus();
 		    return;
 		}
 		
-		if(!check(re,pw,"패스워드는 5~15자의 영문 소문자와 숫자로만 입력")) {
+		if(!check(re3,pw,"비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.")) {
 		    return;
 		}
 		
@@ -292,6 +292,7 @@ $(function(){
     			<label for="likeGenre1" class="col-sm-2 col-form-label">선호장르</label>
     			<div class="col-sm-3">
     				<select class="form-control" id="likeGenre1" name="likeGenre1">
+    				<option selected>선호장르</option>
       					<option>드라마</option>
 						<option>코미디</option>
 						<option>액션</option>
@@ -317,6 +318,7 @@ $(function(){
     			</div>
     			<div class="col-sm-3">
 					<select class="form-control" id="likeGenre2" name="likeGenre2">
+					<option selected>선호장르</option>
 						<option>드라마</option>
 						<option>코미디</option>
 						<option>액션</option>
@@ -342,6 +344,7 @@ $(function(){
     			</div>
 				<div class="col-sm-3">
 					<select class="form-control" id="likeGenre3" name="likeGenre3">
+					<option selected>선호장르</option>
 						<option>드라마</option>
 						<option>코미디</option>
 						<option>액션</option>

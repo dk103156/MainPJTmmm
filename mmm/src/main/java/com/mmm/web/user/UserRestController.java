@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mmm.common.CheckAuth;
@@ -176,6 +177,37 @@ public class UserRestController {
 	
 	}
 	
+	@RequestMapping(value = "json/updateUser/{phone}", method=RequestMethod.GET)
+	public boolean updateUser(@PathVariable("phone") String phone , HttpSession session) {
+		
+		try {
+		System.out.println("/json/updateUser : GET");
+		
+		//Business Logic
+		boolean result = true;
+		User user = (User)session.getAttribute("user");
+		user.setPhone(phone);
+		System.out.println("여기"+user);
+		
+		if(phone != null) {
+			
+				userService.updateUser(user);
+			
+			System.out.println("업데이트된 폰"+user.getPhone());
+			session.setAttribute("user", user);
+			return result;
+		}else{
+			result= false;
+			return result;
+		}
+		
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	@RequestMapping(value = "json/updateUser", method=RequestMethod.POST)
 	public boolean updateUser(@RequestBody Map<String,Object> params , HttpSession session) throws Exception{
 		
@@ -203,14 +235,14 @@ public class UserRestController {
 	
 	}
 	
-	@RequestMapping(value = "json/pwChk/{password}", method=RequestMethod.GET)
-	public boolean pwChk(@PathVariable("password") String password , HttpSession session) throws Exception{
+	@RequestMapping(value = "json/pwChk", method=RequestMethod.POST)
+	public boolean pwChk(@RequestBody Map<String,Object> params , HttpSession session) throws Exception{
 		
-		System.out.println("/json/pwChk : GET");
+		System.out.println("/json/pwChk : POST");
 
 		//Business Logic
 		boolean result = true;
-		
+		String password= ((String)params.get("password"));
 		User user= new User(); //User가 입력한 password
 		String cryptoPassword = CryptoUtil.cryptoText(password);
 		user.setPassword(cryptoPassword);
@@ -220,7 +252,7 @@ public class UserRestController {
 		
 		User sessionUser = ((User)session.getAttribute("user"));
 		
-		if(sessionUser.getPassword().equals(user.getPassword())) { //비밀번호 일치하면 userStatus 변경
+		if(sessionUser.getPassword().equals(user.getPassword())) { //비밀번호 일치하면 비밀번호 변경허용
 			
 			return result;
 		}else{
@@ -231,7 +263,6 @@ public class UserRestController {
 	}
 
 
-	
 	@RequestMapping( value = "json/sendSMS/{phone}" )
 	public Map sendSMS(@PathVariable String phone, Model model, HttpSession session) throws Exception {
 		
@@ -634,6 +665,9 @@ public class UserRestController {
 		
 		// {"url" : "naverLoginUrl"} 로 저장 => $.ajax에서 JSONData.url로 접근 가능  
 		map.put("url", googleLoginUrl);
+		
+		
+
 		
 		return map;
 	}
