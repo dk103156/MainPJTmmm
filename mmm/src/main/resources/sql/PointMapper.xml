@@ -7,7 +7,7 @@
 <mapper namespace="PointMapper">
 
 	<resultMap type="Point" id="pointSelectMap">
-		<result property="pointNo" 				column="PONIT_NO" 					jdbcType="NUMERIC"/>
+		<result property="pointNo" 				column="POINT_NO" 					jdbcType="NUMERIC"/>
 		<result property="userNo" 				column="user_no" 					jdbcType="NUMERIC"/>
 		<result property="pointStatus" 			column="point_status" 				jdbcType="VARCHAR"/>
 		<result property="paymentNo" 			column="payment_no" 				jdbcType="NUMERIC"/>
@@ -20,8 +20,8 @@
 	
 	<sql id="select-PointList">
 		SELECT 
-		POINT_NO, user_no, point_status, payment_no, point_date,
-		 part_point, SUM(PART_POINT) OVER(ORDER BY POINT_NO) total_point,
+		POINT_NO, user_no, UPPER(point_status) point_status, payment_no, point_date,
+		 part_point, SUM(PART_POINT) OVER(ORDER BY point_no) total_point,
 		 point_cancel_flag
 		FROM POINTT
 		<where>

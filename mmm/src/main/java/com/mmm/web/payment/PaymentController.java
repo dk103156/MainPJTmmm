@@ -2,6 +2,7 @@ package com.mmm.web.payment;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mmm.common.Search;
 import com.mmm.service.domain.Movie;
 import com.mmm.service.domain.Payment;
 import com.mmm.service.domain.Point;
@@ -73,6 +75,7 @@ public class PaymentController {
 		System.out.println(" --------------- purchase : "+purchase);
 		System.out.println(" --------------- (User)session.getAttribute(\"user\") : "+(User)session.getAttribute("user"));
 		
+//		사용 가능한 포인트 조회하기
 		int totalPoint = paymentService.getTotalPoint(((User)session.getAttribute("user")).getUserNo());
 		System.out.println(" --------------- totalPoint : "+totalPoint);
 		
@@ -231,7 +234,7 @@ public class PaymentController {
 			model.addAttribute("movie", resultMovie);
 			model.addAttribute(ticketing);
 			
-			return "forward:/ticketing/completeTicketing.jsp";
+//			return "forward:/ticketing/completeTicketing.jsp";
 			
 		}else if (payment.getPayObjectFlag() == 1) {	// 2: only 구매
 			model.addAttribute(purchase);
@@ -252,10 +255,43 @@ public class PaymentController {
 			model.addAttribute(ticketing);
 			model.addAttribute(purchase);
 			
-			return "forward:/ticketing/completeTicketing.jsp";
+//			return "forward:/ticketing/completeTicketing.jsp";
 		}
 		
 		
-		return "forward:/payment/testPaymentResult.jsp";
+		return "forward:/ticketing/completeTicketing.jsp";
+	}//end of addPayment()
+	
+	
+	@RequestMapping(value = "/getPointList", method = RequestMethod.GET)
+	public String getPointList( HttpSession session, Model model,
+								Search search)throws Exception{
+		
+//		로그인한 회원 정보 from session
+		User user = (User)session.getAttribute("user");
+		System.out.println("----------- user.getUserNo() : "+user.getUserNo());
+		search.setUserNo(user.getUserNo());
+		
+//		search.currentPage setting...
+		if(search.getCurrentPage() ==0 ) {
+			search.setCurrentPage(1);
+		}
+		
+//		search.pageSize 세팅
+		search.setPageSize(pageSize);
+		System.out.println("------------search"+ search);
+		
+		HashMap<String, Object> outputMap = paymentService.getPointList(search);
+		
+		
+		for(Point point : (List<Point>)outputMap.get("list")) {
+			System.out.println("--------- point : " + point);
+		}
+		
+		List<Point> list = (List<Point>) outputMap.get("list");
+		
+		model.addAttribute("list", list);
+		
+		return "forward:/payment/getPointList.jsp";
 	}
 }

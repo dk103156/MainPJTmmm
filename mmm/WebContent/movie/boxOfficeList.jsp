@@ -24,6 +24,9 @@
     
 <!--     movie css -->
     <link rel="stylesheet" href="/resources/css/movieIcon.css?after">
+    
+<!--     Common Css -->
+    <link rel="stylesheet" href="/resources/css/common.css?after">
 
      
        

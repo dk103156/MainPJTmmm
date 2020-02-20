@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import com.mmm.common.JavaUtil;
 import com.mmm.common.Search;
 import com.mmm.service.domain.Payment;
 import com.mmm.service.domain.Point;
@@ -91,7 +92,30 @@ public class PaymentDaoImpl implements PaymentDao {
 	public HashMap<String, Object> getPointList(Search search) throws Exception {
 		
 		HashMap<String, Object> outputMap = new HashMap<String, Object>();
-		outputMap.put("list", sqlSession.selectList("PointMapper.getPointList", search));
+		
+		List<Point> list = sqlSession.selectList("PointMapper.getPointList", search);
+		
+//		날짜포맷 바꾸기
+		for(Point pnt : list) {
+			pnt.setPointDate(JavaUtil.convertDateFormat(pnt.getPointDate()));
+			
+			switch(pnt.getPointStatus()) {
+				case "S0" :
+					pnt.setPointStatus("적립 - 현금 결제");
+					break;
+				case "S1" :
+					pnt.setPointStatus("적립 - 출석 체크");
+					break;
+				case "S2" :
+					pnt.setPointStatus("적립 - 영화 퀴즈");
+					break;
+				case "U0" :
+					pnt.setPointStatus("사용 - 포인트 결제");
+					break;
+			}
+		}
+
+		outputMap.put("list", list);
 		outputMap.put("totalCnt", sqlSession.selectOne("PointMapper.getTotalCntPointList", search));
 		
 		return outputMap;

@@ -100,6 +100,7 @@ $(function(){
 <ul>
   <h3>5.payment</h3>	
 	<li> <a href="payment/preparePayment"><strike>결제하기 Test</strike></a> 따로 Test 안해요. 일반결제에서 넘어갑니다.</li>
+	<li> <a href="payment/getPointList">포인트 리스트</a></li>
 </ul>
 <ul>
   <h3>6.event</h3>	
