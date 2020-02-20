@@ -28,7 +28,8 @@ public class Search {
 	private int category; //0: 전체, 1: 예매&매표 , 2: 스토어,  3: 결제,  4: 할인혜택,  5: 홈페이지,  6: 이벤트
 	private String userId; 
 	private int previewFlag; //0: 진행중  1:마감
-
+	private int cartUserNo; // 상품 & 구매 전용
+	private Timestamp cartRegDate; // 상품 & 구매 전용
 
 	///Constructor
 	public Search() {
@@ -221,6 +222,22 @@ public class Search {
 	public void setPreviewFlag(int previewFlag) {
 		this.previewFlag = previewFlag;
 	}
+	
+	public int getCartUserNo() {
+		return cartUserNo;
+	}
+
+	public Timestamp getCartRegDate() {
+		return cartRegDate;
+	}
+
+	public void setCartUserNo(int cartUserNo) {
+		this.cartUserNo = cartUserNo;
+	}
+
+	public void setCartRegDate(Timestamp cartRegDate) {
+		this.cartRegDate = cartRegDate;
+	}	
 
 	@Override
 	public String toString() {
