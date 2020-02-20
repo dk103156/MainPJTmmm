@@ -161,7 +161,7 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public void deleteQuiz(int quizNo) throws Exception {
-		sqlSession.delete("EventMapper.deleteQuiz", quizNo);
+		sqlSession.update("EventMapper.deleteQuiz", quizNo);
 	}
 
 	@Override

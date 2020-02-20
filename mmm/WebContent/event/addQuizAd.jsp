@@ -45,7 +45,6 @@
 		var optionFourth = $("input[name='optionFourth']").val();
 		var answer = $("select[name='answer']").val();
 		var quizStartDate = $("input[name='quizStartDate']").val();
-		var quizEndDate = $("input[name='quizEndDate']").val();
 		
 		if(question == null || question.length<1) {
 			alert("퀴즈문제는 반드시 입력하셔야 합니다.")
@@ -74,11 +73,6 @@
 		if(quizStartDate == null || quizStartDate.length<1) {
 			alert("퀴즈참여 시작일자는 반드시 입력하셔야 합니다.")
 			return;
-		}
-		if(quizEndDate == null || quizEndDate.length<1) {
-			alert("퀴즈참여 종료일자는 반드시 입력하셔야 합니다.")
-			return;
-		
 		}
 		$("form").attr("method","post").attr("action","/event/addQuizAd").submit();
 	
@@ -137,6 +131,7 @@
 		
     
 	<form autocomplete="off">
+	
 		<div class="form-inline form-group">
 			<label for="title" class="col-sm-2 control-label">Question</label>
 			<div class="form-group col-sm-10">
@@ -192,23 +187,7 @@
                 </div>
                  </div>			
 			</div>	
-			
-			
-			
-			
         </div>
-        <div class="form-inline form-group">
-			<label for="title" class="col-sm-2 control-label">종료일자</label>
-			<div class="col-sm-10">
-			<div class='input-group date' data-provide="datepicker">
- 				 <input placeholder="Selected date"  type="text"  name="quizEndDate" class="form-control - datepicker">                    
- 				 <div class="input-group-addon pinkstyle">
-                     <i class="far fa-calendar-alt"></i>
-                </div>			
-               </div> 
-        </div>
-	 </div>
-	
 		<br>
 		<div class="text-center">
 			<button id="regBtn" class="btn btn-dafault write" type="button">등 &nbsp;록</button>

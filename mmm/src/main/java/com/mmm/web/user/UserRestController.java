@@ -44,6 +44,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.CryptoUtil;
 import com.mmm.common.MailUtils;
 import com.mmm.common.Search;
@@ -132,32 +133,104 @@ public class UserRestController {
 		
 	}
 	
-//	@RequestMapping(value = "json/updateUserStatus", method=RequestMethod.POST)
-//	public String updateUserStatus(@PathVariable("password")String password, HttpSession session) throws Exception{
-//		
-//		System.out.println("/json/updateUserStatus : POST");
-//		
-//		//Business Logic
-//		String password = user.getPassword();
-//		String cryptoPassword = CryptoUtil.cryptoText(password);
-//		user.setPassword(cryptoPassword);
-//		user.setUserId(user.getPhone());
-//		
-//		User sessionUser = ((User)session.getAttribute("user"));
-//		
-//		
-//		if(sessionUser.getPassword()) {
-//			userService.updateUserStatus(sessionUser);
-//			//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-//			return "redirect:/mypage/mypage.jsp";
-//		}
-//
-//		return "redirect:/user/login.jsp";
-//	}//어디로 갈지 정해줘라  !!!!!!!!!!!!!!!!!!!!!!!!!!!
-//	
-//	
 	
+	@RequestMapping(value = "json/updateUserStatus", method=RequestMethod.POST)
+	public boolean updateUserStatus(@RequestBody Map<String,Object> params , HttpSession session) throws Exception{
+		
+		System.out.println("/json/updateUserStatus : POST");
+
+		//Business Logic
+		boolean result = true;
+		
+		String password= ((String)params.get("password")); //화면에서 받아온 password
+		User user= new User(); //User가 입력한 password
+		String cryptoPassword = CryptoUtil.cryptoText(password);
+		user.setPassword(cryptoPassword);
+		
+		
+		System.out.println("user===="+user);
+		
+		User sessionUser = ((User)session.getAttribute("user"));
+		
+		System.out.println("세션...!!"+(User)session.getAttribute("user"));
+		System.out.println("status 변경전!!!!!"+sessionUser.getUserStatus());
+		
+		if(sessionUser.getPassword().equals(user.getPassword())) { //비밀번호 일치하면 userStatus 변경
+			userService.updateUserStatus(sessionUser);
+			
+			int userNo = sessionUser.getUserNo();
+			user= userService.getUser(userNo); //변경된 유저 다시 담아줌 
+			System.out.println("status 변경후!!"+user.getUserStatus());
+			
+			if(user.getUserStatus() == 0) { //탈퇴가 된 회원이라면 세션지움..
+				System.out.println("여기 타냐?"+user.getUserStatus());
+				session.invalidate();
+			}else { 
+				session.setAttribute("user", user);
+			}
+			return result;
+		}else{
+			result= false;
+			return result;
+		}
 	
+	}
+	
+	@RequestMapping(value = "json/updateUser", method=RequestMethod.POST)
+	public boolean updateUser(@RequestBody Map<String,Object> params , HttpSession session) throws Exception{
+		
+		System.out.println("/json/updateUser : POST");
+		
+		
+		//Business Logic
+		boolean result = true;
+		
+		String email= ((String)params.get("email"));
+		int userNo= ((Integer)params.get("userNo"));
+		User user = new User();
+		user.setEmail(email);
+		user.setUserNo(userNo);
+		
+		User sessionUser = ((User)session.getAttribute("user"));
+
+		if(sessionUser.getUserNo() == user.getUserNo()) {
+			userService.updateUser(user);
+			return result;
+		}else{
+			result= false;
+			return result;
+		}
+	
+	}
+	
+	@RequestMapping(value = "json/pwChk/{password}", method=RequestMethod.GET)
+	public boolean pwChk(@PathVariable("password") String password , HttpSession session) throws Exception{
+		
+		System.out.println("/json/pwChk : GET");
+
+		//Business Logic
+		boolean result = true;
+		
+		User user= new User(); //User가 입력한 password
+		String cryptoPassword = CryptoUtil.cryptoText(password);
+		user.setPassword(cryptoPassword);
+		
+		
+		System.out.println("user===="+user);
+		
+		User sessionUser = ((User)session.getAttribute("user"));
+		
+		if(sessionUser.getPassword().equals(user.getPassword())) { //비밀번호 일치하면 userStatus 변경
+			
+			return result;
+		}else{
+			result= false;
+			return result;
+		}
+		
+	}
+
+
 	
 	@RequestMapping( value = "json/sendSMS/{phone}" )
 	public Map sendSMS(@PathVariable String phone, Model model, HttpSession session) throws Exception {

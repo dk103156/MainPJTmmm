@@ -13,87 +13,77 @@
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<!-- 	jQuery...  -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="<c:url value="/resources/javascript/jquery.barrating.min.js" />"></script> 
+    <script src="<c:url value="/resources/javascript/rater.min.js" />"></script> 
+
+    <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+	
+	
+	<!-- 	SweetAlert2 CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
 	
-	<!--  ///////////////////////// CSS ////////////////////////// 
-	<style>
-	img{
-	border: 3px solid #ece1fc;
-    margin-top: 10px;
-	float:left;
-	}
-	</style>	
-	-->
-	
-  
-
-
 
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-	
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$( function() {
-		$("a[href='#' ]:contains('MovMovMov')").on("click" , function() {
-			self.location = "/product/getProductMainList"
+		$( "#mov" ).on("click" , function() {
+			self.location = "/product/getVoucherList";
 		});
 	});
 	
 	
 	
 	$( function() {
-			$("a[href='#' ]:contains('영화관람권')").on("click" , function() {
-				self.location = "/product/getProductList?franType= ${product.franType}"
+		$( "#voucher" ).on("click" , function() {
+			self.location = "/product/getVoucherList";
 			});
 		});
 	 
 	
 	$( function() {
-		$("a[href='#' ]:contains('스토어이용권')").on("click" , function() {
-			self.location = "/product/getProductList?franType= ${product.franType}"
+		$( "#snack" ).on("click" , function() {
+			self.location = "/product/getSnackProductList"
 		});
 	});
 	
 	
 	$( function() {
-		$("a[href='#' ]:contains('스낵')").on("click" , function() {
-			self.location = "/product/getProductList?franType= ${product.franType}"
+		$( "#QuickOrder" ).on("click" , function() {
+			self.location = "/product/getQuickOrder"
 		});
 	});
 	
 	
+	<!--  /////////////////////////////////////////////////// -->
 	
 	$( function() {
-		$("a[href='#' ]:contains('상품 등록')").on("click" , function() {
+		$( "#addProduct" ).on("click" , function() {
 			self.location = "/product/addProduct"
 		});
-	}); 
-	 
+	});
+	
+	
 	
 	
 	$( function() {
-		$("a[href='#' ]:contains('상품 수정')").on("click" , function() {
+		$( "#updateProduct" ).on("click" , function() {
 			self.location = "/product/updateProduct?prodNo=${product.prodNo}"
 		});
 	}); 
 	
 	
 	$( function() {
-		$("a[href='#' ]:contains('상품 삭제')").on("click" , function() {
+		$( "#deleteProduct" ).on("click" , function() {
 			self.location = "/product/deleteProduct?prodNo=${product.prodNo}"
 		});
 	}); 
@@ -101,13 +91,11 @@
 	
 	
 	$( function() {
-		$("a[href='#' ]:contains('장바구니')").on("click" , function() {
+		$( "#cart" ).on("click" , function() {
 			self.location = "/cart/getCartList"
 		});
 	}); 
 	
-	
-
 		   	
 		</script>
 		
@@ -115,44 +103,107 @@
 
 <body>
 	
-	
-			<!-- ToolBar Start /////////////////////////////////////-->
 			
-			<div class="navbar  navbar-inverse">
+	<hr style="background-color: #ebeadd;">
+		<div class="row" style="text-align:center;">
+				<div class="col-md-2" style="text-align:center;">
+					<h4 id="mov">MovMovMov</h4>
+				</div>
 				
-		        <div class="container">
-		        
-		        	<a class="navbar-brand" href="#">MovMovMov</a>
-					
-					<!-- toolBar Button Start //////////////////////// -->
-					<div class="navbar-header">
-					   <div class="collapse navbar-collapse"  id="target">
-			             <ul class="nav navbar-nav navbar-right">
-			                 <li><a href="/product/getVoucherList">MOV바우처</a></li>
-			                 <li><a href="/product/getSnackProductList">스낵</a></li>
-			                   <li><a href="/product/getQuickOrder">QuickOrder</a></li>
-			           	</ul>
-			       </div>
-					</div>
-					
-					<!-- toolBar Button End //////////////////////// -->
-					
-					<div class="collapse navbar-collapse"  id="target">
-			             <ul class="nav navbar-nav navbar-right">
-			                 <li><a href="#">상품 등록</a></li>
-			                 <li><a href="#">상품 수정</a></li>
-			                 <li><a href="#">상품 삭제</a></li>
-			                 <li><a href="#">장바구니</a></li>
-			           	</ul>
-			       </div>
-		   		
-		   		</div>
-		   	</div>
-		   	<!-- ToolBar End /////////////////////////////////////-->
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="voucher">바우처</h4>
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="snack">스낵</h4>
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="QuickOrder">QuickOrder</h4>
+				</div>
+				
+				
+				
+			<!--<c:if test="${sessionScope.user.role == 'user'}">
 			
+				<div class="col-md-3" style="text-align:center;">
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="addProduct">상품 등록</h4>
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="updateProduct">상품 수정</h4>
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="deleteProduct">상품 삭제</h4>
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="cart">장바구니</h4>
+				</div>
+				
+			</c:if>	
+				
+				<div class="col-md-5" style="text-align:center;">
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="cart">장바구니</h4>
+				</div>
+				
+			-->	
+			
+				<div class="col-md-3" style="text-align:center;">
+				</div>
+				
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+					 상품 등록
+				</button>
+				<!-- 
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="addProduct">상품 등록</h4>
+				</div>
+				 -->
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="updateProduct">상품 수정</h4>
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="deleteProduct">상품 삭제</h4>
+				</div>
+				
+				<div class="col-md-1" style="text-align:center;">
+					<h4 id="cart">장바구니</h4>
+				</div>
+			
+		</div>	
+	<hr style="background-color: #ebeadd;">
 	
 	
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">상품 등록</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+				...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	
- 	
 </body>
 </html>

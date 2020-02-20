@@ -19,6 +19,7 @@ import com.mmm.common.Page;
 import com.mmm.common.Search;
 import com.mmm.service.board.BoardService;
 import com.mmm.service.domain.Article;
+import com.mmm.service.domain.Quiz;
 import com.mmm.service.domain.User;
 import com.mmm.service.event.EventService;
 import com.mmm.service.payment.PaymentService;
@@ -121,4 +122,28 @@ public class CustomerRestController {
 		return map;
 		
 	}
+	
+
+	@RequestMapping("json/deleteContact")
+	public int deleteQuiz(@RequestParam(value = "chbox[]") List<String> chArr, Quiz quiz) throws Exception {
+		 
+		System.out.println("chArrrrrrrrr"+chArr);
+		 
+		 int result = 0;
+		 int articleNo = 0;
+		 
+//		 quiz.setQuizNo(quizNo);
+		  if(chArr!=null) {
+		  
+		   for(String i : chArr) {   
+		   articleNo = Integer.parseInt(i);
+		   System.out.println("삭제할 놈!!" + articleNo);
+		   boardService.deleteArticle(articleNo);
+		  }   
+		  result = 1;
+		  }
+		  
+	return result;  
+	
+		}
 }

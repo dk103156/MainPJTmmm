@@ -41,4 +41,6 @@ public interface BoardDao {
 	
 	public Article getReply(int articleNo) throws Exception;
 	
+	public void updateViewCnt(int articleNo) throws Exception;
+	
 }
