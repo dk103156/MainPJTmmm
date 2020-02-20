@@ -46,7 +46,7 @@
 		<div class="cartContentHeader row mx-0">
 			<div class="prodNoHeader col-2"><span>상품번호</span></div>
 			<div class="prodNameHeader col-6"><span>상품명</span></div>
-			<div class="prodPriceHeader col-2"><span>4500</span></div>
+			<div class="prodPriceHeader col-2"><span>가격</span></div>
 			<div class="prodQuantityHeader col-2"><span>수량</span></div>
 		</div>
 		
@@ -81,19 +81,21 @@
 $(function(){
 	
 });
-
+$.ajaxSetup({async:false}); //전역 ajax 동기로
 	var prodNoList = new Array();	//상품 번호 
 	var prodNameList = new Array();
 	var prodQuantityList = new Array();	// 상품 갯수
 	var prodPriceList = new Array();
 	var prodImageList = new Array();
+
 	<c:forEach var='i' items='${cartList }'>
 		prodNoList.push('${i.cartProdNo}');
 		prodQuantityList.push('${i.cartProdQuantity}')	
 	</c:forEach>
 	prodNoList.sort( function(a,b) { return a - b});
 	prodNoList.forEach( (x) => {
-		
+			//console.log(x)
+			
 			$.get('/product/json/getProduct/'+x)
 			.done( y => {
 				
@@ -102,17 +104,18 @@ $(function(){
 				prodImageList.push(y.product.prodImage)
 				
 			})
+			
 
 	});
 	
 	setTimeout(function(){
-		//console.log(prodNoList)
-		//console.log(prodNameList)
-		//console.log(prodQuantityList)
-		//console.log(prodPriceList);
-		//console.log(prodImageList)		
+		console.log(prodNoList)
+		console.log(prodNameList)
+		console.log(prodQuantityList)
+		console.log(prodPriceList);
+		console.log(prodImageList)		
 	prodNoList.forEach( (x,i) => {
-	
+		//console.log(i)
 		var Element = "<div class='cartContentIn row mx-0 mb-2'>"
 			Element+= "<div class='prodNo col-2'><span><kbd>"+prodNoList[i]+"</kbd></span></div>"
 			Element+= "<div class='prodName col-6'>"
@@ -122,10 +125,17 @@ $(function(){
 			Element+= "<div class='prodPrice col-2'><span><input name='prodPrice' type='text' initialValue='"+prodPriceList[i]+"'value='"+prodPriceList[i]+"' readonly> 원</span></div>"
 			Element+= "<div class='prodQuantity col-2'><span><input type='number' value='"+prodQuantityList[i]+"' min='1' step='1' max='99'> 개</span></div>" 
 			Element+= "</div>"		
-			console.log(Element)
+			//console.log(Element)
 			
-		$("div.cartContent").append(Element);	
+		$("div.cartContent").append(Element);		
+			
 	})
+	var sum=0;
+	$("input[name=prodPrice]").each( (index,value) => {
+		sum += parseInt( $(value).val() )
+	});
+	$("input[name=totalPrice]").val(sum)
+	
 	
 	$("input[type=number]").on("change",function(){
 		

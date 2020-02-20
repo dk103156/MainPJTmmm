@@ -6,11 +6,7 @@
    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>    
 
-    
-<!DOCTYPE html>
-<html>
 <head>
  <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -41,13 +37,13 @@
 	<div class="container">
 		<div class="row mx-0">
 			<div class="inventoryHeader col-12 text-center">
-				<span>인벤토리 목록</span>
+				<span>내 인벤토리 목록</span>
 			</div>
 		</div>
 		
 		<hr>
 		
-		<div class="cartContentHeader row mx-0">
+		<div class="inventoryContentHeader row mx-0">
 			<div class="prodNoHeader col-2"><span>상품번호</span></div>
 			<div class="prodNameHeader col-6"><span>상품명</span></div>
 			<div class="prodQuantityHeader col-2"><span>소지수(사용가능)</span></div>
@@ -58,14 +54,14 @@
 		<div class="inventoryContent">
 			<c:forEach var="i" items="${map.productList }">
 				<div class='cartContentIn row mx-0 mb-2'>
-				<div class="prodNo col-2"><span><kbd>${i.prodNo }</kbd></span></div>
-				<div class="prodName col-6"><span><img src="../resources/image/${ i.prodImage}" width=150></span><span>${i.prodName }</span></div>
-				<div class="prodQuantity col-4">
-					<span></span>
-					<button type="button" class="btn btn-primary modalButton" data-toggle="modal" data-target="#exampleModalCenter">
-	  					 상세보기
-					</button>
-				</div>
+					<div class="prodNo col-2"><span><kbd>${i.prodNo }</kbd></span></div>
+					<div class="prodName col-6"><span><img src="../resources/image/${ i.prodImage}" width=150></span><span>${i.prodName }</span></div>
+					<div class="prodQuantity col-4">
+						<span></span>
+						<button type="button" class="btn btn-primary modalButton" data-toggle="modal" data-target="#exampleModalCenter">
+		  					 상세보기
+						</button>
+					</div>
 				</div>
 			</c:forEach>
 		</div>
@@ -124,11 +120,11 @@ $(function(){
 		//console.log(value)
 		var quantity = productQuantityList[index];
 		$($("div.prodQuantity > span")[index]).text(quantity)
-		
+		  
 		 $.ajax({
 		  type: "POST",
 		  url: "json/getInventoryList/",
-		  data: JSON.stringify({inventoryProdNo : value, inventoryStatus : "0" }),
+		  data: JSON.stringify({inventoryProdNo : value, inventoryStatus : "0", inventoryPurchaseNo : "0" }),
 		  dataType : "json",
 	      headers: { 
 	        "Accept" : "application/json",

@@ -35,6 +35,8 @@ public class Search {
 	private int inventoryPurchaseNo; // 상품 & 구매 전용
 	private int inventoryStatus; // 상품 & 구매 전용
 	private Timestamp inventoryUsedDate; // 상품 & 구매 전용
+	private String receiverPhone; // 상품 & 구매 전용
+	private int purchaseStatus;
 
 	///Constructor
 	public Search() {
@@ -283,6 +285,23 @@ public class Search {
 		this.inventoryUsedDate = inventoryUsedDate;
 	}
 	
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone;
+	}
+	
+	public int getPurchaseStatus() {
+		return purchaseStatus;
+	}
+
+	public void setPurchaseStatus(int purchaseStatus) {
+		this.purchaseStatus = purchaseStatus;
+	}
+	
+
 	@Override
 	public String toString() {
 		return "Search [currentPage=" + currentPage + ", searchCondition=" + searchCondition + ", searchKeyword="
@@ -294,22 +313,26 @@ public class Search {
 				+ ", articleType=" + articleType + ", category=" + category + ", userId=" + userId + ", previewFlag="
 				+ previewFlag + ", cartUserNo=" + cartUserNo + ", cartRegDate=" + cartRegDate + ", inventoryUserNo="
 				+ inventoryUserNo + ", inventoryProdNo=" + inventoryProdNo + ", inventoryPurchaseNo="
-				+ inventoryPurchaseNo + ", getTicketerPhone()=" + getTicketerPhone() + ", getCurrentPage()="
-				+ getCurrentPage() + ", getSearchCondition()=" + getSearchCondition() + ", getSearchKeyword()="
-				+ getSearchKeyword() + ", getViewCondition()=" + getViewCondition() + ", getMovieName()="
-				+ getMovieName() + ", getFranchise()=" + getFranchise() + ", getTheaterName()=" + getTheaterName()
-				+ ", getScreenDate()=" + getScreenDate() + ", getScreenTime()=" + getScreenTime() + ", getFranchises()="
-				+ getFranchises() + ", getTheaterNames()=" + getTheaterNames() + ", getPageSize()=" + getPageSize()
-				+ ", getEndRowNum()=" + getEndRowNum() + ", getStartRowNum()=" + getStartRowNum() + ", getUserNo()="
-				+ getUserNo() + ", getPayObjectFlag()=" + getPayObjectFlag() + ", getOnBoxOfficeFlag()="
-				+ getOnBoxOfficeFlag() + ", getArticleType()=" + getArticleType() + ", getCategory()=" + getCategory()
-				+ ", getUserId()=" + getUserId() + ", getPreviewFlag()=" + getPreviewFlag() + ", getCartUserNo()="
-				+ getCartUserNo() + ", getCartRegDate()=" + getCartRegDate() + ", getInventoryUserNo()="
-				+ getInventoryUserNo() + ", getInventoryProdNo()=" + getInventoryProdNo()
-				+ ", getInventoryPurchaseNo()=" + getInventoryPurchaseNo() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
-	
+				+ inventoryPurchaseNo + ", inventoryStatus=" + inventoryStatus + ", inventoryUsedDate="
+				+ inventoryUsedDate + ", receiverPhone=" + receiverPhone + ", purchaseStatus=" + purchaseStatus
+				+ ", getTicketerPhone()=" + getTicketerPhone() + ", getCurrentPage()=" + getCurrentPage()
+				+ ", getSearchCondition()=" + getSearchCondition() + ", getSearchKeyword()=" + getSearchKeyword()
+				+ ", getViewCondition()=" + getViewCondition() + ", getMovieName()=" + getMovieName()
+				+ ", getFranchise()=" + getFranchise() + ", getTheaterName()=" + getTheaterName() + ", getScreenDate()="
+				+ getScreenDate() + ", getScreenTime()=" + getScreenTime() + ", getFranchises()=" + getFranchises()
+				+ ", getTheaterNames()=" + getTheaterNames() + ", getPageSize()=" + getPageSize() + ", getEndRowNum()="
+				+ getEndRowNum() + ", getStartRowNum()=" + getStartRowNum() + ", getUserNo()=" + getUserNo()
+				+ ", getPayObjectFlag()=" + getPayObjectFlag() + ", getOnBoxOfficeFlag()=" + getOnBoxOfficeFlag()
+				+ ", getArticleType()=" + getArticleType() + ", getCategory()=" + getCategory() + ", getUserId()="
+				+ getUserId() + ", getPreviewFlag()=" + getPreviewFlag() + ", getCartUserNo()=" + getCartUserNo()
+				+ ", getCartRegDate()=" + getCartRegDate() + ", getInventoryUserNo()=" + getInventoryUserNo()
+				+ ", getInventoryProdNo()=" + getInventoryProdNo() + ", getInventoryPurchaseNo()="
+				+ getInventoryPurchaseNo() + ", getInventoryStatus()=" + getInventoryStatus()
+				+ ", getInventoryUsedDate()=" + getInventoryUsedDate() + ", getReceiverPhone()=" + getReceiverPhone()
+				+ ", getPurchaseStatus()=" + getPurchaseStatus() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}	
+
 
 
 

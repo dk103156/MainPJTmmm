@@ -82,7 +82,9 @@ $(function(){
 <ul>
  <h3>2.Product</h3>	
 	<li> <a href="product/getVoucherList">상품 목록 UI</a></li>
-	<li> <a href="purchase/getInventoryList">내 인벤토리 목록</a></li>
+	<li> <a href="purchase/getPurchaseList?purchaseStatus=0">내 구매 목록 UI</a></li>
+	<li> <a href="purchase/getPurchaseList?purchaseStatus=2">내 구매 취소 목록 UI</a></li>
+	<li> <a href="purchase/getInventoryList">내 인벤토리 목록 UI</a></li>
 	<li> <a href="product/getCartList">장바구니 목록 UI</a></li>
 </ul>
 

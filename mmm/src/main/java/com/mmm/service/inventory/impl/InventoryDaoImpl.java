@@ -61,8 +61,8 @@ public class InventoryDaoImpl implements InventoryDao {
 
 	@Override
 	public void deleteInventory(int inventoryNo) throws Exception {
-		// TODO Auto-generated method stub
 		
+		sqlSession.delete("InventoryMapper.deleteInventory",inventoryNo);
 	}
 
 

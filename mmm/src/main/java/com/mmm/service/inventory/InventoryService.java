@@ -18,7 +18,7 @@ public interface InventoryService {
 	
 	public List<Inventory> getInventoryList(Search search) throws Exception;
 	
-	public void updateInventory(Inventory inventor) throws Exception;
+	public void updateInventory(Inventory inventory) throws Exception;
 	
 	public void deleteInventory(int inventoryNo) throws Exception;
 		
