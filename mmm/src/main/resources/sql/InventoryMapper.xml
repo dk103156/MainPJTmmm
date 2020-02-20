@@ -65,17 +65,19 @@
 			<if test="inventoryUserNo !=0">inventory_user_no = #{inventoryUserNo} and</if>
 			<if test="inventoryProdNo !=0">inventory_prod_no = #{inventoryProdNo} and</if>
 			<if test="inventoryPurchaseNo !=0">inventory_purchase_no = #{inventoryPurchaseNo} and</if>
-			inventory_Status = #{inventoryStatus} and
+			<if test="inventoryStatus ==2"></if>
+			<if test="inventoryStatus !=2">inventory_Status = #{inventoryStatus} and</if>
+			
 		</trim>	
  	</select> 	
 	
 	<update id="updateInventory" parameterType="Search" >
 	 	UPDATE inventory
 	 	<trim prefix="SET" suffixOverrides=",">
-			<if test="inventoryNo !=null">inventory_no = #{inventoryNo},</if>
-			<if test="inventoryUserNo !=null">inventory_user_no = #{inventoryUserNo},</if>
-			<if test="inventoryProdNo !=null">inventory_prod_no = #{inventoryProdNo},</if>
-			<if test="inventoryPurchaseNo !=null">inventory_purchase_no = #{inventoryPurchaseNo},</if>
+			<if test="inventoryNo !=0">inventory_no = #{inventoryNo},</if>
+			<if test="inventoryUserNo !=0">inventory_user_no = #{inventoryUserNo},</if>
+			<if test="inventoryProdNo !=0">inventory_prod_no = #{inventoryProdNo},</if>
+			<if test="inventoryPurchaseNo !=0">inventory_purchase_no = #{inventoryPurchaseNo},</if>
 			<if test="inventoryProdPinNo !=null">inventory_prod_pin_no = #{inventoryProdPinNo},</if>
 			<if test="inventoryRegDate !=null">inventory_reg_date =#{inventoryRegDate},</if>
 			<if test="inventoryUsedDate !=null">inventory_used_date = #{inventoryUsedDate},</if>

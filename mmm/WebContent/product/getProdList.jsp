@@ -69,7 +69,7 @@
 	 
 	 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( ".img-circle.img-responsive" ).on("click" , function() {
+			$( ".img.img-responsive" ).on("click" , function() {
 				var prodNo = $(this).next().val();
 				console.log(prodNo);
 				self.location = "/product/getProduct?prodNo="+prodNo;
@@ -192,7 +192,7 @@
 			<div class="col-sm-6 col-md-4">
       				<div class="thumb-wrapper">
       					<div class="img-box">
- 						<img src="/resources/image/${product.prodImage}" class="img-circle img-responsive" width="400" height="400">
+ 						<img src="/resources/image/${product.prodImage}" class="img img-responsive" width="400" height="400">
 				       	<input type="hidden" value = "${product.prodNo}">
 				       </div>
 				        	<h3>${product.prodName}</h3>

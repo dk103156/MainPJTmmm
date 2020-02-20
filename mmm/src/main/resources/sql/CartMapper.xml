@@ -37,7 +37,7 @@
 			<if test="cartUserNo != null">
 						WHERE cart_user_no = #{cartUserNo}
 			</if>
-			order by cart_user_no
+			order by cart_no
 		<include refid="back" />	  
 	</select>
 	  	

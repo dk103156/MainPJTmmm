@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,12 +16,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mmm.common.Page;
 import com.mmm.common.Search;
 import com.mmm.service.cart.CartService;
+import com.mmm.service.domain.DateTime;
 import com.mmm.service.domain.Inventory;
 import com.mmm.service.domain.Product;
 import com.mmm.service.domain.Purchase;
@@ -64,6 +66,7 @@ public class PurchaseController {
 	
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
+	
 	//직접 구매 하는 경우
 	@RequestMapping(value="addPurchaseOne", method=RequestMethod.POST)
 	public String addPurchase(@ModelAttribute("purchase") Purchase purchase, HttpServletRequest request, Model model) throws Exception {
@@ -123,6 +126,50 @@ public class PurchaseController {
 		
 		return "forward:/purchase/test.jsp";
 	}
+	
+	// 내 구매목록으로
+	@RequestMapping(value="getPurchaseList")
+	public String getPurchaseList(@ModelAttribute Search search, HttpServletRequest request, Model model) throws Exception{
+		
+		User user = (User) request.getSession().getAttribute("user");
+		search.setUserNo(user.getUserNo());
+		if(search.getCurrentPage()==0) {
+			search.setCurrentPage(1);
+		}
+		
+		search.setPageSize(pageSize);
+		
+		Map<String,Object> map =purchaseService.getPurchaseList(search);
+		List<Purchase> list = (List<Purchase>)map.get("list");
+		Page resultPage	= 
+				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		map = new HashMap<String,Object>();
+		map.put("PurchaseList",list);
+		map.put("resultPage", resultPage);
+		map.put("search", search);
+		
+		model.addAttribute("map",map);
+	
+		return "forward:/purchase/getPurchaseList.jsp";
+	}
+	
+	@RequestMapping(value="/cancelTest/{purchaseNo}", method=RequestMethod.POST)
+	public String cancelTest(@PathVariable("purchaseNo") int purchaseNo) throws Exception {
+		System.out.println("/cancelTest");
+		
+		Purchase purchase= new Purchase();
+		purchase.setPurchaseStatus(2);
+		purchase.setPurchaseNo(purchaseNo);
+		System.out.println("updatePurchase시작");
+		
+		purchase.setCancelDate(new Timestamp(new Date().getTime()));
+		purchaseService.updatePurchase(purchase);
+		
+		System.out.println("updatePurchase끝");
+		
+		return "redirect:/purchase/getPurchaseList";
+	}
+	
 	// 내 인벤토리 목록으로
 	@RequestMapping(value="getInventoryList" , method=RequestMethod.GET)
 	public String getInventoryList(@ModelAttribute Search search, HttpServletRequest request, Model model) throws Exception{

@@ -2,6 +2,7 @@ package com.mmm.service.purchase.impl;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -84,14 +85,27 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public Map<String,Object> getPurchaseList(Purchase purchase) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String,Object> getPurchaseList(Search search) throws Exception {
+		
+		return purchaseDao.getPurchaseList(search);
 	}
 
 	@Override
 	public void updatePurchase(Purchase purchase) throws Exception {
-		// TODO Auto-generated method stub
+		
+		Search search = new Search();
+		
+		search.setInventoryPurchaseNo(purchase.getPurchaseNo());
+		
+		List<Inventory> inventoryList= inventoryDao.getInventoryList(search);
+		
+		for(Inventory iv : inventoryList) {
+			
+			inventoryDao.deleteInventory(iv.getInventoryNo());
+		}
+		
+		purchaseDao.updatePurchase(purchase);
+		
 		
 	}
 

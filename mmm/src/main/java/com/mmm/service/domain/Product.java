@@ -14,8 +14,8 @@ public class Product {
 	private String prodDetail;				// 상품 구성
 	private String prodImage;
 	private List<MultipartFile> file;		// 상품 이미지
-	private int franType;					// 프랜차이즈 flag -> 0:CGV 1:롯시 2:메박
-	private int prodType;					// 상품 종류   flag -> 0:영관   1:스권 3:스낵
+	private int franType;					
+	private int prodType;					// 상품 종류   flag -> 0:영관 1:스권 2:스낵
 	private int quantity;
 	
 	

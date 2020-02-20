@@ -13,9 +13,7 @@ public class Purchase {
 	private int purchaseStatus;					// 0:구매, 1:선물
 	private int purchasePrice;					// 구매 총 가격
 	private Timestamp purchaseDate;				// 구매 일시
-	private String receiverPhone;				// 받는사람 휴대전화번호
-	private String receiverName;				// 받는사람 이름
-	private String senderMessage;				// 선물 메세지
+	private Timestamp cancelDate;
 	
 	public int getPurchaseNo() {
 		return purchaseNo;
@@ -38,14 +36,8 @@ public class Purchase {
 	public Timestamp getPurchaseDate() {
 		return purchaseDate;
 	}
-	public String getReceiverPhone() {
-		return receiverPhone;
-	}
-	public String getReceiverName() {
-		return receiverName;
-	}
-	public String getSenderMessage() {
-		return senderMessage;
+	public Timestamp getCancelDate() {
+		return cancelDate;
 	}
 	public void setPurchaseNo(int purchaseNo) {
 		this.purchaseNo = purchaseNo;
@@ -68,14 +60,8 @@ public class Purchase {
 	public void setPurchaseDate(Timestamp purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
-	public void setReceiverPhone(String receiverPhone) {
-		this.receiverPhone = receiverPhone;
-	}
-	public void setReceiverName(String receiverName) {
-		this.receiverName = receiverName;
-	}
-	public void setSenderMessage(String senderMessage) {
-		this.senderMessage = senderMessage;
+	public void setCancelDate(Timestamp cancelDate) {
+		this.cancelDate = cancelDate;
 	}
 	
 	@Override
@@ -83,9 +69,10 @@ public class Purchase {
 		return "Purchase [purchaseNo=" + purchaseNo + ", purchaseUserNo=" + purchaseUserNo + ", purchaseProductNo="
 				+ purchaseProductNo + ", purchaseProductQuantity=" + purchaseProductQuantity + ", purchaseStatus="
 				+ purchaseStatus + ", purchasePrice=" + purchasePrice + ", purchaseDate=" + purchaseDate
-				+ ", receiverPhone=" + receiverPhone + ", receiverName=" + receiverName + ", senderMessage="
-				+ senderMessage + "]";
+				+ ", cancelDate=" + cancelDate + "]";
 	}
+	
+	
 	
 
 	

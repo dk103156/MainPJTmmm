@@ -68,8 +68,8 @@ public class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	public void deleteInventory(int inventoryNo) throws Exception {
-		// TODO Auto-generated method stub
 		
+		inventoryDao.deleteInventory(inventoryNo);
 	}
 
 
