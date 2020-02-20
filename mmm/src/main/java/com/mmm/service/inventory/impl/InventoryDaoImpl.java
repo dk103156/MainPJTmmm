@@ -31,6 +31,8 @@ public class InventoryDaoImpl implements InventoryDao {
 	@Override
 	public void addInventory(Inventory inventory) throws Exception {
 		
+		System.out.println("---------------------- addInvend() inven "+ inventory );
+		
 		sqlSession.insert("InventoryMapper.addInventory",inventory);
 		
 	}
@@ -65,7 +67,10 @@ public class InventoryDaoImpl implements InventoryDao {
 		sqlSession.delete("InventoryMapper.deleteInventory",inventoryNo);
 	}
 
-
+	public List<Inventory> getVoucherListInPayment(int userNo)throws Exception{
+		
+		return sqlSession.selectList("InventoryMapper.getVoucherListInPayment", userNo);
+	}
 	
 
 	

@@ -73,6 +73,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 				inventory.setInventoryProdPinNo(uuid); // 2. 핀 정보 삽입 				
 				inventory.setInventoryStatus("0");
 				inventoryDao.addInventory(inventory);
+				
+				System.out.println("------------------ inven" + j +"   --   " + inventory );
 			}
 		}
 		
