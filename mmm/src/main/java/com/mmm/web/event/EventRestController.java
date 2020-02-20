@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mmm.common.Search;
@@ -23,6 +24,7 @@ import com.mmm.service.domain.Participation;
 import com.mmm.service.domain.Payment;
 import com.mmm.service.domain.Point;
 import com.mmm.service.domain.Preview;
+import com.mmm.service.domain.Quiz;
 import com.mmm.service.domain.User;
 import com.mmm.service.event.EventService;
 import com.mmm.service.payment.PaymentService;
@@ -119,7 +121,28 @@ public class EventRestController {
 	}
 	
 	
+	@RequestMapping("json/deleteQuiz")
+	public int deleteQuiz(@RequestParam(value = "chbox[]") List<String> chArr, Quiz quiz) throws Exception {
+		 
+		System.out.println("chArrrrrrrrr"+chArr);
+		 
+		 int result = 0;
+		 int quizNo = 0;
+		 
+//		 quiz.setQuizNo(quizNo);
+		  if(chArr!=null) {
+		  
+		   for(String i : chArr) {   
+		   quizNo = Integer.parseInt(i);
+		   System.out.println("삭제할 놈!!" + quizNo);
+		   eventService.deleteQuiz(quizNo);
+		  }   
+		  result = 1;
+		  }
+		  
+	return result;  
 	
+		}
 	
 	@RequestMapping(value="json/getPreview", method=RequestMethod.GET)
 	public Map<String,Object> getPreview(@RequestBody Preview preview) throws Exception{

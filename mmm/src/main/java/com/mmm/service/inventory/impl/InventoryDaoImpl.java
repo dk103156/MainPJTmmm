@@ -36,28 +36,36 @@ public class InventoryDaoImpl implements InventoryDao {
 	}
 
 	@Override
-	public Inventory getInventory(int inventoryNo) throws Exception {
+	public Inventory getInventory(Search search) throws Exception {
+		
+		return sqlSession.selectOne("InventoryMapper.getInventory",search);
+	}
+	
+	@Override
+	public int getInventoryCount(Search search) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("InventoryMapper.getInventoryCount",search);
 	}
 
 	@Override
-	public Map<String, Object> getInventoryList(Inventory inventory) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Inventory> getInventoryList(Search search) throws Exception {
+		
+		return sqlSession.selectList("InventoryMapper.getInventoryList",search);
 	}
 
 	@Override
 	public void updateInventory(Inventory inventory) throws Exception {
-		// TODO Auto-generated method stub
 		
+		sqlSession.update("InventoryMapper.updateInventory",inventory);
 	}
 
 	@Override
 	public void deleteInventory(int inventoryNo) throws Exception {
-		// TODO Auto-generated method stub
 		
+		sqlSession.delete("InventoryMapper.deleteInventory",inventoryNo);
 	}
+
+
 	
 
 	

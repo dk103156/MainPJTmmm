@@ -338,13 +338,24 @@
 	    line-height: 30px;
 	 }
 	 
+	div.resetSelection {
+		cursor: pointer;
+		background-image: url('http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/top_buttons.png');
+		background-repeat: no-repeat;
+		background-position : 0 -120px;
+		width: 113px;
+	}
+	 
 </style>
 
 <script>
 $(function(){
-	$($("#btn")).on("click",function(){
+	$($(".resetSelection")).on("click",function(){
 		window.location.reload();
-		
+		 $(".loading").css("display", "block");
+		 setTimeout(() => {
+			 $(".loading").css("display", "none");
+		}, 500);		
 	});
 	
   /* 영화 예매 버튼 통해서 들어오면 클릭*/
@@ -366,17 +377,11 @@ $(function(){
       <!-- 비교 예매 -->
       <div class="compareTicketing">
         <!-- 타이틀 -->
-        <div class="col navi">
-        	<div class="row">
-        		<div class="col-3">
-	        		<input id="btn" type="button" value="다시하기">
-	        	</div>
-	        	<div class="col-4 text-center">
-	        	</div>
-	        	<div class="col-2"></div>
-	        	<div class="col-3"></div>
-        	</div>	
-        </div>
+     <div class="row mb-2">
+     	<div class="col-12 navi" style="margin-left: 15px;">
+     		<div class="resetSelection" style="clear:both; float:right; height:30px"></div>
+     	</div>
+     </div>
 
         <!-- 메인 컨텐츠  -->
 
@@ -544,7 +549,7 @@ $(function(){
                             	</div>
                           </div>
                           
-                          <div class="placeholder" style="margin-top: 190px;">영화, 극장, 날짜를 <br><br>선택해주세요.</div>
+                          <div class="placeholder" style="margin-top: 220px;">영화, 극장, 날짜를 <br><br>선택해주세요.</div>
            </div><!-- end of col -->
            </div><!-- end of row -->
           </div><!-- end of steps-body -->
@@ -553,6 +558,11 @@ $(function(){
 		</div><!-- end of row -->
 	</div><!-- end of compareTicketing -->
 	</div><!-- end of container -->
+	
+<div class="loading" id="ticket_loading" style="display: none;">
+	<div class="dimm"></div>
+	<p class="loadWrap"><img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/common/ajax-loader-w.gif" alt="로딩 애니메이션"></p>
+</div>
 
         	
      	<form>
@@ -1387,6 +1397,11 @@ function check(){
 		     		
 		     	TimeSelect(); // <-- 추가된 시간에 이벤트
 		     	
+					 $(".loading").css("display", "block");
+					 setTimeout(() => {
+						 $(".loading").css("display", "none");
+					}, 500);
+		     	
 		      }//end of success
 		      
    		}); //end of ajax    		 
@@ -1461,6 +1476,10 @@ function getMovieList(franchiseCheck,theaterCheck,dateCheck){
 				      success : function(result,status){
 					      // 데이터를 받으면 resolve() 호출
 					      resolve(result);
+							 $(".loading").css("display", "block");
+							 setTimeout(() => {
+								 $(".loading").css("display", "none");
+							}, 500);
 				      }//end of success
 			 });//end of ajax
 			})//end of promise
@@ -1500,7 +1519,11 @@ function getFranchiseList(movieCheck,dateCheck){
 		      },
 		      success : function(result,status){
 			      // 데이터를 받으면 resolve() 호출
-			      resolve(result);		      
+			      resolve(result);		 
+					 $(".loading").css("display", "block");
+					 setTimeout(() => {
+						 $(".loading").css("display", "none");
+					}, 500);
 		      }
 	 });//end of ajax
 	})//end of Promise
@@ -1544,6 +1567,11 @@ function getTheaterList(movieCheck,franchiseCheck,dateCheck){
 		      success : function(result,status){;
 			      // 데이터를 받으면 resolve() 호출
 			      resolve(result);	
+			      
+					 $(".loading").css("display", "block");
+					 setTimeout(() => {
+						 $(".loading").css("display", "none");
+					}, 500);
 		    	  
 		      }//end of success
 	 });//end of ajax
@@ -1608,7 +1636,10 @@ function getDateList(movieCheck,franchiseCheck,theaterCheck){
 			      success : function(result,status){
 				      // 데이터를 받으면 resolve() 호출
 				      resolve(result);			      		
-			    	  
+						 $(".loading").css("display", "block");
+						 setTimeout(() => {
+							 $(".loading").css("display", "none");
+						}, 500);
 			      }//end of success
 		 });//end of ajax
 	})//end of Promise

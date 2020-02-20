@@ -202,6 +202,9 @@
 	  /* 화살표 우측 정렬*/
 	  span.arrowTotal{
 	  	float : right;
+	  	position: relative;
+	  	left: 15px !important; 
+	  	top: 3px;
 	  }
 	  
 	  /* 프랜차이즈 선택, 목록 창 크기 고정 */
@@ -221,7 +224,7 @@
 	    height: 56px;
 	    left: 22px;
 	    position: absolute;
-	    top: 0px;
+	    top: 1px;
 	  }
 	   
 	  	  /* 클릭했을 시 색 변화 */
@@ -321,18 +324,40 @@
 	    font-weight: bold;
 	    line-height: 30px;	  
 	  }
+	  
+		div.resetSelection {
+			cursor: pointer;
+			background-image: url('http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/top_buttons.png');
+			background-repeat: no-repeat;
+			background-position : 0 -120px;
+			width: 113px;
+		}	  
 	  	  
   </style>
   
-  <script>
-  </script>
+<script>
+	$(function(){
+		$($(".resetSelection")).on("click",function(){
+			 $(".loading").css("display", "block");
+			 setTimeout(() => {
+				 $(".loading").css("display", "none");
+			}, 500);
+			window.location.reload();		
+		
+		});
+	});
+</script>
   </head>
   <body>
     <div class="container">
       <!-- 비교 예매 -->
       <div class="compareTicketing">
         <!-- 타이틀 -->
-        <div class="col navi">네비게이션바</div>
+     <div class="row mb-2">
+     	<div class="col-12 navi" style="margin-left: 11px;">
+     		<div class="resetSelection" style="clear:both; float:right; height:30px"></div>
+     	</div>
+     </div>
 
         <!-- 메인 컨텐츠  -->
 
@@ -421,10 +446,10 @@
                           <div class="franchise-select">
 	                           <ul class="list-group first" style="padding-left: 30px;">
 	                           		 <li class="list-group-item first text-center" style="width: 160px;">
-	                           		 <span class="firstHeaderName">프랜차이즈</span><img class="firstHeaderImage" src="" alt="" width="30" >
+	                           		 <span class="firstHeaderName" style="margin-left: 20px;">프랜차이즈</span><img class="firstHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal" style="position: relative; left: 5px;">
-		                           		 <span class="arrow" style="position : relative; bottom:2px"><i id="firstArrowUp" class="fas fa-sort-up"></i></span>
-		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i id="firstArrowDown"  class="fas fa-sort-down"></i></span>
+		                           		 <span class="arrow" style="position : relative;bottom:5px;left: 6px;"><i id="firstArrowUp" class="fas fa-sort-up" style="font-size: 22px;"></i></span>
+		                           		 <span class="arrow" style="position : relative; top:6px; right: 11px"><i id="firstArrowDown"  class="fas fa-sort-down" style="font-size: 22px;"></i></span>
 	                           		 </span>
 	                           		 </li>
 							    </ul>
@@ -469,10 +494,10 @@
                           <div class="franchise-select">
 	                           <ul class="list-group second" style="padding-left: 40px;">  
 	                           		 <li class="list-group-item second text-center">
-	                           		 <span class="secondHeaderName">프랜차이즈</span><img class="secondHeaderImage" src="" alt="" width="30" >
+	                           		 <span class="secondHeaderName" style="margin-left: 20px;">프랜차이즈</span><img class="secondHeaderImage" src="" alt="" width="30" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
-		                           		 <span class="arrow" style="position : relative; bottom:2px"><i id="secondArrowUp"  class="fas fa-sort-up"></i></span>
-		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i id="secondArrowDown" class="fas fa-sort-down"></i></span>
+		                           		 <span class="arrow" style="position : relative;bottom:5px;left: 6px;"><i id="secondArrowUp"  class="fas fa-sort-up" style="font-size: 22px;"></i></span>
+		                           		 <span class="arrow" style="position : relative; top:6px; right: 11px"><i id="secondArrowDown" class="fas fa-sort-down" style="font-size: 22px;"></i></span>
 	                           		 </span>
 	                           		 </li>
 							    </ul>
@@ -517,10 +542,10 @@
                           <div class="franchise-select">
 	                           <ul class="list-group third" style="padding-left: 40px;">  
 	                           		<li class="list-group-item third text-center">
-	                           		 <span class="thirdHeaderName">프랜차이즈</span><img class="thirdHeaderImage" src="" alt="" >
+	                           		 <span class="thirdHeaderName" style="margin-left: 20px;">프랜차이즈</span><img class="thirdHeaderImage" src="" alt="" >
 	                           		 <span class="arrowTotal"  style="position: relative; left: 5px;">
-		                           		 <span class="arrow" style="position : relative; bottom:2px"><i id="thirdArrowUp" class="fas fa-sort-up"></i></span>
-		                           		 <span class="arrow" style="position : relative; top:3px; right: 11px"><i id="thirdArrowDown" class="fas fa-sort-down"></i></span>
+		                           		 <span class="arrow" style="position : relative;bottom:5px;left: 6px;"><i id="thirdArrowUp" class="fas fa-sort-up" style="font-size: 22px;"></i></span>
+		                           		 <span class="arrow" style="position : relative; top:6px; right: 11px"><i id="thirdArrowDown" class="fas fa-sort-down" style="font-size: 22px;"></i></span>
 	                           		 </span>
 									</li>
 							    </ul>
@@ -622,11 +647,19 @@
                             	</div>
                           </div>
                     </div>
+                    
+                    <div class="placeholder" style="margin-top: 130px;margin-left: 373px;">영화, 극장, 날짜를 <br><br>선택해주세요.</div>
 
                   </div>
               </div>
             </div>
         	</div><!-- end of div steps -->
+        	
+ 
+ <div class="loading" id="ticket_loading" style="display: none;">
+	<div class="dimm"></div>
+	<p class="loadWrap"><img src="http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/common/ajax-loader-w.gif" alt="로딩 애니메이션"></p>
+</div>       	
         	
         	<form>
         	<input type="hidden" name="movieName">
@@ -738,21 +771,18 @@
 	    		 franchiseFirstCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.first > li > span:nth-child(1)").text(franchiseFirstCheck)
 	    		 $("img.firstHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
-	    		 $("div.franchise-select > ul.first > li > span.arrowTotal").css("top","1px");
 	    		 $("span.firstHeaderName").css("position","relative").css("top","1px");
 	    	}else if(index=="second"){
 	    		 theaterSecondCheck=""
 	    		 franchiseSecondCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.second > li > span:nth-child(1)").text(franchiseSecondCheck)
 	    		 $("img.secondHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
-	    		 $("div.franchise-select > ul.second > li > span.arrowTotal").css("top","1px");
 	    		 $("span.secondHeaderName").css("position","relative").css("top","1px");
 	    	}else if(index=="third"){
 	    		 theaterThirdCheck=""
 	    		 franchiseThirdCheck=$.trim($(this).text());
 	    		 $("div.franchise-select > ul.third > li > span:nth-child(1)").text(franchiseThirdCheck)
 	    		 $("img.thirdHeaderImage").attr("src",$(this).children().next().attr("src")).css("display","inline");
-	    		 $("div.franchise-select > ul.third > li > span.arrowTotal").css("top","1px");
 	    		 $("span.thirdHeaderName").css("position","relative").css("top","1px");
 	    	 }
 	    	 
@@ -858,6 +888,11 @@
 				    	 }
 			    		  
     		    	  });//end of click
+    		    	  
+						 $(".loading").css("display", "block");
+						 setTimeout(() => {
+							 $(".loading").css("display", "none");
+						}, 500);
     		      }//end of success
 					  
     		      
@@ -1057,7 +1092,7 @@
     	 
     	 //모두 선택됐다면..
     	 if( movieName==true && franchise==true && theaterName==true && screenTime == true){
-    		
+    		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "none");
 	    	 $.ajax({
 	    		  type: "POST",
 	    		  url: "/ticketing/json/getTimeList",
@@ -1119,6 +1154,10 @@
 			     	   })
 			     	   
     		     	firstTimeSelect(); // <-- 추가된 시간에 이벤트 
+						 $(".loading").css("display", "block");
+						 setTimeout(() => {
+							 $(".loading").css("display", "none");
+						}, 500);
     		      }//end of success
     		      
 	    		}); //end of ajax    		 
@@ -1378,6 +1417,10 @@
  			     	   })
  			     	   
     		     		secondTimeSelect(); // <-- 추가된 시간에 이벤트 
+						 $(".loading").css("display", "block");
+						 setTimeout(() => {
+							 $(".loading").css("display", "none");
+						}, 500);
     		    	  }//end of success
     		      });//end of ajax    
     		 
@@ -1611,6 +1654,10 @@
     			     	   })
     			     	   
     		     		thirdTimeSelect(); // <-- 추가된 시간에 이벤트 
+							 $(".loading").css("display", "block");
+							 setTimeout(() => {
+								 $(".loading").css("display", "none");
+							}, 500);
     		    	  }//end of success
     		      });//end of ajax      		 
     		 
@@ -2708,6 +2755,10 @@ function getMovieList(dateFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 				      success : function(result,status){
 				    	  // 데이터를 받으면 resolve() 호출
 					      resolve(result);
+							 $(".loading").css("display", "block");
+							 setTimeout(() => {
+								 $(".loading").css("display", "none");
+							}, 500);
 				      }//end of success
 			 });//end of ajax
 			})//end of promise
@@ -2751,6 +2802,10 @@ function getFranchiseList(movieFirstCheck,dateFirstCheck){
 		      success : function(result,status){
 		    	  // 데이터를 받으면 resolve() 호출
 			      resolve(result);		      
+					 $(".loading").css("display", "block");
+					 setTimeout(() => {
+						 $(".loading").css("display", "none");
+					}, 500);		    	  
 		      }
 	 });//end of ajax
 	})//end of Promise
@@ -2798,7 +2853,10 @@ function getTheaterFirstList(movieFirstCheck,franchiseFirstCheck,dateFirstCheck)
 		      success : function(result,status){;
 			      // 데이터를 받으면 resolve() 호출
 			      resolve(result);	
-		    	  
+					 $(".loading").css("display", "block");
+					 setTimeout(() => {
+						 $(".loading").css("display", "none");
+					}, 500);		    	  
 		      }//end of success
 	 });//end of ajax
 	})//end of Promise
@@ -2846,6 +2904,10 @@ function getTheaterSecondList(movieFirstCheck,franchiseSecondCheck,dateFirstChec
 		      success : function(result,status){;
 			      // 데이터를 받으면 resolve() 호출
 			      resolve(result);	
+					 $(".loading").css("display", "block");
+					 setTimeout(() => {
+						 $(".loading").css("display", "none");
+					}, 500);			      
 		    	  
 		      }//end of success
 	 });//end of ajax
@@ -2891,9 +2953,13 @@ function getTheaterThirdList(movieFirstCheck,franchiseThirdCheck,dateFirstCheck)
 		        "Accept" : "application/json",
 		        "Content-Type": "application/json"
 		      },
-		      success : function(result,status){;
+		      success : function(result,status){
 			      // 데이터를 받으면 resolve() 호출
 			      resolve(result);	
+					 $(".loading").css("display", "block");
+					 setTimeout(() => {
+						 $(".loading").css("display", "none");
+					}, 500);
 		    	  
 		      }//end of success
 	 });//end of ajax
@@ -2912,6 +2978,7 @@ function getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 		datas = JSON.stringify({
 			 franchise : franchiseFirstCheck,		  
 		 		 })
+		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");
 	//프렌차이즈 두번째만 클릭했을 경우(1),			 		 
 	}
 	if(franchiseFirstCheck.length==0 && franchiseSecondCheck.length!=0 && franchiseThirdCheck==0 && 
@@ -2920,6 +2987,7 @@ function getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 		datas = JSON.stringify({
 			franchise : franchiseSecondCheck,	  
 		 		 })
+		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");
 	//프렌차이즈 세번째만 클릭했을 경우(1),
 	}
 	if(franchiseFirstCheck.length==0 && franchiseSecondCheck.length==0 && franchiseThirdCheck!=0 && 
@@ -2928,6 +2996,7 @@ function getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 		datas = JSON.stringify({
 			franchise : franchiseThirdCheck,	  
 		 		 })
+		 		$("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");
   	 		 
 	}
 	//영화만 클릭했을 경우(1),		 		 
@@ -3430,7 +3499,11 @@ function getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 			      },
 			      success : function(result,status){
 			    	  // 데이터를 받으면 resolve() 호출
-				      resolve(result);			      		
+				      resolve(result);		
+						 $(".loading").css("display", "block");
+						 setTimeout(() => {
+							 $(".loading").css("display", "none");
+						}, 500);			    	  
 			    	  
 			      }//end of success
 		 });//end of ajax

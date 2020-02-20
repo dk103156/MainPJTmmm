@@ -1,12 +1,14 @@
 package com.mmm.service.inventory.impl;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.mmm.common.Search;
 import com.mmm.service.cart.CartService;
 import com.mmm.service.domain.Cart;
 import com.mmm.service.domain.Inventory;
@@ -38,31 +40,39 @@ public class InventoryServiceImpl implements InventoryService {
 
 
 	@Override
-	public Inventory getInventory(int inventoryNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Inventory getInventory(Search search) throws Exception {
+	
+		return inventoryDao.getInventory(search);
 	}
+	
+	@Override
+	public int getInventoryCount(Search search) throws Exception {
+	
+		return inventoryDao.getInventoryCount(search);
+	}	
 
 
 	@Override
-	public Map<String, Object> getInventoryList(Inventory inventory) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public void updateInventory(Inventory inventor) throws Exception {
-		// TODO Auto-generated method stub
+	public List<Inventory> getInventoryList(Search search) throws Exception {
 		
+		return inventoryDao.getInventoryList(search);
+	}
+
+
+	@Override
+	public void updateInventory(Inventory inventory) throws Exception {
+		
+		inventoryDao.updateInventory(inventory);
 	}
 
 
 	@Override
 	public void deleteInventory(int inventoryNo) throws Exception {
-		// TODO Auto-generated method stub
 		
+		inventoryDao.deleteInventory(inventoryNo);
 	}
+
+
 
 
 

@@ -28,7 +28,15 @@ public class Search {
 	private int category; //0: 전체, 1: 예매&매표 , 2: 스토어,  3: 결제,  4: 할인혜택,  5: 홈페이지,  6: 이벤트
 	private String userId; 
 	private int previewFlag; //0: 진행중  1:마감
-
+	private int cartUserNo; // 상품 & 구매 전용
+	private Timestamp cartRegDate; // 상품 & 구매 전용
+	private int inventoryUserNo; // 상품 & 구매 전용
+	private int inventoryProdNo; // 상품 & 구매 전용
+	private int inventoryPurchaseNo; // 상품 & 구매 전용
+	private int inventoryStatus; // 상품 & 구매 전용
+	private Timestamp inventoryUsedDate; // 상품 & 구매 전용
+	private String receiverPhone; // 상품 & 구매 전용
+	private int purchaseStatus;
 
 	///Constructor
 	public Search() {
@@ -221,57 +229,111 @@ public class Search {
 	public void setPreviewFlag(int previewFlag) {
 		this.previewFlag = previewFlag;
 	}
+	
+	public int getCartUserNo() {
+		return cartUserNo;
+	}
+
+	public Timestamp getCartRegDate() {
+		return cartRegDate;
+	}
+
+	public void setCartUserNo(int cartUserNo) {
+		this.cartUserNo = cartUserNo;
+	}
+
+	public void setCartRegDate(Timestamp cartRegDate) {
+		this.cartRegDate = cartRegDate;
+	}	
+	public int getInventoryUserNo() {
+		return inventoryUserNo;
+	}
+	
+	public int getInventoryProdNo() {
+		return inventoryProdNo;
+	}
+	
+	public int getInventoryPurchaseNo() {
+		return inventoryPurchaseNo;
+	}
+	
+	public void setInventoryUserNo(int inventoryUserNo) {
+		this.inventoryUserNo = inventoryUserNo;
+	}
+	
+	public void setInventoryProdNo(int inventoryProdNo) {
+		this.inventoryProdNo = inventoryProdNo;
+	}
+	
+	public void setInventoryPurchaseNo(int inventoryPurchaseNo) {
+		this.inventoryPurchaseNo = inventoryPurchaseNo;
+	}
+
+	public int getInventoryStatus() {
+		return inventoryStatus;
+	}
+
+	public Timestamp getInventoryUsedDate() {
+		return inventoryUsedDate;
+	}
+
+	public void setInventoryStatus(int inventoryStatus) {
+		this.inventoryStatus = inventoryStatus;
+	}
+
+	public void setInventoryUsedDate(Timestamp inventoryUsedDate) {
+		this.inventoryUsedDate = inventoryUsedDate;
+	}
+	
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone;
+	}
+	
+	public int getPurchaseStatus() {
+		return purchaseStatus;
+	}
+
+	public void setPurchaseStatus(int purchaseStatus) {
+		this.purchaseStatus = purchaseStatus;
+	}
+	
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Search [currentPage=");
-		builder.append(currentPage);
-		builder.append(", searchCondition=");
-		builder.append(searchCondition);
-		builder.append(", searchKeyword=");
-		builder.append(searchKeyword);
-		builder.append(", viewCondition=");
-		builder.append(viewCondition);
-		builder.append(", movieName=");
-		builder.append(movieName);
-		builder.append(", franchise=");
-		builder.append(franchise);
-		builder.append(", theaterName=");
-		builder.append(theaterName);
-		builder.append(", franchises=");
-		builder.append(franchises);
-		builder.append(", theaterNames=");
-		builder.append(theaterNames);
-		builder.append(", screenDate=");
-		builder.append(screenDate);
-		builder.append(", screenTime=");
-		builder.append(screenTime);
-		builder.append(", ticketerPhone=");
-		builder.append(ticketerPhone);
-		builder.append(", pageSize=");
-		builder.append(pageSize);
-		builder.append(", endRowNum=");
-		builder.append(endRowNum);
-		builder.append(", startRowNum=");
-		builder.append(startRowNum);
-		builder.append(", userNo=");
-		builder.append(userNo);
-		builder.append(", payObjectFlag=");
-		builder.append(payObjectFlag);
-		builder.append(", onBoxOfficeFlag=");
-		builder.append(onBoxOfficeFlag);
-		builder.append(", articleType=");
-		builder.append(articleType);
-		builder.append(", category=");
-		builder.append(category);
-		builder.append(", userId=");
-		builder.append(userId);
-		builder.append(", previewFlag=");
-		builder.append(previewFlag);
-		builder.append("]");
-		return builder.toString();
-	}
+		return "Search [currentPage=" + currentPage + ", searchCondition=" + searchCondition + ", searchKeyword="
+				+ searchKeyword + ", viewCondition=" + viewCondition + ", movieName=" + movieName + ", franchise="
+				+ franchise + ", theaterName=" + theaterName + ", franchises=" + franchises + ", theaterNames="
+				+ theaterNames + ", screenDate=" + screenDate + ", screenTime=" + screenTime + ", ticketerPhone="
+				+ ticketerPhone + ", pageSize=" + pageSize + ", endRowNum=" + endRowNum + ", startRowNum=" + startRowNum
+				+ ", userNo=" + userNo + ", payObjectFlag=" + payObjectFlag + ", onBoxOfficeFlag=" + onBoxOfficeFlag
+				+ ", articleType=" + articleType + ", category=" + category + ", userId=" + userId + ", previewFlag="
+				+ previewFlag + ", cartUserNo=" + cartUserNo + ", cartRegDate=" + cartRegDate + ", inventoryUserNo="
+				+ inventoryUserNo + ", inventoryProdNo=" + inventoryProdNo + ", inventoryPurchaseNo="
+				+ inventoryPurchaseNo + ", inventoryStatus=" + inventoryStatus + ", inventoryUsedDate="
+				+ inventoryUsedDate + ", receiverPhone=" + receiverPhone + ", purchaseStatus=" + purchaseStatus
+				+ ", getTicketerPhone()=" + getTicketerPhone() + ", getCurrentPage()=" + getCurrentPage()
+				+ ", getSearchCondition()=" + getSearchCondition() + ", getSearchKeyword()=" + getSearchKeyword()
+				+ ", getViewCondition()=" + getViewCondition() + ", getMovieName()=" + getMovieName()
+				+ ", getFranchise()=" + getFranchise() + ", getTheaterName()=" + getTheaterName() + ", getScreenDate()="
+				+ getScreenDate() + ", getScreenTime()=" + getScreenTime() + ", getFranchises()=" + getFranchises()
+				+ ", getTheaterNames()=" + getTheaterNames() + ", getPageSize()=" + getPageSize() + ", getEndRowNum()="
+				+ getEndRowNum() + ", getStartRowNum()=" + getStartRowNum() + ", getUserNo()=" + getUserNo()
+				+ ", getPayObjectFlag()=" + getPayObjectFlag() + ", getOnBoxOfficeFlag()=" + getOnBoxOfficeFlag()
+				+ ", getArticleType()=" + getArticleType() + ", getCategory()=" + getCategory() + ", getUserId()="
+				+ getUserId() + ", getPreviewFlag()=" + getPreviewFlag() + ", getCartUserNo()=" + getCartUserNo()
+				+ ", getCartRegDate()=" + getCartRegDate() + ", getInventoryUserNo()=" + getInventoryUserNo()
+				+ ", getInventoryProdNo()=" + getInventoryProdNo() + ", getInventoryPurchaseNo()="
+				+ getInventoryPurchaseNo() + ", getInventoryStatus()=" + getInventoryStatus()
+				+ ", getInventoryUsedDate()=" + getInventoryUsedDate() + ", getReceiverPhone()=" + getReceiverPhone()
+				+ ", getPurchaseStatus()=" + getPurchaseStatus() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
+	}	
+
+
 
 
 

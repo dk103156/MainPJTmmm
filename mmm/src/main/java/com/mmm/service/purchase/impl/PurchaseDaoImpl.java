@@ -1,5 +1,6 @@
 package com.mmm.service.purchase.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,16 +45,23 @@ public class PurchaseDaoImpl implements PurchaseDao{
 
 
 	@Override
-	public Map<String,Object> getPurchaseList(Purchase purchase) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String,Object> getPurchaseList(Search search) throws Exception {
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		int totalCount =sqlSession.selectOne("PurchaseMapper.getTotalCount",search);
+		List<Purchase> list =sqlSession.selectList("PurchaseMapper.getPurchaseList", search);
+		
+		map.put("totalCount", totalCount);
+		map.put("list", list);
+		
+		return map;
 	}
 
 
 	@Override
 	public void updatePurchase(Purchase purchase) throws Exception {
-		// TODO Auto-generated method stub
 		
+		sqlSession.update("PurchaseMapper.updatePurchase",purchase);
 	}
 
 

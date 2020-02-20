@@ -206,6 +206,11 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	
+	@Override
+	public int getTotalPoint(int userNo) throws Exception {
+		return paymentDao.getTotalPoint(userNo);
+	}
+	
 //	impUid로 결제 정보를 가져오는 메소드
 	public void getPayinfo(String impUid)throws Exception{
 		this.getToken();
@@ -226,10 +231,6 @@ public class PaymentServiceImpl implements PaymentService {
 		System.out.println(jsonObject);
 	}
 
-	@Override
-	public int getTotalPoint(int userNo) throws Exception {
-		return paymentDao.getTotalPoint(userNo);
-	}
 
 	
 }

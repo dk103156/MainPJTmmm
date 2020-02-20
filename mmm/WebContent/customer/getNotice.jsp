@@ -31,7 +31,7 @@
 		
 		$('#okBtn').on("click", function(){
 			alert('ok버튼이 클릭됨');
-			history.go(-1);
+			self.location="/customer/getNoticeList";
 		});
 		
 		
