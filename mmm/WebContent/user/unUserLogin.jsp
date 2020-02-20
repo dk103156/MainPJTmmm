@@ -57,18 +57,9 @@ $(function(){
 		var re5 = /^(01[016789]{1})([0-9]{3,4})([0-9]{4})$/; //폰번호가 적합한지 검사할 정규식
 	    
 		
-		var birth = $("#birth").val(); 
 		var phone = $("#phone").val().replace(/-/gi,'');
 		var pw= $("#password").val();
-		
-		
-		if(birth=="") {
-		    alert("생년월일을 입력해 주세요");
-		    console.log(birth);
-		    $("#birth").focus();
-		    return false;
-		}
-		
+
 		if(phone == null || phone.length <1){
 			$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
 			//$("#chkBtn").attr("disabled", true);
@@ -88,7 +79,6 @@ $(function(){
 		    return;
 		}
 		
-		alert("비회원 예매내역 보여주기!!");
 		$("form").attr("method" , "POST").attr("action" , "/user/unUserLogin").submit();
 			
 	}
@@ -132,13 +122,6 @@ $(function(){
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form>
-			<div class="form-group row">
-    			<label for="birth" class="col-sm-2 col-form-label">생년월일</label>
-    			<div class="col-sm-10">
-      				<input type="date" class="form-control" id="birth" name="birth" placeholder="ex)20200101">
-      				<input type="hidden" class="form-control" id="role" name="role" value="unUser">
-    			</div>
-			</div>
 		  	<div class="form-group row" style="font-size: 12pt;">
 				<label for="staticEmail" class="col-sm-2 col-form-label">휴대전화번호</label>
 				<div class="input-group sm-10">

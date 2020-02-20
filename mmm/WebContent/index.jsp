@@ -61,6 +61,11 @@ $(function(){
 	if(status=="failed"){
 		alert("요청하신 페이지에 권한이 없습니다.");
 	}
+	if(status=="login"){
+		alert("이미 로그인 하셨습니다.");
+	}
+	
+	
 	
 });
 
@@ -77,6 +82,7 @@ $(function(){
   <h3>1.Users</h3>	
 	<li> <a href="user/login">로그인 UI</a></li>
 	<li> <a href="mypage/mypage.jsp">마이페이지 UI</a></li>
+	<li> <a href="user/logout">로그아웃</a></li>
 
 </ul>
 <ul>

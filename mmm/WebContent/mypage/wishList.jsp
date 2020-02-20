@@ -18,83 +18,44 @@
 <title>위시리스트</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-body {
-	background-color: #f9fad4;
-	position: absolute;
-	text-align: center;
-	width: 100%;
-	height: 100%;
-	top: 150px;
-	left: 0;
-}
-#contaniner{
-	width: 800px;
-	display: inline-block;
-	vertical-align: middle;
-} 
 
-.col-left{
-	text-align: left;
-}
 </style> 
 </head>
 <body>
-<!--container-->
-	<div id="contaniner">
-	
-		<div class="row">
-			<div class="col-md-4 .col-left" style="margin-bottom: 20px;">
-				<h3><span class="badge badge-primary">위시리스트</span></h3>
-			</div>
-			<div class="col-md-4 offset-md-4">
-				<div class="form-group">
-					<label for="sorting"></label><a style ="float:right; margin-top: 27px; margin-right: 45px;"><button class="btn btn-primary btn-sm">GO</button></a>
-					<select class="form-control" id="sorting" style="width: 150px; float:center;">
-					  <option>등록일순</option>
-					  <option>개봉일순</option>
-					</select>
 
-				 </div>
-			</div>
+<!--// contents -->
+<div id="contents">
+	<h2 class="tit">위시리스트</h2>
+
+	<!--// 위시 리스트 -->
+	<!-- my-movie-list -->
+	<div class="my-movie-list myLikeMovie myMovieStory">
+		<div class="board-list-util">
+			<p class="result-count">
+				<strong>총 <b class="font-gblue" id="totalCnt">0</b>건</strong>
+			</p>
 		</div>
-		
-		<div class="row">
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
+
+		<div class="movie-list myLikeMovie myMovieStory">
+			<ol class="list" id="movieList"></ol>
 		</div>
-		<br>
-		<div class="row">
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
+
+		<div class="more-movie-list pt30 myLikeMovie myMovieStory">
+			<button type="button" class="button btn-more-like-list">더보기 <i class="iconset ico-btn-more-arr"></i></button>
 		</div>
-		<br>
-		<div class="row">
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-			</div>
-		</div>
-		<br>
+
 	</div>
-	<!--container end-->
+	<!--// my-movie-list -->
+
+	<!-- 보고싶어 영화 없을 때 -->
+	<div class="no-my-movie-list myLikeMovie myMovieStory" id="noDataDiv">
+		<i class="iconset ico-movie-see"></i>
+		<p>보고싶은 영화를 담아주세요.</p>
+	</div>
+	<!--// 위시 리스트 -->
+</div>
+<!--// contents -->
+		
+
 </body>
 </html>
