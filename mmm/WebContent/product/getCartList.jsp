@@ -29,10 +29,6 @@
 <title>Insert title here</title>
 
 <style>
-	input[type=text] {
-		width : 120px;
-	
-	}
 
 </style>
 </head>

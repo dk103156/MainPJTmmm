@@ -115,4 +115,15 @@ public class PurchaseServiceTest {
 		
 		inventoryService.addInventory(inventory);
 	}
+	
+	//쿠폰 사용 테스트
+	@Test
+	public void userVoucher() throws Exception {
+		
+		Inventory inventory = new Inventory();
+		
+		//inventory.setInventoryUserNo(10001);
+		inventory.setInventoryUsedDate(new Timestamp(new Date().getTime()));
+		
+	}
 }
