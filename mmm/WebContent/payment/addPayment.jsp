@@ -137,7 +137,7 @@
 								"purchasePrice" : '${purchase.purchasePrice}',
 								"totalPrice" : totalPrice,						//properties for Payment
 								"usingPoint" : partPoint,
-								"usingVoucherid" : usingVoucherid,
+								"vouchers" : usingVoucherid,
 								"cash" : cash,
 								"impUid" : response.imp_uid
 								},

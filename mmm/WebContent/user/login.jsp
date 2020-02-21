@@ -23,7 +23,6 @@
 body{
 font-family: 'Noto Sans KR', sans-serif;
 }
-
 body > div.container{
 	border: 3px solid #D6CDB7;
     margin-top: 10px;
@@ -39,15 +38,12 @@ h3.tit {
     font-size: 1.2em;
     line-height: 1.1;
 }  
-
 .col-wrap{
-
 	letter-spacing: 0;
 	line-height: 1.5;
 	font-size: 15px;
 	color: #444;
 	font-weight: 400; 
-
 }
   
 .login-input-area .input-text {
@@ -55,7 +51,6 @@ h3.tit {
     width: 100%;
     height: 46px;
 }
-
 .input-text {
     display: inline-block;
     width: 100%;
@@ -70,11 +65,9 @@ h3.tit {
     overflow: hidden;
     padding: 15px 0 35px 0;
 }
-
 .login-input-area .chk-util .left {
     float: left;
 }
-
 [type=checkbox], [type=radio] {
     width: 16px;
     height: 16px;
@@ -84,13 +77,11 @@ h3.tit {
     box-sizing: border-box;
     padding: 0;
 }
-
 label {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
 }
-
 .button.purple.large {
     line-height: 46px;
 }
@@ -98,27 +89,22 @@ label {
     display: block;
     width: 100%;
 }
-
 .login-input-area .link {
     padding: 20px 0 30px 0;
     text-align: center;
     line-height: 1.1;
 }
-
 	
-
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-
 $(function(){	
 	
 // 	function clickBtn(){
 // 		$("#btn").trigger("click");
 // 	}
 	
-
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -129,7 +115,6 @@ $(function(){
 	    }
 	    return value;
 	}
-
 	var status = getParam("status");
 	
 	if(status=="failed"){
@@ -161,9 +146,9 @@ $(function(){
     	alert(message);
 	}
 	
-
 	
-	clickBtn();
+	
+// 	//clickBtn();
 	
 // 	$("#btn").on('click',function(){	
 // 		self.location="/user/login";
@@ -192,11 +177,9 @@ $(function(){
 			}
 		 }
 	})
-
 			
 		
 	
-
 	//$('#loginBtn').button('toggle').addClass('fat')
 	
 	$('#loginBtn').on('click',function(){
@@ -213,7 +196,6 @@ $(function(){
 			$('form').attr('method','POST').attr('action','/user/login').submit();	
 		}
 	})	
-
 	$('#signUpBtn').on('click',function(){
 		self.location = '/user/userAuthorization.jsp?type=addUser';
 		
@@ -247,8 +229,6 @@ $(function(){
 	})
 	
 });
-
-
 </script>
 </head>
 <body>

@@ -155,7 +155,7 @@ public class PaymentController {
 	public String addPayent(@ModelAttribute Payment payment,
 							@ModelAttribute Ticketing ticketing,
 							@ModelAttribute Purchase purchase,
-							@RequestParam(value = "usingVoucherid" , required = false) String usingVoucherid,
+//							@RequestParam(value = "usingVoucherid" , required = false) String usingVoucherid,
 //							@RequestParam(value = "ticketingNo" , required = false) String ticketingNo,		//bodyEntity에 넣어서 주는 ticketing 정보
 //							@RequestParam(value = "purchaseNo", required = false) String purchaseNo,		//bodyEntity에 넣어서 주는 purchase 정보
 //							@RequestParam("impUid") String impUid,
@@ -166,7 +166,7 @@ public class PaymentController {
 		System.out.println("------------input purchase :  "+purchase);
 		System.out.println("----------- input impUid  : "+payment.getImpUid());
 		
-		System.out.println("-------------------usingVoucherid : " + usingVoucherid);
+		System.out.println("-------------------payment.getVouchers() : " + payment.getVouchers());
 		
 //		로그인한 회원 정보 from session
 		User user = (User)session.getAttribute("user");
@@ -186,9 +186,10 @@ public class PaymentController {
 		
 //	3.payment setting
 //		voucher parsing..
+		String vouchers = payment.getVouchers();
 		List<String> voucherList = new ArrayList<String>();
-		if (usingVoucherid != null && usingVoucherid != "") {
-			String[] voucherArray =  usingVoucherid.split(",");
+		if (vouchers != null && vouchers != "") {
+			String[] voucherArray =  vouchers.split(",");
 			voucherList = Arrays.asList(voucherArray);
 			
 			System.out.println("--------------------- voucherList :" + voucherList);

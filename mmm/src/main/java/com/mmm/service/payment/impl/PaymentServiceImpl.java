@@ -133,7 +133,20 @@ public class PaymentServiceImpl implements PaymentService {
 			paymentDao.addPoint((Point)inputMap.get("minusPoint"));
 		}
 		
-		
+//		Inventory Updatng.inputMap.
+//		if (payment.getVouchers() != null && payment.getVouchers().length()>0) {
+//			if (payment.getUsingVoucherFirst() != null) {
+//				Inventory inventory = inventoryDao.getInventory(search)
+//				inventoryDao.updateInventory(inventory);
+//			}
+//			if (payment.getUsingVoucherSecond() != null) {
+//				voucherExist += payment.getUsingVoucherSecond();
+//			}
+//			if (payment.getUsingVoucherThird() != null) {
+//				voucherExist += payment.getUsingVoucherThird();
+//			}
+//			
+//		}
 		
 //		String impUid = payment.getImpUid();
 		
