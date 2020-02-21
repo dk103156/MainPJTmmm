@@ -16,9 +16,9 @@
 		<result property="inventoryRegDate" 		column="inventory_reg_date" 	jdbcType="TIMESTAMP"  />
 		<result property="inventoryUsedDate" 		column="inventory_used_date" 	jdbcType="TIMESTAMP"  />
 		<result property="inventoryStatus" 			column="inventory_status" 		jdbcType="VARCHAR"  />
+		<result property="inventoryPrice" 			column="inventory_price" 		jdbcType="NUMERIC"  />
+		<result property="inventoryName" 			column="inventory_name" 		jdbcType="VARCHAR"  />
 	</resultMap>
-	
-	
 	
 	<insert id="addInventory" parameterType="Inventory" >
 	 	INSERT
@@ -32,7 +32,6 @@
 		 #{inventoryUsedDate:TIMESTAMP},    
 		 0 )
 	 </insert>
-	
 
 	<select id="getInventory" parameterType="Search"  resultMap="inventorySelectMap" >
 	 	SELECT
@@ -70,6 +69,15 @@
 			
 		</trim>	
  	</select> 	
+ 	
+ 	<select id="getVoucherListInPayment" parameterType="Search" resultMap="inventorySelectMap">
+ 		SELECT i.*, p.PROD_PRICE inventoryPrice, p.prod_name inventory_name
+		FROM INVENTORY i, PRODUCT p
+		WHERE i.INVENTORY_PROD_NO = p.prod_no
+			AND i.inventory_prod_no IN('10000', '10001')
+			AND i.INVENTORY_USER_NO = #{userNo:NUMERIC}
+			AND i.INVENTORY_STATUS = 0
+ 	</select>
 	
 	<update id="updateInventory" parameterType="Search" >
 	 	UPDATE inventory

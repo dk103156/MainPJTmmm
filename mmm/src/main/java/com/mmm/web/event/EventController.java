@@ -28,7 +28,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
+import com.mmm.service.board.BoardService;
 import com.mmm.service.datetime.DateTimeService;
+import com.mmm.service.domain.Comment;
 import com.mmm.service.domain.Participation;
 import com.mmm.service.domain.Point;
 import com.mmm.service.domain.Preview;
@@ -58,6 +60,11 @@ public class EventController {
 	@Autowired
 	@Qualifier("paymentServiceImpl")
 	private PaymentService paymentService;
+	
+	
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
 	
 	
 	//private PointService pointService;
@@ -273,9 +280,15 @@ public class EventController {
 	
 	
 	@RequestMapping(value="getPreviewList")
-	public String getPreviewList(@ModelAttribute("search") Search search, Model model) throws Exception{
-		System.out.println("프리뷰리스트와따!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	public String getPreviewList(@ModelAttribute("search") Search search, Model model, HttpSession session) throws Exception{
+		
+		User user = (User)session.getAttribute("user");
+	
+		
+		System.out.println("[getPreviewList start]");
+		
 		String[] fileArr = null;
+		
 		List<String[]> fileNameArr = new ArrayList<>();
 		
 		if(search.getCurrentPage()==0) {
@@ -287,7 +300,24 @@ public class EventController {
 		Map<String, Object> map = eventService.getPreviewList(search);
 		List<Preview> list = (List<Preview>)map.get("list");
 		
-		System.out.println("#################카운트"+(Integer)map.get("totalCount"));
+		List<Preview> previewAll = eventService.getAllPreview();
+		
+		List<Preview> doingList = new ArrayList<>();
+		List<Preview> doneList = new ArrayList<>(); 
+
+		for(Preview previeww: previewAll) {
+			if(previeww.getPreviewFlag().equals("1")) {
+				doingList.add(previeww);
+			}else if(previeww.getPreviewFlag().equals("2")) {
+				doneList.add(previeww);
+			}
+		} 
+		
+		for(Preview p: doneList) {
+			System.out.println("=======================>done============>"+p);
+		}
+		System.out.println(doneList.size());
+
 		Page resultPage	= 
 				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		
@@ -295,12 +325,16 @@ public class EventController {
 			 fileArr = preview.getPreviewImage().split(",");
 			 fileNameArr.add(fileArr);
 		}
+		
 		System.out.println("fileNameArr>>>>>>>>>>>>>>>"+fileNameArr);
 		
 		model.addAttribute("fileNameArr", fileNameArr);
-		model.addAttribute("list",list);
+		model.addAttribute("doingList",doingList);
+		model.addAttribute("doneList",doneList);
 		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("user", user);
 		
+		System.out.println("[getPreviewList end]");
 		return "forward:/event/getPreviewList.jsp";
 	}
 	
@@ -592,12 +626,12 @@ public class EventController {
 	}
 	
 	
-	//퀴즈제출 버튼 눌렀을 시 리얼 데이터 들어가는거
+	//퀴즈등록
 	@RequestMapping(value="addWinQuiz", method=RequestMethod.POST)
 	public String addWinQuiz(@ModelAttribute("participation") Participation participation, Model model) throws Exception{
 		
 		System.out.println("/event/addWinQuiz");
-		System.out.println("######################quizNo::"+participation.getQuizNo());
+		System.out.println("quizNo::"+participation.getQuizNo());
 		System.out.println("궁금하다고!!!!!!!!!!!!!"+participation.getUserNo());
 		eventService.addPartQuiz(participation);
 		Map<String, Object> updateMap = new HashMap<String,Object>();
@@ -645,8 +679,11 @@ public class EventController {
 	public String deleteQuizAd(@ModelAttribute("quiz") Quiz quiz) throws Exception {
 		
 		System.out.println("/event/deleteQuizAd:POST");
+		
 		eventService.deleteQuiz(quiz.getQuizNo());
+		
 		return "redirect:/event/getQuizListAd.jsp";
+		
 	}
 	
 	
@@ -670,6 +707,8 @@ public class EventController {
 	
 	@RequestMapping(value="updateWinningFlag")
 	public String updateWinningFlag(@RequestParam Map<String, Object> map, Model model) throws Exception{
+		
+		
 			System.out.println("/event/updateWinningFlag");
 			int previewNo = (Integer)map.get("previewNo");
 			int userNo = (Integer)map.get("userNo");
@@ -681,46 +720,104 @@ public class EventController {
 			model.addAttribute("userNo", userNo);
 			
 		 return "forward:/event/getApplyList.jsp";
+		 
+		 
 	}
 	
 	
 	
-	@RequestMapping(value="getWinner")
+	//@RequestMapping(value="getWinner")
 	public String getWinner(@RequestParam int previewNo) throws Exception{
+		
 			System.out.println("/event/getWinner");
 			randWinner(previewNo);
 			return "redirect:/event/getPreviewAd?previewNo="+previewNo;
+			
 	}
 	
+	
+	
+	
+	
+	
+	//(sysdate == 시사회이벤트 시작일자) 애들 플래그를 1로 update시켜준다
+	//@Scheduled(cron = "*/10 * * * * *") //매일 12시마다 체크
+	public void updateStartPrevFlag() throws Exception{
+		
+		System.out.println("[updateStartPrevFlag] start.."); 
+		
+		List<Preview> list = eventService.updateStPrev(); 
+		
+			for(Preview p: list) {
+				System.out.println("["+p.getPreviewName()+"]");
+			}
+		
+		System.out.println("[updateStartPrevFlag] end.."); 
+	}
+	
+	
+	
+	
+	
+	
+	//(0:시작전, 1:진행중, 2:마감)
 	//@Scheduled(cron = "*/10 * * * * *") //매일 12시로 바꾸기
 	public void doRandWinner() throws Exception{
-		System.out.println("추첨할래!");
-		List<Preview> list = eventService.getPrepareRand();
-		System.out.println("추첨할 애들이다!!!>>>>>>>"+list);
 		
+		System.out.println("[doRandWinner] start..");
+		
+		List<Preview> list = eventService.getPrepareRand();
+		
+		//(sysdate == 시사회이벤트 종료일자+1) && (previewFlag가 1) 인 preview  
+		System.out.println("[doRandWinner]의 추첨할 대상 list ==? "+list); 
+		if(list.size()==0) {
+			System.out.println("추첨할 필요 없거든요.........");
+			return;
+		}
+		
+		//preview마다 추첨해야하므로 리스트에서 previewNo를 가져온다
 		for(Preview p : list) {
 			randWinner(p.getPreviewNo());
 		}
+		
+		System.out.println("[doRandWinner] end..");
+	}
+
+	
+	
+
+	@RequestMapping(value="addExpectLine")
+	public void addExpectLine(Comment comment, HttpSession session) throws Exception {
+	
+		System.out.println("[addExpectLine] start");
+		
+		boardService.addComment(comment);
+		
+		System.out.println("[addExpectLine] end");
+		
 	}
 	
-	//당첨자를 뽑는애 이벤트 종료에 맞춰서 
+	//당첨자 추첨하는 메소드(doRandWinner에서 호출된다)
 	public void randWinner(int previewNo) throws Exception {
 
+		System.out.println("randWinner() start...");
+		
 		Map<String, Object> updateMap = new HashMap<String,Object>();
 
 
 		Map<String,Object> map = eventService.getApplyList(previewNo); //응모자 리스트
 		List<Participation> list = (List<Participation>)map.get("list"); //응모자들의 참여VO 리스트
-		System.out.println("이 시사회에 참여VO리스트>>>" + list);
+		System.out.println("해당 시사회에  [participation list]" + list);
 		
 		Preview preview = eventService.getPreviewAd(previewNo); //해당 이벤트의 참여수를 가지고 오기 위함
 		int winnerCount = preview.getWinnerCount(); //뽑아야할 당첨자 수 
-		System.out.println("뽑아야 할 당첨자수는>>>>>>" + winnerCount);
+		System.out.println("해당 시사회에 [뽑아야할 당첨자 수]" + winnerCount);
 
 		List<Integer> applyUserNo = new ArrayList<Integer>(); //응모자 아이디 List를 담을것
-		for(Participation p: list) { //응모자 아이디 List
-			applyUserNo.add((Integer)p.getUserNo()); 
-		}
+		
+			for(Participation p: list) { //응모자 아이디 List
+				applyUserNo.add((Integer)p.getUserNo()); 
+			}
 		
 		int winner=0;
 
@@ -728,8 +825,10 @@ public class EventController {
 		
 		if(applyUserNo.size() < winnerCount) { //뽑을 수보다 덜 지원했다면
 			
-			System.out.println("응모자가 당첨자보다 적잖아");
+			System.out.println("[응모자< 당첨자] ==> 모든 응모자가 당첨자");
+			
 			for(Participation p: list) { //응모자 아이디 List를 winnerUserNo에 넣자
+				
 				winnerUserNo.add((Integer)p.getUserNo()); 
 			}
 			
@@ -766,11 +865,12 @@ public class EventController {
 		eventService.updateWinningFlag(updateMap);
 		
 		
+		System.out.println("randWinner() end...");
+		
 	}
 	
 
-	//addAttendanceCheck
-
+	//파일 저장하는 메소드
 	private String saveFile(MultipartFile file) {
 		
 		String filePath = "C:\\Users\\user\\git\\MainPJTmmm\\mmm\\WebContent\\resources\\image";

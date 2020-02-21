@@ -1092,7 +1092,7 @@
     	 
     	 //모두 선택됐다면..
     	 if( movieName==true && franchise==true && theaterName==true && screenTime == true){
-    		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "none");
+    		 $("div.steps-body.text-center > div > div.placeholder").css("display", "none");
 	    	 $.ajax({
 	    		  type: "POST",
 	    		  url: "/ticketing/json/getTimeList",
@@ -1759,6 +1759,7 @@
 			$.getJSON( "/ticketing/json/getDateTimeByMovieName/"+$.trim($(this).text()), function( data ) {
 				    $("#ticket_tnb > div > div.info.movie > span > img").attr("src",data.poster)
 				    $("#movieRating > span").text(data.rating+" 관람가")
+				    $("#movieRating > span").attr("title", data.rating+" 관람가")
 				});
 	     });//end of movie Click
      }
@@ -1920,6 +1921,7 @@
 	    	  
 	    	  // "극장명" 변경
 	    	  $("#theater").children().first().next().text(finalTheaterName);
+	    	  $("#theater").children().first().next().attr("title", finalTheaterName);
 	    	  
 	    	  console.log("첫번째열을 선택했군요..")
 	    	  console.log("영화 제목 :"+finalMovieName)
@@ -1974,6 +1976,7 @@
 	    	  
 	    	  // "극장명" 변경
 	    	  $("#theater").children().first().next().text(finalTheaterName);
+	    	  $("#theater").children().first().next().attr("title", finalTheaterName);
 	    	  
 	    	  console.log("두번째열을 선택했군요..")
 	    	  console.log("영화 제목 :"+finalMovieName)
@@ -2026,6 +2029,7 @@
 			 
 	    	  // "극장명" 변경
 	    	  $("#theater").children().first().next().text(finalTheaterName);
+	    	  $("#theater").children().first().next().attr("title", finalTheaterName);
 	    	  
 	    	  console.log("세번째열을 선택했군요..")
 	    	  console.log("영화 제목 :"+finalMovieName)
@@ -2978,7 +2982,7 @@ function getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 		datas = JSON.stringify({
 			 franchise : franchiseFirstCheck,		  
 		 		 })
-		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");
+		 		 $("div.steps-body.text-center > div > div.placeholder").css("display", "block");
 	//프렌차이즈 두번째만 클릭했을 경우(1),			 		 
 	}
 	if(franchiseFirstCheck.length==0 && franchiseSecondCheck.length!=0 && franchiseThirdCheck==0 && 
@@ -2987,7 +2991,7 @@ function getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 		datas = JSON.stringify({
 			franchise : franchiseSecondCheck,	  
 		 		 })
-		 		 $("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");
+		 		 $("div.steps-body.text-center > div > div.placeholder").css("display", "block");
 	//프렌차이즈 세번째만 클릭했을 경우(1),
 	}
 	if(franchiseFirstCheck.length==0 && franchiseSecondCheck.length==0 && franchiseThirdCheck!=0 && 
@@ -2996,7 +3000,7 @@ function getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,fr
 		datas = JSON.stringify({
 			franchise : franchiseThirdCheck,	  
 		 		 })
-		 		$("div.steps-body.text-center > div > div > div.placeholder").css("display", "block");
+		 		$("div.steps-body.text-center > div > div.placeholder").css("display", "block");
   	 		 
 	}
 	//영화만 클릭했을 경우(1),		 		 

@@ -72,8 +72,16 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public List<Comment> getCommentList(Search search) throws Exception {
-		return sqlSession.selectList("BoardMapper.getCommentList", search);
+	public  Map<String, Object> getCommentList(Search search) throws Exception {
+		
+		List<Comment> list =  sqlSession.selectList("BoardMapper.getCommentList", search);
+		int totalCount = sqlSession.selectOne("BoardMapper.getCmtCount", search);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", totalCount);
+		
+		return map;
 	}
 
 	@Override

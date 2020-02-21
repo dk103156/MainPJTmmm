@@ -48,6 +48,7 @@
 		<result property="articleNo"				column="article_no"			jdbcType="NUMERIC"/>
 		<result property="commentContent"			column="cmt_content"		jdbcType="VARCHAR"/>
 		<result property="commentDate"				column="cmt_date"			jdbcType="TIMESTAMP"/>
+		<result property="blindStatus"				column="blind_flag"		jdbcType="NUMERIC"/>
 	</resultMap>
 
 
@@ -156,7 +157,6 @@
 	 seq_commentt_cmt_no.nextval,
 	 #{commentType:NUMERIC},
 	 #{userId:VARCHAR},
-	 #{userNo:NUMERIC},
 	 <if test="supCommentNo==0">null,</if>
 	 <if test="supCommentNo!=0">#{supCommentNo:NUMERIC},</if>
 	 <if test="articleNo==0">null,</if>
@@ -172,10 +172,53 @@
 <!-- 댓글 /한줄평 읽기 -->	
 	<select id="getCommentList" parameterType="Search" resultMap="cmtSelectMap">
 	SELECT 
-	 cmt_no, cmt_type, user_id, sup_cmt_no, article_no,
-	 movie_no, cmt_content, cmt_date, cmt_count, blind_flag, blind_reason, blind_date
-	FROM commentt
+	 cmt_no, cmt_type, user_id, sup_cmt_no, article_no,	 movie_no, cmt_content, cmt_date, 
+	 cmt_count, blind_flag, blind_reason, blind_date
+	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+  				FROM (	
+  					<include refid="search-cmt"/>	
+  					) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+	WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+	ORDER BY cmt_date DESC
 	</select>
+	
+	
+<!--  -->	
+	<sql id="search-cmt">	 
+		 SELECT
+		 	 cmt_no, cmt_type, user_id, sup_cmt_no, article_no,
+	 		 movie_no, cmt_content, cmt_date, cmt_count, blind_flag, blind_reason, blind_date
+		 FROM commentt
+		<where>
+		 <if test="commentType!=null">
+		 	<if test="commentType==0 ">   
+				cmt_type = 0 
+				AND article_no = #{parent}
+		   </if>
+			<if test="commentType==1 "> 
+				cmt_type = 1
+				AND movie_no = #{parent}
+			</if>
+			<if test="commentType==2 "> 
+				cmt_type = 2 
+			</if>
+		 </if>
+		 
+		
+		</where>
+ </sql>
+
+
+
+<!-- SQL : 댓글 total  count -->
+	 <select  id="getCmtCount"  parameterType="com.mmm.common.Search"	 resultType="int">
+	  		SELECT COUNT(*)
+	  		FROM(	
+			<include refid="search-cmt"/>	
+		 	) countTable	
+	 </select>	
+	
 	
 	
 <!-- 댓글/ 한줄평 수정하기 -->	

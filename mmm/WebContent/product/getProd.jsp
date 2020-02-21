@@ -193,7 +193,7 @@
 		
 		//바로 구매하기 클릭
 		$("#addPurchase").on('click',function(){
-			$("form").attr("method","post").attr("action","/purchase/addPurchaseOne").submit();
+			$("form").attr("method","post").attr("action","/payment/preparePayment").submit();
 		});
 		
 		//장바구니 추가 클릭

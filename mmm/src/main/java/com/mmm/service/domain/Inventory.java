@@ -13,6 +13,9 @@ public class Inventory {
 	private Timestamp inventoryUsedDate;	// 사용일자
 	private String inventoryStatus;			// 0:미사용, 1:사용
 	
+	private int inventoryPrice;
+	private String inventoryName;
+	
 	public int getInventoryNo() {
 		return inventoryNo;
 	}
@@ -62,12 +65,43 @@ public class Inventory {
 		this.inventoryStatus = inventoryStatus;
 	}
 	
+	public int getInventoryPrice() {
+		return inventoryPrice;
+	}
+	public void setInventoryPrice(int inventoryPrice) {
+		this.inventoryPrice = inventoryPrice;
+	}
+	public String getInventoryName() {
+		return inventoryName;
+	}
+	public void setInventoryName(String inventoryName) {
+		this.inventoryName = inventoryName;
+	}
 	@Override
 	public String toString() {
-		return "Inventory [inventoryNo=" + inventoryNo + ", inventoryUserNo=" + inventoryUserNo + ", inventoryProdNo="
-				+ inventoryProdNo + ", inventoryProdPinNo=" + inventoryProdPinNo + ", inventoryPurchaseNo="
-				+ inventoryPurchaseNo + ", inventoryRegDate=" + inventoryRegDate + ", inventoryUsedDate="
-				+ inventoryUsedDate + ", inventoryStatus=" + inventoryStatus + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Inventory [inventoryNo=");
+		builder.append(inventoryNo);
+		builder.append(", inventoryUserNo=");
+		builder.append(inventoryUserNo);
+		builder.append(", inventoryProdNo=");
+		builder.append(inventoryProdNo);
+		builder.append(", inventoryPurchaseNo=");
+		builder.append(inventoryPurchaseNo);
+		builder.append(", inventoryProdPinNo=");
+		builder.append(inventoryProdPinNo);
+		builder.append(", inventoryRegDate=");
+		builder.append(inventoryRegDate);
+		builder.append(", inventoryUsedDate=");
+		builder.append(inventoryUsedDate);
+		builder.append(", inventoryStatus=");
+		builder.append(inventoryStatus);
+		builder.append(", inventoryPrice=");
+		builder.append(inventoryPrice);
+		builder.append(", inventoryName=");
+		builder.append(inventoryName);
+		builder.append("]");
+		return builder.toString();
 	}
 	
 
