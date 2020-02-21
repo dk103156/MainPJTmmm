@@ -67,7 +67,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<Comment> getCommentList(Search search) throws Exception {
+	public  Map<String, Object> getCommentList(Search search) throws Exception {
 		return boardDao.getCommentList(search);
 	}
 

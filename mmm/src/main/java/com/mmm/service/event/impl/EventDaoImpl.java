@@ -259,5 +259,15 @@ public class EventDaoImpl implements EventDao {
 		sqlSession.update("EventMapper.updatePrevStatus", previewNo);
 	}
 
+	@Override
+	public List<Preview> getAllPreview() throws Exception {
+		return sqlSession.selectList("EventMapper.getAllPreview");
+	}
+
+	@Override
+	public List<Preview> updateStPrev() throws Exception {
+		return sqlSession.selectList("EventMapper.getStartPrevList");
+	}
+
 
 }

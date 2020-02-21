@@ -6,132 +6,79 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<!-- font -->
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+<!-- fontawesome-->
+<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 
-
-	<!-- FullCalendar CDN -->
-	<link href='https://unpkg.com/@fullcalendar/core@4.3.1/main.min.css' rel='stylesheet' />
-  	<link href='https://unpkg.com/@fullcalendar/daygrid@4.3.0/main.min.css' rel='stylesheet' />
-  	<link href='https://unpkg.com/@fullcalendar/timegrid@4.3.0/main.min.css' rel='stylesheet' />
-	<link href='https://unpkg.com/@fullcalendar/list@4.3.0/main.min.css' rel='stylesheet' />
-	
-	<script src='https://unpkg.com/@fullcalendar/core@4.3.1/main.min.js'></script>
-	<script src='https://unpkg.com/@fullcalendar/daygrid@4.3.0/main.min.js'></script>
-	<script src='https://unpkg.com/@fullcalendar/interaction@4.3.0/main.min.js'></script>
-	<script src='https://unpkg.com/@fullcalendar/timegrid@4.3.0/main.min.js'></script>
-	<script src='https://unpkg.com/@fullcalendar/list@4.3.0/main.min.js'></script>
-	
+<!-- FullCalendar -->
+<link rel="stylesheet" href="../resources/css/daygrid.css">
+<link rel="stylesheet" href="../resources/css/fullcalendar.css">
+<link rel="stylesheet" href="../resources/css/timegrid.css">
+<script src='../resources/javascript/fullcalendar.js'></script>
+<script src='../resources/javascript/daygrid.js'></script>
+<script src='../resources/javascript/timegrid.js'></script>
+<script src='../resources/javascript/interaction.js'></script>
 
 
 
-<!-- 	<link href='/css/core/main.css' rel='stylesheet' />
-    <link href='/css/daygrid/main.css' rel='stylesheet' />
-    <link href='/css/list/main.css' rel='stylesheet' />
-    <link href='/css/timegrid/main.css' rel='stylesheet' />
-    
-    
-    <script src='/javascript/core/main.js'></script>
-    <script src='/javascript/daygrid/main.js'></script>
-	<script src='/javascript/list/main.js'></script>
-	<script src='/javascript/interaction/main.js'></script>
-	<script src='/javascript/timegrid/main.js'></script> -->
 	
 	
 <script type="text/javascript">
 
-		$(function(){
-			
-		var wait = document.getElementById("wait");
-		
-		var Calendar = FullCalendar.Calendar;
-		var Draggable = FullCalendarInteraction.Draggable;
-		
-		var containerEl = document.getElementById('external-events');
-		var calendarEl = document.getElementById('calendar');
-		var checkbox = document.getElementById('drop-remove');
-		
-		var calendar = new Calendar(calendarEl, {
-		    plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
-		    customButtons: {
-		        choolCheck: {
-		          text: '출석체크',
-		          click: function() {
-						var date = new Date();
-		          		var currentDate = date.getFullYear() + "-"+ (date.getMonth()+1) + "-" +date.getDate();
-		          		var stringDate = date.getFullYear() +""+(date.getMonth()+1) +date.getDate();
-						$(function(){
-						$.ajax({
-							url : "/event/json/addAttendacne",
-							method : "post",
-							dataType : "json",
-							headers : {
-								"Accept" : "application/json",
-								"Content-Type" : "application/json"
-							},
-							data : JSON.stringify({
-								currentDate : currentDate,
-								year : date.getFullYear(),
-								month : date.getMonth()+1,
-								day : date.getDate(),
-								stringDate : stringDate
-							}),
-							success : function(JSONData, Status) {
-										
-									if(JSONData.error == 'error'){
-										alert("이미 출석체크 하셨습니다.");
-									}else{
-										calendar.addEvent(JSONData);
-									}
-								}
-						})	
-					})
-		          }
-		        }
-		      },
-		    header: {
-		      left: 'title',
-		      center: 'choolCheck',
-		      right : 'prev,next today'
-		    },
-					eventSources: [{
-		
-			events: function(start, callback) {
-			    $.ajax({
-			        url     : '/event/json/addAttendance',
-			        type    : 'get',
-			        dataType: 'json',
-			        success : function(doc) {
-			            
-			           	callback(doc);
-			            console.log("이게 되나;;");
-			            console.log(doc);
-			        }
-			    });
-			}
-			}],
-		    editable: false,
-		    eventLimit : true,
-		    cache : false
-		  });
-		  wait.style.display = 'block';
-		 setTimeout(function() {
-			 
-		  calendar.render();
-		  wait.style.display = 'none';
-			}, 3000);
-		 
-		})
-		
+document.addEventListener('DOMContentLoaded', function() {
+	  var calendarEl = document.getElementById('calendar');
+	  
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
+	    plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+	    dateClick: function(info){
+	    	alert('1d11Clicked on:'+info.dateStr);
+	    },
+	    select: function(start, end, allDay) {
+	        var check = $.calendar.formatDate(start,'yyyy-MM-dd');
+	        var today = $.calendar.formatDate(new Date(),'yyyy-MM-dd');
+	        console.log(check);
+	        console.log(today);
+	        if(check < today)
+	        {
+	           alert('aaaa')
+	        }
+	        else
+	        {
+	           alert('bbb')
+	        }
+	      },
+
+// 	    validRange:function(nowDate){
+// 	    	return {
+// 	    		start: nowDate
+// 	    		}
+// 	    },
+	    selectConstraint: {
+	    },
+	    defaultView: 'dayGridMonth',
+	    selectable: true,
+	    defaultDate: new Date(),
+	    header: {
+	      left: '',
+	      center: 'title',
+	      right: ''
+	    },
+	  });
+	  calendar.render();
+	});
 
 
+function addAttendance(){
 
-
-
-
-
+	alert('비슷한편');
+}
 
 ///////////////////////////////////////////////
  
@@ -143,92 +90,41 @@
 
 </script>
 
+<style type="text/css">
 
+
+ body {
+		
+	    overflow: auto;
+	    overflow-y: scroll;
+	    letter-spacing: 0;
+	    line-height: 1.5;
+	    font-size: 15px;
+	    color: #444;
+	    font-weight: 400;
+		font-family: 'Noto Sans KR', sans-serif;
+		
+}
+ #calendar{
+ 	width: 700px;
+ }
+
+</style>
 
 </head>
 <body>
+<div class="container">
+
+<i class="fas fa-calendar-check">출석체크</i>
+
+<div id="calendar">
+
+</div>
+</div>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
   출석체크
 </button>
 
-유저아이디 = ${user.userId}</br>
-유저이름 = ${user.userName}</br>
-유저닉네임 = ${user.nickname}</br>
-보유포인트 = ${user.totalPoint}
-
-
-<div class="modal fade" id="myModal">
-	  <div class="modal-dialog">
-		<div class="modal-content">
-
-				
-				
-			 <!-- 	<div class="modal-header">
-					<h4 class="modal-title">출 석 체 크</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>modal header End 
- -->
-				 
-				
-				
-				<div class="modal-body">
-					<div id="calendar"></div>
-					
-					<div id="wait" style="display: none;">
-						<div class="spinner-grow text-primary" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-secondary" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-success" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-danger" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-warning" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-info" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-primary" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-secondary" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-success" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-danger" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-warning" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						<div class="spinner-grow text-info" role="status">
-						  <span class="sr-only">Loading...</span>
-						</div>
-						
-					</div>
-					
-					
-					
-					
-				</div><!--modal body End  -->
-
-		<!-- 		<div class="modal-footer">
-      			  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-				</div>modal footer End 
- -->
-
-
-			</div><!--modal content End  --> 
-	  </div><!--modal dialog End  -->
-
-</div><!--myModal End  -->
 
 </body>
 </html>

@@ -116,13 +116,13 @@
 			<div class="info movie">
 				<span class="movie_poster"><img src="${dateTime.poster }" alt="영화 포스터" style="display: inline;"></span>
 				<div id="movieTitle" class="row movie_title colspan2" style="display: block;">
-					<span class="data letter-spacing-min ellipsis-line2"><a href="#" target="_blank" onmousedown="javascript:logClick('SUMMARY/영화상세보기');"></a>${dateTime.movieName}</span>
+					<span class="data letter-spacing-min ellipsis-line2" title="${dateTime.movieName}"><a href="#" target="_blank" onmousedown="javascript:logClick('SUMMARY/영화상세보기');"></a>${dateTime.movieName}</span>
 				</div>
 				<div id="movieType" class="row movie_type" style="display: block;">
 					<span class="data ellipsis-line1" title=""></span>
 				</div>			
 				<div id="movieRating" class="row movie_rating" style="display: block;">
-					<span class="data" title="">${dateTime.rating } 관람가</span>
+					<span class="data" title="${dateTime.rating } 관람가">${dateTime.rating } 관람가</span>
 				</div>
 				<div class="placeholder" title="영화선택" style="display: none;"></div>
 			</div>
@@ -131,7 +131,7 @@
 			<div class="info theater">
 				<div id="theater" class="row name" style="display: block;">
 					<span class="header">극장</span>
-					<span class="data letter-spacing-min ellipsis-line1" title="">${dateTime.theaterName}</span>
+					<span class="data letter-spacing-min ellipsis-line1" title="${dateTime.theaterName}">${dateTime.theaterName}</span>
 				</div>			
 				<div id="date" class="row date" style="display: block;">
 					<fmt:formatDate var="screenDate" value="${dateTime.screenDate}" pattern="yyyy.MM.dd"/>
@@ -142,7 +142,7 @@
 				</div>			
 				<div id="screen" class="row screen" style="display: block;">
 					<span class="header">상영관</span>
-					<span class="data" title="">${dateTime.screenName}</span>
+					<span class="data" title="${dateTime.screenName}">${dateTime.screenName}</span>
 				</div>	
 				<div id="number" class="row number" style="display: block;">
 					<span class="header">인원</span>

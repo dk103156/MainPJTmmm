@@ -84,11 +84,12 @@
 	console.log(" voucherListddd : "+voucherList[0].invenPrice)
 	console.log(" voucherList.length : "+voucherList.length);
 
-	if (voucherList.length != 0) {
-		for (var i = 0; i < voucherList.length; i++) {
-			console.log("dd "+voucherList[i]);
-		}
-	}
+
+// 	if ('${! empty voucherJSONArray}') {
+// 		for (var i = 0; i < voucherList.length; i++) {
+			
+// 		}
+// 	}
 	
 // 	해당 회원이 select한 voucher List
 	var usingVoucherList = new Array();
@@ -375,10 +376,15 @@
 		var index = voucherList.findIndex(voucher => voucher.invenNo == selectedVoucher);
 		console.log(" index " + index);
 		
+		usingVoucherList.push(voucherList[index]);
+		
+// 		usingVoucherList
 		if(index !== undefined) voucherList.splice(index, 1);
 		
 		console.log("-----------after VoucherList.length :: " + voucherList.length )
 		console.log("-----------after VoucherList :: " + voucherList )
+		console.log("-----------after usingVoucherList.length :: " + usingVoucherList.length )
+		console.log("-----------after usingVoucherList :: " + usingVoucherList )
 		
 	});
 

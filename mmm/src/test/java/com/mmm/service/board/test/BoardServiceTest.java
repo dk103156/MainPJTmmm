@@ -1,6 +1,7 @@
 package com.mmm.service.board.test;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -123,16 +124,16 @@ public class BoardServiceTest {
 	}
 	
 	
-	//@Test
-	public void testgetCommentList() throws Exception{
-		
-		Search search = new Search();
-		List<Comment> list = boardService.getCommentList(search);
-		System.out.println(list);
-		Assert.assertEquals(3, list.size());
-
-	}
-	
+//	//@Test
+//	public void testgetCommentList() throws Exception{
+//		
+//		Search search = new Search();
+//		List<Comment> list = boardService.getCommentList(search);
+//		System.out.println(list);
+//		Assert.assertEquals(3, list.size());
+//
+//	}
+//	
 	
 	//@Test
 	public void testUpdateCmt() throws Exception{
@@ -222,7 +223,7 @@ public class BoardServiceTest {
 	  }
 	  
 	  
-	  @Test
+	 // @Test
 	  public void testGetReply() throws Exception {
 		  
 		  int articleNo = 10042;
@@ -232,5 +233,28 @@ public class BoardServiceTest {
 		  System.out.println(">>>>>>>>>>>>>>>>>>>>>>>"+article);
 	  }
 	  
+	  @Test
+	  public void testCmtList() throws Exception {
+		  
+		  Search search = new Search();
+		  search.setParent(10001);
+		  search.setCommentType(0);
+		  search.setPageSize(pageSize);
+		  if(search.getCurrentPage()==0) {
+			  
+			  search.setCurrentPage(1);
+		  }
+		  
+		  Map<String, Object> map = boardService.getCommentList(search);
+		  List<Comment> list = (List<Comment>)map.get("list");
+		  
+		  System.out.println(list.size());
+		  
+		  for(Comment cmt: list) {
+			  System.out.println(""+cmt.getCommentContent());
+		  }
+		  
+		  
+	  }
 	  
 	 }
