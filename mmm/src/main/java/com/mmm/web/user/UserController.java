@@ -268,7 +268,7 @@ public class UserController {
 
 		User sessionUser = (User)session.getAttribute("user");
 		if(sessionUser != null) {
-			return"redirect:/index.jsp?status=login";
+			return"redirect:/main.jsp?status=login";
 		}else {
 		
 		return "redirect:/user/login.jsp";
@@ -294,7 +294,7 @@ public class UserController {
 			//회원정보가 없거나  비회원일 경우
 			  if(dbUser == null || dbUser.getRole().trim().equals("unUser")) {
 				  
-				  return "redirect:/user/login.jsp?status=failed"; 
+				  return "redirect:/main.jsp?status=failed"; 
 			  }
 			  
 			 //탈퇴한 회원일 경우
@@ -309,14 +309,14 @@ public class UserController {
 				session.setAttribute("user", dbUser);	
 				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 			}else {//로그인 실패시 
-				return "redirect:/user/login.jsp?status=failed";
+				return "redirect:/main.jsp?status=failed";
 			}
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/index.jsp";
+		return "redirect:/main.jsp";
 	}
 	
 	@RequestMapping(value = "unUserLogin" , method=RequestMethod.GET)

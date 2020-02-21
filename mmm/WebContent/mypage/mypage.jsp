@@ -192,12 +192,16 @@ $(function(){
 		$("#plusPage").load("/purchase/getInventoryList");
 	})
 	
+	$("a[href='#']:contains('포인트 내역')").on('click',function(){		
+		$("#plusPage").load("/payment/getPointList");
+	})
+	
 	$("a[href='#']:contains('나의 이벤트 응모내역')").on('click',function(){		
-		$("#plusPage").load("/purchase/getInventoryList");
+		$("#plusPage").load("/event/getApplyList");
 	})
 	
 	$("a[href='#']:contains('나의 문의내역')").on('click',function(){		
-		$("#plusPage").load("/purchase/getInventoryList");
+		$("#plusPage").load("/customer/getContactList");
 	})
 	
 	
