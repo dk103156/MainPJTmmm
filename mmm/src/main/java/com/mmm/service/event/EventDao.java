@@ -67,4 +67,8 @@ public interface EventDao {
 	
 	public void updatePrevStatus(int previewNo) throws Exception;
 	
+
+	public List<Preview> getAllPreview() throws Exception;
+	
+	public List<Preview> updateStPrev() throws Exception;
 }

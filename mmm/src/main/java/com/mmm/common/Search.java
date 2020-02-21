@@ -28,6 +28,8 @@ public class Search {
 	private int category; //0: 전체, 1: 예매&매표 , 2: 스토어,  3: 결제,  4: 할인혜택,  5: 홈페이지,  6: 이벤트
 	private String userId; 
 	private int previewFlag; //0: 진행중  1:마감
+	private int commentType; //0: 1: 2: 
+	private int parent; // 부모글 
 
 
 	///Constructor
@@ -222,6 +224,25 @@ public class Search {
 		this.previewFlag = previewFlag;
 	}
 
+	public int getCommentType() {
+		return commentType;
+	}
+
+	public void setCommentType(int commentType) {
+		this.commentType = commentType;
+	}
+
+	
+	public int getParent() {
+		return parent;
+	}
+
+	public void setParent(int parent) {
+		this.parent = parent;
+	}
+
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -269,10 +290,71 @@ public class Search {
 		builder.append(userId);
 		builder.append(", previewFlag=");
 		builder.append(previewFlag);
+		builder.append(", commentType=");
+		builder.append(commentType);
+		builder.append(", parent=");
+		builder.append(parent);
+		builder.append(", getTicketerPhone()=");
+		builder.append(getTicketerPhone());
+		builder.append(", getCurrentPage()=");
+		builder.append(getCurrentPage());
+		builder.append(", getSearchCondition()=");
+		builder.append(getSearchCondition());
+		builder.append(", getSearchKeyword()=");
+		builder.append(getSearchKeyword());
+		builder.append(", getViewCondition()=");
+		builder.append(getViewCondition());
+		builder.append(", getMovieName()=");
+		builder.append(getMovieName());
+		builder.append(", getFranchise()=");
+		builder.append(getFranchise());
+		builder.append(", getTheaterName()=");
+		builder.append(getTheaterName());
+		builder.append(", getScreenDate()=");
+		builder.append(getScreenDate());
+		builder.append(", getScreenTime()=");
+		builder.append(getScreenTime());
+		builder.append(", getFranchises()=");
+		builder.append(getFranchises());
+		builder.append(", getTheaterNames()=");
+		builder.append(getTheaterNames());
+		builder.append(", getPageSize()=");
+		builder.append(getPageSize());
+		builder.append(", getEndRowNum()=");
+		builder.append(getEndRowNum());
+		builder.append(", getStartRowNum()=");
+		builder.append(getStartRowNum());
+		builder.append(", getUserNo()=");
+		builder.append(getUserNo());
+		builder.append(", getPayObjectFlag()=");
+		builder.append(getPayObjectFlag());
+		builder.append(", getOnBoxOfficeFlag()=");
+		builder.append(getOnBoxOfficeFlag());
+		builder.append(", getArticleType()=");
+		builder.append(getArticleType());
+		builder.append(", getCategory()=");
+		builder.append(getCategory());
+		builder.append(", getUserId()=");
+		builder.append(getUserId());
+		builder.append(", getPreviewFlag()=");
+		builder.append(getPreviewFlag());
+		builder.append(", getCommentType()=");
+		builder.append(getCommentType());
+		builder.append(", getParent()=");
+		builder.append(getParent());
+		builder.append(", getClass()=");
+		builder.append(getClass());
+		builder.append(", hashCode()=");
+		builder.append(hashCode());
+		builder.append(", toString()=");
+		builder.append(super.toString());
 		builder.append("]");
 		return builder.toString();
 	}
 
+	
+	
+	
 
 
 

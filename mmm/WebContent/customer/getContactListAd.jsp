@@ -1811,8 +1811,8 @@ input {
 </head>
 
 <body>
+<div class="container">
 <form>
-
  <input type="hidden" id="currentPage" name="currentPage" value=""/> 
 <div id="contents">
 	<h2 class="tit">관리자 문의내역 관리</h2>
@@ -1960,7 +1960,7 @@ input {
 			  </div><!-- end of ticketingPagination -->
 	<!--// pagination -->
 </div>
-
 </form>
+</div>
 </body>
 </html>

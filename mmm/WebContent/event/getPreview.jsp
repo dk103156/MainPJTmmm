@@ -8,8 +8,7 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-<title>getPreviewAd</title> 
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" type="text/javascript" ></script>	 -->
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <!-- 부트스트랩4 를 위한 것 -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -112,15 +111,16 @@
 	
 </script>
 <style>
-
-img-wrapper{
-	width: 25%;
-	}
-	
-img{
-	width: 100%;
-	height: auto;
-	}
+	body{
+		font-family: 'Noto Sans KR', sans-serif;
+		}
+	img-wrapper{
+		width: 25%;
+		}
+	img{
+		width: 100%;
+		height: auto;
+		}
 
 </style>
 
@@ -130,76 +130,14 @@ img{
 
 <div class="container">
 
-	<br>
-		<div class="page-header text-secondary">
-	       <h3>시사회 이벤트 상세조회</h3>
-	    </div>
-			
-		<br>	
-		<br>
 
- 	<div class="row">
-			<div class="col-md-5">		    
-				<div class="img-wrapper">
-		    	<c:forEach var = "image" items ="${fileArr}">
-		    		<img src="/resources/image/${image}"/>
-		    	<br/>
-		    	</c:forEach>
-		    	<c:if test="${!empty preview.previewImage}">
-				</c:if> 
-				</div>	
-			</div>
+ 	<div>
 			
-			<div class="col-sm-7">
-				<table class="table">
-				<tr>
-				<td><label>시사회이름</label></td>
-				<td>${preview.previewName}</td>
-				</tr>
-				
-				<tr>
-				<td><label>시사회장소</label></td>
-				<td>${preview.previewPlace}</td>
-				</tr>	
-				
-				<tr>
-				<td><label>시사회일자</label></td>
-				<td>${preview.preDate}</td>
-				</tr>	
-				
-				<tr>
-				<td><label>시사회시간</label></td>
-				<td>${preview.previewTime}</td>
-				</tr>	
-				
-				<tr>
-				<td><label>시사회시작일자</label></td>
-				<td>${preview.preStDate}</td>
-				</tr>	
-				
-				<tr>
-				<td><label>시사회종료일자</label></td>
-				<td>${preview.preEdDate}</td>
-				</tr>	
-				
-				<tr>
-				<td><label>당첨발표일자</label></td>
-				<td>${preview.winDate}</td>
-				</tr>	
-				
-				<tr>
-				<td><label>당첨인원수</label></td>
-				<td>${preview.winnerCount}</td>
-				</tr>	
-				
-				</table>
-				
-			 </div>
 	
-		
 		</div>
 <!-- 		 row 닫는 애! -->
-	<br>
+
+
 		<div class="text-center">
 			<button id="updateBtn"" class="btn btn-outline-secondary" type="button">수 &nbsp;정</button>
 			<button id="okBtn" type="button" class="btn btn-outline-secondary">확 &nbsp;인</button>
@@ -208,17 +146,17 @@ img{
 		</div>
 		<br>
 		<div class="text-center">
-		<button class="btn btn-outline-secondary"   id="apply">응모자 정보보기</button>
-		<div id="ax">
+			<button class="btn btn-outline-secondary"   id="apply">응모자 정보보기</button>
+			<div id="ax">
+			</div>
 		</div>
-		
 		<div class="text-center">
-		<button class="btn btn-outline-secondary" id="winner">당첨자 정보보기</button>
-		<div id="az">
-		
+			<button class="btn btn-outline-secondary" id="winner">당첨자 정보보기</button>
+			<div id="az">
+			</div>
 		</div>
 		
-	</div>
+		
 <!-- 	container 닫는 애  -->
 </div>
 
