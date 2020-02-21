@@ -78,21 +78,22 @@
 	var cash;
 	
 // 	해당 회원이 사용할 수 있는 voucher List
-	var voucherList = new Array();
+	var voucherList = JSON.parse('${voucherJSONArray}');
 	
-	console.log('${voucherJSONArray}')
-// 	if('${!empty invenList}'){
-// 		alert('shit');
-// 		<c:forEach items="${invenList}" var="invenJS">
-// 			voucherList.push('${invenJS}')
-// 		</c:forEach>
-// 	}
+	console.log(" voucherList : "+voucherList)
+	console.log(" voucherListddd : "+voucherList[0].invenPrice)
+	console.log(" voucherList.length : "+voucherList.length);
+
+	if (voucherList.length != 0) {
+		for (var i = 0; i < voucherList.length; i++) {
+			console.log("dd "+voucherList[i]);
+		}
+	}
+	
 // 	해당 회원이 select한 voucher List
 	var usingVoucherList = new Array();
 	
 	
-	console.log('voucherList :  '+voucherList[0]);
-	console.log('voucherList :  '+voucherList[0].inventoryNo);
 		
 // 	var ticketingNo;
 // 	var purchaseNo;
@@ -173,6 +174,14 @@
 		phone = '${user.phone}';	
 		totalPoint = '${totalPoint}'
 		
+// 		사용가능한 상품권 목록을 넣어준다
+		var voucherDisplay = '<option selected>사용 가능한 상품권을 선택하세요</option>';
+		for (var i = 0; i < voucherList.length; i++) {
+			voucherDisplay += "<option value='"+voucherList[i].invenNo+"'>";
+			voucherDisplay += voucherList[i].invenName+"("+ voucherList[i].invenPrice+"원)</option>";
+		}		
+		
+		$('select[name=select-voucher]').html(voucherDisplay);
 		
 		
 // // 		예매번호 및 구매번호 넣어주자
@@ -316,7 +325,11 @@
 			    voucher += "<select class='custom-select custom-select-md-3 custom-select-sm' name='select-voucher'>";
 			    voucher += "<option selected>사용 가능한 상품권을 선택하세요</option>";
 			    
-// -------------
+				for (var i = 0; i < voucherList.length; i++) {
+					voucher += "<option value='"+voucherList[i].invenNo+"'>";
+					voucher += voucherList[i].invenName+"("+ voucherList[i].invenPrice+"원)</option>";
+				}		
+				
 			    
 			    voucher += "</select>";
 				voucher += "<button type='button' name='addVoucher-btn' class='btn btn-md'>"  
@@ -349,12 +362,26 @@
 			IMPCard();
 		});
 		
-
-		
-		
-		
 	});
 	
+
+// 	상품권 하나 선택하면 사용가능 목록에서 선택된 상품권 목록으로 이동시키는..
+	$(document).on("change", "select[name='select-voucher']", function(){
+		
+		var selectedVoucher = $(this).children('option:selected').val();
+		
+		alert("선택된 상품권 번호 :  "+selectedVoucher);
+		
+		var index = voucherList.findIndex(voucher => voucher.invenNo == selectedVoucher);
+		console.log(" index " + index);
+		
+		if(index !== undefined) voucherList.splice(index, 1);
+		
+		console.log("-----------after VoucherList.length :: " + voucherList.length )
+		console.log("-----------after VoucherList :: " + voucherList )
+		
+	});
+
 
 	</script>
     
@@ -433,11 +460,6 @@
 	   		</c:if>
 	   		
 	   		
-	   		<script type="text/javascript">
-	   			var list = '${prodList}';
-	   			console.log("list ::    "+list);
-	   		
-	   		</script>
 	   		
 	   		
 <!-- 	   		구매정보 -->
@@ -504,15 +526,14 @@
                       <label for='select-voucher' class='col-sm-4 control-label'>상품권</label>
                       <div class='col'>
                           <select class='custom-select custom-select-md-3 custom-select-sm' name='select-voucher'>
-                              <option selected>사용 가능한 상품권을 선택하세요</option>
                               
-                              <c:forEach var='inven' items="${invenList}">
-	                              <option value='${inven.inventoryNo}'>
-	                              	${inven.inventoryName}( ${inven.inventoryPrice}원)
-<%-- 	                              	<input class="voucherPrice" type="hidden" value="${inven.inventoryPrice }"/> --%>
-	                              </option>
-                              </c:forEach>
                               
+<%--                               <c:forEach var='inven' items="${invenList}"> --%>
+<%-- 	                              <option value='${inven.inventoryNo}'> --%>
+<%-- 	                              	${inven.inventoryName}( ${inven.inventoryPrice}원) --%>
+<%-- <%-- 	                              	<input class="voucherPrice" type="hidden" value="${inven.inventoryPrice }"/> --%> --%>
+<!-- 	                              </option> -->
+<%--                               </c:forEach> --%>
                               
                               
                            </select>

@@ -38,8 +38,8 @@
 	<sql id="select-wishMovies">
 	
 		SELECT
-		m.MOVIE_NO, m.MOVIE_TITLE, m.poster, m.MOVIE_RATING, TO_CHAR(m.release_date, 'YYYY-MM-DD') release_date, m.KOBIS_CODE,
-		m.NAVER_CODE, m.KMDB_CODE, m.ONBOXOFFICE_FLAG, t.WISH_CNT WISH_CNT, w.WISH_DATE, s.star_rate,
+		m.MOVIE_NO, m.MOVIE_TITLE, m.poster, m.MOVIE_RATING, TO_CHAR(m.release_date, 'YYYY-MM-DD') release_date, 
+		m.KMDB_CODE, m.ONBOXOFFICE_FLAG, t.WISH_CNT WISH_CNT, w.WISH_DATE, s.star_rate,
 		NVL2(c.wish_no, '1', '0') wish_user_flag, NVL(r.star_rate, '0') star_user
 		FROM 
 		MOVIE m, WISH w, (SELECT MOVIE_NO, COUNT(*) WISH_CNT
