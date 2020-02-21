@@ -10,7 +10,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
- 
+ <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
@@ -64,6 +64,10 @@
 	     width: 940px;
 	  }
 	}
+	
+	body {
+		font-family: 'Noto Sans KR', sans-serif;
+		}
 </style>
 </head>
 <body>
@@ -96,30 +100,27 @@
 	  </div>
 	</div>
 	
-	
-</div>
 
 
 <br>
-
-<div class="container bb">
+<div class="categoryBtn">
 	<div><p class="text-dark">
 	전체  ${resultPage.totalCount} 건 </p>
 	</div>
       <table class="table table-hover table-bordered table-sm" >
         <thead class="table-active">
-          <tr class="row">
-            <th  class="col-sm-2"align="center">구분</th>
-            <th  class="col-sm-10" align="left" >질문</th>
+          <tr>
+            <th  scope="col"align="center">구분</th>
+            <th  scope="col" align="left" >질문</th>
           </tr>
         </thead>
 		<tbody class="getTranInfo">
 		  <c:set var="i" value="0" />
 		  <c:forEach var="ask" items="${list}">
 			<c:set var="i" value="${ i+1 }"/>
-			<tr class="row">
+			<tr>
 			 
-			  <td class="col-sm-2" align="left" >
+			  <td scope="col" align="left" >
 			  <c:if test="${ask.category==1}">예매/매표</c:if>
 			  <c:if test="${ask.category==2}">스토어</c:if>
 			  <c:if test="${ask.category==3}">결제</c:if>
@@ -129,16 +130,16 @@
 			  
 	  	    	<input type="hidden" id="articleNo" value="${ask.articleNo}"/>
 			  </td>
-			  <td class="col-sm-10" align="left" id="" >  ${ask.articleTitle} 
+			  <td scope="col" align="left" id="" >  ${ask.articleTitle} 
 			  </td>
 			</tr>
-			<tr class="row" id="${ask.articleNo}">
+			<tr id="${ask.articleNo}">
 			</tr>
           </c:forEach>
         </tbody>
       </table>
 			  <div class="hee"></div>
-       </div>
+      </div>
 
 
  <div class="ticketingPagination row">
@@ -190,7 +191,8 @@
 					 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
 					 	<input type="hidden" id="category" name="category" value="${search.category}"/></form>
 			  </div><!-- end of ticketingPagination -->
-			  
+	</div>
+	
 
 <script>
 
@@ -282,19 +284,19 @@
 		ajaxPromise("/customer/json/getAskList", datas).then(
 			data=> {
 				console.log(data)
-				$(".bb").empty();
+				$(".categoryBtn").empty();
 				
 				if(data.askList.length!=0){
 					
 					var html ="	<div><p class='text-dark'>전체  "+ data.resultPage.totalCount+" 건 </p></div>"
-						html +="<div class='row'><table class='table table-hover table-bordered table-sm'>"
-			        	html +="<thead class='table-active'><tr class='row'>"		
-			         	html +="<th class='col-sm-2' align='center'>구분</th><th class='col-sm-10' align='left'>질문</th></tr></thead>"
+						html +="<div><table class='table table-hover table-bordered table-sm'>"
+			        	html +="<thead class='table-active'><tr>"		
+			         	html +="<th scope='col' align='center'>구분</th><th scope='col' align='left'>질문</th></tr></thead>"
 						html +="<tbody class='getTranInfo'>"
 				
 					for (var i = 0; i < data.askList.length; i++) {
 						   
-						html +="<tr class='row'><td class='col-sm-2' align='left'>";
+						html +="<tr><td scope='col' align='left'>";
 						
 						if (data.askList[i].category==1) {
 							html += "예매/매표";
@@ -311,14 +313,14 @@
 						}
 						
 						html +="<input type='hidden' id='articleNo' value='"+data.askList[i].articleNo+"'/>"
-						html +="</td><td class='col-sm-10' align='left'>"+data.askList[i].articleTitle  
+						html +="</td><td scope='col' align='left'>"+data.askList[i].articleTitle  
 						html +="</td></tr>"
 					
 					}
 					
 					html += "</tbody></table></div>"
 					
-							$(".bb").append(html);
+							$(".categoryBtn").append(html);
 					
 					
 							

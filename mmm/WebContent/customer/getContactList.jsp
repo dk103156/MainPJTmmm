@@ -1788,6 +1788,7 @@ input {
 
 <body>
 <form autocomplete="off">
+<div class="container">
 <div id="contents">
 	<h2 class="tit">나의 문의내역</h2>
 <!-- 	<div class="tab-block"> -->
@@ -1942,7 +1943,7 @@ input {
 </c:if>
 </div>
 
-
+</div>
 </form>
 </body>
 </html>

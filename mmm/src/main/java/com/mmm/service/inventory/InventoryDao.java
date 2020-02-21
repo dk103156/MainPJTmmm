@@ -23,5 +23,5 @@ public interface InventoryDao {
 	
 	public void deleteInventory(int inventoryNo) throws Exception;
 	
-	
+	public List<Inventory> getVoucherListInPayment(int userNo)throws Exception;
 }

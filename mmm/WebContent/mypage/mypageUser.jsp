@@ -12,7 +12,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -47,11 +47,7 @@ body {
     font-size: 15px;
     color: #444;
     font-weight: 400;
-    
-}
-
-* {
-    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .my-magabox-info {
@@ -87,7 +83,7 @@ button, input {
 
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -132,7 +128,6 @@ button, input {
 }
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -255,17 +250,6 @@ a {
     height: 9px;
     background-image: url(https://img.megabox.co.kr/static/pc/images/common/ico/ico-arr-right-reverse-gray.png);
 }
-.iconset {
-    overflow: hidden;
-    display: inline-block;
-    margin: -1px 0 0 0;
-    padding: 0;
-    font-size: 0;
-    line-height: 0;
-    vertical-align: middle;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-}
 
 .ico-exclamation-white {
     width: 16px;
@@ -332,7 +316,7 @@ p {
 
 .my-magabox-info .bottom .point {
     float: left;
-    width: 337px;
+    width: 33%;
     min-height: 116px;
 }
 
@@ -430,7 +414,7 @@ em {
 
 .my-magabox-info .bottom .theater {
     float: left;
-    width: 237px;
+    width: 34%;
     height: 100%;
     min-height: 116px;
     padding: 0 30px;
@@ -467,11 +451,6 @@ em {
     border-bottom: 1px solid #444;
 }
 
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
 
 l {
     display: block;
@@ -484,7 +463,6 @@ l {
 }
 
 .my-magabox-info .bottom .theater .list ol li {
-    padding: 9px 0 0 0;
     line-height: 1.1;
 }
 
@@ -493,10 +471,10 @@ li {
     text-align: -webkit-match-parent;
 }
 
+
 .my-magabox-info .bottom .theater .list ol li em {
     display: inline-block;
     margin: 0 5px 0 0;
-    font-family: Roboto;
     font-style: italic;
     font-size: 1.2em;
     vertical-align: middle;
@@ -504,7 +482,7 @@ li {
 
 .my-magabox-info .bottom .coupon {
     float: left;
-    width: 206px;
+    width: 33%;
     height: 100%;
     padding: 0 0 0 30px;
     border-left: 1px solid #d8d9db;
@@ -531,29 +509,11 @@ my-magabox-info .bottom .coupon .list ul li span {
     text-align: right;
 }
 
-.my-magabox-info .bottom .theater .list ol li {
-    padding: 9px 0 0 0;
-    line-height: 1.1;
-}
-
-li {
-    text-align: -webkit-match-parent;
-}
-
-
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
 
 ol, ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
-
-div {
-    display: block;
 }
 
 .my-megabox-main .column {
@@ -580,7 +540,7 @@ div {
 h2.tit.small {
     padding: 0 0 16px 0;
     font-size: 1.4666em;
-    color: #503396;
+    color: #333;
 }
 .tit-util .tit {
     float: left;
@@ -599,7 +559,7 @@ a.button.gray-line:active, a.button.gray-line:focus, a.button.gray-line:hover, a
     line-height: 32px;
 }
 a.button:active, a.button:focus, a.button:hover, a.button:visited {
-    color: #503396;
+    color: #fee50e;
 }
 .tit-util .right a {
     display: inline-block;
@@ -635,11 +595,11 @@ a:link {
     padding: 0 15px;
     text-align: center;
     line-height: 34px;
-    color: #503396;
+    color: #fee50e;
     font-weight: 400;
     border-radius: 4px;
     text-decoration: none;
-    border: 1px solid #503396;
+    border: 1px solid #fee50e;
     vertical-align: middle;
     background-color: #fff;
     cursor: pointer;
@@ -677,7 +637,6 @@ a:link {
 
 .my-megabox-main .link-movie-story a em {
     display: block;
-    font-family: Roboto;
     font-size: 2em;
     font-weight: 400;
     color: #01738b;
@@ -686,6 +645,7 @@ a:link {
 .my-megabox-main .link-movie-story a span {
     display: block;
     padding: 3px 0 0 0;
+    font-size: 13px;
 }
 
 .my-megabox-main .column .col.right {
@@ -714,11 +674,7 @@ a:link {
 .my-megabox-main .tit-util .tit {
     line-height: 32px;
 }
-h2.tit.small {
-    padding: 0 0 16px 0;
-    font-size: 1.4666em;
-    color: #503396;
-}
+
 .tit-util .tit {
     float: left;
     padding: 0!important;
@@ -768,7 +724,7 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     top: 9px;
     left: 0;
-    background-color: #503396;
+    background-color: #fee50e;
     width: 3px;
     height: 3px;
 }
@@ -801,11 +757,6 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 32px;
 }
 
-h2.tit.small {
-    padding: 0 0 16px 0;
-    font-size: 1.4666em;
-    color: #503396;
-}
 .tit-util .tit {
     float: left;
     padding: 0!important;
@@ -983,24 +934,6 @@ table td, table th {
 .board-list {
     line-height: 1.3;
 }
-table {
-    width: 100%;
-    margin: 0;
-    border: 0;
-    table-layout: fixed;
-    border-collapse: collapse;
-    empty-cells: show;
-}
-* {
-    box-sizing: border-box;
-}
-
-table {
-    display: table;
-    border-collapse: separate;
-    border-spacing: 2px;
-    border-color: grey;
-}
 
 colgroup {
     display: table-column-group;
@@ -1008,13 +941,42 @@ colgroup {
 
 
 </style>
+<script type="text/javascript">
+$(function(){
+
+	$("#userInfo").on('click',function(){
+		$("#plusPage").load("/user/passwordCheck");
+	});
+	
+	$("#sawMovie").on('click',function(){
+		$("#plusPage").load("/mypage/myMovieList");
+	});
+	
+	$("#wishList").on('click',function(){
+		$("#plusPage").load("/mypage/wishList");
+	});
+	
+	$("#addGenreBtn").on('click',function(){
+		var likeGenre1 =$("#likeGenre1").val();
+		var likeGenre2 =$("#likeGenre2").val();
+		var likeGenre3 =$("#likeGenre3").val();
+		
+		$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
+	});
+	
+		
+	
+});
+
+</script>
+
 </head>
 <body>
 
 
 <div id="contents">
 
-	<!-- my-megabox-main -->
+	<!-- mypage-main -->
 	<div class="my-megabox-main">
 
 		<div class="my-magabox-info ">
@@ -1022,15 +984,13 @@ colgroup {
 			<div class="top">
 				<div class="photo" id="myPhoto">
 					<div class="wrap">
-						<form name="fileForm" style="display: none;">
-							<input type="file"   name="file">
-							<input type="hidden" name="fileMbNo" value="72436" />
-						</form>
-
-						<i class="iconset ico-add-photo"></i>
-
 						<button type="button" class="img">
-							<img src="https://www.megabox.co.kr/static/pc/images/mypage/bg-photo.png" alt="" onerror="noImg(this, 'human')" />
+						<c:if test="${empty user.profile.trim()}">	
+							<img src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
+						</c:if>
+						<c:if test="${! empty user.profile.trim()}">
+							<img alt="" src="/resources/image/${user.profile}"/>
+						</c:if>
 						</button>
 					</div>
 				</div>
@@ -1038,14 +998,21 @@ colgroup {
 				<div class="grade">
 					<p class="name">
 					
-					님은 일반등급 입니다.<br>
+					${user.userName}님은 
+					<c:if test="${user.userGrade == 0}">	
+						일반회원 
+					</c:if>
+					<c:if test="${user.userGrade == 1}">
+						VIP	
+					</c:if>
+					<c:if test="${user.userGrade == 2}">
+						VVIP	
+					</c:if>
+					 입니다.<br>
 					
 					</p>	 	
 					<div class="link">
-						<a href="/mypage/myinfo?returnURL=info" title="개인정보수정 페이지로 이동">개인정보수정 <i class="iconset ico-arr-right-reverse"></i></a>
-						<a href="#layer_before_grade" id="bfrClassSearch" class="btn-modal-open" w-data="400" h-data="400" title="지난등급 상세보기">
-							지난등급조회 <i class="iconset ico-arr-right-reverse"></i>
-						</a>
+						<a href="#" id="userInfo" title="개인정보수정 페이지로 이동">개인정보수정 <i class="iconset ico-arr-right-reverse"></i></a>
 					</div>
 				</div>
 
@@ -1096,15 +1063,28 @@ colgroup {
 				<!-- theater -->
 				<div class="theater" id="myFaverBrch">
 					<div class="tit-area">
-						<p class="tit">선호극장</p>
-						<a href="" class="right" title="선호극장 변경">변경 <i class="iconset ico-arr-right-reverse"></i></a>
+						<p class="tit">자주가는 극장</p>
+						<a href="" class="right" title="자주가는 극장 변경">변경 <i class="iconset ico-arr-right-reverse"></i></a>
 					</div>
 
 					<div class="list">
 						<div class="no-list" style="display: none;">
-							<span>선호극장</span>을  설정하세요.
+							<span>자주가는 극장</span>을  설정하세요.
 						</div>
-						<ol></ol>
+						<ol>
+							<li>
+								<em style="padding-bottom : 5px;">1</em>
+								<span >${user.likeTheater1}</span>
+							</li>
+							<li>
+								<em style="padding-bottom : 5px;">2</em>
+								<span>${user.likeTheater2}</span>
+							</li>
+							<li>
+								<em style="padding-bottom : 5px;">3</em>
+								<span>${user.likeTheater3}</span>
+							</li>
+						</ol>
 					</div>
 				</div>
 				<!--// theater -->
@@ -1147,29 +1127,25 @@ colgroup {
 			<div class="col left" id="myStory">
 				<div class="tit-util">
 					<h2 class="tit small">나의 무비스토리</h2>
-
-					<div class="right">
-						<a href="#saw_movie_regi" class="button gray-line small btn-modal-open" w-data='600' h-data='400' title="본 영화 등록">본 영화 등록</a>
-					</div>
 				</div>
 
 				<div class="box-border link-movie-story">
-					<a href="/mypage/moviestory?cd=sm" title="본 영화 탭으로 이동">
+					<a href="#" id=sawMovie title="본 영화 탭으로 이동">
 						<em>0</em>
 						<span>본 영화</span>
 					</a>
 
-					<a href="/mypage/moviestory?cd=one" title="한줄평 탭으로 이동">
+					<a href="#" id="wishList" title="위시리스트 탭으로 이동" >
 						<em>0</em>
-						<span>보고싶어</span>
+						<span>위시리스트</span>
 					</a>
 
-					<a href="/mypage/moviestory?cd=lm" title="보고싶어 탭으로 이동">
+					<a href="/mypage/moviestory?cd=lm" title="한줄평 탭으로 이동">
 						<em>0</em>
 						<span>한줄평</span>
 					</a>
 
-					<a href="/mypage/moviestory?cd=mp" title="무비포스트 탭으로 이동">
+					<a href="/mypage/moviestory?cd=mp" title="리뷰 탭으로 이동">
 						<em>0</em>
 						<span>리뷰</span>
 					</a>
@@ -1183,16 +1159,125 @@ colgroup {
 					<h2 class="tit small">선호관람정보</h2>
 
 					<div class="right">
-						<a href="" class="button gray-line small" title="설정">설정</a>
+						<a href="#" class="button gray-line small" title="설정" data-toggle="modal" data-target="#likechoice">설정</a>
 					</div>
 				</div>
 
 				<div class="box-border favor-see">
 					<ul class="dot-list gray">
-						<li><span class="font-gblue mr10">내 선호장르</span></li>
-						<li><span class="font-gblue mr10">내 선호시간</span></li>
+						<li><a id="reLoadGenre"><span class="font-gblue mr10">내 선호장르</span></a>
+							<c:if test="${user.likeGenre1 != null ||user.likeGenre2 != null ||user.likeGenre3 != null }">	
+								<span id="chgLikeGenre1">${user.likeGenre1},</span>
+								<span id="chgLikeGenre2">${user.likeGenre2},</span>
+								<span id="chgLikeGenre3">${user.likeGenre3}</span>
+							</c:if>
+						</li>
+						<li><span class="font-gblue mr10">자주가는 극장</span></li>
 					</ul>
 				</div>
+				<!-- Modal -->
+				 <form>
+				 <input type= "hidden" name= "userNo" value="${user.userNo }" >
+					<div class="modal fade" id="likechoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="staticBackdropLabel">선호 장르 선택</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      	<div class="row">
+					      		<div class="col-sm-4">
+				    				<select class="form-control" id="likeGenre1" name="likeGenre1" style="width:120px;height:50px;">
+				    				<option selected>선호장르</option>
+				      					<option>드라마</option>
+										<option>코미디</option>
+										<option>액션</option>
+										<option>멜로/로맨스</option>
+										<option>스릴러</option>
+										<option>미스터리</option>
+										<option>공포(호러)</option>
+										<option>어드벤쳐</option>
+										<option>범죄</option>
+										<option>가족</option>
+										<option>판타지</option>
+										<option>SF</option>
+										<option>서부극(웨스턴)</option>
+										<option>사극</option>
+										<option>애니메이션</option>
+										<option>다큐멘터리</option>
+										<option>전쟁</option>
+										<option>뮤지컬</option>
+										<option>성인물(에로)</option>
+										<option>공연</option>
+										<option>기타</option>
+				    				</select>
+			    				</div>
+			    				<div class="col-sm-4">
+									<select class="form-control" id="likeGenre2" name="likeGenre2" style="width:120px;height:50px;">
+									<option selected>선호장르</option>
+										<option>드라마</option>
+										<option>코미디</option>
+										<option>액션</option>
+										<option>멜로/로맨스</option>
+										<option>스릴러</option>
+										<option>미스터리</option>
+										<option>공포(호러)</option>
+										<option>어드벤쳐</option>
+										<option>범죄</option>
+										<option>가족</option>
+										<option>판타지</option>
+										<option>SF</option>
+										<option>서부극(웨스턴)</option>
+										<option>사극</option>
+										<option>애니메이션</option>
+										<option>다큐멘터리</option>
+										<option>전쟁</option>
+										<option>뮤지컬</option>
+										<option>성인물(에로)</option>
+										<option>공연</option>
+										<option>기타</option>
+									</select>
+								</div>
+								<div class="col-sm-4">
+									<select class="form-control" id="likeGenre3" name="likeGenre3" style="width:120px;height:50px;">
+									<option selected>선호장르</option>
+										<option>드라마</option>
+										<option>코미디</option>
+										<option>액션</option>
+										<option>멜로/로맨스</option>
+										<option>스릴러</option>
+										<option>미스터리</option>
+										<option>공포(호러)</option>
+										<option>어드벤쳐</option>
+										<option>범죄</option>
+										<option>가족</option>
+										<option>판타지</option>
+										<option>SF</option>
+										<option>서부극(웨스턴)</option>
+										<option>사극</option>
+										<option>애니메이션</option>
+										<option>다큐멘터리</option>
+										<option>전쟁</option>
+										<option>뮤지컬</option>
+										<option>성인물(에로)</option>
+										<option>공연</option>
+										<option>기타</option>
+									</select>
+								</div>
+							</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary" id="addGenreBtn">등록</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</form>
+				
 			</div>
 			<!--// right -->
 		</div>

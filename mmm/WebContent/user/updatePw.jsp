@@ -181,14 +181,13 @@ label {
     color: #444;
     border: 1px solid #d8d9db;
     vertical-align: middle;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family:'Noto Sans KR', sans-serif;
 }
 button, input {
     overflow: visible;
 }
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -258,7 +257,7 @@ colgroup {
     color: #503396;
     font-weight: 400;
     border-radius: 4px;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family:'Noto Sans KR', sans-serif;
     text-decoration: none;
     border: 1px solid #503396;
     vertical-align: middle;
@@ -272,64 +271,165 @@ colgroup {
 
 
 <script type="text/javascript">
+$(function(){
+	
+	function getParam(key) {
+	    var params = location.search.substr(location.search.indexOf("?") + 1);
+	    var value = "";
+	    params = params.split("&");
+	    for (var i = 0; i < params.length; i++) {
+	        temp = params[i].split("=");
+	        if ([temp[0]] == key) { value = temp[1]; }
+	    }
+	    return value;
+	}
 
+	var status = getParam("status");
+	
+	if(status=="failed"){
+		alert("비밀번호를 확인해주세요.");
+	}
+	
+	$("#updateBtn").on("click",function(){
+		result= validate();
+		if(!result){
+			return;
+		}
+		$("form").attr("method","post").attr("action","/user/updatePw").submit();
+		alert("비밀번호가 수정되었습니다.")
+	})
+	
+	
+	
+	function validate() {
+					
+		//숫자, 특문 각 1회 이상, 영문,숫자 사용하여 5자리 이상 15자입력
+		var re3 = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{1,50}).{5,15}$/; 
 
+		var pw= $("#pwnew").val();
+		var checkPw= $("#repwnew").val();
+
+		
+		if(!check(re3,pw,"비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.")) {
+			$("#pwnew").focus();
+			$("#updateBtn").attr("disabled", true);
+		    return false;
+		}
+		
+		if(!check(re3,pw,"비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.")) {
+		    return false;
+		}
+		
+		if(pw != checkPw) {
+		    alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+		    $("#repwnew").val("");
+		    $("#repwnew").focus();
+		    return false;
+		}
+		return true;
+	}
+	
+	function check(re, what, message) {
+    	if(re.test(what)) {
+        return true;
+    	}
+    	alert(message);
+	}
+	
+	//비밀번호 체크 (1 = 중복 / 0 != 중복)
+	$('#password').keyup(function() {
+		var password = $("#password").val();
+		
+		$.ajax({
+			url : '/user/json/pwChk',
+			method : "post" ,
+			datatype : "json" ,
+			headers : {
+				"Accept" : "application/json" ,
+				"Content-Type" : "application/json"
+			} ,
+			data : JSON.stringify({
+				password : password	
+			}), 
+			success : function(data) {
+				if (data == 0) {
+					// 0 : 비밀번호가 일치하지 않는경우
+					$("#chkPw").text("비밀번호를 확인해주세요.");
+					$("#updateBtn").attr("disabled", true);
+				}else{
+					$("#chkPw").text("새로운 비밀번호를 입력해주세요.");
+					$("#chkPw").css("color", "red");
+					$("#updateBtn").attr("disabled", false);
+				} 
+			}, error : function() {
+					console.log("실패");
+				}
+			})//ajax 끝
+		});//비밀번호 체크 
+	
+	
+	
+	
+
+});
 </script>
 </head>
 <body>
 
-<form id="moveFrm" method="post"></form>
+<form id="pwchange" method="post">
 
-<div id="contents">
-	<h2 class="tit">비밀번호 변경</h2>
-
-	<ul class="dot-list mb10">
-		<li>현재 비밀번호를 입력한 후 새로 사용할 비밀번호를 입력하세요.</li>
-	</ul>
-
-	<div class="table-wrap mb20">
-		<table class="board-form">
-			<caption>현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 항목을 가진 표</caption>
-			<colgroup>
-				<col style="width:180px;">
-				<col>
-			</colgroup>
-			<tbody>
-				<tr>
-					<th scope="row"><label for="pwnow">현재 비밀번호</label></th>
-					<td>
-						<input type="password" id="pwnow" class="input-text w150px" />
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="pwnew">새 비밀번호</label></th>
-					<td>
-						<input type="password" id="pwnew" class="input-text w150px" />
-						<span class="ml10 font-size-14">※ 영문, 숫자, 특수문자 중 2가지 이상 조합하여 10자리 이상으로 입력 해 주세요.</span>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><label for="repwnew">새 비밀번호 재입력</label></th>
-					<td>
-						<input type="password" id="repwnew" class="input-text w150px" />
-						<span class="ml10 font-size-14">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div id="contents">
+		<h2 class="tit">비밀번호 변경</h2>
+	
+		<ul class="dot-list mb10">
+			<li>현재 비밀번호를 입력한 후 새로 사용할 비밀번호를 입력하세요.</li>
+		</ul>
+	
+		<div class="table-wrap mb20">
+			<table class="board-form">
+				<caption>현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 항목을 가진 표</caption>
+				<colgroup>
+					<col style="width:180px;">
+					<col>
+				</colgroup>
+				<tbody>
+					<tr>
+						<th scope="row"><label for="pwnow">현재 비밀번호</label></th>
+						<td>
+							<input type="password" id="password" class="input-text w150px" />
+							<h6 id="chkPw" style="color: red;"></h6>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="pwnew">새 비밀번호</label></th>
+						<td>
+							<input type="password" id="pwnew" name="password" class="input-text w150px" />
+							<input type="hidden" name="userNo" value="${user.userNo }" />
+							<span class="ml10 font-size-14">※ 비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><label for="repwnew">새 비밀번호 재입력</label></th>
+						<td>
+							<input type="password" id="repwnew" class="input-text w150px" />
+							<span class="ml10 font-size-14">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	
+		<ul class="dot-list">
+			<li>생년월일, 전화번호 등 개인 정보와 관련된 숫자, 연속된 숫자와 같이 쉬운 비밀번호는 다른 사람이 쉽게 알아낼 수 있으니 사용을 자제해 주세요.</li>
+			<li>비밀번호는 3-6개월마다 꼭 바꿔 주세요.</li>
+			<li>비밀번호 변경시 모바일 기기와 홈페이지에서 모두 로그아웃됩니다. 변경한 비밀번호로 다시 로그인해주세요.</li>
+		</ul>
+	
+		<div class="pt40" style="text-align: center; margin-bottom:20px;">
+			<button class="button large" id="cancelBtn">취소</button>
+			<button class="button purple large" data-key="login_0b94283bacf2401d897526e61c0cd87f" id="updateBtn">수정</button>
+		</div>
 	</div>
-
-	<ul class="dot-list">
-		<li>생년월일, 전화번호 등 개인 정보와 관련된 숫자, 연속된 숫자와 같이 쉬운 비밀번호는 다른 사람이 쉽게 알아낼 수 있으니 사용을 자제해 주세요.</li>
-		<li>비밀번호는 3-6개월마다 꼭 바꿔 주세요.</li>
-		<li>비밀번호 변경시 모바일 기기와 홈페이지에서 모두 로그아웃됩니다. 변경한 비밀번호로 다시 로그인해주세요.</li>
-	</ul>
-
-	<div class="pt40" style="text-align: center; margin-bottom:20px;">
-		<button class="button large" id="cancelBtn">취소</button>
-		<button class="button purple large" data-key="login_0b94283bacf2401d897526e61c0cd87f" id="updateBtn">수정</button>
-	</div>
-</div>
-
+</form>
 </body>
 </html>

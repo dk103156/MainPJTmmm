@@ -10,7 +10,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -61,6 +61,11 @@ $(function(){
 	if(status=="failed"){
 		alert("요청하신 페이지에 권한이 없습니다.");
 	}
+	if(status=="login"){
+		alert("이미 로그인 하셨습니다.");
+	}
+	
+	
 	
 });
 
@@ -77,12 +82,15 @@ $(function(){
   <h3>1.Users</h3>	
 	<li> <a href="user/login">로그인 UI</a></li>
 	<li> <a href="mypage/mypage.jsp">마이페이지 UI</a></li>
+	<li> <a href="user/logout">로그아웃</a></li>
 
 </ul>
 <ul>
  <h3>2.Product</h3>	
 	<li> <a href="product/getVoucherList">상품 목록 UI</a></li>
-	<li> <a href="purchase/getInventoryList">내 인벤토리 목록</a></li>
+	<li> <a href="purchase/getPurchaseList?purchaseStatus=0">내 구매 목록 UI</a></li>
+	<li> <a href="purchase/getPurchaseList?purchaseStatus=2">내 구매 취소 목록 UI</a></li>
+	<li> <a href="purchase/getInventoryList">내 인벤토리 목록 UI</a></li>
 	<li> <a href="product/getCartList">장바구니 목록 UI</a></li>
 </ul>
 
@@ -100,6 +108,7 @@ $(function(){
 <ul>
   <h3>5.payment</h3>	
 	<li> <a href="payment/preparePayment"><strike>결제하기 Test</strike></a> 따로 Test 안해요. 일반결제에서 넘어갑니다.</li>
+	<li> <a href="payment/getPointList">포인트 리스트</a></li>
 </ul>
 <ul>
   <h3>6.event</h3>	

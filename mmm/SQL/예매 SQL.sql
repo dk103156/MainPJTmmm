@@ -103,9 +103,9 @@ insert into Ticketing
 seat_no, head_count, ticketing_price, ticketing_pin_no, ticketer_phone, ticketing_date, ticketing_status)
 values 
 (seq_ticketing_ticketing_no.NEXTVAL,
-'버즈 오브 프레이(할리 퀸의 황홀한 해방)', 'CGV 건대입구', '13656', '일반', 'economy', 'A1', 1, 9000, '1231231-32131-1231', '01011111111', SYSDATE, 0)
+'버즈 오브 프레이(할리 퀸의 황홀한 해방)', 'CGV 건대입구', '10000', '일반', 'economy', 'A1', 1, 9000, '1231231-32131-1231', '01011111111', SYSDATE, 0)
 
-
+commit;
 
 /*
 CREATE TABLE theater ( 

@@ -19,7 +19,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmm.common.JavaUtil;
+import com.mmm.common.Page;
 import com.mmm.common.Search;
+import com.mmm.service.board.BoardService;
+import com.mmm.service.domain.Blind;
+import com.mmm.service.domain.Comment;
 import com.mmm.service.domain.Participation;
 import com.mmm.service.domain.Payment;
 import com.mmm.service.domain.Point;
@@ -45,6 +50,10 @@ public class EventRestController {
 	@Autowired
 	@Qualifier("paymentServiceImpl")
 	private PaymentService paymentService;
+	
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
 	
 	public EventRestController(){
 		System.out.println(this.getClass());
@@ -228,6 +237,86 @@ public class EventRestController {
 		
 	}
 	
+	@RequestMapping(value="json/addExpectLine")
+	public void addExpectLine(@RequestBody Map<String, Object> map) throws Exception {
+		
+		System.out.println("json/addExpectLine도착");
+		String userId = (String)map.get("userId");
+		int articleNo = Integer.parseInt((String)map.get("articleNo"));
+		int commentType = Integer.parseInt((String)map.get("commentType"));
+		String commentContent = (String)map.get("commentContent");
+		
+		Comment comment = new Comment();
+		comment.setUserId(userId);
+		comment.setArticleNo(articleNo);
+		comment.setCommentType(commentType);
+		comment.setCommentContent(commentContent);
+		
+		boardService.addComment(comment);
+		
+	}
 	
+	
+	
+	
+	@RequestMapping(value="json/addExpectLineBlind")
+	public void addExpectLineBlind(@RequestBody Map<String, Object> map) throws Exception {
+		
+		System.out.println("=========================>json/addExpectLineBlind start");
+		int blindReason = Integer.parseInt((String)map.get("blindReason"));
+		int commentNo = Integer.parseInt((String)map.get("commentNo")); 
+		
+		Blind blind = new Blind();
+		blind.setBlindReason(blindReason);
+		blind.setCommentNo(commentNo);
+		
+		boardService.addCommentBlind(blind);
+		
+		System.out.println("=========================>json/addExpectLineBlind end");
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "json/listExpectLine")
+	public Map<String, Object> listExpectLine(@RequestBody Map<String, Object> map) throws Exception {
+
+		System.out.println("/event/json/listExpectLine : GET");
+		
+		int currentPage = Integer.parseInt((String)map.get("currentPage"));
+		int commentType = Integer.parseInt((String)map.get("commentType"));
+		int parent = Integer.parseInt((String)map.get("parent"));
+		System.out.println("[[[[[[[[[[[currentPage]]]]]]]]]]]]]]]]"+currentPage);
+		Search search = new Search();
+		if (currentPage == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setCurrentPage(currentPage);
+		search.setPageSize(pageSize);
+		search.setCommentType(commentType);
+		search.setParent(parent);
+		
+		Map<String, Object> cmtResultMap = boardService.getCommentList(search);
+		List<Comment> list = (List<Comment>)cmtResultMap.get("list");
+		
+		for(Comment cmt: list) {
+			cmt.setCommentDate(JavaUtil.convertDateFormat(cmt.getCommentDate()));
+		}
+		
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) cmtResultMap.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		
+		System.out.println(resultPage);
+
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+
+		returnMap.put("list", list);
+		returnMap.put("search", search);
+		returnMap.put("resultPage", resultPage);
+		
+		
+		return returnMap;
+	}
 	
 }

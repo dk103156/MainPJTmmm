@@ -230,7 +230,7 @@ $(function(){
  			$("input[name='headCount']").val('${ticketing.headCount}')
  			$("input[name='ticketingPrice']").val('${ticketing.ticketingPrice}')
  			
- 			$("form#finalData").attr("method","POST").attr("action","/purchase/addPurchase").submit();
+ 			$("form#finalData").attr("method","POST").attr("action","/payment/preparePayment").submit();
  			
  		});
  		

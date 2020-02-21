@@ -34,9 +34,18 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 	
+<!-- 	Google web font -->
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	
+	<!--     Common Css -->
+    <link rel="stylesheet" href="/resources/css/common.css?after">
+	    
+    <link rel="stylesheet" href="/resources/css/payment.css?after">	
+	
 	
 	
     <style type="text/css">
+    
 /* 	div 안에 element들 가운데 정렬 */
 	.row div {
 		float: none;
@@ -47,7 +56,6 @@
 	.whiteSym{
 		color : white;
 	}
-	
     </style>
     
 	<script type="text/javascript">
@@ -58,13 +66,34 @@
 	var phone;
 
 // 	결제를 위한 변수들
-	var ticketingPrice; 	
+	var ticketingPrice;
+
+	var productNo;
+	var productQuatity;
 	var purchasePrice;
+	
 	var totalPrice;
 	var partPoint;
 	var totalDiscount;
 	var cash;
 	
+// 	해당 회원이 사용할 수 있는 voucher List
+	var voucherList = new Array();
+	
+	voucherList = '${voucherJSONArray}'
+	console.log(voucherList)
+
+	if ('${! empty voucherJSONArray}') {
+		for (var i = 0; i < voucherList.length; i++) {
+			
+		}
+	}
+	
+// 	해당 회원이 select한 voucher List
+	var usingVoucherList = new Array();
+	
+	
+		
 // 	var ticketingNo;
 // 	var purchaseNo;
 
@@ -94,7 +123,12 @@
 								"seatType" : '${ticketing.seatType}',
 								"seatNo" : '${ticketing.seatNo}',
 								"headCount" : '${ticketing.headCount}',
-								"ticketingPrice" : '${ticketing.ticketingPrice}',
+// 								"ticketingPrice" : '${ticketing.ticketingPrice}',
+								"ticketingPrice" : ticketingPrice,
+								"purchaseProductNo" : '${purchase.purchaseProductNo}',//properties for purchase
+								"purchaseProductQuantity" : '${purchase.purchaseProductQuantity}',
+// 								"purchasePrice" : purchasePrice,
+								"purchasePrice" : '${purchase.purchasePrice}',
 								"totalPrice" : totalPrice,						//properties for Payment
 								"usingPoint" : partPoint,
 								"cash" : cash,
@@ -138,6 +172,8 @@
 		userName = '${user.userName}';
 		phone = '${user.phone}';	
 		totalPoint = '${totalPoint}'
+		
+		
 		
 // // 		예매번호 및 구매번호 넣어주자
 // 		ticketingNo = '${ticketing.ticketingNo}';
@@ -279,9 +315,9 @@
 			    voucher += "<div class='col'>";
 			    voucher += "<select class='custom-select custom-select-md-3 custom-select-sm' name='select-voucher'>";
 			    voucher += "<option selected>사용 가능한 상품권을 선택하세요</option>";
-			    voucher += "<option value='1'>One</option>";
-			    voucher += "<option value='2'>Two</option>";
-			    voucher += "<option value='3'>Three</option>";
+			    
+// -------------
+			    
 			    voucher += "</select>";
 				voucher += "<button type='button' name='addVoucher-btn' class='btn btn-md'>"  
 				voucher += "<i class='far fa-plus-square'></i>"  
@@ -397,6 +433,13 @@
 	   		</c:if>
 	   		
 	   		
+	   		<script type="text/javascript">
+	   			var list = '${prodList}';
+	   			console.log("list ::    "+list);
+	   		
+	   		</script>
+	   		
+	   		
 <!-- 	   		구매정보 -->
 	   		<c:if test="${purchase.purchasePrice > 0}">
 				<div class="card mb-4">
@@ -405,25 +448,41 @@
 			   		<c:set var="i" value="${i+1}"/>
 				  </div>
 				  <div class="card-body">
-				  
-	<!-- 			  	상품 하나당 하나의 row -->
-				     <div class="row pb-3 mb-3 border-bottom">
-					     <div class="col-md-2 text-center">
-				        	<img src="http://placehold.it/90x90/E8117F/ffffff?text=sample" />
-				         </div>
-				         <div class="row col-md m-3 p-3">
-				            <div class="col-6 d-inline">상품명(프랜차이즈)</div>
-				            <div class="col d-inline">1 개</div>
-				            <div class="col d-inline text-right">원</div>
-				         </div>
-			         </div>
-			         
-			         
-				  	 <div>
-					   <h5 class="text-right text-primary">구매 금액 : <span name="barPurchasePrice"></span>원</h5>			  	 
+				  	<div>
+				  	
+						  <table class="table table-hover text-center">
+							  <thead class="thead">
+							    <tr >
+							      <th scope="col">상품 이미지</th>
+							      <th scope="col">상품명</th>
+							      <th scope="col">상품 가격</th>
+							      <th scope="col">수량</th>
+							      <th scope="col">총 가격</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+					  
+					  
+						  	<c:forEach var="prod" items="${prodList}">
+						      <tr >
+						        <th scope="col"><img src="/resources/image/${prod.prodImage}" width="70px" height="70px" /></th>
+						        <td scope="col">${prod.prodName}</td>
+						        <td scope="col"  class="text-right">${prod.prodPrice}원</td>
+						        <td scope="col">${prod.quantity}개</td>
+						        <td scope="col" class="text-right font-weight-bold">${prod.quantity * prod.prodPrice}원</td>
+						      </tr>					  	
+					       </c:forEach> 
+				       
+		        			  </tbody>
+						</table> 
+				         
+					  	 <div>
+						   <h5 class="text-right text-primary">구매 금액 : <span name="barPurchasePrice"></span>원</h5>			  	 
+					  	 </div>
+				  	 
 				  	 </div>
+<!-- 				  	 end of card-body -->
 				  </div>
-				</div>
 			</c:if>
 			
 <!-- 	   		자체 결제수단 -->
@@ -446,9 +505,16 @@
                       <div class='col'>
                           <select class='custom-select custom-select-md-3 custom-select-sm' name='select-voucher'>
                               <option selected>사용 가능한 상품권을 선택하세요</option>
-                              <option value='1'>One</option>
-                              <option value='2'>Two</option>
-                              <option value='3'>Three</option>
+                              
+                              <c:forEach var='inven' items="${invenList}">
+	                              <option value='${inven.inventoryNo}'>
+	                              	${inven.inventoryName}( ${inven.inventoryPrice}원)
+<%-- 	                              	<input class="voucherPrice" type="hidden" value="${inven.inventoryPrice }"/> --%>
+	                              </option>
+                              </c:forEach>
+                              
+                              
+                              
                            </select>
                           <button type='button' name='addVoucher-btn' class='btn btn-md'>
                             <i class='far fa-plus-square'></i>

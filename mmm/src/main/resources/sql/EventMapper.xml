@@ -53,7 +53,11 @@
 
 	</resultMap>
 
-	
+	<select id="getAllPreview" resultMap="previewSelectMap">
+	select * from preview
+	ORDER BY end_date DESC
+	</select>
+
 	<!--퀴즈추가하기 -->
 	<insert id="addQuiz" parameterType="com.mmm.service.domain.Quiz">
 		INSERT
@@ -347,7 +351,10 @@
 		AND u.user_no = #{userNo}
 	</select>
 	
-<!-- 	parameterType :: modelAttribute같은 놈 -->
+	
+	
+	
+<!-- 	parameterType :: modelAttribute같은 애 -->
 	<select id= "checkPart" parameterType="map" resultType="Integer">
 	SELECT 	COUNT(*) 
 	FROM participation
@@ -384,22 +391,33 @@
 		  GROUP BY user_no
 	</select>
 
-
-<!-- 이벤트 플래그가 0인 시사회 이벤트 리스트를 가져오기-->
-  <select id="getRandList" resultMap="previewSelectMap">
+<!-- 이벤트 플래그 0:시작전 , 1:진행중, 2: 마감-->
+<!-- 이벤트 플래그가 0이고 시작날짜가 오늘인  시사회 이벤트 리스트를 가져오기-->
+  <select id="getStartPrevList" resultMap="previewSelectMap">
   		 SELECT 
   				preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
 				winner_count, winner_date, preview_regdate, preview_status, TO_CHAR(END_DATE, 'yyyyMMdd') 
 		 FROM preview
 		 WHERE preview_status = 0
-		  AND TO_CHAR(END_DATE, 'yyyyMMdd') = TO_CHAR(SYSDATE,'yyyyMMdd') 
+		 AND TO_CHAR(START_DATE, 'yyyyMMdd') = TO_CHAR(SYSDATE,'yyyyMMdd') 
+  </select>
+  
+<!-- 이벤트 플래그가 1이고, 종료일자가 오늘인 시사회 이벤트 리스트를 가져오기-->
+  <select id="getRandList" resultMap="previewSelectMap">
+  		 SELECT 
+  				preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
+				winner_count, winner_date, preview_regdate, preview_status, TO_CHAR(END_DATE, 'yyyyMMdd') 
+		 FROM preview
+		 WHERE preview_status = 1
+	     AND TO_CHAR(END_DATE, 'yyyyMMdd') = TO_CHAR(SYSDATE,'yyyyMMdd') 
   </select>
 
-
+  
 <!-- 이벤트 마감 플래그로 업데이트 시키기  -->
   <update id="updatePrevStatus" parameterType="int">
   		 UPDATE PREVIEW
-		 SET PREVIEW_STATUS = 1
+		 SET 
+		  preview_status = preview_status + 1 
 		 WHERE PREVIEW_NO = #{value}
   </update>
 

@@ -68,12 +68,15 @@ public class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	public void deleteInventory(int inventoryNo) throws Exception {
-		// TODO Auto-generated method stub
 		
+		inventoryDao.deleteInventory(inventoryNo);
 	}
 
 
-
+	@Override
+	public List<Inventory> getVoucherListInPayment(int userNo) throws Exception {
+		return inventoryDao.getVoucherListInPayment(userNo);
+	}
 
 
 	

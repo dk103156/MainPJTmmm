@@ -376,7 +376,7 @@ public class ProductController {
 			List<Ticketing> list = (List<Ticketing>)map.get("list");
 			Page resultPage	= 
 					new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
-			
+			System.out.println(list);
 			model.addAttribute("cartList",list);
 			model.addAttribute("resultPage", resultPage);
 			model.addAttribute("search", search);

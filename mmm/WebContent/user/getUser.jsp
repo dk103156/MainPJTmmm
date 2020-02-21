@@ -12,7 +12,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -30,6 +30,7 @@ body {
     font-size: 15px;
     color: #444;
     font-weight: 400;
+    font-family:'Noto Sans KR', sans-serif;
 }
 
 .container.has-lnb #contents {
@@ -155,7 +156,6 @@ button, input {
 
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -229,7 +229,7 @@ button, input {
 }	
 
 a.button:active, a.button:focus, a.button:hover, a.button:visited {
-    color: #503396;
+    color: #fee50e;
 }
 
 .profile-photo .button {
@@ -261,12 +261,12 @@ a:visited {
     padding: 0 15px;
     text-align: center;
     line-height: 34px;
-    color: #503396;
+    color: #fee50e;
     font-weight: 400;
     border-radius: 4px;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     text-decoration: none;
-    border: 1px solid #503396;
+    border: 1px solid #fee50e;
     vertical-align: middle;
     background-color: #fff;
     cursor: pointer;
@@ -287,7 +287,7 @@ h3.tit {
     padding: 0 0 16px 0;
     font-size: 1.6em;
     font-weight: 400;
-    color: #503396;
+    color: #333;
     line-height: 1.1;
 }
 
@@ -342,7 +342,6 @@ button, input {
 }
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -358,7 +357,6 @@ input[type="hidden" i] {
 
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -431,7 +429,7 @@ a:-webkit-any-link {
     left: 0;
     width: 100%;
     height: 45px;
-    background: #503396;
+    background: #fee50e;
 }	
 
 .modal-layer .wrap .layer-header h3.tit {
@@ -476,7 +474,6 @@ label {
 }
 
 .change-phone-num-area {
-    display: none;
     padding: 10px 0 0 0;
 }
 
@@ -535,7 +532,7 @@ label {
     color: #444;
     border: 1px solid #d8d9db;
     vertical-align: middle;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .mt40 {
@@ -560,10 +557,10 @@ label {
     margin: 0 3px;
 }
 .button.purple {
-    color: #fff;
+    color: #333;
     line-height: 36px;
     border: 0;
-    background: #503396;
+    background: #fee50e;
 }
 .button.large {
     height: 46px;
@@ -653,69 +650,91 @@ $(function(){
 	
 	//휴대폰번호 변경
 	$("#phoneChgBtn").on("click",function(){
-		window.open('/user/phoneAuth.jsp',
-				'popWin',
-				'left=700, top=90, width=537, height=400, marginwidth=20, marginheight=20, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
+		$("#newPhone").show();
 	});
+	
+	//인증번호 전송 
+	$("#sendNumberBtn").on("click",function(){
+		var phone = $("#chPhone").val();
+		var re5 = /^(01[016789]{1})([0-9]{3,4})([0-9]{4})$/; //폰번호가 적합한지 검사할 정규식
+		console.log(phone)
+		
+		if(phone == null || phone.length <1){
+			$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
+			return;
+		}else if(phone != "" && phone.length <11 ){
+			$("#confirmNum1").text("휴대폰번호를 확인해주세요.");
+		    return;	
+		}else if(re5.test(phone)){ //휴대폰 유효성 통과면 
+				$("#confirmNum1").text("");
+				$("#inputPhone").show();
+				
+				$.ajax({ 
+					url : "/user/json/sendSMS/" + phone ,
+					method : "get" ,
+					datatype : "json" ,
+					headers : {
+						"Accept" : "application/json" ,
+						"Content-Type" : "application/json"
+					} ,
+					success : function( JSONData , status ) {
+						console.log("동작");
+						console.log(status);
+						if(JSONData == 0){
+							//0: 인증번호가 틀림
+							$('confirmNum2'),text('인증번호를 확인해주세요.');
+							$("#confirmNum2").css("color", "red");
+						}else{
+							$("#confirmNum2").text("인증이 완료되었습니다.");
+													
+						}
+					}, error : function() {
+						console.log("실패");
+					}
+				})//ajax	
+		}else{
+			$("#confirmNum1").text("");
+		}
+	});//휴대폰인증 
+	
+	//변경완료 버튼  변경된번호 ajax
+	$("#chgBtn").on("click",function(){
+		var phone = $("#chPhone").val();
+		$.ajax({ 
+			url : "/user/json/updateUser/" + phone ,
+			method : "get" ,
+			datatype : "json" ,
+			headers : {
+				"Accept" : "application/json" ,
+				"Content-Type" : "application/json"
+			} ,
+			success : function( JSONData , status ) {
+				console.log("동작");
+				console.log(status);
+				$("#phone").html(phone);
+				
+			}, error : function() {
+				console.log("실패");
+			}
+		})//ajax	
+		$("#plusPage").load("/user/getUser");
+	});
+		
+	
+	
+	
 	
 	
 	//비밀번호 입력창
 	$("#chgPwBtn").on("click",function(){
-		$("#pwModal").modal("show");
-		
-		
+		//$("#pwModal").modal("show");
+// 		self.location= "/user/updatePw";
+		$("#plusPage").load("/user/updatePw");
+
 	});
 	
-	//비밀번호 재설정
-	$("#confirmBtn").on("click",function(){
-		$("#pwModal").modal("hide");
-		window.open('/user/updatePw.jsp',
-				'popWin',
-				'left=700, top=90, width=537, height=400, marginwidth=20, marginheight=20, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
-	});
+
 	
-	
-	$('#pwd').keyup(function() {
-		console.log("클릭!!!");
-		var pwd = $("pwd").val();
-		
-		$.ajax({
-			url : '/user/json/pwChk/'+ pwd,
-			type : 'get',
-			success : function(data) {
-				console.log("false = 중복o / true = 중복x : "+ data);							
-				
-				if (data == 0) {
-						// 0 : 아이디가 중복되는 문구
-						$("#checkId").text("사용중인 아이디입니다 :p");
-						$("#checkId").css("color", "red");
-						$("#addUserBtn").attr("disabled", true);
-				} else {
-						
-						if(re.test(userId)){
-							// 1 : 아이디 길이 / 문자열 검사
-							$("#checkId").text("");
-							$("#addUserBtn").attr("disabled", false);
-				
-						} else if(userId == ""){
-							
-							$('#checkId').text('아이디를 입력해주세요 :)');
-							$('#checkId').css('color', 'red');
-							$("#addUserBtn").attr("disabled", true);				
-							
-						} else {
-							
-							$('#checkId').text("아이디는 소문자와 숫자 5~15자리만 가능합니다 :) :)");
-							$('#checkId').css('color', 'red');
-							$("#addUserBtn").attr("disabled", true);
-						}
-						
-					}
-				}, error : function() {
-						console.log("실패");
-				}
-			}); //ajax 
-		});
 	
 
 	//회원정보 수정
@@ -789,7 +808,7 @@ $(function(){
 	//회원탈퇴
 	$("#byeconfirmBtn").on("click",function(){
 		var password= $("#password").val();
-
+		$("#passwordChk").text("");
 		$.ajax({
 			url : '/user/json/updateUserStatus',
 			method : "post" ,
@@ -808,7 +827,8 @@ $(function(){
 						// 0 : 비밀번호가 다름
 						$("#passwordChk").text("비밀번호를 확인해주세요.");
 						$("#passwordChk").css("color", "red");
-						$("#byeconfirmBtn").attr("disabled", true);
+						//$("#byeconfirmBtn").attr("disabled", true);
+					
 				}else{
 					$("#passwordChk").text("");
 					alert("정말 탈퇴 하실?")
@@ -952,13 +972,34 @@ $(function(){
 							</th>
 								<td>
 									<div class="clearfix">
-										<p class="reset float-l w170px lh32 changeVal" data-name="phoneNo">
+										<p class="reset float-l w170px lh32 changeVal" id="phone" data-name="phoneNo">
 										    ${user.phone}
 										</p>
 									    <div class="float-l">
 									        <button type="button" class="button small gray-line change-phone-num" id="phoneChgBtn" title="휴대폰번호 변경">휴대폰번호 변경</button>
 									    </div>
 									</div>
+									
+									<div class="change-phone-num-area">
+                                      <div class="position" id="newPhone" style="display: none;">
+                                          <label for="chPhone" class="label">변경할 휴대폰</label>
+                                          <input type="text" id="chPhone" class="input-text w160px numType" placeholder="'-'없이 입력해 주세요" title="변경할 휴대폰 번호 입력" maxlength="11" />
+                                          <button type="button" class="button small gray-line" id="sendNumberBtn">인증번호 전송</button>
+                                          <h6 id="confirmNum1" style="color: red;"></h6>
+                                      </div>
+
+                                      <div class="position"  id="inputPhone" style="display: none;">
+                                          <label for="chkNum" class="label">인증번호 입력</label>
+
+                                          <div class="chk-num small">
+                                              <div class="line">
+                                                  <input type="text" id="chkNum" class="input-text w180px" title="인증번호 입력" placeholder="인증번호를 입력해 주세요" maxlength="6">
+                                                  <h6 id="confirmNum1" style="color: red;"></h6>
+                                              </div>
+                                          </div>
+                                          <button type="button" class="button small gray-line" id="chgBtn">변경완료</button>
+                                      </div>
+                                  </div>
 								</td>
 							</tr>
 							<tr>
@@ -973,31 +1014,8 @@ $(function(){
 							    <th scope="row">비밀번호 <em class="font-orange">*</em></th>
 							    <td>
 							        <button type="button" class="button small gray-line" id="chgPwBtn" title="비밀번호 변경">비밀번호 변경</button>
-									<!-- Modal -->
-									<div class="modal fade" id="pwModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-									  <div class="modal-dialog" role="document">
-									    <div class="modal-content">
-									      <div class="modal-header">
-									        <h5 class="modal-title" id="staticBackdropLabel">비밀번호 입력</h5>
-									        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									          <span aria-hidden="true">&times;</span>
-									        </button>
-									      </div>
-									      <div class="modal-body">
-									        ${user.userName}님 비밀번호 입력해주세요.<br/>
-									        	<br/><br/>
-									        	비밀번호
-									        <input type="password" name="password" id="pwd">	
-									        <h6 id="passwordChk" style="color: red;"></h6>
-									      </div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-									        <button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
-									      </div>
-									    </div>
-									  </div>
-									</div>
-							        마지막 비밀번호 변경: 1일전에 함 (2020-02-12 10:44:21)
+							        <fmt:formatDate var="updatePwDate" value="${user.updatePwDate}" pattern="yyyy-MM-dd HH:mm"/>
+							        	마지막 비밀번호 변경:(${updatePwDate})
 							    </td>
 							</tr>	
 							
@@ -1018,7 +1036,7 @@ $(function(){
           <div class="mt40" style="text-align: center; margin-bottom:20px;">
 			
 	              <button class="button large"  id="cancelBtn">취소</button>
-	              <button class="button purple large" id="updateBtn">등록</button>
+	              <button class="button purple large" id="updateBtn" style="font: #333;">등록</button>
 			
           </div>
           

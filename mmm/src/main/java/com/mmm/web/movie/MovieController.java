@@ -79,12 +79,12 @@ public class MovieController {
 	private String naverClientSecret = "cSbBOgvfac";
 	
 	//KMDB 인증 Key
-//	private String kmdbKey = "VE61R22GGTP493E028O6";
-//	private String kmdbKey = "3R3N86K61455468O57JN ";
-	private String kmdbKey = "07T082A3EZW65K7IZS2D ";
+	private String kmdbKey = "VE61R22GGTP493E028O6";
+//	private String kmdbKey = "3R3N86K61455468O57JN";
+//	private String kmdbKey = "07T082A3EZW65K7IZS2D";
 	
 	//Kmdb 접근 url
-	String urlKmdb = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json.jsp?collection=kmdb_new&detail=Y&ServiceKey="+kmdbKey;
+	String urlKmdb = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey="+kmdbKey;
 	
 	//google Key	
 //	String googleKey = "AIzaSyDkx60xLvshVJFRcGlYfz1wrMRC7L7hNK8";	//내꺼
@@ -132,8 +132,8 @@ public class MovieController {
 //		크롤링할 페이지 수 2개로 고정
 		for (int i = 0; i < 2; i++) {
 			//웹페이지 설정하기(자동화된 어쩌구 저쩌구..*************************************************************************************************
-//			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
-			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
+			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
+//			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
 			
 	//		Css Selector로 Element 요소 잡아오기 1 ____영화제목
 			List<WebElement> list = webDriver.findElements(By.cssSelector("#mArticle > ul.list_movie.\\#movie > li> div.wrap_movie > div > a"));
@@ -519,7 +519,11 @@ public class MovieController {
 		System.out.println("-------- movieInfoFromKmdb : " + movieInfoFromKmdb);
 		
 		movieKmdb.setKmdbCd(movieInfoFromKmdb.get("movieSeq").toString());	//KMDB 영화 관리번호 넣기
-		movieKmdb.setSummary(movieInfoFromKmdb.get("plot").toString());;	//줄거리 넣기
+//		System.out.println("------------- plots   : "+movieInfoFromKmdb.get("plots"));	
+		HashMap<String, ArrayList<HashMap<String, Object>>>  plots = (HashMap<String, ArrayList<HashMap<String, Object>>>) movieInfoFromKmdb.get("plots");
+		
+		System.out.println("-------------------- plotText "+plots.get("plot").get(0).get("plotText"));
+		movieKmdb.setSummary(plots.get("plot").get(0).get("plotText").toString()); 	//KMDB 줄거리 넣기
 		
 		System.out.println("-------- movieInfoFromKmdb.get(\"runtime\" : " + movieInfoFromKmdb.get("runtime"));
 		
@@ -556,7 +560,9 @@ public class MovieController {
 		
 //		감독 넣기 위한 ...
 //		System.out.println(movieInfoFromKmdb.get("director"));
-		ArrayList<HashMap<String, String>> directorList = (ArrayList<HashMap<String, String>>) movieInfoFromKmdb.get("director");
+		HashMap<String, ArrayList<HashMap<String, Object>>>  directors = (HashMap<String, ArrayList<HashMap<String, Object>>>) movieInfoFromKmdb.get("directors");
+		ArrayList<HashMap<String, Object>> directorList = directors.get("director");
+//		System.out.println("------------- directorList : "+ directorList);
 		
 		String director = "";
 		
@@ -566,10 +572,13 @@ public class MovieController {
 				director += ", ";
 			}
 		}
+		
+//		System.out.println("----------------- director  : "+ director);
 		movieKmdb.setDirector(director);		//감독 넣기
 		
 //		배우 넣기 위한 ...
-		ArrayList<HashMap<String, String>> actorList = (ArrayList<HashMap<String, String>>) movieInfoFromKmdb.get("actor");
+		HashMap<String, ArrayList<HashMap<String, Object>>>  actors = (HashMap<String, ArrayList<HashMap<String, Object>>>) movieInfoFromKmdb.get("actors");
+		ArrayList<HashMap<String, Object>> actorList = actors.get("actor");
 		
 		String actor = "";
 		
@@ -579,6 +588,7 @@ public class MovieController {
 				actor += ", ";
 			}
 		}
+		System.out.println("----------------- actor  : "+ actor);
 		movieKmdb.setActor(actor);		//배우 넣기
 		
 		
