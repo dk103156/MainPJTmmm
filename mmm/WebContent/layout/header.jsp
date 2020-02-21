@@ -177,10 +177,10 @@ $(function(){
 	<div style="background-color: #fee50e;">
 		<ul class="gnb">                
 				<li style="text-align: right; padding-top: 10px; padding-bottom: 10px; padding-right: 5px;">
-					<a href="/user/login/" class="login"><span>LOGIN</span></a>
-					<a href="/user/join/" class="join"><span>JOIN</span></a>
+					<a href="#" id=mainLoginBtn class="login"><span>LOGIN</span></a>
+					<a href="/user/userAuthorization.jsp?type=addUser" class="join"><span>JOIN</span></a>
 					<a href="/mypage/mypage" class="myPage"><span>MY PAGE</span></a>
-					<a href="/customer/" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
+					<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
 				</li>
 		</ul>
 	</div>
@@ -200,13 +200,13 @@ $(function(){
 			<ul id="aa-mega-menu-omb-top-menu" class="aa-mega-menu" data-trigger="hover" data-effect="none" data-css3animations="none" style="margin-right: 180px;">
 			
 				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-2914 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-2914">
-					<a href="/movie/"><span>MOVIE</span><span class="arrow"> ▼</span></a>
+					<a href="/movie/getBoxOfficeList"><span>MOVIE</span><span class="arrow"> ▼</span></a>
 						<ul class="aa-mega-sub-menu we-sidebar" style="right: auto; display: none;">
 							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2902 aa-mega-menu-item" id="aa-mega-menu-item-2902">
-								<a href="/movie/">/movie/</a>
+								<a href="/movie/getBoxOfficeList">BoxOffice</a>
 							</li>
 							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2181 aa-mega-menu-item" id="aa-mega-menu-item-2181">
-								<a href="/movie/">/movie/</a>
+								<a href="/movie/getExpectedMovieList">상영예정작</a>
 							</li>
 						</ul>
 				</li>
@@ -236,25 +236,16 @@ $(function(){
 				</li>
 
 				<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2120 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-2120">
-					<a href="/event"><span>EVENT</span><span class="arrow"> ▼</span></a>
+					<a href="/event/getPreviewList"><span>EVENT</span><span class="arrow"> ▼</span></a>
 					<ul class="aa-mega-sub-menu we-sidebar" style="right: auto; display: none;">
 						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2053 aa-mega-menu-item" id="aa-mega-menu-item-2053">
-							<a href="/event">/event</a>
+							<a href="/event/getPreviewList">시사회이벤트</a>
 						</li>
 						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2114 aa-mega-menu-item" id="aa-mega-menu-item-2114">
-							<a href="/event">/event</a>
+							<a href="/event/getQuizList">퀴즈풀기</a>
 						</li>
 						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2251 aa-mega-menu-item" id="aa-mega-menu-item-2251">
-							<a href="/event">/event</a>
-						</li>
-						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2834 aa-mega-menu-item" id="aa-mega-menu-item-2834">
-							<a href="/event">/event</a>
-						</li>
-						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2134 aa-mega-menu-item" id="aa-mega-menu-item-2134">
-							<a href="/event">/event</a>
-						</li>
-						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2117 aa-mega-menu-item" id="aa-mega-menu-item-2117">
-							<a href="/event">/event</a>
+							<a href="/event/addAttendance">출석체크</a>
 						</li>
 					</ul>
 				</li>
