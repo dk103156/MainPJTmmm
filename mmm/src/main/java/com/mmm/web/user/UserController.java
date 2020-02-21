@@ -88,6 +88,15 @@ public class UserController {
 		return "redirect:/user/userAuthorization.jsp?type="+type;
 	}
 	
+	@CheckAuth(role="user,admin")
+	@RequestMapping(value ="passwordCheck", method = RequestMethod.GET)
+	public String passwordCheck() throws Exception{
+		
+		System.out.println("/user/passwordCheck : GET ");
+			
+		return "redirect:/user/passwordCheck.jsp";
+	}
+	
 	
 	@RequestMapping(value ="addUser", method = RequestMethod.GET)
 	public String addUser(Model model) throws Exception{
@@ -97,7 +106,7 @@ public class UserController {
 		model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			
 
-		return "forword:/user/addUser.jsp";
+		return "forward:/user/addUser.jsp";
 
 	}
 	
@@ -110,7 +119,7 @@ public class UserController {
 	
 	
 	System.out.println(user);
-	//Business Logic
+	//Business Logic 
 	//비밀번호 암호화
 	String password = user.getPassword();
 	String cryptoPassword = CryptoUtil.cryptoText(password);
@@ -180,7 +189,7 @@ public class UserController {
 		session.setAttribute("user", newUser);
 		
 		
-		return "redirect:/user/getUser.jsp";
+		return "redirect:/mypage/mypage.jsp";
 	}
 
 
@@ -200,7 +209,7 @@ public class UserController {
 	}
 	
 	
-	@CheckAuth(role="user")
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value = "getUser" , method=RequestMethod.GET)
 	public String getUser(Model model,HttpSession session) throws Exception{
 		
@@ -216,13 +225,13 @@ public class UserController {
 			System.out.println(user);
 			//Model 과 View 연결
 			model.addAttribute("user",user);
+			return "forward:/user/getUser.jsp";
+			
 		}else {
 			
 			return "forward:/user/login.jsp";
 		}
 
-		return "forward:/user/getUser.jsp";
-		
 	}
 	
 	@RequestMapping(value = "addUnUserView" , method=RequestMethod.GET)
@@ -253,11 +262,17 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.GET)
-	public String login() throws Exception{
+	public String login(HttpSession session) throws Exception{
 		
 		System.out.println("/user/login : GET");
 
+		User sessionUser = (User)session.getAttribute("user");
+		if(sessionUser != null) {
+			return"redirect:/index.jsp?status=login";
+		}else {
+		
 		return "redirect:/user/login.jsp";
+		}
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.POST)
@@ -469,57 +484,66 @@ public class UserController {
 //	}
 	
 	@RequestMapping(value = "updateUser" , method=RequestMethod.POST)
-	public String updateUser(@ModelAttribute("user") User user, Model model, HttpSession session) throws Exception{
+	public String updateUser(@ModelAttribute("user") User user, Model model, HttpSession session) {
 		
-		System.out.println("/user/updateUser : POST");
+		try {
+			System.out.println("/user/updateUser : POST");
 		
-		//Business Logic
-		int sessionNo = ((User)session.getAttribute("user")).getUserNo();
-	
-		if(sessionNo ==user.getUserNo()) {
-			userService.updateUser(user);
-			session.setAttribute("user", user);
+			//Business Logic
+			User sessionUser = ((User)session.getAttribute("user"));
+			
+		
+			if(sessionUser.getUserNo() == user.getUserNo()) {
+				userService.updateUser(user);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
 		return "redirect:/mypage/mypage.jsp";
 	}
 		
 	
-	@RequestMapping(value= "userIdChk", method=RequestMethod.GET)
-	public String userIdChk(@ModelAttribute("user") User user, HttpSession session) throws Exception{
+	@RequestMapping(value= "updatePw", method=RequestMethod.GET)
+	public String updatePw(HttpSession session) throws Exception{
 		
-		System.out.println("/user/userIdChk : GET");
+		System.out.println("/user/updatePw : GET");
 		
 		//Business Logic
-		User dbUser = userService.getUser(user.getUserNo());
-		if(dbUser.getPassword().equals(user.getPassword())) {
-			return "forward:/updatePw.jsp";	
-		}else {
-			return "forward:/updateUser.jsp";	
-		}
+		User sessionUser = ((User)session.getAttribute("user"));
+		sessionUser = userService.getUser(sessionUser.getUserNo());
 		
+		if(sessionUser != null) {
+			return "forward:/user/updatePw.jsp";	
+		}else {
+			return "forward:/user/login.jsp";
+		}
 	}
 		
-	@RequestMapping(value= "updatePw", method=RequestMethod.PUT)
+	@RequestMapping(value= "updatePw", method=RequestMethod.POST)
 	public String updatePw(@ModelAttribute("user") User user, Model model, HttpSession session) throws Exception{
 		
-		System.out.println("/user/updatePw : PUT");
+		System.out.println("/user/updatePw : POST");
+		
+		System.out.println(user);
 		
 		//Business Logic
+		
 		User dbUser = userService.getUser(user.getUserNo());
 		
 		int sessionNo = ((User)session.getAttribute("user")).getUserNo();
 		if(sessionNo == user.getUserNo()) {
+			//비밀번호 암호화
+			String password = user.getPassword();
+			String cryptoPassword = CryptoUtil.cryptoText(password);
+			dbUser.setPassword(cryptoPassword);
 			userService.updateUser(dbUser);
+			return "redirect:/index.jsp";
+		}else {
+			return "redirect:/user/updatePw.jsp?status=failed";
 		}
-		return "redirect:/user/getUser?userNo="+user.getUserNo();
-		
 	}
 	
-
-		
-	
-		
 
 	@RequestMapping(value= "authSMS/{numStr}", method=RequestMethod.GET)
 	public String authSMS(@PathVariable("numStr") String numStr, Model model, HttpSession session) throws Exception{
@@ -557,193 +581,193 @@ public class UserController {
 	}
 		
 	//===========================naverLogin===========================
-	@RequestMapping( value = "naverLoginLogic" )
-	// http://{encoding한 http://192.168.0.76:8080/user/naverLoginLogic}/redirect?code={code값}&state={state값}
-	// 에서 주어지는 code와 state를 @RequestParam("code") / @RequestParam("state") 로 가져왔다.
-	
-	public String naverLoginLogic( @RequestParam("code") String code, @RequestParam("state") String state,Model model, HttpSession session) throws Exception {
-		// 접근 토큰을 발생받고 접근 토큰을 이용해 네이버 회원 프로필 조회하는 구간 
-		// developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 로그인 API 명세 => 3.2 접근 토큰 발급/갱신/삭제 요청 참조
+		@RequestMapping( value = "naverLoginLogic" )
+		// http://{encoding한 http://192.168.0.76:8080/user/naverLoginLogic}/redirect?code={code값}&state={state값}
+		// 에서 주어지는 code와 state를 @RequestParam("code") / @RequestParam("state") 로 가져왔다.
 		
-		// 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client ID
-		// 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client Secret
-		String clientId = "2P_hAYrSC24AikGvmMgw";
-		String clientSecret = "jqB2qpZUQt";
-		
-		// https://nid.naver.com/oauth2.0/token :: 접근 토큰 발급요청
-		// GET방식으로 url을 연결할 예정이므로 query String 형식으로 URL 작성
-		
-		// grant_type :: 접근 토큰 발급시 authorization_code 고정
-		// client id :: 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client ID
-		// client_secret :: 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client Secret
-		// code :: redirect URL query string code={code값} => @RequestParam("code")로 받아온 값 
-		// state :: redirect URL query string state={state값} => @RequestParam("state")로 받아온 값 
-		String tokenUrl = 	"https://nid.naver.com/oauth2.0/token?" + 
-								"grant_type=authorization_code" + 
-								"&client_id=" + clientId + 
-								"&client_secret=" + clientSecret + 
-								"&code=" + code + 
-								"&state=" + state;
-		
-		// 생성한 URL로 URL을 추상화 / 캡슐화한 Java Class URL 객체 생성 
-		URL tokenURL = new URL(tokenUrl);
-		
-		// 생성한 URL 객체를 HttpURLConnection.openConnection()으로 연결 
-		// HttpURLConnection :: java.net class에서 제공하는 URL 요청(Request)를 위한 클래스 
-		HttpURLConnection tokenCon = (HttpURLConnection)tokenURL.openConnection();
-		
-		// 사용 method 선언
-		tokenCon.setRequestMethod("GET");
-		
-		// tokenCon.getResponseCode()로 URL을 Request하고 그 응답 결과를 int형으로 반환 
-		int tokenResponseCode = tokenCon.getResponseCode();
-		
-		// BufferedReader를 정상응답일때와 에러일때로 구분하기 위해 null로 선언 
-		BufferedReader tokenBr =  null;
-		
-		if( tokenResponseCode == 200 ) { // Http 200 OK일 때 tokenCon.getInputStream() UTF-8 인코딩해서 읽음 
-			tokenBr = new BufferedReader(new InputStreamReader(tokenCon.getInputStream(), "UTF-8"));
-		}
-		else { // 에러 발생시 tokenCon.getErrorStream()을 읽음 
-			tokenBr = new BufferedReader(new InputStreamReader(tokenCon.getErrorStream()));
-		}
-		
-		// BufferedReader를 한 줄씩 읽기 위한 변수 
-		String tokenJsonData = "";
-		// 실제 response를 출력하는 변수 
-		StringBuffer tokenResponse = new StringBuffer();
-		
-		// readLine()의 경우 한 줄을 읽은 뒤 무조건 다음 줄로 개행되기 때문에 
-		// readLine() != null이 아닌 ( ( tokenJsonData = tokenBr.readLine() ) != null로 설정했다
-		
-		while( ( tokenJsonData = tokenBr.readLine() ) != null ) {
-			// BufferedReader에서 한 줄씩 읽어 tokenResponse에 추가 
-			tokenResponse.append(tokenJsonData);
-		}
-		
-		// buffered close
-		tokenBr.close();
-		
-		// response 확인 
-		System.out.println("----------response ? : " + tokenResponse.toString());
-		
-		
-		// 접근 토큰 요청의 반환값은 모두 String이므로 Map<String, String>으로 형변환
-		// developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 로그인 API 명세 => 6.2.2 접근 토큰 발급 요청 참조
-		JSONObject jsonObject = (JSONObject)JSONValue.parse(tokenResponse.toString());
-		ObjectMapper objectMapper = new ObjectMapper();
-		Map<String, String> tokenMap = objectMapper.readValue(jsonObject.toString(), new TypeReference<Map<String, String>>(){});
-		
-		// 접근 토큰, 갱신 토큰, 토큰 타입, 토큰 유효기간을 모두 출력 
-		System.out.println("-----------------------tokenMap : " + tokenMap);
-		
-		// 접근 토큰 access_token을 가져와서 accessToken에 저장
-		String accessToken = tokenMap.get("access_token");
-		
-		// 이후 구간은 네이버 회원 프로필 조회를 위한 구간 
-		// developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 회원 프로필 조회 API 명세 => 2. API 기본 정보 확인 
-             
-        Map<String, String> profileMap = new HashMap<String, String>();
-        
-        try {
-        	// https://openapi.naver.com/v1/nid/me :: 네이버 회원 프로필 조회 요청 url
-            String naverLoginUrl = "https://openapi.naver.com/v1/nid/me";
-            
-            URL naverLoginURL = new URL(naverLoginUrl);
-            
-            HttpURLConnection naverLoginCon = (HttpURLConnection)naverLoginURL.openConnection();
-            
-            // 해당 API는 GET 방식만 가능 
-            naverLoginCon.setRequestMethod("GET");
-            
-            // 접근 토큰을 전달하는 Header 설정
-            // Bearer뒤에 꼭 공백이 존재해야 한다 
-            // 예시 : Authorization: Bearer AAAAOLtP40eH6P5S4Z4FpFl77n3FD5I 
-            String header = "Bearer " + accessToken;
-            
-            // HttpURLConnection.setRequestProperty로 각 Attribute를 설정 가능
-            // 접근 토큰을 전달하는 Header 설정
-            naverLoginCon.setRequestProperty("Authorization", header);
-            
-            int naverLoginResponseCode = naverLoginCon.getResponseCode();
-            
-            BufferedReader naverLoginBr;
-            
-            if( naverLoginResponseCode == 200 ) { 
-            	naverLoginBr = new BufferedReader(new InputStreamReader(naverLoginCon.getInputStream(), "UTF-8"));
-            } else {  
-            	naverLoginBr = new BufferedReader(new InputStreamReader(naverLoginCon.getErrorStream()));
-            }
-            
-            String inputLine;
-            
-            StringBuffer naverLoginResponse = new StringBuffer();
-            
-            while ( ( inputLine = naverLoginBr.readLine() ) != null ) {
-            	naverLoginResponse.append(inputLine);
-            }
-            
-            naverLoginBr.close();
-            
-            
-            System.out.println(naverLoginResponse.toString());
-            
-            // 응답 예시에 따라 JSONData 형변환
-            // developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 회원 프로필 조회 API 명세 => 7. 요청 예시에서 응답 예시 참조 
-            jsonObject = (JSONObject)JSONValue.parse(naverLoginResponse.toString());
-            profileMap = objectMapper.readValue(jsonObject.get("response").toString(), new TypeReference<Map<String, String>>(){});
-            
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-		
-        System.out.println("------------------profileMap" + profileMap);
-        
-        // id : 네이버 아이디의 고유한 식별성. 이메일과는 다름.
-        String id = profileMap.get("id");
-		System.out.println("-------------------profileMap.get(id) : " + id);
-		
-		String name = profileMap.get("name");
-		String email = profileMap.get("email");
-		String gender = profileMap.get("gender");
-		
-		// 이메일 ~~~@naver.com에서 @의 인덱스를 가져옴
-		int index = email.indexOf("@");
-		
-		// ~~~@naver.com에서 ~~~를 파싱해서 userId로 설정 
-		String userId = email.substring(0, index);
-		System.out.println("-----------------userId ? : " + userId);
-		
-		// checkDuplication return false :: 존재하는 아이디 => userService.getUserId
-		if(! (userService.idCheckDupl(userId)) ) { 
-			User dbUser = userService.getUserId(userId);
+		public String naverLoginLogic( @RequestParam("code") String code, @RequestParam("state") String state,Model model, HttpSession session) throws Exception {
+			// 접근 토큰을 발생받고 접근 토큰을 이용해 네이버 회원 프로필 조회하는 구간 
+			// developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 로그인 API 명세 => 3.2 접근 토큰 발급/갱신/삭제 요청 참조
 			
-			// 로그인 처리 
-			session.setAttribute("user", dbUser);	
+			// 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client ID
+			// 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client Secret
+			String clientId = "2P_hAYrSC24AikGvmMgw";
+			String clientSecret = "jqB2qpZUQt";
+			
+			// https://nid.naver.com/oauth2.0/token :: 접근 토큰 발급요청
+			// GET방식으로 url을 연결할 예정이므로 query String 형식으로 URL 작성
+			
+			// grant_type :: 접근 토큰 발급시 authorization_code 고정
+			// client id :: 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client ID
+			// client_secret :: 상단 메뉴 => Application => 내 어플리케이션에서 발급받은 Client Secret
+			// code :: redirect URL query string code={code값} => @RequestParam("code")로 받아온 값 
+			// state :: redirect URL query string state={state값} => @RequestParam("state")로 받아온 값 
+			String tokenUrl = 	"https://nid.naver.com/oauth2.0/token?" + 
+									"grant_type=authorization_code" + 
+									"&client_id=" + clientId + 
+									"&client_secret=" + clientSecret + 
+									"&code=" + code + 
+									"&state=" + state;
+			
+			// 생성한 URL로 URL을 추상화 / 캡슐화한 Java Class URL 객체 생성 
+			URL tokenURL = new URL(tokenUrl);
+			
+			// 생성한 URL 객체를 HttpURLConnection.openConnection()으로 연결 
+			// HttpURLConnection :: java.net class에서 제공하는 URL 요청(Request)를 위한 클래스 
+			HttpURLConnection tokenCon = (HttpURLConnection)tokenURL.openConnection();
+			
+			// 사용 method 선언
+			tokenCon.setRequestMethod("GET");
+			
+			// tokenCon.getResponseCode()로 URL을 Request하고 그 응답 결과를 int형으로 반환 
+			int tokenResponseCode = tokenCon.getResponseCode();
+			
+			// BufferedReader를 정상응답일때와 에러일때로 구분하기 위해 null로 선언 
+			BufferedReader tokenBr =  null;
+			
+			if( tokenResponseCode == 200 ) { // Http 200 OK일 때 tokenCon.getInputStream() UTF-8 인코딩해서 읽음 
+				tokenBr = new BufferedReader(new InputStreamReader(tokenCon.getInputStream(), "UTF-8"));
+			}
+			else { // 에러 발생시 tokenCon.getErrorStream()을 읽음 
+				tokenBr = new BufferedReader(new InputStreamReader(tokenCon.getErrorStream()));
+			}
+			
+			// BufferedReader를 한 줄씩 읽기 위한 변수 
+			String tokenJsonData = "";
+			// 실제 response를 출력하는 변수 
+			StringBuffer tokenResponse = new StringBuffer();
+			
+			// readLine()의 경우 한 줄을 읽은 뒤 무조건 다음 줄로 개행되기 때문에 
+			// readLine() != null이 아닌 ( ( tokenJsonData = tokenBr.readLine() ) != null로 설정했다
+			
+			while( ( tokenJsonData = tokenBr.readLine() ) != null ) {
+				// BufferedReader에서 한 줄씩 읽어 tokenResponse에 추가 
+				tokenResponse.append(tokenJsonData);
+			}
+			
+			// buffered close
+			tokenBr.close();
+			
+			// response 확인 
+			System.out.println("----------response ? : " + tokenResponse.toString());
+			
+			
+			// 접근 토큰 요청의 반환값은 모두 String이므로 Map<String, String>으로 형변환
+			// developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 로그인 API 명세 => 6.2.2 접근 토큰 발급 요청 참조
+			JSONObject jsonObject = (JSONObject)JSONValue.parse(tokenResponse.toString());
+			ObjectMapper objectMapper = new ObjectMapper();
+			Map<String, String> tokenMap = objectMapper.readValue(jsonObject.toString(), new TypeReference<Map<String, String>>(){});
+			
+			// 접근 토큰, 갱신 토큰, 토큰 타입, 토큰 유효기간을 모두 출력 
+			System.out.println("-----------------------tokenMap : " + tokenMap);
+			
+			// 접근 토큰 access_token을 가져와서 accessToken에 저장
+			String accessToken = tokenMap.get("access_token");
+			
+			// 이후 구간은 네이버 회원 프로필 조회를 위한 구간 
+			// developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 회원 프로필 조회 API 명세 => 2. API 기본 정보 확인 
+	             
+	        Map<String, String> profileMap = new HashMap<String, String>();
+	        
+	        try {
+	        	// https://openapi.naver.com/v1/nid/me :: 네이버 회원 프로필 조회 요청 url
+	            String naverLoginUrl = "https://openapi.naver.com/v1/nid/me";
+	            
+	            URL naverLoginURL = new URL(naverLoginUrl);
+	            
+	            HttpURLConnection naverLoginCon = (HttpURLConnection)naverLoginURL.openConnection();
+	            
+	            // 해당 API는 GET 방식만 가능 
+	            naverLoginCon.setRequestMethod("GET");
+	            
+	            // 접근 토큰을 전달하는 Header 설정
+	            // Bearer뒤에 꼭 공백이 존재해야 한다 
+	            // 예시 : Authorization: Bearer AAAAOLtP40eH6P5S4Z4FpFl77n3FD5I 
+	            String header = "Bearer " + accessToken;
+	            
+	            // HttpURLConnection.setRequestProperty로 각 Attribute를 설정 가능
+	            // 접근 토큰을 전달하는 Header 설정
+	            naverLoginCon.setRequestProperty("Authorization", header);
+	            
+	            int naverLoginResponseCode = naverLoginCon.getResponseCode();
+	            
+	            BufferedReader naverLoginBr;
+	            
+	            if( naverLoginResponseCode == 200 ) { 
+	            	naverLoginBr = new BufferedReader(new InputStreamReader(naverLoginCon.getInputStream(), "UTF-8"));
+	            } else {  
+	            	naverLoginBr = new BufferedReader(new InputStreamReader(naverLoginCon.getErrorStream()));
+	            }
+	            
+	            String inputLine;
+	            
+	            StringBuffer naverLoginResponse = new StringBuffer();
+	            
+	            while ( ( inputLine = naverLoginBr.readLine() ) != null ) {
+	            	naverLoginResponse.append(inputLine);
+	            }
+	            
+	            naverLoginBr.close();
+	            
+	            
+	            System.out.println(naverLoginResponse.toString());
+	            
+	            // 응답 예시에 따라 JSONData 형변환
+	            // developers.naver.com 에서 상단 Documents => 네이버 아이디로 로그인 => API 명세 => 회원 프로필 조회 API 명세 => 7. 요청 예시에서 응답 예시 참조 
+	            jsonObject = (JSONObject)JSONValue.parse(naverLoginResponse.toString());
+	            profileMap = objectMapper.readValue(jsonObject.get("response").toString(), new TypeReference<Map<String, String>>(){});
+	            
+	        } catch (Exception e) {
+	            System.out.println(e);
+	        }
+			
+	        System.out.println("------------------profileMap" + profileMap);
+	        
+	        // id : 네이버 아이디의 고유한 식별성. 이메일과는 다름.
+	        String id = profileMap.get("id");
+			System.out.println("-------------------profileMap.get(id) : " + id);
+			
+			String name = profileMap.get("name");
+			String email = profileMap.get("email");
+			String gender = profileMap.get("gender");
+			
+			// 이메일 ~~~@naver.com에서 @의 인덱스를 가져옴
+			int index = email.indexOf("@");
+			
+			// ~~~@naver.com에서 ~~~를 파싱해서 userId로 설정 
+			String userId = email.substring(0, index);
+			System.out.println("-----------------userId ? : " + userId);
+			
+			// checkDuplication return false :: 존재하는 아이디 => userService.getUserId
+			if(! (userService.idCheckDupl(userId)) ) { 
+				User dbUser = userService.getUserId(userId);
+				
+				// 로그인 처리 
+				session.setAttribute("user", dbUser);	
 
+			}
+			// checkDuplication return false :: 존재하는 아이디 => userService.getUser
+			// checkDuplication return true :: 없는 아이디 => userService.addUser
+			else {
+				
+				model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
+				
+				User user = new User();
+				user.setUserId(userId);
+				user.setEmail(email);
+				user.setUserName(name);
+				user.setPassword(id);
+				user.setGender(gender);
+				user.setIdentity(1);
+				
+				model.addAttribute("user",user);
+				
+				return "forward:/user/extraAddUser.jsp";
+			}
+			
+			// 모든 네이버 로그인(회원가입) Business Logic이 끝난 타이밍을 알기 위해 전혀 의미 없는 jsp로 연결
+			return "forward:/naver/pathLoginImfo.jsp";
 		}
-		// checkDuplication return false :: 존재하는 아이디 => userService.getUser
-		// checkDuplication return true :: 없는 아이디 => userService.addUser
-		else {
-			
-			model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
-			
-			User user = new User();
-			user.setUserId(userId);
-			user.setEmail(email);
-			user.setUserName(name);
-			user.setPassword(id);
-			user.setGender(gender);
-			user.setIdentity(1);
-			
-			model.addAttribute("user",user);
-			
-			return "forward:/user/extraAddUser.jsp";
-		}
-		
-		// 모든 네이버 로그인(회원가입) Business Logic이 끝난 타이밍을 알기 위해 전혀 의미 없는 jsp로 연결
-		return "forward:/naver/pathLoginImfo.jsp";
-	}
 	
 	//===========================kakaoLogin===========================
 	@RequestMapping( value = "kakaoLoginLogic" )

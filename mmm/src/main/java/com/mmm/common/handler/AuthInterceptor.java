@@ -48,11 +48,24 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		} else {
 			
 			String checkRole = auth.role(); // @CheckAuth의 Role
-			String sessionRole = user.getRole(); // Session의 User Role
+			String[] roles = checkRole.split(",");
+			String sessionRole = user.getRole(); // Session의 User Role 
 			
-			System.err.printf("=== checkRole : %s, sessionRole : %s \n", checkRole, sessionRole);
+			System.err.printf("=== checkRole : %s, sessionRole : %s \n", roles, sessionRole);
 			
-			if(!checkRole.equals(sessionRole)) { // @CheckAuth Role != Session Role ===> 권한 없음
+			if(sessionRole.equals("admin")) {
+				return true;
+			}
+			
+			boolean chkKey = false;
+			
+			for(String role : roles) { // 어노테이션에 입력된 롤의 배열
+				if(role.equals(sessionRole)) {  // 어노테이션 배열의 롤과 세션의 롤이 일치하면
+					chkKey = true; // 체크 키 값을 참으로 변경
+				}
+			}
+			
+			if(!chkKey) { // 체크 키의 값이 거짓이면(즉 어노테이션의 롤과 세션의 롤이 일치하는게 없다면) 접속 불가
 				response.sendRedirect(request.getContextPath() + "/index.jsp?status=failed");
 				return false;
 			}

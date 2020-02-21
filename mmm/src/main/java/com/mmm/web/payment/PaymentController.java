@@ -1,12 +1,16 @@
 package com.mmm.web.payment;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,14 +20,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mmm.common.Search;
+import com.mmm.service.domain.Inventory;
 import com.mmm.service.domain.Movie;
 import com.mmm.service.domain.Payment;
 import com.mmm.service.domain.Point;
+import com.mmm.service.domain.Product;
 import com.mmm.service.domain.Purchase;
 import com.mmm.service.domain.Ticketing;
 import com.mmm.service.domain.User;
+import com.mmm.service.inventory.InventoryService;
 import com.mmm.service.movie.MovieService;
 import com.mmm.service.payment.PaymentService;
+import com.mmm.service.product.ProductService;
 import com.mmm.service.purchase.PurchaseService;
 import com.mmm.service.ticketing.TicketingService;
 
@@ -46,8 +55,16 @@ public class PaymentController {
 	private TicketingService ticketingService;
 	
 	@Autowired
+	@Qualifier("productServiceImpl")
+	private ProductService productService;
+	
+	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
+
+	@Autowired
+	@Qualifier("inventoryServiceImpl")
+	private InventoryService inventoryService;
 
 	// 페이지네이션 번호 갯수
 	@Value("#{commonProperties['pageUnit']}")
@@ -63,25 +80,71 @@ public class PaymentController {
 									HttpSession session,
 									Model model)throws Exception{
 		
-//		Movie poster를 가져오기 위해 ticketing에서 movieTitle 뽑기
-		Movie inputMovie = new Movie();
-		inputMovie.setMovieTitle(ticketing.getMovieName().trim());
-		Movie movie = movieService.getMovieByMovieTitle(inputMovie);
+//		Tickeing..
+		if (ticketing != null && ticketing.getTicketingPrice()>0) {
+			
+//			Movie poster를 가져오기 위해 ticketing에서 movieTitle 뽑기
+			Movie inputMovie = new Movie();
+			inputMovie.setMovieTitle(ticketing.getMovieName().trim());
+			Movie movie = movieService.getMovieByMovieTitle(inputMovie);
+			
+			System.out.println(" --------------- movie : "+movie);
+			System.out.println(" --------------- ticketing : "+ticketing);
+			
+			model.addAttribute("movie",movie);
+			model.addAttribute("ticketing",ticketing);
+		}
 		
-		System.out.println(" --------------- movie : "+movie);
-		System.out.println(" --------------- ticketing : "+ticketing);
-		System.out.println(" --------------- purchase : "+purchase);
-		System.out.println(" --------------- (User)session.getAttribute(\"user\") : "+(User)session.getAttribute("user"));
 		
-		int totalPoint = paymentService.getTotalPoint(((User)session.getAttribute("user")).getUserNo());
+//		Purchase..
+		if (purchase != null && purchase.getPurchasePrice()>0) {
+			System.out.println(" --------------- purchase : "+purchase);
+			
+			String[] prodNoArray = purchase.getPurchaseProductNo().split(",");
+			String[] prodQuantityArray = purchase.getPurchaseProductQuantity().split(",");
+			
+			List<Product> list = new ArrayList<Product>();
+			for (int i = 0; i < prodNoArray.length; i++) {
+				System.out.println("-----"+prodNoArray[i]);
+				
+				Product product = productService.getProduct(Integer.parseInt(prodNoArray[i]));
+				product.setQuantity(Integer.parseInt(prodQuantityArray[i]));
+				
+				list.add(product);
+			}
+			
+			System.out.println("----------------------------list   : " + list);
+			
+			model.addAttribute("prodList", list);
+			model.addAttribute("purchase", purchase);
+		}		
+		
+//	사용 가능한 포인트 조회하기
+		User user = (User)session.getAttribute("user");
+		
+		int totalPoint = paymentService.getTotalPoint(user.getUserNo());
 		System.out.println(" --------------- totalPoint : "+totalPoint);
-		
-		model.addAttribute("movie",movie);
-		model.addAttribute("ticketing",ticketing);
-		model.addAttribute("purchase",purchase);
+
 		model.addAttribute("totalPoint",totalPoint);
+//		System.out.println("model:   "+ model);
 //		발행한 상품권 중 사용가능한 상품권 리스트도 넣어주어야 한다.
 		
+//	사용 가능한 voucher 조회하기
+		List<Inventory> invenList = inventoryService.getVoucherListInPayment(user.getUserNo());
+		System.out.println("------------------- 사용 가능한 vouchers "+invenList);
+		
+//		Client에서 parsing 하기 편하도록 JSONArray로 변환해서 줄테야!
+		JSONArray jsonArray = new JSONArray();
+		
+		for(Inventory inven : invenList) {
+			JSONObject jsonObj = new JSONObject();
+			jsonObj.put("invenNo", inven.getInventoryNo());
+			jsonObj.put("invenName", inven.getInventoryName());
+			jsonObj.put("invenPrice", inven.getInventoryPrice());
+			
+			jsonArray.add(jsonObj);
+		}
+		model.addAttribute("voucherJSONArray",jsonArray);
 		
 		return "forward:/payment/addPayment.jsp";
 	}
@@ -113,6 +176,8 @@ public class PaymentController {
 		ticketing.setTicketerPhone(user.getPhone());	//회원,비회원 포함
 
 //	2.purchase setting
+		purchase.setPurchaseUserNo(user.getUserNo());
+		purchase.setPurchaseStatus(0);
 		
 //	3.payment setting
 //		payMethod 나눠주는 Logic..
@@ -231,7 +296,7 @@ public class PaymentController {
 			model.addAttribute("movie", resultMovie);
 			model.addAttribute(ticketing);
 			
-			return "forward:/ticketing/completeTicketing.jsp";
+//			return "forward:/ticketing/completeTicketing.jsp";
 			
 		}else if (payment.getPayObjectFlag() == 1) {	// 2: only 구매
 			model.addAttribute(purchase);
@@ -252,10 +317,43 @@ public class PaymentController {
 			model.addAttribute(ticketing);
 			model.addAttribute(purchase);
 			
-			return "forward:/ticketing/completeTicketing.jsp";
+//			return "forward:/ticketing/completeTicketing.jsp";
 		}
 		
 		
-		return "forward:/payment/testPaymentResult.jsp";
+		return "forward:/ticketing/completeTicketing.jsp";
+	}//end of addPayment()
+	
+	
+	@RequestMapping(value = "/getPointList", method = RequestMethod.GET)
+	public String getPointList( HttpSession session, Model model,
+								Search search)throws Exception{
+		
+//		로그인한 회원 정보 from session
+		User user = (User)session.getAttribute("user");
+		System.out.println("----------- user.getUserNo() : "+user.getUserNo());
+		search.setUserNo(user.getUserNo());
+		
+//		search.currentPage setting...
+		if(search.getCurrentPage() ==0 ) {
+			search.setCurrentPage(1);
+		}
+		
+//		search.pageSize 세팅
+		search.setPageSize(pageSize);
+		System.out.println("------------search"+ search);
+		
+		HashMap<String, Object> outputMap = paymentService.getPointList(search);
+		
+		
+		for(Point point : (List<Point>)outputMap.get("list")) {
+			System.out.println("--------- point : " + point);
+		}
+		
+		List<Point> list = (List<Point>) outputMap.get("list");
+		
+		model.addAttribute("list", list);
+		
+		return "forward:/payment/getPointList.jsp";
 	}
 }

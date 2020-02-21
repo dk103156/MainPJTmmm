@@ -13,13 +13,15 @@ public interface InventoryDao {
 	
 	public void addInventory(Inventory inventory) throws Exception;
 	
-	public Inventory getInventory(int inventoryNo) throws Exception;
+	public Inventory getInventory(Search search) throws Exception;
 	
-	public Map<String,Object> getInventoryList(Inventory inventory) throws Exception;
+	public int getInventoryCount(Search search) throws Exception;
+	
+	public List<Inventory> getInventoryList(Search search) throws Exception;
 	
 	public void updateInventory(Inventory inventory) throws Exception;
 	
 	public void deleteInventory(int inventoryNo) throws Exception;
 	
-	
+	public List<Inventory> getVoucherListInPayment(int userNo)throws Exception;
 }

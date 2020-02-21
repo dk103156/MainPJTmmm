@@ -25,17 +25,45 @@
 		#{cartUserNo:INTEGER},
 		#{cartProdNo:INTEGER},
 		#{cartProdQuantity:INTEGER},
-		SYSTIMESTAMP )
+		#{cartRegDate:TIMESTAMP} )
 	 </insert>
 	
-	<select id="getCartList"	parameterType="Search"	resultMap="cartSelectMap" >
-		SELECT * 
-		FROM CART
-		<trim prefix="where" suffixOverrides="and">
-			<if test="cartUserNo !=null">cart_user_no = #{cartUserNo} and</if>
-			<if test="cartRegDate !=null">cart_reg_date &lt; #{cartRegDate} and</if>
-		</trim>		 
+
+	<select id="getCartList" parameterType="Search" resultMap="cartSelectMap">
+	 	<include refid="front" /> 
+			SELECT 
+			*
+			FROM CART 
+			<if test="cartUserNo != null">
+						WHERE cart_user_no = #{cartUserNo}
+			</if>
+			order by cart_no
+		<include refid="back" />	  
 	</select>
+	  	
+			
+	<sql id="front">
+  		SELECT * FROM (		SELECT inner_table. * ,  ROWNUM AS row_seq  	FROM (	
+  	</sql>
+  	
+  	 <sql id="back">
+  					) inner_table
+					WHERE ROWNUM &lt;= #{endRowNum} )
+			WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+  	</sql>
+  	
+  		<!-- SQL : SELECTONE -->
+	 <select  id="getTotalCount"  parameterType="Search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	
+			SELECT 
+			*
+			FROM CART 
+			<if test="cartUserNo != null">
+						WHERE cart_user_no = #{cartUserNo}
+			</if>
+			)					
+	 </select>	
 	
 	<delete id="deleteCart" parameterType="cart">
 		DELETE FROM cart 

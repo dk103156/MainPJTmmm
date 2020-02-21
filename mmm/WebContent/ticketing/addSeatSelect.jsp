@@ -146,7 +146,7 @@ tr, td {
 	height: 16px;
 	vertical-align: middle;	
 	text-align : center;
-	border : 1px;
+	border : 2px;
 	padding : 0px;
 }
 

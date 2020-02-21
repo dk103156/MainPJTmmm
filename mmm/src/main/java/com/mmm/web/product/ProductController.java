@@ -2,6 +2,7 @@ package com.mmm.web.product;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mmm.common.Page;
 import com.mmm.common.Search;
+import com.mmm.service.cart.CartService;
 import com.mmm.service.domain.Cart;
 import com.mmm.service.domain.Product;
 import com.mmm.service.domain.Ticketing;
@@ -38,6 +40,10 @@ public class ProductController {
 	@Autowired
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
+	
+	@Autowired
+	@Qualifier("cartServiceImpl")
+	private CartService cartService;
 
 	public ProductController() {
 		System.out.println(this.getClass());
@@ -348,6 +354,36 @@ public class ProductController {
 			
 		}
 		
+		@RequestMapping(value="getCartList", method=RequestMethod.GET)
+		public String getCartList(@ModelAttribute Search search, Model model, HttpServletRequest request) throws Exception {
+			
+			User user = (User) request.getSession().getAttribute("user");
+			search.setCartUserNo(user.getUserNo());
+			
+			if(search.getCurrentPage()==0) {
+				search.setCurrentPage(1);
+			}
+			search.setPageSize(pageSize);
+			try {
+				if(search.getSearchCondition()==null) {
+					search.setSearchCondition("0");
+				}
+			}catch(NullPointerException e) {
+				search.setSearchCondition("0");
+			}			
+			
+			Map<String, Object> map = cartService.getCartList(search);
+			List<Ticketing> list = (List<Ticketing>)map.get("list");
+			Page resultPage	= 
+					new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+			System.out.println(list);
+			model.addAttribute("cartList",list);
+			model.addAttribute("resultPage", resultPage);
+			model.addAttribute("search", search);
+			
+			return "forward:/product/getCartList.jsp";
+		}
+		
 		
 		
 		
@@ -366,5 +402,9 @@ public class ProductController {
 			
 							return saveName;
 					}
+		
+		
+		
+		
 	
 }

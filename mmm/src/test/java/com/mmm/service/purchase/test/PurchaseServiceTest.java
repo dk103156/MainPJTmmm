@@ -93,7 +93,7 @@ public class PurchaseServiceTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void addInventory() throws Exception {
 		
 		Inventory inventory = new Inventory();
@@ -114,5 +114,19 @@ public class PurchaseServiceTest {
 		inventory.setInventoryStatus("0"); // 0은 미사용, 1은 사용
 		
 		inventoryService.addInventory(inventory);
+	}
+	
+	//쿠폰 사용 테스트
+	//@Test
+	public void userVoucher() throws Exception {
+		
+		Inventory inventory = new Inventory();
+		
+		inventory.setInventoryNo(10000);
+		inventory.setInventoryUserNo(10001);
+		inventory.setInventoryUsedDate(new Timestamp(new Date().getTime()));
+		inventory.setInventoryStatus("1");
+		
+		inventoryService.updateInventory(inventory);
 	}
 }

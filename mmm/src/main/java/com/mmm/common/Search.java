@@ -30,6 +30,15 @@ public class Search {
 	private int previewFlag; //0: 진행중  1:마감
 	private int commentType; //0: 1: 2: 
 	private int parent; // 부모글 
+	private int cartUserNo; // 상품 & 구매 전용
+	private Timestamp cartRegDate; // 상품 & 구매 전용
+	private int inventoryUserNo; // 상품 & 구매 전용
+	private int inventoryProdNo; // 상품 & 구매 전용
+	private int inventoryPurchaseNo; // 상품 & 구매 전용
+	private int inventoryStatus; // 상품 & 구매 전용
+	private Timestamp inventoryUsedDate; // 상품 & 구매 전용
+	private String receiverPhone; // 상품 & 구매 전용
+	private int purchaseStatus;
 
 
 	///Constructor
@@ -223,6 +232,78 @@ public class Search {
 	public void setPreviewFlag(int previewFlag) {
 		this.previewFlag = previewFlag;
 	}
+	
+	public int getCartUserNo() {
+		return cartUserNo;
+	}
+
+	public Timestamp getCartRegDate() {
+		return cartRegDate;
+	}
+
+	public void setCartUserNo(int cartUserNo) {
+		this.cartUserNo = cartUserNo;
+	}
+
+	public void setCartRegDate(Timestamp cartRegDate) {
+		this.cartRegDate = cartRegDate;
+	}	
+	public int getInventoryUserNo() {
+		return inventoryUserNo;
+	}
+	
+	public int getInventoryProdNo() {
+		return inventoryProdNo;
+	}
+	
+	public int getInventoryPurchaseNo() {
+		return inventoryPurchaseNo;
+	}
+	
+	public void setInventoryUserNo(int inventoryUserNo) {
+		this.inventoryUserNo = inventoryUserNo;
+	}
+	
+	public void setInventoryProdNo(int inventoryProdNo) {
+		this.inventoryProdNo = inventoryProdNo;
+	}
+	
+	public void setInventoryPurchaseNo(int inventoryPurchaseNo) {
+		this.inventoryPurchaseNo = inventoryPurchaseNo;
+	}
+
+	public int getInventoryStatus() {
+		return inventoryStatus;
+	}
+
+	public Timestamp getInventoryUsedDate() {
+		return inventoryUsedDate;
+	}
+
+	public void setInventoryStatus(int inventoryStatus) {
+		this.inventoryStatus = inventoryStatus;
+	}
+
+	public void setInventoryUsedDate(Timestamp inventoryUsedDate) {
+		this.inventoryUsedDate = inventoryUsedDate;
+	}
+	
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
+
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone;
+	}
+	
+	public int getPurchaseStatus() {
+		return purchaseStatus;
+	}
+
+	public void setPurchaseStatus(int purchaseStatus) {
+		this.purchaseStatus = purchaseStatus;
+	}
+	
 
 	public int getCommentType() {
 		return commentType;
@@ -294,6 +375,24 @@ public class Search {
 		builder.append(commentType);
 		builder.append(", parent=");
 		builder.append(parent);
+		builder.append(", cartUserNo=");
+		builder.append(cartUserNo);
+		builder.append(", cartRegDate=");
+		builder.append(cartRegDate);
+		builder.append(", inventoryUserNo=");
+		builder.append(inventoryUserNo);
+		builder.append(", inventoryProdNo=");
+		builder.append(inventoryProdNo);
+		builder.append(", inventoryPurchaseNo=");
+		builder.append(inventoryPurchaseNo);
+		builder.append(", inventoryStatus=");
+		builder.append(inventoryStatus);
+		builder.append(", inventoryUsedDate=");
+		builder.append(inventoryUsedDate);
+		builder.append(", receiverPhone=");
+		builder.append(receiverPhone);
+		builder.append(", purchaseStatus=");
+		builder.append(purchaseStatus);
 		builder.append(", getTicketerPhone()=");
 		builder.append(getTicketerPhone());
 		builder.append(", getCurrentPage()=");
@@ -338,6 +437,24 @@ public class Search {
 		builder.append(getUserId());
 		builder.append(", getPreviewFlag()=");
 		builder.append(getPreviewFlag());
+		builder.append(", getCartUserNo()=");
+		builder.append(getCartUserNo());
+		builder.append(", getCartRegDate()=");
+		builder.append(getCartRegDate());
+		builder.append(", getInventoryUserNo()=");
+		builder.append(getInventoryUserNo());
+		builder.append(", getInventoryProdNo()=");
+		builder.append(getInventoryProdNo());
+		builder.append(", getInventoryPurchaseNo()=");
+		builder.append(getInventoryPurchaseNo());
+		builder.append(", getInventoryStatus()=");
+		builder.append(getInventoryStatus());
+		builder.append(", getInventoryUsedDate()=");
+		builder.append(getInventoryUsedDate());
+		builder.append(", getReceiverPhone()=");
+		builder.append(getReceiverPhone());
+		builder.append(", getPurchaseStatus()=");
+		builder.append(getPurchaseStatus());
 		builder.append(", getCommentType()=");
 		builder.append(getCommentType());
 		builder.append(", getParent()=");
@@ -351,13 +468,7 @@ public class Search {
 		builder.append("]");
 		return builder.toString();
 	}
-
 	
-	
-	
-
-
-
 }
 	
 	

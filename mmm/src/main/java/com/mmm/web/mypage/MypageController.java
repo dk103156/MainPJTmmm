@@ -39,7 +39,7 @@ public class MypageController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	@CheckAuth(role="user")
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value ="mypage", method = RequestMethod.GET)
 	public String mypage() throws Exception{
 		
@@ -48,13 +48,22 @@ public class MypageController {
 		return "redirect:/mypage/mypage.jsp";
 	}
 	
-	@CheckAuth(role="user")
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value ="mypageUser", method = RequestMethod.GET)
 	public String mypageUser() throws Exception{
 		
-		System.out.println("/mypage/mypage : GET ");
+		System.out.println("/mypage/mypageUser : GET ");
 			
 		return "redirect:/mypage/mypageUser.jsp";
+	}
+	
+	@CheckAuth(role="user,admin")
+	@RequestMapping(value ="mySeenMovieList", method = RequestMethod.GET)
+	public String myMovieList() throws Exception{
+		
+		System.out.println("/mypage/mySeenMovieList : GET ");
+		
+		return "redirect:/mypage/mySeenMovieList.jsp";
 	}
 
 }
