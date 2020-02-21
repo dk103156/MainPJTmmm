@@ -65,5 +65,14 @@ public class MypageController {
 		
 		return "redirect:/mypage/mySeenMovieList.jsp";
 	}
+	
+	@CheckAuth(role="user,admin")
+	@RequestMapping(value ="wishList", method = RequestMethod.GET)
+	public String wishList() throws Exception{
+		
+		System.out.println("/mypage/wishList : GET ");
+		
+		return "redirect:/mypage/wishList.jsp";
+	}
 
 }
