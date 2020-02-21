@@ -22,8 +22,6 @@
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
 
-<link rel="stylesheet" id="omb-main-style-css" href="http://demo.aa-team.com/tf/omb/wp-admin/admin-ajax.php?action=omb_frontend_style&amp;ver=4.9.13" type="text/css" media="all">
-
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -43,20 +41,14 @@
 </head>
 <body>
 
-<footer class="omb-fixed-footer">
-        <div class="container">
-            <div class="col-xs-3">
-                © 2020 MMM. Created by <a href="http://www.aa-team.com">GET-SET</a>.            </div>
-            <div class="col-xs-9">
-                <div class="menu-footer-menu-container">
-	                <ul id="menu-footer-menu" class="menu">
-		                <li id="#" class="#"><a href="http://demo.aa-team.com/tf/omb/advertising/">Advertising</a></li>
-						<li id="#" class="#"><a href="http://demo.aa-team.com/tf/omb/privacy-policy/">Privacy Policy</a></li>
-						<li id="#" class="#"><a href="http://demo.aa-team.com/tf/omb/contact/">Contact</a></li>
-					</ul>
-				</div>            
-			</div>
-        </div>
+<footer>
+	    <div class="theater-info">
+	    </div>
+	    <div class="copyright">
+	        java | spring | jsp | css | js | jquery | bootstrap4 | Oracle DB | AWS | Responsive Web
+	        <br>
+	        copyright@2019 Hwang yeong il | Park so yoon | Jeong min young
+	    </div>
 </footer>
     
     
