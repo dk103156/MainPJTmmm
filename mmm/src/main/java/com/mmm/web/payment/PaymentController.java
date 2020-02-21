@@ -9,6 +9,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -130,7 +132,19 @@ public class PaymentController {
 //	사용 가능한 voucher 조회하기
 		List<Inventory> invenList = inventoryService.getVoucherListInPayment(user.getUserNo());
 		System.out.println("------------------- 사용 가능한 vouchers "+invenList);
-		model.addAttribute("invenList",invenList);
+		
+//		Client에서 parsing 하기 편하도록 JSONArray로 변환해서 줄테야!
+		JSONArray jsonArray = new JSONArray();
+		
+		for(Inventory inven : invenList) {
+			JSONObject jsonObj = new JSONObject();
+			jsonObj.put("invenNo", inven.getInventoryNo());
+			jsonObj.put("invenName", inven.getInventoryName());
+			jsonObj.put("invenPrice", inven.getInventoryPrice());
+			
+			jsonArray.add(jsonObj);
+		}
+		model.addAttribute("voucherJSONArray",jsonArray);
 		
 		return "forward:/payment/addPayment.jsp";
 	}

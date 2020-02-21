@@ -77,8 +77,23 @@
 	var totalDiscount;
 	var cash;
 	
+// 	해당 회원이 사용할 수 있는 voucher List
+	var voucherList = new Array();
+	
+	console.log('${voucherJSONArray}')
+// 	if('${!empty invenList}'){
+// 		alert('shit');
+// 		<c:forEach items="${invenList}" var="invenJS">
+// 			voucherList.push('${invenJS}')
+// 		</c:forEach>
+// 	}
+// 	해당 회원이 select한 voucher List
+	var usingVoucherList = new Array();
 	
 	
+	console.log('voucherList :  '+voucherList[0]);
+	console.log('voucherList :  '+voucherList[0].inventoryNo);
+		
 // 	var ticketingNo;
 // 	var purchaseNo;
 
@@ -301,12 +316,7 @@
 			    voucher += "<select class='custom-select custom-select-md-3 custom-select-sm' name='select-voucher'>";
 			    voucher += "<option selected>사용 가능한 상품권을 선택하세요</option>";
 			    
-// 			    <c:forEach items="${invenList}" var="list">
-//                   <option value='${inven.inventoryNo}'>
-// 	              	${inven.inventoryName}( ${inven.inventoryPrice}원)
-// 	              	<input class="voucherPrice" type="hidden" value=""/>
-// 	              </option>
-// 			    </c:forEach>
+// -------------
 			    
 			    voucher += "</select>";
 				voucher += "<button type='button' name='addVoucher-btn' class='btn btn-md'>"  
@@ -499,7 +509,7 @@
                               <c:forEach var='inven' items="${invenList}">
 	                              <option value='${inven.inventoryNo}'>
 	                              	${inven.inventoryName}( ${inven.inventoryPrice}원)
-	                              	<input class="voucherPrice" type="hidden" value=""/>
+<%-- 	                              	<input class="voucherPrice" type="hidden" value="${inven.inventoryPrice }"/> --%>
 	                              </option>
                               </c:forEach>
                               
