@@ -40,7 +40,7 @@ public class CustomerController {
 	
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;
-	
+
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
@@ -332,7 +332,7 @@ public class CustomerController {
 		search.setPageSize(pageSize);
 		search.setArticleType(1);
 		
-		if(!user.getUserId().equals("user02")) {   //admin이 아니면 search조건에 userId를 set해준다
+		if(!user.getUserId().equals("admin")) {   //admin이 아니면 search조건에 userId를 set해준다
 			search.setUserId(user.getUserId());	
 			returnPage = "forward:/customer/getContactList.jsp";   //나의 문의내역 페이지로 이동한다
 		}else {

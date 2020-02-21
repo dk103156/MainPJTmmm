@@ -181,14 +181,13 @@ label {
     color: #444;
     border: 1px solid #d8d9db;
     vertical-align: middle;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family:'Noto Sans KR', sans-serif;
 }
 button, input {
     overflow: visible;
 }
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -258,7 +257,7 @@ colgroup {
     color: #503396;
     font-weight: 400;
     border-radius: 4px;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family:'Noto Sans KR', sans-serif;
     text-decoration: none;
     border: 1px solid #503396;
     vertical-align: middle;

@@ -12,7 +12,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -47,7 +47,7 @@ body {
     font-size: 15px;
     color: #444;
     font-weight: 400;
-    
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .my-magabox-info {
@@ -83,7 +83,7 @@ button, input {
 
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -128,7 +128,6 @@ button, input {
 }
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -476,7 +475,6 @@ li {
 .my-magabox-info .bottom .theater .list ol li em {
     display: inline-block;
     margin: 0 5px 0 0;
-    font-family: Roboto;
     font-style: italic;
     font-size: 1.2em;
     vertical-align: middle;
@@ -639,7 +637,6 @@ a:link {
 
 .my-megabox-main .link-movie-story a em {
     display: block;
-    font-family: Roboto;
     font-size: 2em;
     font-weight: 400;
     color: #01738b;
@@ -965,10 +962,6 @@ $(function(){
 		var likeGenre3 =$("#likeGenre3").val();
 		
 		$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
-
-		$("#chgLikeGenre1").html(likeGenre1);
-		$("#chgLikeGenre2").html(likeGenre2);
-		$("#chgLikeGenre3").html(likeGenre3);
 	});
 	
 		

@@ -92,9 +92,6 @@ p {
     margin: 0;
 }
 
-.board-list-util {
-    text-align: right;
-}
 
 b, strong {
     font-weight: 700;
@@ -123,6 +120,7 @@ b, strong {
     overflow: hidden;
     margin-bottom: -20px;
 }
+
 ol, ul {
     list-style-type: none;
     margin: 0;
@@ -212,9 +210,10 @@ a {
 </head>
 <body>
 
+
+
 <div id="contents">
 	<h2 class="tit">내가 본 영화 </h2>
-
 	<!-- 내가 본 영화 -->
 	<div class="board-list-util mySeenMovie myMovieStory">
 		<p class="result-count">
@@ -225,51 +224,27 @@ a {
 	<!-- my-saw-movie -->
 	<div class="my-saw-movie mt10 mySeenMovie myMovieStory">
 		<ul id="mySawMovie">
-			<li>
-				<p class="img posterImg" data-mno="01207400" style="cursor: pointer">
-				<img src="https://img.megabox.co.kr/SharedImg/asis/system/mop/poster/2017/64/5CB905-842F-4B81-BBB3-96F25361F278.medium.jpg" onerror="noImg(this)" alt="택시운전사">
-				</p>
-				<div class="cont">        
-					<p class="tit">
-						<a href="javaScript:void(0)" title="택시운전사 상세보기">택시운전사</a>
-					</p>        
-					<div class="theater">            
-						<p>분당</p>            
-						<p>5관[발코니]</p>            
-						<p>2017.08.10(목) 22:40 (6회차)</p>       
-					</div>    
-				</div>
-			</li>
-			<li>
-				<p class="img posterImg" data-mno="01207400" style="cursor: pointer">
-				<img src="https://img.megabox.co.kr/SharedImg/asis/system/mop/poster/2017/64/5CB905-842F-4B81-BBB3-96F25361F278.medium.jpg" onerror="noImg(this)" alt="택시운전사">
-				</p>
-				<div class="cont">        
-					<p class="tit">
-						<a href="javaScript:void(0)" title="택시운전사 상세보기">택시운전사</a>
-					</p>        
-					<div class="theater">            
-						<p>분당</p>            
-						<p>5관[발코니]</p>            
-						<p>2017.08.10(목) 22:40 (6회차)</p>       
-					</div>    
-				</div>
-			</li>
-			<li>
-				<p class="img posterImg" data-mno="01207400" style="cursor: pointer">
-				<img src="https://img.megabox.co.kr/SharedImg/asis/system/mop/poster/2017/64/5CB905-842F-4B81-BBB3-96F25361F278.medium.jpg" onerror="noImg(this)" alt="택시운전사">
-				</p>
-				<div class="cont">        
-					<p class="tit">
-						<a href="javaScript:void(0)" title="택시운전사 상세보기">택시운전사</a>
-					</p>        
-					<div class="theater">            
-						<p>분당</p>            
-						<p>5관[발코니]</p>            
-						<p>2017.08.10(목) 22:40 (6회차)</p>       
-					</div>    
-				</div>
-			</li>
+			<c:forEach var="i" items="${ticketingList}">
+			<c:forEach var="j" items="${dateTimeList}">
+				<li>
+					<p class="img posterImg" data-mno="01207400" style="cursor: pointer">
+					<img src="${j.poster}" onerror="noImg(this)" alt="">
+					</p>
+					<div class="cont">        
+						<p class="tit">
+							<a href="" title="${i.movieName} 상세보기">${i.movieName}</a>
+						</p>        
+						<div class="theater">        
+							<p>${j.theaterName}</p>            
+							<p>${j.screenName}</p> 
+							<p><fmt:formatDate var="screenDate" value="${j.screenDate }" pattern="yyyy-MM-dd"/>
+							   	<fmt:formatDate var="screenTime" value="${j.screenTime }" pattern="HH:mm"/>
+								${screenDate} ${screenTime}</p>           
+						</div>    
+					</div>
+				</li>
+				</c:forEach>
+			</c:forEach>
 		</ul>
 	</div>
 	<!--// my-saw-movie -->

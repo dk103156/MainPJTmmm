@@ -176,7 +176,7 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 		$("input[name=purchaseProductQuantity]").val(finalQuantity)
 		$("input[name=purchasePrice]").val(finalPrice)
 		
-		$("form#finalData").attr("action","/purchase/addPurchase").attr("method","POST").submit();
+		$("form#finalData").attr("action","/payment/preparePayment").attr("method","POST").submit();
 	});	
 	
 	

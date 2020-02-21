@@ -63,4 +63,7 @@ public interface EventService {
 
 	public List<Preview> getPrepareRand() throws Exception;
 	
+	public List<Preview> getAllPreview() throws Exception;
+	
+	public List<Preview> updateStPrev() throws Exception;
 }

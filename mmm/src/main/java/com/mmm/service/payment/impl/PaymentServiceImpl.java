@@ -1,8 +1,10 @@
 package com.mmm.service.payment.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
@@ -19,10 +21,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.mmm.common.Search;
+import com.mmm.service.domain.Inventory;
 import com.mmm.service.domain.Payment;
 import com.mmm.service.domain.Point;
 import com.mmm.service.domain.Purchase;
 import com.mmm.service.domain.Ticketing;
+import com.mmm.service.inventory.InventoryDao;
 import com.mmm.service.payment.PaymentDao;
 import com.mmm.service.payment.PaymentService;
 import com.mmm.service.purchase.PurchaseDao;
@@ -44,6 +48,10 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	@Qualifier("purchaseDaoImpl")
 	private PurchaseDao purchaseDao;
+	
+	@Autowired
+	@Qualifier("inventoryDaoImpl")
+	private InventoryDao inventoryDao;
 	
 	public static final String impKey = "6944686805011226";
 	public static final String impSecret = "ZXtPf4IT38iJVVxXvy4CNmejclGC3qu2oYRD2Ax6IQQELnBgWGTK383fuKRxamAzkscn2KtKAjplH0CE";
@@ -93,14 +101,18 @@ public class PaymentServiceImpl implements PaymentService {
 		System.out.println("------------addPayment ticketing :  "+ticketing);
 		System.out.println("------------addPayment purchase :  "+purchase);
 		
+		
+		System.out.println("------------- payObjectFlag  : " + payment.getPayObjectFlag());
 //		DB에 넣기( 예매,	 구매,	결제).. transaction 관리를 위해 여기서..
 		if (payment.getPayObjectFlag()==0) {
 			ticketingDao.addTicketing(ticketing);
 		}else if (payment.getPayObjectFlag()==1) {
-			purchaseDao.addPurchase(purchase);
+			
+			this.fncAddPurchaseAndInven(purchase);
+		
 		}else if (payment.getPayObjectFlag()==2) {
 			ticketingDao.addTicketing(ticketing);
-			purchaseDao.addPurchase(purchase);
+			this.fncAddPurchaseAndInven(purchase);
 		}
 		paymentDao.addPayment(payment);
 		
@@ -232,5 +244,42 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 
+	public void fncAddPurchaseAndInven(Purchase purchase) throws Exception{
+		
+		//구매 테이블에 들어감
+		purchaseDao.addPurchase(purchase);
+		
+		//테이블에 들어가자마자 최근 값을 구매관리번호로 가져온다
+		purchase= purchaseDao.recentPurchase();
+		
+		//내 인벤토리에 들어가야함, 이때.. 상품번호들과 수량들.. 그리고 구입할시 시간을 같게해줘야하므로 purchase에서 뺌.. 결제시까지 고려는 아직안함
+		List<String> prodNo =Arrays.asList( purchase.getPurchaseProductNo().split(",") );
+		List<String> prodQuantity = Arrays.asList( purchase.getPurchaseProductQuantity().split(","));
+		
+		Inventory inventory = new Inventory();
+		String uuid=null;
+		inventory.setInventoryUserNo(purchase.getPurchaseUserNo()); // 1. 인벤토리에 유저 정보 삽입
+		inventory.setInventoryPurchaseNo( purchase.getPurchaseNo());// 2. 인벤토리에 구매 정보 삽입
+		inventory.setInventoryRegDate(purchase.getPurchaseDate());  // 3. 인벤토리에 구매 날짜 정보 삽입.. 동일하게
+		
+
+		
+		
+		// 4. 상품 번호와 수량을 각각 돌려 넣어준다.  5. 그러면서 핀번호도 생성하는것을 잊지말것
+		// 최종적으로 인벤토리에는 상품 3,5,4 개 있엇다면 12번의 로그가 들어가는셈이 된다.
+		for(int i=0; i<prodNo.size(); i++) {
+			
+			inventory.setInventoryProdNo( Integer.parseInt( prodNo.get(i)) );
+			
+			for(int j=0; j<Integer.parseInt(prodQuantity.get(i)); j++){
+				uuid = UUID.randomUUID().toString().substring(0, 23);
+				inventory.setInventoryProdPinNo(uuid); // 2. 핀 정보 삽입 				
+				inventory.setInventoryStatus("0");
+				inventoryDao.addInventory(inventory);
+				
+				System.out.println("------------------ inven" + j +"   --   " + inventory );
+			}
+		}
+	}
 	
 }

@@ -175,17 +175,8 @@ public class Payment {
 		this.totalPrice = totalPrice;
 	}
 
+
 	public int getPayObjectFlag() {
-//		System.out.println("--------------------ticketNo : "+ ticketing.getTicketingNo());
-//		System.out.println("--------------------purchaseNo : "+ this.purchase.getPurchaseNo());
-		payObjectFlag = 0;
-		
-		if(this.ticketing.getTicketingNo() != null && this.purchase.getPurchaseNo() != 0) {
-			payObjectFlag = 2;
-		}else if (this.purchase.getPurchaseNo() != 0) {
-			payObjectFlag = 1;
-		}
-		
 		return payObjectFlag;
 	}
 
