@@ -78,6 +78,8 @@
 	var totalDiscount;
 	var cash;
 	
+	var usingVoucherid = '';
+	
 // 	해당 회원이 사용할 수 있는 voucher List
 	var voucherList = JSON.parse('${voucherJSONArray}');
 	
@@ -115,6 +117,7 @@
 			
 			if ( response.success ) { 	// imPort 결제 성공
 				console.log('--- imPort결제 성공.. : '+JSON.stringify(response));
+				alert('usingVoucherid  : '+ usingVoucherid);
 			
 				// form 양식 없이 POST로 보내는 jQuery.. cdn..
 				$.redirect("/payment/addPayment", 				//보낼 url
@@ -134,6 +137,7 @@
 								"purchasePrice" : '${purchase.purchasePrice}',
 								"totalPrice" : totalPrice,						//properties for Payment
 								"usingPoint" : partPoint,
+								"usingVoucherid" : usingVoucherid,
 								"cash" : cash,
 								"impUid" : response.imp_uid
 								},
@@ -446,9 +450,18 @@
 		
 // 		import 모달 띄우는 이벤트
 		$("#imp-btn").on("click", function(){
-						
-// 			alert(usingVoucherList.length);
-// 			usingVoucherList
+				
+			
+			alert("usingVoucherList"  + usingVoucherList);
+			for (var i = 0; i < usingVoucherList.length; i++) {
+				usingVoucherid += usingVoucherList[i].invenNo;
+				
+				if (i != usingVoucherList.length-1) {
+					usingVoucherid += ","
+				}
+			}
+			
+			alert("usingVoucherid"  + usingVoucherid);
 			
 			IMPCard();
 		});

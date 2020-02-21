@@ -163,7 +163,7 @@ label {
 	
 $(function(){	
 	
-// 	clickBtn();
+	clickBtn();
 	
 	$("#btn").on('click',function(){	
 		self.location="/user/login";
