@@ -201,5 +201,25 @@ public class EventServiceImpl implements EventService {
 	}
 
 
+	@Override
+	public List<Preview> getAllPreview() throws Exception {
+		return eventDao.getAllPreview();
+	}
+
+
+	@Override
+	public List<Preview> updateStPrev()  throws Exception {
+		
+		List<Preview> list = eventDao.updateStPrev();
+		
+		for(Preview p:list) {
+			System.out.println(p.getPreviewNo());
+			eventDao.updatePrevStatus(p.getPreviewNo()); 
+		}
+		
+		return list;
+	}
+
+
 
 }

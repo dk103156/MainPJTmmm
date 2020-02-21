@@ -26,7 +26,7 @@ public interface BoardService {
 	
 	public void addComment(Comment comment) throws Exception;
 	
-	public List<Comment> getCommentList(Search search) throws Exception;
+	public Map<String, Object> getCommentList(Search search) throws Exception;
 	
 	public void updateComment(Comment comment) throws Exception;
 	

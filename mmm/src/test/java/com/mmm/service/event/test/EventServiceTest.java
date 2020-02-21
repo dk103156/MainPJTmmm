@@ -222,7 +222,7 @@ public class EventServiceTest {
 		
 		
 		
-		@Test
+		//@Test
 		public void testGetQuizListAd() throws Exception{
 			
 			Search search = new Search();
@@ -340,7 +340,7 @@ public class EventServiceTest {
 		}
 		
 		
-		@Test
+		//@Test
 		public void getPreparedRandTest() throws Exception  {
 			
 			List<Preview> list = eventService.getPrepareRand();
@@ -351,5 +351,26 @@ public class EventServiceTest {
 			}
 		}
 		
+		//@Test
+		public void getAllt() throws Exception  {
+			
+			List<Preview> list = eventService.getAllPreview();
+			
+			System.out.println(list.size());
+			for (Preview p : list) {
+				System.out.println("pppppppppppppp>>>>>>>>>>>>>>>>>>>>"+p);
+			}
+		}
 		
+		
+		@Test
+				public void getStUpdateList() throws Exception  {
+					
+					List<Preview> list = eventService.updateStPrev();
+					
+					System.out.println(list.size());
+					for (Preview p : list) {
+						System.out.println("pppppppppppppp>>>>>>>>>>>>>>>>>>>>"+p);
+					}
+				}
 }

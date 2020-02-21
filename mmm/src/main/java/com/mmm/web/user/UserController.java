@@ -495,6 +495,8 @@ public class UserController {
 		
 			if(sessionUser.getUserNo() == user.getUserNo()) {
 				userService.updateUser(user);
+				
+				session.setAttribute("user", userService.getUser(user.getUserNo()));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

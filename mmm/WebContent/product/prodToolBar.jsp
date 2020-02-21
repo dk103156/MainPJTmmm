@@ -28,11 +28,16 @@
 	<!-- 	SweetAlert2 CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
-
 	
+	
+<style>
+	header {
+    background-color: #242424;
+    height: 3.0rem;
+	}
+</style>
 
-	<!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+<script type="text/javascript">
 
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 	$( function() {
@@ -57,11 +62,6 @@
 	});
 	
 	
-	$( function() {
-		$( "#QuickOrder" ).on("click" , function() {
-			self.location = "/product/getQuickOrder"
-		});
-	});
 	
 	
 	<!--  /////////////////////////////////////////////////// -->
@@ -90,12 +90,6 @@
 	
 	
 	
-	$( function() {
-		$( "#cart" ).on("click" , function() {
-			self.location = "/cart/getCartList"
-		});
-	}); 
-	
 		   	
 		</script>
 		
@@ -103,107 +97,62 @@
 
 <body>
 	
-			
-	<hr style="background-color: #ebeadd;">
-		<div class="row" style="text-align:center;">
-				<div class="col-md-2" style="text-align:center;">
-					<h4 id="mov">MovMovMov</h4>
+	<header>
+		<div class="row mx-0" >
+				<div class="col-2">
+					<h3 id="mov" style="color: #ffffff;  margin: 10px 5px; ">스토어</h3>
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="voucher">바우처</h4>
+				<div class="col-1" style="text-align:left;">
+					<h6 id="voucher" style="color: #ffffff;margin: 15px 0px;"><strong>바우처</strong></h6>
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="snack">스낵</h4>
+				<div class="col-1" style="text-align:left;">
+					<h6 id="snack" style="color: #ffffff; margin: 15px 0px;"><strong>스낵</strong></h6>
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="QuickOrder">QuickOrder</h4>
-				</div>
 				
 				
 				
 			<!--<c:if test="${sessionScope.user.role == 'user'}">
 			
-				<div class="col-md-3" style="text-align:center;">
+				<div class="col-4" style="text-align:center;">
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="addProduct">상품 등록</h4>
+				
+				<div class="col-1" style="text-align:center;">
+					<h6 id="addProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>등록</strong></h6>
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="updateProduct">상품 수정</h4>
+				<div class="col-1" style="text-align:center;">
+					<h6 id="updateProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>수정</strong></h6>
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="deleteProduct">상품 삭제</h4>
-				</div>
-				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="cart">장바구니</h4>
+				<div class="col-1" style="text-align:center;">
+					<h6 id="deleteProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>삭제</strong></h6>
 				</div>
 				
 			</c:if>	
 				
-				<div class="col-md-5" style="text-align:center;">
-				</div>
-				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="cart">장바구니</h4>
-				</div>
-				
 			-->	
 			
-				<div class="col-md-3" style="text-align:center;">
+				<div class="col-4" style="text-align:center;">
 				</div>
 				
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-					 상품 등록
-				</button>
-				<!-- 
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="addProduct">상품 등록</h4>
-				</div>
-				 -->
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="updateProduct">상품 수정</h4>
+				<div class="col-1" style="text-align:center;">
+					<h6 id="addProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>등록</strong></h6>
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="deleteProduct">상품 삭제</h4>
+				<div class="col-1" style="text-align:center;">
+					<h6 id="updateProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>수정</strong></h6>
 				</div>
 				
-				<div class="col-md-1" style="text-align:center;">
-					<h4 id="cart">장바구니</h4>
+				<div class="col-1" style="text-align:center;">
+					<h6 id="deleteProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>삭제</strong></h6>
 				</div>
 			
 		</div>	
-	<hr style="background-color: #ebeadd;">
-	
-	
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">상품 등록</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-				...
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-	
+	</header>
 </body>
 </html>

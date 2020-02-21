@@ -30,7 +30,7 @@ body {
     font-size: 15px;
     color: #444;
     font-weight: 400;
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family:'Noto Sans KR', sans-serif;
 }
 
 .container.has-lnb #contents {
@@ -156,7 +156,6 @@ button, input {
 
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -265,7 +264,7 @@ a:visited {
     color: #fee50e;
     font-weight: 400;
     border-radius: 4px;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     text-decoration: none;
     border: 1px solid #fee50e;
     vertical-align: middle;
@@ -343,7 +342,6 @@ button, input {
 }
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -359,7 +357,6 @@ input[type="hidden" i] {
 
 button, input, optgroup, select, textarea {
     margin: 0;
-    font-family: inherit;
     font-size: 1em;
     line-height: 1.15;
 }
@@ -535,7 +532,7 @@ label {
     color: #444;
     border: 1px solid #d8d9db;
     vertical-align: middle;
-    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 .mt40 {
@@ -1017,7 +1014,8 @@ $(function(){
 							    <th scope="row">비밀번호 <em class="font-orange">*</em></th>
 							    <td>
 							        <button type="button" class="button small gray-line" id="chgPwBtn" title="비밀번호 변경">비밀번호 변경</button>
-							        마지막 비밀번호 변경: 1일전에 함 (${user.updatePwDate})
+							        <fmt:formatDate var="updatePwDate" value="${user.updatePwDate}" pattern="yyyy-MM-dd HH:mm"/>
+							        	마지막 비밀번호 변경:(${updatePwDate})
 							    </td>
 							</tr>	
 							

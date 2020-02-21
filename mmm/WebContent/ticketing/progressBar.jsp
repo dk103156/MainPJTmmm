@@ -166,7 +166,7 @@
 			
 			<!-- 1. 영화 선택(영화 제목, 영화 타입(2D, 3D...), 관람등급) -->
 			<div class="info movie">
-				<span class="movie_poster"><img src="" alt="영화 포스터" style="display: none;"></span>
+				<span class="movie_poster"><img src="${dateTime.poster }" alt="영화 포스터" style="display: none;"></span>
 				<div id="movieTitle" class="row movie_title colspan2" style="display: none;">
 					<span class="data letter-spacing-min ellipsis-line2"><a href="#" target="_blank" onmousedown="javascript:logClick('SUMMARY/영화상세보기');"></a></span>
 				</div>

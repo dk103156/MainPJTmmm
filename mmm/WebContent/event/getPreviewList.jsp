@@ -8,7 +8,7 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-<title>getPreviewAd</title> 
+<title></title> 
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" type="text/javascript" ></script>	 -->
 <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
 <link rel="stylesheet" href="../resources/css/owl.theme.default.min.css">
@@ -41,11 +41,25 @@
 				var previewNo = $(this).parent().find("input[name='pn']").val();
 				alert(previewNo)
 				self.location = "/event/getPreview?previewNo="+previewNo;
+			
+			});
+			
+			
+			$('ul li').on('click',function(){
+				console.log('리스트 클릭')
+				var previewNo = $(this).parent().next().val();
+				//alert(previewNo)
+				self.location = "/event/getPreview?previewNo="+previewNo;
 				
 			});
 		})
 </script>
 <style>
+
+	img.doneImg{
+	width:40px;
+	height:55px;
+	}
 
 	body{
 		font-family: 'Noto Sans KR', sans-serif;
@@ -138,7 +152,45 @@
 		img {
 		
 		}
+      div{
+        width: 100%;
+        
+    }
     
+    
+    div.left {
+        width: 40%;
+        float: left;
+        height: 300px;
+       
+    }
+    div.right {
+        width: 40%;
+        float: right;
+        height: 300px;
+    }
+
+ul{
+   list-style:none;
+   }
+
+
+.doneImg {
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+}
+.doneImg:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+}
+.img {width:325px; height:280px;}  
 	
 </style>
 
@@ -149,10 +201,13 @@
 
 <div class="container">
 <br/><br/>
-<h5><i class="fas fa-trophy"></i>시사회 이벤트</h5>
-<br/><br/><br/>
+<h4><i class="fas fa-trophy"></i>시사회 이벤트</h4>
+<hr>
+<br/>
 
 <div class="container">
+		<h5><i class="fas fa-grip-lines-vertical"></i>  진행중인 이벤트</h5>
+		<br/><br/>
 	<div class="row">
 	
 		<div class="col-1 nav">
@@ -160,27 +215,22 @@
 		</div>
 		
 		
-		
 		<div class="col-10">
 			<!-- owl-carousel 시작 -->
 			<div class="owl-carousel owl-theme" id="owl-popular">
 				<c:set var="i" value="0" />
-		 <c:forEach var="preview" items="${list}">
+				 <c:forEach var="preview" items="${doingList}">
+				
 				<div class="item">
-		      <div class="card" name="cardImg">
-		      <figure>
-            <img name="preImg" src= "/resources/image/${preview.previewImage}" alt="" class="card-img-top" />
+		      	<div class="card" name="cardImg">
+		     	<figure>
+          		  <img name="preImg" src= "/resources/image/${preview.previewImage}" alt="" class="card-img-top" />
                   <div class="overlay">
 		        	<div class="description" style="line-height:170%">
-            	<c:if test="${preview.previewFlag eq 0}">
 		        	${preview.previewName}<br>
 		        	${preview.previewPlace}<br>
 		        	${preview.preDate}<br>
 		        	${preview.previewTime}
-	        	</c:if>
-		      <c:if test="${preview.previewFlag eq 1}">
-		      <p>응모가 마감되었다</p>
-		        	</c:if>
 		     <input type="hidden" name="pn" value="${preview.previewNo}">
 		        	</div>
 		        </div>
@@ -205,7 +255,45 @@
 		</div>
 		
 	</div>
+
+
+<br><br><br>
+<div class="row">
+	    	
+	    <div class="second">
+        <div class="left border-bottom-1" >
+        
+        <h5><i class="fas fa-grip-lines-vertical"></i>  마감된 이벤트<i class="fas fa-plus-circle float-right">more</i></h5>
+        
+        <br>
+		<c:set var="i" value="0" />
+		 <c:forEach var="preview" items="${doneList}"  begin="0" end="4">
+		 
+		 <ul>
+			 <li>
+			 	<img class="doneImg" src= "/resources/image/${preview.previewImage}" style="display:inline;" /> 
+			    <span>${preview.previewName}</span>
+			 </li>
+		 </ul>
+		     <input type="hidden" name="pn" value="${preview.previewNo}"  style="display:inline;">
+		   </c:forEach>
+        </div>
+        
+        <div class="right">
+        <h5><i class="fas fa-grip-lines-vertical"></i>당첨자 조회<i class="fas fa-plus-circle float-right">more</i></h5>
+        <br>
+        
+        DSADSD
+        </div>
+    </div>
+
+
+
+
 </div>
+
+</div>
+
 
 </div>
  </body>
