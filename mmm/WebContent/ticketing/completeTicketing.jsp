@@ -39,7 +39,7 @@
 			<span><h2>예매가 완료 되었습니다.</h2></span>
 		</div>
 	</div><!-- end of row -->
-	 
+	<c:if test="${payment.payObjectFlag==0 || payment.payObjectFlag==2 }">
 	<div class="row">
 		<div class="col-4 text-center my-auto">
 			<img src="${movie.poster}" width="200" height="280" />
@@ -70,6 +70,18 @@
 				<div class="col-3">좌석번호</div>
 				<div class="col-9">${ticketing.seatNo }</div>
 			</div>
+			
+	</c:if> 
+	<c:if test="${payment.payObjectFlag==1 || payment.payObjectFlag==2 }" >
+			<div class="row mb-4">
+				<div class="col-3">상품명</div>
+				<div id="prodName" class="col-9"></div>
+			</div>
+						<div class="row mb-4">
+				<div class="col-3">상품개수</div>
+				<div class="col-9">${purchase.purchaseProductQuantity }</div>
+			</div>
+	</c:if> 			
 			<div class="row mb-4">
 				<div class="col-3">결제금액</div>
 				<div class="col-9">${payment.totalPrice}원</div>
@@ -134,6 +146,37 @@
 </div><!-- end of container -->
 
 <script>
+$.ajaxSetup({async:false}); //전역 ajax 동기로
+<c:if test="${payment.payObjectFlag==1 || payment.payObjectFlag==2 }" >
+	var productName = new Array();
+	var productNo = '${purchase.purchaseProductNo }';
+	
+	productNo.split(",").forEach( (index,value) => {
+		//console.log(value)
+		$.getJSON('json/getProduct/'+value)
+		.done( x => {
+			var product = x.product;
+			productName.push(product.prodName);
+						
+		})
+	}); // end of forEach
+	//중복 제거
+	productName= productName.reduce(function(a,b){
+					if(a.indexOf(b)==-1){
+						a.push(b)
+					}
+					return a
+					
+					},[])
+	var fullName="";
+	productName.forEach( (index,value) => {
+		
+		fullName += value+",";
+	})					
+	fullName = fullName.substring(0, fullName.length-1);
+	$("div#prodName").text(fullName);
+</c:if>
+
 $("button.confirm").on("click",function(){
 	self.location="/ticketing/getTicketingList";
 });

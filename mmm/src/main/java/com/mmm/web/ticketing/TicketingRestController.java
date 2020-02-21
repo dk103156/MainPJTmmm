@@ -255,4 +255,11 @@ public class TicketingRestController {
 		return ticketingService.getTicketing(ticketingNo);
 	}
 	
+	@RequestMapping( value="json/getTheaterByName/{theaterName}", method=RequestMethod.GET)
+    public Theater getTheaterByName(@PathVariable String theaterName ) throws Exception {
+		
+		theaterName =new String(theaterName.getBytes("8859_1"),"UTF-8").replace("+", " ");
+		return theaterService.getTheaterByName(theaterName);
+	}
+	
 }

@@ -16,10 +16,12 @@ public interface TheaterDao {
 	
 	public Theater getTheater(String theaterNo) throws Exception;
 	
+	public Theater getTheaterByName(String theaterName) throws Exception;
+	
 	public String lastTheater() throws Exception;
 	
 	public List<Theater> getTheaterList(Search search) throws Exception;
 	
-	
+	 
 	
 }

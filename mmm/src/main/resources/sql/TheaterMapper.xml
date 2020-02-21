@@ -68,13 +68,16 @@
 		*
 		from theater 
 		WHERE 
-		<if test="theaterNo != null">
-		theater_no = #{theaterNo}
-		</if>
-		<if test="id != null">
-				WHERE id = #{id}
-		</if>		
-		
+		theater_no = #{value}
+	</select>
+	
+	<select id="getTheaterByName" parameterType="String"
+		resultMap="theaterSelectMap">
+		select
+		*
+		from theater 
+		WHERE 
+		theater_name = #{value}
 	</select>
 	
 	<select id="lastTheater" resultType="String">

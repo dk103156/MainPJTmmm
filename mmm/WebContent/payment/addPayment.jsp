@@ -73,7 +73,8 @@
 	var purchasePrice;
 	
 	var totalPrice;
-	var partPoint;
+	var voucherPrice=0;
+	var partPoint=0;
 	var totalDiscount;
 	var cash;
 	
@@ -184,6 +185,16 @@
 		
 		$('select[name=select-voucher]').html(voucherDisplay);
 		
+// 		$('#barPartPoint').on("propertychange", function(){
+			
+// 			console.log('바뀌었다!!!');
+			
+// 		});
+		
+// 		상품권 선택 못하도록...
+		$('button[name=addVoucher-btn]').hide();
+		
+		
 		
 // // 		예매번호 및 구매번호 넣어주자
 // 		ticketingNo = '${ticketing.ticketingNo}';
@@ -277,6 +288,7 @@
 					icon: 'error',
 					confirmButtonText: "confirm"
 				});
+				return;
 			}
 			
 // 			총 결제금액보다 큰 숫자를 쓰지 못하도록
@@ -284,24 +296,30 @@
 
 				$(this).val(totalPrice) ;
 				$("#barPartPoint").text(totalPrice);
+				
 				Swal.fire({
 					text: '총 결제금액보다 더 큰 포인트를 사용하실 수 없어요.',
 					icon: 'error',
 					confirmButtonText: "confirm"
 				});
 			}
-			
+			partPoint = $(this).val();
 			$("#barPartPoint").text($(this).val());
+			
+			console.log("partPoint  : " + partPoint)
 			
 	// 		2-3 총할인금액
 	// 		할인금액이 없을 경우 0으로 ..
 // 			나중에 상품권 금액도 더해라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			if (partPoint != 0) {
-				totalDiscount = $(this).val();
-			}
+// 			if (partPoint != 0) {
+
+// 				console.log("----------"+ totalDiscount);
+// 				partPoint += Number($(this).val());
+// 			}
+			totalDiscount = (voucherPrice*1 + partPoint*1)*1;
 			$('#barTotalDiscount').text(totalDiscount)
 			
-			console.log("disc  : "+ totalDiscount);
+			console.log("totalDiscount  : "+ totalDiscount);
 			
 	// 		3. 최종결제금액
 			cash = totalPrice - totalDiscount;
@@ -313,6 +331,8 @@
 	
 // 		상품권 3장까지만 사용 가능하도록..
 		var addVoucherCnt = 0;
+		
+
 		
 // 		상품권 3장까지 추가하는 function
 // 		$('button[name="addVoucher-btn"]').on("click", function(){
@@ -330,8 +350,6 @@
 					voucher += "<option value='"+voucherList[i].invenNo+"'>";
 					voucher += voucherList[i].invenName+"("+ voucherList[i].invenPrice+"원)</option>";
 				}		
-				
-			    
 			    voucher += "</select>";
 				voucher += "<button type='button' name='addVoucher-btn' class='btn btn-md'>"  
 				voucher += "<i class='far fa-plus-square'></i>"  
@@ -343,6 +361,9 @@
 			if (addVoucherCnt <2) {
 				addVoucherCnt += 1;
 				voucher_btn.parent().parent().parent("div.card-body").append(voucher);
+				
+				$('button[name=addVoucher-btn]').hide();
+				
 				console.log('vouCNT  : ' + addVoucherCnt )
 			}else if(addVoucherCnt >1) {
 // 				alert("상품권은 최대 3장까지 사용이 가능합니다.");
@@ -350,43 +371,92 @@
 					text: '상품권은 최대 3장까지 사용이 가능해요.',
 					icon: 'error',
 					confirmButtonText: 'confirm'
-				
 				})
 			}
 		});
+		
+		
+//	 	상품권 하나 선택하면 사용가능 목록에서 선택된 상품권 목록으로 이동시키는..
+		$(document).on("change", "select[name='select-voucher']", function(){
+			
+			var selectedVoucher = $(this).children('option:selected').val();
+			
+			alert("선택된 상품권 번호 :  "+selectedVoucher);
+			
+			var index = voucherList.findIndex(voucher => voucher.invenNo == selectedVoucher);
+			console.log(" index " + index);
+			
+			usingVoucherList.push(voucherList[index]);
+			
+//	 		usingVoucherList
+			if(index !== undefined) voucherList.splice(index, 1);
+			
+			console.log("-----------after VoucherList.length :: " + voucherList.length )
+			console.log("-----------after VoucherList :: " + JSON.stringify(voucherList) )
+			console.log("-----------after usingVoucherList.length :: " + usingVoucherList.length )
+			console.log("-----------after usingVoucherList :: " + JSON.stringify(usingVoucherList) )
+			
+			voucherPrice = 0;
+			for (var i = 0; i < usingVoucherList.length; i++) {
+				
+// 				console.log("usingVoucherList[i].invenPrice   : " + usingVoucherList[i].invenPrice)			
+				voucherPrice += usingVoucherList[i].invenPrice;
+			}
+			
+			if(voucherPrice*1 > totalPrice*1){
+
+				Swal.fire({
+					text: '총 결제금액보다 더 큰 상품권을 사용하실 수 없어요.',
+					icon: 'error',
+					confirmButtonText: "confirm"
+				});
+				
+				voucherPrice = 0;
+// 				$(this).val('');
+				$(this).children(' option:first').attr('selected',true);
+				return;
+			}
+			
+			
+			
+			$('#barVoucherPrice').text(voucherPrice);
+			
+			console.log('voucherPrice  : ' + Number(voucherPrice));
+			console.log("partPoint  : " + partPoint);
+			console.log("totalDiscount  : "+ totalDiscount);
+
+			
+			totalDiscount = (voucherPrice*1 + partPoint*1)*1;
+			$('#barTotalDiscount').text(totalDiscount)
+			
+			
+			// 		3. 최종결제금액
+			cash = totalPrice - totalDiscount;
+			console.log(" cash :  " +cash);
+			$('#barCash').text(cash);
+			
+			if(addVoucherCnt != 2){
+				$('button[name=addVoucher-btn]').show();
+			}
+		});
+		
 		
 // 		IMP  page onload 시 init 해줘야한다. IMP.init(가맹점식별코드)
 		IMP.init('imp58134678');
 		
 // 		import 모달 띄우는 이벤트
 		$("#imp-btn").on("click", function(){
+						
+// 			alert(usingVoucherList.length);
+// 			usingVoucherList
+			
 			IMPCard();
 		});
 		
 	});
 	
 
-// 	상품권 하나 선택하면 사용가능 목록에서 선택된 상품권 목록으로 이동시키는..
-	$(document).on("change", "select[name='select-voucher']", function(){
-		
-		var selectedVoucher = $(this).children('option:selected').val();
-		
-		alert("선택된 상품권 번호 :  "+selectedVoucher);
-		
-		var index = voucherList.findIndex(voucher => voucher.invenNo == selectedVoucher);
-		console.log(" index " + index);
-		
-		usingVoucherList.push(voucherList[index]);
-		
-// 		usingVoucherList
-		if(index !== undefined) voucherList.splice(index, 1);
-		
-		console.log("-----------after VoucherList.length :: " + voucherList.length )
-		console.log("-----------after VoucherList :: " + voucherList )
-		console.log("-----------after usingVoucherList.length :: " + usingVoucherList.length )
-		console.log("-----------after usingVoucherList :: " + usingVoucherList )
-		
-	});
+
 
 
 	</script>
@@ -584,7 +654,7 @@
 	   		      <h6 class="p-2 border-bottom border-danger"> 총 할인금액 </h6>
 	   		      
 	   		      <div class="text-right border-bottom border-danger">
-	   		        <p class="small m-1">(-) 상품권 금액 : 10000원<p>
+	   		        <p class="small m-1">(-) 상품권 금액 : <span id="barVoucherPrice"></span>원<p>
 	   		        <p class="small m-1">(-) 사용 포인트 : <span id="barPartPoint"></span>원<p>
 				  </div>
 				  <div class="p-2 mb-2">

@@ -180,6 +180,30 @@ $(function(){
 		$("#plusPage").load("/ticketing/getTicketingList?searchCondition=2&ticketerPhone="+ticketerPhone);
 	})
 	
+	$("a[href='#']:contains('구매 내역')").on('click',function(){		
+		$("#plusPage").load("/purchase/getPurchaseList?purchaseStatus=0");
+	})
+	
+	$("a[href='#']:contains('구매 취소 내역')").on('click',function(){		
+		$("#plusPage").load("/purchase/getPurchaseList?purchaseStatus=2");
+	})
+	
+	$("a[href='#']:contains('보관함')").on('click',function(){		
+		$("#plusPage").load("/purchase/getInventoryList");
+	})
+	
+	$("a[href='#']:contains('포인트 내역')").on('click',function(){		
+		$("#plusPage").load("/payment/getPointList");
+	})
+	
+	$("a[href='#']:contains('나의 이벤트 응모내역')").on('click',function(){		
+		$("#plusPage").load("/event/getApplyList");
+	})
+	
+	$("a[href='#']:contains('나의 문의내역')").on('click',function(){		
+		$("#plusPage").load("/customer/getContactList");
+	})
+	
 	
 	
 	$("#MypageHome").on('click',function(){	
