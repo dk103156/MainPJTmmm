@@ -446,6 +446,10 @@
 		
 // 		import 모달 띄우는 이벤트
 		$("#imp-btn").on("click", function(){
+						
+// 			alert(usingVoucherList.length);
+// 			usingVoucherList
+			
 			IMPCard();
 		});
 		
