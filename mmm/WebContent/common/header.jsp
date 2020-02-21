@@ -162,6 +162,10 @@ $(function(){
 	});
 	
 	
+	
+	
+	
+	
 
 });
 </script>
@@ -175,7 +179,7 @@ $(function(){
 				<li style="text-align: right; padding-top: 10px; padding-bottom: 10px; padding-right: 5px;">
 					<a href="/user/login/" class="login"><span>LOGIN</span></a>
 					<a href="/user/join/" class="join"><span>JOIN</span></a>
-					<a href="/mypage/mypage.jsp" class="myPage"><span>MY PAGE</span></a>
+					<a href="/mypage/mypage" class="myPage"><span>MY PAGE</span></a>
 					<a href="/customer/" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
 				</li>
 		</ul>
@@ -220,13 +224,13 @@ $(function(){
 				</li>
 
 				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-45 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-45">
-					<a href="/store/"><span>STORE</span><span class="arrow"> ▼</span></a>
+					<a href="/product/getSnackProductList"><span>STORE</span><span class="arrow"> ▼</span></a>
 					<ul class="aa-mega-sub-menu we-sidebar" style="right: auto; display: none;">
 						<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-652 aa-mega-menu-item" id="aa-mega-menu-item-652">
-							<a href="/store/">/store/</a>
+							<a href="/product/getVoucherList">Voucher</a>
 						</li>
 						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61 aa-mega-menu-item" id="aa-mega-menu-item-61">
-							<a href="/store/">/store/</a>
+							<a href="/product/getSnackProductList">Snack</a>
 						</li>
 					</ul>
 				</li>
