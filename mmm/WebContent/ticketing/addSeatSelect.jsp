@@ -1250,6 +1250,7 @@ $(function(){
 				totalArray[index].seatNo = $(this).attr('id');
 				
 				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().text($(this).siblings().first().attr('id')+"석");
+				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().attr("title", $(this).siblings().first().attr('id')+"석");
 				
 				nNumber = $("#numberSelector > div.group.normal > ul > li.selected").text();
 				yNumber = $("#numberSelector > div.group.young > ul > li.selected").text();
@@ -1265,6 +1266,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1301,6 +1303,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1337,6 +1340,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1373,6 +1377,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1408,6 +1413,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1598,6 +1604,8 @@ $(function(){
 				console.log("애프터 str:"+ _str)
 				
 			$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(_str);
+			$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", _str);
+				
 		}
 		
 		if(result>1){
@@ -1610,6 +1618,7 @@ $(function(){
 				$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").css("display","block");
 				
 				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().text($(this).siblings().first().attr('id')+"석");
+				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().attr("title", $(this).siblings().first().attr('id')+"석");
 				
 				var number = $(this).html();
 				if(number%2==1){
@@ -2454,6 +2463,8 @@ $(function(){
 		
 		$("span.screenTime").text(result)
 		$("#date > span.data").append(result)
+		
+		$("#date > span.data").attr("title", $("#date > span.data").text())
 
 
 console.log('${dateTime.screenTime}'.substring(14,'${dateTime.screenTime}'.length-5))

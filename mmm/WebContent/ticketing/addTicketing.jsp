@@ -889,6 +889,7 @@ function movieClick(){
 		$.getJSON( "/ticketing/json/getDateTimeByMovieName/"+$.trim($(this).text()), function( data ) {
 			    $("#ticket_tnb > div > div.info.movie > span > img").attr("src",data.poster)
 			    $("#movieRating > span").text(data.rating+" 관람가")
+			    $("#movieRating > span").attr("title", data.rating+" 관람가")
 			});
 	});
 }
@@ -1415,12 +1416,43 @@ function check(){
 //좌석선택 단계로 넘어가기
 function addSeatSelect(){
 	 
-	 //추후 유효성 체크 필요 
-	 var movieName = $("input[name='movieName']").val();
-	 var franchise = $("input[name='franchise']").val();
-	 var theaterName = $("input[name='theaterName']").val();
-	 var screenDate = $("input[name='screenDate']").val();
-	 var screenTime = $("input[name='screenTime']").val();
+	// 실제 유효성 체크
+	 var movieNam =$("div.movie-list > ul > li").hasClass("active")
+	 var franchis =$("div.franchise-list > ul > li").hasClass("active");
+	 var theaterNam = $("div.theater-list > ul > li").hasClass("active");
+	 var screenDat = $("div.calendar > ul > li").hasClass("active");
+	 var screenTim = $("div.remainingSeat > div > div > ul > li").hasClass("active");
+	 
+	 //모두 선택안됐다면...
+	 if( movieNam !=true && franchis!=true && theaterNam!=true && screenDat != true && screenTim != true){
+		 alert("영화를 선택해 주세요.")
+		 return;   		 
+	 }
+
+	 if( movieNam !=true){
+		 alert("영화를 선택해 주세요.")
+		 return;   		 
+	 }
+	 
+	 if( franchis !=true){
+		 alert("프랜차이즈를 선택해 주세요.")
+		 return;   		 
+	 }    	 
+	 
+	 if( theaterNam !=true){
+		 alert("극장을 선택해 주세요.")
+		 return;   		 
+	 } 
+	 
+	 if( screenDat !=true){
+		 alert("날짜를 선택해 주세요.")
+		 return;   		 
+	 }    	 
+	 
+	 if( screenTim !=true){
+		 alert("시간을 선택해 주세요.")
+		 return;   		 
+	 }    	 
 	 
 	 $("form").attr("method" , "POST").attr("action" , "/ticketing/addSeatSelect").submit();
 }

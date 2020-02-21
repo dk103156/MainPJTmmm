@@ -30,7 +30,6 @@
 
 <style>
 	body {
-		background-color: #f9fad4;
 		margin-top: 10px;
 	  }
   
@@ -49,7 +48,18 @@
 	
 	form > div > div > span.name{
 		width : 166px;	
-	}   
+	}  
+	#productList{
+	margin-top: 10px;
+	float:left;
+	margin: 10px 35px;
+	border: 3px solid #fee50e;
+	border-radius: 30px 40px 20px 40px / 30px 40px 20px 40px;
+	} 
+	#img{
+	width: 300px;
+	height: 300px;
+	}
 </style>  
 
 		
@@ -61,29 +71,26 @@
 
 	<div class="row">
 			<div class="col-md-12" style="text-align:center;">
-				<img src="/resources/image/1111.png" width ="950" height="400">
+				<img src="/resources/image/1111.png" width ="1000" height="350">
 		</div>
 	</div><!-- end of row -->
  			
  		 			
- 	<hr/> <!-- 한줄 -->
+ 	<br/> <!-- 한줄 -->
  		
-	<div class="row">
+	<div class="row" id="row">
  		<c:forEach var="product" items="${list}">
-			<div class="col-6">
-				<div class="thumb-wrapper">
+				<div class="thumb-wrapper" id="productList">
 	 				<div class="img-box text-center">
-						<img src="/resources/image/${product.prodImage}"  class="img-circle img-responsive productImage">
+						<img src="/resources/image/${product.prodImage}"  class="img-circle img-responsive productImage" id="img">
 						<input name="prodNo" type="hidden" value = "${product.prodNo}">
 						<input name="prodPrice" type="hidden" value= "${product.prodPrice }">
 						<div class="content-box">
-							<h3 style="text-align:center;"><strong>${product.prodName}</strong></h3>
-							<h4 style="text-align:center;">${product.prodDetail}</h4>
-							<h4 style="text-align:center;">${product.prodPrice}원</h4>
+							<h4 style="text-align:center;"><strong>${product.prodName}</strong></h4><br>
+							<h5 style="text-align:center;">${product.prodPrice}원</h5>
 		 				</div> 
 					</div>
 				</div><!-- end of thumb-wrapper -->	
-			</div><!-- end of col -->	  		
  		 </c:forEach>	
 	</div><!-- end of row -->
 	
