@@ -50,6 +50,12 @@ public class TheaterDaoImpl implements TheaterDao{
 		return sqlSession.selectOne("TheaterMapper.getTheater",theaterNo);
 	}
 	
+	@Override
+	public Theater getTheaterByName(String theaterName) throws Exception {
+		
+		return sqlSession.selectOne("TheaterMapper.getTheaterByName",theaterName);
+	}
+	
 	public String lastTheater() throws Exception {
 		
 		return sqlSession.selectOne("TheaterMapper.lastTheater");
@@ -59,6 +65,7 @@ public class TheaterDaoImpl implements TheaterDao{
 		
 		return sqlSession.selectList("TheaterMapper.getTheaterList",search);
 	}
+
 
 
 }

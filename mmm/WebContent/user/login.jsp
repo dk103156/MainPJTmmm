@@ -111,10 +111,14 @@ label {
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
-$(function(){
-	
 
 	
+	
+	function clickBtn(){
+		$("#btn").trigger("click");
+	}
+	
+
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -156,6 +160,15 @@ $(function(){
     	}
     	alert(message);
 	}
+	
+$(function(){	
+	
+	//clickBtn();
+	
+	$("#btn").on('click',function(){	
+		self.location="/user/login";
+	})
+	
 	
 	//======================"로그인" Event 연결==========
 		
@@ -200,13 +213,14 @@ $(function(){
 			$('form').attr('method','POST').attr('action','/user/login').submit();	
 		}
 	})	
-	
-	
-	
+
 	$('#signUpBtn').on('click',function(){
 		self.location = '/user/userAuthorization.jsp?type=addUser';
 		
 	})
+	
+	
+	
 	
 	//===================naver Login============
 	$('#naverLogin').on('click',function(){
@@ -280,7 +294,7 @@ $(function(){
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+<button type="button" id="btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
   Login
 </button>
 
