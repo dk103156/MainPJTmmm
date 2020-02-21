@@ -54,6 +54,12 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 	
 	@Override
+	public Theater getTheaterByName(String theaterName) throws Exception {
+		
+		return theaterDao.getTheaterByName(theaterName);
+	}
+	
+	@Override
 	public String lastTheater() throws Exception {
 		
 		return theaterDao.lastTheater();
@@ -64,4 +70,6 @@ public class TheaterServiceImpl implements TheaterService {
 		
 		return theaterDao.getTheaterList(search);
 	}
+
+
 }
