@@ -218,26 +218,26 @@ $(function(){
 		<div id="wishList"></div>
 		
 		
-		<div class="row">
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-				<br><span class="movieTitle">정직한 후보</span>
-				<br><span class="releaseDate">2019.10.23 개봉</span>
-				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span>
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-				<br><span class="movieTitle">정직한 후보</span>
-				<br><span class="releaseDate">2019.10.23 개봉</span>
-				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span>
-			</div>
-			<div class="col-md-4">
-				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" >
-				<br><span class="movieTitle">정직한 후보</span>
-				<br><span class="releaseDate">2019.10.23 개봉</span>
-				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span>
-			</div>
-		</div>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-4"> -->
+<!-- 				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" > -->
+<!-- 				<br><span class="movieTitle">정직한 후보</span> -->
+<!-- 				<br><span class="releaseDate">2019.10.23 개봉</span> -->
+<!-- 				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-4"> -->
+<!-- 				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" > -->
+<!-- 				<br><span class="movieTitle">정직한 후보</span> -->
+<!-- 				<br><span class="releaseDate">2019.10.23 개봉</span> -->
+<!-- 				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-4"> -->
+<!-- 				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" > -->
+<!-- 				<br><span class="movieTitle">정직한 후보</span> -->
+<!-- 				<br><span class="releaseDate">2019.10.23 개봉</span> -->
+<!-- 				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		
 		
 	</div>
