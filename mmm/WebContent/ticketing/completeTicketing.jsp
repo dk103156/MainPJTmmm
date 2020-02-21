@@ -154,11 +154,11 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	productNo.split(",").forEach( (index,value) => {
 		//console.log(value)
 		$.getJSON('json/getProduct/'+value)
-		.done(
-			var product = value.product;
+		.done( x => {
+			var product = x.product;
 			productName.push(product.prodName);
 						
-		)
+		})
 	}); // end of forEach
 	//중복 제거
 	productName= productName.reduce(function(a,b){
