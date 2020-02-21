@@ -73,7 +73,10 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 
-
+	@Override
+	public List<Inventory> getVoucherListInPayment(int userNo) throws Exception {
+		return inventoryDao.getVoucherListInPayment(userNo);
+	}
 
 
 	

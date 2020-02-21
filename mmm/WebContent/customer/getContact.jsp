@@ -13,6 +13,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 <script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
@@ -34,6 +37,7 @@
 			history.go(-1);
 		});
 		
+		//답변달기 모달 띄우기
 		$('#addAnswer').on("click", function(){
 			console.log('addAnswer이 클릭됨');
 			$('#modalBox').modal('show');
@@ -192,6 +196,10 @@
 		div.inline.rightt.date {
 		text-align: right;
 		}
+		
+		body {
+		font-family: 'Noto Sans KR', sans-serif;
+		}
 
 </style>
 
@@ -276,8 +284,8 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-			<h4 class="modal-title" id="myModalLabel">답변달기</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<h4 class="modal-title" id="myModalLabel"></h4>
 			</div>
 		
 			<div class="modal-body">
