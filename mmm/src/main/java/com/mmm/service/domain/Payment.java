@@ -20,7 +20,7 @@ public class Payment {
 							// 4: cash+voucher		5: point+voucher	6: cash+point+voucher
 //	private List<Integer> mVoucherNo;	//영화 관람권 핀 번호
 //	private List<Integer> pVoucherNo;	// 스토어 이용권 핀 번호
-	private List<Integer> vouchers;
+	private String vouchers;
 	private String usingVoucherFirst;
 	private String usingVoucherSecond;
 	private String usingVoucherThird;
@@ -135,16 +135,17 @@ public class Payment {
 //		this.pVoucherNo = pVoucherNo;
 //	}
 
-	public List<Integer> getVouchers() {
-		return vouchers;
-	}
-
-	public void setVouchers(List<Integer> vouchers) {
-		this.vouchers = vouchers;
-	}
 
 	public String getUsingVoucherFirst() {
 		return usingVoucherFirst;
+	}
+
+	public String getVouchers() {
+		return vouchers;
+	}
+
+	public void setVouchers(String vouchers) {
+		this.vouchers = vouchers;
 	}
 
 	public void setUsingVoucherFirst(String usingVoucherFirst) {
@@ -217,10 +218,6 @@ public class Payment {
 		builder.append(savingPoint);
 		builder.append(", payMethod=");
 		builder.append(payMethod);
-//		builder.append(", mVoucherNo=");
-//		builder.append(mVoucherNo);
-//		builder.append(", pVoucherNo=");
-//		builder.append(pVoucherNo);
 		builder.append(", vouchers=");
 		builder.append(vouchers);
 		builder.append(", usingVoucherFirst=");

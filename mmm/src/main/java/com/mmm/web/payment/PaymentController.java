@@ -2,6 +2,7 @@ package com.mmm.web.payment;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mmm.common.Search;
 import com.mmm.service.domain.Inventory;
@@ -153,6 +155,7 @@ public class PaymentController {
 	public String addPayent(@ModelAttribute Payment payment,
 							@ModelAttribute Ticketing ticketing,
 							@ModelAttribute Purchase purchase,
+//							@RequestParam(value = "usingVoucherid" , required = false) String usingVoucherid,
 //							@RequestParam(value = "ticketingNo" , required = false) String ticketingNo,		//bodyEntity에 넣어서 주는 ticketing 정보
 //							@RequestParam(value = "purchaseNo", required = false) String purchaseNo,		//bodyEntity에 넣어서 주는 purchase 정보
 //							@RequestParam("impUid") String impUid,
@@ -162,6 +165,8 @@ public class PaymentController {
 		System.out.println("------------input ticketing :  "+ticketing);
 		System.out.println("------------input purchase :  "+purchase);
 		System.out.println("----------- input impUid  : "+payment.getImpUid());
+		
+		System.out.println("-------------------payment.getVouchers() : " + payment.getVouchers());
 		
 //		로그인한 회원 정보 from session
 		User user = (User)session.getAttribute("user");
@@ -180,6 +185,30 @@ public class PaymentController {
 		purchase.setPurchaseStatus(0);
 		
 //	3.payment setting
+//		voucher parsing..
+		String vouchers = payment.getVouchers();
+		List<String> voucherList = new ArrayList<String>();
+		if (vouchers != null && vouchers != "") {
+			String[] voucherArray =  vouchers.split(",");
+			voucherList = Arrays.asList(voucherArray);
+			
+			System.out.println("--------------------- voucherList :" + voucherList);
+			System.out.println("--------------------- voucherList.size() :" + voucherList.size());
+			
+			
+			if (voucherList.get(0) != null) {
+				payment.setUsingVoucherFirst(voucherList.get(0));
+			}
+			if (voucherList.size()>1 && voucherList.get(1) != null) {
+				payment.setUsingVoucherSecond(voucherList.get(1));
+			}
+			if (voucherList.size()>2 && voucherList.get(2) != null) {
+				payment.setUsingVoucherThird(voucherList.get(2));
+			}
+		}
+
+		System.out.println("------- voucher 확인을 위한 payment" + payment);
+		
 //		payMethod 나눠주는 Logic..
 		String voucherExist ="";
 		if (payment.getUsingVoucherFirst() != null) {
@@ -352,7 +381,13 @@ public class PaymentController {
 		
 		List<Point> list = (List<Point>) outputMap.get("list");
 		
+		System.out.println("----- list.size()" + list.size());
+		int totalPoint = list.get(0).getTotalPoint();
+		System.out.println("----- totalPoint" + totalPoint);
+		
+		
 		model.addAttribute("list", list);
+		model.addAttribute("totalPoint", totalPoint);
 		
 		return "forward:/payment/getPointList.jsp";
 	}

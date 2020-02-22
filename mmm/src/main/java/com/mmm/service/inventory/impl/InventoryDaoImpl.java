@@ -71,6 +71,11 @@ public class InventoryDaoImpl implements InventoryDao {
 		
 		return sqlSession.selectList("InventoryMapper.getVoucherListInPayment", userNo);
 	}
+
+	@Override
+	public Inventory getInventoryForPay(int inventoryNo) throws Exception {
+		return sqlSession.selectOne("InventoryMapper.getInventoryForPay", inventoryNo);
+	}
 	
 
 	

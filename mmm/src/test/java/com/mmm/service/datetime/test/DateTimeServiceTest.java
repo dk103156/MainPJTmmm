@@ -65,7 +65,8 @@ public class DateTimeServiceTest {
 		
 
 		long start = System.currentTimeMillis();
-        System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
 
         //GUI�� ���� headless option ����
         ChromeOptions options = new ChromeOptions();

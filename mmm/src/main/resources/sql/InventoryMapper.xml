@@ -32,6 +32,13 @@
 		 #{inventoryUsedDate:TIMESTAMP},    
 		 0 )
 	 </insert>
+	 
+	 <select id="getInventoryForPay" parameterType="int" resultMap="inventorySelectMap">
+	 SELECT
+	 *
+	 FROM inventory
+	 WHERE inventory_no = #{inventoryNo}
+	 </select>
 
 	<select id="getInventory" parameterType="Search"  resultMap="inventorySelectMap" >
 	 	SELECT
@@ -79,7 +86,7 @@
 			AND i.INVENTORY_STATUS = 0
  	</select>
 	
-	<update id="updateInventory" parameterType="Search" >
+	<update id="updateInventory" parameterType="Inventory" >
 	 	UPDATE inventory
 	 	<trim prefix="SET" suffixOverrides=",">
 			<if test="inventoryNo !=0">inventory_no = #{inventoryNo},</if>

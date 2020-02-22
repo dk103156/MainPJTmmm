@@ -78,12 +78,17 @@
 	var totalDiscount;
 	var cash;
 	
-// 	해당 회원이 사용할 수 있는 voucher List
-	var voucherList = JSON.parse('${voucherJSONArray}');
+	var usingVoucherid = '';
 	
-	console.log(" voucherList : "+voucherList)
-	console.log(" voucherListddd : "+voucherList[0].invenPrice)
-	console.log(" voucherList.length : "+voucherList.length);
+// 	해당 회원이 사용할 수 있는 voucher List
+	if (${! empty voucherJSONArray}) {
+		var voucherList = JSON.parse('${voucherJSONArray}');
+		
+		console.log(" voucherList : "+voucherList)
+		console.log(" voucherListddd : "+voucherList[0].invenPrice)
+		console.log(" voucherList.length : "+voucherList.length);
+		
+	}
 
 
 // 	if ('${! empty voucherJSONArray}') {
@@ -115,6 +120,7 @@
 			
 			if ( response.success ) { 	// imPort 결제 성공
 				console.log('--- imPort결제 성공.. : '+JSON.stringify(response));
+				alert('usingVoucherid  : '+ usingVoucherid);
 			
 				// form 양식 없이 POST로 보내는 jQuery.. cdn..
 				$.redirect("/payment/addPayment", 				//보낼 url
@@ -134,6 +140,7 @@
 								"purchasePrice" : '${purchase.purchasePrice}',
 								"totalPrice" : totalPrice,						//properties for Payment
 								"usingPoint" : partPoint,
+								"vouchers" : usingVoucherid,
 								"cash" : cash,
 								"impUid" : response.imp_uid
 								},
@@ -177,11 +184,16 @@
 		totalPoint = '${totalPoint}'
 		
 // 		사용가능한 상품권 목록을 넣어준다
-		var voucherDisplay = '<option selected>사용 가능한 상품권을 선택하세요</option>';
-		for (var i = 0; i < voucherList.length; i++) {
-			voucherDisplay += "<option value='"+voucherList[i].invenNo+"'>";
-			voucherDisplay += voucherList[i].invenName+"("+ voucherList[i].invenPrice+"원)</option>";
-		}		
+
+		if (voucherList != undefined) {
+			var voucherDisplay = '<option selected>사용 가능한 상품권을 선택하세요</option>';
+			for (var i = 0; i < voucherList.length; i++) {
+				voucherDisplay += "<option value='"+voucherList[i].invenNo+"'>";
+				voucherDisplay += voucherList[i].invenName+"("+ voucherList[i].invenPrice+"원)</option>";
+			}		
+		}else if(voucherList == undefined){
+			voucherDisplay += '<option selected>사용 가능한 상품권이 없습니다.</option>';		
+		}
 		
 		$('select[name=select-voucher]').html(voucherDisplay);
 		
@@ -446,9 +458,18 @@
 		
 // 		import 모달 띄우는 이벤트
 		$("#imp-btn").on("click", function(){
-						
-// 			alert(usingVoucherList.length);
-// 			usingVoucherList
+				
+			
+			alert("usingVoucherList"  + usingVoucherList);
+			for (var i = 0; i < usingVoucherList.length; i++) {
+				usingVoucherid += usingVoucherList[i].invenNo;
+				
+				if (i != usingVoucherList.length-1) {
+					usingVoucherid += ","
+				}
+			}
+			
+			alert("usingVoucherid"  + usingVoucherid);
 			
 			IMPCard();
 		});

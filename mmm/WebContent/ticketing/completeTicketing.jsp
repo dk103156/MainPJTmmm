@@ -151,9 +151,9 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	var productName = new Array();
 	var productNo = '${purchase.purchaseProductNo }';
 	
-	productNo.split(",").forEach( (index,value) => {
+	productNo.split(",").forEach( (value,index) => {
 		//console.log(value)
-		$.getJSON('json/getProduct/'+value)
+		$.getJSON('/product/json/getProduct/'+value)
 		.done( x => {
 			var product = x.product;
 			productName.push(product.prodName);
@@ -169,7 +169,7 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 					
 					},[])
 	var fullName="";
-	productName.forEach( (index,value) => {
+	productName.forEach( (value,index) => {
 		
 		fullName += value+",";
 	})					

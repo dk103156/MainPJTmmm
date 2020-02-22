@@ -40,6 +40,9 @@
 <h4> Point List </h4>
 
 <div class="container mt-2">
+  <div>
+   <h5 class="text-right">Total Point : ${totalPoint}</h5>
+  </div>
 	<div>
 		<table class="table table-hover text-center">
 		  <thead class="thead-dark">
