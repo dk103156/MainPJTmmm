@@ -133,20 +133,25 @@ public class PaymentServiceImpl implements PaymentService {
 			paymentDao.addPoint((Point)inputMap.get("minusPoint"));
 		}
 		
-//		Inventory Updatng.inputMap.
-//		if (payment.getVouchers() != null && payment.getVouchers().length()>0) {
-//			if (payment.getUsingVoucherFirst() != null) {
-//				Inventory inventory = inventoryDao.getInventory(search)
-//				inventoryDao.updateInventory(inventory);
-//			}
-//			if (payment.getUsingVoucherSecond() != null) {
-//				voucherExist += payment.getUsingVoucherSecond();
-//			}
-//			if (payment.getUsingVoucherThird() != null) {
-//				voucherExist += payment.getUsingVoucherThird();
-//			}
-//			
-//		}
+//		Inventory Status Updatng...from 0 to 1
+		if (payment.getVouchers() != null && payment.getVouchers().length()>0) {
+			if (payment.getUsingVoucherFirst() != null) {
+				Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherFirst()));
+				inventory.setInventoryStatus("1");
+				inventoryDao.updateInventory(inventory);
+			}
+			if (payment.getUsingVoucherSecond() != null) {
+				Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherSecond()));
+				inventory.setInventoryStatus("1");
+				inventoryDao.updateInventory(inventory);
+			}
+			if (payment.getUsingVoucherThird() != null) {
+				Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherThird()));
+				inventory.setInventoryStatus("1");
+				inventoryDao.updateInventory(inventory);
+			}
+			
+		}
 		
 //		String impUid = payment.getImpUid();
 		

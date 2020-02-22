@@ -381,7 +381,13 @@ public class PaymentController {
 		
 		List<Point> list = (List<Point>) outputMap.get("list");
 		
+		System.out.println("----- list.size()" + list.size());
+		int totalPoint = list.get(0).getTotalPoint();
+		System.out.println("----- totalPoint" + totalPoint);
+		
+		
 		model.addAttribute("list", list);
+		model.addAttribute("totalPoint", totalPoint);
 		
 		return "forward:/payment/getPointList.jsp";
 	}

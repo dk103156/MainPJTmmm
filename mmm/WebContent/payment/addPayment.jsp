@@ -81,11 +81,14 @@
 	var usingVoucherid = '';
 	
 // 	해당 회원이 사용할 수 있는 voucher List
-	var voucherList = JSON.parse('${voucherJSONArray}');
-	
-	console.log(" voucherList : "+voucherList)
-	console.log(" voucherListddd : "+voucherList[0].invenPrice)
-	console.log(" voucherList.length : "+voucherList.length);
+	if (${! empty voucherJSONArray}) {
+		var voucherList = JSON.parse('${voucherJSONArray}');
+		
+		console.log(" voucherList : "+voucherList)
+		console.log(" voucherListddd : "+voucherList[0].invenPrice)
+		console.log(" voucherList.length : "+voucherList.length);
+		
+	}
 
 
 // 	if ('${! empty voucherJSONArray}') {
@@ -181,11 +184,16 @@
 		totalPoint = '${totalPoint}'
 		
 // 		사용가능한 상품권 목록을 넣어준다
-		var voucherDisplay = '<option selected>사용 가능한 상품권을 선택하세요</option>';
-		for (var i = 0; i < voucherList.length; i++) {
-			voucherDisplay += "<option value='"+voucherList[i].invenNo+"'>";
-			voucherDisplay += voucherList[i].invenName+"("+ voucherList[i].invenPrice+"원)</option>";
-		}		
+
+		if (voucherList != undefined) {
+			var voucherDisplay = '<option selected>사용 가능한 상품권을 선택하세요</option>';
+			for (var i = 0; i < voucherList.length; i++) {
+				voucherDisplay += "<option value='"+voucherList[i].invenNo+"'>";
+				voucherDisplay += voucherList[i].invenName+"("+ voucherList[i].invenPrice+"원)</option>";
+			}		
+		}else if(voucherList == undefined){
+			voucherDisplay += '<option selected>사용 가능한 상품권이 없습니다.</option>';		
+		}
 		
 		$('select[name=select-voucher]').html(voucherDisplay);
 		
