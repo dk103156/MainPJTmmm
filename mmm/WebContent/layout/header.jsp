@@ -161,7 +161,7 @@ $(function(){
 		
 	});
 	
-	
+
 	
 	
 	
@@ -177,7 +177,14 @@ $(function(){
 	<div style="background-color: #fee50e;">
 		<ul class="gnb">                
 				<li style="text-align: right; padding-top: 10px; padding-bottom: 10px; padding-right: 5px;">
-					<a href="#" id=mainLoginBtn class="login"><span>LOGIN</span></a>
+					<c:choose> 
+					    <c:when test="${not empty sessionScope.user }">   
+					       <a href="/user/logout" class="login">LOGOUT</a>
+					    </c:when>
+					    <c:otherwise>    
+					       <a href="#" id=mainLoginBtn class="login"><span>LOGIN</span></a>
+					    </c:otherwise>                  
+					</c:choose>
 					<a href="/user/userAuthorization.jsp?type=addUser" class="join"><span>JOIN</span></a>
 					<a href="/mypage/mypage" class="myPage"><span>MY PAGE</span></a>
 					<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
