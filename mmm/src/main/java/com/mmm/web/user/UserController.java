@@ -352,7 +352,7 @@ public class UserController {
 		}else {//로그인 실패시 
 			return "redirect:/user/unUserLogin.jsp?status=failed";
 		}
-		return "redirect:/index.jsp";
+		return "redirect:/main.jsp";
 	}
 	
 	@RequestMapping(value ="logout", method=RequestMethod.GET)
@@ -535,7 +535,7 @@ public class UserController {
 			String cryptoPassword = CryptoUtil.cryptoText(password);
 			dbUser.setPassword(cryptoPassword);
 			userService.updateUser(dbUser);
-			return "redirect:/index.jsp";
+			return "redirect:/mypage/mypage.jsp";
 		}else {
 			return "redirect:/user/updatePw.jsp?status=failed";
 		}

@@ -28,6 +28,8 @@
 
 $(function(){
 	
+	$("#loginModal").modal("show");
+	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -116,36 +118,76 @@ $(function(){
 <body>
 
 <!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+<!-- 	<div class="container" style="width: 600px;"> -->
 	
-		<h1 class="bg-default text-center">비 회 원 예 매 확 인 </h1>
+<!-- 		<h1 class="bg-default text-center" style="margin-top: 10px; background-color:#fee50e" >비 회 원 예 매 확 인 </h1> -->
 		
-		<!-- form Start /////////////////////////////////////-->
-		<form>
-		  	<div class="form-group row" style="font-size: 12pt;">
-				<label for="staticEmail" class="col-sm-2 col-form-label">휴대전화번호</label>
-				<div class="input-group sm-10">
-					<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" aria-label="Recipient's username"
-						aria-describedby="basic-addon2">
-				</div>
-				<h6 id="confirmNum1" style="color: red;"></h6>
-			</div>
-			<div class="form-group row">
-				<label for="password" class="col-sm-2 col-form-label">비밀번호</label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password" name="password" placeholder="Password">
-		    	</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-12 text-center">
-					<button type="button" id="chkBtn" class="btn btn-primary" >비회원 예매확인</button>
-			 	</div>
-			</div>
-		</form>
-		<!-- form end /////////////////////////////////////-->
+<!-- 		<!-- form Start /////////////////////////////////////--> 
+<!-- 		<form> -->
+<!-- 		  	<div class="form-group row" style="font-size: 12pt; text-align: center; margin-top: 20px;"> -->
+<!-- 				<label for="staticEmail" class="col-sm-3 col-form-label">휴대전화번호</label> -->
+<!-- 				<div class="col-sm-9"> -->
+<!-- 					<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" aria-label="Recipient's username" -->
+<!-- 						aria-describedby="basic-addon2"> -->
+<!-- 				</div> -->
+<!-- 				<h6 id="confirmNum1" style="color: red;"></h6> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group row"  style="text-align: center;"> -->
+<!-- 				<label for="password" class="col-sm-3 col-form-label">비밀번호</label> -->
+<!-- 				<div class="col-sm-9"> -->
+<!-- 					<input type="password" class="form-control" id="password" name="password" placeholder="Password"> -->
+<!-- 		    	</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group row"> -->
+<!-- 				<div class="col-sm-12 text-center"> -->
+<!-- 					<button type="button" id="chkBtn" class="btn btn-primary" >비회원 예매확인</button> -->
+<!-- 			 	</div> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 		<!-- form end /////////////////////////////////////--> 
 
-	</div>
+<!-- 	</div> -->
 	<!--  화면구성 div end /////////////////////////////////////-->
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
+				<h3 class="tit" id="exampleModalLabel" style="font-size: 1.2em;">로그인</h3>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">	    
+		    	<!-- col-wrap -->
+			    <form>
+					<div class="col-wrap">
+						<div class="col left">
+							<div class="login-input-area">
+							<p> 예매 시 입력하신 휴대폰번호와 비밀번호를 입력해주세요.<br></p>
+								<input autocomplete="off" id="phone" name="phone" maxlength="20" type="text" placeholder="휴대폰 번호" title="휴대폰 번호를 입력하세요" class="input-text strTrim"><br>
+								<input autocomplete="off" id="password" name="password" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15" style="margin-top: 15px;">
+								<button id="chkBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; 
+									cursor: default; background-color:#fee50e; margin-top: 10px;" disabled="disabled">로그인<!--로그인--></button>
+					
+								<div class="link" style="padding-top: 20px; padding-bottom: 30px; text-align: center;">
+									<a href="/user/userAuthorization?type=findPw" title="PW 찾기 선택" style=" margin-left:10px; position: relative; color: #333;">PW 찾기<!--ID/PW 찾기--></a>
+									<a href="/user/userAuthorization?type=addUnUserView" title="비회원 예매"style=" margin-left:10px; position: relative; color: #333;">비회원 예매<!--비회원 예매--></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!--// col-wrap -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
 
 </body>
 </html>

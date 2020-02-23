@@ -19,17 +19,54 @@
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+.button.purple {
+    color: #333;
+    line-height: 36px;
+    border: 0;
+    background: #fee50e;
+}
+.button.large {
+    height: 46px;
+    padding: 0 30px;
+    line-height: 44px;
+}
+
+.button {
+    display: inline-block;
+    height: 36px;
+    margin: 0;
+    padding: 0 15px;
+    text-align: center;
+    line-height: 34px;
+    color: #fee50e;
+    font-weight: 400;
+    border-radius: 4px;
+	font-family:'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    border: 1px solid #fee50e;
+    vertical-align: middle;
+    background-color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
 </style>
 
-<title>비회원 로그인</title>
+<title>비회원 예매</title>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 $(function(){
+	
 	$('#addUserBtn').on("click",function(){
 		console.log('click');
 		validate();
-	})
+	});
+	
+	$('#cancelBtn').on("click",function(){
+		console.log('click');
+		history.go(-1);
+	});
 	
 	
 	
@@ -215,65 +252,69 @@ $(function(){
 <body>
 
 <!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container" style="width: 600px;">
 	
-		<h1 class="bg-default text-center">비 회 원 예 매 </h1>
+		<h1 class="bg-default text-center" style="margin-top: 10px; background-color:#fee50e">비 회 원 예 매 </h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form>
-			<div class="form-group row">
-    			<label for="birth" class="col-sm-2 col-form-label">생년월일</label>
-    			<div class="col-sm-10">
+			<div class="form-group row" style="text-align: center;">
+    			<label for="birth" class="col-sm-3 col-form-label">생년월일</label>
+    			<div class="col-sm-9">
       				<input type="date" class="form-control" id="birth" name="birth" placeholder="ex)20200101">
       				<input type="hidden" class="form-control" id="role" name="role" value="unUser">
     			</div>
 			</div>
 			<fieldset class="form-group">
-				<div class="row">
-					<legend class="col-form-label col-sm-2 pt-0">성별</legend>
-						<div class="col-sm-6">
-							<div class="form-check">
+				<div class="row" >
+					<legend class="col-form-label col-sm-4 pt-0" style="padding-left: 57px;" >성별</legend>
+					
+						<div class="col-sm-4" style="text-align: center;" >
+							<div class="form-check" style=" padding-left: 0px;">
 		          				<input class="form-check-input" type="radio" id="male" name="gender" value="M" checked>
 		          				<label class="form-check-label" for="Male">
 		                           	남	
 		          				</label>
-		        			</div>
-							<div class="form-check">
-								<input class="form-check-input" type="radio" id="female" name="gender" value="F">
-								<label class="form-check-label" for="female">
-									여	
-		          				</label>
-							</div>
-		      			</div>
+	          				</div>
+	        			</div>
+		        			<div class="col-sm-4" style="text-align: center;" >
+								<div class="form-check" style=" padding-left: 0px;">
+									<input class="form-check-input" type="radio" id="female" name="gender" value="F">
+									<label class="form-check-label" for="female">
+										여	
+			          				</label>
+								</div>
+		      				</div>
 				</div>
 		  	</fieldset>
-		  	<div class="form-group row" style="font-size: 12pt;">
-				<label for="staticEmail" class="col-sm-2 col-form-label">휴대전화번호</label>
-				<div class="input-group sm-10">
+		  	<div class="form-group row" style="font-size: 12pt; text-align: center; ">
+				<label for="staticEmail" class="col-sm-3 col-form-label">휴대전화번호</label>
+				<div class="col-sm-9">
 					<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" aria-label="Recipient's username"
 						aria-describedby="basic-addon2">
 				</div>
 				<h6 id="confirmNum1" style="color: red;"></h6>
 			</div>
-			<div class="form-group row">
-				<label for="password" class="col-sm-2 col-form-label">비밀번호</label>
-				<div class="col-sm-10">
+			<div class="form-group row" style="text-align: center;">
+				<label for="password" class="col-sm-3 col-form-label">비밀번호</label>
+				<div class="col-sm-9">
 					<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 		    	</div>
 			</div>
-			<div class="form-group row">
-				<label for="password2" class="col-sm-2 col-form-label">비밀번호확인</label>
-				<div class="col-sm-10">
+			<div class="form-group row" style="text-align: center;">
+				<label for="password2" class="col-sm-3 col-form-label">비밀번호확인</label>
+				<div class="col-sm-9">
 					<input type="password" class="form-control" id="password2" placeholder="Password">
 				</div>
 			</div>
-			<div class="form-check">
+			<div class="form-check" style=" margin-bottom: 10px;">
 			    <input type="checkbox" class="form-check-input" id="agreeCheck">
-			    <label class="form-check-label" for="agreeCheck">개인정보수집 및 이용 동의</label>
+			    <label class="form-check-label" for="agreeCheck" >개인정보수집 및 이용 동의</label>
 			</div>	
 			<div class="form-group row">
 				<div class="col-sm-12 text-center">
-					<button type="button" id="addUserBtn" class="btn btn-primary" >비회원 예매하기</button>
+					<button type="button" id="addUserBtn" class="button large purple" >비회원 예매하기</button>
+      				<a class="button large" href="#" id="cancelBtn" role="button">취&nbsp;소</a>
 			 	</div>
 			</div>
 		</form>
