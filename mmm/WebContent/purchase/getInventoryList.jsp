@@ -80,8 +80,8 @@
 							<div class="prodName col-12"><span><img src="../resources/image/${ i.prodImage}"  id="img"></span>
 								<div class="content-box">
 									<div class="prodName col-12" id="prodName"><strong>${i.prodName}</strong></div>
-									<!--  	<div class="prodQuantity col-12"> -->
-											<span></span>
+									<!--  	<div class="prodQuantity col-12"> 
+											<span></span>-->
 											<button type="button" class="btn modalButton" id="btn" data-toggle="modal" data-target="#exampleModalCenter">
 							  					 상세보기
 											</button>
@@ -148,11 +148,11 @@ $(function(){
 	productList.forEach( (value,index) =>{
 		//console.log(value)
 		var quantity = productQuantityList[index];
-		$($("div.prodQuantity > span")[index]).text(quantity)
+		//$($("div.prodQuantity > span")[index]).text(quantity)
 		  
 		 $.ajax({
 		  type: "POST",
-		  url: "json/getInventoryList/",
+		  url: "/purchase/json/getInventoryList/",
 		  data: JSON.stringify({inventoryProdNo : value, inventoryStatus : "0", inventoryPurchaseNo : "0" }),
 		  dataType : "json",
 	      headers: { 
@@ -168,18 +168,11 @@ $(function(){
 							var pinNo =value.inventoryProdPinNo;
 							var Element ="<div><strong><div>"+pinNo+"</div></strong><input type='hidden' value='"+inventoryNo+"'></div>";
 							$("div.modal-body").append(Element);
-						});
-											
-						
-					});
-	  		  
-	  	  })
-		
-
-	})
-	
-
-});
+						});//end of for Each	
+					});//end of eventHadler Click
+	  	  })//end of done
+	})//end of forEach
+});//end of document ready function
 
 </script>
 </body>
