@@ -211,6 +211,12 @@ $(function(){
 			$("#plusPage").load("/user/getUser");
 		}
 	});
+	
+	$('#cancelBtn').on("click",function(){
+		console.log('click');
+		history.go(-1);
+	});
+	
 
 	
 	

@@ -23,6 +23,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -109,7 +110,7 @@ public class MovieController {
 	
 	
 //	하루에 한번씩 실행되는 메소드...
-//	@Scheduled(cron = "*/10 * * * * *")	//매 10초마다 실행
+	@Scheduled(cron = "*/10 * * * * *")	//매 10초마다 실행
 	public void addMovieAndUpdateReleasedMovie()throws Exception{
 		this.addMovie();			//다음에서 상영예정작 크롤링하고, JMDB API에서 해당 영화의 정보를 긁어와서 DB에 추가
 		this.updateReleasedMovie();	//개봉일이 지난 영화들 onBoxOfficeFlagfmf 0--> 1변경
@@ -120,8 +121,8 @@ public class MovieController {
 	public void addMovie()throws Exception{
 		
 //		1. 크롤링---------------------------------------------------------------------
-//		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-		System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
+		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+//		System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
 		
 		//Browser 안띄우기
 		ChromeOptions options = new ChromeOptions();

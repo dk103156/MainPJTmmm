@@ -301,6 +301,12 @@ $(function(){
 		}
 	})
 	
+		$('#cancelBtn').on("click",function(){
+		console.log('click');
+		history.go(-1);
+	});
+	
+	
 	
 	
 	function validate() {
