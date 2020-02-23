@@ -482,10 +482,10 @@
 
 	</script>
     
-    <title>addPay</title>
+    <title>mmm</title>
   </head>
   <body>
-    <h1>addPay</h1>
+	<jsp:include page="/layout/header.jsp"></jsp:include>    
     
 	  <div class="album py-5 bg-light">
 	    <div class="container">

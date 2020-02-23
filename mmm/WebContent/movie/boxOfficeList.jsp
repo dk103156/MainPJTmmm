@@ -412,11 +412,11 @@
 		
 	</script>
     
-    <title>boxOfficeList</title>
+    <title>mmm</title>
   </head>
   <body>
-    <h1>BoxOfficeList</h1>
-    
+	<jsp:include page="/layout/header.jsp"></jsp:include>
+	    
     	<input type="hidden" id="currentPage" value=""/>
     
 		  <div align="right">

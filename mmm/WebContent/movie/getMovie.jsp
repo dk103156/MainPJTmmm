@@ -288,10 +288,11 @@
 
 	</script>
     
-    <title>MovieDetail</title>
+    <title>mmm</title>
   </head>
   <body>
-    <h1>MovieDetail</h1>
+  
+  	<jsp:include page="/layout/header.jsp"></jsp:include>
     
     <!--     	임의로 userNo 심어주기... TEST 용  -->
 <!-- 	<input id="userNo" type="hidden" value="11111"> -->
