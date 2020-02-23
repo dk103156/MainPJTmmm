@@ -29,8 +29,9 @@
   <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>	
 
 <style>
-	body {
+	#body {
 		margin-top: 10px;
+		 font-family: 'Noto Sans KR', sans-serif;
 	  }
   
 	hr{
@@ -57,15 +58,21 @@
 	border-radius: 30px 40px 20px 40px / 30px 40px 20px 40px;
 	} 
 	#img{
-	width: 300px;
-	height: 300px;
+	width: 200px;
+	height: 200px;
+	}
+	#modalhead{
+	background-color: #fee50e;
+	}
+	#modal{
+	border-color: #fee50e;
 	}
 </style>  
 
 		
 	</head>
 
-<body>
+<body id="body">
  		 	 
 <div class="container">
 
@@ -101,8 +108,8 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content"  id="modal">
+      <div class="modal-header"  id="modalhead">
         <h5 class="modal-title" id="exampleModalCenterTitle">추가 입력</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

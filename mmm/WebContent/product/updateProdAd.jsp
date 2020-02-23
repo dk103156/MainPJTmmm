@@ -35,33 +35,28 @@
     margin-top: 10px;
 	float:left;
 	}
-	</style>	
-	
-	<style>
-       body {
-       		background-color: #f9fad4;
+      #body {
             margin-top: 10px;
+            font-family: 'Noto Sans KR', sans-serif;
         }
-     </style>  
-   	 <style>
-      hr{
-        background-color:black;
-        height:3px;
-      }
        #div{
       margin-top: 45px;
       margin-bottom: 55px;
       border: 3px solid #fee50e;
       border-radius: 50px 40px 50px 50px / 50px 40px 50px 50px;
-      margin-left: 230px;
+       width: 836px;
       }
       div.form-group{
-      	margin-left: 300px;
-      	
+      	margin-left: 170px;
       }
       #form{
-      margin-left: 100px;
+      margin-left: 80px;
       }
+        #btn{
+	background-color: #fee50e;
+	color: black;
+	outline-color: #fee50e;
+	}
   	 </style>
    
    
@@ -75,7 +70,7 @@
 	//============= "수정"  Event 연결 =============
 	 $(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$( "button.btn.btn-outline-secondary" ).on("click" , function() {
+		$( "button.btn" ).on("click" , function() {
 			Swal.fire({
 				  icon: 'success',
 				  title: '상품수정이 완료 되었습니다.',
@@ -91,7 +86,9 @@
 		$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$("a[href='#' ]").on("click" , function() {
-				$("form")[0].reset();
+				self.location = "/product/getSnackProductList"
+				
+				//$("form")[0].reset();
 			});
 		});	
 
@@ -105,16 +102,15 @@
 		
 	</head>
 
-<body>
+<body id="body">
 	
 		<jsp:include page="/product/prodToolBar.jsp" />
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
  	<div class="container" id="div">
  	<br/><br/><br/>
- 		<h1 class=" text-center" >상 품 정 보 수 정</h1>
- 		<hr>
- 		
+ 		<h1 class=" text-center" >상 품  수 정</h1>
+ 		<br>
  		
  		<!-- form Start /////////////////////////////////////-->
  		<form class="form-horizontal">
@@ -122,14 +118,16 @@
 		<div class="form-group">
 			<label class=" col-7 control-label">
  				<img src="/resources/image/${product.prodImage}" style= "width: 450px; height: 360px;"/>
- 					<input type="file" class="rounded" id="prodImage" name="prodImage" value="${product.prodImage}">
+ 					<input type="file" class="rounded" id="prodImage"  name="prodImage" value="${product.prodImage}" style="padding-right: 0px;  padding-left: 20px;  
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
 			</label>
 			
 			<br/><br/>
 				
 			<label for="prodNo" class=" col-6 control-label">상품번호</label>	
 				<div class="col-7">
-					 <input type="text" class="form-control" id="prodNo" name="prodNo" value="${product.prodNo}" placeholder="수정불가"  readonly>
+					 <input type="text" class="form-control" id="prodNo"  name="prodNo" value="${product.prodNo}" placeholder="수정불가"  readonly style="padding-right: 0px;  padding-left: 20px;  
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
 					 	<span id="helpBlock" class="help-block">
 		      				<strong class="text-danger">${product.prodNo}</strong>
 		      			</span>
@@ -140,7 +138,8 @@
 				
 			  <label for="prodName" class=" col-7 control-label">상품명</label>	
 				<div class="col-7">
-					<input type="text" class="form-control" id="prodName" name="prodName" value="${product.prodName}" placeholder="상품명 변경">
+					<input type="text" class="form-control" id="prodName"   name="prodName" value="${product.prodName}" placeholder="상품명 변경"  style="padding-right: 0px;  padding-left: 20px;  
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
 				</div>
 			
 			<br/><br/><br/>
@@ -148,7 +147,8 @@
 				
 			<label for="prodPrice" class="col-7 control-label">상품가격</label>
 				<div class="col-7">
-					<input type="text" class="form-control" id="prodPrice" name="prodPrice" value="${product.prodPrice}" placeholder="상품가격 변경">
+					<input type="text" class="form-control" id="prodPrice"  name="prodPrice" value="${product.prodPrice}" placeholder="상품가격 변경" style="padding-right: 0px;  padding-left: 20px;  
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
 				</div>
 				
 			
@@ -157,7 +157,8 @@
 				
 			<label for="prodDetail" class="col-7 control-label">상품구성</label>
  				<div class="col-7">
- 					 <input type="text" class="form-control" id="prodDetail" name="prodDetail" value="${product.prodDetail}" placeholder="상품구성 변경">
+ 					 <input type="text" class="form-control" id="prodDetail" name="prodDetail"  value="${product.prodDetail}" placeholder="상품구성 변경" style="padding-right: 0px;  padding-left: 20px;  
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
 				</div>
 			
 			
@@ -166,7 +167,8 @@
 				
 			<label for="franType" class="col-7 control-label">프랜차이즈    </label>
 			<div class="col-7">
-				<select class=" form-control" name="franType">
+				<select class=" form-control" name="franType" style="padding-right: 0px;  padding-left: 20px;  
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
 					  <option selected>프랜차이즈</option>
 					  <option value="0">CGV</option>
 					  <option value="1">롯데시네마</option>
@@ -179,7 +181,8 @@
 		 
 			<label for="prodType" class="col-7 control-label">상품종류</label>
 			<div class="col-7">
-				<select class=" form-control" name="prodType">
+				<select class=" form-control" name="prodType"  style="padding-right: 0px;  padding-left: 20px;  
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
 					  <option selected>상품종류</option>
 					  <option value="0">영화관람권</option>
 					  <option value="1">스토어이용권</option>
@@ -194,8 +197,8 @@
  			
  			 <div class="form" id="form">
 		   		<div class="col-11 text-center">
-				      <button  type="button" class="btn btn-outline-secondary"  >등&nbsp;록</button>
-						  <a class="btn btn-outline-secondary" href="#" role="button">취&nbsp;소</a>
+				      <button  type="button"  id="btn" class="btn"  >등&nbsp;록</button>
+						  <a class="btn"  id="btn"   href="#" role="button">취&nbsp;소</a>
 								<br><br>		   
 				 </div>
 		   </div> 
