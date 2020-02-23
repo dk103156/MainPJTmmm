@@ -107,10 +107,6 @@ public class EventServiceImpl implements EventService {
 		eventDao.addPartQuiz(participation);
 	}    
 
-	@Override
-	public void addAttendance(Point point) throws Exception {
-		eventDao.addAttendance(point);
-	}
 
 	@Override
 	public List<Point> getAttendanceList(String userNo) throws Exception {
@@ -151,8 +147,8 @@ public class EventServiceImpl implements EventService {
 
 
 	@Override
-	public Map<String, Object> getPartList(int userNo) throws Exception {
-		return eventDao.getPartList(userNo);
+	public Map<String, Object> getPartList(Search search) throws Exception {
+		return eventDao.getPartList(search);
 	}
 
 

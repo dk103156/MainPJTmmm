@@ -23,10 +23,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     
 <!--     movie css -->
-    <link rel="stylesheet" href="/resources/css/movieIcon.css?after">
+    <link rel="stylesheet" href="/resources/css/movieIcon.css?aer">
     
 <!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?after">
+    <link rel="stylesheet" href="/resources/css/common.css?aer">
 
      
        
@@ -45,7 +45,17 @@
 		  padding: 15px;
 		}
 		
+/* 		.btn-yellow-cs { */
+/* 			background-color: #fee50e!important; */
+/* 		    color: #212529; */
+/* 		    border-color: #52514f; */
+/* 		} */
 		
+/* 		.btn-yellow-cs:hover { */
+/* 		    color: #f8f9fa; */
+/* 		    background-color: #e0a800; */
+/* 		    border-color: #040404; */
+/* 		} */
 
 		
 		
@@ -459,19 +469,22 @@
 								</c:choose>
 							
 					       <p class="card-text text-muted">
+  							 <p class="mb-1 text-muted">예매율 ${movie.ticketingRate}%</p>
   							 <p class="mb-1 text-muted">평점 ${movie.starRating}</p>
 							 <p class="mb-1 text-muted">개봉일 ${movie.releaseDate}</p>
 					       </p>
 					       <div class="text-center">
-			                <div class="btn-group bottom-align-c1">
+			                <div class="bottom-align-c1">
 
 			                  <input name="movieNo" type="hidden" value="${movie.movieNo}"/>
 			                  <input name="wishUserFlag" type="hidden" value="${movie.wishUserFlag}"/>
-			                  <button type="button"  name="ticketing-btn" class="btn btn-sm btn-outline-secondary"><i class="fas fa-ticket-alt"></i>예매</button>
+<!-- 			                  <button type="button"  name="ticketing-btn" class="btn btn-sm btn-outline-secondary"><i class="fas fa-ticket-alt"></i>예매</button> -->
+			                  <button type="button"  name="ticketing-btn" class="btn btn-yellow-cs btn-sm "><i class="fas fa-ticket-alt"></i>예매</button>
 <!-- 			                  	좋아요 버튼 --------------------------------------------------------------->
 <!-- 								wishUserFlag 가 1인 경우==> 좋아요가 눌린 상태 -->
 <!-- 								wishUserFlag 가 0인 경우==> 좋아요가 눌리지 않은 상태 -->
 								
+<!-- 			                  <button type="button" name="wish-btn" class="btn btn-sm btn-outline-secondary"> -->
 			                  <button type="button" name="wish-btn" class="btn btn-sm btn-outline-secondary">
 			                 	 <c:if test="${movie.wishUserFlag ne null}">
 				                 	 <c:choose>

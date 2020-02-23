@@ -15,6 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
+<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 
@@ -68,6 +69,30 @@
 	body {
 		font-family: 'Noto Sans KR', sans-serif;
 		}
+		
+	th{
+		background-color: #fee00e;
+	}	
+	td{
+		background-color: #f9f9f9;
+	}
+	
+	.button {
+    display: inline-block;
+    height: 36px;
+    margin: 0;
+    padding: 0 15px;
+    text-align: center;
+    line-height: 34px;
+    color: #503396;
+    font-weight: 400;
+    border-radius: 4px;
+    text-decoration: none;
+    border: 1px solid #282828;
+    vertical-align: middle;
+    background-color: #fff;
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -75,8 +100,8 @@
 
 <div class="container">
 
-	<div class="page-header text-secondary">
-	       <h3>고객센터</h3>
+	<div class="page-header text-dark">
+	       <h3><i class="fas fa-comments"></i>고객센터</h3>
 	       <hr>
 	    </div>
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
@@ -107,6 +132,7 @@
 	<div><p class="text-dark">
 	전체  ${resultPage.totalCount} 건 </p>
 	</div>
+	
       <table class="table table-hover table-bordered table-sm" >
         <thead class="table-active">
           <tr>
@@ -149,12 +175,12 @@
 		   				 <!--  <<== 좌측 nav -->
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">
-     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>
    								 </li>
 		  				</c:if>
 		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>
    							</li>
 						</c:if>
 						
@@ -176,12 +202,12 @@
 					     <!--  우측 nav==>> -->
 					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
 					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#">Next</a>
+					    		<a class="page-link" href="#"><i class='fas fa-angle-right'></i></a>
     						</li>
 					      </c:if>
 					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 					      	    <li class="page-item">
-     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') "><i class='fas fa-angle-right'></i></a>
     							</li>
 						 </c:if>	
 					  </ul><!-- end of pagination -->
@@ -335,11 +361,11 @@
 				Element +="<ul class='pagination'>"
 	   			if(data.resultPage.currentPage <= data.resultPage.pageUnit){
 	   				Element +="<li class='page-item disabled'>"
-	   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>Previous</a>"
+	   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>"
 	   				Element +="</li>"
 	   			}else if(data.resultPage.currentPage > data.resultPage.pageUnit){
 	   				Element +="<li class='page-item'>"
-	   				Element +="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>Previous</a>"
+	   				Element +="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>"
 	   				Element +="</li>"
 	   			}
 				
@@ -358,11 +384,11 @@
 				
 	  			if(data.resultPage.endUnitPage >= data.resultPage.maxPage){
 	  				Element+="<li class='page-item disabled'>"
-	  				Element+="<a class='page-link' href='#'>Next</a>"
+	  				Element+="<a class='page-link' href='#'><i class='fas fa-angle-right'></i></a>"
 	  				Element+="</li>"
 	  			}else if(data.resultPage.endUnitPage < data.resultPage.maxPage){
 	  				Element+="<li class='page-item'>"
-	  				Element+="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.endUnitPage)+1)+") '>Next</a>"
+	  				Element+="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.endUnitPage)+1)+") '><i class='fas fa-angle-right'></i> </a>"
 	  				Element+="</li>"
 	  			}
 				

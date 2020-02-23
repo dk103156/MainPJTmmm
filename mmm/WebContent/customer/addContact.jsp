@@ -17,6 +17,8 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 	
+<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
+	
 		
 <script type="text/javascript">
 	
@@ -65,7 +67,6 @@ $(document).ready(function() {
 		
 		
 		$('#regBtn').on("click", function(){
-			alert('눌렸어!!!!!!!!!!!!!!!!!!!!!!!');
 			fncAddNotice();
 		});
 		
@@ -115,9 +116,8 @@ $(document).ready(function() {
 		});
 
 		$("button[name='updtUser']").on("click", function(){
-			
-			var userNo = ${user.userNo};
-			self.location="/user/updateUser?userNo="+userNo;
+			console.log(userNo);
+			self.location="/user/passwordCheck";
 		});
 		
 	});  
@@ -161,13 +161,12 @@ $(document).ready(function() {
 	  	width:300px;
 	  
 	  }
-	  
-	  body {
-		font-family: 'Noto Sans KR', sans-serif;
-		
-		}
 
-	   
+	  button.write{
+	background-color:#fee50e ;
+	color:#545454;
+	border: 1px solid #dedede;
+	}
 </style>
 
 
@@ -178,7 +177,7 @@ $(document).ready(function() {
 <div class="container">
 
 	<div class="page-header text-dark">
-	       <h3>고객센터</h3>
+	       <h3><i class="fas fa-comments"></i>고객센터</h3>
 	       <hr>
 	    </div>
 	  <div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
@@ -193,6 +192,7 @@ $(document).ready(function() {
 	  
 <form autocomplete="off">
 	<input type="hidden" name="userNo" value="${user.userNo}"/>
+	
 	<div class="container">
 	
 	<div id="header"> 
@@ -242,8 +242,8 @@ $(document).ready(function() {
 		
 	 
 	<div class="text-center">
-		<button id="regBtn" class="btn btn-secondary">등&nbsp;록</button>
-		<button id="cancelBtn" type="button" class="btn btn-secondary">취 &nbsp;소</button>
+		<button id="regBtn" class="btn write ">등&nbsp;록</button>
+		<button id="cancelBtn" type="button" class="btn write" >취 &nbsp;소</button>
 	</div>
 	<br>
 	

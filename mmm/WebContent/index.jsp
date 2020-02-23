@@ -114,15 +114,17 @@ $(function(){
   <h3>6.event</h3>	
 	<li> <a href="event/getPreviewList">이벤트 목록조회</a></li>
 	<li> <a href="event/getQuizList">퀴즈 풀기</a></li>
-	<li> <a href="customer/addNoticeAd">올라가?</a></li>
+	<li> <a href="event/addAttendance">출석체크</a></li>
 </ul>
 
 <h3>7.purchase</h3>	
 	<li> <a href="purchase/getPurchaseList">구매내역 (관리자)</a></li>
 </ul>
 <ul>
-  <h3>7.customer</h3>	
+  <h3>8.customer</h3>	
 	<li> <a href="customer/getContactList">일대일문의 목록조회</a></li>
+	<li> <a href="customer/getAskList">자주찾는질문 목록조회</a></li>
+	<li> <a href="customer/getNoticeList">공지사항 목록조회</a></li>
 </ul>
 
 <div class="test" >

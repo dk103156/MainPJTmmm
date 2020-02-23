@@ -65,8 +65,8 @@ public class DateTimeServiceTest {
 		
 
 		long start = System.currentTimeMillis();
-//        System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
+        System.setProperty("webdriver.chrome.driver","C:\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
 
         //GUI�� ���� headless option ����
         ChromeOptions options = new ChromeOptions();
@@ -196,20 +196,20 @@ public class DateTimeServiceTest {
 	            								
 	            								for( WebElement lc : locals) {
 	            									synchronized(lc) {
-	            										lc.wait(400);
+	            										lc.wait(500);
 	            									}
 	            									if(!lc.getAttribute("class").equals("off")) {
 	            										while(true) {
 	            											try {
 				            									synchronized(lc) {
-				            										lc.wait(400);
+				            										lc.wait(500);
 				            									}			
 			            										lc.click();
             										
 			            										WebElement lcRe = driver.findElement(localRe);
 			            										
 				            									synchronized(lc) {
-				            										lc.wait(100);
+				            										lc.wait(200);
 				            									}	
 				            									
 			            										List<WebElement> tName = driver.findElements(theaterName);
@@ -253,11 +253,14 @@ public class DateTimeServiceTest {
 			            															 }else {
 			            																 	 for( String s : tTime.split("\n")) {
 			            																 		synchronized(s) {
-			            						            										s.wait(50);
+			            						            										s.wait(100);
 			            						            									}	
 			            																	 
 				            																 	 try {	
 						            																	 java.util.Date resultTime = timeFormat.parse(s);
+						            																	 if(resultTime==null) {
+						            																		 break;
+						            																	 }
 						            																	 Timestamp timeStamp = new Timestamp(resultTime.getTime());
 						            																	 dateTime.setScreenTime(timeStamp);	// 상영일시 시간
 						            																	 dateTimeService.addDateTime(dateTime);

@@ -29,9 +29,11 @@
     <!-- fontawesome CDN -->
     <script src="https://kit.fontawesome.com/e464a52b8d.js" crossorigin="anonymous"></script>
     
-<!--     daum icon css -->
-    <link rel="stylesheet" href="/resources/css/movieIcon.css">
-     
+<!--     movie css -->
+    <link rel="stylesheet" href="/resources/css/movieIcon.css?aer">
+    
+<!--     Common Css -->
+    <link rel="stylesheet" href="/resources/css/common.css?aer">
      
     <style type="text/css">
     	img { max-width: 100%; height: auto; }
@@ -175,8 +177,9 @@
 	
 	
 // 	예매하기로 넘어가는 함수
-	function fncTicketing(){
-		
+	function fncTicketing(ticketing_btn){
+		var movieName = $.trim(ticketing_btn.parent().parent().parent().children('h5[name="movieTitle"]').text());
+		self.location = "/ticketing/addTicketing?movieName="+movieName
 	};
 	
 	
@@ -225,7 +228,7 @@
 			var wish_btn = $(this);		
 // 			console.log(userNo);
 			
-			fncTikecting();
+			fncTicketing();
 		});
 		
 	});
@@ -240,10 +243,9 @@
     <!--     	임의로 userNo 심어주기... TEST 용  -->
 <!-- 	<input id="userNo" type="hidden" value="11111"> -->
     
-	  <div class="album py-5 bg-light">
 	    <div class="container">
-	    	<div class="col moviebody">
-			    <div class="row">
+	    	<div class="col moviebody mt-5">
+			    <div class="row border-bottom pb-3">
 	   		        <div class="col-md-4 text-center">
 			        	<img id="poster" src="${movie.poster}" alt="">
 			        </div>
@@ -299,7 +301,7 @@
 				        	</c:if>
 				        </div>
 				        <div class="row">
-							<div class="col-md  text-center" style="margin:10px">
+							<div class="col-md  text-center m-2 mt-3">
 								<div class="text-left">
 									<p>- <span class="font-weight-bold">감독 :</span> ${movie.director}  
 									/ <span class="font-weight-bold">배우 :</span> ${movie.actor}</p>
@@ -308,10 +310,10 @@
 									<p>- <span class="font-weight-bold">개봉일자 :</span> ${movie.releaseDate}</p>
 								</div>
 								
-								<div class="btn-group">
+								<div>
 									<input name="movieNo" type="hidden" value="${movie.movieNo}"/>
 									<input name="wishUserFlag" type="hidden" value="${movie.wishUserFlag}"/>
-									<button type="button" name="ticketing-btn" class="btn btn-outline-secondary"><i class="fas fa-ticket-alt"></i>예매</button>
+									<button type="button" name="ticketing-btn" class="btn btn-yellow-cs"><i class="fas fa-ticket-alt"></i>예매</button>
 	<!-- 			                  	좋아요 버튼 --------------------------------------------------------------->
 	<!-- 								wishUserFlag 가 1인 경우==> 좋아요가 눌린 상태 -->
 	<!-- 								wishUserFlag 가 0인 경우==> 좋아요가 눌리지 않은 상태 -->
@@ -332,9 +334,7 @@
 			        </div>
 	
 			    </div>
-			    <div class="border-bottom" style="margin-top:10px">
-			    </div>
-			    <div class="row" style="margin-top:10px">
+			    <div class="row border-bottom pb-3 mt-3">
 			        <div class="col-md-6 embed-responsive embed-responsive-16by9">
 			        	<h4>무비 트레일러</h4>
 			        	<iframe id="player" class="embed-responsive-item" width="640" heigth="390
@@ -342,16 +342,23 @@
 			        </div>
 			        <div class="col-md-6" style="padding:20px">
 			        	<div>
-			        		<p>줄거리</p>
+			        		<h6>줄거리</h6>
 			        		<p>${movie.summary}</p>
 			        	</div>
 			        </div>
 			    </div>
+<!-- 			    한줄평 및 리뷰  -->
+				<div class="row border-bottom pb-3 mt-3">
+					<div class="col">
+					  <h6>한줄평</h6>
+					</div>
+					<div class="col">
+					  <h6>리뷰</h6>
+					</div>
+				</div>
 			</div>
 		</div>
 		
-      </div>
-
   	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>

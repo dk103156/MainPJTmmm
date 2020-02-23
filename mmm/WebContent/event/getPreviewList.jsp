@@ -37,21 +37,30 @@
 
 		$(function(){
 			$('div[name="cardImg"]').on('click',function(){
-				console.log('moreInfo클릭')
+				
+				console.log('이미지클릭클릭')
+
 				var previewNo = $(this).parent().find("input[name='pn']").val();
+				
 				alert(previewNo)
+				
 				self.location = "/event/getPreview?previewNo="+previewNo;
 			
 			});
 			
 			
 			$('ul li').on('click',function(){
-				console.log('리스트 클릭')
 				var previewNo = $(this).parent().next().val();
 				//alert(previewNo)
 				self.location = "/event/getPreview?previewNo="+previewNo;
 				
 			});
+			
+			$("#doneMore").on("click", function(){
+				
+				self.location = "/event/getDoneList";
+				
+			})
 		})
 </script>
 <style>
@@ -63,7 +72,12 @@
 
 	body{
 		font-family: 'Noto Sans KR', sans-serif;
+		font-weight bold;
 		}
+
+	h5{
+		font-family: 'Noto Sans KR', sans-serif;
+	}
 	
 	*{
 		margin:0; 
@@ -80,19 +94,19 @@
 		text-align : center;
 		line-height:250px; 
 		margin:10px;
-	}
-	
-	img.card-img-top{
-		width: 290px;
-		height:350px;
-	}
-	
-	figure {
-        width: 100%;
-        position: relative;
-   		}
-	    
-	    
+		}
+		
+		img.card-img-top{
+			width: 290px;
+			height:350px;
+		}
+		
+		figure {
+	        width: 100%;
+	        position: relative;
+	   	}
+		    
+		    
 	    figure img {
 	        display: block;
 	        width: 100%;
@@ -119,9 +133,9 @@
 	        width: 100%;
 	        height: 0;
 	        color: #fff;
-	        background: rgba(0, 0, 0, 0.6);
-	        -webkit-transition: .6s ease;
-	        transition: .6s ease;
+	        background: rgba(0, 0, 0, 0.8);
+	        -webkit-transition: .5ms ease;
+	        transition: .5ms ease;
 	    }
 	    
 	    figure .overlay .description {
@@ -136,14 +150,14 @@
 	        text-align: center;
 	    }
 	    
-	    figure:hover h4 {
-	        display: none;
-	    }   
+	  
 	    
 	    figure:hover .overlay {
 	        display: block;
 	        height: 100%;
 	    }
+	    
+	    
 	    button.btn.btn-primary {
 		  display: block;
 		  margin-left: 10;
@@ -152,46 +166,62 @@
 		img {
 		
 		}
-      div{
+		
+     	div{
         width: 100%;
-        
-    }
+   	  	}
     
     
-    div.left {
+    	div.left {
         width: 40%;
         float: left;
         height: 300px;
-       
-    }
-    div.right {
+        }
+     
+     	div.right {
         width: 40%;
         float: right;
         height: 300px;
-    }
+     	 }
+ 
+		ul{
+		   list-style:none;
+	 	  }
 
-ul{
-   list-style:none;
-   }
 
-
-.doneImg {
-  transform: scale(1);
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transition: all 0.3s ease-in-out;   /* 부드러운 모션을 위해 추가*/
-}
-.doneImg:hover {
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  -o-transform: scale(1.2);
-}
-.img {width:325px; height:280px;}  
-	
+		.doneImg {
+		  transform: scale(1);
+		  -webkit-transform: scale(1);
+		  -moz-transform: scale(1);
+		  -ms-transform: scale(1);
+		  -o-transform: scale(1);
+		  transition: all 0.5s ease-in-out;   /* 부드러운 모션을 위해 추가*/
+		}
+		
+		.img {
+			width:325px; 
+			height:280px;
+		}  
+		
+		p.lbtxt{	
+		letter-spacing: -0.05em !important;
+		font-family: 'Nanum Gothic';
+		margin: 0;
+		padding: 0;
+		padding-bottom: 17px;
+		line-height: 19px;
+		font-size: 14px;
+		color: #666;
+		}
+		
+		#doneMore{
+		font-size : 20px;
+		}
+		span{
+     display: block;
+		}
+		
+		
 </style>
 
 </head> 
@@ -202,11 +232,13 @@ ul{
 <div class="container">
 <br/><br/>
 <h4><i class="fas fa-trophy"></i>시사회 이벤트</h4>
+<p class="lbtxt">개봉 전  누구보다 먼저 영화를 만나는 방법</p>
 <hr>
 <br/>
 
-<div class="container">
-		<h5><i class="fas fa-grip-lines-vertical"></i>  진행중인 이벤트</h5>
+<div class="container ">
+		<div>
+		<h5>진행중인 이벤트</h5>
 		<br/><br/>
 	<div class="row">
 	
@@ -227,10 +259,10 @@ ul{
           		  <img name="preImg" src= "/resources/image/${preview.previewImage}" alt="" class="card-img-top" />
                   <div class="overlay">
 		        	<div class="description" style="line-height:170%">
-		        	${preview.previewName}<br>
-		        	${preview.previewPlace}<br>
-		        	${preview.preDate}<br>
-		        	${preview.previewTime}
+		        	<span style="font-size:1.5em;">${preview.previewName}</span><br>
+		        	<span style="font-size:1.5em;">${preview.previewPlace}</span>
+		        	<span style="font-size:1.5em;">${preview.preDate}</span>
+		        	<span style="font-size:1.5em;">${preview.previewTime}</span>
 		     <input type="hidden" name="pn" value="${preview.previewNo}">
 		        	</div>
 		        </div>
@@ -256,18 +288,18 @@ ul{
 		
 	</div>
 
-
+</div>
 <br><br><br>
 <div class="row">
 	    	
-	    <div class="second">
+	    <div class="second mt-6">
         <div class="left border-bottom-1" >
         
-        <h5><i class="fas fa-grip-lines-vertical"></i>  마감된 이벤트<i class="fas fa-plus-circle float-right">more</i></h5>
+        <h5>마감된 이벤트<i class="fas fa-plus-circle float-right"><span id="doneMore">more</span></i></h5>
         
         <br>
 		<c:set var="i" value="0" />
-		 <c:forEach var="preview" items="${doneList}"  begin="0" end="4">
+		 <c:forEach var="preview" items="${doneList}"  begin="0" end="5">
 		 
 		 <ul>
 			 <li>
@@ -280,7 +312,7 @@ ul{
         </div>
         
         <div class="right">
-        <h5><i class="fas fa-grip-lines-vertical"></i>당첨자 조회<i class="fas fa-plus-circle float-right">more</i></h5>
+        <h5>시사회 후기<i class="fas fa-plus-circle float-right">more</i></h5>
         <br>
         
         DSADSD

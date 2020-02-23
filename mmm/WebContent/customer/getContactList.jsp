@@ -39,7 +39,6 @@ $(function(){
 	
 	$(".askBody td:nth-child(3)").on("click",function(){
 		var articleNo = $(this).parent().find('input[name="articleNo"]').val();
-		alert(articleNo)
 		console.log(articleNo);
 		self.location="/customer/getContact?articleNo="+articleNo;	
 	});
