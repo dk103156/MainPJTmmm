@@ -90,7 +90,7 @@
 		<div class="row px-0 mx-0">
 			<div class="aside col-12 px-0 mb-3 text-center">
 				<img class="aside" src="../resources/image/mainPage/aside/myPage.png" width=80 >
-				<span class="aside">마이 페이지</span>
+				<a href="/mypage/mypage"><span class="aside">마이 페이지</span></a>
 			</div>
 			<div class="aside col-12 px-0 mb-3 text-center">
 				<img class="aside"  src="../resources/image/mainPage/aside/addTicketing.png" width=80 >

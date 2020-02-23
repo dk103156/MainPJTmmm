@@ -945,16 +945,24 @@ colgroup {
 <script type="text/javascript">
 $(function(){
 
+	//회원기본정보
 	$("#userInfo").on('click',function(){
 		$("#plusPage").load("/user/passwordCheck");
 	});
 	
+	//내가본영화
 	$("#sawMovie").on('click',function(){
 		$("#plusPage").load("/mypage/myMovieList");
 	});
 	
+	//위시리스트
 	$("#wishList").on('click',function(){
 		$("#plusPage").load("/mypage/wishList");
+	});
+	
+	//포인트내역
+	$("#pointList").on("click",function(){
+		$("#plusPage").load("/payment/getPointList");
 	});
 	
 	$("#addGenreBtn").on('click',function(){
@@ -1025,38 +1033,13 @@ $(function(){
 				<div class="point" id="myPoint">
 					<div class="tit-area">
 						<p class="tit">총 보유 포인트</p>
-						<a href="/mypage/point-list" class="more" title="포인트 이용내역 페이지로 이동"><i class="iconset ico-arr-right-gray">더보기</i></a>
+						<a href="#" id="pointList" class="more" title="포인트 이용내역 페이지로 이동"><i class="iconset ico-arr-right-gray">더보기</i></a>
 					</div>
 
 					<div class="cont-area">
 						<div class="total">
-							<p class="now">0 P</p>
+							<p class="now">9816504 P</p>
 
-							<div class="division" style="display: none;">
-								<div class="cell">
-									<p class="old">
-										<span>구 포인트</span>
-										<em>0</em>
-									</p>
-
-									<p class="new">
-										<span>신 포인트</span>
-										<em>0</em>
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="change">
-							<p class="save">
-								<span>적립예정</span>
-								<em>0 P</em>
-							</p>
-
-							<div class="del">
-								<span>소멸예정</span>
-								<em>0 P</em>
-							</div>
 						</div>
 					</div>
 				</div>
