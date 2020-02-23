@@ -42,6 +42,7 @@
 	
 	<result property = "partNo" column="part_no" jdbcType="NUMERIC" />
 	<result property = "previewNo" column="preview_no" jdbcType="NUMERIC" />
+	<result property = "previewName" column="preview_name" jdbcType="NUMERIC" />
 	<result property = "quizNo" column="quiz_no" jdbcType="NUMERIC" />
 	<result property = "userNo" column="user_no" jdbcType="NUMERIC" />
 	<result property = "partType" column="part_type" jdbcType="NUMERIC" />
@@ -315,8 +316,6 @@
 	</update>
 	
 	
-	
-	
 	<!-- SQL SELECTLIST:응모자 리스트 출력  --> 
 	<select  id="getApplyList" parameterType="int" resultMap="partSelectMap">
 	
@@ -343,14 +342,46 @@
 	
 	
 	<!--SQL SELECTLIST:내 응모내역 /퀴즈 참여 리스트 조회 -->
-	<select id="getPartList" parameterType="int" resultMap="partSelectMap">
-		SELECT
-		p.part_no, p.preview_no, p.quiz_no, u.user_no, u.user_name, p.part_date, p.winning_flag
-		FROM users u, participation p
-		WHERE u.user_no = p.user_no
-		AND u.user_no = #{userNo}
-	</select>
+<!-- 	<select id="getPartList" parameterType="int" resultMap="partSelectMap"> -->
+<!-- 		SELECT -->
+<!-- 		p.part_no, p.preview_no, p.quiz_no, u.user_no, u.user_name, p.part_date, p.winning_flag -->
+<!-- 		FROM users u, participation p -->
+<!-- 		WHERE u.user_no = p.user_no -->
+<!-- 		AND u.user_no = #{userNo} -->
+<!-- 	</select> -->
 	
+	
+	 	 <!-- SQL : getPartList -->
+	<select  id="getPartList"  parameterType="com.mmm.common.Search"	resultMap="partSelectMap">
+  		SELECT 
+  		*
+  		FROM (	SELECT inner_table.* , ROWNUM AS row_seq
+  				FROM (	
+  					<include refid="srchPartList"/>	
+  					) inner_table
+				WHERE ROWNUM &lt;= #{endRowNum} )
+		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+ </select>
+ 
+  <sql id="srchPartList">	 
+		SELECT p.part_no, p.preview_no, p.quiz_no, u.user_no, u.user_name, p.part_date, p.winning_flag, e.preview_name
+		FROM users u, participation p, preview e
+		WHERE 
+		 	   u.user_no = p.user_no 
+		  AND  p.preview_no = e.preview_no
+		  AND  u.user_no = #{userNo}
+ 		ORDER BY p.part_date desc
+	 </sql>
+ 
+ 
+	 	<!-- SQL : SELECTONE -->
+	 <select  id="getTotalPartList"  parameterType="com.mmm.common.Search"	 resultType="int">
+	  		SELECT COUNT(*)
+	  		FROM(	
+			<include refid="srchPartList"/>	
+		 	) countTable	
+	 </select>
+	 
 	
 	
 	
@@ -368,8 +399,6 @@
 	WHERE user_no = #{userNo}
 	AND quiz_no = #{quizNo}
 	</select>
-	
-	
 	
 	
 	<!-- SQL SELECTONE: 참여 상세조회  -->

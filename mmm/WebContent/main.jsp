@@ -25,18 +25,13 @@
   
 <title>Insert title here</title>
 <style>
+ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+ 
+ 
  body {
- 	
+ 	height : 3000px;
  	font-family: 'Noto Sans KR', sans-serif;
  
- }
- aside {
- 	border:1px solid red; 
- 	height: 500px; 
- 	width:100px; 
- 	right:10px; 
- 	position: fixed;
- 	bottom : 100px;
  }
  
  
@@ -50,7 +45,7 @@
  
  }
  
- h3.main{
+ h3.mainPage {
  	height: 41px;
     background: url(../resources/image/mainPage/bg_h3_line.jpg) repeat-x 0 50%;
     line-height: 41px;
@@ -76,19 +71,20 @@
  	 word-wrap: break-word; 
  	 -webkit-box-orient: vertical;
  }
- 	/* 슬라이더 */
- 	 html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+ 
+/* 슬라이더 */
+ 	
     *, *:before, *:after { box-sizing: inherit; }
     .clearfix:after { content: ''; display: block; clear: both; float: none; }
     .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
     .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
     .link:hover, .link:focus { color: #9fd6c2; }
 	 #movieSelectList { width: 1000px; margin: auto; }
-	div.slide_wrap { position: relative; width: 1000px; margin: auto; padding-bottom: 30px; }
-	div.slide_box { width: 100%; margin: auto; overflow-x: hidden; }
-	div.slide_content { display: table; float: left; width: 184px; height: 200px; }
+	.slide_wrap { position: relative; width: 1000px; margin: auto; padding-bottom: 30px; }
+	.slide_box { width: 100%; margin: auto; overflow-x: hidden; }
+	.slide_content { display: table; float: left; width: 184px; height: 200px; }
 													/* mr-3 값이 16px임*/
-	div.slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
+	.slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
 	/*
 	.slide_content.slide01 { background: #ddbdff; }
 	.slide_content.slide02 { background: #9fd6c2; }
@@ -99,28 +95,20 @@
 	.slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	.slide_btn_box > .slide_btn_prev { left: -100px; }
 	.slide_btn_box > .slide_btn_next { right: -100px; }
-	.slide_pagination { position: relative; left: 75%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	.slide_pagination { position: relative; left: 50%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
 	.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
  
 
- 
- 
 
 </style>
-
-
-<script type="text/javascript">
-
-
-</script>
 </head>
 <body>
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/header.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
 
+
+	
+	
 	<div class="container-fluid px-0 mb-5">
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		  <ol class="carousel-indicators">
@@ -162,7 +150,7 @@
 		</div>
 	</div>
 	<div class="mb-5 mx-5">
-		<h3 class="main"><img src="http://img.cgv.co.kr/R2014/images/title/h3_movie_selection.gif" alt="MOVIE SELECTION"></h3>
+		<h3 class="mainPage"><img class="introTag" src="http://img.cgv.co.kr/R2014/images/title/h3_movie_selection.gif" alt="MOVIE SELECTION"></h3>
 	</div>
 	
 	<div class="container-fluid">
@@ -240,7 +228,7 @@
 	</div> <!-- end of container-fluid -->
 	
 	<div class="mb-5 mx-5">
-	<h3  class="main"><img src="http://img.cgv.co.kr/R2014/images/title/h3_event.gif" alt="EVENT"></h3>
+	<h3 class="mainPage"><img class="introTag" src="http://img.cgv.co.kr/R2014/images/title/h3_event.gif" alt="EVENT"></h3>
 	</div>
 	
 	<div class="container-fluid">
@@ -260,7 +248,7 @@
 								
 								<div class="postHeader col-12 mb-2 text-center">
 									<h4>
-										<a href="#">조규비 로또 당첨되어버려</a>
+										<a href="#">asdflkjasdf</a>
 									</h4>
 								</div>
 								
@@ -324,15 +312,7 @@
 		</div> <!-- end of pageContent -->
 	</div> <!-- end of container-fluid -->	
 	
-<aside>
-
-
-</aside>
-
-
-	<!-- footer Start /////////////////////////////////////-->
-	<jsp:include page="/layout/footer.jsp" />
-   	<!-- footer	 End /////////////////////////////////////-->
+<jsp:include page="/layout/sideBar.jsp"></jsp:include>
 
 <!-- 슬라이더 -->
   <script>
@@ -516,11 +496,6 @@
   
   </script>
   
-  <!-- 함수 모음 -->
-  <script>
-  
-  
-  
-  </script>
+
 </body>
 </html>

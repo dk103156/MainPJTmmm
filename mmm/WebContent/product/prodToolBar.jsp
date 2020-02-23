@@ -34,6 +34,7 @@
 	header {
     background-color: #242424;
     height: 3.0rem;
+    font-family: 'Noto Sans KR', sans-serif;
 	}
 </style>
 

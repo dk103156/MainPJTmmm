@@ -20,6 +20,12 @@
 
 	$(function(){
 		
+		$('#updateBtn').on('click', function(){
+			
+			self.location="/user/getUser";
+			
+		})
+		
 		$('#applyBtn').on('click', function(){
 			
 			
@@ -94,6 +100,7 @@
 <body>
 
 <div class="container">
+ 	<form>
 
 	<br>
 		<div class="page-header text-secondary">
@@ -101,7 +108,6 @@
 	       
 	    </div>
 <br>
- 	<form>
  	<div class="row">
 			<div class="col-sm-10">
 				<input type="hidden" id="un" name="userNo" value="${user.userNo}">
@@ -180,15 +186,16 @@
 			
 			</div>
 	<!-- 		 row 닫는 애! -->
+	
 			<div class="text-center">
 				<button id="applyBtn" class="btn btn-dafault write" type="button">응모하기</button>
+				<button id="updateBtn" class="btn btn-dafault write" type="button">수정하기</button>
 			</div>
 			<br>
 		
-		</div>
+	</form>
+ </div>
 	<!-- 	container 닫는 애  -->
-	</div>
-</form>
  </body>
  
  </html>

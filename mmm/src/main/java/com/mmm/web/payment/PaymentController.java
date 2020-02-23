@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mmm.common.Page;
 import com.mmm.common.Search;
 import com.mmm.service.domain.Inventory;
 import com.mmm.service.domain.Movie;
@@ -355,8 +356,9 @@ public class PaymentController {
 	
 	
 	@RequestMapping(value = "/getPointList", method = RequestMethod.GET)
-	public String getPointList( HttpSession session, Model model,
-								Search search)throws Exception{
+	public String getPointList( @ModelAttribute(value = "search") Search search,
+								HttpSession session, Model model
+								)throws Exception{
 		
 //		로그인한 회원 정보 from session
 		User user = (User)session.getAttribute("user");
@@ -367,13 +369,17 @@ public class PaymentController {
 		if(search.getCurrentPage() ==0 ) {
 			search.setCurrentPage(1);
 		}
-		
 //		search.pageSize 세팅
 		search.setPageSize(pageSize);
 		System.out.println("------------search"+ search);
 		
+		
 		HashMap<String, Object> outputMap = paymentService.getPointList(search);
 		
+		
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer)outputMap.get("totalCnt")).intValue(),
+				pageUnit, pageSize);
+		System.out.println("------- resultPage : " + resultPage);
 		
 		for(Point point : (List<Point>)outputMap.get("list")) {
 			System.out.println("--------- point : " + point);
@@ -381,13 +387,17 @@ public class PaymentController {
 		
 		List<Point> list = (List<Point>) outputMap.get("list");
 		
-		System.out.println("----- list.size()" + list.size());
-		int totalPoint = list.get(0).getTotalPoint();
+//		System.out.println("----- list.size()" + list.size());
+		int totalPoint = paymentService.getTotalPoint(user.getUserNo());
 		System.out.println("----- totalPoint" + totalPoint);
+		int accPoint = paymentService.getAccPoint(user.getUserNo());
 		
 		
 		model.addAttribute("list", list);
 		model.addAttribute("totalPoint", totalPoint);
+		model.addAttribute("accPoint", accPoint);
+		model.addAttribute("search",search);
+		model.addAttribute("resultPage",resultPage);
 		
 		return "forward:/payment/getPointList.jsp";
 	}

@@ -172,7 +172,7 @@
 		 ) countTable
 	</select>
 	
-<!-- 	결제 상세조회...  -->
+<!-- 	결제 상세조회...  payment 관리번호로..  -->
 	<select id="getPayment"
 			parameterType="int"
 			resultMap="paymentSelectMap">
@@ -182,7 +182,30 @@
 		USING_FIRST_PROD_PIN_NO, USING_SECOND_PROD_PIN_NO, USING_THIRD_PROD_PIN_NO
 		FROM PAYMENT
 		WHERE PAYMENT_NO = #{paymentNo}
-			
+	</select>
+	
+<!-- 	결제 상세조회...  ticketing 관리번호로..  -->
+	<select id="getPaymentbyTicketingNo"
+			parameterType="int"
+			resultMap="paymentSelectMap">
+		SELECT
+		PAYMENT_NO, USER_NO, TICKETING_NO, PURCHASE_NO, PAY_STATUS, PAY_METHOD,
+		PAY_PRICE, PAY_DATE, CANCEL_DATE, CASH, USING_POINT, SAVING_POINT,
+		USING_FIRST_PROD_PIN_NO, USING_SECOND_PROD_PIN_NO, USING_THIRD_PROD_PIN_NO
+		FROM PAYMENT
+		WHERE Ticketing_No = #{ticketingNo}
+	</select>
+	
+<!-- 	결제 상세조회...  purchase 관리번호로..  -->
+	<select id="getPaymentbyPurchaseNo"
+			parameterType="int"
+			resultMap="paymentSelectMap">
+		SELECT
+		PAYMENT_NO, USER_NO, TICKETING_NO, PURCHASE_NO, PAY_STATUS, PAY_METHOD,
+		PAY_PRICE, PAY_DATE, CANCEL_DATE, CASH, USING_POINT, SAVING_POINT,
+		USING_FIRST_PROD_PIN_NO, USING_SECOND_PROD_PIN_NO, USING_THIRD_PROD_PIN_NO
+		FROM PAYMENT
+		WHERE purchase_no = #{purchaseNo}
 	</select>
 	
 <!-- 	결제취소.. 플래그 변경 -->

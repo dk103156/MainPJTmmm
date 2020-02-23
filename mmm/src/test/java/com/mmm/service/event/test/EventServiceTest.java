@@ -303,16 +303,27 @@ public class EventServiceTest {
 			}
 		}
 		
-		//@Test
+		@Test
 		public void testGetPartList() throws Exception{
+			System.out.println("시작작작작작");
+			Search search = new Search();
 			
-			Map<String, Object> map = eventService.getPartList(10003); //userNo이얌 
+			search.setPageSize(pageSize);
+			search.setCurrentPage(1);
+			search.setUserNo(10005);
+			
+			Map<String, Object> map = eventService.getPartList(search); //userNo이얌 
+			
 			List<Participation> list = (List<Participation>)map.get("list");
-			Assert.assertEquals(2, list.size());
-			Assert.assertEquals(10001, list.get(0).getPartNo());
-			Assert.assertEquals(10005, list.get(0).getPreviewNo());
-			Assert.assertEquals(10002, list.get(1).getPartNo());
-			Assert.assertEquals(0, list.get(1).getWinningFlag());
+			Page resultPage	= 
+					new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+			
+			
+			System.out.println(list.size());
+			
+			for(Participation p: list) {
+				System.out.println(p);
+			}
 			
 		}
 		
@@ -363,7 +374,7 @@ public class EventServiceTest {
 		}
 		
 		
-		@Test
+		//@Test
 				public void getStUpdateList() throws Exception  {
 					
 					List<Preview> list = eventService.updateStPrev();

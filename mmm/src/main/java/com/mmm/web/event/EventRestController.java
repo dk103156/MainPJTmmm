@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,6 +67,9 @@ public class EventRestController {
 	int pageSize;
 	
 	
+	
+	
+//응모자 리스트 가져오기	
 	@RequestMapping(value="json/getApplyList/{previewNo}", method=RequestMethod.GET)
 	public Map<String, Object> getApplyList(@PathVariable int previewNo) throws Exception {
 		
@@ -95,6 +100,11 @@ public class EventRestController {
 		return returnMap;
 	}
 	
+	
+	
+	
+	
+//당첨자 리스트 가져오기
 	@RequestMapping(value="json/getWinnerList/{previewNo}", method=RequestMethod.GET)
 	public Map<String, Object> getWinnerList(@PathVariable int previewNo) throws Exception {
 		
@@ -130,48 +140,62 @@ public class EventRestController {
 	}
 	
 	
-	@RequestMapping("json/deleteQuiz")
-	public int deleteQuiz(@RequestParam(value = "chbox[]") List<String> chArr, Quiz quiz) throws Exception {
-		 
-		System.out.println("chArrrrrrrrr"+chArr);
-		 
-		 int result = 0;
-		 int quizNo = 0;
-		 
-//		 quiz.setQuizNo(quizNo);
-		  if(chArr!=null) {
-		  
-		   for(String i : chArr) {   
-		   quizNo = Integer.parseInt(i);
-		   System.out.println("삭제할 놈!!" + quizNo);
-		   eventService.deleteQuiz(quizNo);
-		  }   
-		  result = 1;
-		  }
-		  
-	return result;  
 	
-		}
 	
-	@RequestMapping(value="json/getPreview", method=RequestMethod.GET)
-	public Map<String,Object> getPreview(@RequestBody Preview preview) throws Exception{
-		
-		System.out.println("/event/json/getPreview : GET");
-		Map<String, Object> map = new HashMap<String,Object>();
-		
-		preview = eventService.getPreview(preview.getPreviewNo());
-		String[] fileArr = preview.getPreviewImage().split(",");
-		
-		map.put("preview", preview);
-		map.put("fileArr", fileArr);
-		
-		return map;
-	}
 	
+//	@RequestMapping("json/deleteQuiz")
+//	public int deleteQuiz(@RequestParam(value = "chbox[]") List<String> chArr, Quiz quiz) throws Exception {
+//		 
+//		System.out.println("chArrrrrrrrr"+chArr);
+//		 
+//		 int result = 0;
+//		 int quizNo = 0;
+//		 
+//		  if(chArr!=null) {
+//		  
+//		   for(String i : chArr) {   
+//		   quizNo = Integer.parseInt(i);
+//		   System.out.println("삭제할 놈!!" + quizNo);
+//		   eventService.deleteQuiz(quizNo);
+//		  }   
+//		  result = 1;
+//		  }
+//		  
+//	
+//		  return result;  
+//	
+//		}
+//	
+//	
+//	
+	
+	
+//	@RequestMapping(value="json/getPreview", method=RequestMethod.GET)
+//	public Map<String,Object> getPreview(@RequestBody Preview preview) throws Exception{
+//		
+//		System.out.println("/event/json/getPreview : GET");
+//		Map<String, Object> map = new HashMap<String,Object>();
+//		
+//		preview = eventService.getPreview(preview.getPreviewNo());
+//		String[] fileArr = preview.getPreviewImage().split(",");
+//		
+//		map.put("preview", preview);
+//		map.put("fileArr", fileArr);
+//		
+//		return map;
+//	}
+//	
+//	
+//	
+	
+
+	
+//시사회 이벤트 참여	
 	@RequestMapping(value="json/checkPart")
 	public Map<String, Object> checkPart(@RequestBody Map<String, Object> map) throws Exception{
 		
 		System.out.println("eventRestController도착!!!");
+		
 		String userNo= (String)map.get("userNo");
 		System.out.println("checkPart의 userNo"+userNo);
 		
@@ -199,6 +223,8 @@ public class EventRestController {
 	}
 	
 	
+	
+//퀴즈참여하기	
 	@RequestMapping(value="json/checkQuiz")
 	public Map<String, Object> checkQuiz(@RequestBody Map<String, Object> map) throws Exception{
 		
@@ -236,7 +262,10 @@ public class EventRestController {
 		return returnMap;
 		
 	}
+
 	
+	
+//한줄평 등록하기	
 	@RequestMapping(value="json/addExpectLine")
 	public void addExpectLine(@RequestBody Map<String, Object> map) throws Exception {
 		
@@ -258,7 +287,8 @@ public class EventRestController {
 	
 	
 	
-	
+
+//기대평 블라인드 처리하기
 	@RequestMapping(value="json/addExpectLineBlind")
 	public void addExpectLineBlind(@RequestBody Map<String, Object> map) throws Exception {
 		
@@ -278,7 +308,8 @@ public class EventRestController {
 	
 	
 	
-	
+
+//시사회 기대평 리스트 가져오기	
 	@RequestMapping(value = "json/listExpectLine")
 	public Map<String, Object> listExpectLine(@RequestBody Map<String, Object> map) throws Exception {
 
@@ -319,4 +350,70 @@ public class EventRestController {
 		return returnMap;
 	}
 	
+
+	
+	
+//출첵하기 
+	@RequestMapping(value="json/addAttendance")
+	public void addAttendance(@RequestBody Map<String, Object> map) throws Exception {
+		System.out.println("/event/json/addAttendance");
+		
+		int userNo = Integer.parseInt((String)map.get("userNo"));
+		String pointStatus = (String)map.get("pointStatus");
+		int partPoint = Integer.parseInt((String)map.get("partPoint"));
+		
+		Map<String, Object> returnMap = new HashMap<String,Object>();
+		
+		int attendanceCnt = paymentService.checkAttedance(userNo);
+		System.out.println("[[[[[[attendanceCnt]]]]]]" + attendanceCnt);
+		
+		if(attendanceCnt==0) {
+			System.out.println("출첵할수이써");
+			Point point = new Point();
+			
+			point.setUserNo(userNo);
+			point.setPointStatus(pointStatus);
+			point.setPartPoint(partPoint);
+			
+			paymentService.savePoint(point);
+		}else if(attendanceCnt==1) {
+			System.out.println("출첵할수업써");
+		}
+		
+		
+	}
+	
+	
+	//출첵기록 가져오기 
+		@RequestMapping(value="json/getAttendanceRecord")
+		public List<Point> getAttendanceRecord(HttpSession session) throws Exception {
+			System.out.println("/event/json/getAttendanceRecord");
+			
+			
+			User user = (User)session.getAttribute("user");
+			int userNo = user.getUserNo();
+			
+			
+			Map<String, Object> returnMap = new HashMap<String,Object>();
+			List<Point> checkList = paymentService.checkList(userNo);
+			System.out.println("pointList========>"+checkList);
+			
+			List returnList = new ArrayList();
+			
+			for(Point p : checkList) {
+				Map map = new HashMap();
+				
+				map.put("title", "출석");
+				String startDate = JavaUtil.convertDateFormat(p.getPointDate());
+//				String startDate = new SimpleDateFormat("yyyy-MM-dd").format(p.getPointDate());
+				map.put("start",startDate);
+				map.put("color", "#f5f50c");
+				returnList.add(map);
+			}
+			
+			returnMap.put("checkList",checkList);
+			
+			
+			return returnList;
+		}	
 }

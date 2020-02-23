@@ -26,4 +26,6 @@ public interface InventoryDao {
 	public List<Inventory> getVoucherListInPayment(int userNo)throws Exception;
 	
 	public Inventory getInventoryForPay(int inventoryNo)throws Exception;
+	
+	
 }

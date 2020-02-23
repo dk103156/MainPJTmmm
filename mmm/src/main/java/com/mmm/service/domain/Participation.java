@@ -4,9 +4,11 @@ import java.sql.Timestamp;
 
 public class Participation {
 
+
 	private int partNo;
 	private int userNo;
 	private int previewNo;
+	private String previewName;
 	private int quizNo;
 	private int partType;
 	private Timestamp partDate;
@@ -93,13 +95,46 @@ public class Participation {
 		this.winQuizCount = winQuizCount;
 	}
 	
-	@Override
-	public String toString() {
-		return "Participation [partNo=" + partNo + ", userNo=" + userNo + ", previewNo=" + previewNo + ", quizNo="
-				+ quizNo + ", partType=" + partType + ", partDate=" + partDate + ", winningFlag=" + winningFlag
-				+ ", choice=" + choice + ", totalQuizCount=" + totalQuizCount + ", winQuizCount=" + winQuizCount + "]";
+	public String getPreviewName() {
+		return previewName;
+	}
+	public void setPreviewName(String previewName) {
+		this.previewName = previewName;
 	}
 	
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Participation [partNo=");
+		builder.append(partNo);
+		builder.append(", userNo=");
+		builder.append(userNo);
+		builder.append(", previewNo=");
+		builder.append(previewNo);
+		builder.append(", previewName=");
+		builder.append(previewName);
+		builder.append(", quizNo=");
+		builder.append(quizNo);
+		builder.append(", partType=");
+		builder.append(partType);
+		builder.append(", partDate=");
+		builder.append(partDate);
+		builder.append(", partStrDate=");
+		builder.append(partStrDate);
+		builder.append(", winningFlag=");
+		builder.append(winningFlag);
+		builder.append(", choice=");
+		builder.append(choice);
+		builder.append(", totalQuizCount=");
+		builder.append(totalQuizCount);
+		builder.append(", winQuizCount=");
+		builder.append(winQuizCount);
+		builder.append("]");
+		return builder.toString();
+	}
+
+
 	
 
 	
