@@ -27,5 +27,7 @@ public interface PaymentDao {
 	
 	public int checkAttedance(int userNo)throws Exception;
 	
+	public List<Point> checkList(int userNo) throws Exception;
+	
 	
 }

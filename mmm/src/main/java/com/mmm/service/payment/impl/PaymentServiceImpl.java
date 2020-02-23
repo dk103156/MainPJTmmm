@@ -281,5 +281,12 @@ public class PaymentServiceImpl implements PaymentService {
 			}
 		}
 	}
+
+	@Override
+	public List<Point> checkList(int userNo) throws Exception {
+
+		return paymentDao.checkList(userNo);
+		
+	}
 	
 }

@@ -39,6 +39,7 @@ $(function(){
 	
 	$(".askBody td:nth-child(3)").on("click",function(){
 		var articleNo = $(this).parent().find('input[name="articleNo"]').val();
+		alert(articleNo)
 		console.log(articleNo);
 		self.location="/customer/getContact?articleNo="+articleNo;	
 	});
@@ -100,16 +101,16 @@ $(function(){
     border-color: #d6cece;
 }
 
-	h2.tit{
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0 0 26px 0;
-	font-size: 1.8666em;
-	font-weight: 400;
-	letter-spacing: -1px;
-	line-height: 1.1;
-	color: #222;
-	}
+h2.tit{
+box-sizing: border-box;
+margin: 0;
+padding: 0 0 26px 0;
+font-size: 1.8666em;
+font-weight: 400;
+letter-spacing: -1px;
+line-height: 1.1;
+color: #222;
+}
 
 
 
@@ -118,7 +119,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
     font-weight: 400;
 }
-
 * {
     box-sizing: border-box;
 }
@@ -175,7 +175,9 @@ ol, ul {
     margin: 0;
     padding: 0;
 }
-
+* {
+    box-sizing: border-box;
+}
 
 ul {
     display: block;
@@ -327,7 +329,9 @@ ol, ul {
     border: 1px solid #d8d9db;
     border-left: 0;
 }
-
+* {
+    box-sizing: border-box;
+}
 li {
     display: list-item;
     text-align: -webkit-match-parent;
@@ -1691,52 +1695,51 @@ a {
     box-sizing: border-box;
 }
 user agent stylesheet
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-button, input {
-    overflow: visible;
-}
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-family: inherit;
-    font-size: 1em;
-    line-height: 1.15;
-}
-input[type="hidden" i] {
-    display: none;
-    -webkit-appearance: initial;
-    background-color: initial;
-    cursor: default;
-    padding: initial;
-    border: initial;
-}
-user agent stylesheet
-input {
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: -internal-light-dark-color(black, white);
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    -webkit-appearance: textfield;
-    background-color: -internal-light-dark-color(white, black);
-    -webkit-rtl-ordering: logical;
-    cursor: text;
-    margin: 0em;
-    font: 400 13.3333px Arial;
-    padding: 1px 0px;
-    border-width: 2px;
-    border-style: inset;
-    border-color: initial;
-    border-image: initial;
-}
+	a:-webkit-any-link {
+	    color: -webkit-link;
+	    cursor: pointer;
+	    text-decoration: underline;
+	}
+	button, input {
+	    overflow: visible;
+	}
+	button, input, optgroup, select, textarea {
+	    margin: 0;
+	    font-family: inherit;
+	    font-size: 1em;
+	    line-height: 1.15;
+	}
+	input[type="hidden" i] {
+	    display: none;
+	    -webkit-appearance: initial;
+	    background-color: initial;
+	    cursor: default;
+	    padding: initial;
+	    border: initial;
+	}
+	input {
+	    -webkit-writing-mode: horizontal-tb !important;
+	    text-rendering: auto;
+	    color: -internal-light-dark-color(black, white);
+	    letter-spacing: normal;
+	    word-spacing: normal;
+	    text-transform: none;
+	    text-indent: 0px;
+	    text-shadow: none;
+	    display: inline-block;
+	    text-align: start;
+	    -webkit-appearance: textfield;
+	    background-color: -internal-light-dark-color(white, black);
+	    -webkit-rtl-ordering: logical;
+	    cursor: text;
+	    margin: 0em;
+	    font: 400 13.3333px Arial;
+	    padding: 1px 0px;
+	    border-width: 2px;
+	    border-style: inset;
+	    border-color: initial;
+	    border-image: initial;
+	}
 	span.round.on.red {
     border: 2px solid #e71a0f;
     background-color: #e71a0f;
@@ -1744,40 +1747,28 @@ input {
 	}
 	
 	#delBtn{
-	
-	width:50px;
-
-    background-color: #f2f4f5;
-   
-    border: none;
-
-    color:#000000;
-
-    padding: 10px 0;
-    
-	/* float: right; */
-    text-align: center;
-
-    text-decoration: none;
-
-    display: inline-block;
-
-    font-size: 15px;
-
-    margin: 4px;
-
-    cursor: pointer;
-
-	border-radius:30px;
+		width:50px;
+	    background-color: #f2f4f5;
+	    border: none;
+	    color:#000000;
+	    padding: 10px 0;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 15px;
+	    margin: 4px;
+	    cursor: pointer;
+		border-radius:30px;
 	}
 	
 	body{
-	font-family: 'Noto Sans KR', sans-serif;
+		font-family: 'Noto Sans KR', sans-serif;
 	
 	}
+	
 	#delBtn:hover {
-    background-color: #fee50e;
-}
+    	background-color: #fee50e;
+	}
 
 </style>
 </head>
@@ -1786,24 +1777,17 @@ input {
 <form autocomplete="off">
 <div class="container">
 <div id="contents">
-	<h2 class="tit">나의 문의내역</h2>
-<!-- 	<div class="tab-block"> -->
-<!-- 		<ul> -->
-<!-- 			<li data-url="/mypage/myinquiry?cd=INQD01"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li> -->
-<!-- 			<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관 문의내역</a></li> -->
-<!-- 			<li data-url="/mypage/myinquiry?cd=INQD02"><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
+	<h2 class="tit">나의 응모내역</h2>
 
 	<div class="mypage-infomation mt20">
 		<ul class="dot-list mb20">
-			<li id="tabDesc">  고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+			<li id="tabDesc">  참여한 시사회 이벤트 응모내역을 확인하실 수 있습니다.</li>
 			<!-- <li>문의하시기 전 <a href="/support/faq" class="a-link"><strong>자주묻는질문</strong></a>을 확인하시면 궁금증을 더욱 빠르게 해결하실 수 있습니다</li> -->
 		</ul>
 
-		<div class="btn-group right">
-			<a href="#" class="button" id="inqBtn" title="1:1 문의하기">1:1 문의하기</a>
-		</div>
+<!-- 		<div class="btn-group right"> -->
+<!-- 			<a href="#" class="button" id="inqBtn" title="1:1 문의하기">1:1 문의하기</a> -->
+<!-- 		</div> -->
 	</div>
 
 	<div class="board-list-util mb10">
@@ -1813,67 +1797,56 @@ input {
 		</p>
 
 			
-		<select id="custInqStatCd" name="searchCondition">
-			<option value="2" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>전체</option>
-			<option value="0" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>미답변</option>
-			<option value="1" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>답변완료</option>
-		</select>
+<!-- 		<select id="custInqStatCd" name="searchCondition"> -->
+<%-- 			<option value="2" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>전체</option> --%>
+<%-- 			<option value="0" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>미답변</option> --%>
+<%-- 			<option value="1" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>답변완료</option> --%>
+<!-- 		</select> -->
 		
 		
-		<div class="board-search ml07">
-			<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." name="searchKeyword" class="input-text" value="">
-			<button type="button" class="btn-search-input" id="searchBtn">검색</button>
-		</div>
+<!-- 		<div class="board-search ml07"> -->
+<!-- 			<input type="text" title="검색어를 입력해 주세요." placeholder="검색어를 입력해 주세요." name="searchKeyword" class="input-text" value=""> -->
+<!-- 			<button type="button" class="btn-search-input" id="searchBtn">검색</button> -->
+<!-- 		</div> -->
 	</div>
 
 	<div class="table-wrap">
 		<table class="board-list a-c">
-			<caption>번호, 극장, 유형, 제목, 답변상태, 등록일 순서로 보여주는 1:1 문의 내역 표입니다</caption>
 			<colgroup>
-				<col style="width:40px">
-				<col style="width:40px">
+				<col style="width:70px">
 				<col style="width:140px;">
 				<col style="width:180px;">
 				<col style="width:100px;">
 			</colgroup>
 			<thead>
 				<tr>
-				    <th scope="col">선택</th>
 					<th scope="col">번호</th>
-					<th scope="col">제목</th>
-					<th scope="col">답변상태</th>
-					<th scope="col">등록일</th>
+					<th scope="col">이벤트이름</th>
+					<th scope="col">당첨여부</th>
+					<th scope="col">참여일자</th>
 				</tr>
 			</thead>
 			<tbody class="askBody">
 			  <c:set var="i" value="0" />
 			<c:if test="${empty list}"><tr><td colspan="5">조회된 결과가 없습니다</td></tr></c:if>
-		  <c:forEach var="notice" items="${list}">
+		  <c:forEach var="participation" items="${list}">
 			<c:set var="i" value="${ i+1 }"/>
 			
 			<tr>
 					
 			  <td  class="col" >
-	  	    	 <input type="checkBox" class="chBox" name="chBox" data-articleNo = "${notice.articleNo}" id="" />
-	  	    	  <script>
-				  $(".chBox").click(function(){
-					  $("#allCheck").prop("checked", false);
-				  });
-			  </script>
-			  </td>
-			  <td  class="col" >
-	  	    	<input type="hidden" name="articleNo" value="${notice.articleNo}"/>${ i}
+	  	    	<input type="hidden" name="partNo" value="${participation.partNo}"/>${ i}
 			  </td>
 			  
-			  <td class="col">  ${notice.articleTitle} 
+			  <td class="col">  ${participation.previewName} 
 			  </td>
 			  <td class="col" > 
 			  <span class="btn btn-secondary btn-sm"><small>
-				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
-				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
+				  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 0}">미당첨</c:if>
+				  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 1}">당첨</c:if>
 				</small></span>
 				</td>
-			  <td class="col"  > ${notice.articleDate}
+			  <td class="col"  > ${participation.partDate}
 				</td>
 			   
 			</tr>
@@ -1882,11 +1855,6 @@ input {
 
 		</table>
 	</div>
-		<div class=" d-flex justify-content-end">
-		<c:if test="${!empty list}">
-		<button type="button" id="delBtn" class="">삭제</button>
-		</c:if>
-		</div>
 <c:if test="${!empty list}">
 	<!-- pagination -->
 	<div class="ticketingPagination row">
