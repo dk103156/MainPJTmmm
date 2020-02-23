@@ -24,7 +24,6 @@ body {
 	text-align: center;
 	width: 100%;
 	height: 100%;
-	top: 150px;
 	left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -273,7 +272,7 @@ $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자�
 </head>
 <body>
 	<!--container-->
-	<div id="contaniner">
+	<div id="contaniner" style="margin-top: 50px;">
 		<div class="row">
 			<div class="col-md-12" style="text-align: left;">
 				<div>

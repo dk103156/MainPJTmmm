@@ -39,6 +39,7 @@ public class Search {
 	private Timestamp inventoryUsedDate; // 상품 & 구매 전용
 	private String receiverPhone; // 상품 & 구매 전용
 	private int purchaseStatus;
+	private int MovieNo;
 
 
 	///Constructor
@@ -323,7 +324,14 @@ public class Search {
 	}
 
 	
-	
+	public int getMovieNo() {
+		return MovieNo;
+	}
+
+	public void setMovieNo(int movieNo) {
+		MovieNo = movieNo;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -393,78 +401,8 @@ public class Search {
 		builder.append(receiverPhone);
 		builder.append(", purchaseStatus=");
 		builder.append(purchaseStatus);
-		builder.append(", getTicketerPhone()=");
-		builder.append(getTicketerPhone());
-		builder.append(", getCurrentPage()=");
-		builder.append(getCurrentPage());
-		builder.append(", getSearchCondition()=");
-		builder.append(getSearchCondition());
-		builder.append(", getSearchKeyword()=");
-		builder.append(getSearchKeyword());
-		builder.append(", getViewCondition()=");
-		builder.append(getViewCondition());
-		builder.append(", getMovieName()=");
-		builder.append(getMovieName());
-		builder.append(", getFranchise()=");
-		builder.append(getFranchise());
-		builder.append(", getTheaterName()=");
-		builder.append(getTheaterName());
-		builder.append(", getScreenDate()=");
-		builder.append(getScreenDate());
-		builder.append(", getScreenTime()=");
-		builder.append(getScreenTime());
-		builder.append(", getFranchises()=");
-		builder.append(getFranchises());
-		builder.append(", getTheaterNames()=");
-		builder.append(getTheaterNames());
-		builder.append(", getPageSize()=");
-		builder.append(getPageSize());
-		builder.append(", getEndRowNum()=");
-		builder.append(getEndRowNum());
-		builder.append(", getStartRowNum()=");
-		builder.append(getStartRowNum());
-		builder.append(", getUserNo()=");
-		builder.append(getUserNo());
-		builder.append(", getPayObjectFlag()=");
-		builder.append(getPayObjectFlag());
-		builder.append(", getOnBoxOfficeFlag()=");
-		builder.append(getOnBoxOfficeFlag());
-		builder.append(", getArticleType()=");
-		builder.append(getArticleType());
-		builder.append(", getCategory()=");
-		builder.append(getCategory());
-		builder.append(", getUserId()=");
-		builder.append(getUserId());
-		builder.append(", getPreviewFlag()=");
-		builder.append(getPreviewFlag());
-		builder.append(", getCartUserNo()=");
-		builder.append(getCartUserNo());
-		builder.append(", getCartRegDate()=");
-		builder.append(getCartRegDate());
-		builder.append(", getInventoryUserNo()=");
-		builder.append(getInventoryUserNo());
-		builder.append(", getInventoryProdNo()=");
-		builder.append(getInventoryProdNo());
-		builder.append(", getInventoryPurchaseNo()=");
-		builder.append(getInventoryPurchaseNo());
-		builder.append(", getInventoryStatus()=");
-		builder.append(getInventoryStatus());
-		builder.append(", getInventoryUsedDate()=");
-		builder.append(getInventoryUsedDate());
-		builder.append(", getReceiverPhone()=");
-		builder.append(getReceiverPhone());
-		builder.append(", getPurchaseStatus()=");
-		builder.append(getPurchaseStatus());
-		builder.append(", getCommentType()=");
-		builder.append(getCommentType());
-		builder.append(", getParent()=");
-		builder.append(getParent());
-		builder.append(", getClass()=");
-		builder.append(getClass());
-		builder.append(", hashCode()=");
-		builder.append(hashCode());
-		builder.append(", toString()=");
-		builder.append(super.toString());
+		builder.append(", MovieNo=");
+		builder.append(MovieNo);
 		builder.append("]");
 		return builder.toString();
 	}

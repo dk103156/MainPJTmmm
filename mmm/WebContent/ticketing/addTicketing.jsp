@@ -378,6 +378,8 @@ $(function(){
 </head>
 <body>
 
+	<jsp:include page="/layout/header.jsp"></jsp:include>
+	
    <div class="container">
       <!-- 비교 예매 -->
       <div class="compareTicketing">
@@ -581,7 +583,7 @@ $(function(){
   <!-- 하단 진행 바  --> 
     <jsp:include page="/ticketing/progressBar.jsp" />	 
   <!-- 하단 진행 바  -->           	
-
+	
 <!-- 변수 모음 -->
 <script>
 

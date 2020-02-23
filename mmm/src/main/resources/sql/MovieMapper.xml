@@ -152,7 +152,7 @@
 		m.movie_no, m.movie_title, m.kmdb_code, m.poster, m.running_time, m.summary,
 		m.movie_rating, TO_CHAR(release_date, 'YYYY-MM-DD') release_date, m.onBoxOffice_flag, 
 		t.star_RATE, w.WISH_CNT, NVL2(c.wish_no, '1', '0') wish_user_flag,
-		NVL(s.star_rate, '0') star_user, NVL2(s.star_rate, '1', '0') star_flag
+		NVL(s.star_rate, '0') star_user, NVL2(s.star_rate, '1', '0') star_flag, tc.ticketing_rate
 		FROM(
 			SELECT 
 			MOVIE_NO, ROUND(AVG(STAR_RATE), 2) STAR_RATE
@@ -174,11 +174,18 @@
 			SELECT MOVIE_NO, STAR_RATE
 			FROM STAR_RATING
 			WHERE USER_NO = #{userNo:NUMERIC}
-			) s, movie m
+			) s,
+			(SELECT m.movie_no, m.MOVIE_TITLE, NVL(ROUND((s.tic_cnt / t.total_tic_cnt), 3)*100, '0') ticketing_rate
+			FROM MOVIE m,
+				(SELECT  movie_name, count(*) tic_cnt FROM TICKETING WHERE TICKETING_DATE >= (SYSDATE -7) GROUP BY  movie_name) s,
+				(SELECT count(*) total_tic_cnt FROM TICKETING WHERE TICKETING_DATE >= (SYSDATE -7)) t
+			WHERE m.MOVIE_TITLE = s. movie_name(+)
+			) tc, movie m
 		WHERE m.MOVIE_NO = t.movie_no(+)
 			AND m.MOVIE_NO = w.movie_no(+)
 			AND m.MOVIE_NO = c.movie_no(+)
 			AND m.MOVIE_NO = s.movie_no(+)
+			AND m.MOVIE_NO = tc.movie_no(+)
 			AND m.movie_no = #{movieNo}
 			
 	</select>
@@ -192,7 +199,7 @@
 		m.movie_no, m.movie_title, m.kmdb_code, m.poster, m.running_time, m.summary,
 		m.movie_rating, TO_CHAR(release_date, 'YYYY-MM-DD') release_date, m.onBoxOffice_flag, 
 		t.star_RATE, w.WISH_CNT, NVL2(c.wish_no, '1', '0') wish_user_flag,
-		NVL(s.star_rate, '0') star_user, NVL2(s.star_rate, '1', '0') star_flag
+		NVL(s.star_rate, '0') star_user, NVL2(s.star_rate, '1', '0') star_flag, tc.ticketing_rate
 		FROM(
 			SELECT 
 			MOVIE_NO, ROUND(AVG(STAR_RATE), 2) STAR_RATE
@@ -214,11 +221,18 @@
 			SELECT MOVIE_NO, STAR_RATE
 			FROM STAR_RATING
 			WHERE USER_NO = #{userNo:NUMERIC}
-			) s, movie m
+			) s,
+			(SELECT m.movie_no, m.MOVIE_TITLE, NVL(ROUND((s.tic_cnt / t.total_tic_cnt), 3)*100, '0') ticketing_rate
+			FROM MOVIE m,
+				(SELECT  movie_name, count(*) tic_cnt FROM TICKETING WHERE TICKETING_DATE >= (SYSDATE -7) GROUP BY  movie_name) s,
+				(SELECT count(*) total_tic_cnt FROM TICKETING WHERE TICKETING_DATE >= (SYSDATE -7)) t
+			WHERE m.MOVIE_TITLE = s. movie_name(+)
+			) tc, movie m
 		WHERE m.MOVIE_NO = t.movie_no(+)
 			AND m.MOVIE_NO = w.movie_no(+)
 			AND m.MOVIE_NO = c.movie_no(+)
 			AND m.MOVIE_NO = s.movie_no(+)
+			AND m.MOVIE_NO = tc.movie_no(+)
 			AND REPLACE(m.movie_title, ' ', '') = REPLACE(#{movieTitle}, ' ', '')
 			
 	</select>

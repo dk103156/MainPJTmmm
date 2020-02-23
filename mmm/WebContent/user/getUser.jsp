@@ -632,6 +632,9 @@ $(function(){
 	
 	
 
+	
+	
+
 	//회원정보 수정
 	$("#updateBtn").on("click",function(){
 		if(!validate()){ //이메일 유효성 오류 : false, 정상 : true

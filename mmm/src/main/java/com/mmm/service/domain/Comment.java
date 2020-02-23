@@ -4,7 +4,7 @@ package com.mmm.service.domain;
 public class Comment {
 	
 	private int commentNo;
-	private int commentType;
+	private int commentType;	// 0 : 댓글,  2: 한줄평
 	private String userId;
 	private int userNo;
 	private int supCommentNo;
@@ -93,9 +93,33 @@ public class Comment {
 	
 	@Override
 	public String toString() {
-		return "Comment [commentNo=" + commentNo + ", supCommentNo=" + supCommentNo + ", articleNo=" + articleNo
-				+ ", userId=" + userId + ", commentContent=" + commentContent + ", commentDate=" + commentDate
-				+ ", likeCount=" + likeCount + ", commentCount=" + commentCount + ", blindStatus=" + blindStatus + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Comment [commentNo=");
+		builder.append(commentNo);
+		builder.append(", commentType=");
+		builder.append(commentType);
+		builder.append(", userId=");
+		builder.append(userId);
+		builder.append(", userNo=");
+		builder.append(userNo);
+		builder.append(", supCommentNo=");
+		builder.append(supCommentNo);
+		builder.append(", movieNo=");
+		builder.append(movieNo);
+		builder.append(", articleNo=");
+		builder.append(articleNo);
+		builder.append(", commentContent=");
+		builder.append(commentContent);
+		builder.append(", commentDate=");
+		builder.append(commentDate);
+		builder.append(", likeCount=");
+		builder.append(likeCount);
+		builder.append(", commentCount=");
+		builder.append(commentCount);
+		builder.append(", blindStatus=");
+		builder.append(blindStatus);
+		builder.append("]");
+		return builder.toString();
 	} 
 	
 	
