@@ -53,7 +53,7 @@
 
 	body, input, select, textarea, header, footer {
 	    color: #333;
-	    font-family: 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
+	   	font-family: 'Noto Sans KR', sans-serif;
 	    font-size: 12px;
 	    font-weight: bold;
 	}
@@ -67,7 +67,7 @@
 	    padding: 2.0625rem 2.5625rem;
 	    border-top: solid 0.125rem transparent;
 	    font-size: 0.875rem;
-	    font-family: 'Yantramanav', sans-serif;
+	    font-family: 'Noto Sans KR', sans-serif;
 	    letter-spacing: 0.01rem;
 	    font-weight: 700;
 	    color: #fff;
@@ -182,7 +182,7 @@ $(function(){
 					       <a href="/user/logout" class="login">LOGOUT</a>
 					    </c:when>
 					    <c:otherwise>    
-					       <a href="#" id=mainLoginBtn class="login"><span>LOGIN</span></a>
+					       <a href="/user/login" id=mainLoginBtn class="login"><span>LOGIN</span></a>
 					    </c:otherwise>                  
 					</c:choose>
 					<a href="/user/userAuthorization.jsp?type=addUser" class="join"><span>JOIN</span></a>

@@ -52,20 +52,20 @@
 									(
 						SELECT MOVIE_NO, COUNT(wish_no) wish_no
 						FROM WISH 
-						WHERE USER_NO = ${userNo:NUMERIC}
+						WHERE USER_NO = ${userNo}
 						GROUP BY MOVIE_NO
 						) c,
 						(
 						SELECT MOVIE_NO, STAR_RATE
 						FROM STAR_RATING
-						WHERE USER_NO = ${userNo:NUMERIC}
+						WHERE USER_NO = ${userNo}
 						) r
 		WHERE m.MOVIE_NO = w.MOVIE_NO
 			AND m.MOVIE_NO = t.movie_no(+)
 			AND m.MOVIE_NO = s.Movie_no(+)
 			AND m.MOVIE_NO = c.movie_no(+)
 			AND m.MOVIE_NO = r.movie_no(+)
-			AND w.USER_NO = ${userNo:NUMERIC}
+			AND w.USER_NO = ${userNo}
 		<choose>
 			<when test="viewCondition !=''  and viewCondition == 1">
 				ORDER BY s.star_RATE DESC NULLS LAST

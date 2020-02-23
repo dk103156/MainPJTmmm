@@ -40,9 +40,10 @@ body {
 #contents.location-fixed {
     padding-top: 82px;
 }
+
 #contents {
     width: 100%;
-    margin: 0;
+	margin-top: 30px;
     padding: 10px 0 0 0;
 }
 
@@ -60,20 +61,12 @@ h2.tit {
     margin-bottom: 10px!important;
 }
 
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-* {
-    box-sizing: border-box;
-}
 
 .dot-list>li {
     position: relative;
     padding: 0 0 0 8px;
 }
+
 table {
     width: 100%;
     margin: 0;
@@ -87,6 +80,7 @@ table {
     position: relative;
     border-top: 1px solid #555;
 }
+
 table caption {
     overflow: hidden;
     width: 0;
@@ -120,56 +114,11 @@ tr {
     border-bottom: 1px solid #d1d5dd;
 }
 
-table td, table th {
-    padding: 0;
-}
-
-.board-form tbody td, .board-form tbody th {
-    position: relative;
-    height: 50px;
-    padding: 7px 15px;
-    text-align: left;
-    border-bottom: 1px solid #d1d5dd;
-}
-
-td {
-    display: table-cell;
-    vertical-align: inherit;
-}
 
 .profile-photo {
     overflow: hidden;
 }
 
-div {
-    display: block;
-}
-
-form {
-    display: block;
-    margin-top: 0em;
-}
-
-button, input {
-    overflow: visible;
-}
-
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-size: 1em;
-    line-height: 1.15;
-}
-
-input[type="file" i] {
-    -webkit-appearance: initial;
-    background-color: initial;
-    cursor: default;
-    align-items: baseline;
-    color: inherit;
-    text-align: start !important;
-    padding: initial;
-    border: initial;
-}
 .profile-photo .profile-img {
     overflow: hidden;
     float: left;
@@ -188,17 +137,13 @@ input[type="file" i] {
     width: 100%;
     height: 100%;
 }
+
 img {
     border: 0;
 }
 
 .button.gray-line.small {
     line-height: 32px;
-}
-
-.profile-photo .button {
-    float: left;
-    margin: 17px 0 0 10px;
 }
 
 .button.gray-line {
@@ -219,40 +164,18 @@ button, select {
     text-transform: none;
 }
 
-button, input {
-    overflow: visible;
-}
 
 .profile-photo .button.member-out {
     float: right;
     margin-left: 0;
 }	
 
-a.button:active, a.button:focus, a.button:hover, a.button:visited {
-    color: #fee50e;
-}
 
 .profile-photo .button {
     float: left;
     margin: 17px 0 0 10px;
 }
 
-.button.small {
-    height: 32px;
-    padding: 0 12px;
-    line-height: 30px;
-    font-size: .9333em;
-}
-
-a.button {
-    text-decoration: none;
-}
-
-a:visited {
-    color: #666;
-    text-decoration: none;
-    outline: 1px dotted #000;
-}
 
 .button {
     display: inline-block;
@@ -276,6 +199,16 @@ a:visited {
     margin-top: 40px!important;
 }
 
+input[type="file" i] {
+    -webkit-appearance: initial;
+    background-color: initial;
+    cursor: default;
+    align-items: baseline;
+    color: inherit;
+    text-align: start !important;
+    padding: initial;
+    border: initial;
+}
 .tit-util .tit {
     float: left;
     padding: 0!important;
@@ -298,7 +231,6 @@ h3 {
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
-    font-weight: bold;
 }
 
 .tit-util .right {
@@ -328,48 +260,6 @@ p {
     color: #e63e30!important;
 }
 
-em {
-    font-style: normal;
-}
-
-form {
-    display: block;
-    margin-top: 0em;
-}
-
-button, input {
-    overflow: visible;
-}
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-size: 1em;
-    line-height: 1.15;
-}
-
-input[type="hidden" i] {
-    display: none;
-    -webkit-appearance: initial;
-    background-color: initial;
-    cursor: default;
-    padding: initial;
-    border: initial;
-}
-
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-size: 1em;
-    line-height: 1.15;
-}
-
-table caption {
-    overflow: hidden;
-    width: 0;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-    opacity: 0;
-}
-
 colgroup {
     display: table-column-group;
 }
@@ -378,9 +268,6 @@ col {
     display: table-column;
 }
 
-a.button.gray-line:active, a.button.gray-line:focus, a.button.gray-line:hover, a.button.gray-line:visited {
-    color: #444;
-}
 
 .modal-layer {
     overflow-y: scroll;
@@ -400,14 +287,6 @@ a.button.gray-line:active, a.button.gray-line:focus, a.button.gray-line:hover, a
     left: -9999px;
     top: -9999px;
     z-index: 502;
-}
-
-a {
-    background-color: transparent;
-}
-
-a:-webkit-any-link {
-    cursor: pointer;   
 }
 
 .modal-layer .wrap {
@@ -449,15 +328,6 @@ a:-webkit-any-link {
     border-radius: 5px;
 }
 
-.mt20 {
-    margin-top: 20px!important;
-}
-
-label {
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-}
 
 .clearfix:after {
     clear: both;
@@ -535,12 +405,6 @@ label {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-.mt40 {
-    margin-top: 40px!important;
-}
-
-
-
 .btn-group .button {
     margin: 0 3px;
 }
@@ -553,9 +417,7 @@ label {
 .button.purple.large {
     line-height: 46px;
 }
-.btn-group .button {
-    margin: 0 3px;
-}
+
 .button.purple {
     color: #333;
     line-height: 36px;
@@ -571,6 +433,7 @@ label {
 .btn-group:after {
     clear: both;
 }
+
 .btn-group:after, .btn-group:before {
     content: '';
     display: table;
@@ -583,7 +446,34 @@ label {
     vertical-align: middle;
 }
 
+.button.purple {
+    color: #333;
+    line-height: 36px;
+    border: 0;
+    background: #fee50e;
+}
+.button.large {
+    height: 46px;
+    padding: 0 30px;
+    line-height: 44px;
+}
 
+
+.input-text {
+    display: inline-block;
+    width: 100%;
+    height: 32px;
+    padding: 0 10px;
+    line-height: 30px;
+    color: #444;
+    border: 1px solid #d8d9db;
+    vertical-align: middle;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+label{
+	font-weight: normal;
+}
 
 </style>
 
@@ -591,6 +481,11 @@ label {
 <script type="text/javascript">
 
 $(function(){
+	
+	//모달창 엑스
+	$("#btn").on("click",function(){
+		history.go(-1);
+	})
 	
 	
 	
@@ -805,6 +700,11 @@ $(function(){
 	    $('#profileTarget').click();
 	});
 	
+	
+	//모달창에서 엔터키 안눌리게
+	$(document).keypress(function(e) { 
+		if (e.keyCode == 13) e.preventDefault(); });
+	
 	//회원탈퇴
 	$("#byeconfirmBtn").on("click",function(){
 		var password= $("#password").val();
@@ -832,7 +732,7 @@ $(function(){
 				}else{
 					$("#passwordChk").text("");
 					alert("정말 탈퇴 하실?")
-					self.location="/index.jsp";
+					self.location="/user/logout";
 				} 
 			}, error : function() {
 					console.log("실패");
@@ -890,6 +790,7 @@ $(function(){
 								
 								<button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 선택</button>
 								<button type="button" class="button small gray-line" id="updateImgBtn">등록</button>
+								
 								<!-- Button trigger modal -->
 								<button type="button" class="button small member-out" data-toggle="modal" data-target="#staticBackdrop" title="회원탈퇴">회원탈퇴</button>
 								
@@ -898,27 +799,32 @@ $(function(){
 								<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 								  <div class="modal-dialog" role="document">
 								    <div class="modal-content">
-								      <div class="modal-header">
+								       <div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
 								        <h5 class="modal-title" id="staticBackdropLabel">회원 탈퇴</h5>
-								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								        <button type="button" class="close" data-dismiss="modal" id="btn" aria-label="Close">
 								          <span aria-hidden="true">&times;</span>
 								        </button>
 								      </div>
 								      <div class="modal-body">
-								        ${user.userName}님 탈퇴를 하시겠습니까?<br/>
-								        	<br/><br/>
-								        	비밀번호
-								        <input type="password" name="password" id="password">	
-								        <h6 id="passwordChk" style="color: red;"></h6>
-								      </div>
+										<div class="col-wrap">
+											<div class="col left">
+												<div class="login-input-area">
+													<p> ${user.userName}님 탈퇴를 하시겠습니까?<br>
+														탈퇴를 원하시면 비밀번호를 입력해주세요.</p>
+													<input autocomplete="off" id="password" name="password" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15" style=" width:250px; margin-top: 15px;">
+													<h6 id="passwordChk" style="color: red;"></h6>
+												</div>
+											</div>
+										</div>
 								      <div class="modal-footer">
-								        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-								        <button type="button" class="btn btn-primary" id="byeconfirmBtn">탈퇴</button>
+								        <button type="button" class="button large" data-dismiss="modal">취소</button>
+								        <button type="button" class="button large purple" style=" background-color:#fee50e; color: #333 "id="byeconfirmBtn">탈퇴</button>
 								      </div>
 								    </div>
 								  </div>
 								</div>
-							</form>
+							</div>
+							</form><!-- Madal --> 
 						</div>
 						</td>
 					</tr>
@@ -1007,7 +913,7 @@ $(function(){
 							        <label for="email">이메일</label> <em class="font-orange">*</em>
 							    </th>
 							    <td>
-							        <input type="text" id="email" name="email" class="input-text w500px" value="${user.email}" />
+							        <input type="text" id="email" name="email" style="font-weight: normal;" class="input-text w500px" value="${user.email}" />
 							    </td>
 							</tr>
 							<tr>

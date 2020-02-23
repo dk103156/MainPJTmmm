@@ -36,7 +36,6 @@ h3.tit {
 }  
 
 .col-wrap{
-
 	letter-spacing: 0;
 	line-height: 1.5;
 	font-size: 15px;
@@ -70,21 +69,6 @@ h3.tit {
     float: left;
 }
 
-[type=checkbox], [type=radio] {
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-}
-[type=checkbox], [type=radio] {
-    box-sizing: border-box;
-    padding: 0;
-}
-
-label {
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-}
 
 .button.purple.large {
     line-height: 46px;
@@ -358,14 +342,16 @@ $(function(){
 	// 입력한 이메일 유효성 검사 
 	// 단 존재하지 않는 이메일을 보냈을 때에도 이메일 형식에만 맞는다면 동작한다 
 		if( email == null || email.length <1){
-			$("#confirmNum3").text("이메일은 반드시 입력하셔야 합니다.");
+			$("#confirmNum3").text("이메일은 반드시 입력하셔야 합니다.");		
 			return;
 		}else if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
 			$("#confirmNum3").text("이메일 형식이 아닙니다.");
+
 	    	return;
 		}else if(re2.test(email)){
 			$("#confirmNum3").text("");
 			$("#sendBtn").attr("disabled", false);	
+
      	}else{
 			$("#confirmNum3").text("");
 		}
@@ -449,6 +435,10 @@ $(function(){
 </script>
 </head>
 <body>
+	<!-- ToolBar Start /////////////////////////////////////-->
+	<jsp:include page="/layout/header.jsp" />
+   	<!-- ToolBar End /////////////////////////////////////-->
+
 
 <!-- nextPage Form -->
 <form name="nextPage">
@@ -456,12 +446,23 @@ $(function(){
       <input type="hidden" name="authType"/>
 </form>
 
-	<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container" style="margin-top: 10%;">
-	
-		<h1 class="bg-default text-center">본 인 인 증</h1>
-		<p></p>
+<!--  화면구성 div Start /////////////////////////////////////-->
+<div class="container" style="margin-top: 10px; width: 600px;">
 
+	<h1 class="bg-default text-center" style="background-color:#fee50e;">본 인 인 증</h1><br>
+		<h4 class="bg-default text-center"> 본인 인증단계 입니다.<br><br>
+			원하시는 인증 방법을 선택해주세요. <br>
+		</h4>	
+		<div class="row" style="margin-top: 20px;"> 
+			<div class="col-md-6" ><a href="#" data-toggle="modal" data-target="#phoneModal"><img style="float: right;width: 200px;height: 230px;" alt="" src="/resources/image/user/phone_img.png"></a></div>
+			<div class="col-md-6" ><a href="#" data-toggle="modal" data-target="#emailModal"><img style="padding-top: 30px; width: 190px; height: 200px;" alt="" src="/resources/image/user/email_img.png"></a></div>
+		</div>
+			<h4 class="bg-default text-center" >
+				14세 미만 어린이는 보호자 인증을 추가로 완료한 후 가입이 가능합니다.<br>
+				 본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, <br>
+				인증 이외의 용도로 이용 또는 저장되지 않습니다. 
+			</h4><br>
+</div>	<!-- container -->	
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-md-2"></div> -->
 <!-- 			<div class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;"> -->
@@ -490,95 +491,125 @@ $(function(){
 <!-- 					</div> -->
 <!-- 				</form> -->
 <!-- 			</div> -->
-			&nbsp;&nbsp;&nbsp;
-			<div id ="emailArea" class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;">
-				<strong>이메일 인증</strong>
-				<form>
-					<div class="form-group row" style="font-size: 12pt;">
-						<label for="staticEmail" class="col-sm-4 col-form-label">이메일</label>
-						<div class="input-group sm-4">
-							<input type="text" class="form-control" id="email" name="email"
-								placeholder="이메일을 정확히 입력해주세요." aria-label="Recipient's username"
-								aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" id="sendBtn" type="button">메일전송</button>
+<!-- 			&nbsp;&nbsp;&nbsp; -->
+<!-- 			<div id ="emailArea" class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;"> -->
+<!-- 				<strong>이메일 인증</strong> -->
+<!-- 				<form> -->
+<!-- 					<div class="form-group row" style="font-size: 12pt;"> -->
+<!-- 						<label for="staticEmail" class="col-sm-4 col-form-label">이메일</label> -->
+<!-- 						<div class="input-group sm-4"> -->
+<!-- 							<input type="text" class="form-control" id="email" name="email" -->
+<!-- 								placeholder="이메일을 정확히 입력해주세요." aria-label="Recipient's username" -->
+<!-- 								aria-describedby="basic-addon2"> -->
+<!-- 							<div class="input-group-append"> -->
+<!-- 								<button class="btn btn-outline-secondary" id="sendBtn" type="button">메일전송</button> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<h6 id="confirmNum3" style="color: red;"></h6> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group row"> -->
+<!-- 						<label for="emailChkNum" class="col-sm-4 col-form-label" style="font-size: 12pt;">인증번호</label> -->
+<!-- 						<div class="col-sm-6"> -->
+<!-- 							<input type="text" class="form-control" id="emailChkNum" placeholder="인증번호">  -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<h6 id="confirmNum4" style="color: red;"></h6> -->
+<!-- 					<div class="col-sm-12" style="text-align: center;"> -->
+<!-- 						<button type="button" class="btn btn-dark" id="chkBtn2">확인</button> -->
+<!-- 					</div> -->
+<!-- 				</form> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-2"></div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+
+	
+		<!-- Modal -->
+		<div class="modal fade" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
+						<h3 class="tit" id="exampleModalLabel">휴대폰 인증</h3>
+						<button type="button" class="close" data-dismiss="modal" id="btn1" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+					    <form>
+							<div class="col-wrap">
+								<div class="col left">
+									<div class="login-input-area">
+										<div class="row" style="margin-bottom: 20px;"> 
+										
+											<span style="padding-right: 10px; margin-top: 10px;">휴대전화 번호</span>
+											<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" style="margin-top: 5px; margin-right: 20px; width: 200px">
+											
+											<button id="smsBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
+										         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button> 
+										</div>
+										<h6 id="confirmNum1" style="color: red;"></h6> 		
+										<div class="row">	
+											<span style="padding-right: 10px; width: 97px;">인증번호</span>
+											<input type="number" id="numStr" class="form-control" style="width: 150px; margin-right: 20px;" placeholder="인증번호 6자리">
+										</div>
+										<h6 id="confirmNum2" style="color: red;"></h6>
+										<div style="text-align: center;">
+										<button id="chkBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
+											         width: 100px; height: 46px; margin-top:20px; border: 0; cursor: default; background-color:#fee50e;">확인</button> 
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-						<h6 id="confirmNum3" style="color: red;"></h6>
-					</div>
-					<div class="form-group row">
-						<label for="emailChkNum" class="col-sm-4 col-form-label" style="font-size: 12pt;">인증번호</label>
-						<div class="col-sm-6">
-							<input type="text" class="form-control" id="emailChkNum" placeholder="인증번호"> 
-						</div>
-					</div>
-					<h6 id="confirmNum4" style="color: red;"></h6>
-					<div class="col-sm-12" style="text-align: center;">
-						<button type="button" class="btn btn-dark" id="chkBtn2">확인</button>
-					</div>
-				</form>
-			</div>
-			<div class="col-md-2"></div>
-		</div>
-	</div>
-
-	
-	
-	
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#phoneModal">
-  	휴대폰 인증
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
-        <h3 class="tit" id="exampleModalLabel">휴대폰 인증</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-    
-	    col-wrap
-	    <form>
-			<div class="col-wrap">
-				<div class="col left">
-					<div class="login-input-area">
-						<div class="row" style="margin-bottom: 20px;"> 
-						
-							<span style="padding-right: 10px; margin-top: 10px;">휴대전화 번호</span>
-							<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" style="margin-top: 5px; margin-right: 20px; width: 200px">
-							
-							<button id="smsBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
-						         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button> 
-						</div>
-						<h6 id="confirmNum1" style="color: red;"></h6> 		
-						<div class="row">	
-							<span style="padding-right: 10px; width: 97px;">인증번호</span>
-							<input type="number" id="numStr" class="form-control" style="width: 150px; margin-right: 20px;" placeholder="인증번호 6자리">
-						</div>
-						<h6 id="confirmNum2" style="color: red;"></h6>
-						<div style="text-align: center;">
-						<button id="chkBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
-							         width: 100px; height: 46px; margin-top:20px; border: 0; text  cursor: default; background-color:#fee50e;">확인</button> 
-						</div>
+						</form>
+				<!--// col-wrap -->
 					</div>
 				</div>
 			</div>
-		</form>
-		<!--// col-wrap -->
+		</div>
 		
-      </div>
-    </div>
-  </div>
-</div>
-	
-	
-	
-	
+		<!-- Modal -->
+		<div class="modal fade" id="emailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
+						<h3 class="tit" id="exampleModalLabel">이메일 인증</h3>
+						<button type="button" class="close" data-dismiss="modal" id="btn2"  aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="col-wrap">
+								<div class="col left">
+									<div class="login-input-area">
+										<div class="row" style="margin-bottom: 20px;"> 
+										
+											<span style="padding-right: 10px; margin-top: 10px;">이메일</span>
+											<input type="text" class="form-control" placeholder="이메일을 정확히 입력해주세요." id="email" name="email" style="margin-top: 5px; margin-right: 20px; width: 250px">
+											
+											<button id="sendBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
+										         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button> 
+										</div>
+										<h6 id="confirmNum3" style="color: red;"></h6> 		
+										<div class="row">	
+											<span style="padding-right: 10px; width: 97px;">인증번호</span>
+											<input type="text" id="emailChkNum" class="form-control" style="width: 150px; margin-right: 20px;" placeholder="인증번호 ">
+										</div>
+										<h6 id="confirmNum4" style="color: red;"></h6>
+										<div style="text-align: center;">
+										<button id="chkBtn2" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
+											         width: 100px; height: 46px; margin-top:20px; border: 0; cursor: default; background-color:#fee50e;">확인</button> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div> <!-- email 인증  -->
+	</div>	<!-- row  -->
+
 	
 	
 	

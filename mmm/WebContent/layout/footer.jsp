@@ -36,16 +36,76 @@
     width: 50%;
 }
 
+body{
+	font-family: 'Noto Sans KR', sans-serif;
+
+}
+ 
+h3.tit {
+    color: #333;
+    font-size: 1.2em;
+    line-height: 1.1;
+}  
+.col-wrap{
+	letter-spacing: 0;
+	line-height: 1.5;
+	font-size: 15px;
+	color: #444;
+	font-weight: 400; 
+}
+  
+.login-input-area .input-text {
+    display: block;
+    width: 100%;
+    height: 46px;
+}
+.input-text {
+    display: inline-block;
+    width: 100%;
+    height: 32px;
+    padding: 0 10px;
+    line-height: 30px;
+    color: #444;
+    border: 1px solid #d8d9db;
+    vertical-align: middle;
+  
+.login-input-area .chk-util {
+    overflow: hidden;
+    padding: 15px 0 35px 0;
+}
+.login-input-area .chk-util .left {
+    float: left;
+}
+
+.button.purple.large {
+    line-height: 46px;
+}
+.login-input-area .btn-login {
+    display: block;
+    width: 100%;
+}
+.login-input-area .link {
+    padding: 20px 0 30px 0;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.col-wrap{
+
+	letter-spacing: 0;
+	line-height: 1.5;
+	font-size: 15px;
+	color: #444;
+	font-weight: 400; 
+
+}
+
+
 </style>
 
 <script type="text/javascript">
 $(function(){
-	
-	$('#mainLoginBtn').on('click',function(){
-		$("#loginModal").modal("show");
 		
-	})
-	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -221,7 +281,7 @@ $(function(){
 						</div>
 						<!--// chk-util -->
 			
-						<button id="loginBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; cursor: default; background-color:#fee50e;" disabled="disabled">로그인<!--로그인--></button>
+						<button id="loginBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; cursor: default; background-color:#fee50e;">로그인<!--로그인--></button>
 			
 						<div class="link" style="padding-top: 20px; padding-bottom: 30px; text-align: center;">
 							<a href="/user/userAuthorization?type=findId" title="ID 찾기 선택" style=" margin-left:10px; color: #333; ">ID 찾기<!--ID/PW 찾기--></a>
@@ -245,6 +305,7 @@ $(function(){
     </div>
   </div>
 </div>
+
     
 </body>
 </html>

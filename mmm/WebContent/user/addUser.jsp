@@ -30,9 +30,7 @@
 
 
   body > div.container{
-        	border: 3px solid #D6CDB7;
             margin-top: 10px;
-            background-color: beige;
         }
  	
   #infoWindow{
@@ -51,6 +49,36 @@
    .distanceInfo .label {display:inline-block;width:50px;}
    .distanceInfo:after {content:none;}
  
+  
+.button.purple {
+    color: #333;
+    line-height: 36px;
+    border: 0;
+    background: #fee50e;
+}
+.button.large {
+    height: 46px;
+    padding: 0 30px;
+    line-height: 44px;
+}
+
+.button {
+    display: inline-block;
+    height: 36px;
+    margin: 0;
+    padding: 0 15px;
+    text-align: center;
+    line-height: 34px;
+    color: #fee50e;
+    font-weight: 400;
+    border-radius: 4px;
+	font-family:'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    border: 1px solid #fee50e;
+    vertical-align: middle;
+    background-color: #fff;
+    cursor: pointer;
+}
       
 </style>
 
@@ -215,83 +243,86 @@ $(function(){
 </head>
 <body>
 <!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container">
+	<div class="container" style="width: 600px;">
 	
-		<h1 class="bg-default text-center">회 원 가 입</h1>
+		<h1 class="bg-default text-center"style="margin-top: 10px; background-color:#fee50e">회 원 가 입</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form>
-			<div class="form-group row">
-			    <label for="userId" class="col-sm-2 col-form-label">아이디</label>
-			    <div class="col-sm-10">
-		      		<input type="text" class="form-control" id="userId" name="userId" >
+			<div class="form-group row" style="text-align: center;">
+			    <label for="userId" class="col-sm-3 col-form-label">아이디</label>
+			    <div class="col-sm-9">
+		      		<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" >
 		      		<input type="hidden" class="form-control" id="role" name="role" value="user" >
 		      		<h6 id="checkId" style="color: red;"></h6>
 		    	</div>
 			</div>
-			<div class="form-group row">
-				<label for="password" class="col-sm-2 col-form-label">비밀번호</label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+			<div class="form-group row" style="text-align: center;">
+				<label for="password" class="col-sm-3 col-form-label">비밀번호</label>
+				<div class="col-sm-9">
+					<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
 		    	</div>
 			</div>
-			<div class="form-group row">
-				<label for="password2" class="col-sm-2 col-form-label">비밀번호확인</label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" id="password2" placeholder="Password">
+			<div class="form-group row" style="text-align: center;">
+				<label for="password2" class="col-sm-3 col-form-label">비밀번호확인</label>
+				<div class="col-sm-9">
+					<input type="password" class="form-control" id="password2" placeholder="비밀번호">
 				</div>
 			</div>
-		  	<div class="form-group row">
-		    	<label for="userName" class="col-sm-2 col-form-label">이름</label>
-		    	<div class="col-sm-10">
+		  	<div class="form-group row" style="text-align: center;">
+		    	<label for="userName" class="col-sm-3 col-form-label">이름</label>
+		    	<div class="col-sm-9">
 		      		<input type="text" class="form-control" id="userName" name="userName" placeholder="이름">
 		    	</div>
 		  	</div>
 			<fieldset class="form-group">
-				<div class="row">
-					<legend class="col-form-label col-sm-2 pt-0">성별</legend>
-						<div class="col-sm-6">
-							<div class="form-check">
+				<div class="row" >
+					<legend class="col-form-label col-sm-4 pt-0" style="padding-left: 57px;" >성별</legend>
+					
+						<div class="col-sm-4" style="text-align: center;" >
+							<div class="form-check" style=" padding-left: 0px;">
 		          				<input class="form-check-input" type="radio" id="male" name="gender" value="M" checked>
 		          				<label class="form-check-label" for="Male">
 		                           	남	
 		          				</label>
-		        			</div>
-							<div class="form-check">
-								<input class="form-check-input" type="radio" id="female" name="gender" value="F">
-								<label class="form-check-label" for="female">
-									여	
-		          				</label>
-							</div>
-		      			</div>
-		    	</div>
+	          				</div>
+	        			</div>
+		        			<div class="col-sm-4" style="text-align: center;" >
+								<div class="form-check" style=" padding-left: 0px;">
+									<input class="form-check-input" type="radio" id="female" name="gender" value="F">
+									<label class="form-check-label" for="female">
+										여	
+			          				</label>
+								</div>
+		      				</div>
+				</div>
 		  	</fieldset>
-			<div class="form-group row">
-    			<label for="birth" class="col-sm-2 col-form-label">생년월일</label>
-    			<div class="col-sm-10">
+			<div class="form-group row" style="text-align: center;">
+    			<label for="birth" class="col-sm-3 col-form-label">생년월일</label>
+    			<div class="col-sm-9">
       				<input type="date" class="form-control" id="birth" name="birth" placeholder="ex)20200101">
     			</div>
 			</div>
-			<div class="form-group row">
-		    	<label for="userName" class="col-sm-2 col-form-label">주소</label>
-		    	<div class="col-sm-10">
-		      		<input type="text" class="form-control" id="addr" name="addr" placeholder="주소">
-		    	</div>
-		  	</div>
-  			<div class="form-group row">
-    			<label for="email" class="col-sm-2 col-form-label">이메일</label>
-    			<div class="col-sm-10">
+<!-- 			<div class="form-group row" style="text-align: center;"> -->
+<!-- 		    	<label for="userName" class="col-sm-3 col-form-label">주소</label> -->
+<!-- 		    	<div class="col-sm-9"> -->
+<!-- 		      		<input type="text" class="form-control" id="addr" name="addr" placeholder="주소"> -->
+<!-- 		    	</div> -->
+<!-- 		  	</div> -->
+  			<div class="form-group row" style="text-align: center;">
+    			<label for="email" class="col-sm-3 col-form-label">이메일</label>
+    			<div class="col-sm-9">
       				<input type="email" class="form-control" id="email" name="email" placeholder="이메일">
     			</div>
   			</div> 
-			<div class="form-group row">
-    			<label for="phone" class="col-sm-2 col-form-label">휴대전화번호</label>
-    			<div class="col-sm-10">
+			<div class="form-group row" style="text-align: center;">
+    			<label for="phone" class="col-sm-3 col-form-label">휴대전화번호</label>
+    			<div class="col-sm-9">
       				<input type="text" class="form-control" id="phone" name="phone" placeholder="-없이 입력해주세요.">
     			</div>
   			</div>
-  			<div class="form-group row">
-    			<label for="likeGenre1" class="col-sm-2 col-form-label">선호장르</label>
+  			<div class="form-group row" style="text-align: center;">
+    			<label for="likeGenre1" class="col-sm-3 col-form-label" style="text-align: center;">선호장르</label>
     			<div class="col-sm-3">
     				<select class="form-control" id="likeGenre1" name="likeGenre1">
     				<option selected>선호장르</option>
@@ -371,9 +402,9 @@ $(function(){
 					</select>
 				</div>
   			</div>
-  			<div class="form-group row">
-				<label for="likeTheater1" class="col-sm-2 col-form-label">자주가는 극장</label>
-    			<div class="col-sm-2">
+  			<div class="form-group row" style="text-align: center;">
+				<label for="likeTheater1" class="col-sm-3 col-form-label" style="text-align: center;">자주가는 극장</label>
+    			<div class="col-sm-3">
 					<select class="form-control" id="likeTheater1" name="likeTheater1">
 							<option selected>극장선택</option>
 						<c:forEach var="i" items="${getTheaterList}">
@@ -381,7 +412,7 @@ $(function(){
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<select class="form-control" id="likeTheater2" name="likeTheater2">
 							<option selected>극장선택</option>
 						<c:forEach var="i" items="${getTheaterList}">
@@ -389,7 +420,7 @@ $(function(){
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<select class="form-control" id="likeTheater3" name="likeTheater3">
 							<option selected>극장선택</option>
 						<c:forEach var="i" items="${getTheaterList}">
@@ -397,18 +428,18 @@ $(function(){
 						</c:forEach>
 					</select>
 				</div>
-				<div class="col-sm-3">
-					<button type="button" id="mapModal" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-xl">지도에서 선택</button>
-				</div>
   			</div>
-  			<div class="form-check">
+  			<div style="text-align:center;">
+					<button type="button" id="mapModal" class="button large purple" data-toggle="modal" data-target=".bd-example-modal-xl">지도로 선택</button>
+			</div>
+  			<div class="form-check" style="margin-top: 5px; margin-bottom: 5px;">
 			    <input type="checkbox" class="form-check-input" id="agreeCheck">
 			    <label class="form-check-label" for="agreeCheck">개인정보수집 및 이용 동의</label>
 			</div>	
 			<div class="form-group row">
 				<div class="col-sm-12 text-center">
-					<button type="button" id="addUserBtn" class="btn btn-primary" >가&nbsp;입</button>
-      				<a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
+					<button type="button" id="addUserBtn" class="button large purple" >가&nbsp;입</button>
+      				<a class="button large" href="#" role="button">취&nbsp;소</a>
     			</div>
 			</div>
 			

@@ -25,7 +25,6 @@ body {
 	text-align: center;
 	width: 100%;
 	height: 100%;
-	top: 150px;
 	left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -216,12 +215,16 @@ $(function(){
 </script>
 </head>
 <body>
-<h1>${user.userId}/${user.userNo }</h1>
+
+<!-- ToolBar Start /////////////////////////////////////-->
+<jsp:include page="/layout/header.jsp" />
+<!-- ToolBar End /////////////////////////////////////-->
+
 <!-- container  -->
 <div class= "container">
 	<div class="row">
 		<!-- left side bar -->
-		<div class="col-md-3" style="padding-left: 50px;">
+		<div class="col-md-3" style="padding-left: 30px; padding-top: 50px;">
 			<div class="inner-wrap">
 				<div class="lnb-area">
 					<nav id="lnb">
