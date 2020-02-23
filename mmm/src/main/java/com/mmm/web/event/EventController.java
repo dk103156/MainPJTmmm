@@ -31,12 +31,14 @@ import com.mmm.common.Search;
 import com.mmm.service.board.BoardService;
 import com.mmm.service.datetime.DateTimeService;
 import com.mmm.service.domain.Comment;
+import com.mmm.service.domain.Movie;
 import com.mmm.service.domain.Participation;
 import com.mmm.service.domain.Point;
 import com.mmm.service.domain.Preview;
 import com.mmm.service.domain.Quiz;
 import com.mmm.service.domain.User;
 import com.mmm.service.event.EventService;
+import com.mmm.service.movie.MovieService;
 import com.mmm.service.payment.PaymentService;
 import com.mmm.service.user.UserService;
 
@@ -61,6 +63,9 @@ public class EventController {
 	@Qualifier("paymentServiceImpl")
 	private PaymentService paymentService;
 	
+	@Autowired
+	@Qualifier("movieServiceImpl")
+	private MovieService movieService;
 	
 	@Autowired
 	@Qualifier("boardServiceImpl")
@@ -83,18 +88,25 @@ public class EventController {
 	
 
 	
-	@RequestMapping(value="attendance", method=RequestMethod.GET)
-	public String attendance() throws Exception{ 
-		System.out.println("/event/attendance : GET");
-		return "redirect:/event/addAttendance.jsp";
-	}
+//	@RequestMapping(value="attendance", method=RequestMethod.GET)
+//	public String attendance() throws Exception{ 
+//		System.out.println("/event/attendance : GET");
+//		return "redirect:/event/addAttendance.jsp";
+//	}
 
 	//시사회이벤트 등록 폼 가져오기
 	@RequestMapping(value="addPreviewAd", method=RequestMethod.GET)
-	public String addPreviewAdView(Model model) throws Exception{ 
+	public String addPreviewAdView(Model model, @RequestParam int movieNo) throws Exception{ 
 		System.out.println("/event/addPreviewAd:GET");
+		Movie movie = new Movie();
+		movie.setMovieNo(movieNo);
+		movie = movieService.getMovieByMovieNo(movie);
+		
+		System.out.println("movie를 찍어보자 ====>" + movie);
+		
 		System.out.println("dateTimeService.getTheaterList(new Search())>>>"+dateTimeService.getTheaterList(new Search())); //영화관을 가져오기 위해
 		
+		model.addAttribute("movie", movie);
 		model.addAttribute("getTheaterList", dateTimeService.getTheaterList(new Search()));
 		
 		return "forward:/event/addPreviewAd.jsp";
@@ -187,12 +199,23 @@ public class EventController {
 	
 	
 	@RequestMapping(value="getPreviewAd")
-	public String getPreviewAd(@RequestParam int previewNo, Model model) throws Exception{
+	public String getPreviewAd(@RequestParam int previewNo, HttpSession session, Model model) throws Exception{
+		
 		System.out.println("/event/getPreviewAd:GET");
+		
+		if(session.getAttribute("user")!=null) {
+			User user = (User)session.getAttribute("user");
+			model.addAttribute("user", user);
+		}
+		
 		Preview preview = eventService.getPreviewAd(previewNo);
+
 		model.addAttribute("preview" , preview);
+		
 		String[] fileArr = preview.getPreviewImage().split(",");
+		
 		model.addAttribute("fileArr", fileArr);
+		
 		return "forward:/event/getPreviewAd.jsp";
 	}
 	
@@ -297,6 +320,7 @@ public class EventController {
 		search.setPageSize(pageSize);
 
 		System.out.println("search에 flag잘 담겨와??????????"+search);
+		
 		Map<String, Object> map = eventService.getPreviewList(search);
 		List<Preview> list = (List<Preview>)map.get("list");
 		
@@ -338,17 +362,75 @@ public class EventController {
 		return "forward:/event/getPreviewList.jsp";
 	}
 	
+	@RequestMapping(value="getDoneList")
+	public String getDoneList(@ModelAttribute("search") Search search, Model model) throws Exception{
+		
+		System.out.println("[getDoneList start]");
+		
+		String[] fileArr = null;
+		
+		List<String[]> fileNameArr = new ArrayList<>();
+		
+		if(search.getCurrentPage()==0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+
+		System.out.println("search에 flag잘 담겨와??????????"+search);
+		
+		Map<String, Object> map = eventService.getPreviewList(search);
+		List<Preview> list = (List<Preview>)map.get("list");
+		
+		List<Preview> previewAll = eventService.getAllPreview();
+		
+		List<Preview> doneList = new ArrayList<>(); 
+
+		for(Preview previeww: previewAll) {
+			if(previeww.getPreviewFlag().equals("2")) {
+				doneList.add(previeww);
+			}
+		} 
+		
+		for(Preview p: doneList) {
+			System.out.println("=======================>done============>"+p);
+		}
+		System.out.println(doneList.size());
+
+		Page resultPage	= 
+				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		
+		for(Preview preview : list) {
+			 fileArr = preview.getPreviewImage().split(",");
+			 fileNameArr.add(fileArr);
+		}
+		
+		System.out.println("fileNameArr>>>>>>>>>>>>>>>"+fileNameArr);
+		
+		model.addAttribute("fileNameArr", fileNameArr);
+		model.addAttribute("doneList", doneList);
+		model.addAttribute("resultPage", resultPage);
+		
+		System.out.println("[getDoneList end]");
+		
+		return "forward:/event/getDonePrev.jsp";
+	}
+	
 	
 	//getPreview 이거 근데 restController 가야할것같음===>나중에..
 	@RequestMapping(value="getPreview", method=RequestMethod.GET)
 	public String getPreview(@RequestParam int previewNo, Model model) throws Exception{
-		System.out.println("/event/getPreview:GET");
+		
+		System.out.println("/event/getPreview:GET start");
+		
 		Preview preview = eventService.getPreviewAd(previewNo);
 		
 		model.addAttribute("preview" , preview);
 		String[] fileArr = preview.getPreviewImage().split(",");
 		model.addAttribute("fileArr", fileArr);
-		return "forward:/event/getPreviewAd";
+		
+		System.out.println("/event/getPreview:GET end");
+
+		return "forward:/event/getPreviewAd.jsp";
 	}
 		
 	
@@ -796,6 +878,51 @@ public class EventController {
 		System.out.println("[addExpectLine] end");
 		
 	}
+	
+	
+	//마이페이지- 내응모목록조회 
+	@RequestMapping(value="getPartList")
+	public String getPartList(@ModelAttribute("search")Search search, HttpSession session, Model model) throws Exception {
+		
+		System.out.println("getPartList start...");
+		
+		User user = (User)session.getAttribute("user");
+		
+		if(search.getCurrentPage()==0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+		search.setUserNo(user.getUserNo());
+		Map<String, Object> map = eventService.getPartList(search); 
+		
+		List<Participation> list = (List<Participation>)map.get("list");
+		Page resultPage	= 
+				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("user", user);
+		model.addAttribute("resultPage", resultPage);
+		
+		System.out.println("getPartList end...");
+		
+		return "/event/getApplyList.jsp";
+	}
+	
+	
+	@RequestMapping(value="addAttendance")
+	public String addAttendance(HttpSession session, Model model) throws Exception {
+	
+		System.out.println("[addAttendance] start");
+		User user = (User)session.getAttribute("user");
+		
+		model.addAttribute("user", user);
+		
+		System.out.println("[addAttendance] end");
+		
+		return "/event/addAttendance.jsp";
+	}
+	
+	
 	
 	//당첨자 추첨하는 메소드(doRandWinner에서 호출된다)
 	public void randWinner(int previewNo) throws Exception {

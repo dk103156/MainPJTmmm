@@ -5,15 +5,28 @@
 <!DOCTYPE html>
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> 
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <!-- 카카오 맵 api key -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  <!-- Bootstrap Extended Color -->
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
+
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 
 <!-- 부트스트랩4 를 위한 것 -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 <script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 
@@ -24,6 +37,7 @@
 
 
 function getCommentList(currentPage) {
+	
 	var parent = ${preview.previewNo};
 	
 	var datas = JSON.stringify({
@@ -67,21 +81,25 @@ function getCommentList(currentPage) {
 					html += "<input type='hidden' name='commentNo' value='"+result.list[i].commentNo+"'>";
 					html += "<div class='date' name='date'>"+result.list[i].commentDate+"</div>";
 					html += "<div class='comment' name='content'>"+result.list[i].commentContent+"</div>";
-					html += "<a type='button' class='btn_spam' name='btn_spam'>처리</a></li>";
+					
+					if('${user.role}'=='admin'){
+						html += "<a type='button' class='btn_spam' name='btn_spam'>처리</a>";
+					}
+					html += "</li>";
 					}
 				}
 			}
 				html += "</p>"
 					$(".reply_box").append(html);
 				
-			
+		
 			
 			//페이지네이션 추가
 			$("div.cmtPagination").empty();
 			
 			Element = "<div class='col-4'></div>"
-	  		Element +="<div class='col-4'>"
-			Element +="<ul class='pagination'>"
+	  		Element +="<div>"
+			Element +="<ul class='pagination justify-content-center'>"
    			if(result.resultPage.currentPage <= result.resultPage.pageUnit){
    				Element +="<li class='page-item disabled'>"
    				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>";
@@ -114,17 +132,17 @@ function getCommentList(currentPage) {
   				Element+="<a class='page-link' href='javascript:getCommentList("+(parseInt(data.resultPage.endUnitPage)+1)+") '><i class='fas fa-angle-right'></i></a>";
   				Element+="</li>";
   			}
-			
-  			Element+= "</ul>";
-			Element+= "</div>";
-			Element+= "<div class='col-4'></div>";
-			Element+= "<form>";
-			Element+= "<input type='hidden' id='currentPage' name='currentPage' value=''/>";
-			Element+= "</form>";
-			
-			$("div.cmtPagination").append(Element);
-			
-			comment(currentPage)
+				
+	  			Element+= "</ul>";
+				Element+= "</div>";
+				Element+= "<div class='col-4'></div>";
+				Element+= "<form>";
+				Element+= "<input type='hidden' id='currentPage' name='currentPage' value=''/>";
+				Element+= "</form>";
+				
+				$("div.cmtPagination").append(Element);
+				
+				comment(currentPage)
 			
 		}//end of success
 	
@@ -199,9 +217,6 @@ function comment(currentPage){
 		
 		
 		
-		
-		
-		
 		//블라인드 처리 모달창 확인버튼 
 		$('#addBlindBtn').on("click", function(){
 			
@@ -242,63 +257,36 @@ function comment(currentPage){
 
 		
 		$('#okBtn').on("click", function(){
-			alert('ok버튼이 클릭됨');
 			self.location="/event/getPreviewListAd";
 		});
 		
 		
 		$('#doApply').on("click", function(){
-			alert('doApply버튼이 클릭됨');
+
 			var status =${preview.previewFlag};
 			console.log(status);
 			
-			if(status==1){
-			
-				Swal.fire({
-					  title: 'Error!',
-					  text: 'Do you want to continue',
-					  icon: 'error',
-					  confirmButtonText: 'Cool'
-					});
-			
+			if(status==2){
+				 alert("마감된 이벤트 입니다");
 			}
-			
 			
 			var previewNo = ${preview.previewNo};
 			self.location="/event/addPartPrev?previewNo="+previewNo;
 		});
 		
-		$('#ranBtn').on("click", function(){
-			alert('doApply버튼이 클릭됨');
-			var previewNo = ${preview.previewNo};
-			alert("previewNo:"+previewNo)
-			self.location="/event/getWinner?previewNo="+previewNo;
-		});
+//추첨하는 버튼...		
+// 		$('#ranBtn').on("click", function(){
+// 			alert('doApply버튼이 클릭됨');
+// 			var previewNo = ${preview.previewNo};
+// 			alert("previewNo:"+previewNo)
+// 			self.location="/event/getWinner?previewNo="+previewNo;
+// 		});
 		
 		
-		$('#winner').on('click',function(){
-			console.log('winner클릭')
+		$('#viewWinner').on('click',function(){
 			var previewNo = ${preview.previewNo};
-			console.log("previewNo"+previewNo);
-			
-				$.ajax({
-				url: "/event/json/getWinnerList/"+previewNo,
-				method:"GET",
-				dataType:"json",
-				headers:{
-					"Accept" : "application/json",
-					"Content-Type" : "application/json"
-				},
-				success: function(JSONData, status){
-					//alert(status)
-					console.log(JSONData.list.length);
-					for (var i = 0; i < JSONData.list.length; i++) {
-						console.log(JSONData.list[i]);
-						$('#az').append("<h4><h5>[회원이름] "+JSONData.uList[i].userName+
-								"[전화번호]  "+JSONData.uList[i].phone+"</h4><br>");
-					}
-				}
-			}); //ajax끝
+			$("div#winnerModal").modal("show");
+			getWinnerList(previewNo);
 		});
 		
 		
@@ -331,6 +319,33 @@ function comment(currentPage){
 </script>
 <style>
 	
+ 	#infoWindow{
+ 		  white-space: nowrap; 
+		  width: 50px; 
+		  overflow: hidden;
+		  text-overflow: ellipsis; 	
+ 	}
+ 	
+ 	#doApply{
+ 	
+ 		background-color: #ffc441;
+ 		font-weight: 900;
+ 		color: #495057;
+ 	}
+ 	
+ 	
+ 	.dot {overflow:hidden;float:left;width:12px;height:12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/mini_circle.png');}    
+	.dotOverlay {position:relative;bottom:10px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;font-size:12px;padding:5px;background:#fff;}
+	.dotOverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}    
+	.number {font-weight:bold;color:#ee6152;}
+	.dotOverlay:after {content:'';position:absolute;margin-left:-6px;left:50%;bottom:-8px;width:11px;height:8px;background:url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white_small.png')}
+	.distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
+	.distanceInfo .label {display:inline-block;width:50px;}
+	.distanceInfo:after {content:none;}
+
+
+
+
 	.issue{
 	height: 500px;
 	border: 1px solid black;
@@ -360,7 +375,12 @@ function comment(currentPage){
 	* {
 	    box-sizing: border-box;
 		}
-	
+	.page-item.active .page-link {
+    z-index: 3;
+    color:  #4e4c4c;
+    background-color: #fee00e;
+    border-color: #d6cece;
+}
 	p {
 	    display: block;
 	    margin-block-start: 1em;
@@ -382,10 +402,10 @@ function comment(currentPage){
 		
 		}
 		
-		#contents {
-	    width: 100%;
-	    margin: 0;
-	    padding: 40px 0 0 0;
+	#contents {
+   		 width: 100%;
+    	 margin: 0;
+  		 padding: 40px 0 0 0;
 	}
 
 	.event-detail h2.tit {
@@ -626,6 +646,7 @@ function comment(currentPage){
 	button.btn {
 	background-color:#fee50e ;
 	color:#545454;
+	border: 1px solid #dedede;
 	}
 	
 	#content{
@@ -651,7 +672,7 @@ function comment(currentPage){
 	    left: 40px;
 	}
 	span{
-	 color: #dedede;
+	 color: #444444;
 	}
 	
 	div.blindInfo{
@@ -669,12 +690,11 @@ function comment(currentPage){
 </head> 
 
 <body>
-	<button class="btn btn-outline-secondary" id="doApply">응모하기</button>
+	
 <div class="container">
 
 
  	<div id="contents">
- 	
  	
 	<div class="event-detail">	
 	<h2 class="tit">${preview.previewName}</h2>
@@ -682,6 +702,7 @@ function comment(currentPage){
 				<span>기간</span>
 				<em>${preview.preStDate} ~ ${preview.preEdDate}</em>
 	</p>
+	
 	</div><!-- div.event-detail끝 -->
 	
 	<div class="cdtl_cm_detail">
@@ -698,14 +719,22 @@ function comment(currentPage){
 		
 				<div class="cdtl_bn_wrap">
                         <div>
-                                   <img src="/resources/image/ddd.PNG" alt=""></a>
+<!--                                    <img src="/resources/image/ddd.PNG" alt=""> -->
 										</div>
                         </div>
-               
+            
+            <c:if test="${preview.previewFlag==1}">
+               <button class="btn float-right" id="doApply">응모하기</button>
+            </c:if>
+            <c:if test="${preview.previewFlag==2}">
+               <button class="btn float-right" id="viewWinner">당첨자보기</button>
+            </c:if>
+            
+            
             <div class="cdtl_prd_info"> <!-- 시사회 정보 -->
                 <div class="prevInfo">
                 	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사회 이름</span> ${preview.previewName}</p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">장소</span>  ${preview.previewPlace} <i class="far fa-map"></i></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">장소</span>  <span id="previewPlace">${preview.previewPlace}</span> <i id="mapIcon" class="far fa-map"></i></p>
                 	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사 일자</span> ${preview.preDate}</p>
                 	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">상영 시간 </span> ${preview.previewTime}</p>
                 	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">인원수  </span> ${preview.winnerCount}</p>
@@ -770,10 +799,8 @@ function comment(currentPage){
 			</div>
 		
 			<div class="modal-body">
-			<form>
+					<form>
 					
-				
-					 
 					 <div class="mt-3 mb-0">
 					 <label class="m-4">처리사유</label>
 						<select class="m-3" name="blind_reason">
@@ -803,19 +830,221 @@ function comment(currentPage){
 		</div>
 	</div>
 
-	</div>
+	</div><!-- end of modal-box -->
+
+<div id="modal3" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div id="map" style="width:1152px;height:500px;"></div>
+    </div>
+  </div>
+</div>
 
 
 
+<script>
+	
 
 
+</script>
+<script>
 
+function getWinnerList(previewNo){
+
+		$.ajax({
+		url: "/event/json/getWinnerList/"+previewNo,
+		method:"GET",
+		dataType:"json",
+		headers:{
+			"Accept" : "application/json",
+			"Content-Type" : "application/json"
+		},
+		success: function(JSONData, status){
+			
+			console.log(JSONData.list.length);
+			$('#winnerArea').empty();
+			for (var i = 0; i < JSONData.list.length; i++) {
+				console.log(JSONData.list[i]);
+				$('#winnerArea').append("<h4><h5>[회원이름] "+JSONData.uList[i].userName+
+						"[전화번호]  "+JSONData.uList[i].phone+"</h4><br>");
+			}
+		}
+	}); //ajax끝
+	}
+	
+	$("i#mapIcon").on("click",function(){
 		
-<!-- 	container 닫는 애  -->
-
-
+		$("div#modal3").modal("show");
+	
+		var place = $.trim($("span#previewPlace").text())
+		console.log(place)
+		searchTheater(place);
+	});
+	function searchTheater(keyword){	  
+		/* 맵에 현재 위치 찍기 */
+		if(navigator.geolocation) {
+	           
+	           navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true, maximumAge : 0});
+		}//end of if
+	        
 		
+		// 현재 위치 불러오는게 성공했다면	
+		function success(position) {
+			var container = document.getElementById('map');
+			var options = {
+				center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
+				level: 1,
+				keyboardShortcuts : true
+			};
+	
+			var map = new kakao.maps.Map(container, options); // 화면에 맵 추가
+			
+			var mapTypeControl = new kakao.maps.MapTypeControl();
+			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT); // 일반-스카이뷰 선택 추가
+			
+			var control = new kakao.maps.ZoomControl(); // 맵 축소 확대 추가
+			map.addControl(control, kakao.maps.ControlPosition.RIGHT);
+			
+			// 현재 위치 마커 이미지
+			var myPosition ="../resources/image/kakaoMapIcon/myPosition.png";
+			
+			var icon = new kakao.maps.MarkerImage(myPosition, new kakao.maps.Size(100, 100));
+			
+			// 현재 위치 마커
+			var marker = new kakao.maps.Marker({ 
+			    // 지도 중심좌표에 마커를 생성합니다 
+			    position: map.getCenter(),
+			    image: icon
+			}); 
+			// 지도에 마커를 표시합니다
+			//marker.setMap(map);
+			
+			var cgvLogo ="../resources/image/kakaoMapIcon/CGV.png";
+			var lotteLogo ="../resources/image/kakaoMapIcon/lotte.png";
+			var megaLogo ="../resources/image/kakaoMapIcon/MegaBox.png";
+			
+			//theater List ajax로 불러오고 Marker로 표시
+			var theaterMarkerArray = new Array();
+			var jqxhr = $.getJSON( "/ticketing/json/getTheaterByName/"+encodeURI(keyword), function() {
+				  console.log( "success" );
+				})
+				  .done( 
+				    	theater => {
+				    		console.log(theater)
+				    		//로고 달기
+				    		if(theater.franchise=='CGV'){
+				    			var icon = new kakao.maps.MarkerImage(cgvLogo, new kakao.maps.Size(100, 100));
+				    		}else if(theater.franchise=='롯데시네마'){
+				    			var icon = new kakao.maps.MarkerImage(lotteLogo, new kakao.maps.Size(100, 100));
+				    		}else if(theater.franchise=='메가박스'){
+				    			var icon = new kakao.maps.MarkerImage(megaLogo, new kakao.maps.Size(100, 100));
+				    		}
+				    		//극장 마커 생성
+				    		var theaterMarker = new kakao.maps.Marker({
+				    		    map: map,
+				    		    position: new kakao.maps.LatLng(theater.positionY, theater.positionX),
+				    		 	image: icon
+				    		});
+				    		
+				    		theaterMarkerArray.push(theaterMarker);
+				    		//극장 마커 표시
+				    		//theaterMarker.setMap(new kakao.maps.LatLng(theater.positionY, theater.positionX));
+							
+				    		
+				    		
+				    	    var infowindow = new kakao.maps.InfoWindow({
+				    	        content: "<span id='infoWindow'>"+theater.theaterName+"</span>" // 인포윈도우에 표시할 내용
+				    	    });
+				    		
+				    		//극장 마커에 인포윈도우 달기
+				    		kakao.maps.event.addListener(theaterMarker, 'mouseover', function(){
+				    			
+				    			 infowindow.open(map, theaterMarker);
+				    		});
+				    		
+				    		kakao.maps.event.addListener(theaterMarker, 'mouseout', function(){
+				    			
+				    			 infowindow.close();
+				    		});			    		
+				    		//극장 마커에 Click 이벤트 달기
+				    		kakao.maps.event.addListener(theaterMarker, 'click', function() {
+				    			$("#myModalTitle").html("<strong>"+theater.theaterName+"</strong>");
+				    			
+				    			var bodyHtml = "<p>주소  : "+theater.address+"</p>"
+				    				bodyHtml+= "<p>도로명 주소 : "+theater.roadAddress+"</p>"
+				    				bodyHtml+= "<p>전화번호 : "+theater.theaterPhone+"</p>"
+				    				bodyHtml+= "<button type='button' id='myModalBodyButton' class='btn btn-link p-0'>상세정보</button>"
+				    			$("#myModalBody").html(bodyHtml);
+				    			$("#myModalBodyButton").on("click",function(){
+				    				showPopup(theater.placeUrl);
+				    			});	
+				    			$('#myModal2').modal('show')
+				    			
+				    			
+				    		});//end of theaterMarker event click
+				    		
+				    		kakao.maps.event.addListener(map,'click',function(mouseevent){
+				    			console.log("맵 클릭")
+				    			map.relayout();
+				    			map.setCenter(new kakao.maps.LatLng(theater.positionY, theater.positionX));
+				    		});
+				    	})//end of forEach inner Function		 
+				     
+		};//end of success
+		
+		function showPopup(url){
+			
+			window.open(url, "a", "width=400, height=300, left=100, top=50");
+		}
+	
+		// 현재 위치 불러오는게 실패했다면
+		function error(err) {
+	  		console.warn('ERROR(' + err.code + '): ' + err.message);
+		};	  
+	}
 
+	/* 마커 클릭하면 정보 보이고, 버튼 누를시에 선호 극장으로 데이터 전송하기 */
+	</script>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="myModalTitle"></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" id="myModalBody">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>		
+
+	<!-- Modal -->
+	<div class="modal fade" id="winnerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="myModalTitle"></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" id="winnerArea">
+	        ...
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
  </body>
  
  </html>
