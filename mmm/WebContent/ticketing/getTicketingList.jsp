@@ -354,11 +354,38 @@ $(function(){
 						//좌석번호
 						$("div.seatNo").text(data.seatNo);
 						
-						//결제수단
-						$("div.payMethod").text();
+						$.getJSON("/payment/json/getPaymentbyTicketingNo/"+data.ticketingNo)
+						.done( x=> {
+							console.log(x.payment)
+							//결제수단
+							// 0: cash	1: point	2: voucher	3: cash+point
+							// 4: cash+voucher		5: point+voucher	6: cash+point+voucher
+							if(x.payment.payMethod==0){
+								$("div.payMethod").text("현금");
+								$("div.totalPrice").text(x.payment.cash);
+							}else if(x.payment.payMethod==1){
+								$("div.payMethod").text("포인트");
+								$("div.totalPrice").text(x.payment.usingPoint);
+							}else if(x.payment.payMethod==2){
+								$("div.payMethod").text("상품권");
+								$("div.totalPrice").text(x.payment.vouchers);
+							}else if(x.payment.payMethod==3){
+								$("div.payMethod").text("현금,포인트");
+								$("div.totalPrice").text("현금 : "+x.payment.cash+" 포인트 : "+x.payment.usingPoint);
+							}else if(x.payment.payMethod==4){
+								$("div.totalPrice").text("현금 : "+x.payment.cash+" 상품권 : "+x.payment.vouchers);
+							}else if(x.payment.payMethod==5){
+								$("div.payMethod").text("포인트,상품권");
+								$("div.totalPrice").text("포인트 : "+x.payment.usingPoint+" 상품권 : "+x.payment.vouchers)
+							}else if(x.payment.payMethod==6){
+								$("div.payMethod").text("현금,포인트,상품권");
+								$("div.totalPrice").text("현금 : "+x.payment.cash+"포인트 : "+x.payment.usingPoint+" 상품권 : "+x.payment.vouchers)
+							}
+							
+							
+						})
 						
-						//결제금액
-						$("div.totalPrice").text();
+
 						
 						//예매일시
 						//console.log(data.cancelDate.length)

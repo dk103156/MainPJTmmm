@@ -46,8 +46,8 @@ public class PaymentRestController {
 //	Method
 	
 //	ticktingNo로 payment 가져오는 method
-	@RequestMapping(value = "getPaymentbyTicketingNo/{ticketingNo}", method = RequestMethod.GET)
-	public Map<String, Object> getPaymentbyTicketingNo(@PathVariable(value = "ticketingNp") int ticketingNo)throws Exception{
+	@RequestMapping(value = "json/getPaymentbyTicketingNo/{ticketingNo}", method = RequestMethod.GET)
+	public Map<String, Object> getPaymentbyTicketingNo(@PathVariable(value = "ticketingNo") int ticketingNo)throws Exception{
 		
 		Payment payment = paymentService.getPaymentbyTicketingNo(ticketingNo);
 		
@@ -59,7 +59,7 @@ public class PaymentRestController {
 	}
 	
 //	purchaseNo로 payment 가져오는 method
-	@RequestMapping(value = "getPaymentbyPurchaseNo/{purchaseNo}", method = RequestMethod.GET)
+	@RequestMapping(value = "json/getPaymentbyPurchaseNo/{purchaseNo}", method = RequestMethod.GET)
 	public Map<String, Object> getPaymentbyPurchaseNo(@PathVariable(value = "purchaseNo") int purchaseNo)throws Exception{
 		
 		Payment payment = paymentService.getPaymentbyPurchaseNo(purchaseNo);
