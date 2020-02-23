@@ -3,7 +3,6 @@ package com.mmm.web.movie;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +23,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -39,11 +36,11 @@ import org.springframework.web.client.RestTemplate;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
+import com.mmm.service.board.BoardService;
+import com.mmm.service.domain.Comment;
 import com.mmm.service.domain.Movie;
 import com.mmm.service.domain.User;
 import com.mmm.service.movie.MovieService;
-
-import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 
 @Controller
 @RequestMapping("/movie/*")
@@ -54,6 +51,10 @@ public class MovieController {
 	@Qualifier("movieServiceImpl")
 	private MovieService movieService; //DI 받자
 	
+	@Autowired
+	@Qualifier("boardServiceImpl")
+	private BoardService boardService;
+	
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
@@ -63,20 +64,20 @@ public class MovieController {
 	//Field for Other API ---------------------------------------------------------
 	//영화진흥원 Kobis 인증Key 와 lib
 	
-	@Value("#{movieProperties['kobisKeyFirst']}")
-	String kobisKeyFirst; 		//1ee4215b28fff482b9c603b630164550
-	
-	@Value("#{movieProperties['kobisKeySecond']}")
-	String kobisKeySecond;		//69714ef584a7abf49f89833c0372e1d0
+//	@Value("#{movieProperties['kobisKeyFirst']}")
+//	String kobisKeyFirst; 		//1ee4215b28fff482b9c603b630164550
+//	
+//	@Value("#{movieProperties['kobisKeySecond']}")
+//	String kobisKeySecond;		//69714ef584a7abf49f89833c0372e1d0
 	
 //	String kobisKey ="1ee4215b28fff482b9c603b630164550";
 	
 //	하루 한도 3000개라서 위에 key 번갈아서 쓰자
-	KobisOpenAPIRestService kobisService = new KobisOpenAPIRestService("69714ef584a7abf49f89833c0372e1d0");
+//	KobisOpenAPIRestService kobisService = new KobisOpenAPIRestService("69714ef584a7abf49f89833c0372e1d0");
 	
 	//네이버 API key & Secret Key
-	private String naverClientId = "yRckAK42WkKwESUtSenf";
-	private String naverClientSecret = "cSbBOgvfac";
+//	private String naverClientId = "yRckAK42WkKwESUtSenf";
+//	private String naverClientSecret = "cSbBOgvfac";
 	
 	//KMDB 인증 Key
 	private String kmdbKey = "VE61R22GGTP493E028O6";
@@ -87,8 +88,8 @@ public class MovieController {
 	String urlKmdb = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey="+kmdbKey;
 	
 	//google Key	
-//	String googleKey = "AIzaSyDkx60xLvshVJFRcGlYfz1wrMRC7L7hNK8";	//내꺼
-	String googleKey = "AIzaSyCYkM_LbtXdbyGh6pxT4S3we3c6Lte2A9A";	//지민이꺼
+	String googleKey = "AIzaSyDzyK2Q-0hj5aKytkaDkqS7ZwZgr-zaPDg";	//내꺼
+//	String googleKey = "AIzaSyCYkM_LbtXdbyGh6pxT4S3we3c6Lte2A9A";	//지민이꺼
 	String urlGoogleSearch ="https://www.googleapis.com/youtube/v3/search?key="+googleKey;
 	
 	//외부 Http 연결을 용이하게 하기 위한 template
@@ -119,8 +120,8 @@ public class MovieController {
 	public void addMovie()throws Exception{
 		
 //		1. 크롤링---------------------------------------------------------------------
-		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-//		System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
+//		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "/Users/Jee-hang/chromedriver/chromedriver");	// for Mac chrome version 80
 		
 		//Browser 안띄우기
 		ChromeOptions options = new ChromeOptions();
@@ -132,8 +133,8 @@ public class MovieController {
 //		크롤링할 페이지 수 2개로 고정
 		for (int i = 0; i < 2; i++) {
 			//웹페이지 설정하기(자동화된 어쩌구 저쩌구..*************************************************************************************************
-//			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
-			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
+			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
+//			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
 			
 	//		Css Selector로 Element 요소 잡아오기 1 ____영화제목
 			List<WebElement> list = webDriver.findElements(By.cssSelector("#mArticle > ul.list_movie.\\#movie > li> div.wrap_movie > div > a"));
@@ -439,11 +440,18 @@ public class MovieController {
 		movieFromKmdb.setGenreString(genreString);
 		movieFromKmdb.setStarByUser(movie.getStarByUser());
 		movieFromKmdb.setStarUserFlag(movie.getStarUserFlag());
+		movieFromKmdb.setTicketingRate(movie.getTicketingRate());
 //		movieFromKmdb.setTrailer(videoId);						///////////  youtube API 한도......T.T
 		
 		System.out.println("---------------movieFromKmdb  : " + movieFromKmdb);
 
-
+		
+//	2. 한줄평 목록 주기
+		Search search = new Search();
+		search.setMovieNo(movieNo);
+		Map<String, Object> resultCmtMap = getOnelineList(search);
+		
+		model.addAttribute("resultCmtMap", resultCmtMap);
 		model.addAttribute("movie", movieFromKmdb);
 		
 		return "forward:/movie/getMovie.jsp";
@@ -637,7 +645,7 @@ public class MovieController {
 		
 //		google API 다녀오자
 		ResponseEntity<String> responseEntity = template.exchange(urlYoutube, HttpMethod.GET, headers, String.class);
-//		System.out.println("-----------------------responseEntity"+ responseEntity);
+		System.out.println("-----------------------responseEntity"+ responseEntity);
 		
 //		response Data에서 video ID 뽑기..
 		HashMap<String, Object> searchResult = mapper.readValue(responseEntity.getBody(), new TypeReference<HashMap<String, Object>>() {});
@@ -653,97 +661,130 @@ public class MovieController {
 		return  videoId;
 	}
 	
-	
-	//	테스트용.. kobis꺼 가져오는 ... 이젠 안쓴다 ..
-	//	@Scheduled(cron = "*/10 * * * * *")	//매 10초마다 실행
-		public void addTestMovie(){	
-		try {
-			System.out.println("-------addMovie() Call.. start-------" + new Date());
-			System.out.println("-------Using key-------" + kobisKeySecond);
-			
-			String itemPerPage = "10"; 	// 결과 Row의 갯수 지정	( default = 10)
-			String multiMovieYn = "N"; 	// 다양성 영화 = y /  상업영화 = n ( default = All)
-			String repNationCd = "";	// 한국영화 = K	/ 외국영화 = F (default = ALL)
-			String wideAreaCd = "";		//	상영지역별로 조회할 수 있으며, 지역코드는 공통코드 조회 서비스에서 “0105000000” 로서 조회된 지역코드. (default : 전체)
-			
-			SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd");
-			String targetDt =  new SimpleDateFormat ( "yyyyMMdd").format(System.currentTimeMillis()- 1000 * 60 * 60 * 24 );
-			
-			//서비스 메소드로 조회하고 JsonStirng 형태로 return 받는다.
-			String dailyBoxOfficeResponse = kobisService.getDailyBoxOffice(true, targetDt, itemPerPage, multiMovieYn, repNationCd, wideAreaCd);
-			
-			System.out.println("--------------------dailyBoxOfficeResponse  : " + dailyBoxOfficeResponse);
-			
-			//Json Data를 다루기 위해 jacksonJson lib의 objectMapper 선언 및 생성
-			ObjectMapper mapper = new ObjectMapper();
-			JSONParser parser = new JSONParser();
-			
-			//Json from String to Object(HashMap.class)
-	//		Map 속에 Map 이 또 있는 구조라.. 일단 이렇게 해보았다..
-			HashMap<String, Object> resultMap = mapper.readValue(dailyBoxOfficeResponse, HashMap.class);
-			HashMap<String, Object> boxOfficeResult= (HashMap<String, Object>) resultMap.get("boxOfficeResult");
-	//		System.out.println("----------- resultMap : " + resultMap);
-	//		System.out.println("----------- boxOfficeResult : " + boxOfficeResult);
-			
-	//		이렇게 하면 Json을 Collection에 넣지 못한다..그냥 String 일뿐, 실제 JsonArray가 아니다
-	//		ArrayList<String> boxOfficeList= mapper.readValue(dailyBoxOfficeResponse, ArrayList.class);
-	//		List<HashMap<String, String>> boxOfficeList= (ArrayList<HashMap<String, String>>)resultMap;
-			
-	//		json 을 list로 다루기 위해 변환 ..Generic으로 Map을 받는다.
-			ArrayList<HashMap<String, String>> boxOfficeList=(ArrayList<HashMap<String, String>>)boxOfficeResult.get("dailyBoxOfficeList");
-			
-	//		각각 하나의 영화를 다루기 위한 Loop 
-			for(HashMap<String, String> mov : boxOfficeList) {
-				
-	//			해당 영화의 데이터를 담을 Movie VO 생성
-				Movie movie = new Movie();
-				List<String> genreList = new ArrayList<String>();
-	
-	//			개별 영화의 상세정보 조회...from Kobis
-				HashMap<String, Object> movieInfoResponse = mapper.readValue(kobisService.getMovieInfo(true, mov.get("movieCd")), HashMap.class);
-				HashMap<String, Object> movieInfoResult = (HashMap<String, Object>)movieInfoResponse.get("movieInfoResult");
-				HashMap<String, Object> movieInfo = (HashMap<String, Object>)movieInfoResult.get("movieInfo");
-				
-	//			영화의 관련 Data 넣기
-				movie.setMovieTitle(mov.get("movieNm"));	// 영화 제목 넣기
-	//			Date releaseDate = new SimpleDateFormat("yyyy-MM-dd").parse(mov.get("openDt"));	//String to Date..
-				movie.setReleaseDate(mov.get("openDt"));			// 개봉일자
-				
-				ArrayList<HashMap<String, String>> audits = (ArrayList<HashMap<String, String>>)movieInfo.get("audits");
-				movie.setMovieRating(audits.get(0).get("watchGradeNm"));	//관람물 등급
-				movie.setRunningTime( Integer.parseInt((String)(movieInfo.get("showTm"))));	// 런닝타임
-				
-	//			장르만 따로 List에 넣기
-				ArrayList<HashMap<String, String>> genres = (ArrayList<HashMap<String, String>>)movieInfo.get("genres");
-				for(HashMap<String, String> map : genres) {
-	//				System.out.println("--------------------- genreNm"+map.get("genreNm"));
-					genreList.add(map.get("genreNm"));
-				}
-				
-	//			Service의 Parameter인 Map으로 포장하기
-				HashMap<String, Object> inputData = new HashMap<String, Object>();
-				inputData.put("movie", movie);
-				inputData.put("genreList", genreList);
-				
-	//			KMDB 다녀오기.....
-				Movie movieFromAPI = this.getMovieInfoFromKmdb(movie);
-				
-				movie.setKmdbCd(movieFromAPI.getKmdbCd());
-				movie.setDirector(movieFromAPI.getDirector());
-				movie.setActor(movieFromAPI.getActor());
-				movie.setPoster(movieFromAPI.getPoster());
-				movie.setSummary(movieFromAPI.getSummary());
-				
-				System.out.println("----------------------- movie: " + movie);
-				
-	//			addMovie().... DB에 넣기
-				movieService.addMovie(inputData);
-			}
-			
-		}catch (Exception e) {
-			e.printStackTrace();
+	public Map<String, Object> getOnelineList(Search search)throws Exception{
+		
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
 		}
-	}//end of test addMovie() method
+		
+		search.setPageSize(pageSize);
+		search.setCommentType(2);
+		
+		System.out.println("------ search : " + search);
+		
+		Map<String, Object> resultMap = boardService.getCommentList(search);
+		
+		List<Comment> list = (List<Comment>) resultMap.get("list");
+		
+		for(Comment cmt: list) {
+			cmt.setCommentDate(JavaUtil.convertDateFormat(cmt.getCommentDate()));
+			System.err.println("-------- commentt  :" +cmt);
+		}
+		
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) resultMap.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+		
+		System.out.println(resultPage);
+		
+		Map<String, Object> returnCmtMap = new HashMap<String, Object>();
+		returnCmtMap.put("list", list);
+		returnCmtMap.put("search", search);
+		returnCmtMap.put("resultPage", resultPage);
+		
+		return returnCmtMap;	
+	}
+	
+	
+//	//	테스트용.. kobis꺼 가져오는 ... 이젠 안쓴다 ..
+//	//	@Scheduled(cron = "*/10 * * * * *")	//매 10초마다 실행
+//		public void addTestMovie(){	
+//		try {
+//			System.out.println("-------addMovie() Call.. start-------" + new Date());
+//			System.out.println("-------Using key-------" + kobisKeySecond);
+//			
+//			String itemPerPage = "10"; 	// 결과 Row의 갯수 지정	( default = 10)
+//			String multiMovieYn = "N"; 	// 다양성 영화 = y /  상업영화 = n ( default = All)
+//			String repNationCd = "";	// 한국영화 = K	/ 외국영화 = F (default = ALL)
+//			String wideAreaCd = "";		//	상영지역별로 조회할 수 있으며, 지역코드는 공통코드 조회 서비스에서 “0105000000” 로서 조회된 지역코드. (default : 전체)
+//			
+//			SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd");
+//			String targetDt =  new SimpleDateFormat ( "yyyyMMdd").format(System.currentTimeMillis()- 1000 * 60 * 60 * 24 );
+//			
+//			//서비스 메소드로 조회하고 JsonStirng 형태로 return 받는다.
+//			String dailyBoxOfficeResponse = kobisService.getDailyBoxOffice(true, targetDt, itemPerPage, multiMovieYn, repNationCd, wideAreaCd);
+//			
+//			System.out.println("--------------------dailyBoxOfficeResponse  : " + dailyBoxOfficeResponse);
+//			
+//			//Json Data를 다루기 위해 jacksonJson lib의 objectMapper 선언 및 생성
+//			ObjectMapper mapper = new ObjectMapper();
+//			JSONParser parser = new JSONParser();
+//			
+//			//Json from String to Object(HashMap.class)
+//	//		Map 속에 Map 이 또 있는 구조라.. 일단 이렇게 해보았다..
+//			HashMap<String, Object> resultMap = mapper.readValue(dailyBoxOfficeResponse, HashMap.class);
+//			HashMap<String, Object> boxOfficeResult= (HashMap<String, Object>) resultMap.get("boxOfficeResult");
+//	//		System.out.println("----------- resultMap : " + resultMap);
+//	//		System.out.println("----------- boxOfficeResult : " + boxOfficeResult);
+//			
+//	//		이렇게 하면 Json을 Collection에 넣지 못한다..그냥 String 일뿐, 실제 JsonArray가 아니다
+//	//		ArrayList<String> boxOfficeList= mapper.readValue(dailyBoxOfficeResponse, ArrayList.class);
+//	//		List<HashMap<String, String>> boxOfficeList= (ArrayList<HashMap<String, String>>)resultMap;
+//			
+//	//		json 을 list로 다루기 위해 변환 ..Generic으로 Map을 받는다.
+//			ArrayList<HashMap<String, String>> boxOfficeList=(ArrayList<HashMap<String, String>>)boxOfficeResult.get("dailyBoxOfficeList");
+//			
+//	//		각각 하나의 영화를 다루기 위한 Loop 
+//			for(HashMap<String, String> mov : boxOfficeList) {
+//				
+//	//			해당 영화의 데이터를 담을 Movie VO 생성
+//				Movie movie = new Movie();
+//				List<String> genreList = new ArrayList<String>();
+//	
+//	//			개별 영화의 상세정보 조회...from Kobis
+//				HashMap<String, Object> movieInfoResponse = mapper.readValue(kobisService.getMovieInfo(true, mov.get("movieCd")), HashMap.class);
+//				HashMap<String, Object> movieInfoResult = (HashMap<String, Object>)movieInfoResponse.get("movieInfoResult");
+//				HashMap<String, Object> movieInfo = (HashMap<String, Object>)movieInfoResult.get("movieInfo");
+//				
+//	//			영화의 관련 Data 넣기
+//				movie.setMovieTitle(mov.get("movieNm"));	// 영화 제목 넣기
+//	//			Date releaseDate = new SimpleDateFormat("yyyy-MM-dd").parse(mov.get("openDt"));	//String to Date..
+//				movie.setReleaseDate(mov.get("openDt"));			// 개봉일자
+//				
+//				ArrayList<HashMap<String, String>> audits = (ArrayList<HashMap<String, String>>)movieInfo.get("audits");
+//				movie.setMovieRating(audits.get(0).get("watchGradeNm"));	//관람물 등급
+//				movie.setRunningTime( Integer.parseInt((String)(movieInfo.get("showTm"))));	// 런닝타임
+//				
+//	//			장르만 따로 List에 넣기
+//				ArrayList<HashMap<String, String>> genres = (ArrayList<HashMap<String, String>>)movieInfo.get("genres");
+//				for(HashMap<String, String> map : genres) {
+//	//				System.out.println("--------------------- genreNm"+map.get("genreNm"));
+//					genreList.add(map.get("genreNm"));
+//				}
+//				
+//	//			Service의 Parameter인 Map으로 포장하기
+//				HashMap<String, Object> inputData = new HashMap<String, Object>();
+//				inputData.put("movie", movie);
+//				inputData.put("genreList", genreList);
+//				
+//	//			KMDB 다녀오기.....
+//				Movie movieFromAPI = this.getMovieInfoFromKmdb(movie);
+//				
+//				movie.setKmdbCd(movieFromAPI.getKmdbCd());
+//				movie.setDirector(movieFromAPI.getDirector());
+//				movie.setActor(movieFromAPI.getActor());
+//				movie.setPoster(movieFromAPI.getPoster());
+//				movie.setSummary(movieFromAPI.getSummary());
+//				
+//				System.out.println("----------------------- movie: " + movie);
+//				
+//	//			addMovie().... DB에 넣기
+//				movieService.addMovie(inputData);
+//			}
+//			
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}//end of test addMovie() method
 	
 	
 }

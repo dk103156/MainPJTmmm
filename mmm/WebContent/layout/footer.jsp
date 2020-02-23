@@ -10,102 +10,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	
- <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
-  <!-- Bootstrap Extended -->
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
-
-    <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
   	
 <title></title>
 
-<style>
-.col-xs-6 {
-    width: 50%;
-}
-
-body{
-	font-family: 'Noto Sans KR', sans-serif;
-
-}
- 
-h3.tit {
-    color: #333;
-    font-size: 1.2em;
-    line-height: 1.1;
-}  
-.col-wrap{
-	letter-spacing: 0;
-	line-height: 1.5;
-	font-size: 15px;
-	color: #444;
-	font-weight: 400; 
-}
-  
-.login-input-area .input-text {
-    display: block;
-    width: 100%;
-    height: 46px;
-}
-.input-text {
-    display: inline-block;
-    width: 100%;
-    height: 32px;
-    padding: 0 10px;
-    line-height: 30px;
-    color: #444;
-    border: 1px solid #d8d9db;
-    vertical-align: middle;
-  
-.login-input-area .chk-util {
-    overflow: hidden;
-    padding: 15px 0 35px 0;
-}
-.login-input-area .chk-util .left {
-    float: left;
-}
-
-.button.purple.large {
-    line-height: 46px;
-}
-.login-input-area .btn-login {
-    display: block;
-    width: 100%;
-}
-.login-input-area .link {
-    padding: 20px 0 30px 0;
-    text-align: center;
-    line-height: 1.1;
-}
-
-.col-wrap{
-
-	letter-spacing: 0;
-	line-height: 1.5;
-	font-size: 15px;
-	color: #444;
-	font-weight: 400; 
-
-}
-
-
-</style>
 
 <script type="text/javascript">
 $(function(){
+	
+	$('#mainLoginBtn').on('click',function(){
+		$("#loginModal").modal("show");
 		
+	})
+	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -281,7 +197,7 @@ $(function(){
 						</div>
 						<!--// chk-util -->
 			
-						<button id="loginBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; cursor: default; background-color:#fee50e;">로그인<!--로그인--></button>
+						<button id="loginBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; cursor: default; background-color:#fee50e;" disabled="disabled">로그인<!--로그인--></button>
 			
 						<div class="link" style="padding-top: 20px; padding-bottom: 30px; text-align: center;">
 							<a href="/user/userAuthorization?type=findId" title="ID 찾기 선택" style=" margin-left:10px; color: #333; ">ID 찾기<!--ID/PW 찾기--></a>
@@ -305,7 +221,6 @@ $(function(){
     </div>
   </div>
 </div>
-
     
 </body>
 </html>

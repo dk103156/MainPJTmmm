@@ -1,22 +1,26 @@
 package com.mmm.web.movie;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.executor.ReuseExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
+import com.mmm.service.board.BoardService;
+import com.mmm.service.domain.Comment;
 import com.mmm.service.domain.Movie;
 import com.mmm.service.domain.User;
 import com.mmm.service.domain.WishStarRating;
@@ -31,6 +35,10 @@ public class MovieRestController {
 		@Autowired
 		@Qualifier("movieServiceImpl")
 		private MovieService movieService; //DI 받자
+		
+		@Autowired
+		@Qualifier("boardServiceImpl")
+		private BoardService boardService;
 		
 		@Value("#{commonProperties['pageSize']}")
 		int pageSize;
@@ -233,4 +241,55 @@ public class MovieRestController {
 			
 			return returnMap;	
 		}
+		
+//		한줄평 등록하는 method
+		@RequestMapping(value = "json/addOneline", method = RequestMethod.POST)
+		public Map<String, Object> addOneline(@RequestBody Comment comment, HttpSession session)throws Exception{
+			
+			User user = (User) session.getAttribute("user");
+			comment.setUserId(user.getUserId());
+			comment.setCommentType(2);
+			
+			System.out.println("--------comment :: " + comment);
+			
+			boardService.addComment(comment);
+			
+			Map<String, Object> returnMap = new HashMap<String, Object>();
+			returnMap.put("comment", comment);
+			
+			return returnMap;	
+		}
+		
+		public Map<String, Object> getOnelineList(@RequestBody Search search)throws Exception{
+			
+			if (search.getCurrentPage() == 0) {
+				search.setCurrentPage(1);
+			}
+			
+			search.setPageSize(pageSize);
+			search.setCommentType(2);
+			
+			Map<String, Object> resultMap = boardService.getCommentList(search);
+			
+			List<Comment> list = (List<Comment>) resultMap.get("list");
+			
+			for(Comment cmt: list) {
+				cmt.setCommentDate(JavaUtil.convertDateFormat(cmt.getCommentDate()));
+				System.err.println("-------- commentt  :" +cmt);
+			}
+			
+			Page resultPage = new Page(search.getCurrentPage(), ((Integer) resultMap.get("totalCount")).intValue(), pageUnit,
+					pageSize);
+			
+			System.out.println(resultPage);
+			
+			Map<String, Object> returnMap = new HashMap<String, Object>();
+			returnMap.put("list", list);
+			returnMap.put("search", search);
+			returnMap.put("resultPage", resultPage);
+			
+			return returnMap;	
+		}
+		
+		
 }

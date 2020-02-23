@@ -120,7 +120,7 @@
 			
 			if ( response.success ) { 	// imPort 결제 성공
 				console.log('--- imPort결제 성공.. : '+JSON.stringify(response));
-				alert('usingVoucherid  : '+ usingVoucherid);
+// 				alert('usingVoucherid  : '+ usingVoucherid);
 			
 				// form 양식 없이 POST로 보내는 jQuery.. cdn..
 				$.redirect("/payment/addPayment", 				//보낼 url
@@ -393,7 +393,7 @@
 			
 			var selectedVoucher = $(this).children('option:selected').val();
 			
-			alert("선택된 상품권 번호 :  "+selectedVoucher);
+// 			alert("선택된 상품권 번호 :  "+selectedVoucher);
 			
 			var index = voucherList.findIndex(voucher => voucher.invenNo == selectedVoucher);
 			console.log(" index " + index);
@@ -460,7 +460,7 @@
 		$("#imp-btn").on("click", function(){
 				
 			
-			alert("usingVoucherList"  + usingVoucherList);
+// 			alert("usingVoucherList"  + usingVoucherList);
 			for (var i = 0; i < usingVoucherList.length; i++) {
 				usingVoucherid += usingVoucherList[i].invenNo;
 				
@@ -469,7 +469,7 @@
 				}
 			}
 			
-			alert("usingVoucherid"  + usingVoucherid);
+// 			alert("usingVoucherid"  + usingVoucherid);
 			
 			IMPCard();
 		});

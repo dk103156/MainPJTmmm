@@ -40,17 +40,22 @@ img.cancelButton {
 	color: black;
 	outline-style: none;
 	}
+	#body {
+    margin-top: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+     }
 </style>	
-<body>
+<body id="body">
 
 	<div class="container">
 		<div class="row mx-0">
 			<div class="purchaseHeader col-12 text-center">
-				<span>구매 목록</span>
+			<br><br>
+				<h3  class="text-left"><strong><span>구매 목록</span></strong></h3>
+				<hr style="background-color: black;">
 			</div>
 		</div>
 		
-		<hr>
 		
 		<div class="purchaseContentHeader row mx-0">
 			<div class="purchaseNoHeader col-2">
@@ -108,11 +113,11 @@ img.cancelButton {
 					   	<form action="/purchase/cancelTest/${i.purchaseNo}" method="post">
 						</form>
 					</div>
-				</div>	
+				</div>
+				<hr>	
 			</c:forEach>
 		</div>
 		
-		<hr>
 		
 		<div class="purchaseContentFooter row">
 			<div class="purchaseNoFooter col-2"><span></span></div>
@@ -314,7 +319,7 @@ purchaseQuantityList.forEach( (x,y) => {
 			 
 			 if(!useFlag){
 				 
-				 var Element ="<img class='cancelButton' src='https://www.seekpng.com/png/detail/14-140030_free-cancel-button-png-image-graphic-design.png' alt='Free Cancel Button Png Image - Graphic Design@seekpng.com' width=190>"
+				 var Element ="<img class='cancelButton' src='/resources/image/cancel.PNG' width=130>"
 				 
 				 $($("div.purchaseCancel")[index]).append(Element);
 				 
