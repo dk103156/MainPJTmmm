@@ -107,7 +107,7 @@
 // 	예매하기로 넘어가는 함수
 	function fncTicketing(ticketing_btn){
 		var movieName = $.trim(ticketing_btn.parent().parent().parent().children('h5[name="movieTitle"]').text());
-		self.location = "/ticketing/addTicketing?movieName="+movieName
+		self.location = "/ticketing/addTicketing?movieName="+movieName;
 	};
 	
 	
@@ -296,6 +296,12 @@
 		var ticketing_btn = $(this);		
 		
 		fncTicketing(ticketing_btn);
+	});
+	
+// 	시사회 등록 버튼 이벤트
+	$(document).on("click", "button[name='preview-btn']",function(){
+		var movieNo = $(this).parent().parent().find('input[name="movieNo"]').val();
+		self.location = "/event/addPreviewAd?movieNo="+movieNo;
 	});
 	
 	
@@ -504,6 +510,16 @@
 			                 	 </c:if>
 			                  </button>
 			                </div>
+			                
+<!-- 			               	admin일 경우 시사회 등록 버튼 보이도 -->
+			                <c:if test="${user.role eq 'admin' }">
+			                	<div class="text-center">
+				                  <button type="button" name="preview-btn" class="btn btn-sm btn-danger justify-align-center">
+				                    시사회 등록
+				                  </button>
+			                	</div>
+			                </c:if>
+			                
 			              </div>
 					     </div>
 			          </div>

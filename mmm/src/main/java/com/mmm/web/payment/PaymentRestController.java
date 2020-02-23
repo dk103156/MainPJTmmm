@@ -1,19 +1,20 @@
 package com.mmm.web.payment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.mmm.service.domain.Payment;
+import com.mmm.service.payment.PaymentService;
 
 
 @RestController
@@ -32,9 +33,42 @@ public class PaymentRestController {
 	ObjectMapper mapper = new ObjectMapper();
 	JSONParser jsonParser = new JSONParser();
 	
+	@Autowired
+	@Qualifier("paymentServiceImpl")
+	private PaymentService paymentService;
+	
 //	Constructor
 	public PaymentRestController() {
 		System.out.println(this.getClass()+"   Constructor Call...");
+	}
+	
+	
+//	Method
+	
+//	ticktingNo로 payment 가져오는 method
+	@RequestMapping(value = "getPaymentbyTicketingNo/{ticketingNo}", method = RequestMethod.GET)
+	public Map<String, Object> getPaymentbyTicketingNo(@PathVariable(value = "ticketingNp") int ticketingNo)throws Exception{
+		
+		Payment payment = paymentService.getPaymentbyTicketingNo(ticketingNo);
+		
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("payment", payment);
+		
+		return returnMap;			
+	}
+	
+//	purchaseNo로 payment 가져오는 method
+	@RequestMapping(value = "getPaymentbyPurchaseNo/{purchaseNo}", method = RequestMethod.GET)
+	public Map<String, Object> getPaymentbyPurchaseNo(@PathVariable(value = "purchaseNo") int purchaseNo)throws Exception{
+		
+		Payment payment = paymentService.getPaymentbyPurchaseNo(purchaseNo);
+		
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		returnMap.put("payment", payment);
+		
+		return returnMap;			
 	}
 	
 //	public void getToken() throws Exception{

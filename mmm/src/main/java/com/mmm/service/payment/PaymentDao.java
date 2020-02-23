@@ -15,11 +15,17 @@ public interface PaymentDao {
 	
 	public Payment getPayment(int paymentNo)throws Exception;
 	
+	public Payment getPaymentbyTicketingNo(int ticketingNo)throws Exception;
+	
+	public Payment getPaymentbyPurchaseNo(int purchaseNo)throws Exception;
+	
 	public void cancelPayment(Payment payment)throws Exception;
 	
 	public HashMap<String, Object> getPaymentListAd(Search search)throws Exception;
 	
 	public int getTotalPoint(int userNo)throws Exception;
+	
+	public int getAccPoint(int userNo)throws Exception;
 	
 	public HashMap<String, Object> getPointList(Search search)throws Exception;
 	

@@ -187,11 +187,34 @@ public class PaymentServiceTest {
 //		Assert.assertEquals(1, paymentService.checkAttedance(userNo));
 //	}
 	
+//	@Test
+//	public void testgetTotalPoint()throws Exception{
+//		int userNo = 10000;
+//		 int totalPoint = paymentService.getTotalPoint(userNo);
+//		 System.out.println("=======================>    totalPoint   "+totalPoint);
+//	}
+	
+//	@Test
+//	public void testGetAccPoint()throws Exception{
+//		
+//		int userNo = 10003;
+//		int accPoint = paymentService.getAccPoint(userNo);
+//		
+//		System.out.println("=========accPoint  : " + accPoint);
+//	}
+	
 	@Test
-	public void testgetTotalPoint()throws Exception{
-		int userNo = 10000;
-		 int totalPoint = paymentService.getTotalPoint(userNo);
-		 System.out.println("=======================>    totalPoint   "+totalPoint);
+	public void testGetPayment()throws Exception{
+		
+		int ticketingNo = 10003;
+		int purchaseNo = 10001;
+		
+		Payment pay = paymentService.getPaymentbyTicketingNo(ticketingNo);
+		Payment pay1 = paymentService.getPaymentbyPurchaseNo(purchaseNo);
+		
+		
+		System.out.println("=========pay  : " + pay);
+		System.out.println("=========pay1  : " + pay1);
 	}
 	
 }
