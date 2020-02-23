@@ -30,7 +30,7 @@
  
  body {
  	height : 3000px;
- 	font-family: 'Noto Sans KR', sans-serif;
+ 	font-family: 'Noto Sans KR', sans-serif !important;
  
  }
  
@@ -74,7 +74,7 @@
  
 /* 슬라이더 */
  	
-    *, *:before, *:after { box-sizing: inherit; }
+    
     .clearfix:after { content: ''; display: block; clear: both; float: none; }
     .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
     .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
@@ -95,7 +95,7 @@
 	.slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	.slide_btn_box > .slide_btn_prev { left: -100px; }
 	.slide_btn_box > .slide_btn_next { right: -100px; }
-	.slide_pagination { position: relative; left: 50%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	.slide_pagination { position: relative; left: 75%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
 	.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
@@ -106,8 +106,8 @@
 </head>
 <body>
 
+	<jsp:include page="/layout/header.jsp"></jsp:include>
 
-	
 	
 	<div class="container-fluid px-0 mb-5">
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -312,7 +312,10 @@
 		</div> <!-- end of pageContent -->
 	</div> <!-- end of container-fluid -->	
 	
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
+	
 <jsp:include page="/layout/sideBar.jsp"></jsp:include>
+
 
 <!-- 슬라이더 -->
   <script>

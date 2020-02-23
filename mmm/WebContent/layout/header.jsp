@@ -1,279 +1,185 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-    
-    
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-<meta charset="UTF-8">
-	
- <!-- Required meta tags -->
+  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
-  <!-- Bootstrap Extended -->
+  <!-- Bootstrap Extended Color -->
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
-
-<link rel="stylesheet" id="omb-main-style-css" href="http://demo.aa-team.com/tf/omb/wp-admin/admin-ajax.php?action=omb_frontend_style&amp;ver=4.9.13" type="text/css" media="all">  
-<link rel="stylesheet" id="omb-bootstrap-min-css" href="http://demo.aa-team.com/tf/omb/wp-content/themes/omb/css/bootstrap.min.css?ver=4.9.13" type="text/css" media="all"> 
-<link rel="stylesheet" id="TMDB-movie-styles-css" href="http://demo.aa-team.com/tf/omb/wp-content/plugins/tmdb/templates/assets/tmdb-style.php?1582201824&amp;ver=4.9.13" type="text/css" media="all">
-<link rel="stylesheet" id="aa-megamenu-css" href="http://demo.aa-team.com/tf/omb/wp-content/plugins/mega-menu/assets/menu-core.css?ver=4.9.13" type="text/css" media="all">  
-<link rel="stylesheet" id="font-awesome-css" href="http://demo.aa-team.com/tf/omb/wp-content/themes/omb/css/font-awesome.min.css?ver=4.9.13" type="text/css" media="all">
-
- <!-- Optional JavaScript -->
+   
+   <!-- google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+   
+    <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   
+  <style>
+  body {
+  	font-family: 'Noto Sans KR', sans-serif !important;
+  }
+  
+  div.navBar {
+  	box-sizing : border-box;
+  }
+  ul.header {
+  	background-color : #fee50e;
+  	margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    list-style: none;
+    
+  }
+  
+  ul.header li {
+  	line-height : 17px;
   	
-<title></title>
+  }
+  
+  ul.header li a {
+  	font-size : 12px;
+  	font-weight : 700;
+  }
+  
+  ul.header li a.borderRight {
+  	padding-right : 10px;
+  	border-right: 2px solid #fe9558;
+  	color : #333;
+  	
+  }
+  
+  div.navMain div {
+  	background-color : #333;
+  	
+  }
+  
+  div.headerLogo {
+  	background-color : #fee50e !important;
+  }
+  
+  #firstDropdown,#secondDropdown,#thirdDropdown,#fouthDropdown {
+  	background-color : #333 !important;
+  	border : none !important;
 
-<style>
-
-	.aa-mega-menu-wrap li.menu-item-has-children > a:after {
-	    color: #ccc;
-	    content: "";
-	    font-family: "";
-	    font-size: 10px;
-	    vertical-align: 0px;
-	    margin: 0px 0px 0px 7px;
-	    position: relative;
-	    top: -3px;
-	}
-
-	body, input, select, textarea, header, footer {
-	    color: #333;
-	   	font-family: 'Noto Sans KR', sans-serif;
-	    font-size: 12px;
-	    font-weight: bold;
-	}
-
-	.logo > img{
-		width: 69px;
-	    height: 37px;
-	}
+  }
 	
-	header .container .omb-menu.content-wrapper .aa-mega-menu-wrap .aa-mega-menu > li > a {
-	    padding: 2.0625rem 2.5625rem;
-	    border-top: solid 0.125rem transparent;
-	    font-size: 0.875rem;
-	    font-family: 'Noto Sans KR', sans-serif;
-	    letter-spacing: 0.01rem;
-	    font-weight: 700;
-	    color: #fff;
-	    text-transform: uppercase;
-	}
-	
-	
-	#aa-mega-menu-item-2914 > a{
-		padding-left: 48px;
-	}
-	
-	#aa-mega-menu-item-83 > a{
-		padding-left: 42px;
-		padding-right: 40px;
-	}
-	
-	#aa-mega-menu-item-45 > a{
-	    padding-left: 49px;
-	}
-	
-	header .container .omb-menu.content-wrapper .aa-mega-menu-wrap .aa-mega-menu > li:last-of-type a {
-	    padding-right: 35.875px;
-	    padding-left: 47px;
-	}
-
-	ul, ol {
-	    margin-top: 0;
-	    margin-bottom: 0px;
-	}
-	
-	a, a span, input, button, .btn, a:after, a span:after, input:after, button:after, .btn:after, a:before, a span:before, input:before, button:before, .btn:before {
-    	transition: all -3.0s;
-	}
-	
-	.login{
-		color: #242424; 
-		border-right: 2px solid #fe9558; 
-		padding-right: 7px;	
-	}
-	
-	.join{
-		color: #242424; 
-		border-right: 2px solid #fe9558; 
-		padding-right: 5px; 
-		padding-left: 1px;
-	}
-	
-	.myPage{
-		color: #242424; 
-		border-right: 2px solid #fe9558; 
-		padding-right: 6px; 
-		padding-left: 2px;
-	}
-	
-	header .container .omb-menu.content-wrapper .aa-mega-menu-wrap .aa-mega-menu > li > a:hover {
-	    border-top-color: #ff0000;
-	    color: #fee50e;
-	}
-	
-	@media all and (min-width:768px) {
-    	.aa-mega-menu{
-    		display: block !important;
-    	}
-	}
-</style>
-
-<script type="text/javascript">
-$(function(){
-
-	/* ÎìúÎ°≠Îî∞Ïö¥Ïì∞ */
-	$("#aa-mega-menu-omb-top-menu > li").on("mouseover", function(){ 
-		$(this).children().first().next().css("display","block"); 
-		
-		$(this).on("mouseout",function(){
-			$(this).children().first().next().css("display","none"); 
-		});					
-	});
-	
-	/* ÌôîÎ©¥ Ï§ÑÏòÄÏùÑÎïå ÎìúÎ°≠Îî∞Ïö¥Ïì∞ */
-	$("#aa-mega-menu-wrap-omb-top-menu > div > i").on("click", function(){
-	
-		if($(this).hasClass("on")){
-			$(this).removeClass("on");
-			$(this).parent().next().css("display","none");	
-		}else if(!$(this).hasClass("on")){
-			$(this).addClass("on");
-			$(this).parent().next().css("display","block");	
-			
-		}
-	
-		
-	});
-	
-
-	
-	
-	
-	
-
-});
-</script>
-
+  #firstDropdownMenu,#secondDropdownMenu,#thirdDropdownMenu,#fouthDropdownMenu {
+    position : absolute !important;
+  	top : -7px !important;
+  	left : -8px !important;
+   
+  }
+  
+  #firstDropdownMenu a,#secondDropdownMenu a,#thirdDropdownMenu a,#fouthDropdownMenu a {
+  	color : white !important;
+  }	
+  	
+  </style>
+<title>Insert title here</title>
 </head>
-
 <body>
 
-	<div style="background-color: #fee50e;">
-		<ul class="gnb">                
-				<li style="text-align: right; padding-top: 10px; padding-bottom: 10px; padding-right: 5px;">
-					<c:choose> 
-					    <c:when test="${not empty sessionScope.user }">   
-					       <a href="/user/logout" class="login">LOGOUT</a>
-					    </c:when>
-					    <c:otherwise>    
-					       <a href="/user/login" id=mainLoginBtn class="login"><span>LOGIN</span></a>
-					    </c:otherwise>                  
-					</c:choose>
-					<a href="/user/userAuthorization.jsp?type=addUser" class="join"><span>JOIN</span></a>
-					<a href="/mypage/mypage" class="myPage"><span>MY PAGE</span></a>
-					<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
-				</li>
-		</ul>
-	</div>
-           
-<header>
-	<div class="container">
-
-		<span>
-				<a class="logo" href="#" title="MMM">
-					<img src="../resources/image/logo/movmovmov.jpg" alt="MMM">
-				</a>	
-		</span>
-	
-		<div class="omb-menu content-wrapper">
-			<div id="aa-mega-menu-wrap-omb-top-menu" class="aa-mega-menu-wrap">
-			<div class="aa-mega-menu-brand"><span>Top menu</span> <i class="fa fa-bars"></i></div>
-			<ul id="aa-mega-menu-omb-top-menu" class="aa-mega-menu" data-trigger="hover" data-effect="none" data-css3animations="none" style="margin-right: 180px;">
-			
-				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-2914 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-2914">
-					<a href="/movie/getBoxOfficeList"><span>MOVIE</span><span class="arrow"> ‚ñº</span></a>
-						<ul class="aa-mega-sub-menu we-sidebar" style="right: auto; display: none;">
-							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2902 aa-mega-menu-item" id="aa-mega-menu-item-2902">
-								<a href="/movie/getBoxOfficeList">BoxOffice</a>
-							</li>
-							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2181 aa-mega-menu-item" id="aa-mega-menu-item-2181">
-								<a href="/movie/getExpectedMovieList">ÏÉÅÏòÅÏòàÏ†ïÏûë</a>
-							</li>
-						</ul>
-				</li>
-			
-				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-83 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-83">
-					<a href="/ticketing/addTicketing"><span>TICKETING</span><span class="arrow"> ‚ñº</span></a>
-						<ul class="aa-mega-sub-menu we-sidebar" style="right: auto; display: none;">
-							<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-188 aa-mega-menu-item" id="aa-mega-menu-item-188">
-								<a href="/ticketing/addTicketing">ÏùºÎ∞òÏòàÎß§</a>
-							</li>
-							<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-372 aa-mega-menu-item" id="aa-mega-menu-item-372">
-								<a href="/ticketing/addCompareTicketing">Í∑πÏû•Î≥Ñ ÎπÑÍµêÏòàÎß§</a>
-							</li>
-						</ul>
-				</li>
-
-				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-45 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-45">
-					<a href="/product/getSnackProductList"><span>STORE</span><span class="arrow"> ‚ñº</span></a>
-					<ul class="aa-mega-sub-menu we-sidebar" style="right: auto; display: none;">
-						<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-652 aa-mega-menu-item" id="aa-mega-menu-item-652">
-							<a href="/product/getVoucherList">Voucher</a>
-						</li>
-						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-61 aa-mega-menu-item" id="aa-mega-menu-item-61">
-							<a href="/product/getSnackProductList">Snack</a>
-						</li>
-					</ul>
-				</li>
-
-				<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2120 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-2120">
-					<a href="/event/getPreviewList"><span>EVENT</span><span class="arrow"> ‚ñº</span></a>
-					<ul class="aa-mega-sub-menu we-sidebar" style="right: auto; display: none;">
-						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2053 aa-mega-menu-item" id="aa-mega-menu-item-2053">
-							<a href="/event/getPreviewList">ÏãúÏÇ¨ÌöåÏù¥Î≤§Ìä∏</a>
-						</li>
-						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2114 aa-mega-menu-item" id="aa-mega-menu-item-2114">
-							<a href="/event/getQuizList">ÌÄ¥Ï¶àÌíÄÍ∏∞</a>
-						</li>
-						<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2251 aa-mega-menu-item" id="aa-mega-menu-item-2251">
-							<a href="/event/addAttendance">Ï∂úÏÑùÏ≤¥ÌÅ¨</a>
-						</li>
-					</ul>
-				</li>
-<!-- 
-				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-285">
-					<a href="#">#</a>
-				</li>
-				
-				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-302 aa-mega-menu-item align-left menu-flyout" id="aa-mega-menu-item-302">
-					<a href="#">#</a>
-				</li>
- -->
-				
-				
+	<div class="container-fluid">
+		<div class="row navBar">
+			<ul class="col-12 header">                
+					<li style="text-align: right; padding-top: 7px; padding-bottom: 7px; padding-right: 5px;"> 
+						<a href="#" id="mainLoginBtn" class="login borderRight"><span>LOGIN</span></a>
+						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span>JOIN</span></a>
+						<a href="/mypage/mypage" class="myPage borderRight"><span>MY PAGE</span></a>
+						<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
+					</li>
 			</ul>
-			</div>			
-		</div>
+		</div>	<!-- end of navBar --> 
 		
+		<div class="row navMain">
+			<div class="col-3">
+				<div class="row">
+					<div class="col-6 px-0"></div>
+					<div class="col-6 px-0 headerLogo text-center">
+						<span>
+							<a href="#" title="MMM">
+								<img src="../resources/image/logo/movmovmov.jpg" alt="MMM" width=68>
+							</a>	
+						</span>
+					</div><!-- endof headerLogo -->
+				</div>
+			</div>
+			<div class="col-6 pt-3">
+				<div class="row">
+					<div class="col-3 text-center">
+						  <div class="dropdown mr-1">
+						    <button type="button" class="btn btn-secondary dropdown-toggle" id="firstDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+						      MOVIE
+						    </button>
+						    <div class="dropdown-menu" aria-labelledby="firstDropdown" id="firstDropdownMenu">
+						      <a class="dropdown-item" href="/movie/getBoxOfficeList">π⁄Ω∫ ø¿««Ω∫</a>
+						      <a class="dropdown-item" href="/movie/getExpectedMovieList">ªÛøµ øπ¡§¿€</a>
+						    </div>
+						  </div><!-- end of First Dropdown -->
+					</div>
+					<div class="col-3 text-center">
+						  <div class="dropdown mr-1">
+						    <button type="button" class="btn btn-secondary dropdown-toggle" id="secondDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+						      TICKETING
+						    </button>
+						    <div class="dropdown-menu" aria-labelledby="secondDropdown" id="secondDropdownMenu">
+						      <a class="dropdown-item" href="/ticketing/addTicketing">¿œπ›øπ∏≈</a>
+						      <a class="dropdown-item" href="/ticketing/addCompareTicketing">±ÿ¿Â∫∞ ∫Ò±≥øπ∏≈</a>
+						    </div>
+						  </div><!-- end of Second Dropdown -->					
+					</div>
+					<div class="col-3 text-center">
+						  <div class="dropdown mr-1">
+						    <button type="button" class="btn btn-secondary dropdown-toggle" id="thirdDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+						      STORE
+						    </button>
+						    <div class="dropdown-menu" aria-labelledby="thirdDropdown" id="thirdDropdownMenu">
+						      <a class="dropdown-item" href="/product/getVoucherList">ªÛ«∞±«</a>
+						      <a class="dropdown-item" href="/product/getSnackProductList">Ω∫≥º</a>
+						    </div>
+						  </div><!-- end of Third Dropdown -->						
+					</div>
+					<div class="col-3 text-center">
+						  <div class="dropdown mr-1">
+						    <button type="button" class="btn btn-secondary dropdown-toggle" id="fouthDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+						      EVENT
+						    </button>
+						    <div class="dropdown-menu" aria-labelledby="fouthDropdown" id="fouthDropdownMenu">
+						      <a class="dropdown-item" href="/event/getPreviewList">Ω√ªÁ»∏¿Ã∫•∆Æ</a>
+						      <a class="dropdown-item" href="/event/getQuizList">ƒ˚¡Ó«Æ±‚</a>
+						      <a class="dropdown-item" href="/event/addAttendance">√‚ºÆ√º≈©</a>
+						    </div>
+						  </div><!-- end of Fouth Dropdown -->						
+					</div>
+				</div>
+			</div>
+			<div class="col-3">
+			</div>		
+		</div>	<!-- end of navMain -->
 	</div>
-</header>
+	
+<script>
+$("#firstDropdownMenu a,#secondDropdownMenu a,#thirdDropdownMenu a,#fouthDropdownMenu a").on("mouseenter",function(){
+	$(this).attr("style","color : #333 !important")
+});
+$("#firstDropdownMenu a,#secondDropdownMenu a,#thirdDropdownMenu a,#fouthDropdownMenu a").on("mouseleave",function(){
+	$(this).attr("style","color : white !important")
+})
 
-
+</script>
 </body>
 </html>
