@@ -31,6 +31,7 @@
    	  body {
    	  	font-family: 'Noto Sans KR', sans-serif !important;
    	  }
+   	  
   	  .list-group{
 	    cursor: pointer;
 	    line-height: 33px;
@@ -85,8 +86,7 @@
 	  }
 	  
 	  body > div.container > div > div.steps > div > div.col-9.px-1.h-100 > div.steps-body{
-	  	padding-top: 9px;
-	  	padding-bottom: 18px;	
+
 	  }
 	  
 	  body > div.container > div > div.row > div.col-9.px-1.h-100 > div.steps-body.text-center{
@@ -99,6 +99,13 @@
 		}
 	  
 	  .movie-select {
+	  	padding-top: 9px;
+	  	padding-left: 9px;	    
+	    padding-right: 9px;	 
+	    padding-bottom: 9px;	   
+	  }
+	  
+	  body > div.container > div > div.steps > div > div.col-9.px-1.h-100 > div.steps-body > div {
 	  	padding-top: 9px;
 	  	padding-left: 9px;	    
 	    padding-right: 9px;	 
@@ -169,7 +176,7 @@
 	   
 	   /* 스크롤바 CSS  */
 	   div.steps > div > div.col-3.px-0.h-100 > div.steps-body > div > div.movie-list.text-md-left > ul	{
-	   		height: 424px;
+	   		height: 440px;
 	   		overflow: auto;
 	   }  
 	   
@@ -300,7 +307,7 @@
 	  /* 조조, 심야*/
 	  span.timeMorning {
 		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-	    background-position: 14px 1px;
+	    background-position: 14px 2px;
 	    padding-right: 33px;
 	    border-left-width: 0px;
 	    padding-left: 33px !important;
@@ -308,7 +315,7 @@
 	  
 	  span.timeNight {
 	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-	    background-position: 19px -20px;
+	    background-position: 19px -19px;
 	    padding-right: 33px;
 	    border-left-width: 0px;
 	    padding-left: 33px !important;
@@ -318,6 +325,16 @@
 /* 	  div.steps-body > div > div > div:nth-child(1) > div > ul > li {
 	  	width : 181px;
 	  } */
+	  
+	  .row {
+	    display: -ms-flexbox;
+	    display: flex;
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	    margin-right: -15px;
+	    margin-left: -15px;
+	    padding-bottom: 6px;
+	  }
 	  
 	  body > div.container > div > div.row > div.col-3.px-0.h-100 > div.steps-body.text-center > div > ul > li.month > div > span.month {
 	    display: block;
@@ -1676,8 +1693,8 @@
 		 
 		 // 실제 유효성 체크
     	 var movieNam =$("div.movie-list > ul > li").hasClass("active")
-    	 var franchis =$("div.franchise-list > ul > li.list-group-item.first").hasClass("active");
-    	 var theaterNam = $("div.theater-list > ul > li.list-group-item.first").hasClass("active");
+    	 var franchis =$("div.franchise-list > ul > li.list-group-item").hasClass("active");
+    	 var theaterNam = $("div.theater-list > ul > li.list-group-item").hasClass("active");
     	 var screenDat = $("div.calendar > ul > li").hasClass("active");
     	 var screenTim = $("div.remainingSeat > div > div > ul > li").hasClass("active");
     	 

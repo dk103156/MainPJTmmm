@@ -218,7 +218,7 @@
 	  /* 2020-02-14 조조, 심야*/
 	  span.timeMorning {
 	  	    background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-    		background-position: 14px 1px;
+    		background-position: 14px 2px;
 		    padding-right: 33px; 
 		    border-left-width: 0px;
 		    padding-left: 33px;
@@ -226,7 +226,7 @@
 	  
 	  span.timeNight {
 	 		background: url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/icon/icon_morning_night.png) no-repeat left;
-   			background-position: 19px -20px;
+   			background-position: 19px -19px;
 		    padding-right: 33px;
 		    border-left-width: 0px;
 		    padding-left: 33px;
