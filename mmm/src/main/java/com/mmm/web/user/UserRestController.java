@@ -1,6 +1,7 @@
 package com.mmm.web.user;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpHost;
@@ -35,7 +37,9 @@ import org.json.simple.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -481,26 +485,47 @@ public class UserRestController {
 		// Autowired된 JavaMailSender로 MailUtils 객체 생성 
 		MailUtils sendMail = new MailUtils(mailSender);
 		
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+		messageHelper.setSubject("[MovMovMov] 이메일 인증");
+		
+		messageHelper.setFrom("movmovmov6@gmail.com", "MovMovMov");
+	    messageHelper.setTo((String)params.get("email"));
+	    
+	    StringBuffer contents = new StringBuffer();
+	    contents.append("<img src=\"cid:boxoffice.jpg\" width=\"500\" height=\"300\">");
+	    contents.append("<h1>[MovMovMov] 이메일 인증</h1>");
+	    contents.append("<h2><p>아래 인증문자를 입력하시면 이메일 인증이 완료됩니다.</p></h2>");
+	   // contents.append("<p>입력 문자 :: </p><br/><br/><hr/>");
+		// 본인인증을 위한 state를 메일로 발송 
+	    contents.append("<h2><p>" + state +"</p></h2>");
+	    messageHelper.setText(contents.toString(), true);
+	    FileSystemResource file = new FileSystemResource(new File("C:/Users/user/git/MainPJTmmm/mmm/WebContent/resources/image/user/boxoffice.jpg"));
+	    messageHelper.addInline("boxoffice.jpg", file);
+	    mailSender.send(message);
+		
 		// JavaMailSender.setSubject(title) :: 메일 제목 설정 
-		sendMail.setSubject("[MovMovMov] 회원가입 이메일 인증");
+		//sendMail.setSubject("[MovMovMov] 회원가입 이메일 인증");
 		
 		// JavaMailSender.setText(text) :: 메일 내용 설정 
 		// StringBuffer로 작성 
+	    /*
 		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
+				.append("<img src=\"cid:DUKE.gif\">")
 				.append("<p>아래 글자를 입력하시면 이메일 인증이 완료됩니다.</p>")
 				.append("<p>입력 문자 :: </p><br/><br/><hr/>")
 				// 본인인증을 위한 state를 메일로 발송 
 				.append("<p>" + state +"</p>")
 				.toString());
-		
+		*/
 		// JavaMailSender.setFrom(senderEmail, senderName) :: 메일 작성자 설정 
-		sendMail.setFrom("movmovmov6@gmail.com", "MovMovMov");
+		//sendMail.setFrom("movmovmov6@gmail.com", "MovMovMov");
 		
 		// JavaMailSender.setTo(receiverEmail) :: 메일 수신자 설정 
-		sendMail.setTo((String)params.get("email"));
+		//sendMail.setTo((String)params.get("email"));
 		
 		// JavaMailSender.send :: 설정한 내용을 바탕으로 메일 전송
-		sendMail.send();
+		//sendMail.send();
 		
 		session.setAttribute("email", (String)params.get("email"));
 		session.setAttribute("state", state);

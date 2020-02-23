@@ -206,57 +206,54 @@ a {
 </head>
 <body>
 
+<div class="container" style="margin-top: 50px;">
 
-
-<div id="contents">
-	<h2 class="tit">내가 본 영화 </h2>
-	<!-- 내가 본 영화 -->
-	<div class="board-list-util mySeenMovie myMovieStory">
-		<p class="result-count">
-			<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b>건</strong>
-		</p>
-	</div>
-
-	<!-- my-saw-movie -->
-	<div class="my-saw-movie mt10 mySeenMovie myMovieStory">
-		<ul class="mySawMovie" id="mySawMovie">
-			<c:forEach var="j" items="${dateTimeList}">
-			<c:forEach var="i" items="${ticketingList}">
-			<c:if test= "${i.dateTimeNo eq j.dateTimeNo}">
-				<script>
-					var cnt = $("#mySeenMovieCnt").html();
-					$("#mySeenMovieCnt").html(parseInt(cnt)+1);
-				</script>
-				<li class="col-md-6">
-					<p class="img posterImg" data-mno="01207400" style="cursor: pointer">
-					<img src="${j.poster}" onerror="noImg(this)" alt="">
-					</p>
-					<div class="cont">        
-						<p class="tit">
-							<a href="" title="${i.movieName} 상세보기">${i.movieName}</a>
-						</p>        
-						<div class="theater">        
-							<p>${j.theaterName}</p>            
-							<p>${j.screenName}</p> 
-							<p><fmt:formatDate var="screenDate" value="${j.screenDate }" pattern="yyyy-MM-dd"/>
-							   	<fmt:formatDate var="screenTime" value="${j.screenTime }" pattern="HH:mm"/>
-								${screenDate} ${screenTime}</p>           
-						</div>    
-					</div>
-				</li>
-			</c:if>
-			</c:forEach>
-			</c:forEach>
-		</ul>
-	</div>
-	<!--// my-saw-movie -->
-
-	<nav class="pagination mySeenMovie myMovieStory"></nav>
-	<!--// 나의 본영화 -->
-
-</div>
-<!--// contents -->
-
+	<div id="contents">
+		<h2 class="tit">내가 본 영화 </h2>
+		<!-- 내가 본 영화 -->
+		<div class="board-list-util mySeenMovie myMovieStory">
+			<p class="result-count">
+				<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b>건</strong>
+			</p>
+		</div>
+	
+		<!-- my-saw-movie -->
+		<div class="my-saw-movie mt10 mySeenMovie myMovieStory">
+			<ul class="mySawMovie" id="mySawMovie">
+				<c:forEach var="j" items="${dateTimeList}">
+				<c:forEach var="i" items="${ticketingList}">
+				<c:if test= "${i.dateTimeNo eq j.dateTimeNo}">
+					<script>
+						var cnt = $("#mySeenMovieCnt").html();
+						$("#mySeenMovieCnt").html(parseInt(cnt)+1);
+					</script>
+					<li class="col-md-6">
+						<p class="img posterImg" data-mno="01207400" style="cursor: pointer">
+						<img src="${j.poster}" onerror="noImg(this)" alt="">
+						</p>
+						<div class="cont">        
+							<p class="tit">
+								<a href="" title="${i.movieName} 상세보기">${i.movieName}</a>
+							</p>        
+							<div class="theater">        
+								<p>${j.theaterName}</p>            
+								<p>${j.screenName}</p> 
+								<p><fmt:formatDate var="screenDate" value="${j.screenDate }" pattern="yyyy-MM-dd"/>
+								   	<fmt:formatDate var="screenTime" value="${j.screenTime }" pattern="HH:mm"/>
+									${screenDate} ${screenTime}</p>           
+							</div>    
+						</div>
+					</li>
+				</c:if>
+				</c:forEach>
+				</c:forEach>
+			</ul>
+		</div><!--// my-saw-movie -->
+	
+		<nav class="pagination mySeenMovie myMovieStory"></nav><!--// 나의 본영화 -->
+	
+	</div><!--// contents -->
+</div><!--// container -->
 
 </body>
 </html>
