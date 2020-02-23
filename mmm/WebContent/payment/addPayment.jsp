@@ -38,9 +38,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?after">
+    <link rel="stylesheet" href="/resources/css/common.css?aftr">
 	    
-    <link rel="stylesheet" href="/resources/css/payment.css?after">	
+    <link rel="stylesheet" href="/resources/css/payment.css?aftr">	
 	
 	
 	
@@ -548,10 +548,13 @@
 							</table>
 				         </div>
 			         </div>
-				  	 <div class="border-bottom m-3"></div>
-				  	 <div>
-					   <h5 class="text-right text-primary">예매 금액 : <span name="barTicketingPrice"></span>원</h5>			  	 
-				  	 </div>
+<!-- 				  	 <div class="m-3"></div> -->
+<!-- 				  	 <div class="bg-dark font-yellow-cs"> -->
+<!-- 					   <h5 class="text-right">예매 금액 : <span name="barTicketingPrice"></span>원</h5>			  	  -->
+<!-- 				  	 </div> -->
+				  </div>
+				  <div class="card-footer bg-dark font-yellow-cs">
+				    <h5 class="text-right">예매 금액 : <span name="barTicketingPrice"></span>원</h5>
 				  </div>
 				</div>
 	   		</c:if>
@@ -595,13 +598,17 @@
 		        			  </tbody>
 						</table> 
 				         
-					  	 <div>
-						   <h5 class="text-right text-primary">구매 금액 : <span name="barPurchasePrice"></span>원</h5>			  	 
-					  	 </div>
+<!-- 					  	 <div> -->
+<!-- 						   <h5 class="text-right text-primary">구매 금액 : <span name="barPurchasePrice"></span>원</h5>			  	  -->
+<!-- 					  	 </div> -->
 				  	 
 				  	 </div>
 <!-- 				  	 end of card-body -->
 				  </div>
+ 				  <div class="card-footer bg-dark font-yellow-cs">
+				    <h5 class="text-right">구매 금액 : <span name="barPurchasePrice"></span>원</h5>
+				  </div>
+				</div>
 			</c:if>
 			
 <!-- 	   		자체 결제수단 -->
@@ -653,10 +660,10 @@
 	   		  
 <!-- 	    총결제금액 -->
 	   		    <div class="card col-md-3 mb-2 p-0">
-	   		      <h6 class="p-2 border-bottom border-danger"> 총 결제금액 </h6>
+	   		      <h6 class="p-2 border-bottom border-warning"> 총 결제금액 </h6>
 	   		      
 <!-- 	   		      얘네 분기문 처리 해줘야... -->
-				  <div class="text-right border-bottom border-danger">
+				  <div class="text-right border-bottom border-dark">
 	   		        <p class="small m-1">(+) 예매 금액 : <span name="barTicketingPrice"></span>원<p>
 	   		        <p class="small m-1">(+) 구매 금액 : <span name="barPurchasePrice"></span>원<p>
 				  </div>
@@ -672,9 +679,9 @@
 	   		    
 <!-- 	      총할인금액 -->
 	   		    <div class="card col-md-3 mb-2 p-0">
-	   		      <h6 class="p-2 border-bottom border-danger"> 총 할인금액 </h6>
+	   		      <h6 class="p-2 border-bottom border-warning"> 총 할인금액 </h6>
 	   		      
-	   		      <div class="text-right border-bottom border-danger">
+	   		      <div class="text-right border-bottom border-dark">
 	   		        <p class="small m-1">(-) 상품권 금액 : <span id="barVoucherPrice"></span>원<p>
 	   		        <p class="small m-1">(-) 사용 포인트 : <span id="barPartPoint"></span>원<p>
 				  </div>
@@ -690,10 +697,10 @@
 	   		    
 <!-- 	     최종결제금액 -->
 	   		    <div class="card col-md-3 mb-2 pb-4 pt-1">
-	   		      <h6 class="p-2 border-bottom border-danger"> 최종결제금액 </h6>
+	   		      <h6 class="p-2 border-bottom border-warning"> 최종결제금액 </h6>
 	   		      <h5> <span id="barCash"></span>원 </h5>
 	   		      <input type="hidden" id="impPrice">
-	   		      <button type="button" id="imp-btn" class="btn btn-danger btn-sm">결제하기</button>
+	   		      <button type="button" id="imp-btn" class="btn btn-yellow-cs btn-sm">결제하기</button>
 	   		    </div>
 	   		    
 	   		  </div>
