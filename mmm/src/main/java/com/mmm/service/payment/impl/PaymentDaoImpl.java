@@ -135,6 +135,10 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 
 	@Override
+	public List<Point> checkList(int userNo) throws Exception {
+		return sqlSession.selectList("PointMapper.checkList", userNo);
+	}
+	
 	public int getAccPoint(int userNo) throws Exception {
 		return sqlSession.selectOne("PointMapper.getAccPoint", userNo);
 	}

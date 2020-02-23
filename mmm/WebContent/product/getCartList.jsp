@@ -29,28 +29,33 @@
 <title>Insert title here</title>
 
 <style>
-
+#body {
+      margin-top: 10px;
+       font-family: 'Noto Sans KR', sans-serif;
+     }
 </style>
 </head>
-<body>
+<body id="body">
 
 	<div class="container">
 		<div class="row mx-0">
-			<div class="cartHeader col-12 text-center">
-				<span>장바구니 목록</span>
+			<div class="cartHeader col-12 ">
+			<br>
+				<h1><strong><span>장바구니</span></strong></h1>
 			</div>
 		</div>
 		
-		<hr>
+		<hr  style="height: 2px; background-color: black; ">
 		
 		<div class="cartContentHeader row mx-0">
-			<div class="prodNoHeader col-2"><span>상품번호</span></div>
-			<div class="prodNameHeader col-6"><span>상품명</span></div>
-			<div class="prodPriceHeader col-2"><span>가격</span></div>
-			<div class="prodQuantityHeader col-2"><span>수량</span></div>
+		<div class="prodNoHeader col-2"><span>상품번호</span></div>  
+<!--			<div class="prodNoHeader col-2"><h4><span>번호</span></h4></div>	 -->	
+			<div class="prodNameHeader col-6"><h4><span>상품명</span></h4></div>
+			<div class="prodPriceHeader col-2"><h4><span>가격</span></h4></div>
+			<div class="prodQuantityHeader col-2"><h4><span>수량</span></h4></div>
 		</div>
 		
-		<hr>
+		<hr  style="height: 2px; background-color: black; ">
 		
 		<div class="cartContent">
 		
@@ -61,11 +66,13 @@
 			<div class="col-2"><span></span></div>
 			<div class="col-6"><span></span></div>
 			<div class="fianlPrice col-2">
-				<span>최종가격</span><br>
-				<input name="totalPrice" type="text" readonly><br>
+				<h5><span>최종가격</span></h5>
+				<input name="totalPrice" type="text" readonly>
 			</div>			
 			<div class="col-2"><span></span>
+			<br>
 				<button id="toPayment" type="button" class="btn btn-dark">결제하기</button>
+				<br><br><br><br>
 			</div>
 		</div>
 	</div>
@@ -117,14 +124,15 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	prodNoList.forEach( (x,i) => {
 		//console.log(i)
 		var Element = "<div class='cartContentIn row mx-0 mb-2'>"
-			Element+= "<div class='prodNo col-2'><span><kbd>"+prodNoList[i]+"</kbd></span></div>"
+				Element+= "<div class='prodNo col-1' style='margin-top: 55px;'><span><kbd>"+prodNoList[i]+"</kbd></span></div>"
+//				Element+= "<div class='prodNo col-1'><span><h3 style='margin-top: 55px;'>"+[i+1]+"</h3></span></div>"
 			Element+= "<div class='prodName col-6'>"
 			Element+= "<span><img src='../resources/image/"+prodImageList[i]+"' width=150></span>"
 			Element+= "<span>"+prodNameList[i]+"</span>"
 			Element+= "</div>"
-			Element+= "<div class='prodPrice col-2'><span><input name='prodPrice' type='text' initialValue='"+prodPriceList[i]+"'value='"+prodPriceList[i]+"' readonly> 원</span></div>"
-			Element+= "<div class='prodQuantity col-2'><span><input type='number' value='"+prodQuantityList[i]+"' min='1' step='1' max='99'> 개</span></div>" 
-			Element+= "</div>"		
+			Element+= "<div class='prodPrice col-3'><span><input name='prodPrice' type='text' style='margin-top: 55px;' initialValue='"+prodPriceList[i]+"'value='"+prodPriceList[i]+"' readonly> 원</span></div>"
+			Element+= "<div class='prodQuantity col-2'><span><input type='number' style='margin-top: 55px;'  value='"+prodQuantityList[i]+"' min='1' step='1' max='99'> 개</span></div>" 
+			Element+= "</div><hr style='background-color: black;'>"		
 			//console.log(Element)
 			
 		$("div.cartContent").append(Element);		

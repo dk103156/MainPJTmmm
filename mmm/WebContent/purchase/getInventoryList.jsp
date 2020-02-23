@@ -29,18 +29,18 @@
 
 <style>
 	#inven{
-	border: 3px solid #fee50e;
+	border: 2px solid #fee50e;
     margin-top: 10px;
 	float:left;
 	margin: 10px 40px;
 	border-radius: 30px 40px 20px 40px / 30px 40px 20px 40px;
-	padding-top: 15px;
-    padding-bottom: 15px;
-	 
+	padding-top: 10px;
 	}
-	#prodName{
-	margin: 20px;
-	}
+	#body {
+    margin-top: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+     }
+	
 	#btn{
 	background-color: #fee50e;
 	color: black;
@@ -52,15 +52,19 @@
 	#modal{
 	border-color: #fee50e;
 	}
+	#img{
+	width: 150px;
+	height: 150px;
+	}
 </style>
 </head>
-<body>
-<jsp:include page="/product/prodToolBar.jsp" />
+<body id="body">
 	<div class="container">
 		<div class="row mx-0">
 			<div class="inventoryHeader col-12 text-center">
 			<br><br>
-		<!-- <h3><strong><span style="border-style: double; padding:10px 10px 10px 10px;">${user.userName}님의 보관함</span></strong></h3>  -->		
+			<h3 class="text-left"><strong><span>${user.userName}님의 보관함</span></strong></h3> 	
+			<hr style="background-color: black;">
 				<br>
 			</div>
 		</div>
@@ -73,11 +77,11 @@
 				<div class="thumb-wrapper">
 					<div class="img-box text-center"  id="inven">
 					<!--  	<div class="prodNo col-12"><span><kbd>${i.prodNo }</kbd></span></div> -->
-							<div class="prodName col-12"><span><img src="../resources/image/${ i.prodImage}" width=250 height=250></span>
+							<div class="prodName col-12"><span><img src="../resources/image/${ i.prodImage}"  id="img"></span>
 								<div class="content-box">
-									<div class="prodName col-10" id="prodName"><strong>${i.prodName}</strong></div>
-									<!--  	<div class="prodQuantity col-12"> -->
-											<span></span>
+									<div class="prodName col-12" id="prodName"><strong>${i.prodName}</strong></div>
+									<!--  	<div class="prodQuantity col-12"> 
+											<span></span>-->
 											<button type="button" class="btn modalButton" id="btn" data-toggle="modal" data-target="#exampleModalCenter">
 							  					 상세보기
 											</button>
@@ -144,11 +148,11 @@ $(function(){
 	productList.forEach( (value,index) =>{
 		//console.log(value)
 		var quantity = productQuantityList[index];
-		$($("div.prodQuantity > span")[index]).text(quantity)
+		//$($("div.prodQuantity > span")[index]).text(quantity)
 		  
 		 $.ajax({
 		  type: "POST",
-		  url: "json/getInventoryList/",
+		  url: "/purchase/json/getInventoryList/",
 		  data: JSON.stringify({inventoryProdNo : value, inventoryStatus : "0", inventoryPurchaseNo : "0" }),
 		  dataType : "json",
 	      headers: { 
@@ -164,18 +168,11 @@ $(function(){
 							var pinNo =value.inventoryProdPinNo;
 							var Element ="<div><strong><div>"+pinNo+"</div></strong><input type='hidden' value='"+inventoryNo+"'></div>";
 							$("div.modal-body").append(Element);
-						});
-											
-						
-					});
-	  		  
-	  	  })
-		
-
-	})
-	
-
-});
+						});//end of for Each	
+					});//end of eventHadler Click
+	  	  })//end of done
+	})//end of forEach
+});//end of document ready function
 
 </script>
 </body>

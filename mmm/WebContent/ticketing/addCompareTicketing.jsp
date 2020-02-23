@@ -354,6 +354,9 @@
 </script>
   </head>
   <body>
+  
+  	<jsp:include page="/layout/header.jsp"></jsp:include>
+  		
     <div class="container">
       <!-- 비교 예매 -->
       <div class="compareTicketing">

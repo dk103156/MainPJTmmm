@@ -35,5 +35,5 @@ public interface PaymentService {
 	
 	public int checkAttedance(int userNo)throws Exception;
 	
-	
+	public List<Point> checkList(int userNo) throws Exception;
 }

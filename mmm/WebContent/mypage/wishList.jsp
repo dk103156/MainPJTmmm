@@ -47,7 +47,6 @@ body {
     font-size: 16px;
     line-height: 16px;
     text-overflow: ellipsis;
-    white-space: nowrap;
 }
 .releaseDate{
 	color: #999999;
@@ -117,10 +116,14 @@ p {
     margin-inline-end: 0px;
 }
 
+.cancleWishBtn{
+	cursor: pointer;
+}
+
 </style> 
 <script type="text/javascript">
 
-function getWishMovieList(startRowNum, endRowNum){
+function getWishMovieList(startRowNum, currentPage, pageSize){ // 위시리스트 가져오는 함수
 	$.ajax({
 		url : '/user/json/getWishMovieList',
 		method : "post",
@@ -131,37 +134,46 @@ function getWishMovieList(startRowNum, endRowNum){
 		},
 		data : JSON.stringify({
 			startRowNum : startRowNum,
-			endRowNum : endRowNum
+			currentPage : currentPage,
+			pageSize : pageSize
 		}),
 		success : function(data) {
 			
 			$("#wishList").empty();
+			$("#wishList").append(
+				'<div id="1_line" class="row"></div><br>'+
+				'<div id="2_line" class="row"></div><br>'+
+				'<div id="3_line" class="row"></div>'		
+			);
 			
 			console.log("=== getWishMovieList success ===");
 			console.log(data); // data.wishMovieList => List<Movie>
 
-			if(data.totalCnt > 0){ 
+			if(data.totalCnt > 0){
 				
+				$("#mySeenMovieCnt").html(data.totalCnt);
+
 				var len = data.wishMovieList.length;
-				var num = 1;
+				var num = 0;
 				
 				for(var i=0; i<len; i++){
-					
-					if(num%3 == 1){ $("#wishList").append("<div class='row'>") }
-					
-					$("#wishList").append(
+					var rowNum = Math.floor(num/3)+1;
+					var row = "#"+rowNum+"_line";
+					$(row).append(
 						"<div class='col-md-4'>"
-							+"<img src='https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419' width='185' height='260'>"
-							+"<br>"
-							+data.wishMovieList[i].movieTitle
-							+"<br>"
+							+"<img src='"+data.wishMovieList[i].poster+"' width='185' height='260'>"
+							+"<br><span class='movieTitle'>"+data.wishMovieList[i].movieTitle+"</span>"
+							+"<br><span class='releaseDate'>"+data.wishMovieList[i].releaseDate+" 개봉</span>"
+							+"<br><span class='cancleWishBtn' id='"+data.wishMovieList[i].movieNo+"'><img src='/resources/image/heart.png' width='20' height='20'></span> <span class='likebg'>"+data.wishMovieList[i].wishCnt+"</span>"
 						+"</div>"
 					);
-					
-					if(num%3 == 0){ $("#wishList").append("</div>") }
-					
-					num++;
+					num+=1;
 				}
+				
+				pagination(startRowNum, currentPage, pageSize, data.totalCnt);
+				
+				return data.totalCnt;
+				
 			} else { // 조회된 위시 리스트가 없을때
 				$("#wishList").append(
 					'<div class="no-my-movie-list myLikeMovie myMovieStory" id="noDataDiv">'+
@@ -177,69 +189,105 @@ function getWishMovieList(startRowNum, endRowNum){
 	}); //ajax 끝
 }
 
-$(function(){
+function pagination(startRowNum, currentPage, pageSize, totalCnt){ // 페이징 하는 함수
+	console.log("pagination 함수 호출");
+	console.log("> startRowNum : "+startRowNum);
+	console.log("> currentPage : "+currentPage);
+	console.log("> pageSize : "+pageSize);
+	console.log("> totalCnt : "+totalCnt);
+	$("#pagination").empty();
+	var maxPage = Math.ceil(totalCnt/pageSize); // 페이지의 수
+	$("#pagination").append("<button class='btn btn-default pageBtn'>&#60;</button>");
+	for(var i=1; i<=maxPage; i++){ // 페이지 찍기
+		if(currentPage==i){
+			$("#pagination").append("<button class='btn btn-default pageBtn' style='background-color: #fee50e'>"+i+"</button>");
+		} else {
+			$("#pagination").append("<button class='btn btn-default pageBtn'>"+i+"</button>");
+		}
+	}
+	$("#pagination").append("<button class='btn btn-default pageBtn'>&#62;</button>");
+}
+
+$(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자바스크립트는 구동되라
 	
-	getWishMovieList(1, 10);
+	var startRowNum = 1;
+	var currentPage = 1;
+	var pageSize = 9;
 	
-	$(".cancleWishBtn").on('click',function(){
+	getWishMovieList(startRowNum, currentPage, pageSize); // 초기 1 페이지 호출
+	
+	$(document).on("click", ".cancleWishBtn", function(){ // 위시리스트 취소 이벤트
 		if(confirm("취소 하갓소?")){
-			console.log("취소!");
+			
+			var movieNo = $(this).attr("id");
+			
+			$.ajax({
+				url : "/movie/json/deleteWish",
+				method : "POST",
+				data : JSON.stringify({
+					movieNo : movieNo,
+					userNo : '${user.userNo}' // 이후에 고쳐야할  가능성이 다분하다 다분해!!
+				}),
+				dataType : "json",	//data를 json으로 받았으면 좋겠다.
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"
+				}
+			}).done(function(responseJSON){
+				getWishMovieList(startRowNum, currentPage, pageSize);
+			}).fail(function(result, status){
+				console.log(result, status);
+			});
 		} else {
 			console.log("안취소!");
 		}			
 	});
 	
+	$(document).on("click", ".pageBtn", function(){ // 페이지 버튼 이벤트
+		
+		var pageVal = $(this).html(); // 선택한 페이지 버튼의 값 가져오기
+		var totalCnt = parseInt($("#mySeenMovieCnt").html()); // 전체 위시리스트 건수 가져오기
+		var maxPage = Math.ceil(totalCnt/pageSize); // 마지막 페이지
+		
+		if(pageVal == "&lt;"){ // < 버튼 일때
+			if(currentPage > 1){
+				currentPage = currentPage - 1;
+				pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출
+				getWishMovieList(startRowNum, currentPage, pageSize); // 위시리스트 호출	
+			}
+		} else if (pageVal == "&gt;"){ // > 버튼 일때
+			if(currentPage < maxPage){
+				currentPage = currentPage + 1;
+				pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출
+				getWishMovieList(startRowNum, currentPage, pageSize); // 위시리스트 호출
+			}
+		} else { // 숫자 버튼 일때
+			currentPage = parseInt(pageVal); // 선택한 페이지 번호 가져오기
+			pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출
+			getWishMovieList(startRowNum, currentPage, pageSize); // 위시리스트 호출
+		}
+	})
+	
 });
 </script>
 </head>
 <body>
-<!--container-->
+	<!--container-->
 	<div id="contaniner">
-	
 		<div class="row">
-			<h2 class="tit">위시 리스트 </h2>
-	<!-- 내가 본 영화 -->
-	<div class="board-list-util mySeenMovie myMovieStory">
-		<p class="result-count">
-			<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b> 건</strong>
-		</p>
-	</div>
-			<div class="col-md-4 offset-md-4">
-<!-- 				<div class="form-group"> -->
-<!-- 					<label for="sorting"></label><a style ="float:right; margin-top: 27px; margin-right: 45px;"><button class="btn btn-primary btn-sm">GO</button></a> -->
-<!-- 					<select class="form-control" id="sorting" style="width: 150px; float:center;"> -->
-<!-- 					  <option>등록일순</option> -->
-<!-- 					  <option>개봉일순</option> -->
-<!-- 					</select> -->
-<!-- 				 </div> -->
+			<div class="col-md-12" style="text-align: left;">
+				<div>
+					<h2>위시 리스트</h2>
+					<p><strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b> 건</strong></p>
+				</div>
 			</div>
 		</div>
 		
 		<div id="wishList"></div>
 		
+		<br>
 		
-<!-- 		<div class="row"> -->
-<!-- 			<div class="col-md-4"> -->
-<!-- 				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" > -->
-<!-- 				<br><span class="movieTitle">정직한 후보</span> -->
-<!-- 				<br><span class="releaseDate">2019.10.23 개봉</span> -->
-<!-- 				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-4"> -->
-<!-- 				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" > -->
-<!-- 				<br><span class="movieTitle">정직한 후보</span> -->
-<!-- 				<br><span class="releaseDate">2019.10.23 개봉</span> -->
-<!-- 				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-md-4"> -->
-<!-- 				<img src="https://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F08bddecf7d26414585157598e5e453031579576516419" width="185" height="260" > -->
-<!-- 				<br><span class="movieTitle">정직한 후보</span> -->
-<!-- 				<br><span class="releaseDate">2019.10.23 개봉</span> -->
-<!-- 				<br><span class="cancleWishBtn"><img src="/resources/image/heart.png" width="20" height="20"></span> <span class="likebg">999,999</span> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-		
-		
-	</div>
-	<!--container end-->
+		<div id="pagination"></div>
+
+	</div><!--container end-->
 </body>

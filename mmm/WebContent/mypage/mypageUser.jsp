@@ -55,6 +55,7 @@ body {
     height: 367px;
     border-radius: 10px;
     background-color: #f3f4f6;
+    margin-top: 50px;
 }
 
 .my-magabox-info .top {

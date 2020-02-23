@@ -20,19 +20,12 @@
 <title>로그인</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+
 body{
-font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
+
 }
-body > div.container{
-	border: 3px solid #D6CDB7;
-    margin-top: 10px;
-    background-color: beige;
-      }
-        
-p{
-      text-align: center;
-  }
-  
+ 
 h3.tit {
     color: #333;
     font-size: 1.2em;
@@ -68,20 +61,7 @@ h3.tit {
 .login-input-area .chk-util .left {
     float: left;
 }
-[type=checkbox], [type=radio] {
-    width: 16px;
-    height: 16px;
-    vertical-align: middle;
-}
-[type=checkbox], [type=radio] {
-    box-sizing: border-box;
-    padding: 0;
-}
-label {
-    display: inline-block;
-    vertical-align: middle;
-    cursor: pointer;
-}
+
 .button.purple.large {
     line-height: 46px;
 }
@@ -94,6 +74,16 @@ label {
     text-align: center;
     line-height: 1.1;
 }
+
+.col-wrap{
+
+	letter-spacing: 0;
+	line-height: 1.5;
+	font-size: 15px;
+	color: #444;
+	font-weight: 400; 
+
+}
 	
 </style>
 
@@ -101,9 +91,13 @@ label {
 <script type="text/javascript">
 $(function(){	
 	
-// 	function clickBtn(){
-// 		$("#btn").trigger("click");
-// 	}
+	
+	$("#loginModal").modal("show");
+	
+	//모달창 엑스
+	$("#btn").on("click",function(){
+		history.go(-1);
+	})
 	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
@@ -148,11 +142,6 @@ $(function(){
 	
 	
 	
-// 	//clickBtn();
-	
-// 	$("#btn").on('click',function(){	
-// 		self.location="/user/login";
-// 	})
 	
 	
 	//======================"로그인" Event 연결==========
@@ -166,21 +155,19 @@ $(function(){
 			
 			if(id == '' || id ==null||pw == '' || pw ==null){
 				alert('아이디와 비밀번호를 입력하세요.');
-				$('#loginBtn').attr("disabled", true);
+				// $('#loginBtn').attr("disabled", true);
 				location.reload();
 			/* }else if(pw == '' || pw ==null){
 				alert('비밀번호를 입력하세요.');
 				$('#loginBtn').attr("disabled", true); */
 			}else{
-				$('#loginBtn').attr("disabled", false);
+			//	$('#loginBtn').attr("disabled", false);
 				$('form').attr('method','POST').attr('action','/user/login').submit();	
 			}
 		 }
 	})
 			
 		
-	
-	//$('#loginBtn').button('toggle').addClass('fat')
 	
 	$('#loginBtn').on('click',function(){
 		console.log("클릭");
@@ -189,13 +176,14 @@ $(function(){
 		
 		if(id == '' || id ==null||pw == '' || pw ==null){
 			alert('아이디와 비밀번호를 입력하세요.');
-			$('#loginBtn').attr("disabled", true);
+			//$('#loginBtn').attr("disabled", true);
 			location.reload();
 		}else{
-			$('#loginBtn').attr("disabled", false);
+			//$('#loginBtn').attr("disabled", false);
 			$('form').attr('method','POST').attr('action','/user/login').submit();	
 		}
 	})	
+	
 	$('#signUpBtn').on('click',function(){
 		self.location = '/user/userAuthorization.jsp?type=addUser';
 		
@@ -274,17 +262,17 @@ $(function(){
 
 
 <!-- Button trigger modal -->
-<button type="button" id="btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-  Login
-</button>
+<!-- <button type="button" id="btn" class="btn btn-primary" data-toggle="modal" data-target="#loginModal"> -->
+<!--   Login -->
+<!-- </button> -->
 
 <!-- Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
-        <h3 class="tit" id="exampleModalLabel">로그인</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h3 class="tit" id="exampleModalLabel" style="font-size: 1.2em;">로그인</h3>
+        <button type="button" class="close" data-dismiss="modal" id="btn" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -306,7 +294,7 @@ $(function(){
 						</div>
 						<!--// chk-util -->
 			
-						<button id="loginBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; cursor: default; background-color:#fee50e;" disabled="disabled">로그인<!--로그인--></button>
+						<button id="loginBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; cursor: default; background-color:#fee50e;">로그인<!--로그인--></button>
 			
 						<div class="link" style="padding-top: 20px; padding-bottom: 30px; text-align: center;">
 							<a href="/user/userAuthorization?type=findId" title="ID 찾기 선택" style=" margin-left:10px; color: #333; ">ID 찾기<!--ID/PW 찾기--></a>

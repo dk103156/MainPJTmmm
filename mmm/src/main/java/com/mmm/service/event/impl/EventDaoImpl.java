@@ -148,10 +148,6 @@ public class EventDaoImpl implements EventDao {
 		sqlSession.insert("EventMapper.addPartQuiz", participation);
 	}
 
-	@Override
-	public void addAttendance(Point point) throws Exception {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public List<Point> getAttendanceList(String userNo) throws Exception {
@@ -203,23 +199,36 @@ public class EventDaoImpl implements EventDao {
 	}
 
 	@Override
-	public Map<String, Object> getPartList(int userNo) throws Exception {
+	public Map<String, Object> getPartList(Search search) throws Exception {
+		System.out.println("dao에서 search를 찍어볼게.."+ search);
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Participation> list = sqlSession.selectList("EventMapper.getPartList", userNo);
-		System.out.println("<<<<<<<<"+userNo+"님이 참여한 이벤트 목록>>>>>>>>>");
+		
+		List<Participation> list = sqlSession.selectList("EventMapper.getPartList", search);
+		int totalCount = sqlSession.selectOne("EventMapper.getTotalPartList", search);
+		
 		for(Participation p: list) {
-			if(p.getQuizNo()!=0) {
-				System.out.println("이것은 퀴즈==퀴즈번호==>"+p.getQuizNo());
-				Quiz quiz = sqlSession.selectOne("EventMapper.getQuizAd",p.getQuizNo());
-				System.out.println("이 문제에 참여했어==>" + quiz.getQuestion());
-			}else if(p.getPreviewNo()!=0) {
-				System.out.println("이것은 응모이벤트==시사회번호==>"+p.getPreviewNo());
-				Preview prev = sqlSession.selectOne("EventMapper.getPreviewAd",p.getPreviewNo());
-				System.out.println("이 시사회에 참여했어==>" + prev.getPreviewName());
-
-			}
+			System.out.println(p);
 		}
+		
+		System.out.println(totalCount);
+		
+//		List<Participation> list = sqlSession.selectList("EventMapper.getPartList", userNo);
+//		System.out.println("<<<<<<<<"+userNo+"님이 참여한 이벤트 목록>>>>>>>>>");
+//		for(Participation p: list) {
+//			if(p.getQuizNo()!=0) {
+//				System.out.println("이것은 퀴즈==퀴즈번호==>"+p.getQuizNo());
+//				Quiz quiz = sqlSession.selectOne("EventMapper.getQuizAd",p.getQuizNo());
+//				System.out.println("이 문제에 참여했어==>" + quiz.getQuestion());
+//			}else if(p.getPreviewNo()!=0) {
+//				System.out.println("이것은 응모이벤트==시사회번호==>"+p.getPreviewNo());
+//				Preview prev = sqlSession.selectOne("EventMapper.getPreviewAd",p.getPreviewNo());
+//				System.out.println("이 시사회에 참여했어==>" + prev.getPreviewName());
+//
+//			}
+//		}
 		map.put("list", list);
+		map.put("totalCount", totalCount);
+		
 		return map;
 	}
 

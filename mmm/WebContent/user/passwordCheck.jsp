@@ -30,9 +30,7 @@
     margin: 0;
     padding: 40px 0 0 0;
 }
-* {
-    box-sizing: border-box;
-}
+	
 user agent stylesheet
 div {
     display: block;
@@ -106,7 +104,7 @@ h2 {
     color: #444;
     border: 1px solid #d8d9db;
     vertical-align: middle;
-    font-family:'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 button, input {
     overflow: visible;
@@ -124,7 +122,7 @@ button, input, optgroup, select, textarea {
 }
 
 a.button:active, a.button:focus, a.button:hover, a.button:visited {
-    color: #503396;
+    color: #fee50e;
 }
 .btn-group .button {
     margin: 0 3px;
@@ -153,12 +151,12 @@ a:link {
     padding: 0 15px;
     text-align: center;
     line-height: 34px;
-    color: #503396;
+    color: #fee50e;
     font-weight: 400;
     border-radius: 4px;
 	font-family:'Noto Sans KR', sans-serif;
     text-decoration: none;
-    border: 1px solid #503396;
+    border: 1px solid #fee50e;
     vertical-align: middle;
     background-color: #fff;
     cursor: pointer;
@@ -168,13 +166,13 @@ a {
 }
 
 a.button.purple:active, a.button.purple:focus, a.button.purple:hover, a.button.purple:visited {
-    color: #fff;
+    color: #333;
 }
 .button.purple.large {
     line-height: 46px;
 }
 a.button:active, a.button:focus, a.button:hover, a.button:visited {
-    color: #503396;
+    color: #fee50e;
 }
 .btn-group .button {
     margin: 0 3px;
@@ -183,7 +181,7 @@ a.button:active, a.button:focus, a.button:hover, a.button:visited {
     color: #fff;
     line-height: 36px;
     border: 0;
-    background: #503396;
+    background: #fee50e;
 }
 .button.large {
     height: 46px;
@@ -256,6 +254,7 @@ $(function(){
 </head>
 
 <body>
+
 
 <div id="contents">
 		<h2 class="tit">회원정보</h2>

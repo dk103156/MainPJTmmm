@@ -237,10 +237,10 @@ colgroup {
     margin: 0 3px;
 }
 .button.purple {
-    color: #fff;
+    color: #333;
     line-height: 36px;
     border: 0;
-    background: #503396;
+    background: #fee50e;
 }
 .button.large {
     height: 46px;
@@ -254,12 +254,12 @@ colgroup {
     padding: 0 15px;
     text-align: center;
     line-height: 34px;
-    color: #503396;
+    color: #fee50e;
     font-weight: 400;
     border-radius: 4px;
     font-family:'Noto Sans KR', sans-serif;
     text-decoration: none;
-    border: 1px solid #503396;
+    border: 1px solid #fee50e;
     vertical-align: middle;
     background-color: #fff;
     cursor: pointer;
@@ -293,10 +293,12 @@ $(function(){
 	$("#updateBtn").on("click",function(){
 		result= validate();
 		if(!result){
+			alert("리턴")
 			return;
-		}
+		}else{
+		alert("비밀번호가 수정되었습니다.");
 		$("form").attr("method","post").attr("action","/user/updatePw").submit();
-		alert("비밀번호가 수정되었습니다.")
+		}
 	})
 	
 	
@@ -312,11 +314,7 @@ $(function(){
 		
 		if(!check(re3,pw,"비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.")) {
 			$("#pwnew").focus();
-			$("#updateBtn").attr("disabled", true);
-		    return false;
-		}
-		
-		if(!check(re3,pw,"비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.")) {
+			alert("바꿀비번이 유효하지않음");
 		    return false;
 		}
 		
@@ -405,14 +403,14 @@ $(function(){
 						<td>
 							<input type="password" id="pwnew" name="password" class="input-text w150px" />
 							<input type="hidden" name="userNo" value="${user.userNo }" />
-							<span class="ml10 font-size-14">※ 비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.</span>
+							<div class="ml10 font-size-14" style="font-size:12px;">※ 비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.</div>
 						</td>
 					</tr>
 					<tr>
 						<th scope="row"><label for="repwnew">새 비밀번호 재입력</label></th>
 						<td>
 							<input type="password" id="repwnew" class="input-text w150px" />
-							<span class="ml10 font-size-14">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</span>
+							<div class="ml10 font-size-14" style="font-size:12px;">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -426,8 +424,8 @@ $(function(){
 		</ul>
 	
 		<div class="pt40" style="text-align: center; margin-bottom:20px;">
-			<button class="button large" id="cancelBtn">취소</button>
-			<button class="button purple large" data-key="login_0b94283bacf2401d897526e61c0cd87f" id="updateBtn">수정</button>
+			<button class="button large" type="button" id="cancelBtn">취소</button>
+			<button class="button purple large" type="button" id="updateBtn">수정</button>
 		</div>
 	</div>
 </form>

@@ -27,32 +27,28 @@
   
 	
 <style>
-    body {
-        margin-top: 10px;
-    }
-    hr{
-	    border: 0;
-       background-color:#fee50e;
+   #body {
+      margin-top: 10px;
+       font-family: 'Noto Sans KR', sans-serif;
      }
 	#productList{
 	margin-top: 10px;
 	float:left;
-	margin: 10px 38px;
+	margin: 10px 40px;
+	padding-top: 15px;
+    padding-bottom: 15px;
 	}
 	#img{
 	width: 250px;
 	height: 250px;
 	}
 	#prodName{
-	margin: 0px 35px;
+	margin: 20px;
 	}
 	#prodPrice{
-	margin: 0px 30px;
+	margin: 20px;
 	}
 </style>
-  
-
-	<!-- <link rel="stylesheet" href="/css/admin.css" type="text/css"> -->
 
 
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -118,7 +114,7 @@
 		
 	</head>
 
-<body>
+<body id="body">
 	
 		<jsp:include page="/product/prodToolBar.jsp" />
 	
@@ -161,10 +157,10 @@
  		<!-- table 위쪽 검색 Start /////////////////////////////////////-->	
  			
  			
- 		<hr>
+ 		<hr style="background-color : #fee50e;">
 		<br/>
 		
-	<div class="productListContent row">
+	<div class="productListContent row" style="  margin-left: 50px;">
 		  <c:set var="i" value="0" />
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i }" />

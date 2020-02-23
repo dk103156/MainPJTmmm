@@ -33,7 +33,7 @@ public interface EventDao {
 	
 	public Map<String, Object> getApplyList(int previewNo) throws Exception;
 	
-	public Map<String, Object> getPartList(int userNo) throws Exception;
+	public Map<String, Object> getPartList(Search search) throws Exception;
 	
 	public Participation getParticiation(int partNo) throws Exception;
 	
@@ -47,7 +47,6 @@ public interface EventDao {
 	
 	public void addPartQuiz(Participation participation) throws Exception;
 	
-	public void addAttendance(Point point) throws Exception; //출석체크하기
 	
 	public List<Point> getAttendanceList(String userNo) throws Exception; //출석체크리스트
 	

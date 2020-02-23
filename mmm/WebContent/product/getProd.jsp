@@ -32,9 +32,9 @@
     margin-top: 10px;
 	float:left;
 	}
-    body {
-       		background-color: #f9fad4;
-            margin-top: 10px;
+    #body {
+    margin-top: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
      }
      hr{
         background-color:black;
@@ -44,7 +44,7 @@
 		
 </head>
 
-	<body>
+	<body id="body">
 	<jsp:include page="/product/prodToolBar.jsp" />
 	<br>
 	
@@ -66,19 +66,15 @@
 		 			</c:forEach>	
 			</div>
 			<div id='productInfo' class="col-sm-7 px-0">
-				<div class="row mx-0">
-					<div class="col-12">
-						<h1 class="pl-3" style="margin: 0px;">${product.prodPrice}원</h1>
-					</div>
-				</div>
+				
 				<div class="row mx-0">
 					<div class="col-12">
 					<br>
 					</div>
 				</div>
 				<div class="row mx-0 mb-2">
-					<div class="col-3"><strong class="pl-3">상품구성 </strong></div>
-					<div class="col-9"><span>${product.prodDetail}</span></div>
+					<div class="col-3"><strong class="pl-3">상품가격 </strong></div>
+					<div class="col-9"><span>${product.prodPrice}원</span></div>
 				</div>
 				<div class="row mx-0 mb-2">
 					<div class="col-3"><strong class="pl-3">프랜차이즈 </strong></div>
@@ -103,17 +99,17 @@
 				<div class="col-sm-6"></div>
 					<div class="col-sm-6">
 					<br>
-						<h5 style="text-align: center;"> 총 구매 금액 </h5>
+						<h5 style="text-align: left: ;"><strong> 총 구매 금액 </strong></h5>
 					</div>
-				<div class="col-sm-8 row">
+				<div class="col-sm-6">
 						<div class="col-sm-3">
 								<label class="control-label">
-									<img src="/resources/image/buy.jpg" style="width: 120px; height:120px; margin: 0px 0px;" id="addPurchase"/>
+									<img src="/resources/image/addPurchase.PNG" style="width: 200px; height:50px; margin-right: 20px;" id="addPurchase"/>
 								</label>
 						</div>						
 						<div class="col-sm-3">
 							<label class=" col-sm-3 control-label">
-	 							<img src="/resources/image/addCart.jpg" style="width: 120px; height:120px; margin: 0px 20px;" id="addCart"/>
+	 							<img src="/resources/image/addCart.PNG" style="width: 200px; height:50px; margin-left:-15px;" id="addCart"/>
 							</label>			
 						</div>	
 				</div>
@@ -198,7 +194,7 @@
 		
 		//장바구니 추가 클릭
 		$("#addCart").on("click",function(){
-			
+			alert("장바구니 추가 완료했습니다")
 			var quantity= parseInt( $("#quantity").val() );
 			var timestamp= new Date().getTime();
 			var userNo = '${user.userNo}'
@@ -221,7 +217,7 @@
 			);//end of then 
 		});//end of click
 		
-	});//end of function  
+	}); //end of function  
 	
 	
 	function ajaxPromise(urls,datas){

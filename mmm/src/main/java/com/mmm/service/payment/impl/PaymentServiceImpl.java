@@ -315,6 +315,14 @@ public class PaymentServiceImpl implements PaymentService {
 			}//end inner for
 		}
 	}//end of fncAddPurchaseAndInven
+
+	@Override
+	public List<Point> checkList(int userNo) throws Exception {
+
+		return paymentDao.checkList(userNo);
+		
+	}
+
 	
 	
 	

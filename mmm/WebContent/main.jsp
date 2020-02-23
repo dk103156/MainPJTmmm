@@ -30,37 +30,9 @@
  
  body {
  	height : 3000px;
- 	font-family: 'Noto Sans KR', sans-serif;
+ 	font-family: 'Noto Sans KR', sans-serif !important;
  
  }
- 
- 
- aside {
- 	border:3px solid #4D5155; 
- 	border-radius: 30px;
- 	height: 450px; 
- 	width:100px; 
- 	right:10px; 
- 	position: fixed;
- 	bottom : 30%;
- 	background-color : #333;
-	transition-property: right;
-	transition-duration: 1s; 	
- }
- 
- aside div div.row {
- 	position : relative;
- 	top : 18px;
- }
- 
- div.aside {
- 	border-radius: 30px;
-	
- }
- 
- span.aside {
- 	color : #fff;
- } 
  
  
  .carousel-inner > .item > img {
@@ -102,7 +74,7 @@
  
 /* 슬라이더 */
  	
-    *, *:before, *:after { box-sizing: inherit; }
+    
     .clearfix:after { content: ''; display: block; clear: both; float: none; }
     .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
     .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
@@ -123,39 +95,20 @@
 	.slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	.slide_btn_box > .slide_btn_prev { left: -100px; }
 	.slide_btn_box > .slide_btn_next { right: -100px; }
-	.slide_pagination { position: relative; left: 50%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	.slide_pagination { position: relative; left: 75%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
 	.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
- 
-/* 장바구니 */
-	#shoppingCart{
-		width : 50px;
-		position:fixed;
-		right:10px;
-		bottom:0px;
-		z-index:1000;
-		cursor : pointer;
-	}
-	
-	div.shoppingCart{
-		position:fixed;
-		right:-200px;
-		bottom:180px;
-		z-index:1000;
-		transition-property: right;
-		transition-duration: 1s;
-		width : 200px;
-		height : 550px;
-		border : 4px dashed #bcbcbc;
-		overflow : auto;
-	}
  
 
 
 </style>
 </head>
 <body>
+
+	<jsp:include page="/layout/header.jsp"></jsp:include>
+
+	
 	<div class="container-fluid px-0 mb-5">
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		  <ol class="carousel-indicators">
@@ -359,37 +312,10 @@
 		</div> <!-- end of pageContent -->
 	</div> <!-- end of container-fluid -->	
 	
-<aside>
-	<div class="container-fluid px-0">
-		<div class="row px-0 mx-0">
-			<div class="aside col-12 px-0 mb-3 text-center">
-				<img class="aside" src="../resources/image/mainPage/aside/myPage.png" width=80 >
-				<span class="aside">마이 페이지</span>
-			</div>
-			<div class="aside col-12 px-0 mb-3 text-center">
-				<img class="aside"  src="../resources/image/mainPage/aside/addTicketing.png" width=80 >
-				<span class="aside">예매하기</span>
-			</div>
-			<div class="aside col-12 px-0 mb-3 text-center">
-				<img class="aside"  src="../resources/image/mainPage/aside/getTicketingList.png" width=80 >
-				<span class="aside">예매내역</span>
-			</div>		
-			<div class="aside col-12 px-0 mb-3 text-center">
-				<img class="aside"  src="../resources/image/mainPage/aside/product.png" width=80 >
-				<span class="aside">상품권구매</span>
-			</div>
-		</div>
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
-	</div>
+<jsp:include page="/layout/sideBar.jsp"></jsp:include>
 
-</aside>
-
-<div class="shoppingCart" >
-
-</div>
-
-
-<img id="shoppingCart" src="../resources/image/productIcon/shoppingcart_80945.png">
 
 <!-- 슬라이더 -->
   <script>
@@ -573,64 +499,6 @@
   
   </script>
   
-  <!-- 장바구니 -->
-  <script>
- $(function(){ 
-	myCartList();
-	//페이지네이션으로 1페이지 설정했기때문에 8개까지만 나옵니다
-	function myCartList(){
-	 $.ajax({
-		  type: "POST",
-		  url: "/product/json/getCartList",
-		  data: JSON.stringify({ cartUserNo : '${user.userNo}'}),
-		  dataType : "json",
-	      headers: { 
-	        "Accept" : "application/json",
-	        "Content-Type": "application/json"
-	      },
-	 }).done(
-		data => {
-			
-			$("div.shoppingCart").empty()
-			data.list.forEach( (data,index) => {
-				$.getJSON("/product/json/getProduct/"+data.cartProdNo)
-				.done( x =>{
-						var Image =x.product.prodImage
-						
-						var Element ="<div class='product'><span><img class='prodImage' src='../resources/image/"+Image+"' width=155><img class='removeCart'src='../resources/image/productIcon/close-button.jpg' width=20><span>";
-							Element+="<input class='cartNo' type='hidden' value='"+data.cartNo+"'</div>"
-						$("div.shoppingCart").append(Element);
-						
-						$("div.product img.prodImage").last().on("click",function(){
-							
-							self.location ="/product/getProduct?prodNo="+x.product.prodNo
-						});
-						var cartNo = $.trim($("input.cartNo").last().val());
-						$("img.removeCart").last().on("click",function(){
-							
-							$.get("/product/json/removeCart/"+cartNo)
-							.done( () =>{
-								 console.log("성공")
-								 myCartList();
-							})//end of $.get
-						});//end of img.removeCart click
-				})//end of $.getJSON
-			}) //end of forEach
-		}) //end of ajax Done
-	}//end of function
-});// end of function
 
-	$("#shoppingCart").on("click", function(){
-		if($("div.shoppingCart").css("right")=="-200px"){
-			$("aside").css("right","-200px");
-			$("div.shoppingCart").css("right","0px");
-			$("#shoppingCart").css("opacity","0.5")
-		}else{
-			$("aside").css("right","10px");
-			$("div.shoppingCart").css("right","-200px");
-			$("#shoppingCart").css("opacity","1");
-		}
-	});
-  </script>
 </body>
 </html>
