@@ -1,9 +1,23 @@
+.btn-yellow-cs {
+	background-color: #fee50e!important;
+    color: #212529;
+    border-color: #fcfaf5;
+}
+
+.btn-yellow-cs:hover {
+    color: #f8f9fa;
+    background-color: #e0a800;
+    border-color: #040404;
+}
+
 .bg-yellow-cs {
     background-color: #fee50e!important;
+    color: #222;
 }
 
 .bg-dark-cs {
     background-color: #282828!important;
+    color: #f6fff4;
 }
 
 .font-bold-cs{
@@ -18,4 +32,8 @@ body, th, td, input, select, textarea, button {
     font-family: 'Noto Sans KR', sans-serif;
     color: #222;
     letter-spacing: -0.05em;
+}
+
+.btn-outline-light:hover {
+    background-color: #ffe007;
 }

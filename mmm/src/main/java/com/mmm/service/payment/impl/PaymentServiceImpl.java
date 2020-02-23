@@ -133,7 +133,25 @@ public class PaymentServiceImpl implements PaymentService {
 			paymentDao.addPoint((Point)inputMap.get("minusPoint"));
 		}
 		
-		
+//		Inventory Status Updatng...from 0 to 1
+		if (payment.getVouchers() != null && payment.getVouchers().length()>0) {
+			if (payment.getUsingVoucherFirst() != null) {
+				Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherFirst()));
+				inventory.setInventoryStatus("1");
+				inventoryDao.updateInventory(inventory);
+			}
+			if (payment.getUsingVoucherSecond() != null) {
+				Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherSecond()));
+				inventory.setInventoryStatus("1");
+				inventoryDao.updateInventory(inventory);
+			}
+			if (payment.getUsingVoucherThird() != null) {
+				Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherThird()));
+				inventory.setInventoryStatus("1");
+				inventoryDao.updateInventory(inventory);
+			}
+			
+		}
 		
 //		String impUid = payment.getImpUid();
 		
@@ -217,13 +235,28 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	}
 	
-	
 	@Override
 	public int getTotalPoint(int userNo) throws Exception {
 		return paymentDao.getTotalPoint(userNo);
 	}
 	
-//	impUid로 결제 정보를 가져오는 메소드
+	
+	@Override
+	public int getAccPoint(int userNo) throws Exception {
+		return paymentDao.getAccPoint(userNo);
+	}
+
+	@Override
+	public Payment getPaymentbyTicketingNo(int ticketingNo) throws Exception {
+		return paymentDao.getPaymentbyTicketingNo(ticketingNo);
+	}
+
+	@Override
+	public Payment getPaymentbyPurchaseNo(int purchaseNo) throws Exception {
+		return paymentDao.getPaymentbyPurchaseNo(purchaseNo);
+	}
+
+	//	impUid로 결제 정보를 가져오는 메소드
 	public void getPayinfo(String impUid)throws Exception{
 		this.getToken();
 		
@@ -244,6 +277,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 
+//	payment 할 때 , purchase와 inventory에 같이 들어가게 하는..
 	public void fncAddPurchaseAndInven(Purchase purchase) throws Exception{
 		
 		//구매 테이블에 들어감
@@ -278,9 +312,9 @@ public class PaymentServiceImpl implements PaymentService {
 				inventoryDao.addInventory(inventory);
 				
 				System.out.println("------------------ inven" + j +"   --   " + inventory );
-			}
+			}//end inner for
 		}
-	}
+	}//end of fncAddPurchaseAndInven
 
 	@Override
 	public List<Point> checkList(int userNo) throws Exception {
@@ -288,5 +322,8 @@ public class PaymentServiceImpl implements PaymentService {
 		return paymentDao.checkList(userNo);
 		
 	}
+
+	
+	
 	
 }

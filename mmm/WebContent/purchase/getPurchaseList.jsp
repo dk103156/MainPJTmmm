@@ -32,8 +32,14 @@
 img.cancelButton {
 	cursor : pointer;
 }
-
-
+#modalhead{
+	background-color: #fee50e;
+	}
+	#btn{
+	background-color: #fee50e;
+	color: black;
+	outline-style: none;
+	}
 </style>	
 <body>
 
@@ -175,7 +181,7 @@ img.cancelButton {
 	<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content">
-	      <div class="modal-header">
+	      <div class="modal-header" id="modalhead">
 	        <h5 class="modal-title" id="exampleModalCenterTitle">구매 정보</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
@@ -188,8 +194,8 @@ img.cancelButton {
 	        </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary">네</button>
+	        <button type="button" id="btn"  class="btn" data-dismiss="modal">닫기</button>
+<!-- 	      <button type="button" class="btn btn-primary">네</button>  -->	  
 	      </div>
 	    </div>
 	  </div>
@@ -270,8 +276,8 @@ purchaseQuantityList.forEach( (x,y) => {
 									 var Element = 	"<div class='prodName col-12'><span>"+prodName+"</span></div>";
 								 	 Element += "<div class='prodPinNo col-12'><span style='color: red; opacity:0.5;'>"+Inventory.inventoryProdPinNo+"</span></div>"						 
 								 }else{
-									 var Element = 	"<div class='prodName col-12'><span>"+prodName+"</span></div>";
-								 	 Element += "<div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div>"						 
+									 var Element = 	"<strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
+								 	 Element += "<strong><div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div></strong>"						 
 								 }
 								 
 							 	$("div.modal-body div.row").append(Element);

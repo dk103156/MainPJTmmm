@@ -8,49 +8,48 @@
 <html lang="ko">
 
 <head>
-	<meta charset="UTF-8">
+	<!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  <!-- Bootstrap Extended Color -->
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
+
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
 	
-	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!--  ///////////////////////// Bootstrap, jQuery CDN ////////////////////////// -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-	
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-	
-	<!--  ///////////////////////// CSS ////////////////////////// 
-	<style>
-	img{
-	border: 3px solid #ece1fc;
-    margin-top: 10px;
+<style>
+    body {
+        margin-top: 10px;
+    }
+    hr{
+	    border: 0;
+       background-color:#fee50e;
+     }
+	#productList{
+	margin-top: 10px;
 	float:left;
+	margin: 10px 38px;
 	}
-	</style>	
-	-->
-	<style>
-       body {
-       		background-color: #f9fad4;
-            margin-top: 10px;
-        }
-     </style>  
-     
-   	 <style>
-      hr{
-        background-color:black;
-        height:2px;
-      }
-  	 </style>
+	#img{
+	width: 250px;
+	height: 250px;
+	}
+	#prodName{
+	margin: 0px 35px;
+	}
+	#prodPrice{
+	margin: 0px 30px;
+	}
+</style>
   
 
 	<!-- <link rel="stylesheet" href="/css/admin.css" type="text/css"> -->
@@ -59,22 +58,15 @@
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-	//============= "등록"  Event 연결 =============
-	 $(function() {
+	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$( "button.btn.btn-info" ).on("click" , function() {
-			self.location = "/product/mainListProduct";
+		$( ".img-circle.img-responsive" ).on("click" , function() {
+			var prodNo = $(this).next().val();
+			console.log(prodNo);
+			self.location = "/product/getProduct?prodNo="+prodNo;
 		});
 	});	
-	 
-	 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$( ".img.img-responsive" ).on("click" , function() {
-				var prodNo = $(this).next().val();
-				console.log(prodNo);
-				self.location = "/product/getProduct?prodNo="+prodNo;
-			});
-		});	
+
 	
 	 
 	//=============    검색 / page 두가지 경우 모두  Event  처리 =============	
@@ -134,28 +126,15 @@
  		<br/><br/><br/>
  		 	
  			
- 		<!-- ToolBar Start /////////////////////////////////////-->
-	<!--
-	<div class="navbar  navbar-default">
-        <div class="container">
-        	<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-   		</div>
-   	</div>
-   	-->
-	<!-- ToolBar End /////////////////////////////////////-->
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
  	
  	
  	<div class="container" id = "container">
  		<br/><br/><br/>
- 		 	 <div class="row">
+ 		 	 <div class="row mx-0">
 	    
-		    <div class="col-md-6 text-left">
-		    </div>
-		
-			
-			<div class="col-md-6 text-right">
+			<div class="col-6">
 			    <form class="form-inline" name="detailForm">
 			    
 				  <div class="form-group">
@@ -182,25 +161,27 @@
  		<!-- table 위쪽 검색 Start /////////////////////////////////////-->	
  			
  			
- 		<hr/>
+ 		<hr>
 		<br/>
 		
-		
+	<div class="productListContent row">
 		  <c:set var="i" value="0" />
 		  <c:forEach var="product" items="${list}">
 			<c:set var="i" value="${ i }" />
-			<div class="col-sm-6 col-md-4">
-      				<div class="thumb-wrapper">
-      					<div class="img-box">
- 						<img src="/resources/image/${product.prodImage}" class="img img-responsive" width="400" height="400">
+      				<div class="thumb-wrapper" id="productList">
+      					<div class="img-box text-center">
+ 						<img src="/resources/image/${product.prodImage}" id="img"class="img-circle img-responsive">
 				       	<input type="hidden" value = "${product.prodNo}">
 				       </div>
-				        	<h3>${product.prodName}</h3>
-				          	<h4>${product.prodDetail}</h4>
-				        <hr/>
+				       	<div class="prodName col-12" id="prodName"><h4><span>${product.prodName}</span></h4>
+				       	<div class="prodPrice col-10" id="prodPrice"><h4>${product.prodPrice}원</h4>
+				       	</div>	
       				</div>
-    		</div>
+      				</div>
+    		
+    	
           </c:forEach>
+        </div>	 
 	</div>	
 </body>
 </html>

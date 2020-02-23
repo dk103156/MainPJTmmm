@@ -265,14 +265,9 @@ public class UserController {
 	public String login(HttpSession session) throws Exception{
 		
 		System.out.println("/user/login : GET");
-
-		User sessionUser = (User)session.getAttribute("user");
-		if(sessionUser != null) {
-			return"redirect:/index.jsp?status=login";
-		}else {
 		
 		return "redirect:/user/login.jsp";
-		}
+		
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.POST)
@@ -294,7 +289,7 @@ public class UserController {
 			//회원정보가 없거나  비회원일 경우
 			  if(dbUser == null || dbUser.getRole().trim().equals("unUser")) {
 				  
-				  return "redirect:/user/login.jsp?status=failed"; 
+				  return "redirect:/main.jsp?status=failed"; 
 			  }
 			  
 			 //탈퇴한 회원일 경우
@@ -309,14 +304,14 @@ public class UserController {
 				session.setAttribute("user", dbUser);	
 				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 			}else {//로그인 실패시 
-				return "redirect:/user/login.jsp?status=failed";
+				return "redirect:/main.jsp?status=failed";
 			}
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/index.jsp";
+		return "redirect:/main.jsp";
 	}
 	
 	@RequestMapping(value = "unUserLogin" , method=RequestMethod.GET)
@@ -367,7 +362,7 @@ public class UserController {
 		
 		session.invalidate();
 		
-		return "redirect:/index.jsp";
+		return "redirect:/main.jsp";
 	}
 	
 	@RequestMapping(value = "findPw" , method=RequestMethod.POST)
@@ -495,6 +490,8 @@ public class UserController {
 		
 			if(sessionUser.getUserNo() == user.getUserNo()) {
 				userService.updateUser(user);
+				
+				session.setAttribute("user", userService.getUser(user.getUserNo()));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

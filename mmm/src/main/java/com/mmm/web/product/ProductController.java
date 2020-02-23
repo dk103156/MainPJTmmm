@@ -86,11 +86,12 @@ public class ProductController {
 		
 		Product product = new Product();
 		
-		
-		product.setProdName((String)map.get("prodName"));;
-		product.setProdDetail((String)map.get("prodDetail"));;
+		product.setProdName((String)map.get("prodName"));
+		product.setProdDetail((String)map.get("prodDetail"));
 		product.setProdPrice(Integer.parseInt((String) map.get("prodPrice")));
+		System.out.println("2");
 		product.setFranType(Integer.parseInt((String) map.get("franType")));
+		System.out.println("2");
 		product.setProdType(Integer.parseInt((String) map.get("prodType")));
 		System.out.println(product);
 		
@@ -125,9 +126,8 @@ public class ProductController {
 		fileArr = product.getProdImage().split(",");
 		model.addAttribute("fileArr", fileArr);
 		
-		System.out.println("addProdConAd.jsp 로 갑니당!");
 		
-		return "forward:/product/addProdConAd.jsp";
+		return "redirect:/product/getVoucherList";
 		
 		
 	}
@@ -179,10 +179,7 @@ public class ProductController {
 		productService.updateProduct(product);
 		
 		
-		System.out.println("updateProdConAd.jsp로 갑니당!");
-		
-		
-		return "forward:/product/updateProdConAd.jsp";
+		return "redirect:/product/getVoucherList";
 	}
 	
 	

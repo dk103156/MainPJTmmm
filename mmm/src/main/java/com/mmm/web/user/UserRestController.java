@@ -50,6 +50,8 @@ import com.mmm.common.CryptoUtil;
 import com.mmm.common.MailUtils;
 import com.mmm.common.Search;
 import com.mmm.service.domain.User;
+import com.mmm.service.movie.MovieService;
+import com.mmm.service.movie.impl.MovieServiceImpl;
 import com.mmm.service.user.UserService;
 
 @RestController
@@ -63,7 +65,10 @@ public class UserRestController {
 	//setter Method 구현하지 않음
 	
 	@Autowired
-	private JavaMailSender mailSender;	
+	private JavaMailSender mailSender;
+	
+	@Autowired
+	private MovieService movieService;
 
 	///Constructor
 	public UserRestController() {
@@ -274,7 +279,7 @@ public class UserRestController {
       CredentialsProvider credsProvider = new BasicCredentialsProvider();
       credsProvider.setCredentials(
     		new AuthScope(hostname, 443, AuthScope.ANY_REALM),
-            new UsernamePasswordCredentials("mmmm2", "d7c49cd24c7511ea943f0cc47a1fcfae")
+            new UsernamePasswordCredentials("mmmm3", "40fd6a124c7611ea80f10cc47a1fcfae")
         );
       
         // Create AuthCache instance
@@ -323,7 +328,7 @@ public class UserRestController {
 	        System.out.println("난수!!!"+numStr);
             
             Map<String, Object>smsMap = new HashMap<String,Object>();
-            smsMap.put("sender", "01095518074");
+            smsMap.put("sender", "01033294725");
             smsMap.put("content","MovMovMov 본인확인 인증번호["+numStr+"]입니다. 정확히 입력해주세요.");
             
             List<String>receivers = new ArrayList<String>();
@@ -672,6 +677,43 @@ public class UserRestController {
 		return map;
 	}
 	
+	
+	@RequestMapping(value = "json/getWishMovieList", method=RequestMethod.POST)
+	public HashMap<String, Object> getWishMovieList(@RequestBody Search search, HttpSession session){
+		
+		System.out.println("=== getWishMovieList start ===");
+		
+		HashMap<String, Object> result = null;
+		
+		try {
+			
+			if(session.getAttribute("user") != null) {
+
+				User user = (User) session.getAttribute("user");
+				
+				System.out.println("=== getWishMovieList userNo : "+user.getUserNo());
+				System.out.println("=== getWishMovieList page : "+search.getStartRowNum()+"~"+search.getEndRowNum());
+				
+				HashMap<String, Object> inputData = new HashMap<String, Object>();
+				inputData.put("userNo", user.getUserNo());
+				inputData.put("search", search);
+				
+				result = movieService.getWishMovieList(inputData);
+				
+				System.out.println("=== getWishMovieList Result Data : "+result);
+				
+				return result;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("=== getWishMovieList error : "+e.getMessage());
+		}
+		
+		System.out.println("=== getWishMovieList end ===");
+		
+		return result;
+		
+	}
 	
 	
 

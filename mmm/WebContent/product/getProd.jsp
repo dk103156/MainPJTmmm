@@ -26,47 +26,39 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
+<style>
 	img{
 	border: 3px solid #ece1fc;
     margin-top: 10px;
 	float:left;
 	}
-	</style>	
-	
-	<style>
-       body {
+    body {
        		background-color: #f9fad4;
             margin-top: 10px;
-        }
-     </style>  
-   	 <style>
-      hr{
+     }
+     hr{
         background-color:black;
         height:3px;
       }
-  	 </style>
-   
-   
-
-
-
+</style>
 		
-	</head>
-	<body>
+</head>
 
+	<body>
+	<jsp:include page="/product/prodToolBar.jsp" />
+	<br>
 	
 	
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
+ 	<br>
  	<div class="container">
  		<div class="row">
-	 		<h1 class="bg-light text-dark" >${product.prodName}</h1>
+	 		<h1 style="margin: 10px;">${product.prodName}</h1>
  		</div>
  		
- 		<hr>
-
-
+ 		<hr style="background-color: black; height:2px;">
+ 		
  		<div class="row">
  			<div id='productImage' class="col-sm-5">
 					<c:forEach var = "image" items ="${fileArr}">
@@ -76,12 +68,12 @@
 			<div id='productInfo' class="col-sm-7 px-0">
 				<div class="row mx-0">
 					<div class="col-12">
-						<h1 class="pl-3">${product.prodPrice}원</h1>
+						<h1 class="pl-3" style="margin: 0px;">${product.prodPrice}원</h1>
 					</div>
 				</div>
 				<div class="row mx-0">
 					<div class="col-12">
-						<hr>
+					<br>
 					</div>
 				</div>
 				<div class="row mx-0 mb-2">
@@ -103,43 +95,48 @@
 					<c:if test= "${product.prodType eq  1}">스토어이용권</c:if>
 					<c:if test= "${product.prodType eq  2}">스낵</c:if> 
 					</span></div>
+					<br><br>
 				</div>
-				<div class="row mx-0 mb-2">
-					<div class="col-sm-3">
-						<label class="control-label">
-							<img src="/resources/image/buy.jpg" id="addPurchase"/>
-						</label>
-					</div>						
-					<div class="col-sm-3">
-						<label class=" col-sm-3 control-label">
- 							<img src="/resources/image/addCart.jpg" id="addCart"/>
-						</label>			
-					</div>	
-					<div class="col-sm-6"></div>
-				</div><!-- end of row -->
-				<div class="row mx-0 mb-2">
-					<div class="col-12">
-						<h4> 총 구매 금액  </h2>
-					</div>
 				
+				
+				<div class="row mx-0 mb-6">
+				<div class="col-sm-6"></div>
+					<div class="col-sm-6">
+					<br>
+						<h5 style="text-align: center;"> 총 구매 금액 </h5>
+					</div>
+				<div class="col-sm-8 row">
+						<div class="col-sm-3">
+								<label class="control-label">
+									<img src="/resources/image/buy.jpg" style="width: 120px; height:120px; margin: 0px 0px;" id="addPurchase"/>
+								</label>
+						</div>						
+						<div class="col-sm-3">
+							<label class=" col-sm-3 control-label">
+	 							<img src="/resources/image/addCart.jpg" style="width: 120px; height:120px; margin: 0px 20px;" id="addCart"/>
+							</label>			
+						</div>	
+				</div>
 					<form>
 						<input id='price' type='text' name='purchasePrice' value='${product.prodPrice}' readonly> 원 <br> 
 						<input id='quantity' type='number' name='purchaseProductQuantity' value='1'  min='1' step="1"> 개
 						<input type='hidden' name='purchaseProductNo' value="${product.prodNo}">
 					</form>				
-				</div><!-- end of row -->												
+				</div><!-- end of row -->	
+				
 			</div><!-- end of #productInfo -->
 		</div>	<!-- end of row -->
 		<hr>
 		
 		<div id='caution'class="row mx-0">
 			<div class="col-12 pageHeader">
+			<br>
 				<h2>상품 이용 안내</h2>
 			</div>
 			
 			<div class="col-12 pageContent">
 				<span>
-					<h4><p>영화관람권 기프트콘은 CGV모바일, 홈페이지, 오프라인 극장에서 영화를 예매할 수 있는 온라인 상품권입니다.<br>
+					<h5><p>영화관람권 기프트콘은 CGV모바일, 홈페이지, 오프라인 극장에서 영화를 예매할 수 있는 온라인 상품권입니다.<br>
 						- 구매 후 전송받으신 기프트콘은,<br>
 						- 지정된 상영타입의 영화만 예매 가능합니다.(ex. 3D 관람권으로는 3D 영화만 예매 가능합니다)<br>
 						- 금액권이 아니므로 차액 환급이 불가합니다. (ex.조조영화/청소년 관람 시 차액환급 불가)<br>
@@ -151,7 +148,7 @@
 						- 사용가능한 CGV의 매점에서 지정된 해당 상품으로만 교환이 가능합니다.<br>
 						- 해당 상품 내에서 팝콘 혹은 음료, 스낵 변경 시 추가 비용이 발생합니다.<br>
 						- 교환 완료한 상품의 환불 및 반품은 불가합니다.<br>
-						- 상기 이미지는 실제와 다를 수 있습니다.</p></h4>
+						- 상기 이미지는 실제와 다를 수 있습니다.</p></h5>
 				</span>
 			</div>
 			<div class="col-12 pageHeader">
@@ -160,7 +157,7 @@
 			
 			<div class="col-12 pageContent">
 				<span>
-					<h4><p>
+					<h5><p>
 					- 공연 컨텐츠 전일까지 환불이 가능합니다.<br> 
 					- 공연당일은 환불이 불가능합니다.<br>
 					- 공연 관람시 시작 시간 이후에는 입장이 제한됩니다. <br><br>
@@ -169,7 +166,7 @@
 					- 인터넷 예매하신 내역은 상영시간 전까지는  현장에서 환불이 가능합니다.	<br>		
 					- 스토어용권은 구매하신 날부터 1년까지 사용 가능합니다.<br>
 					- 스토어 상품을 구매하신 후 7일 동안만 환불이 가능합니다.
-					</p></h4>
+					</p></h5>
 				</span>
 			</div>	
 		</div><!-- end of row -->

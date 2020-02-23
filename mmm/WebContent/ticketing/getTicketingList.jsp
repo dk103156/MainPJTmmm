@@ -17,7 +17,10 @@
   <!-- Bootstrap Extended Color -->
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
-
+   
+   <!-- google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+   
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -29,7 +32,7 @@
 <style>
 
 body {
-	font-family : 'Tahoma','돋움',dotum,Nanum Gothic,sans-serif;
+	font-family: 'Noto Sans KR', sans-serif !important;
 
 }
 

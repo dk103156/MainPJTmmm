@@ -95,7 +95,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		List<Point> list = sqlSession.selectList("PointMapper.getPointList", search);
 		
-//		날짜포맷 바꾸기
+//		날짜포맷 바꾸기, PointStatus 세
 		for(Point pnt : list) {
 			pnt.setPointDate(JavaUtil.convertDateFormat(pnt.getPointDate()));
 			
@@ -137,6 +137,20 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public List<Point> checkList(int userNo) throws Exception {
 		return sqlSession.selectList("PointMapper.checkList", userNo);
+	}
+	
+	public int getAccPoint(int userNo) throws Exception {
+		return sqlSession.selectOne("PointMapper.getAccPoint", userNo);
+	}
+
+	@Override
+	public Payment getPaymentbyTicketingNo(int ticketingNo) throws Exception {
+		return sqlSession.selectOne("PaymentMapper.getPaymentbyTicketingNo", ticketingNo);
+	}
+
+	@Override
+	public Payment getPaymentbyPurchaseNo(int purchaseNo) throws Exception {
+		return sqlSession.selectOne("PaymentMapper.getPaymentbyPurchaseNo", purchaseNo);
 	}
 
 	

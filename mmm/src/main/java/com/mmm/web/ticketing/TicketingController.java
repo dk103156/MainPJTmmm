@@ -167,6 +167,7 @@ public class TicketingController {
 			if(search.getSearchCondition()==null) {
 				search.setSearchCondition("0");
 			}
+			
 		}catch(NullPointerException e) {
 			search.setSearchCondition("0");
 		}
@@ -181,7 +182,28 @@ public class TicketingController {
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		
+		
+		if(search.getSearchCondition().equals("2")) {
+			
+			List<DateTime> dtList = new ArrayList<DateTime>();
+			
+			for(Ticketing t: list) {
+				t.getDateTimeNo();
+				
+				DateTime dateTime= dateTimeService.getDateTime(t.getDateTimeNo());	
+				dtList.add(dateTime);
+				System.out.println(dateTime);
+				
+			}	
+			
+			model.addAttribute("dateTimeList",dtList);
+			
+		return "forward:/mypage/mySeenMovieList.jsp";
+		}
+				
 		return "forward:/ticketing/getTicketingList.jsp";
+		
+		
 	}	
 	
 	@RequestMapping(value="/completeTicketing", method=RequestMethod.POST)

@@ -69,6 +69,17 @@
 		WHERE USER_NO = #{userNo:NUMERIC}
 	
 	</select>
+	
+<!-- 	해당 유저의 누적 포인트 조회 (사용 포인트 제외) -->
+	<select id="getAccPoint"
+			parameterType="int"
+			resultType="int">
+	
+		SELECT SUM(PART_POINT)
+		FROM POINTT
+		WHERE USER_NO = #{userNo:NUMERIC}
+		    AND UPPER(point_status) IN('S0', 'S1', 'S2')
+	</select>
 
 <!-- 	해당 유저의 포인트 사용내역 조회 -->
 	<select id="getPointList"

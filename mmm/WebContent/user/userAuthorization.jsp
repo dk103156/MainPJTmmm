@@ -11,7 +11,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -20,6 +20,86 @@
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+body {
+    font-weight: 400;
+    font-family:'Noto Sans KR', sans-serif;
+}
+
+p{
+      text-align: center;
+  }
+  
+h3.tit {
+    color: #333;
+    font-size: 1.2em;
+    line-height: 1.1;
+}  
+
+.col-wrap{
+
+	letter-spacing: 0;
+	line-height: 1.5;
+	font-size: 15px;
+	color: #444;
+	font-weight: 400; 
+
+}
+  
+.login-input-area .input-text {
+    display: block;
+    width: 100%;
+    height: 46px;
+}
+
+.input-text {
+    display: inline-block;
+    width: 100%;
+    height: 32px;
+    padding: 0 10px;
+    line-height: 30px;
+    color: #444;
+    border: 1px solid #d8d9db;
+    vertical-align: middle;
+  
+.login-input-area .chk-util {
+    overflow: hidden;
+    padding: 15px 0 35px 0;
+}
+
+.login-input-area .chk-util .left {
+    float: left;
+}
+
+[type=checkbox], [type=radio] {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+[type=checkbox], [type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+label {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.button.purple.large {
+    line-height: 46px;
+}
+.login-input-area .btn-login {
+    display: block;
+    width: 100%;
+}
+
+.login-input-area .link {
+    padding: 20px 0 30px 0;
+    text-align: center;
+    line-height: 1.1;
+}
+
 </style>
 
 <title>본 인 인 증</title>
@@ -382,34 +462,34 @@ $(function(){
 		<h1 class="bg-default text-center">본 인 인 증</h1>
 		<p></p>
 
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;">
-				<strong>휴대폰 인증</strong>
-				<form>
-					<div class="form-group row" style="font-size: 12pt;">
-						<label for="phone" class="col-sm-4 col-form-label">휴대전화번호</label>
-						<div class="input-group sm-4">
-							<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" aria-label="Recipient's username"
-								aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-outline-secondary" id="smsBtn"type="button">문자전송</button>
-							</div>
-						</div>
-						<h6 id="confirmNum1" style="color: red;"></h6>
-					</div>
-					<div class="form-group row">
-						<label for="numStr" class="col-sm-4 col-form-label"style="font-size: 12pt;">인증번호</label>
-						<div class="col-sm-6">
-							<input type="number" id="numStr" class="form-control" placeholder="인증번호 6자리">
-						</div>
-					</div>
-					<h6 id="confirmNum2" style="color: red;"></h6>
-					<div class="col-sm-12" style="text-align: center;">
-						<button type="button" class="btn btn-dark" id="chkBtn">확인</button>
-					</div>
-				</form>
-			</div>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-2"></div> -->
+<!-- 			<div class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;"> -->
+<!-- 				<strong>휴대폰 인증</strong> -->
+<!-- 				<form> -->
+<!-- 					<div class="form-group row" style="font-size: 12pt;"> -->
+<!-- 						<label for="phone" class="col-sm-4 col-form-label">휴대전화번호</label> -->
+<!-- 						<div class="input-group sm-4"> -->
+<!-- 							<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" aria-label="Recipient's username" -->
+<!-- 								aria-describedby="basic-addon2"> -->
+<!-- 							<div class="input-group-append"> -->
+<!-- 								<button class="btn btn-outline-secondary" id="smsBtn"type="button">문자전송</button> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<h6 id="confirmNum1" style="color: red;"></h6> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group row"> -->
+<!-- 						<label for="numStr" class="col-sm-4 col-form-label"style="font-size: 12pt;">인증번호</label> -->
+<!-- 						<div class="col-sm-6"> -->
+<!-- 							<input type="number" id="numStr" class="form-control" placeholder="인증번호 6자리"> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<h6 id="confirmNum2" style="color: red;"></h6> -->
+<!-- 					<div class="col-sm-12" style="text-align: center;"> -->
+<!-- 						<button type="button" class="btn btn-dark" id="chkBtn">확인</button> -->
+<!-- 					</div> -->
+<!-- 				</form> -->
+<!-- 			</div> -->
 			&nbsp;&nbsp;&nbsp;
 			<div id ="emailArea" class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;">
 				<strong>이메일 인증</strong>
@@ -441,6 +521,89 @@ $(function(){
 			<div class="col-md-2"></div>
 		</div>
 	</div>
+
+	
+	
+	
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#phoneModal">
+  	휴대폰 인증
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
+        <h3 class="tit" id="exampleModalLabel">휴대폰 인증</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+    
+	    col-wrap
+	    <form>
+			<div class="col-wrap">
+				<div class="col left">
+					<div class="login-input-area">
+						<div class="row" style="margin-bottom: 20px;"> 
+						
+							<span style="padding-right: 10px; margin-top: 10px;">휴대전화 번호</span>
+							<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" style="margin-top: 5px; margin-right: 20px; width: 200px">
+							
+							<button id="smsBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
+						         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button> 
+						</div>
+						<h6 id="confirmNum1" style="color: red;"></h6> 		
+						<div class="row">	
+							<span style="padding-right: 10px; width: 97px;">인증번호</span>
+							<input type="number" id="numStr" class="form-control" style="width: 150px; margin-right: 20px;" placeholder="인증번호 6자리">
+						</div>
+						<h6 id="confirmNum2" style="color: red;"></h6>
+						<div style="text-align: center;">
+						<button id="chkBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
+							         width: 100px; height: 46px; margin-top:20px; border: 0; text  cursor: default; background-color:#fee50e;">확인</button> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--// col-wrap -->
+		
+      </div>
+    </div>
+  </div>
+</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </body>
 </html>

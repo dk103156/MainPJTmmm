@@ -37,9 +37,16 @@
 </head>
 <body>
 
-<h4> Point List </h4>
-
 <div class="container mt-2">
+  <div class="row">
+    <div class="col d-inline">
+		<h2> Point List </h2>
+	</div>
+	<div class="col d-inline">
+		<h5 class="text-right">보유 포인트 : ${totalPoint} p</h5>
+   		<p class="text-right text-muted">(누적 포인트 : ${accPoint} p)</p>
+	</div>
+  </div>
 	<div>
 		<table class="table table-hover text-center">
 		  <thead class="thead-dark">

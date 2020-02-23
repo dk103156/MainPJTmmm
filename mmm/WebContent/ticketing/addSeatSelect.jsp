@@ -11,7 +11,10 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+	
+    <!-- google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  	
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -27,7 +30,11 @@
 <title></title>
 
 <style>
-
+ 	  body {
+ 	  	font-family: 'Noto Sans KR', sans-serif !important;
+ 	  }
+   	  
+   	  
 #numberSelector > div.group.normal > ul {
     margin-top: 0;
     margin-bottom: 0rem; 
@@ -1250,6 +1257,7 @@ $(function(){
 				totalArray[index].seatNo = $(this).attr('id');
 				
 				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().text($(this).siblings().first().attr('id')+"석");
+				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().attr("title", $(this).siblings().first().attr('id')+"석");
 				
 				nNumber = $("#numberSelector > div.group.normal > ul > li.selected").text();
 				yNumber = $("#numberSelector > div.group.young > ul > li.selected").text();
@@ -1265,6 +1273,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1301,6 +1310,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1337,6 +1347,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1373,6 +1384,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1408,6 +1420,7 @@ $(function(){
 					totalArray[index].flagTrue();
 					$(this).addClass("sequence"+index);
 					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(totalArray[index].seatNo);
+					$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", totalArray[index].seatNo);
 					///// '일반' 만 선택했을 경우
 					if(nName == '일반' && nNumber != '0' && yNumber == '0' && sNumber == '0'){
 						$("#ticket_tnb > div > div.info.payment-ticket > div.row.payment-adult").children().first().next().text(totalArray[index].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 원");
@@ -1598,6 +1611,8 @@ $(function(){
 				console.log("애프터 str:"+ _str)
 				
 			$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().text(_str);
+			$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").children().first().next().attr("title", _str);
+				
 		}
 		
 		if(result>1){
@@ -1610,6 +1625,7 @@ $(function(){
 				$("#ticket_tnb > div > div.info.seat > div.row.seat_no.colspan3").css("display","block");
 				
 				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().text($(this).siblings().first().attr('id')+"석");
+				$("#ticket_tnb > div > div.info.seat > div.row.seat_name").children().first().next().attr("title", $(this).siblings().first().attr('id')+"석");
 				
 				var number = $(this).html();
 				if(number%2==1){
@@ -2454,6 +2470,8 @@ $(function(){
 		
 		$("span.screenTime").text(result)
 		$("#date > span.data").append(result)
+		
+		$("#date > span.data").attr("title", $("#date > span.data").text())
 
 
 console.log('${dateTime.screenTime}'.substring(14,'${dateTime.screenTime}'.length-5))

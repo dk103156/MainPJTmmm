@@ -28,43 +28,69 @@
 <title>Insert title here</title>
 
 <style>
-
-
+	#inven{
+	border: 3px solid #fee50e;
+    margin-top: 10px;
+	float:left;
+	margin: 10px 40px;
+	border-radius: 30px 40px 20px 40px / 30px 40px 20px 40px;
+	padding-top: 15px;
+    padding-bottom: 15px;
+	 
+	}
+	#prodName{
+	margin: 20px;
+	}
+	#btn{
+	background-color: #fee50e;
+	color: black;
+	outline-style: none;
+	}
+	#modalhead{
+	background-color: #fee50e;
+	}
+	#modal{
+	border-color: #fee50e;
+	}
 </style>
 </head>
 <body>
-
+<jsp:include page="/product/prodToolBar.jsp" />
 	<div class="container">
 		<div class="row mx-0">
 			<div class="inventoryHeader col-12 text-center">
-				<span>내 인벤토리 목록</span>
+			<br><br>
+		<!-- <h3><strong><span style="border-style: double; padding:10px 10px 10px 10px;">${user.userName}님의 보관함</span></strong></h3>  -->		
+				<br>
 			</div>
 		</div>
 		
-		<hr>
 		
-		<div class="inventoryContentHeader row mx-0">
-			<div class="prodNoHeader col-2"><span>상품번호</span></div>
-			<div class="prodNameHeader col-6"><span>상품명</span></div>
-			<div class="prodQuantityHeader col-2"><span>소지수(사용가능)</span></div>
-		</div>
 		
-		<hr>
 		
-		<div class="inventoryContent">
-			<c:forEach var="i" items="${map.productList }">
-				<div class='cartContentIn row mx-0 mb-2'>
-					<div class="prodNo col-2"><span><kbd>${i.prodNo }</kbd></span></div>
-					<div class="prodName col-6"><span><img src="../resources/image/${ i.prodImage}" width=150></span><span>${i.prodName }</span></div>
-					<div class="prodQuantity col-4">
-						<span></span>
-						<button type="button" class="btn btn-primary modalButton" data-toggle="modal" data-target="#exampleModalCenter">
-		  					 상세보기
-						</button>
-					</div>
-				</div>
+		<div class="inventoryContent row">
+			<c:forEach var="i" items="${map.productList}">
+				<div class="thumb-wrapper">
+					<div class="img-box text-center"  id="inven">
+					<!--  	<div class="prodNo col-12"><span><kbd>${i.prodNo }</kbd></span></div> -->
+							<div class="prodName col-12"><span><img src="../resources/image/${ i.prodImage}" width=250 height=250></span>
+								<div class="content-box">
+									<div class="prodName col-10" id="prodName"><strong>${i.prodName}</strong></div>
+									<!--  	<div class="prodQuantity col-12"> -->
+											<span></span>
+											<button type="button" class="btn modalButton" id="btn" data-toggle="modal" data-target="#exampleModalCenter">
+							  					 상세보기
+											</button>
+											<br>
+									<!--	</div>-->
+										<br>
+								</div>
+							</div>
+					  </div>	
+				 </div>
 			</c:forEach>
 		</div>
+	
 		
 		<div class="inventoryContentFooter row">
 			<div class="col-2"><span></span></div>
@@ -80,19 +106,18 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content" id="modal">
+      <div class="modal-header" id="modalhead">
         <h5 class="modal-title" id="exampleModalCenterTitle">상품 핀 번호</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+   <!--     <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+  <!--        <span aria-hidden="true">&times;</span> -->
+   <!--       </button>    -->
       </div>
       <div class="modal-body">
-        ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" id="btn" class="btn" data-dismiss="modal">닫 기</button>
+<!--      <button type="button" id="btn"  class="btn">Save changes</button>  -->    
       </div>
     </div>
   </div>
@@ -137,7 +162,7 @@ $(function(){
 						x.forEach( (value,index) => {
 							var inventoryNo = value.inventoryNo;
 							var pinNo =value.inventoryProdPinNo;
-							var Element ="<div><div>"+pinNo+"</div><input type='hidden' value='"+inventoryNo+"'></div>";
+							var Element ="<div><strong><div>"+pinNo+"</div></strong><input type='hidden' value='"+inventoryNo+"'></div>";
 							$("div.modal-body").append(Element);
 						});
 											

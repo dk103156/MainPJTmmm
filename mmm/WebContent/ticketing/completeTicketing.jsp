@@ -22,6 +22,9 @@
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
 
+  <!-- google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -30,6 +33,12 @@
   
   	
 <title>Insert title here</title>
+<style>
+	  body {
+ 	  	font-family: 'Noto Sans KR', sans-serif !important;
+ 	  }
+
+</style>
 </head>
 <body>
 
@@ -39,7 +48,7 @@
 			<span><h2>예매가 완료 되었습니다.</h2></span>
 		</div>
 	</div><!-- end of row -->
-	 
+	<c:if test="${payment.payObjectFlag==0 || payment.payObjectFlag==2 }">
 	<div class="row">
 		<div class="col-4 text-center my-auto">
 			<img src="${movie.poster}" width="200" height="280" />
@@ -70,6 +79,18 @@
 				<div class="col-3">좌석번호</div>
 				<div class="col-9">${ticketing.seatNo }</div>
 			</div>
+			
+	</c:if> 
+	<c:if test="${payment.payObjectFlag==1 || payment.payObjectFlag==2 }" >
+			<div class="row mb-4">
+				<div class="col-3">상품명</div>
+				<div id="prodName" class="col-9"></div>
+			</div>
+						<div class="row mb-4">
+				<div class="col-3">상품개수</div>
+				<div class="col-9">${purchase.purchaseProductQuantity }</div>
+			</div>
+	</c:if> 			
 			<div class="row mb-4">
 				<div class="col-3">결제금액</div>
 				<div class="col-9">${payment.totalPrice}원</div>
@@ -134,6 +155,37 @@
 </div><!-- end of container -->
 
 <script>
+$.ajaxSetup({async:false}); //전역 ajax 동기로
+<c:if test="${payment.payObjectFlag==1 || payment.payObjectFlag==2 }" >
+	var productName = new Array();
+	var productNo = '${purchase.purchaseProductNo }';
+	
+	productNo.split(",").forEach( (value,index) => {
+		//console.log(value)
+		$.getJSON('/product/json/getProduct/'+value)
+		.done( x => {
+			var product = x.product;
+			productName.push(product.prodName);
+						
+		})
+	}); // end of forEach
+	//중복 제거
+	productName= productName.reduce(function(a,b){
+					if(a.indexOf(b)==-1){
+						a.push(b)
+					}
+					return a
+					
+					},[])
+	var fullName="";
+	productName.forEach( (value,index) => {
+		
+		fullName += value+",";
+	})					
+	fullName = fullName.substring(0, fullName.length-1);
+	$("div#prodName").text(fullName);
+</c:if>
+
 $("button.confirm").on("click",function(){
 	self.location="/ticketing/getTicketingList";
 });
