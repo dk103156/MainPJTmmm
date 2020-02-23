@@ -40,6 +40,7 @@
  	<select id="getUser" parameterType="Integer" resultMap="userSelectMap">
 	 	SELECT 
 		 	*
+		 from users
 	 	WHERE user_no = #{value}
  	</select>
  	

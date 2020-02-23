@@ -45,7 +45,7 @@ public class MypageController {
 		
 		System.out.println("/mypage/mypage : GET ");
 			
-		return "redirect:/mypage/mypage.jsp";
+		return "forward:/mypage/mypage.jsp";
 	}
 	
 	@CheckAuth(role="user,admin")
@@ -54,7 +54,7 @@ public class MypageController {
 		
 		System.out.println("/mypage/mypageUser : GET ");
 			
-		return "redirect:/mypage/mypageUser.jsp";
+		return "forward:/mypage/mypageUser.jsp";
 	}
 	
 	@CheckAuth(role="user,admin")
@@ -63,7 +63,7 @@ public class MypageController {
 		
 		System.out.println("/mypage/mySeenMovieList : GET ");
 		
-		return "redirect:/mypage/mySeenMovieList.jsp";
+		return "forward:/mypage/mySeenMovieList.jsp";
 	}
 	
 	@CheckAuth(role="user,admin")
@@ -72,7 +72,7 @@ public class MypageController {
 		
 		System.out.println("/mypage/wishList : GET ");
 		
-		return "redirect:/mypage/wishList.jsp";
+		return "forward:/mypage/wishList.jsp";
 	}
 
 }

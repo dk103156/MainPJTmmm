@@ -265,14 +265,9 @@ public class UserController {
 	public String login(HttpSession session) throws Exception{
 		
 		System.out.println("/user/login : GET");
-
-		User sessionUser = (User)session.getAttribute("user");
-		if(sessionUser != null) {
-			return"redirect:/main.jsp?status=login";
-		}else {
 		
 		return "redirect:/user/login.jsp";
-		}
+		
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.POST)
@@ -367,7 +362,7 @@ public class UserController {
 		
 		session.invalidate();
 		
-		return "redirect:/index.jsp";
+		return "redirect:/main.jsp";
 	}
 	
 	@RequestMapping(value = "findPw" , method=RequestMethod.POST)
