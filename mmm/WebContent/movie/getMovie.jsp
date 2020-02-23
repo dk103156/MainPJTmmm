@@ -21,19 +21,26 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     
-    <!- Star..Rating..을 위한 fontawesome ..  css.. js...-->
+<!--      Star..Rating..을 위한 fontawesome ..  css.. js...-->
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<c:url value="/resources/css/fontawesome-stars.css" />">
 	<link rel="stylesheet" href="<c:url value="/resources/css/fontawesome-stars-o.css" />">
 
     <!-- fontawesome CDN -->
     <script src="https://kit.fontawesome.com/e464a52b8d.js" crossorigin="anonymous"></script>
+
+<!-- 	SweetAlert2 CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
+	
+<!-- 	Google web font -->
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     
 <!--     movie css -->
-    <link rel="stylesheet" href="/resources/css/movieIcon.css?aer">
+    <link rel="stylesheet" href="/resources/css/movieIcon.css?aefr">
     
 <!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?aer">
+    <link rel="stylesheet" href="/resources/css/common.css?aefr">
      
     <style type="text/css">
     	img { max-width: 100%; height: auto; }
@@ -178,7 +185,9 @@
 	
 // 	예매하기로 넘어가는 함수
 	function fncTicketing(ticketing_btn){
-		var movieName = $.trim(ticketing_btn.parent().parent().parent().children('h5[name="movieTitle"]').text());
+// 		var movieName = $.trim($('#movieTitle').text()).replace(/ /g, '');;
+		var movieName = $('#movieTitle').text().replace(/ /g, '');;
+		alert(movieName);
 		self.location = "/ticketing/addTicketing?movieName="+movieName
 	};
 	
@@ -195,6 +204,7 @@
 		
 // 		평점 이벤트
 		$("button[name='rate']").on("click", function(){
+			console.log('rate')
 			fncDoRating();
 		});
 		
@@ -229,6 +239,49 @@
 // 			console.log(userNo);
 			
 			fncTicketing();
+		});
+		
+	});
+	
+// 	한줄평 등록 버튼 이벤트
+	$(document).on("click", "button[name='btn-addOneline']", function(){
+		var movieNo = $(this).parent().parent().find('input[name="movieNo"]').val();
+		var commentContent = $("input[name='commentContent']").val();
+		
+		if(commentContent == null || commentContent.length <1){
+			Swal.fire({
+				text: '한줄평을 작성해주셔야 등록이 가능해요.',
+				icon: 'error',
+				confirmButtonText: "confirm"
+			});
+			return;
+		}
+		
+		$.ajax(
+			{
+				url : "/movie/json/addOneline",
+				method : "POST",
+				data : JSON.stringify({
+					movieNo : movieNo,
+					commentContent : commentContent
+				}),
+				dataType : "json",
+				headers : {
+					"Accept" : "application/json",
+					"Content-Type" : "application/json"					
+				}
+			}		
+		).done(function(responseJSON){
+			Swal.fire({
+				text: '한줄평 등록이 완료되었어요.',
+				icon: 'success',
+				confirmButtonText: "confirm"
+			});
+			
+			$('#modal-addOneline').modal("hide");
+			
+		}).fail(function(result, status){
+			console.log(result, status);
 		});
 		
 	});
@@ -276,8 +329,7 @@
 <!-- 				        	상영예정작은 평점을 내릴 수 없도록.. 분기문 처리  -->
 				        	<c:if test="${movie.onBoxOfficeFlag == 1}">
 					        	<div class="col-md text-center my-auto">
-						        	<div>
-						        		<div class="starRev">
+						        		<div class="col starRev">
 										  <span class="starR1 on">별1_왼쪽</span>
 										  <span class="starR2">별1_오른쪽</span>
 										  <span class="starR1">별2_왼쪽</span>
@@ -290,19 +342,29 @@
 										  <span class="starR2">별5_오른쪽</span>
 										</div>
 										<div class="rating" data-rate-value=6></div>
-										
-						        		<span id="starRating"> ${movie.starRating}</span>
-						        		 
+<%-- 						        		<span id="starRating"> ${movie.starRating}</span> --%>
 						        		<input id="starUserFlag" type="hidden" value="${movie.starUserFlag}">
-						        	   <input id="starByUser" type="text" value="${movie.starByUser}" placeholder="평점 0~10">
-						        	   <button type="button" name="rate">등록</button>
+<%-- 						        	   <input id="starByUser" type="text" value="${movie.starByUser}" placeholder="평점 0~10"> --%>
+						        	
+						        	<!-- Button trigger modal -->
+						        	<div class="mt-1">
+						        	    <button type="button" class="btn btn-sm btn-yellow-cs" name="rate">평점 등록</button>
+										<button type="button" class="btn btn-sm btn-yellow-cs" data-toggle="modal" data-target="#modal-addOneline">
+										  한줄평 작성
+										</button>
 						        	</div>
+						        	
+						        	
 					        	</div>
 				        	</c:if>
 				        </div>
 				        <div class="row">
-							<div class="col-md  text-center m-2 mt-3">
-								<div class="text-left">
+							<div class="col-md  text-center mt-1 p-1">
+								<div class="row m-2">
+									<div class="col"><h6><i class="fas fa-chart-pie font-yellow-cs"></i> 예매율 : ${movie.ticketingRate}</h6></div>
+									<div class="col"><h6><i class="fas fa-star font-yellow-cs"></i> 평점 : ${movie.starRating}</h6></div>
+								</div>
+								<div class="text-left p-2">
 									<p>- <span class="font-weight-bold">감독 :</span> ${movie.director}  
 									/ <span class="font-weight-bold">배우 :</span> ${movie.actor}</p>
 									<p>- <span class="font-weight-bold">장르 :</span> ${movie.genreString} 
@@ -342,7 +404,7 @@
 			        </div>
 			        <div class="col-md-6" style="padding:20px">
 			        	<div>
-			        		<h6>줄거리</h6>
+			        		<div><h6>줄거리</h6></div>
 			        		<p>${movie.summary}</p>
 			        	</div>
 			        </div>
@@ -350,14 +412,61 @@
 <!-- 			    한줄평 및 리뷰  -->
 				<div class="row border-bottom pb-3 mt-3">
 					<div class="col">
-					  <h6>한줄평</h6>
+					  <div class="bg-dark-cs p-2 text-center  mb-2"><h6 class="m-0">한줄평</h6></div>
+					  
+						<table class="table table-sm table-hover text-center">
+<!-- 						  <thead class="thead-dark"> -->
+<!-- 						    <tr > -->
+<!-- 						      <th scope="col">한줄평</th> -->
+<!-- 						      <th scope="col">포인트 구분</th> -->
+<!-- 						      <th scope="col">적립/사용 포인트</th> -->
+<!-- 						    </tr> -->
+<!-- 						  </thead> -->
+						  <tbody>
+					          
+					<!--         list size만큼 for문으로 Point 내역 출력  -->
+					        <c:forEach var="oneline" items="${resultCmtMap.list}">
+						      <tr >
+						        <th scope="col" class="text-left"> ${oneline.commentContent}</th>
+						        <td scope="col" class="text-muted">- ${oneline.userId}
+						        
+						        </td>
+						      </tr>
+					        </c:forEach>  
+					          
+					          
+						  </tbody>
+						</table>
+					  
 					</div>
 					<div class="col">
-					  <h6>리뷰</h6>
+					  <div class="bg-dark-cs p-2 text-center mb-2"><h6 class="m-0">리뷰</h6></div>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		<!-- 한줄평 등록 Modal -->
+<div class="modal fade" id="modal-addOneline" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-yellow-cs">
+        <h5 class="modal-title" id="exampleModalCenterTitle">한줄평 작성</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+	      <div class="modal-body">
+	        <input class="form-control form-control-lg" name="commentContent" type="text" placeholder="한줄평을 작성하세요.">
+	        <input type="hidden" name="movieNo" value="${movie.movieNo}">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        <button type="button" name="btn-addOneline" class="btn btn-yellow-cs">등록</button>
+	      </div>
+    </div>
+  </div>
+</div>
 		
   	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

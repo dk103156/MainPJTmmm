@@ -202,6 +202,7 @@
 			</if>
 			<if test="commentType==2 "> 
 				cmt_type = 2 
+				AND movie_no = #{movieNo}
 			</if>
 		 </if>
 		 
