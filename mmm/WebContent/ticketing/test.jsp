@@ -20,21 +20,44 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <title>Insert title here</title>
 <style>
+
+ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+ 
+ 
  body {
  	height : 3000px;
- 
+ 	font-family: 'Noto Sans KR', sans-serif;
  
  }
+ 
+ 
  aside {
- 	border:1px solid red; 
- 	height: 500px; 
+ 	border:3px solid #4D5155; 
+ 	border-radius: 30px;
+ 	height: 450px; 
  	width:100px; 
  	right:10px; 
  	position: fixed;
- 	bottom : 100px;
+ 	bottom : 30%;
+ 	background-color : #333;
  }
+ 
+ aside div div.row {
+ 	position : relative;
+ 	top : 18px;
+ }
+ 
+ div.aside {
+ 	border-radius: 30px;
+	
+ }
+ 
+ span.aside {
+ 	color : #fff;
+ } 
  
  
  .carousel-inner > .item > img {
@@ -47,7 +70,7 @@
  
  }
  
- h3{
+ h3.mainPage {
  	height: 41px;
     background: url(../resources/image/mainPage/bg_h3_line.jpg) repeat-x 0 50%;
     line-height: 41px;
@@ -74,7 +97,7 @@
  	 -webkit-box-orient: vertical;
  }
  	/* 슬라이더 */
- 	html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+ 	
     *, *:before, *:after { box-sizing: inherit; }
     .clearfix:after { content: ''; display: block; clear: both; float: none; }
     .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
@@ -101,6 +124,7 @@
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
  
+
 
 </style>
 </head>
@@ -146,7 +170,7 @@
 		</div>
 	</div>
 	<div class="mb-5 mx-5">
-		<h3><img src="http://img.cgv.co.kr/R2014/images/title/h3_movie_selection.gif" alt="MOVIE SELECTION"></h3>
+		<h3 class="mainPage"><img class="introTag" src="http://img.cgv.co.kr/R2014/images/title/h3_movie_selection.gif" alt="MOVIE SELECTION"></h3>
 	</div>
 	
 	<div class="container-fluid">
@@ -224,7 +248,7 @@
 	</div> <!-- end of container-fluid -->
 	
 	<div class="mb-5 mx-5">
-	<h3><img src="http://img.cgv.co.kr/R2014/images/title/h3_event.gif" alt="EVENT"></h3>
+	<h3 class="mainPage"><img class="introTag" src="http://img.cgv.co.kr/R2014/images/title/h3_event.gif" alt="EVENT"></h3>
 	</div>
 	
 	<div class="container-fluid">
@@ -244,7 +268,7 @@
 								
 								<div class="postHeader col-12 mb-2 text-center">
 									<h4>
-										<a href="#">조규비 로또 당첨되어버려</a>
+										<a href="#">asdflkjasdf</a>
 									</h4>
 								</div>
 								
@@ -309,7 +333,27 @@
 	</div> <!-- end of container-fluid -->	
 	
 <aside>
-
+	<div class="container-fluid px-0">
+		<div class="row px-0 mx-0">
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside" src="../resources/image/mainPage/aside/myPage.png" width=80 >
+				<span class="aside">마이 페이지</span>
+			</div>
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside"  src="../resources/image/mainPage/aside/addTicketing.png" width=80 >
+				<span class="aside">예매하기</span>
+			</div>
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside"  src="../resources/image/mainPage/aside/getTicketingList.png" width=80 >
+				<span class="aside">예매내역</span>
+			</div>		
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside"  src="../resources/image/mainPage/aside/product.png" width=80 >
+				<span class="aside">상품권구매</span>
+			</div>
+		</div>
+	
+	</div>
 
 </aside>
 
