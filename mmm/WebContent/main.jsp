@@ -25,19 +25,42 @@
   
 <title>Insert title here</title>
 <style>
+ html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+ 
+ 
  body {
- 	
+ 	height : 3000px;
  	font-family: 'Noto Sans KR', sans-serif;
  
  }
+ 
+ 
  aside {
- 	border:1px solid red; 
- 	height: 500px; 
+ 	border:3px solid #4D5155; 
+ 	border-radius: 30px;
+ 	height: 450px; 
  	width:100px; 
  	right:10px; 
  	position: fixed;
- 	bottom : 100px;
+ 	bottom : 30%;
+ 	background-color : #333;
+	transition-property: right;
+	transition-duration: 1s; 	
  }
+ 
+ aside div div.row {
+ 	position : relative;
+ 	top : 18px;
+ }
+ 
+ div.aside {
+ 	border-radius: 30px;
+	
+ }
+ 
+ span.aside {
+ 	color : #fff;
+ } 
  
  
  .carousel-inner > .item > img {
@@ -50,7 +73,7 @@
  
  }
  
- h3.main{
+ h3.mainPage {
  	height: 41px;
     background: url(../resources/image/mainPage/bg_h3_line.jpg) repeat-x 0 50%;
     line-height: 41px;
@@ -76,19 +99,20 @@
  	 word-wrap: break-word; 
  	 -webkit-box-orient: vertical;
  }
- 	/* 슬라이더 */
- 	 html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
+ 
+/* 슬라이더 */
+ 	
     *, *:before, *:after { box-sizing: inherit; }
     .clearfix:after { content: ''; display: block; clear: both; float: none; }
     .title { margin-bottom: 0; text-align: center; font-size: 30px; color: #333; }
     .link, .link:visited { display: inline-block; margin: 20px 0; color: #555; text-decoration: none; font-weight: bold; }
     .link:hover, .link:focus { color: #9fd6c2; }
 	 #movieSelectList { width: 1000px; margin: auto; }
-	div.slide_wrap { position: relative; width: 1000px; margin: auto; padding-bottom: 30px; }
-	div.slide_box { width: 100%; margin: auto; overflow-x: hidden; }
-	div.slide_content { display: table; float: left; width: 184px; height: 200px; }
+	.slide_wrap { position: relative; width: 1000px; margin: auto; padding-bottom: 30px; }
+	.slide_box { width: 100%; margin: auto; overflow-x: hidden; }
+	.slide_content { display: table; float: left; width: 184px; height: 200px; }
 													/* mr-3 값이 16px임*/
-	div.slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
+	.slide_content > p { display: table-cell; vertical-align: middle; text-align: center; font-size: 100px; font-weight: bold; color: #555; }
 	/*
 	.slide_content.slide01 { background: #ddbdff; }
 	.slide_content.slide02 { background: #9fd6c2; }
@@ -99,28 +123,39 @@
 	.slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	.slide_btn_box > .slide_btn_prev { left: -100px; }
 	.slide_btn_box > .slide_btn_next { right: -100px; }
-	.slide_pagination { position: relative; left: 75%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	.slide_pagination { position: relative; left: 50%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
 	.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
  
+/* 장바구니 */
+	#shoppingCart{
+		width : 50px;
+		position:fixed;
+		right:10px;
+		bottom:0px;
+		z-index:1000;
+		cursor : pointer;
+	}
+	
+	div.shoppingCart{
+		position:fixed;
+		right:-200px;
+		bottom:180px;
+		z-index:1000;
+		transition-property: right;
+		transition-duration: 1s;
+		width : 200px;
+		height : 550px;
+		border : 4px dashed #bcbcbc;
+		overflow : auto;
+	}
+ 
 
- 
- 
 
 </style>
-
-
-<script type="text/javascript">
-
-
-</script>
 </head>
 <body>
-	<!-- ToolBar Start /////////////////////////////////////-->
-	<jsp:include page="/layout/header.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
-
 	<div class="container-fluid px-0 mb-5">
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		  <ol class="carousel-indicators">
@@ -162,7 +197,7 @@
 		</div>
 	</div>
 	<div class="mb-5 mx-5">
-		<h3 class="main"><img src="http://img.cgv.co.kr/R2014/images/title/h3_movie_selection.gif" alt="MOVIE SELECTION"></h3>
+		<h3 class="mainPage"><img class="introTag" src="http://img.cgv.co.kr/R2014/images/title/h3_movie_selection.gif" alt="MOVIE SELECTION"></h3>
 	</div>
 	
 	<div class="container-fluid">
@@ -240,7 +275,7 @@
 	</div> <!-- end of container-fluid -->
 	
 	<div class="mb-5 mx-5">
-	<h3  class="main"><img src="http://img.cgv.co.kr/R2014/images/title/h3_event.gif" alt="EVENT"></h3>
+	<h3 class="mainPage"><img class="introTag" src="http://img.cgv.co.kr/R2014/images/title/h3_event.gif" alt="EVENT"></h3>
 	</div>
 	
 	<div class="container-fluid">
@@ -260,7 +295,7 @@
 								
 								<div class="postHeader col-12 mb-2 text-center">
 									<h4>
-										<a href="#">조규비 로또 당첨되어버려</a>
+										<a href="#">asdflkjasdf</a>
 									</h4>
 								</div>
 								
@@ -325,14 +360,36 @@
 	</div> <!-- end of container-fluid -->	
 	
 <aside>
-
+	<div class="container-fluid px-0">
+		<div class="row px-0 mx-0">
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside" src="../resources/image/mainPage/aside/myPage.png" width=80 >
+				<span class="aside">마이 페이지</span>
+			</div>
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside"  src="../resources/image/mainPage/aside/addTicketing.png" width=80 >
+				<span class="aside">예매하기</span>
+			</div>
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside"  src="../resources/image/mainPage/aside/getTicketingList.png" width=80 >
+				<span class="aside">예매내역</span>
+			</div>		
+			<div class="aside col-12 px-0 mb-3 text-center">
+				<img class="aside"  src="../resources/image/mainPage/aside/product.png" width=80 >
+				<span class="aside">상품권구매</span>
+			</div>
+		</div>
+	
+	</div>
 
 </aside>
 
+<div class="shoppingCart" >
 
-	<!-- footer Start /////////////////////////////////////-->
-	<jsp:include page="/layout/footer.jsp" />
-   	<!-- footer	 End /////////////////////////////////////-->
+</div>
+
+
+<img id="shoppingCart" src="../resources/image/productIcon/shoppingcart_80945.png">
 
 <!-- 슬라이더 -->
   <script>
@@ -516,11 +573,64 @@
   
   </script>
   
-  <!-- 함수 모음 -->
+  <!-- 장바구니 -->
   <script>
-  
-  
-  
+ $(function(){ 
+	myCartList();
+	//페이지네이션으로 1페이지 설정했기때문에 8개까지만 나옵니다
+	function myCartList(){
+	 $.ajax({
+		  type: "POST",
+		  url: "/product/json/getCartList",
+		  data: JSON.stringify({ cartUserNo : '${user.userNo}'}),
+		  dataType : "json",
+	      headers: { 
+	        "Accept" : "application/json",
+	        "Content-Type": "application/json"
+	      },
+	 }).done(
+		data => {
+			
+			$("div.shoppingCart").empty()
+			data.list.forEach( (data,index) => {
+				$.getJSON("/product/json/getProduct/"+data.cartProdNo)
+				.done( x =>{
+						var Image =x.product.prodImage
+						
+						var Element ="<div class='product'><span><img class='prodImage' src='../resources/image/"+Image+"' width=155><img class='removeCart'src='../resources/image/productIcon/close-button.jpg' width=20><span>";
+							Element+="<input class='cartNo' type='hidden' value='"+data.cartNo+"'</div>"
+						$("div.shoppingCart").append(Element);
+						
+						$("div.product img.prodImage").last().on("click",function(){
+							
+							self.location ="/product/getProduct?prodNo="+x.product.prodNo
+						});
+						var cartNo = $.trim($("input.cartNo").last().val());
+						$("img.removeCart").last().on("click",function(){
+							
+							$.get("/product/json/removeCart/"+cartNo)
+							.done( () =>{
+								 console.log("성공")
+								 myCartList();
+							})//end of $.get
+						});//end of img.removeCart click
+				})//end of $.getJSON
+			}) //end of forEach
+		}) //end of ajax Done
+	}//end of function
+});// end of function
+
+	$("#shoppingCart").on("click", function(){
+		if($("div.shoppingCart").css("right")=="-200px"){
+			$("aside").css("right","-200px");
+			$("div.shoppingCart").css("right","0px");
+			$("#shoppingCart").css("opacity","0.5")
+		}else{
+			$("aside").css("right","10px");
+			$("div.shoppingCart").css("right","-200px");
+			$("#shoppingCart").css("opacity","1");
+		}
+	});
   </script>
 </body>
 </html>

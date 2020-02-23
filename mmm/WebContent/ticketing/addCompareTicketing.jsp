@@ -22,10 +22,15 @@
   <!-- font awesome -->
   <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>
   
+  <!-- google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  
     <title></title>
 
   <style>
-   
+   	  body {
+   	  	font-family: 'Noto Sans KR', sans-serif !important;
+   	  }
   	  .list-group{
 	    cursor: pointer;
 	    line-height: 33px;
