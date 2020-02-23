@@ -417,11 +417,10 @@
 		
 	</script>
     
-    <title>ExpectedMovieList</title>
+    <title>mmm</title>
   </head>
   <body>
-    <h1>ExpectedMovieList</h1>
-    
+	<jsp:include page="/layout/header.jsp"></jsp:include>    
 		  <div align="right">
 		  	<span id="boxOfficePage" class="p-2 ">박스오피스</span> <span id="expectedMoviePage" class="p-2 border-bottom border-danger border-1 text-danger">상영예정작</span>
 		  </div>
