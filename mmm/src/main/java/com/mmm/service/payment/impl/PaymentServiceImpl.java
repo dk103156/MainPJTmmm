@@ -119,10 +119,12 @@ public class PaymentServiceImpl implements PaymentService {
 			
 //			좌석 추가
 			Map<Object,Object> ticketingInfo = new HashMap<Object,Object>();
-			
+			DateTime dateTime =dateTimeDao.getDateTime(ticketing.getDateTimeNo());
+			dateTime= dateTimeDao.getSelectedSeat(dateTime);
+			String totalSeat =dateTime.getSelectedSeat()+","+ticketing.getSeatNo();
 			ticketingInfo.put("dateTimeNo", ticketing.getDateTimeNo());
 			ticketingInfo.put("headCount", ticketing.getHeadCount());
-			ticketingInfo.put("totalSeat", ticketing.getTotalSeat());
+			ticketingInfo.put("totalSeat", totalSeat);
 			dateTimeDao.addTicketing(ticketingInfo);
 			
 		}else if (payment.getPayObjectFlag()==1) {
@@ -134,11 +136,13 @@ public class PaymentServiceImpl implements PaymentService {
 			
 //			좌석 추가
 			Map<Object,Object> ticketingInfo = new HashMap<Object,Object>();
-			
+			DateTime dateTime =dateTimeDao.getDateTime(ticketing.getDateTimeNo());
+			dateTime= dateTimeDao.getSelectedSeat(dateTime);
+			String totalSeat =dateTime.getSelectedSeat()+","+ticketing.getSeatNo();
 			ticketingInfo.put("dateTimeNo", ticketing.getDateTimeNo());
 			ticketingInfo.put("headCount", ticketing.getHeadCount());
-			ticketingInfo.put("totalSeat", ticketing.getTotalSeat());
-			dateTimeDao.addTicketing(ticketingInfo);			
+			ticketingInfo.put("totalSeat", totalSeat);
+			dateTimeDao.addTicketing(ticketingInfo);		
 			
 			this.fncAddPurchaseAndInven(purchase);
 		}
