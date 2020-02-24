@@ -2,6 +2,7 @@ package com.mmm.service.payment.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +65,7 @@ public class PaymentDaoImpl implements PaymentDao {
 		// Payment table 플래그 바꾸기
 		sqlSession.update("PaymentMapper.cancelPayment" ,payment);
 		
-		////// 포인트 되돌리기....( 적립, 사용 )
-		////// 사용한 voucher 되돌리기 (inven table 활성화... )
-		////// 실제 아이엠포트 환불
+
 		
 	}
 
@@ -120,6 +119,16 @@ public class PaymentDaoImpl implements PaymentDao {
 		
 		return outputMap;
 	}
+	
+	@Override
+	public Map<String, Point> getPoints(int paymentNo) throws Exception {
+		
+		Map<String, Point> resultMap = new HashMap<String, Point>();
+		resultMap.put("savingPoint", sqlSession.selectOne("PointMapper.getSavingPoint", paymentNo));
+		resultMap.put("usingPoint", sqlSession.selectOne("PointMapper.getUsingPoint", paymentNo));
+		
+		return resultMap;
+	}
 
 	@Override
 	public int checkAttedance(int userNo) throws Exception {
@@ -151,6 +160,11 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Override
 	public Payment getPaymentbyPurchaseNo(int purchaseNo) throws Exception {
 		return sqlSession.selectOne("PaymentMapper.getPaymentbyPurchaseNo", purchaseNo);
+	}
+
+	@Override
+	public void cancelPoint(int pointNo) throws Exception {
+		sqlSession.update("PointMapper.cancelPoint", pointNo);
 	}
 
 	
