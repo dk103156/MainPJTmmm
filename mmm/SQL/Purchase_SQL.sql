@@ -79,7 +79,7 @@ INSERT INTO product
 VALUES ( seq_product_prod_no.NEXTVAL , '5천원권', SYSTIMESTAMP , 5000 , '5천원권', 'ocheonwon.png', 0, 0 ,null); 
 
 INSERT INTO product 
-VALUES ( seq_product_prod_no.NEXTVAL , '1만원권', SYSTIMESTAMP , 10000 , '1만원권', 'manwon.png', 0, 1 ,null);
+VALUES ( seq_product_prod_no.NEXTVAL , '1만원권', SYSTIMESTAMP , 10000 , '1만원권', 'manwwon.png', 0, 1 ,null);
 
 
 

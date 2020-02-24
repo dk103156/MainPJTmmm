@@ -25,30 +25,9 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   
+  <!--     Common Css -->
+  <link rel="stylesheet" href="/resources/css/product.css">
 	
-<style>
-   #body {
-      margin-top: 10px;
-       font-family: 'Noto Sans KR', sans-serif;
-     }
-	#productList{
-	margin-top: 10px;
-	float:left;
-	margin: 10px 40px;
-	padding-top: 15px;
-    padding-bottom: 15px;
-	}
-	#img{
-	width: 250px;
-	height: 250px;
-	}
-	#prodName{
-	margin: 20px;
-	}
-	#prodPrice{
-	margin: 20px;
-	}
-</style>
 
 
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -116,12 +95,11 @@
 
 <body id="body">
 	
-		<jsp:include page="/product/prodToolBar.jsp" />
+	<jsp:include page="/product/prodToolBar.jsp" />
 	
 	
  		<br/><br/><br/>
  		 	
- 			
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
  	
@@ -157,7 +135,7 @@
  		<!-- table 위쪽 검색 Start /////////////////////////////////////-->	
  			
  			
- 		<hr style="background-color : #fee50e;">
+ 		<hr style="background-color : black ;">
 		<br/>
 		
 	<div class="productListContent row" style="  margin-left: 50px;">
@@ -166,11 +144,11 @@
 			<c:set var="i" value="${ i }" />
       				<div class="thumb-wrapper" id="productList">
       					<div class="img-box text-center">
- 						<img src="/resources/image/${product.prodImage}" id="img"class="img-circle img-responsive">
+ 						<img src="/resources/image/${product.prodImage}" id="getProdListImg"class="img-circle img-responsive">
 				       	<input type="hidden" value = "${product.prodNo}">
 				       </div>
-				       	<div class="prodName col-12" id="prodName"><h4><span>${product.prodName}</span></h4>
-				       	<div class="prodPrice col-10" id="prodPrice"><h4>${product.prodPrice}원</h4>
+				       	<div class="prodName col-12" id="getProdListProdName"><h4><span>${product.prodName}</span></h4>
+				       	<div class="prodPrice col-10" id="getProdListProdPrice"><h4>${product.prodPrice}원</h4>
 				       	</div>	
       				</div>
       				</div>

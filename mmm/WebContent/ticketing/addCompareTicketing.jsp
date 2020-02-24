@@ -440,15 +440,15 @@
 	});
 </script>
   </head>
-    	<jsp:include page="/layout/header.jsp"></jsp:include>
+    	
   <body>
   
-
+<jsp:include page="/layout/header.jsp"></jsp:include>
   		
     <div class="container">
    		<ul class="tab">
-			<li class="current" data-tab="tab1"><a href="#">극장별 비교예매</a></li>
-			<li data-tab="tab2"><a href="#">일반예매</a></li>
+			<li class="current" data-tab="tab1"><a href="/ticketing/addCompareTicketing">극장별 비교예매</a></li>
+			<li data-tab="tab2"><a href="/ticketing/addTicketing">일반예매</a></li>
 		</ul>
       <!-- 비교 예매 -->
       <div class="compareTicketing">
