@@ -28,6 +28,12 @@
     <title></title>
 
   <style>
+  
+	  .mb-2, .my-2 {
+	    margin-bottom: .5rem!important;
+	    margin-top: .5rem !important;
+	  }
+  
    	  body {
    	  	font-family: 'Noto Sans KR', sans-serif !important;
    	  }
@@ -82,7 +88,8 @@
 	  }
 	  
 	  .steps-body {
-	    background-color: #f2f0e4;    
+	  	height : 458px;
+	    background-color: #f2f0e4;
 	  }
 	  
 	  body > div.container > div > div.steps > div > div.col-9.px-1.h-100 > div.steps-body{
@@ -131,11 +138,7 @@
 	  	pointer-events   : none;
 	  	opacity : 0.3;
 	  }	
-	
-	  .list-group{
-	    line-height: 33px;
-	  }
-	  
+		  
 	  .list-group-item.py-2{
 	  	padding-left: 10px;
 	  }
@@ -251,7 +254,7 @@
 	  /* 극장 목록 */
 	  div.theater-list > ul {
   		overflow : auto;
-  		height : 410px;
+  		height : 378px;
 	  }
 	  
 	  div.theater-list > ul::-webkit-scrollbar {
@@ -333,7 +336,6 @@
 	    flex-wrap: wrap;
 	    margin-right: -15px;
 	    margin-left: -15px;
-	    padding-bottom: 6px;
 	  }
 	  
 	  body > div.container > div > div.row > div.col-3.px-0.h-100 > div.steps-body.text-center > div > ul > li.month > div > span.month {
@@ -354,6 +356,16 @@
 			background-position : 0 -120px;
 			width: 113px;
 		}	  
+		
+	  .row {
+	    display: -ms-flexbox;
+	    display: flex;
+	    -ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	    margin-right: -15px;
+	    margin-left: -15px;
+/* 	    padding-bottom: 6px; */
+	  }
 	  	  
   </style>
   
@@ -393,7 +405,7 @@
               <div class="steps-header">
                 <p class="text-white text-center bg-dark mb-0">영화</p>
               </div>
-              <div class="steps-body" style="height: auto!important;">
+              <div class="steps-body">
                 <div class="movie-select h-auto">
                   <div class="movie-list text-md-left">
                   	<ul class="list-group">
@@ -451,9 +463,9 @@
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
-							<hr style="margin-left: 30px;">
+							<hr style="margin-left: 30px; margin-top: -16px; border: 0; margin-bottom: 5px; border-top: 1px solid rgba(0,0,0,.1);">
 							<div class="row mb-3 compare">
-								<div class="col-12" style="padding-left: 45px; height: 96px;">
+								<div class="col-12" style="padding-left: 45px; height: 84px;">
 					        		<span class="likeTheater first"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
 					        		<span class="likeTheater first"><kbd>${user.likeTheater2 }</kbd></span><br/><br/>
@@ -461,7 +473,7 @@
 					        		<span class="likeTheater first"><kbd>${user.likeTheater3 }</kbd></span><br/><br/>
                     			</div>
                     		</div>
-                    		<hr style="margin-left: 30px;">
+                    		<hr style="margin-left: 30px; margin-top: 5px; margin-bottom: 5px; border: 0; border-top: 1px solid rgba(0,0,0,.1);">
                     	</c:if>                    
                         <div class="row mx-0 compare">
                           <div class="franchise-select">
@@ -499,9 +511,9 @@
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
-							<hr style="margin-left: 40px;">
+							<hr style="margin-left: 40px; margin-top: -16px; border: 0; margin-bottom: 5px; border-top: 1px solid rgba(0,0,0,.1);">
 							<div class="row mb-3 compare">
-								<div class="col-12" style="padding-left: 55px; height: 96px;">
+								<div class="col-12" style="padding-left: 55px; height: 84px;">
 					        		<span class="likeTheater second"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
 					        		<span class="likeTheater second"><kbd>${user.likeTheater2 }</kbd></span><br/><br/>
@@ -509,7 +521,7 @@
 					        		<span class="likeTheater second"><kbd>${user.likeTheater3 }</kbd></span><br/><br/>
                     			</div>
                     		</div>
-                    		<hr style="margin-left: 40px;">
+                    		<hr style="margin-left: 40px; margin-top: 5px; margin-bottom: 5px; border: 0; border-top: 1px solid rgba(0,0,0,.1);">
                     	</c:if>                    
                         <div class="row mx-0 compare">
                           <div class="franchise-select">
@@ -547,9 +559,9 @@
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
-							<hr style="margin-left: 40px;">
+							<hr style="margin-left: 40px; margin-top: -16px; border: 0; margin-bottom: 5px; border-top: 1px solid rgba(0,0,0,.1);">
 							<div class="row mb-3 compare">
-								<div class="col-12" style="padding-left: 55px; height: 96px;">
+								<div class="col-12" style="padding-left: 55px; height: 84px;">
 					        		<span class="likeTheater third"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
 					        		<span class="likeTheater third"><kbd>${user.likeTheater2 }</kbd></span><br/><br/>
@@ -557,7 +569,7 @@
 					        		<span class="likeTheater third"><kbd>${user.likeTheater3 }</kbd></span><br/><br/>
                     			</div>
                     		</div>
-                    		<hr style="margin-left: 40px;">
+                    		<hr style="margin-left: 40px; margin-top: 5px; margin-bottom: 5px; border: 0; border-top: 1px solid rgba(0,0,0,.1);">
                     	</c:if>                    
                         <div class="row mx-0 compare">
                           <div class="franchise-select">
@@ -2071,7 +2083,8 @@
 $(function(){
 
 	<c:if test="${user.role eq 'user'}">
-		$("div.movie-list > ul").css("height","659px")
+		$("div.movie-list > ul").css("height","441px")
+		$("div.theater-list > ul").css("height","226px")
 	</c:if>
 		
 		franchiseSelector('first')
