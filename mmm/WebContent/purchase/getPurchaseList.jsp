@@ -272,11 +272,11 @@ purchaseQuantityList.forEach( (x,y) => {
 		    			 }).done( value => {
 							 var prodName = value.product.prodName
 							 if(Inventory.inventoryStatus==1){
-								 var Element = 	"<div class='prodName col-12'><span>"+prodName+"</span></div>";
-							 	 Element += "<div class='prodPinNo col-12'><span style='color: red; opacity:0.5;'>"+Inventory.inventoryProdPinNo+"</span></div>"						 
+								 var Element = 	"<div><strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
+							 	 Element += "<strong><div class='prodPinNo col-12'><span style='color: red; opacity:0.5;'>"+Inventory.inventoryProdPinNo+"</span></div></strong></div>"						 
 							 }else{
-								 var Element = 	"<strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
-							 	 Element += "<strong><div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div></strong>"						 
+								 var Element = 	"<div><strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
+							 	 Element += "<strong><div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div></strong></div>"						 
 							 }
 							 
 						 	$("div.modal-body div.row").append(Element);
