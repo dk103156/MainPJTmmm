@@ -5,17 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-  <!-- Bootstrap Extended Color -->
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
+
 
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -95,7 +88,7 @@
 	.slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	.slide_btn_box > .slide_btn_prev { left: -100px; }
 	.slide_btn_box > .slide_btn_next { right: -100px; }
-	.slide_pagination { position: relative; left: 75%; bottom: 150px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	.slide_pagination { position: relative; left: 70%; bottom: -20px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
 	.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
@@ -164,7 +157,7 @@
 					<div class="col-5 pl-0" id='trailer'>
 						<div class="row mx-0 mb-5">
 							<div id='trailer' class="col-12 embed-responsive embed-responsive-16by9">
-					  			<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JNlnQwHWSYw" allowfullscreen></iframe>
+					  			<iframe id="player" class="embed-responsive-item" src="https://www.youtube.com/embed/JNlnQwHWSYw" allowfullscreen></iframe>
 							</div>
 						</div>
 						<div class="row mx-0">					
@@ -172,8 +165,8 @@
 								<div class="card">
 								  <div class="card-body">
 								    <h5 class="card-title">가디언즈 오브 갤럭시</h5>
-								    <h6 class="card-subtitle mb-3 text-muted"><span>평점</span></h6>
-								    <h6 class="card-subtitle mb-3 text-muted"><span>개봉일</span></h6>
+								    <h6 class="card-subtitle mb-3 text-muted">평점 <span id="starRating"></span></h6>
+								    <h6 class="card-subtitle mb-3 text-muted">개봉일 <span id="releaseDate"></span></h6>
 								    <p class="card-text">자칭 전설의 무법자 스타로드, 그러나 현실은 우주를 떠도는 그저그런 좀도둑에 불과한 피터 퀼(크리스 프랫). 뜻하지 않게 갤럭시의 절대악 타노스와 로난의 타겟이 된 그는 감옥에서 만난 암살자 가모라(조 샐다나), 거구의 파이터 드랙스(데이브 바티스타), 현상금 사냥꾼 로켓(브래들리 쿠퍼)과 그루트(빈 디젤) 콤비와 불편한 동맹을 맺고 일명 ‘가디언즈 오브 갤럭시’를 결성한다. 범상치 않은 화려한 과거를 지닌 이들이 과연 120억 명의 운명을 구할 유일한 희망이 될 수 있을까?흩어지면 무법자, 뭉치면 히어로차원이 다른 마블의 새로운 세계를 목격하라!</p>
 								  </div>
 								</div>
@@ -478,13 +471,15 @@
 
 	
   async function getMovieInfo(){
-	  <!-- 여길바꾸렴 지행아 --><!-- 여길바꾸렴 지행아 --><!-- 여길바꾸렴 지행아 --><!-- 여길바꾸렴 지행아 -->
-	   var result =await ajaxPromise("/ticketing/json/getMovieList",{ } );
+	   var result =await ajaxPromise("/movie/json/getBoxOfficeList",{ } );
 	  
+// 	   console.log('result  : ' + JSON.stringify(result));
+	   
 	   result.forEach( (value,index)=> {
 		   
 		   var Element= "<div class='slide_content slide01 mr-3'>"
-			   Element+="<p><img src='"+value.poster+"' width=184 height=200></p>"
+			   Element+="<p><img name='bottom-poster' src='"+value.poster+"' width=184 height=250>"
+			   Element+= "<input name='movieNo' type='hidden' value='"+value.movieNo+"'></input></p>"
 			   Element+="</div>"
 		   
 		   $("div.slide_list").append(Element)
@@ -494,6 +489,36 @@
 	   
 	   slider();
   }
+  
+//   포스터 클릭 이벤트
+  $(document).on("click", "img[name='bottom-poster']", function(){
+	  
+	  console.log(this);
+	  var movieNo = $(this).parent().children("input[name='movieNo']").val();
+	  console.log('--- movieNo:  ' + movieNo);
+	  
+	  var result = ajaxPromise("/movie/json/getMovie" , {movieNo : movieNo}
+					).then(function(movie){
+						console.log(movie)						
+						console.log(movie.summary)		
+						
+// 						포스터 갈아끼기
+						$("img[name='poster']").attr('src',movie.poster );
+						
+// 						영상갈아끼기
+						$('#player').attr("src","http://www.youtube.com/embed/"+ "${movie.trailer}");
+						
+// 						제목, 평점, 개봉일, 줄거리 갈아끼기
+						$("#movieInfo > div > div > h5").text(movie.movieTitle);
+						$("#starRating").text(movie.starRating);
+						$("#releaseDate").text(movie.releaseDate);
+						$("#movieInfo > div > div > p").text(movie.summary);
+						
+					}) 
+	  
+	  
+	  
+  });
   
   </script>
   

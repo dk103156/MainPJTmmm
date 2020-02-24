@@ -545,9 +545,10 @@ $(function(){
 											<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" style="margin-top: 5px; margin-right: 20px; width: 200px">
 											
 											<button id="smsBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
-										         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button> 
+										         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button>
+										         <h6 id="confirmNum1" style=" padding-left:100px; red; margin-top: 8px;"></h6>  
 										</div>
-										<h6 id="confirmNum1" style="color: red;"></h6> 		
+												
 										<div class="row">	
 											<span style="padding-right: 10px; width: 97px;">인증번호</span>
 											<input type="number" id="numStr" class="form-control" style="width: 150px; margin-right: 20px;" placeholder="인증번호 6자리">
@@ -589,8 +590,9 @@ $(function(){
 											
 											<button id="sendBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
 										         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button> 
+											<h6 id="confirmNum3" style="color: red; padding-left:50px; red; margin-top: 8px;"></h6>
 										</div>
-										<h6 id="confirmNum3" style="color: red;"></h6> 		
+										 		
 										<div class="row">	
 											<span style="padding-right: 10px; width: 97px;">인증번호</span>
 											<input type="text" id="emailChkNum" class="form-control" style="width: 150px; margin-right: 20px;" placeholder="인증번호 ">

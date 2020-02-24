@@ -31,9 +31,7 @@
     margin: 0;
     padding: 0 0 0 0;
 }
-* {
-    box-sizing: border-box;
-}
+
 
 div {
     display: block;
@@ -44,7 +42,7 @@ body {
     overflow-y: scroll;
     letter-spacing: 0;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 16px;
     color: #444;
     font-weight: 400;
     font-family: 'Noto Sans KR', sans-serif;
@@ -521,7 +519,7 @@ ol, ul {
     overflow: hidden;
 }
 .mt70 {
-    margin-top: 70px!important;
+    margin-top: 30px!important;
 }
 
 .my-megabox-main .column .col.left {
@@ -1038,7 +1036,7 @@ $(function(){
 
 					<div class="cont-area">
 						<div class="total">
-							<p class="now">9816504 P</p>
+							<p class="now">입력하자!P</p>
 
 						</div>
 					</div>
@@ -1076,7 +1074,7 @@ $(function(){
 				<!-- coupon -->
 				<div class="coupon" id="myCoupon">
 					<div class="tit-area">
-						<p class="tit">관람권/쿠폰</p>
+						<p class="tit">상품권</p>
 
 						<a href="/mypage/movie-coupon" class="more"><i class="iconset ico-arr-right-gray" title="영화관람권 페이지로 이동">더보기</i></a>
 					</div>
@@ -1084,16 +1082,12 @@ $(function(){
 					<div class="list">
 						<ul>
 							<li>
-								<span>영화관람권</span>
-								<em>0 매</em>
+								<span>5천원권</span>
+								<em>몇!! 매</em>
 							</li>
 							<li>
-								<span>스토어교환권</span>
-								<em>0 매</em>
-							</li>
-							<li>
-								<span>할인/제휴쿠폰</span>
-								<em>0 매</em>
+								<span>1만원권</span>
+								<em>몇!! 매</em>
 							</li>
 						</ul>
 					</div>
@@ -1156,7 +1150,6 @@ $(function(){
 								<span id="chgLikeGenre3">${user.likeGenre3}</span>
 							</c:if>
 						</li>
-						<li><span class="font-gblue mr10">자주가는 극장</span></li>
 					</ul>
 				</div>
 				<!-- Modal -->
@@ -1262,91 +1255,6 @@ $(function(){
 					</div>
 				</form>
 				
-			</div>
-			<!--// right -->
-		</div>
-		<!--// column -->
-
-		<div id="myBokd">
-			<div class="tit-util mt70">
-				<h2 class="tit small">나의 예매내역</h2>
-
-				<a href="/mypage/bookinglist?tab=01" class="more" title="나의 예매내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-			</div>
-
-			<!-- my-reserve-history -->
-			<div class="my-reserve-history">
-				<ul>
-					<li class="no-result">
-						<div class="no-history-reservation">
-							예매 내역이 없습니다.
-						</div>
-					</li>
-				</ul>
-			</div>
-			<!--// my-reserve-history -->
-		</div>
-
-		<div id="myPurc">
-			<div class="tit-util mt70">
-				<h2 class="tit small">나의 구매내역</h2>
-
-				<a href="/mypage/bookinglist?tab=02" class="more" title="나의 구매내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-			</div>
-
-			<div class="table-wrap">
-				<table class="board-list line">
-					<caption>나의 구매내역 요약 표</caption>
-					<colgroup>
-						<col style="width:160px;">
-						<col style="width:140px;">
-						<col>
-						<col style="width:120px;">
-						<col style="width:80px;">
-					</colgroup>
-					<tbody>
-						<tr>
-						<td colspan="6" class="a-c">구매 내역이 없습니다.</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<!-- column -->
-		<div class="column mt70">
-			<!-- left -->
-			<div class="col left" id="mySbsc">
-				<div class="tit-util">
-					<h2 class="tit small">참여이벤트</h2>
-					<a href="/mypage/myevent" class="more" title="참여이벤트 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-				</div>
-
-				<div class="brd-list">
-					<ul>
-						<li class="no-result">
-							참여한 이벤트가 없습니다.
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!--// left -->
-
-			<!-- right -->
-			<div class="col right" id="myInq">
-				<div class="tit-util">
-					<h2 class="tit small">문의내역</h2>
-
-					<a href="/mypage/myinquiry?tab=" class="more" title="문의내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-				</div>
-
-				<div class="brd-list">
-					<ul>
-						<li class="no-result">
-							문의내역이 없습니다.
-						</li>
-					</ul>
-				</div>
 			</div>
 			<!--// right -->
 		</div>
