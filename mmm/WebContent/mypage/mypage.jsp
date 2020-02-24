@@ -218,7 +218,7 @@ $(function(){
 		
 	})
 	
-	
+	 
 	
 	$("#MypageHome").on('click',function(){	
 		$("#plusPage").load("/mypage/mypageUser",function(){
