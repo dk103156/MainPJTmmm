@@ -40,7 +40,7 @@ div {
 
 body {
     overflow: auto;
-    overflow-y: scroll;
+
     letter-spacing: 0;
     line-height: 1.5;
     font-size: 16px;

@@ -449,33 +449,27 @@ public class EventController {
 	@RequestMapping(value="getPreview", method=RequestMethod.GET)
 	public String getPreview(@RequestParam int previewNo, Model model, HttpSession session) throws Exception{
 		
-		System.out.println("/event/getPreview:GET start");
-		
 		if(session.getAttribute("user")!=null) {
 			User user = (User)session.getAttribute("user");
 			model.addAttribute("user", user);
 		}
 		
-
-		
 		Preview preview = eventService.getPreviewAd(previewNo);
-		
 		
 		Movie movie = new Movie();
 		movie.setMovieNo(preview.getMovieNo());
 		movie = movieService.getMovieByMovieNo(movie);
-		System.out.println("movieeeeeeeeeeeeee"+movie);
 //		트레일러...youtube API Method 호출 
-		String videoId = getYoutube(movie.getMovieTitle());
-		preview.setTrailer(videoId);
+//		String videoId = getYoutube(movie.getMovieTitle());
+//		preview.setTrailer(videoId);
 		
 		model.addAttribute("preview" , preview);
 		
+//		파일업로드가 필요없어졌어
 //		String[] fileArr = preview.getPreviewImage().split(",");
 //		model.addAttribute("fileArr", fileArr);
 		
 		
-		System.out.println("/event/getPreview:GET end");
 		return "forward:/event/getPreviewAd.jsp";
 
 	}
@@ -701,7 +695,6 @@ public class EventController {
 		quiz.setOptionFourth((String)map.get("optionFourth"));
 		quiz.setAnswer(Integer.parseInt((String)map.get("answer")));
 		quiz.setQuizStartDate(JavaUtil.ymdToTimestamp((String)map.get("quizStartDate")));
-		quiz.setQuizEndDate(JavaUtil.ymdToTimestamp((String)map.get("quizEndDate")));
 		
 		eventService.updateQuizAd(quiz);
 		model.addAttribute("quiz", quiz);
@@ -838,7 +831,6 @@ public class EventController {
 	@RequestMapping(value="updateWinningFlag")
 	public String updateWinningFlag(@RequestParam Map<String, Object> map, Model model) throws Exception{
 		
-		
 			System.out.println("/event/updateWinningFlag");
 			int previewNo = (Integer)map.get("previewNo");
 			int userNo = (Integer)map.get("userNo");
@@ -890,7 +882,7 @@ public class EventController {
 	
 	
 	
-	//(0:시작전, 1:진행중, 2:마감)
+	//(0:시작전, 1:진행중, 2:마감) 추첨하기
 	//@Scheduled(cron = "*/10 * * * * *") //매일 12시로 바꾸기
 	public void doRandWinner() throws Exception{
 		
@@ -915,7 +907,7 @@ public class EventController {
 
 	
 	
-
+	//시사이벤트 기대평 작성
 	@RequestMapping(value="addExpectLine")
 	public void addExpectLine(Comment comment, HttpSession session) throws Exception {
 	
@@ -932,7 +924,7 @@ public class EventController {
 	@RequestMapping(value="getPartList")
 	public String getPartList(@ModelAttribute("search")Search search, HttpSession session, Model model) throws Exception {
 		
-		System.out.println("getPartList start...");
+		System.out.println("[getPartList] start...");
 		
 		User user = (User)session.getAttribute("user");
 		
@@ -951,12 +943,14 @@ public class EventController {
 		model.addAttribute("user", user);
 		model.addAttribute("resultPage", resultPage);
 		
-		System.out.println("getPartList end...");
+		System.out.println("[getPartList] end...");
 		
 		return "/event/getApplyList.jsp";
 	}
 	
 	
+	
+	//출첵 페이지로 이동
 	@RequestMapping(value="addAttendance")
 	public String addAttendance(HttpSession session, Model model) throws Exception {
 	

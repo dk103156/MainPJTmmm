@@ -37,10 +37,10 @@
 </head>
 <body>
 
-<div class="container mt-2">
+<div class="container point" style="margin-top : 47px;">
   <div class="row">
     <div class="col d-inline">
-		<h2> Point List </h2>
+		<h2><Strong>Point List</Strong></h2>
 	</div>
 	<div class="col d-inline">
 		<h5 class="text-right">보유 포인트 : ${totalPoint} p</h5>
