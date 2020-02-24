@@ -26,6 +26,7 @@
     float: right;
     width: calc(100% - 260px);
 }
+
 #contents {
     width: 100%;
     margin: 0;
@@ -39,7 +40,7 @@ div {
 
 body {
     overflow: auto;
-    overflow-y: scroll;
+
     letter-spacing: 0;
     line-height: 1.5;
     font-size: 16px;
@@ -125,11 +126,6 @@ input {
 button, input {
     overflow: visible;
 }
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-size: 1em;
-    line-height: 1.15;
-}
 
 input[type="hidden" i] {
     display: none;
@@ -167,11 +163,6 @@ input[type="hidden" i] {
     background-repeat: no-repeat;
 }
 
-i {
-    font-style: italic;
-}
-
-
 .my-magabox-info .top .photo .wrap .img {
     overflow: hidden;
     display: block;
@@ -200,7 +191,7 @@ button, select {
     border-radius: 93px;
 }
 
-img {
+.imgs {
     border: 0;
 }
 
@@ -366,50 +357,11 @@ p {
     letter-spacing: -1px;
 }
 
-.my-magabox-info .bottom .point .cont-area .total .division {
-    display: table;
-    float: left;
-}
-
-.my-magabox-info .bottom .point .cont-area .total .division .cell {
-    display: table-cell;
-    height: 44px;
-    padding: 0 0 0 36px;
-    vertical-align: middle;
-    background: url(https://img.megabox.co.kr/static/pc/images/common/ico/ico-equal-black.png) no-repeat 10px center;
-}
-
-.my-magabox-info .bottom .point .cont-area .total .division .cell p span {
-    display: inline-block;
-    width: 60px;
-}
 
 em {
     font-style: normal;
 }
 
-.my-magabox-info .bottom .point .cont-area .change {
-    overflow: hidden;
-    margin: 10px 30px 0 0;
-    padding: 10px 0 0 0;
-    border-top: 1px solid #d8d9db;
-}
-
-.my-magabox-info .bottom .point .cont-area .change .save {
-    float: left;
-}
-
-.my-magabox-info .bottom .point .cont-area .change .save em {
-    margin-left: 4px;
-    color: #222;
-}
-
-.my-magabox-info .bottom .point .cont-area .change .del {
-    float: left;
-    position: relative;
-    margin: 0 0 0 10px;
-    padding: 0 0 0 11px;
-}
 
 .my-magabox-info .bottom .theater {
     float: left;
@@ -993,10 +945,10 @@ $(function(){
 					<div class="wrap">
 						<button type="button" class="img">
 						<c:if test="${empty user.profile.trim()}">	
-							<img src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
+							<img class="imgs" src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
 						</c:if>
 						<c:if test="${! empty user.profile.trim()}">
-							<img alt="" src="/resources/image/${user.profile}"/>
+							<img class="imgs" alt="" src="/resources/image/${user.profile}"/>
 						</c:if>
 						</button>
 					</div>
@@ -1036,8 +988,8 @@ $(function(){
 
 					<div class="cont-area">
 						<div class="total">
-							<p class="now">입력하자!P</p>
-
+							<p class="now">${user.totalPoint}P</p><br><br><br>
+							<p>누적포인트 : ${user.accPoint}P</p>
 						</div>
 					</div>
 				</div>

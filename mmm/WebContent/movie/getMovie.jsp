@@ -78,6 +78,8 @@
     
 	<script type="text/javascript">
 	
+	
+	
 // 	평점 내리기
 	function fncDoRating(){
 		var movieNo = $("button[name='wish-btn']").parent().children('input[name="movieNo"]').val();
@@ -186,7 +188,7 @@
 // 	예매하기로 넘어가는 함수
 	function fncTicketing(ticketing_btn){
 // 		var movieName = $.trim($('#movieTitle').text()).replace(/ /g, '');;
-		var movieName = $('#movieTitle').text().replace(/ /g, '');;
+		var movieName = $('#movieTitle').text();
 		alert(movieName);
 		self.location = "/ticketing/addTicketing?movieName="+movieName
 	};
@@ -194,6 +196,7 @@
 	
 	
 	$(function(){
+		
 // 		영화 번호 
 		var movieNo = $("button[name='wish-btn']").parent().children('input[name="movieNo"]').val();
 		console.log(' movieNo'+ movieNo)
@@ -413,19 +416,21 @@
 <!-- 			    한줄평 및 리뷰  -->
 				<div class="row border-bottom pb-3 mt-3">
 					<div class="col">
-					  <div class="bg-dark-cs p-2 text-center  mb-2"><h6 class="m-0">한줄평</h6></div>
+					  <div id="cmt-table" class="bg-dark-cs p-3 text-center  mb-3"><h6 class="m-0">한줄평</h6></div>
 					  
 						<table class="table table-sm table-hover text-center">
-<!-- 						  <thead class="thead-dark"> -->
-<!-- 						    <tr > -->
-<!-- 						      <th scope="col">한줄평</th> -->
-<!-- 						      <th scope="col">포인트 구분</th> -->
-<!-- 						      <th scope="col">적립/사용 포인트</th> -->
-<!-- 						    </tr> -->
-<!-- 						  </thead> -->
 						  <tbody>
 					          
 					<!--         list size만큼 for문으로 Point 내역 출력  -->
+						   <c:if test="${empty resultCmtMap.list}">
+						   	<div class="border-bottom text-center my-auto" style="height: 100px;">
+						   		<p>처음으로 한줄평을 남겨보세요.</p>
+						   		<button type="button" class="btn btn-sm btn-yellow-cs" data-toggle="modal" data-target="#modal-addOneline">
+										  한줄평 작성
+								</button>
+						   	</div>
+						   </c:if>
+						   <c:if test="${! empty resultCmtMap.list}">
 					        <c:forEach var="oneline" items="${resultCmtMap.list}">
 						      <tr >
 						        <th scope="col" class="text-left"> ${oneline.commentContent}</th>
@@ -434,14 +439,11 @@
 						        </td>
 						      </tr>
 					        </c:forEach>  
-					          
+					       </c:if>
 					          
 						  </tbody>
 						</table>
 					  
-					</div>
-					<div class="col">
-					  <div class="bg-dark-cs p-2 text-center mb-2"><h6 class="m-0">리뷰</h6></div>
 					</div>
 				</div>
 			</div>

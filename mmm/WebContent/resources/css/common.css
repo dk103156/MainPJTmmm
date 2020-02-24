@@ -30,12 +30,13 @@
 .font-bolder-cs{
 	font-weight : bolder;
 }
-body, th, td, input, select, textarea, button {
+
+container.point, th, td, input, select, textarea, button {
     font-size: 13px;
     line-height: 1.5;
     font-family: 'Noto Sans KR', sans-serif;
     color: #222;
-    letter-spacing: -0.05em;
+    letter-spacing : normal;
 }
 
 .btn-outline-light:hover {

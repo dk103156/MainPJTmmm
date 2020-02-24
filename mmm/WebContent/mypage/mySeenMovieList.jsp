@@ -59,7 +59,6 @@ h2.tit {
 
 body {
     overflow: auto;
-    overflow-y: scroll;
     letter-spacing: 0;
     line-height: 1.5;
     font-size: 16px;
@@ -214,7 +213,7 @@ a {
 		<!-- 내가 본 영화 -->
 		<div class="board-list-util mySeenMovie myMovieStory">
 			<p class="result-count">
-				<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b>건</strong>
+				<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b> 건</strong>
 			</p>
 		</div>
 	
