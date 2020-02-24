@@ -146,7 +146,7 @@
 		padding-right: 5px;
 	  }
 	
-	  a{
+	  a.ticketing {
 	    display: block;
     	white-space: nowrap;
     	text-overflow: ellipsis;
@@ -395,38 +395,34 @@
               </div>
               <div class="steps-body" style="height: auto!important;">
                 <div class="movie-select h-auto">
-                  <div class="sortmenu">
-                    <a class="btn btn-primary btn-sm" href="#">예매율순</a>
-                    <a class="btn btn-secondary btn-sm" href="#">가나다순</a>
-                  </div>
                   <div class="movie-list text-md-left">
                   	<ul class="list-group">
 	                  	<c:forEach var="i" items="${movieList}">
 	                      <li class="list-group-item py-2" title="${i.movieName}">
 	                      
 	                       <c:if test= "${ i.rating == '전체'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-all">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
 	                       </c:if>	                      
 	                 
 	                       <c:if test= "${ i.rating == '12세'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-12">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
 	                       </c:if>
 	                       
 	                       <c:if test= "${ i.rating == '15세'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-15">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
 	                       </c:if>
 	                       
 	                       <c:if test= "${ i.rating == '18세'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-18">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
