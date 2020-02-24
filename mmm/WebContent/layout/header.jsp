@@ -102,10 +102,10 @@
 					<li style="text-align: right; padding-top: 7px; padding-bottom: 7px; padding-right: 5px;"> 
 						<c:choose> 
 					    <c:when test="${not empty sessionScope.user }">   
-					       <a href="/user/logout" class="login">LOGOUT</a>
+					       <a href="/user/logout" class="login borderRight">LOGOUT</a>
 					    </c:when>
 					    <c:otherwise>    
-					       <a href="/user/login" id=mainLoginBtn class="login"><span>LOGIN</span></a>
+					       <a href="/user/login" id=mainLoginBtn class="login borderRight"><span>LOGIN</span></a>
 					    </c:otherwise>                  
 					</c:choose>
 						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span>JOIN</span></a>
@@ -121,7 +121,7 @@
 					<div class="col-6 px-0"></div>
 					<div class="col-6 px-0 headerLogo text-center">
 						<span>
-							<a href="#" title="MMM">
+							<a href="/main" title="MMM">
 								<img src="../resources/image/logo/logo.png" alt="MMM" width=68>
 							</a>	
 						</span>

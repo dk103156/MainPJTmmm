@@ -27,7 +27,9 @@ body {
 	height: 100%;
 	left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
+	font-size : 16px;
 }
+
 #contaniner{
 	width: 800px;
 	display: inline-block;
@@ -60,15 +62,12 @@ body {
     background-color: #333;
 }
 
-* {
-    box-sizing: border-box;
-}
+
 
 
 #lnb .tit a {
     display: block;
     width: 100%;
-    font-size: 1.2em;
     line-height: 90px;
     text-align: center;
     color: #fff;
@@ -129,7 +128,7 @@ body {
     background-color: #eaebed;
 }
 
-p {
+p.mypages {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -232,7 +231,7 @@ $(function(){
 			<div class="inner-wrap">
 				<div class="lnb-area">
 					<nav id="lnb">
-						<p class="tit"><a href="#" id ="MypageHome" title="Mypage">Mypage Home</a></p>
+						<p class="tit mypages"><a href="#" id ="MypageHome" title="Mypage">Mypage Home</a></p>
 						<input type="hidden" id="userNo" name="userNo" value="${user.userNo}"> 
 			
 

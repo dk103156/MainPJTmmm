@@ -21,9 +21,9 @@
 <style>
 body {
 	position: absolute;
-	text-align: center;
 	width: 100%;
 	height: 100%;
+	font-size: 16px;
 	left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -33,6 +33,7 @@ body {
 	width: 800px;
 	display: inline-block;
 	vertical-align: middle;
+	text-align: center;
 } 
 
 .col-left{
