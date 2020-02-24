@@ -16,26 +16,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 <!-- 	SweetAlert2 CDN -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
 
 	$(function(){
 		
-		$('#updateBtn').on('click', function(){
-			
-			Swal("Are you sure you want to do this?", {
-				  buttons: ["Oh noez!", true],
-				});
-		})
-		
 		$('#applyBtn').on('click', function(){
 			
-			
-			console.log('응모하기버튼눌렀어요')
 			console.log('userNo  : '+ $("#un").val());
 			console.log('previewNo  : '+ $("#pn").val());
+			
 			if($("#un").val()==0){
 				return;
 			}
@@ -93,18 +85,18 @@
 </script>
 <style>
 	
-	img {
+	img.prevImg {
 		width : 180px;
 		max-width :100%;
 		height : auto;
 	}
 
 	div.text-dark {
-			font-size: 3rem;
-		}
+		font-size: 3rem;
+	}
 		
 	div.text-muted {
-			font-size:2rem;
+		font-size:2rem;
 	}	
 	
 </style>
@@ -113,7 +105,7 @@
 
 </head>
 <body>
-
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
  	<form>
 
@@ -137,20 +129,16 @@
 				${preview.previewPlace}
 				&nbsp
 				
-				
 				<label>시사회일시</label>
 				${preview.preDate} ${preview.previewTime}
 					
-				
 				<br>
 				<label>당첨발표일자</label>
 				${preview.winDate}
 				&nbsp
 				
-			
 				<label>당첨인원수</label>
 				${preview.winnerCount}
-				
 				
 				</div>
 			 </div>
@@ -162,10 +150,10 @@
 		
 				<div class="col-md-3">		    
 					<div>
-			    	<c:forEach var = "image" items ="${fileArr}">
-			    		<img src="${image}"/>
+<%-- 			    	<c:forEach var = "image" items ="${fileArr}"> --%>
+			    		<img class="prevImg" src="${image}"/>
 			    	<br/>
-			    	</c:forEach>
+<%-- 			    	</c:forEach> --%>
 					</div>	
 				</div>
 				

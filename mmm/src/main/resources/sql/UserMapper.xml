@@ -128,6 +128,8 @@
 	      <if test="likeTheater1 != null">like_theater1= #{likeTheater1},</if>
 	      <if test="likeTheater2 != null">like_theater2= #{likeTheater2},</if>
 	      <if test="likeTheater3 != null">like_theater3= #{likeTheater3},</if>
+	      <if test="totalPoint != null">total_point= #{totalPoint},</if>
+	      <if test="accPoint != null">acc_point= #{accPoint},</if>
 	      <if test="profile != null">profile= #{profile},</if>
 	      update_pw_date = SYSTIMESTAMP
 	    </trim>
