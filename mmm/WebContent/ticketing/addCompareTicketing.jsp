@@ -326,7 +326,7 @@
 	  	width : 181px;
 	  } */
 	  
-	  .row {
+	  div.row.compare {
 	    display: -ms-flexbox;
 	    display: flex;
 	    -ms-flex-wrap: wrap;
@@ -378,7 +378,7 @@
       <!-- 비교 예매 -->
       <div class="compareTicketing">
         <!-- 타이틀 -->
-     <div class="row mb-2">
+     <div class="row mb-2 compare">
      	<div class="col-12 navi" style="margin-left: 11px;">
      		<div class="resetSelection" style="clear:both; float:right; height:30px"></div>
      	</div>
@@ -388,7 +388,7 @@
 
         <div class="steps">
           <!-- 영화 선택-->
-          <div class="row">
+          <div class="row compare">
             <div class="col-3 px-0 h-100">
               <div class="steps-header">
                 <p class="text-white text-center bg-dark mb-0">영화</p>
@@ -442,17 +442,17 @@
                 <p class="text-white text-center  bg-dark mb-0">프랜차이즈 & 극장</p>
               </div>
               <div class="steps-body">
-                <div class="row mx-0">
+                <div class="row mx-0 compare">
                     <div class="col-4" style="left: 18px;">
                    	<c:if test="${user.role eq 'user'}">
-                    		<div class="row mb-3">
+                    		<div class="row mb-3 compare">
                     			<div class="col-12" style="padding-left: 45px;">	
 		        					<span class="font-weight-bold"><kbd>자주가는 극장</kbd></span><br>
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
 							<hr style="margin-left: 30px;">
-							<div class="row mb-3">
+							<div class="row mb-3 compare">
 								<div class="col-12" style="padding-left: 45px; height: 96px;">
 					        		<span class="likeTheater first"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
@@ -463,7 +463,7 @@
                     		</div>
                     		<hr style="margin-left: 30px;">
                     	</c:if>                    
-                        <div class="row mx-0">
+                        <div class="row mx-0 compare">
                           <div class="franchise-select">
 	                           <ul class="list-group first" style="padding-left: 30px;">
 	                           		 <li class="list-group-item first text-center" style="width: 160px;">
@@ -476,7 +476,7 @@
 							    </ul>
                           </div>
                         </div>
-                        <div class="row mx-0">
+                        <div class="row mx-0 compare">
                           <div class="franchise-list text-center" style="padding-left: 45px; display: none;" >
 	                           <ul class="list-group first">
 				                  	<c:forEach var="i" items="${franchiseList}">
@@ -493,14 +493,14 @@
                     </div>
                     <div class="col-4" style="left: 8px;">
                  	<c:if test="${user.role eq 'user'}">
-                    		<div class="row mb-3">
+                    		<div class="row mb-3 compare">
                     			<div class="col-12" style="padding-left: 55px;">	
 		        					<span class="font-weight-bold"><kbd>자주가는 극장</kbd></span><br>
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
 							<hr style="margin-left: 40px;">
-							<div class="row mb-3">
+							<div class="row mb-3 compare">
 								<div class="col-12" style="padding-left: 55px; height: 96px;">
 					        		<span class="likeTheater second"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
@@ -511,7 +511,7 @@
                     		</div>
                     		<hr style="margin-left: 40px;">
                     	</c:if>                    
-                        <div class="row mx-0">
+                        <div class="row mx-0 compare">
                           <div class="franchise-select">
 	                           <ul class="list-group second" style="padding-left: 40px;">  
 	                           		 <li class="list-group-item second text-center">
@@ -524,7 +524,7 @@
 							    </ul>
                           </div>
                         </div>
-                        <div class="row mx-0">
+                        <div class="row mx-0 compare">
                           <div class="franchise-list text-center" style="padding-left: 40px; display: none;">
 	                           <ul class="list-group second">
 				                  	<c:forEach var="i" items="${franchiseList}">
@@ -541,14 +541,14 @@
                     </div>
                     <div class="col-4">
                     	<c:if test="${user.role eq 'user'}">
-                    		<div class="row mb-3">
+                    		<div class="row mb-3 compare">
                     			<div class="col-12" style="padding-left: 55px;">
 		        					<span class="font-weight-bold"><kbd>자주가는 극장</kbd></span><br>
 		        					<span class="font-weight-light text-sm-left" style='opacity : 0.4; line-height: 25px'>항목을 클릭하시면 자동선택됩니다.</span>
 								</div>
 							</div>
 							<hr style="margin-left: 40px;">
-							<div class="row mb-3">
+							<div class="row mb-3 compare">
 								<div class="col-12" style="padding-left: 55px; height: 96px;">
 					        		<span class="likeTheater third"><kbd>${user.likeTheater1 }</kbd></span><br/><br/>
 		
@@ -559,7 +559,7 @@
                     		</div>
                     		<hr style="margin-left: 40px;">
                     	</c:if>                    
-                        <div class="row mx-0">
+                        <div class="row mx-0 compare">
                           <div class="franchise-select">
 	                           <ul class="list-group third" style="padding-left: 40px;">  
 	                           		<li class="list-group-item third text-center">
@@ -572,7 +572,7 @@
 							    </ul>
                           </div>
                         </div>
-                        <div class="row mx-0">
+                        <div class="row mx-0 compare">
                           <div class="franchise-list text-center" style="padding-left: 40px; display: none;">
 	                           <ul class="list-group third">
 				                  	<c:forEach var="i" items="${franchiseList}">
@@ -593,7 +593,7 @@
             </div>
           </div>
           
-          <div class="row">
+          <div class="row compare">
             <!-- 날짜 선택 -->
             <div class="col-3 px-0 h-100">
               <div class="steps-header">
@@ -623,7 +623,7 @@
                 <p class="text-white text-center bg-dark mb-0">시간</p>
               </div>
               <div class="steps-body text-center" style="height: 397px;">
-                  <div class="row">
+                  <div class="row compare">
                    	 <div class="col-4">
                           <div class="sortmenu" style="margin-left: 3px;">
                             <span class="morning">조조</span>

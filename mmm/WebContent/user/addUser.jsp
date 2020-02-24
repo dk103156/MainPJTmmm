@@ -233,8 +233,70 @@ $(function(){
 				}, error : function() {
 						console.log("실패");
 				}
-			});
-		});
+			});//ajax 끝
+		});//아이디 중복체크
+		
+		// 이메일중복체크(1 = 중복 / 0 != 중복)
+		$('#email').keyup(function() {
+			console.log("클릭!!!")
+			var email = $('#email').val();
+			console.log(email);
+			$.ajax({
+				url : '/user/json/emailCheckDupl/',
+				method : "post" ,
+				datatype : "json" ,
+				headers : {
+					"Accept" : "application/json" ,
+					"Content-Type" : "application/json"
+				} ,
+				data : JSON.stringify({
+					email : email
+				}), 
+				success : function(data) {
+					console.log("false = 중복o / true = 중복x : "+ data);							
+					
+					if (data == 0) {
+							// 0 : 이메일이 중복되는 문구
+							$("#confirmNum1").text("등록된 이메일입니다 :p");
+							$("#confirmNum1").css("color", "red");
+							$("#addUserBtn").attr("disabled", true);
+					}else{
+						$("#confirmNum1").text("");
+						$("#addUserBtn").attr("disabled", false);
+					} 
+				}, error : function() {
+						console.log("실패");
+					}
+				})//ajax 끝
+			});//중복체크 끝
+		
+		// 휴대폰중복체크(1 = 중복 / 0 != 중복)
+		$('#phone').keyup(function() {
+			console.log("클릭!!!")
+			var phone = $('#phone').val();
+			console.log(phone);
+			$.ajax({
+				url : '/user/json/phoneCheckDupl/'+ phone,
+				type : 'get',
+				success : function(data) {
+					console.log("false = 중복o / true = 중복x : "+ data);							
+					
+					if (data == 0) {
+							// 0 : 휴대폰번호가 중복되는 문구
+							$("#confirmNum2").text("등록된 전화번호입니다 :p");
+							$("#confirmNum2").css("color", "red");
+							$("#addUserBtn").attr("disabled", true);
+					}else{
+						$("#confirmNum2").text("");
+						$("#addUserBtn").attr("disabled", false);
+					} 
+					}, error : function() {
+							console.log("실패");
+					}
+			})//ajax 끝
+		});//중복체크 끝
+		
+		
 	
 });			
 		    
@@ -312,13 +374,29 @@ $(function(){
   			<div class="form-group row" style="text-align: center;">
     			<label for="email" class="col-sm-3 col-form-label">이메일</label>
     			<div class="col-sm-9">
-      				<input type="email" class="form-control" id="email" name="email" placeholder="이메일">
+	    			<c:choose> 
+					    <c:when test="${not empty sessionScope.email }">   
+					       <input type="text" class="form-control" id="email" name="email" value="${sessionScope.email}" readonly>
+					    </c:when>
+					    <c:otherwise>    
+							<input type="text" class="form-control" id="email" name="email" placeholder="- 없이 입력해주세요.">
+							<h6 id="confirmNum2" style="color: red; margin-top: 8px;"></h6>
+					    </c:otherwise>                  
+					</c:choose>
     			</div>
   			</div> 
 			<div class="form-group row" style="text-align: center;">
     			<label for="phone" class="col-sm-3 col-form-label">휴대전화번호</label>
     			<div class="col-sm-9">
-      				<input type="text" class="form-control" id="phone" name="phone" placeholder="-없이 입력해주세요.">
+    				<c:choose> 
+					    <c:when test="${not empty sessionScope.phone }">   
+					       <input type="text" class="form-control" id="phone" name="phone" value="${sessionScope.phone}" readonly>
+					    </c:when>
+					    <c:otherwise>    
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="- 없이 입력해주세요.">
+							<h6 id="confirmNum2" style="color: red; margin-top: 8px;"></h6>
+					    </c:otherwise>                  
+					</c:choose>
     			</div>
   			</div>
   			<div class="form-group row" style="text-align: center;">
