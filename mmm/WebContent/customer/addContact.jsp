@@ -173,6 +173,7 @@ $(document).ready(function() {
 </head> 
 
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 
 	<div class="page-header text-dark">

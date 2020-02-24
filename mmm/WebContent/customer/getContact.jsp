@@ -208,6 +208,7 @@
 </head> 
 
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 	<div class="page-header text-dark">
 	       <h3><i class="fas fa-comments"></i>고객센터</h3>
