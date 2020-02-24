@@ -108,9 +108,9 @@
 					       <a href="/user/login" id=mainLoginBtn class="login borderRight"><span>LOGIN</span></a>
 					    </c:otherwise>                  
 					</c:choose>
-						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span>JOIN</span></a>
-						<a href="/mypage/mypage" class="myPage borderRight"><span>MY PAGE</span></a>
-						<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
+						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span style="margin-left: 5px;">JOIN</span></a>
+						<a href="/mypage/mypage" class="myPage borderRight"><span style="margin-left: 7px;">MY PAGE</span></a>
+						<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span style="margin-left: 4px;">CUSTOMER CENTER</span></a>
 					</li>
 			</ul>
 		</div>	<!-- end of navBar --> 
