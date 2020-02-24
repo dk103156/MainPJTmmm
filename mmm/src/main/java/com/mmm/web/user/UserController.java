@@ -761,6 +761,7 @@ public class UserController {
 				
 				model.addAttribute("user",user);
 				
+				
 				return "forward:/user/extraAddUser.jsp";
 			}
 			
