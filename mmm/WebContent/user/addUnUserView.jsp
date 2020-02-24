@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -290,8 +292,15 @@ $(function(){
 		  	<div class="form-group row" style="font-size: 12pt; text-align: center; ">
 				<label for="staticEmail" class="col-sm-3 col-form-label">휴대전화번호</label>
 				<div class="col-sm-9">
-					<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" aria-label="Recipient's username"
-						aria-describedby="basic-addon2">
+					<c:choose> 
+					    <c:when test="${not empty sessionScope.phone }">   
+					       <input type="text" class="form-control" id="phone" name="phone" value="${sessionScope.phone}" readonly>
+					    </c:when>
+					    <c:otherwise>    
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="- 없이 입력해주세요.">
+							<h6 id="confirmNum2" style="color: red; margin-top: 8px;"></h6>
+					    </c:otherwise>                  
+					</c:choose>
 				</div>
 				<h6 id="confirmNum1" style="color: red;"></h6>
 			</div>

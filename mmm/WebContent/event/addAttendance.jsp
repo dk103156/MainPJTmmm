@@ -39,7 +39,7 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
-	var weekList = ['일','월','화','수','목','금','토']; 
+	  var weekList = ['일','월','화','수','목','금','토']; 
 	  var calendarEl = document.getElementById('calendar');
 	  
 	  var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -51,9 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    select: function(info) {
 	       
 	       var check =moment(info.start).format('YYYY-MM-DD');
-	       //console.log(check);
 	       var today = moment().format('YYYY-MM-DD');
-	       //console.log(today);
 	       
 	       if(check < today){
 	    	   //previous date
@@ -218,26 +216,12 @@ $(function(){
 <style type="text/css">
 
 
- body {
-		
-	    overflow: auto;
-	    overflow-y: scroll;
-	     margin: 0;
-		padding: 0;
-		font-size: 14px;
-	    letter-spacing: 0;
-	    line-height: 1.5;
-	    color: #444;
-		font-family: 'Noto Sans KR', sans-serif;
-		
-}
- #calendar{
-  max-width: 800px;
-  margin: 30px auto;
- }
- 
+	 #calendar{
+ 	 	max-width: 800px;
+  		margin: 30px auto;
+	 }
 	
-			p.lbtxt{	
+	p.lbtxt{	
 		letter-spacing: -0.05em !important;
 		font-family: 'Nanum Gothic';
 		margin: 0;
@@ -253,6 +237,7 @@ $(function(){
 
 </head>
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 <br/><br/>
 <h4><i class="fas fa-calendar-check"></i>&nbsp;매일매일 출첵 이벤트</h4>
