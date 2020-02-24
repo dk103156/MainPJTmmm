@@ -76,17 +76,11 @@
 		font-weight bold;
 		}
 
-	h5{
-		font-family: 'Noto Sans KR', sans-serif;
-		
-	
-	}
-	
 	*{
 		margin:0; 
 		padding:0; 
 		border:0;
-		}
+	}
 	
 	.owl-carousel{}
 	
@@ -166,14 +160,9 @@
 		  margin-left: 10;
 		}
 		
-		img {
-		
-		}
-		
      	div{
         width: 100%;
    	  	}
-    
     
 
 		ul{
@@ -232,6 +221,7 @@
 
 <body>
 
+<%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
 
 <div class="container">
 <br/><br/>
@@ -302,7 +292,7 @@
 
 		<c:set var="i" value="0" />
 		 <c:forEach var="preview" items="${doneList}">
-		  <div class="col-sm-6 col-md-4"">
+		  <div class="col-sm-6 col-md-4">
 		    <div class="thumbnail">
 	    	<div name="thumbImage">
 	    	<figure>

@@ -27,11 +27,16 @@
  
  }
  
- .d-block{
-  width:350px;
+ .prevCarousel{
+  width:450px;
   height:auto;
   margin-top:0;
-  margin-left:100px;
+  margin-left:15px;
+ }
+ .d-block{
+  width:450px;
+  height:auto;
+  margin-top:0;
  }
  .carousel-inner > .item > img {
   width:640px;
@@ -72,14 +77,14 @@
  
  	.img.quiz{
         position: relative;
-        width: 500px;
+        width: 480px;
         height: 345px;
         background-image: url(/resources/image/mainPage/preview/quiz_img.jpg);                                                               
         background-size: cover;
     }
  	.img.attend{ 									
         position: relative;
-        width: 500px;
+        width: 480px;
         height: 345px;
         background-image: url(/resources/image/mainPage/preview/attend.jpg);                                                               
         background-size: cover;
@@ -276,8 +281,7 @@
 								<div class="postImage col-12 mb-2 text-center">
 								<div class="img quiz">
 								   <div class="content">
-									<h1>MOVMOVMOV</h1>
-									<h2>MOVIE 퀴즈</h2>
+									<h4>이런 퀴즈 어때요?</h4>
 								  </div>
 								<div class="img-cover"></div>
 								</div>
@@ -288,7 +292,6 @@
 										<a style="color:black;" href="/event/getQuizList"> </a>
 									</h4>
 								</div>
-								
 								<div class="postContent col-12 mb-2">
 									<p></p>
 								</div>
@@ -298,8 +301,7 @@
 								<div class="postImage col-12 mb-2 text-center">
 									<div class="img attend">
 								   <div class="content">
-									<h2>매일매일 출석체크</h2>
-									<h2>이벤트</h2>
+									<h4>매일매일 출석체크</h4>
 								  </div>
 								<div class="img-cover"></div>
 								</div>
@@ -324,15 +326,15 @@
 							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 							  <div class="carousel-inner">
 							    <div class="carousel-item active">
-							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block" id="preview1" alt="...">
+							      <img src="" class="prevCarousel" id="preview1" alt="...">
 							    	<input type="hidden" name="previewNo1" value=""> 
 							    </div>
 							    <div class="carousel-item">
-							      <img src="/resources/image/mainPage/preview/ccc.PNG" class="d-block" id="preview2" alt="...">
+							      <img src="" class="prevCarousel" id="preview2" alt="...">
 							    	<input type="hidden" name="previewNo2" value=""> 
 							    </div>
 							    <div class="carousel-item">
-							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block" id="preview3" alt="...">
+							      <img src="" class="prevCarousel" id="preview3" alt="...">
 							    	<input type="hidden" name="previewNo3" value=""> 
 							    </div>
 							  </div>

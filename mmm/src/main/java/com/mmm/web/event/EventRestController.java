@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
@@ -266,6 +267,7 @@ public class EventRestController {
 	
 	
 //한줄평 등록하기	
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="json/addExpectLine")
 	public void addExpectLine(@RequestBody Map<String, Object> map) throws Exception {
 		
