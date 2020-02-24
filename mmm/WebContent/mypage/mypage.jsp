@@ -28,6 +28,7 @@ body {
 	left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
 }
+
 #contaniner{
 	width: 800px;
 	display: inline-block;
