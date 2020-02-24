@@ -59,7 +59,6 @@ h2.tit {
 
 body {
     overflow: auto;
-
     letter-spacing: 0;
     line-height: 1.5;
     font-size: 16px;

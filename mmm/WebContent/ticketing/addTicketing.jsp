@@ -31,10 +31,15 @@
 
 <style>
 
-
+	  .mb-2, .my-2 {
+	    margin-bottom: .5rem!important;
+	    margin-top: .5rem !important;
+	  }
+	  
 	  body {
  	  	font-family: 'Noto Sans KR', sans-serif !important;
  	  }
+ 	  
 	  ul li {
 	    list-style-type:none;
 	  }
@@ -384,7 +389,7 @@ $(function(){
 	
    <div class="container">
       <!-- 비교 예매 -->
-      <div class="compareTicketing">
+      <div class="addTicketing">
         <!-- 타이틀 -->
      <div class="row mb-2">
      	<div class="col-12 navi" style="margin-left: 15px;">
@@ -561,7 +566,7 @@ $(function(){
           </div><!-- end of col -->
          </div><!-- end of steps -->
 		</div><!-- end of row -->
-	</div><!-- end of compareTicketing -->
+	</div><!-- end of addTicketing -->
 	</div><!-- end of container -->
 	
 <div class="loading" id="ticket_loading" style="display: none;">
