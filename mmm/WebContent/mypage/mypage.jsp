@@ -61,15 +61,13 @@ body {
     background-color: #333;
 }
 
-* {
-    box-sizing: border-box;
-}
+
 
 
 #lnb .tit a {
     display: block;
     width: 100%;
-    font-size: 1.2em;
+    font-size: 16px;
     line-height: 90px;
     text-align: center;
     color: #fff;
