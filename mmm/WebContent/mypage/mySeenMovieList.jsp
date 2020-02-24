@@ -19,11 +19,13 @@
 <title>Insert title here</title>
 <style type="text/css">
 	
+div.container {
+	font-family: 'Noto Sans KR', sans-serif !important;
 
+}
 
 h2.tit {
-    padding: 0 0 26px 0;
-    padding-left: 30px;
+    padding: 0;
     font-size: 1.8666em;
     font-weight: 400;
     letter-spacing: -1px;
@@ -57,10 +59,9 @@ h2.tit {
 
 body {
     overflow: auto;
-    overflow-y: scroll;
     letter-spacing: 0;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 16px;
     color: #444;
     font-weight: 400;
     font-family: 'Noto Sans KR', sans-serif;
@@ -70,8 +71,7 @@ body {
     position: relative;
     float: left;
     margin: 0;
-    padding-top: 15px;
-    padding-left: 30px;
+    padding-top: 13px;
     line-height: 1.1;
     vertical-align: top;
 }
@@ -95,7 +95,7 @@ b, strong {
 }
 
 .board-list-util {
-    margin: 30px 0 15px 0;
+    margin: 0 0 15px 0;
     text-align: right;
 }
 
@@ -206,14 +206,14 @@ a {
 </head>
 <body>
 
-<div class="container" style="margin-top: 50px;">
+<div class="container pl-0" style="margin-top: 50px;">
 
-	<div id="contents">
-		<h2 class="tit">내가 본 영화 </h2>
+	<div id="contents" class="mr-1">
+		<h2 class="tit"><strong style="font-size : 28px;">내가 본 영화</strong> </h2>
 		<!-- 내가 본 영화 -->
 		<div class="board-list-util mySeenMovie myMovieStory">
 			<p class="result-count">
-				<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b>건</strong>
+				<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b> 건</strong>
 			</p>
 		</div>
 	

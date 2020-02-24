@@ -21,9 +21,9 @@
 <style>
 body {
 	position: absolute;
-	text-align: center;
 	width: 100%;
 	height: 100%;
+	font-size: 16px;
 	left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -163,7 +163,7 @@ function getWishMovieList(startRowNum, currentPage, pageSize){ // 위시리스�
 							+"<img src='"+data.wishMovieList[i].poster+"' width='185' height='260'>"
 							+"<br><span class='movieTitle'>"+data.wishMovieList[i].movieTitle+"</span>"
 							+"<br><span class='releaseDate'>"+data.wishMovieList[i].releaseDate+" 개봉</span>"
-							+"<br><span class='cancleWishBtn' id='"+data.wishMovieList[i].movieNo+"'><img src='/resources/image/heart.png' width='20' height='20'></span> <span class='likebg'>"+data.wishMovieList[i].wishCnt+"</span>"
+							+"<br><span class='cancleWishBtn' id='"+data.wishMovieList[i].movieNo+"'><img src='/resources/image/heart.png' width='20' height='20'></span> <span class='likebg text-center'>"+data.wishMovieList[i].wishCnt+"</span>"
 						+"</div>"
 					);
 					num+=1;
@@ -274,9 +274,9 @@ $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자�
 	<!--container-->
 	<div id="contaniner" style="margin-top: 50px;">
 		<div class="row">
-			<div class="col-md-12" style="text-align: left;">
+			<div class="col-md-12">
 				<div>
-					<h2>위시 리스트</h2>
+					<h2 style="font-size : 28px;"><strong>위시 리스트</strong></h2>
 					<p><strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b> 건</strong></p>
 				</div>
 			</div>
@@ -286,7 +286,7 @@ $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자�
 		
 		<br>
 		
-		<div id="pagination"></div>
+		<div id="pagination" style="text-align: center"></div>
 
 	</div><!--container end-->
 </body>

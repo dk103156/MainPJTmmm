@@ -28,7 +28,7 @@
 #contents {
     width: 100%;
     margin: 0;
-    padding: 40px 0 0 0;
+    padding: 27px 0 0 0;
 }
 	
 user agent stylesheet
@@ -37,10 +37,9 @@ div {
 }
 body {
     overflow: auto;
-    overflow-y: scroll;
     letter-spacing: 0;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 16px;
     color: #444;
     font-weight: 400;
   	font-family:'Noto Sans KR', sans-serif;
@@ -263,7 +262,7 @@ $(function(){
 
 
 <div id="contents">
-		<h2 class="tit">회원정보</h2>
+		<h2 class="tit"><strong>회원정보</strong></h2>
 
 		<div class="intro-pwd">
 			<strong>회원님의 개인정보 보호를 위해 비밀번호를 입력하셔야 합니다.</strong>

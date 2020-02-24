@@ -102,15 +102,15 @@
 					<li style="text-align: right; padding-top: 7px; padding-bottom: 7px; padding-right: 5px;"> 
 						<c:choose> 
 					    <c:when test="${not empty sessionScope.user }">   
-					       <a href="/user/logout" class="login">LOGOUT</a>
+					       <a href="/user/logout" class="login borderRight">LOGOUT</a>
 					    </c:when>
 					    <c:otherwise>    
-					       <a href="/user/login" id=mainLoginBtn class="login"><span>LOGIN</span></a>
+					       <a href="/user/login" id=mainLoginBtn class="login borderRight"><span>LOGIN</span></a>
 					    </c:otherwise>                  
 					</c:choose>
-						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span>JOIN</span></a>
-						<a href="/mypage/mypage" class="myPage borderRight"><span>MY PAGE</span></a>
-						<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
+						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span style="margin-left: 5px;">JOIN</span></a>
+						<a href="/mypage/mypage" class="myPage borderRight"><span style="margin-left: 7px;">MY PAGE</span></a>
+						<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span style="margin-left: 4px;">CUSTOMER CENTER</span></a>
 					</li>
 			</ul>
 		</div>	<!-- end of navBar --> 
@@ -121,7 +121,7 @@
 					<div class="col-6 px-0"></div>
 					<div class="col-6 px-0 headerLogo text-center">
 						<span>
-							<a href="#" title="MMM">
+							<a href="/main" title="MMM">
 								<img src="../resources/image/logo/logo.png" alt="MMM" width=68>
 							</a>	
 						</span>

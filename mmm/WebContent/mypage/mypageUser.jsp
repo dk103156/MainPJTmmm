@@ -26,14 +26,13 @@
     float: right;
     width: calc(100% - 260px);
 }
+
 #contents {
     width: 100%;
     margin: 0;
     padding: 0 0 0 0;
 }
-* {
-    box-sizing: border-box;
-}
+
 
 div {
     display: block;
@@ -41,10 +40,10 @@ div {
 
 body {
     overflow: auto;
-    overflow-y: scroll;
+
     letter-spacing: 0;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 16px;
     color: #444;
     font-weight: 400;
     font-family: 'Noto Sans KR', sans-serif;
@@ -127,11 +126,6 @@ input {
 button, input {
     overflow: visible;
 }
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-size: 1em;
-    line-height: 1.15;
-}
 
 input[type="hidden" i] {
     display: none;
@@ -169,11 +163,6 @@ input[type="hidden" i] {
     background-repeat: no-repeat;
 }
 
-i {
-    font-style: italic;
-}
-
-
 .my-magabox-info .top .photo .wrap .img {
     overflow: hidden;
     display: block;
@@ -202,7 +191,7 @@ button, select {
     border-radius: 93px;
 }
 
-img {
+.imgs {
     border: 0;
 }
 
@@ -293,21 +282,6 @@ p {
     border-radius: 10px;
 }
 
-.my-magabox-info .top .special-membership .no-join {
-    padding: 0;
-}
-
-.my-magabox-info .top .special-membership .no-join .txt {
-    padding: 0 0 10px 0;
-    font-size: .9333em;
-    line-height: 1.3;
-}
-
-
-.my-magabox-info .top .special-membership .no-join a {
-    color: #444;
-}
-
 .my-magabox-info .bottom {
     overflow: hidden;
     height: calc(100% - 198px);
@@ -368,50 +342,11 @@ p {
     letter-spacing: -1px;
 }
 
-.my-magabox-info .bottom .point .cont-area .total .division {
-    display: table;
-    float: left;
-}
-
-.my-magabox-info .bottom .point .cont-area .total .division .cell {
-    display: table-cell;
-    height: 44px;
-    padding: 0 0 0 36px;
-    vertical-align: middle;
-    background: url(https://img.megabox.co.kr/static/pc/images/common/ico/ico-equal-black.png) no-repeat 10px center;
-}
-
-.my-magabox-info .bottom .point .cont-area .total .division .cell p span {
-    display: inline-block;
-    width: 60px;
-}
 
 em {
     font-style: normal;
 }
 
-.my-magabox-info .bottom .point .cont-area .change {
-    overflow: hidden;
-    margin: 10px 30px 0 0;
-    padding: 10px 0 0 0;
-    border-top: 1px solid #d8d9db;
-}
-
-.my-magabox-info .bottom .point .cont-area .change .save {
-    float: left;
-}
-
-.my-magabox-info .bottom .point .cont-area .change .save em {
-    margin-left: 4px;
-    color: #222;
-}
-
-.my-magabox-info .bottom .point .cont-area .change .del {
-    float: left;
-    position: relative;
-    margin: 0 0 0 10px;
-    padding: 0 0 0 11px;
-}
 
 .my-magabox-info .bottom .theater {
     float: left;
@@ -521,7 +456,7 @@ ol, ul {
     overflow: hidden;
 }
 .mt70 {
-    margin-top: 70px!important;
+    margin-top: 30px!important;
 }
 
 .my-megabox-main .column .col.left {
@@ -985,7 +920,7 @@ $(function(){
 
 <div id="contents">
 
-	<!-- mypage-main -->
+	<!-- my page-main -->
 	<div class="my-megabox-main">
 
 		<div class="my-magabox-info ">
@@ -995,10 +930,10 @@ $(function(){
 					<div class="wrap">
 						<button type="button" class="img">
 						<c:if test="${empty user.profile.trim()}">	
-							<img src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
+							<img class="imgs" src="https://www.megabox.co.kr//static/pc/images/mypage/bg-profile.png" alt="프로필 사진 샘플" />
 						</c:if>
 						<c:if test="${! empty user.profile.trim()}">
-							<img alt="" src="/resources/image/${user.profile}"/>
+							<img class="imgs" alt="" src="/resources/image/${user.profile}"/>
 						</c:if>
 						</button>
 					</div>
@@ -1029,33 +964,32 @@ $(function(){
 			<!--// top -->
 
 			<!-- bottom -->
-			<div class="bottom">
-				<div class="point" id="myPoint">
-					<div class="tit-area">
-						<p class="tit">총 보유 포인트</p>
+			<div class="bottom row">
+				<div class="point col-sm-6 " id="myPoint">
+					<div class="tit-area" style="padding-left: 50px;">
+						<p class="tit"  >총 보유 포인트</p>
 						<a href="#" id="pointList" class="more" title="포인트 이용내역 페이지로 이동"><i class="iconset ico-arr-right-gray">더보기</i></a>
 					</div>
 
-					<div class="cont-area">
+					<div class="cont-area" style="padding-left: 50px;">
 						<div class="total">
-							<p class="now">9816504 P</p>
-
+							<p class="now">${user.totalPoint}P</p><br><br>
+							<p>누적포인트 : ${user.accPoint}P</p>
 						</div>
 					</div>
 				</div>
-
 				<!-- theater -->
-				<div class="theater" id="myFaverBrch">
-					<div class="tit-area">
+				<div class="theater col-sm-6" id="myFaverBrch" >
+					<div class="tit-area " >
 						<p class="tit">자주가는 극장</p>
-						<a href="" class="right" title="자주가는 극장 변경">변경 <i class="iconset ico-arr-right-reverse"></i></a>
+						<a href="#" class="right" title="자주가는 극장 변경" style="padding-right: 30px;" data-toggle="modal" data-target="#theaterChoice">변경  <i class="iconset ico-arr-right-reverse"></i></a>
 					</div>
 
 					<div class="list">
 						<div class="no-list" style="display: none;">
 							<span>자주가는 극장</span>을  설정하세요.
 						</div>
-						<ol>
+						<ol style="margin-top: 5px;">
 							<li>
 								<em style="padding-bottom : 5px;">1</em>
 								<span >${user.likeTheater1}</span>
@@ -1070,39 +1004,61 @@ $(function(){
 							</li>
 						</ol>
 					</div>
+				</div><!--// theater -->
+			</div><!--// bottom -->
+		</div><!--// my page-info -->
+		
+		
+		<!-- 선호극장 Modal -->
+	<form>
+		<div class="modal fade" id="theaterChoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">자주 가는 극장</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+	        			</button>
+	     	 		</div>
+					<div class="modal-body">
+						<div class="form-group row" style="text-align: center;">
+		 					<div class="col-sm-4">
+								<select class="form-control" id="likeTheater1" name="likeTheater1">
+										<option selected>극장선택</option>
+									<c:forEach var="i" items="${getTheaterList}">
+						   				<option value="${i.theaterName}">${i.theaterName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select class="form-control" id="likeTheater2" name="likeTheater2">
+										<option selected>극장선택</option>
+									<c:forEach var="i" items="${getTheaterList}">
+						   				<option value="${i.theaterName}">${i.theaterName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select class="form-control" id="likeTheater3" name="likeTheater3">
+										<option selected>극장선택</option>
+									<c:forEach var="i" items="${getTheaterList}">
+						   				<option value="${i.theaterName}">${i.theaterName}</option>
+									</c:forEach>
+								</select>
+							</div>
+								</div>
+								<div style="text-align:center;">
+								<button type="button" id="mapModal" class="button large purple" data-toggle="modal" data-target=".bd-example-modal-xl">지도로 선택</button>
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-primary" id="addGenreBtn">등록</button>
+				      </div>
+				    </div>
+				  </div>
 				</div>
-				<!--// theater -->
-
-				<!-- coupon -->
-				<div class="coupon" id="myCoupon">
-					<div class="tit-area">
-						<p class="tit">관람권/쿠폰</p>
-
-						<a href="/mypage/movie-coupon" class="more"><i class="iconset ico-arr-right-gray" title="영화관람권 페이지로 이동">더보기</i></a>
-					</div>
-
-					<div class="list">
-						<ul>
-							<li>
-								<span>영화관람권</span>
-								<em>0 매</em>
-							</li>
-							<li>
-								<span>스토어교환권</span>
-								<em>0 매</em>
-							</li>
-							<li>
-								<span>할인/제휴쿠폰</span>
-								<em>0 매</em>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!--// coupon -->
-			</div>
-			<!--// bottom -->
-		</div>
-		<!--// my-magabox-info -->
+			</form>
 
 		
 		<!-- column -->
@@ -1143,11 +1099,11 @@ $(function(){
 					<h2 class="tit small">선호관람정보</h2>
 
 					<div class="right">
-						<a href="#" class="button gray-line small" title="설정" data-toggle="modal" data-target="#likechoice">설정</a>
+						<a href="#" class="button gray-line small" title="설정" data-toggle="modal" data-target="#genreChoice">설정</a>
 					</div>
 				</div>
 
-				<div class="box-border favor-see">
+				<div class="box-border favor-see" >
 					<ul class="dot-list gray">
 						<li><a id="reLoadGenre"><span class="font-gblue mr10">내 선호장르</span></a>
 							<c:if test="${user.likeGenre1 != null ||user.likeGenre2 != null ||user.likeGenre3 != null }">	
@@ -1156,13 +1112,12 @@ $(function(){
 								<span id="chgLikeGenre3">${user.likeGenre3}</span>
 							</c:if>
 						</li>
-						<li><span class="font-gblue mr10">자주가는 극장</span></li>
 					</ul>
 				</div>
 				<!-- Modal -->
 				 <form>
 				 <input type= "hidden" name= "userNo" value="${user.userNo }" >
-					<div class="modal fade" id="likechoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal fade" id="genreChoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
@@ -1262,91 +1217,6 @@ $(function(){
 					</div>
 				</form>
 				
-			</div>
-			<!--// right -->
-		</div>
-		<!--// column -->
-
-		<div id="myBokd">
-			<div class="tit-util mt70">
-				<h2 class="tit small">나의 예매내역</h2>
-
-				<a href="/mypage/bookinglist?tab=01" class="more" title="나의 예매내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-			</div>
-
-			<!-- my-reserve-history -->
-			<div class="my-reserve-history">
-				<ul>
-					<li class="no-result">
-						<div class="no-history-reservation">
-							예매 내역이 없습니다.
-						</div>
-					</li>
-				</ul>
-			</div>
-			<!--// my-reserve-history -->
-		</div>
-
-		<div id="myPurc">
-			<div class="tit-util mt70">
-				<h2 class="tit small">나의 구매내역</h2>
-
-				<a href="/mypage/bookinglist?tab=02" class="more" title="나의 구매내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-			</div>
-
-			<div class="table-wrap">
-				<table class="board-list line">
-					<caption>나의 구매내역 요약 표</caption>
-					<colgroup>
-						<col style="width:160px;">
-						<col style="width:140px;">
-						<col>
-						<col style="width:120px;">
-						<col style="width:80px;">
-					</colgroup>
-					<tbody>
-						<tr>
-						<td colspan="6" class="a-c">구매 내역이 없습니다.</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<!-- column -->
-		<div class="column mt70">
-			<!-- left -->
-			<div class="col left" id="mySbsc">
-				<div class="tit-util">
-					<h2 class="tit small">참여이벤트</h2>
-					<a href="/mypage/myevent" class="more" title="참여이벤트 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-				</div>
-
-				<div class="brd-list">
-					<ul>
-						<li class="no-result">
-							참여한 이벤트가 없습니다.
-						</li>
-					</ul>
-				</div>
-			</div>
-			<!--// left -->
-
-			<!-- right -->
-			<div class="col right" id="myInq">
-				<div class="tit-util">
-					<h2 class="tit small">문의내역</h2>
-
-					<a href="/mypage/myinquiry?tab=" class="more" title="문의내역 더보기">더보기 <i class="iconset ico-arr-right-gray"></i></a>
-				</div>
-
-				<div class="brd-list">
-					<ul>
-						<li class="no-result">
-							문의내역이 없습니다.
-						</li>
-					</ul>
-				</div>
 			</div>
 			<!--// right -->
 		</div>

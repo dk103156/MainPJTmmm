@@ -30,9 +30,16 @@
 <title></title>
 
 <style>
+
+	  .mb-2, .my-2 {
+	    margin-bottom: .5rem!important;
+	    margin-top: .5rem !important;
+	  }
+	  
 	  body {
  	  	font-family: 'Noto Sans KR', sans-serif !important;
  	  }
+ 	  
 	  ul li {
 	    list-style-type:none;
 	  }
@@ -94,7 +101,7 @@
 	  
 	  
 	  	  
-	  a {
+	  a.ticketing  {
 		    display: block;
 	    	white-space: nowrap;
 	    	text-overflow: ellipsis;
@@ -351,6 +358,51 @@
 		width: 113px;
 	}
 	 
+	 
+
+
+		.container {
+			width:960px;
+			margin:0 auto;
+		}
+		.tab {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		/* Float the list items side by side */
+		.tab li {
+			float: left;
+		}
+		/* Style the links inside the list items */
+		.tab li a {
+			display: inline-block;
+			color: #000;
+			text-align: center;
+			text-decoration: none;
+			padding: 14px 16px;
+			font-size: 17px;
+			transition:0.3s;
+		}
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			background-color:rgb(0,154,200);
+			padding: 6px 12px;
+			color:#fff;
+		}
+		ul.tab li.current{
+			background-color: rgb(0,154,200);
+			color: #222;
+		}
+		.tabcontent.current {
+			display: block;
+		}	 
+	 
+	 
+	 
+	 
 </style>
 
 <script>
@@ -371,18 +423,37 @@ $(function(){
 			$(item).trigger("click");
 		}
 	})
+	
+		$("a[href='#']:contains('일반예매')").on('click',function(){			
+			$("body").load("/ticketing/addTicketing",function(){
+				$('.dropdown-toggle').dropdown('toggle')
+				$('.dropdown-toggle').dropdown('hide')				
+			});
+		})
+	
+		$("a[href='#']:contains('극장별 비교예매')").on('click',function(){			
+			$("body").load("/ticketing/addCompareTicketing",function(){
+				$('.dropdown-toggle').dropdown('toggle')
+				$('.dropdown-toggle').dropdown('hide')				
+			});
+		})
 
 });
 
 </script>
 </head>
+
 <body>
 
-	<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/header.jsp"></jsp:include>	
 	
    <div class="container">
+   		<ul class="tab">
+			<li class="current" data-tab="tab1"><a href="/ticketing/addTicketing">일반예매</a></li>
+			<li data-tab="tab2"><a href="/ticketing/addCompareTicketing">극장별 비교예매</a></li>
+		</ul>
       <!-- 비교 예매 -->
-      <div class="compareTicketing">
+      <div class="addTicketing">
         <!-- 타이틀 -->
      <div class="row mb-2">
      	<div class="col-12 navi" style="margin-left: 15px;">
@@ -401,38 +472,34 @@ $(function(){
               </div>
               <div class="steps-body">
                 <div class="movie-select h-auto">
-                  <div class="sortmenu">
-                    <a class="btn btn-primary btn-sm" href="#">예매율순</a>
-                    <a class="btn btn-secondary btn-sm" href="#">가나다순</a>
-                  </div>
                   <div class="movie-list text-md-left">
                   	<ul class="list-group">
 	                  	<c:forEach var="i" items="${movieList}">
 	                      <li class="list-group-item py-2" title="${i.movieName}">
 	                      
 	                       <c:if test= "${ i.rating == '전체'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-all">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
 	                       </c:if>	                      
 	                 
 	                       <c:if test= "${ i.rating == '12세'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-12">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
 	                       </c:if>
 	                       
 	                       <c:if test= "${ i.rating == '15세'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-15">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
 	                       </c:if>
 	                       
 	                       <c:if test= "${ i.rating == '18세'}">	
-	                        	<a href="#">
+	                        	<a href="#" class="ticketing" >
 	                        		<span class="icon rating-18">&nbsp;</span>
 	                        		<span class="text">${i.movieName}</span>
 	                        	</a>
@@ -563,7 +630,7 @@ $(function(){
           </div><!-- end of col -->
          </div><!-- end of steps -->
 		</div><!-- end of row -->
-	</div><!-- end of compareTicketing -->
+	</div><!-- end of addTicketing -->
 	</div><!-- end of container -->
 	
 <div class="loading" id="ticket_loading" style="display: none;">

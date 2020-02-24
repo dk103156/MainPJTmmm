@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS -->
+   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
   <!-- Bootstrap Extended Color -->
@@ -25,13 +25,14 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
   	
 <title>Insert title here</title>
 
 <style>
 
-body {
+#body {
+	
 	font-family: 'Noto Sans KR', sans-serif !important;
 
 }
@@ -55,11 +56,16 @@ div.ticketingBody div div.ticketingTitle.row div.col-6 {
   border-left: 1px solid rgba(0,0,0,.1);
   margin-left: 80px;
 }
+
+div.container.getTicketingList {
+	margin-top : 47px;
+
+}
 </style>
 </head>
-<body>
+<body id="body">
 	
-	<div class="container">
+	<div class="container getTicketingList">
 		<div class="getTicketingList">
 				<div class="ticketingHeader row">
 						<h3 class="mb-0"><strong>나의 예매내역</strong></h3><h6 class="mb-0">(항목을 <kbd>Click</kbd>하여, 상세확인 가능합니다)</h6>

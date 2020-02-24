@@ -8,14 +8,25 @@
 <!-- Required meta tags -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  <!-- Bootstrap Extended Color -->
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
+   
+   <!-- google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+   
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 <title>마이페이지</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
@@ -27,7 +38,9 @@ body {
 	height: 100%;
 	left: 0;
 	font-family: 'Noto Sans KR', sans-serif;
+	font-size : 16px;
 }
+
 #contaniner{
 	width: 800px;
 	display: inline-block;
@@ -60,15 +73,12 @@ body {
     background-color: #333;
 }
 
-* {
-    box-sizing: border-box;
-}
+
 
 
 #lnb .tit a {
     display: block;
     width: 100%;
-    font-size: 1.2em;
     line-height: 90px;
     text-align: center;
     color: #fff;
@@ -129,7 +139,7 @@ body {
     background-color: #eaebed;
 }
 
-p {
+p.mypages {
     display: block;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -205,12 +215,18 @@ $(function(){
 	
 	$("a[href='#']:contains('위시리스트')").on('click',function(){		
 		$("#plusPage").load("/mypage/wishList");
+		
 	})
 	
-	
+	 
 	
 	$("#MypageHome").on('click',function(){	
-		$("#plusPage").load("/mypage/mypageUser");
+		$("#plusPage").load("/mypage/mypageUser",function(){
+			$('.dropdown-toggle').dropdown('toggle')
+			$('.dropdown-toggle').dropdown('hide')
+		});
+		<!--빼면 드랍다운 뻑납니다 -->
+		
 	})
 	
 	$("#MypageHome").trigger("click");
@@ -232,7 +248,7 @@ $(function(){
 			<div class="inner-wrap">
 				<div class="lnb-area">
 					<nav id="lnb">
-						<p class="tit"><a href="#" id ="MypageHome" title="Mypage">Mypage Home</a></p>
+						<p class="tit mypages"><a href="#" id ="MypageHome" title="Mypage">Mypage Home</a></p>
 						<input type="hidden" id="userNo" name="userNo" value="${user.userNo}"> 
 			
 

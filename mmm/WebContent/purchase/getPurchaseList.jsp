@@ -270,16 +270,16 @@ purchaseQuantityList.forEach( (x,y) => {
 					      },
 					      
 		    			 }).done( value => {
-								 var prodName = value.product.prodName
-								 if(Inventory.inventoryStatus==1){ //prodName 이랑 pinNo 맞추느라 
-									 var Element = 	"<div class='prodName col-12'><span>"+prodName+" : " + Inventory.inventoryProdPinNo+"</span></div>";
-								 //	 Element += "<div class='prodPinNo col-12'><span style='color: red; opacity:0.5;'>"+Inventory.inventoryProdPinNo+"</span></div>"						 
-								 }else{
-									 var Element = 	"<strong><div class='prodName col-12'><span>"+prodName+" : " + Inventory.inventoryProdPinNo+"</span></div></strong>";
-								 //	 Element += "<strong><div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div></strong>"						 
-								 }
-								 
-							 	$("div.modal-body div.row").append(Element);
+							 var prodName = value.product.prodName
+							 if(Inventory.inventoryStatus==1){
+								 var Element = 	"<div class='prodName col-12'><span>"+prodName+"</span></div>";
+							 	 Element += "<div class='prodPinNo col-12'><span style='color: red; opacity:0.5;'>"+Inventory.inventoryProdPinNo+"</span></div>"						 
+							 }else{
+								 var Element = 	"<strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
+							 	 Element += "<strong><div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div></strong>"						 
+							 }
+							 
+						 	$("div.modal-body div.row").append(Element);
 					 	 
 		    	    })//end of ajax Done
 				 });//end of forEach

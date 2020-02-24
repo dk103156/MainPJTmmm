@@ -118,10 +118,6 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
     font-weight: 400;
 }
-* {
-    box-sizing: border-box;
-}
-
 
 h2 {
     display: block;
@@ -136,19 +132,6 @@ h2 {
     position: relative;
 }
 
-div {
-    display: block;
-}
-body {
-    overflow: auto;
-    overflow-y: scroll;
-    letter-spacing: 0;
-    line-height: 1.5;
-    font-size: 15px;
-    color: #444;
-    font-weight: 400;
-}
-
 .tab-block:before {
     content: '';
     position: absolute;
@@ -157,25 +140,6 @@ body {
     width: 100%;
     height: 1px;
     background-color: #d8d9db;
-}
-
-.tab-block:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 35px;
-    width: 100%;
-    height: 1px;
-    background-color: #d8d9db;
-}
-
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-* {
-    box-sizing: border-box;
 }
 
 ul {
@@ -195,14 +159,6 @@ ul {
 .tab-block ul:after {
     clear: both;
 }
-.tab-block ul:after, .tab-block ul:before {
-    content: '';
-    display: table;
-}
-.tab-block ul:before {
-    content: '';
-    display: table;
-}
 
 .tab-block ul li.hover:first-child, .tab-block ul li.on:first-child {
     border-color: #555;
@@ -220,18 +176,12 @@ ul {
     border: 1px solid #d8d9db;
     border-left: 0;
 }
-* {
-    box-sizing: border-box;
-}
+
 li {
     display: list-item;
     text-align: -webkit-match-parent;
 }
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
+
 ul {
     list-style-type: disc;
 }
@@ -251,173 +201,28 @@ ul {
     background-color: transparent;
     text-decoration: none;
 }
-a:visited {
-    color: #666;
-    text-decoration: none;
-    outline: 1px dotted #000;
-}
-a:link {
-    color: #444;
-    text-decoration: none;
-}
+
 a {
     background-color: transparent;
 }
-* {
-    box-sizing: border-box;
-}
+
 a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
     text-decoration: underline;
 }
-li {
-    text-align: -webkit-match-parent;
-}
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-ul {
-    list-style-type: disc;
-}
+
 li.on:first-child {
     border-color: #555;
 }
-.tab-block ul li.hover, .tab-block ul li.on {
-    border-color: #555;
-}
-.tab-block ul li:first-child, .tab-block ul li:nth-child(6) {
-    border-left: 1px solid #d8d9db;
-}
-.tab-block ul li {
-    position: relative;
-    float: left;
-    width: 20%;
-    border: 1px solid #d8d9db;
-    border-left: 0;
-}
-* {
-    box-sizing: border-box;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.tab-block ul li {
-    position: relative;
-    float: left;
-    width: 20%;
-    border: 1px solid #d8d9db;
-    border-left: 0;
+
+.tab-block ul li:last-child {
+    border-right: 1px solid #d8d9db;
 }
 
 .tab-block ul li:last-child {
     border-right: 1px solid #d8d9db;
 }
-.tab-block ul li {
-    position: relative;
-    float: left;
-    width: 20%;
-    border: 1px solid #d8d9db;
-    border-left: 0;
-}
-* {
-    box-sizing: border-box;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.tab-block ul li .btn {
-    display: block;
-    width: 100%;
-    height: 34px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    line-height: 34px;
-    text-align: center;
-    background-color: transparent;
-    text-decoration: none;
-}
-a:visited {
-    color: #666;
-    text-decoration: none;
-    outline: 1px dotted #000;
-}
-a:link {
-    color: #444;
-    text-decoration: none;
-}
-a {
-    background-color: transparent;
-}
-user agent stylesheet
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-user agent stylesheet
-li {
-    text-align: -webkit-match-parent;
-}
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-.tab-block ul li:last-child {
-    border-right: 1px solid #d8d9db;
-}
-.tab-block ul li {
-    position: relative;
-    float: left;
-    width: 20%;
-    border: 1px solid #d8d9db;
-    border-left: 0;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
-.tab-block {
-    position: relative;
-}
-* {
-    box-sizing: border-box;
-}
-div {
-    display: block;
-}
-
 
 .mypage-infomation {
     position: relative;
@@ -427,47 +232,21 @@ div {
 .mt20 {
     margin-top: 20px!important;
 }
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
 
 .mb20 {
     margin-bottom: 20px!important;
 }
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-user agent stylesheet
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
+
+
 .dot-list>li {
     position: relative;
     padding: 0 0 0 8px;
 }
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
+
 ol, ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
-ul {
-    list-style-type: disc;
 }
 
 .mypage-infomation .btn-group {
@@ -480,15 +259,11 @@ ul {
 .btn-group.right {
     text-align: right;
 }
-.btn-group {
     padding: 20px 0 30px 0;
     margin: 0;
     text-align: center;
 }
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
+
 div {
     display: block;
 }
@@ -502,16 +277,12 @@ a.button:active, a.button:focus, a.button:hover, a.button:visited {
     background-color: #fee50e;
 }
 .btn-group .button {
-    margin: 0 3px;
+    margin: 0;
 }
 a.button {
     text-decoration: none;
 }
-a:visited {
-    color: #666;
-    text-decoration: none;
-    outline: 1px dotted #000;
-}
+
 a:link {
     color: #444;
     text-decoration: none;
@@ -532,18 +303,8 @@ a:link {
     background-color: #fff;
     cursor: pointer;
 }
-a {
-    background-color: transparent;
-}
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
+
+
 
 .btn-group:after {
     clear: both;
@@ -563,29 +324,12 @@ a:-webkit-any-link {
     margin: 30px 0 15px 0;
     text-align: right;
 }
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
-body {
-    overflow: auto;
-    overflow-y: scroll;
-    letter-spacing: 0;
-    line-height: 1.5;
-    font-size: 15px;
-    color: #444;
-    font-weight: 400;
-}
+
 html {
     -webkit-text-size-adjust: 100%;
-}
-user agent stylesheet
-html {
     color: -internal-root-color;
 }
+
 .board-list-util:after, .board-list-util:before {
     content: '';
     display: table;
@@ -593,10 +337,7 @@ html {
 .board-list-util:after {
     clear: both;
 }
-.board-list-util:after, .board-list-util:before {
-    content: '';
-    display: table;
-}
+
 .board-list-util .result-count {
     position: relative;
     float: left;
@@ -605,9 +346,7 @@ html {
     line-height: 1.1;
     vertical-align: top;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 p {
     display: block;
@@ -616,47 +355,20 @@ p {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
-b, strong {
-    font-weight: 700;
-}
-b, strong {
-    font-weight: 700;
-}
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 strong {
     font-weight: bold;
 }
-.board-list-util .result-count {
-    position: relative;
-    float: left;
-    margin: 0;
-    padding-top: 15px;
-    line-height: 1.1;
-    vertical-align: top;
-}
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .board-list-util .result-count b {
     color: #01738b;
 }
+
 b, strong {
     font-weight: 700;
 }
-b, strong {
-    font-weight: 700;
-}
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 b {
     font-weight: bold;
@@ -665,18 +377,7 @@ user agent stylesheet
 strong {
     font-weight: bold;
 }
-.board-list-util .result-count {
-    position: relative;
-    float: left;
-    margin: 0;
-    padding-top: 15px;
-    line-height: 1.1;
-    vertical-align: top;
-}
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: auto;
     height: 36px;
@@ -693,23 +394,11 @@ strong {
     height: 36px;
     vertical-align: middle;
 }
-.bootstrap-select {
-    vertical-align: middle;
-}
+
 .dropdown, .dropup {
     position: relative;
 }
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .board-list-util select {
     display: inline-block;
     vertical-align: middle;
@@ -750,15 +439,13 @@ button, input, optgroup, select, textarea {
     font-size: 1em;
     line-height: 1.15;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 select:not(:-internal-list-box) {
     overflow: visible !important;
 }
 user agent stylesheet
-select {
+z
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
     color: -internal-light-dark-color(black, white);
@@ -784,10 +471,7 @@ select {
     border-color: rgb(169, 169, 169);
     border-image: initial;
 }
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
     color: #999;
 }
@@ -822,7 +506,7 @@ select {
 }
 button {
     cursor: pointer;
-    letter-spacing: -.5px;
+    letter-spacing: normal;
     font-weight: 400;
 }
 button, select {
@@ -837,9 +521,7 @@ button, input, optgroup, select, textarea {
     font-size: 1em;
     line-height: 1.15;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 button {
     -webkit-appearance: button;
@@ -859,16 +541,12 @@ button {
     box-sizing: border-box;
     margin: 0em;
     font: 400 13.3333px Arial;
-    padding: 1px 6px;
-    border-width: 2px;
+    padding: 1px 4px;
     border-style: outset;
     border-color: buttonface;
     border-image: initial;
 }
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .bs3.bootstrap-select .dropdown-toggle .filter-option {
     padding-right: 0;
 }
@@ -889,12 +567,70 @@ button {
     -ms-flex: 0 1 auto;
     flex: 0 1 auto;
 }
-* {
-    box-sizing: border-box;
+
+.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
+    color: #999;
+}
+.bootstrap-select>.dropdown-toggle {
+    position: relative;
+    width: 100%;
+    text-align: right;
+    white-space: nowrap;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+button, select {
+    text-transform: none;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.15;
 }
 user agent stylesheet
-div {
-    display: block;
+button {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: buttontext;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: center;
+    cursor: default;
+    font: 400 13.3333px Arial;
+}
+
+.bootstrap-select .filter-option .filter-option-inner {
+    height: 100%;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option {
+    position: static;
+    top: 0;
+    left: 0;
+    float: left;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
 }
 .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
     color: #999;
@@ -941,83 +677,6 @@ button {
     cursor: default;
     font: 400 13.3333px Arial;
 }
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
-.bootstrap-select .filter-option .filter-option-inner {
-    height: 100%;
-}
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
-.bootstrap-select .dropdown-toggle .filter-option {
-    position: static;
-    top: 0;
-    left: 0;
-    float: left;
-    height: 100%;
-    width: 100%;
-    text-align: left;
-    overflow: hidden;
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-}
-.bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
-    color: #999;
-}
-.bootstrap-select>.dropdown-toggle {
-    position: relative;
-    width: 100%;
-    text-align: right;
-    white-space: nowrap;
-    display: -webkit-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-}
-button {
-    cursor: pointer;
-    letter-spacing: -.5px;
-    font-weight: 400;
-}
-button, select {
-    text-transform: none;
-}
-button, input, optgroup, select, textarea {
-    margin: 0;
-    font-family: inherit;
-    font-size: 1em;
-    line-height: 1.15;
-}
-user agent stylesheet
-button {
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: buttontext;
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    text-align: center;
-    cursor: default;
-    font: 400 13.3333px Arial;
-}
 .bootstrap-select .filter-option .filter-option-inner .filter-option-inner-inner {
     height: 100%;
     line-height: 34px;
@@ -1025,13 +684,7 @@ button {
 .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
     overflow: hidden;
 }
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
+
 .bootstrap-select .dropdown-toggle .filter-option {
     position: static;
     top: 0;
@@ -1127,9 +780,7 @@ button {
     border-right: 4px solid transparent;
     border-left: 4px solid transparent;
 }
-* {
-    box-sizing: border-box;
-}
+
 .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
     color: #999;
 }
@@ -1202,17 +853,7 @@ button {
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .dropdown-menu {
     display: none;
     position: absolute;
@@ -1318,28 +959,6 @@ div {
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
-ol, ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
 
 .ml07 {
     margin-left: 7px!important;
@@ -1354,26 +973,6 @@ ul {
     padding: 0 31px 0 0;
     border: 1px solid #d8d9db;
     border-radius: 3px;
-}
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-div {
-    display: block;
-}
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
-body {
-    overflow: auto;
-    overflow-y: scroll;
-    letter-spacing: 0;
-    line-height: 1.5;
-    font-size: 15px;
-    color: #444;
-    font-weight: 400;
 }
 
 .board-search .input-text {
@@ -1401,9 +1000,7 @@ button, input, optgroup, select, textarea {
     font-size: 1em;
     line-height: 1.15;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 input {
     -webkit-writing-mode: horizontal-tb !important;
@@ -1428,10 +1025,7 @@ input {
     border-color: initial;
     border-image: initial;
 }
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .board-search .btn-search-input {
     position: absolute;
     right: 1px;
@@ -1452,11 +1046,7 @@ input {
 [type=button], [type=reset], [type=submit], button {
     -webkit-appearance: button;
 }
-button {
-    cursor: pointer;
-    letter-spacing: -.5px;
-    font-weight: 400;
-}
+
 button, select {
     text-transform: none;
 }
@@ -1469,9 +1059,7 @@ button, input, optgroup, select, textarea {
     font-size: 1em;
     line-height: 1.15;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 button {
     -webkit-appearance: button;
@@ -1497,13 +1085,11 @@ button {
     border-color: buttonface;
     border-image: initial;
 }
-.board-list-util {
-    margin: 30px 0 15px 0;
-    text-align: right;
-}
+
 .table-wrap {
     position: relative;
     border-top: 1px solid #555;
+    top : -4px;
 }
 .a-c {
     text-align: center!important;
@@ -1601,9 +1187,7 @@ tr {
 table td, table th {
     padding: 0;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 th {
     display: table-cell;
@@ -1632,9 +1216,7 @@ tbody {
 table td, table th {
     padding: 0;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 td {
     display: table-cell;
@@ -1651,7 +1233,7 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
     display: block;
 }
 .modal-layer {
-    overflow-y: scroll;
+
     display: none;
     position: fixed;
     top: 0;
@@ -1664,9 +1246,7 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
 article, aside, figcaption, figure, footer, header, main, nav, section {
     display: block;
 }
-* {
-    box-sizing: border-box;
-}
+
 user agent stylesheet
 section {
     display: block;
@@ -1683,22 +1263,12 @@ a:visited {
     text-decoration: none;
     outline: 1px dotted #000;
 }
-a:link {
-    color: #444;
-    text-decoration: none;
-}
+
 a {
     background-color: transparent;
 }
-* {
-    box-sizing: border-box;
-}
-user agent stylesheet
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
+
+
 button, input {
     overflow: visible;
 }
@@ -1785,11 +1355,11 @@ input {
 </style>
 </head>
 
-<body>
+<body style="font-size : 16px; line-height : 1.5; letter-spacing: 0;">
 <form autocomplete="off">
-<div class="container">
+<div class="container"  style="margin-top : 50px;">
 <div id="contents">
-	<h2 class="tit">나의 문의내역</h2>
+	<h2 class="tit"><strong>나의 문의내역</strong></h2>
 <!-- 	<div class="tab-block"> -->
 <!-- 		<ul> -->
 <!-- 			<li data-url="/mypage/myinquiry?cd=INQD01"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li> -->
