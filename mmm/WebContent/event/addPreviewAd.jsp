@@ -51,12 +51,11 @@
 		    });
 			
 			$('#regBtn').on("click", function(){
-				
 				fncAddPreview();
 			});
 			
 			$('#cancelBtn').on("click", function(){
-				history.go(-1);
+				self.location="/movie/getMovie"; //나중에 관리자 페이지로 이동
 			});
 	
 			$("#fileUpload").on("change", function (){
@@ -167,16 +166,6 @@
 				 display:inline;
 				}
 			
-				body {
-			    overflow: auto;
-			    overflow-y: scroll;
-			    letter-spacing: 0;
-			    line-height: 1.5;
-			    font-size: 17px;
-			    color: #444;
-			    font-weight: 400;
-				font-family: 'Noto Sans KR', sans-serif;
-				}
 				
 				input:focus {
 				outline: none;
@@ -191,28 +180,6 @@
 
 				}
 				
-			.file_input_textbox
-			{
-			float: left;
-			border-style: none;
-		    border-color: white;
-			}
-			 
-			.file_input_div
-			{
-			position: relative;
-			width: 100px;
-			height: 23px;
-			border-color: 1px solid black;
-			overflow: hidden;
-		  
-			}
-			.file_input_button
-			{
-			position: absolute;
-			color:#495057;
-			height:25px;
-			}
 			 
 			#fileUpload
 			{
@@ -242,29 +209,30 @@
 </head> 
 
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <form enctype="multipart/form-data" autocomplete="off">
+<div class="container">
 	<br>
 		<div class="page-header">
-	        <h3><i class="fas fa-grip-lines-vertical"></i>시사회이벤트 등록</h3>
+	        <h3></h3>
 	    </div>
 			
 		<br>	
 		<br>
 		
-<div class="container">
  	<div class="row">
  	
-			<div class="col">		
-				<input type="text" id="fileName" class="file_input_textbox" readonly="readonly">
- 
-				<div class=file_input_div>
+			<div class="col">	
 				
-<!-- 				<i class="file_input_button fas fa-file-image">search file</i> -->
-<!-- 				<input type="button" value="search Files" class="file_input_button" /> -->
-				</div>
+ 
+<!-- 				<div class=file_input_div> -->
+				
+<!-- <!-- 				<i class="file_input_button fas fa-file-image">search file</i> --> 
+<!-- <!-- 				<input type="button" value="search Files" class="file_input_button" /> --> 
+<!-- 				</div> -->
 				<input type="hidden" name="previewImage" value="${movie.poster}"> 
 				<input type="hidden" name="movieNo" value="${movie.movieNo}"> 
-				<img id="blah" src="${movie.poster}"   alt="" width="300" height="400" />
+				<img id="blah" src="${movie.poster}"   alt="" width="300" height="400"  />
 			</div>
 			
 			<div class="col">
@@ -303,8 +271,8 @@
 				<tr>
 					<th scope="row">시사회시간</th>
 					<td>   
-					<input type="text" class="form-control col-sm-3 time" name="previewHH" placeholder="(HH)"> 시
-					<input type="text" class="form-control col-sm-3 time" name="previewMM" placeholder="(MM)"> 분
+					<input type="text" class="form-control col-sm-3 time d-inline" name="previewHH" placeholder="(HH)"> 시
+					<input type="text" class="form-control col-sm-3 time d-inline" name="previewMM" placeholder="(MM)"> 분
 					</td> 
 				</tr>
 				
@@ -357,8 +325,8 @@
 		</div>
 		<br>
 	
-		</form>
 		</div> <!-- container 닫는 애  -->
+		</form>
 
 
  </body>

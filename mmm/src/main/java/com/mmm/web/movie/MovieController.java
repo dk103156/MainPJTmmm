@@ -426,7 +426,7 @@ public class MovieController {
 		}
 		
 //		트레일러...youtube API Method 호출 
-		String videoId = getYoutube(movie.getMovieTitle());
+//		String videoId = getYoutube(movie.getMovieTitle());
 		
 //		VO에 값 세팅
 		movieFromKmdb.setMovieNo(movie.getMovieNo());
@@ -442,7 +442,7 @@ public class MovieController {
 		movieFromKmdb.setStarByUser(movie.getStarByUser());
 		movieFromKmdb.setStarUserFlag(movie.getStarUserFlag());
 		movieFromKmdb.setTicketingRate(movie.getTicketingRate());
-		movieFromKmdb.setTrailer(videoId);						///////////  youtube API 한도......T.T
+//		movieFromKmdb.setTrailer(videoId);						///////////  youtube API 한도......T.T
 		
 		System.out.println("---------------movieFromKmdb  : " + movieFromKmdb);
 

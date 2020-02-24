@@ -137,9 +137,7 @@
 		background-color: black;
 	}
 
-	body {
-			font-family: 'Noto Sans KR', sans-serif;	
-			}
+
 			
      #header{ 
       	width:750px;
@@ -249,7 +247,7 @@
 </style>
 </head>
 <body>
-
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
  		<br>
 		<div class="page-header">
