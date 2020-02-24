@@ -11,53 +11,39 @@
 
 <head>
 
- <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
-  <!-- Bootstrap Extended Color -->
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
-
-    <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
-<style>
-img.cancelButton {
-	cursor : pointer;
-}
-#modalhead{
-	background-color: #fee50e;
-	}
-	#btn{
-	background-color: #fee50e;
-	color: black;
-	outline-style: none;
-	}
-	#body {
-    margin-top: 10px;
-    font-family: 'Noto Sans KR', sans-serif;
-     }
-</style>	
+	 <!-- Required meta tags -->
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	  <!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	  
+	  <!-- Bootstrap Extended Color -->
+	  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
+	  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
+	
+	    <!-- Optional JavaScript -->
+	  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	  
+	  <!--     Common Css -->
+	  <link rel="stylesheet" href="/resources/css/product.css">
+	  
 <body id="body">
 
 	<div class="container">
 		<div class="row mx-0">
 			<div class="purchaseHeader col-12 text-center">
-			<br><br>
+			<br><br><br>
 				<c:if test="${search.purchaseStatus eq 0 }">
-				<h3  class="text-left"><strong><span>구매 목록</span></strong></h3>
+				<h4  class="text-left"><span>구매 목록</span></h4>
 				<hr style="background-color: black;">
 				</c:if>
 				
 				<c:if test="${search.purchaseStatus eq 2 }">
-				<h3  class="text-left"><strong><span>구매 취소 목록</span></strong></h3>
+				<h4  class="text-left"><span>구매 취소 목록</span></h4>
 				<hr style="background-color: black;">
 				</c:if>
 
@@ -207,7 +193,7 @@ img.cancelButton {
 	        </div>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" id="btn"  class="btn" data-dismiss="modal">닫기</button>
+	        <button type="button" id="purchaseListBtn"  class="btn" data-dismiss="modal">닫기</button>
 <!-- 	      <button type="button" class="btn btn-primary">네</button>  -->	  
 	      </div>
 	    </div>
@@ -284,16 +270,16 @@ purchaseQuantityList.forEach( (x,y) => {
 					      },
 					      
 		    			 }).done( value => {
-								 var prodName = value.product.prodName
-								 if(Inventory.inventoryStatus==1){
-									 var Element = 	"<div><strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
-								 	 Element += "<strong><div class='prodPinNo col-12'><span style='color: red; opacity:0.5;'>"+Inventory.inventoryProdPinNo+"</span></div></strong></div>"						 
-								 }else{
-									 var Element = 	"<div><strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
-								 	 Element += "<strong><div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div></strong></div>"						 
-								 }
-								 
-							 	$("div.modal-body div.row").append(Element);
+							 var prodName = value.product.prodName
+							 if(Inventory.inventoryStatus==1){
+								 var Element = 	"<div><strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
+							 	 Element += "<strong><div class='prodPinNo col-12'><span style='color: red; opacity:0.5;'>"+Inventory.inventoryProdPinNo+"</span></div></strong></div>"						 
+							 }else{
+								 var Element = 	"<div><strong><div class='prodName col-12'><span>"+prodName+"</span></div></strong>";
+							 	 Element += "<strong><div class='prodPinNo col-12'><span>"+Inventory.inventoryProdPinNo+"</span></div></strong></div>"						 
+							 }
+							 
+						 	$("div.modal-body div.row").append(Element);
 					 	 
 		    	    })//end of ajax Done
 				 });//end of forEach
@@ -327,7 +313,7 @@ purchaseQuantityList.forEach( (x,y) => {
 			 
 			 if(!useFlag){
 				 
-				 var Element ="<img class='cancelButton' src='/resources/image/cancel.PNG' width=130>"
+				 var Element ="<img class='cancelButton' src='/resources/image/cancel.PNG' width=95>"
 				 
 				 $($("div.purchaseCancel")[index]).append(Element);
 				 

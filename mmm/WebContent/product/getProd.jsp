@@ -24,23 +24,12 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-<style>
-	img{
-	border: 3px solid #ece1fc;
-    margin-top: 10px;
-	float:left;
-	}
-    #body {
-    margin-top: 10px;
-    font-family: 'Noto Sans KR', sans-serif;
-     }
-     hr{
-        background-color:black;
-        height:3px;
-      }
-</style>
+
+
+ <!--     Common Css -->
+ <link rel="stylesheet" href="/resources/css/product.css">	
+ 
+ 
 		
 </head>
 
@@ -49,9 +38,8 @@
 	<br>
 	
 	
-	
  	<!--  화면구성 div Start /////////////////////////////////////-->
- 	<br>
+ 	<br><br>
  	<div class="container">
  		<div class="row">
 	 		<h1 style="margin: 10px;">${product.prodName}</h1>
@@ -62,21 +50,23 @@
  		<div class="row">
  			<div id='productImage' class="col-sm-5">
 					<c:forEach var = "image" items ="${fileArr}">
-		 				<img class="mx-0" src="/resources/image/${image}" width=400 height=436/>
+		 				<img class="mx-0" src="/resources/image/${image}" id="getProdImg"/>
 		 			</c:forEach>	
 			</div>
 			<div id='productInfo' class="col-sm-7 px-0">
 				
 				<div class="row mx-0">
 					<div class="col-12">
-					<br>
+					<br><br><br>
 					</div>
 				</div>
 				<div class="row mx-0 mb-2">
+				<br><br>
 					<div class="col-3"><strong class="pl-3">상품가격 </strong></div>
 					<div class="col-9"><span>${product.prodPrice}원</span></div>
 				</div>
 				<div class="row mx-0 mb-2">
+				<br><br>
 					<div class="col-3"><strong class="pl-3">프랜차이즈 </strong></div>
 					<div class="col-9"><span>
 					<c:if test= "${product.franType eq  0}">CGV</c:if>
@@ -122,7 +112,8 @@
 				
 			</div><!-- end of #productInfo -->
 		</div>	<!-- end of row -->
-		<hr>
+		<br>
+		<hr style="background-color: black;">
 		
 		<div id='caution'class="row mx-0">
 			<div class="col-12 pageHeader">

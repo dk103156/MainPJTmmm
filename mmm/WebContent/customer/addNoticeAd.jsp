@@ -139,6 +139,7 @@
 </head> 
 
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 <br>
 		<div class="page-header text-dark">
