@@ -26,42 +26,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
-
+	<!--     Common Css -->
+    <link rel="stylesheet" href="/resources/css/product.css">
 	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	img{
-	border: 3px solid #ece1fc;
-    margin-top: 10px;
-	float:left;
-	}
-      #body {
-            margin-top: 10px;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-       #div{
-      margin-top: 45px;
-      margin-bottom: 55px;
-      border: 3px solid #fee50e;
-      border-radius: 50px 40px 50px 50px / 50px 40px 50px 50px;
-       width: 836px;
-      }
-      div.form-group{
-      	margin-left: 170px;
-      }
-      #form{
-      margin-left: 80px;
-      }
-        #btn{
-	background-color: #fee50e;
-	color: black;
-	outline-color: #fee50e;
-	}
-  	 </style>
-   
-   
-
-	<!-- <link rel="stylesheet" href="/css/admin.css" type="text/css"> -->
 
 
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -104,30 +71,28 @@
 
 <body id="body">
 	
-		<jsp:include page="/product/prodToolBar.jsp" />
+	<jsp:include page="/product/prodToolBar.jsp"/>
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
- 	<div class="container" id="div">
- 	<br/><br/><br/>
+ 	<div class="container" id="updateProdDiv">
+ 	<br/><br/>
  		<h1 class=" text-center" >상 품  수 정</h1>
  		<br>
  		
  		<!-- form Start /////////////////////////////////////-->
  		<form class="form-horizontal">
  		
-		<div class="form-group">
+		<div class="form-group" id="updateProdDivGroup">
 			<label class=" col-7 control-label">
- 				<img src="/resources/image/${product.prodImage}" style= "width: 450px; height: 360px;"/>
- 					<input type="file" class="rounded" id="prodImage"  name="prodImage" value="${product.prodImage}" style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+ 				<img src="/resources/image/${product.prodImage}" style= "width: 400px; height: 360px;" />
+ 					<input type="file" class="rounded" id="updateProdImage"  name="prodImage">
 			</label>
 			
 			<br/><br/>
 				
 			<label for="prodNo" class=" col-6 control-label">상품번호</label>	
 				<div class="col-7">
-					 <input type="text" class="form-control" id="prodNo"  name="prodNo" value="${product.prodNo}" placeholder="수정불가"  readonly style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+					 <input type="text" class="form-control" id="updateProdInput"  name="prodNo" value="${product.prodNo}" placeholder="수정불가"  readonly>
 					 	<span id="helpBlock" class="help-block">
 		      				<strong class="text-danger">${product.prodNo}</strong>
 		      			</span>
@@ -138,8 +103,7 @@
 				
 			  <label for="prodName" class=" col-7 control-label">상품명</label>	
 				<div class="col-7">
-					<input type="text" class="form-control" id="prodName"   name="prodName" value="${product.prodName}" placeholder="상품명 변경"  style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+					<input type="text" class="form-control" id="updateProdInput"   name="prodName" value="${product.prodName}" placeholder="상품명 변경">
 				</div>
 			
 			<br/><br/><br/>
@@ -147,8 +111,7 @@
 				
 			<label for="prodPrice" class="col-7 control-label">상품가격</label>
 				<div class="col-7">
-					<input type="text" class="form-control" id="prodPrice"  name="prodPrice" value="${product.prodPrice}" placeholder="상품가격 변경" style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+					<input type="text" class="form-control" id="updateProdInput"  name="prodPrice" value="${product.prodPrice}" placeholder="상품가격 변경">
 				</div>
 				
 			
@@ -157,8 +120,7 @@
 				
 			<label for="prodDetail" class="col-7 control-label">상품구성</label>
  				<div class="col-7">
- 					 <input type="text" class="form-control" id="prodDetail" name="prodDetail"  value="${product.prodDetail}" placeholder="상품구성 변경" style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+ 					 <input type="text" class="form-control" id="updateProdInput" name="prodDetail"  value="${product.prodDetail}" placeholder="상품구성 변경">
 				</div>
 			
 			
@@ -167,8 +129,7 @@
 				
 			<label for="franType" class="col-7 control-label">프랜차이즈    </label>
 			<div class="col-7">
-				<select class=" form-control" name="franType" style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+				<select class=" form-control" name="franType"  id="updateProdInput">
 					  <option selected>프랜차이즈</option>
 					  <option value="0">CGV</option>
 					  <option value="1">롯데시네마</option>
@@ -181,8 +142,7 @@
 		 
 			<label for="prodType" class="col-7 control-label">상품종류</label>
 			<div class="col-7">
-				<select class=" form-control" name="prodType"  style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+				<select class=" form-control" name="prodType" id="updateProdInput">
 					  <option selected>상품종류</option>
 					  <option value="0">영화관람권</option>
 					  <option value="1">스토어이용권</option>
@@ -195,10 +155,10 @@
  			</div>
  			<br><br>
  			
- 			 <div class="form" id="form">
+ 			 <div class="form" id="updateProdForm">
 		   		<div class="col-11 text-center">
-				      <button  type="button"  id="btn" class="btn"  >등&nbsp;록</button>
-						  <a class="btn"  id="btn"   href="#" role="button">취&nbsp;소</a>
+				      <button  type="button"  id="updateProdBtn" class="btn"  >등&nbsp;록</button>
+						  <a class="btn"  id="updateProdBtn"   href="#" role="button">취&nbsp;소</a>
 								<br><br>		   
 				 </div>
 		   </div> 

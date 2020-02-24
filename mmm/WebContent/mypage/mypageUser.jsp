@@ -282,21 +282,6 @@ p {
     border-radius: 10px;
 }
 
-.my-magabox-info .top .special-membership .no-join {
-    padding: 0;
-}
-
-.my-magabox-info .top .special-membership .no-join .txt {
-    padding: 0 0 10px 0;
-    font-size: .9333em;
-    line-height: 1.3;
-}
-
-
-.my-magabox-info .top .special-membership .no-join a {
-    color: #444;
-}
-
 .my-magabox-info .bottom {
     overflow: hidden;
     height: calc(100% - 198px);
@@ -935,7 +920,7 @@ $(function(){
 
 <div id="contents">
 
-	<!-- mypage-main -->
+	<!-- my page-main -->
 	<div class="my-megabox-main">
 
 		<div class="my-magabox-info ">
@@ -979,33 +964,32 @@ $(function(){
 			<!--// top -->
 
 			<!-- bottom -->
-			<div class="bottom">
-				<div class="point" id="myPoint">
-					<div class="tit-area">
-						<p class="tit">총 보유 포인트</p>
+			<div class="bottom row">
+				<div class="point col-sm-6 " id="myPoint">
+					<div class="tit-area" style="padding-left: 50px;">
+						<p class="tit"  >총 보유 포인트</p>
 						<a href="#" id="pointList" class="more" title="포인트 이용내역 페이지로 이동"><i class="iconset ico-arr-right-gray">더보기</i></a>
 					</div>
 
-					<div class="cont-area">
+					<div class="cont-area" style="padding-left: 50px;">
 						<div class="total">
-							<p class="now">${user.totalPoint}P</p><br><br><br>
+							<p class="now">${user.totalPoint}P</p><br><br>
 							<p>누적포인트 : ${user.accPoint}P</p>
 						</div>
 					</div>
 				</div>
-
 				<!-- theater -->
-				<div class="theater" id="myFaverBrch">
-					<div class="tit-area">
+				<div class="theater col-sm-6" id="myFaverBrch" >
+					<div class="tit-area " >
 						<p class="tit">자주가는 극장</p>
-						<a href="" class="right" title="자주가는 극장 변경">변경 <i class="iconset ico-arr-right-reverse"></i></a>
+						<a href="#" class="right" title="자주가는 극장 변경" style="padding-right: 30px;" data-toggle="modal" data-target="#theaterChoice">변경  <i class="iconset ico-arr-right-reverse"></i></a>
 					</div>
 
 					<div class="list">
 						<div class="no-list" style="display: none;">
 							<span>자주가는 극장</span>을  설정하세요.
 						</div>
-						<ol>
+						<ol style="margin-top: 5px;">
 							<li>
 								<em style="padding-bottom : 5px;">1</em>
 								<span >${user.likeTheater1}</span>
@@ -1020,35 +1004,61 @@ $(function(){
 							</li>
 						</ol>
 					</div>
+				</div><!--// theater -->
+			</div><!--// bottom -->
+		</div><!--// my page-info -->
+		
+		
+		<!-- 선호극장 Modal -->
+	<form>
+		<div class="modal fade" id="theaterChoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">자주 가는 극장</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+	        			</button>
+	     	 		</div>
+					<div class="modal-body">
+						<div class="form-group row" style="text-align: center;">
+		 					<div class="col-sm-4">
+								<select class="form-control" id="likeTheater1" name="likeTheater1">
+										<option selected>극장선택</option>
+									<c:forEach var="i" items="${getTheaterList}">
+						   				<option value="${i.theaterName}">${i.theaterName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select class="form-control" id="likeTheater2" name="likeTheater2">
+										<option selected>극장선택</option>
+									<c:forEach var="i" items="${getTheaterList}">
+						   				<option value="${i.theaterName}">${i.theaterName}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="col-sm-4">
+								<select class="form-control" id="likeTheater3" name="likeTheater3">
+										<option selected>극장선택</option>
+									<c:forEach var="i" items="${getTheaterList}">
+						   				<option value="${i.theaterName}">${i.theaterName}</option>
+									</c:forEach>
+								</select>
+							</div>
+								</div>
+								<div style="text-align:center;">
+								<button type="button" id="mapModal" class="button large purple" data-toggle="modal" data-target=".bd-example-modal-xl">지도로 선택</button>
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-primary" id="addGenreBtn">등록</button>
+				      </div>
+				    </div>
+				  </div>
 				</div>
-				<!--// theater -->
-
-				<!-- coupon -->
-				<div class="coupon" id="myCoupon">
-					<div class="tit-area">
-						<p class="tit">상품권</p>
-
-						<a href="/mypage/movie-coupon" class="more"><i class="iconset ico-arr-right-gray" title="영화관람권 페이지로 이동">더보기</i></a>
-					</div>
-
-					<div class="list">
-						<ul>
-							<li>
-								<span>5천원권</span>
-								<em>몇!! 매</em>
-							</li>
-							<li>
-								<span>1만원권</span>
-								<em>몇!! 매</em>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!--// coupon -->
-			</div>
-			<!--// bottom -->
-		</div>
-		<!--// my-magabox-info -->
+			</form>
 
 		
 		<!-- column -->
@@ -1089,11 +1099,11 @@ $(function(){
 					<h2 class="tit small">선호관람정보</h2>
 
 					<div class="right">
-						<a href="#" class="button gray-line small" title="설정" data-toggle="modal" data-target="#likechoice">설정</a>
+						<a href="#" class="button gray-line small" title="설정" data-toggle="modal" data-target="#genreChoice">설정</a>
 					</div>
 				</div>
 
-				<div class="box-border favor-see">
+				<div class="box-border favor-see" >
 					<ul class="dot-list gray">
 						<li><a id="reLoadGenre"><span class="font-gblue mr10">내 선호장르</span></a>
 							<c:if test="${user.likeGenre1 != null ||user.likeGenre2 != null ||user.likeGenre3 != null }">	
@@ -1107,7 +1117,7 @@ $(function(){
 				<!-- Modal -->
 				 <form>
 				 <input type= "hidden" name= "userNo" value="${user.userNo }" >
-					<div class="modal fade" id="likechoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					<div class="modal fade" id="genreChoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">

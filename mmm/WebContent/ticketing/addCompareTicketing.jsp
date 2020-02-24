@@ -366,6 +366,49 @@
 	    margin-left: -15px;
 /* 	    padding-bottom: 6px; */
 	  }
+	  
+	  
+	  
+	  
+	  
+		.container {
+			width:960px;
+			margin:0 auto;
+		}
+		.tab {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		/* Float the list items side by side */
+		.tab li {
+			float: left;
+		}
+		/* Style the links inside the list items */
+		.tab li a {
+			display: inline-block;
+			color: #000;
+			text-align: center;
+			text-decoration: none;
+			padding: 14px 16px;
+			font-size: 17px;
+			transition:0.3s;
+		}
+		/* Style the tab content */
+		.tabcontent {
+			display: none;
+			background-color:rgb(0,154,200);
+			padding: 6px 12px;
+			color:#fff;
+		}
+		ul.tab li.current{
+			background-color: rgb(0,154,200);
+			color: #222;
+		}
+		.tabcontent.current {
+			display: block;
+		}	 	  
 	  	  
   </style>
   
@@ -379,14 +422,34 @@
 			window.location.reload();		
 		
 		});
+	
+		$("a[href='#']:contains('극장별 비교예매')").on('click',function(){			
+			$("body").load("/ticketing/addCompareTicketing",function(){
+				$('.dropdown-toggle').dropdown('toggle')
+				$('.dropdown-toggle').dropdown('hide')				
+			});
+		})
+		
+		$("a[href='#']:contains('일반예매')").on('click',function(){			
+			$("body").load("/ticketing/addTicketing",function(){
+				$('.dropdown-toggle').dropdown('toggle')
+				$('.dropdown-toggle').dropdown('hide')				
+			});
+		})
+		
 	});
 </script>
   </head>
+    	
   <body>
   
-  	<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/header.jsp"></jsp:include>
   		
     <div class="container">
+   		<ul class="tab">
+			<li class="current" data-tab="tab1"><a href="/ticketing/addCompareTicketing">극장별 비교예매</a></li>
+			<li data-tab="tab2"><a href="/ticketing/addTicketing">일반예매</a></li>
+		</ul>
       <!-- 비교 예매 -->
       <div class="compareTicketing">
         <!-- 타이틀 -->

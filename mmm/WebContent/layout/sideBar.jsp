@@ -141,7 +141,7 @@
 				.done( x =>{
 						var Image =x.product.prodImage
 						
-						var Element ="<div class='product'><span><img class='prodImage' src='../resources/image/"+Image+"' width=155><img class='removeCart'src='../resources/image/productIcon/close-button.jpg' width=20><span>";
+						var Element ="<div class='product' style='background-color : white;'><span><img class='prodImage' src='../resources/image/"+Image+"' width=155><img class='removeCart'src='../resources/image/productIcon/close-button.jpg' width=20><span>";
 							Element+="<input class='cartNo' type='hidden' value='"+data.cartNo+"'</div>"
 						$("div.shoppingCart").append(Element);
 						
