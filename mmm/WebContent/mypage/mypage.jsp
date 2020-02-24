@@ -29,6 +29,7 @@ body {
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size : 16px;
 }
+
 #contaniner{
 	width: 800px;
 	display: inline-block;
