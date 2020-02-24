@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 카카오 맵 api key -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 
 <!-- Required meta tags -->
 <meta charset="UTF-8">
@@ -1227,7 +1229,7 @@ $(function(){
 </div>
 
 
-<div class="modal fade bd-example-modal-xl" id="outerMotdal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-xl" id="outerMotdal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
      		<div id="map" style="width:1138px;height:762px;"></div>
@@ -1243,14 +1245,13 @@ $(function(){
 	function activeMap(){
 
 		
-		$.getJSON('https://ipinfo.io/geo', function(response) { 
-		    var loc = response.loc.split(',');
+			//비트 캠프 위치
 		    var coords = {
-		        latitude: loc[0],
-		        longitude: loc[1]
+		        latitude: 37.499526740945925,
+		        longitude: 127.02925836185794
 		    };
 		    success(coords)
-		});
+	
 		  
 		// 현재 위치 불러오는게 성공했다면	
 		function success(coords) {
@@ -1625,7 +1626,7 @@ $(function(){
 			    return content;
 			}
 			
-			
+				$("#addTheater").off("click");
 				
 				$("#addTheater").on("click",function(){
 					var theaterName = $("#myModalTitle").text();
@@ -1633,9 +1634,10 @@ $(function(){
 						alert("첫번째 선호극장이 선택되었습니다.")
 						$("#likeTheater1 option:selected").removeAttr("selected");
 						$("#likeTheater1 option").each(
-							option => {
-								if( $("#likeTheater1 option")[option].innerText==theaterName ){
-									$($("#likeTheater1 option")[option]).attr("selected",true);
+							(index,item) => {
+								console.log(index)
+								if( $("#likeTheater1 option")[index].innerText==theaterName ){
+									$($("#likeTheater1 option")[index]).attr("selected",true);
 									
 								}
 							}//end of option		
@@ -1644,9 +1646,9 @@ $(function(){
 							alert("두번째 선호극장이 선택되었습니다.")
 							$("#likeTheater2 option:selected").removeAttr("selected");
 							$("#likeTheater2 option").each(
-								option => {
-									if( $("#likeTheater2 option")[option].innerText==theaterName ){
-										$($("#likeTheater2 option")[option]).attr("selected",true);
+									(index,item) => {
+									if( $("#likeTheater2 option")[index].innerText==theaterName ){
+										$($("#likeTheater2 option")[index]).attr("selected",true);
 										
 									}
 								}//end of option		
@@ -1655,9 +1657,9 @@ $(function(){
 							alert("세번째 선호극장이 선택되었습니다.")
 							$("#likeTheater3 option:selected").removeAttr("selected");
 							$("#likeTheater3 option").each(
-								option => {
-									if( $("#likeTheater3 option")[option].innerText==theaterName ){
-										$($("#likeTheater3 option")[option]).attr("selected",true);
+									(index,item) => {
+									if( $("#likeTheater3 option")[index].innerText==theaterName ){
+										$($("#likeTheater3 option")[index]).attr("selected",true);
 										
 									}
 								}//end of option		
@@ -1668,6 +1670,7 @@ $(function(){
 						$("#outerMotdal").modal('hide')
 					}
 				});//end of #addtheater click
+				
 		};//end of success
 		
 
