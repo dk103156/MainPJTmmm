@@ -485,7 +485,6 @@
     <title>mmm</title>
   </head>
   <body>
-	<jsp:include page="/layout/header.jsp"></jsp:include>    
     
 	  <div class="album py-5 bg-light">
 	    <div class="container">

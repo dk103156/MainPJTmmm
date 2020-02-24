@@ -345,7 +345,7 @@
 										<div class="rating" data-rate-value=6></div>
 <%-- 						        		<span id="starRating"> ${movie.starRating}</span> --%>
 						        		<input id="starUserFlag" type="hidden" value="${movie.starUserFlag}">
-<%-- 						        	   <input id="starByUser" type="text" value="${movie.starByUser}" placeholder="평점 0~10"> --%>
+						        	   <input id="starByUser" type="hidden" value="${movie.starByUser}" placeholder="평점 0~10">
 						        	
 						        	<!-- Button trigger modal -->
 						        	<div class="mt-1">

@@ -196,11 +196,15 @@ $(function(){
 	})
 	
 	$("a[href='#']:contains('나의 이벤트 응모내역')").on('click',function(){		
-		$("#plusPage").load("/event/getApplyList");
+		$("#plusPage").load("/event/getPartList");
 	})
 	
 	$("a[href='#']:contains('나의 문의내역')").on('click',function(){		
 		$("#plusPage").load("/customer/getContactList");
+	})
+	
+	$("a[href='#']:contains('위시리스트')").on('click',function(){		
+		$("#plusPage").load("/mypage/wishList");
 	})
 	
 	
@@ -239,7 +243,7 @@ $(function(){
 							<a href="#" title="포인트 내역">포인트 내역</a>
 							<a href="#" title="내가 본 영화">내가 본 영화</a>
 							<input type="hidden"  id="ticketerPhone" name = "ticketerPhone" value="${user.phone}">
-
+							<a href="#" title="위시리스트">위시리스트</a>
 							<a href="#" title="한줄평/내 리뷰 조회">한줄평/내 리뷰 조회</a>
 							<a href="#"	title="나의 이벤트 응모내역">나의 이벤트 응모내역</a>
 							<a href="#"	title="나의 문의내역">나의 문의내역</a>

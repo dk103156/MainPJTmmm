@@ -6,7 +6,7 @@
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> 
   <!-- 카카오 맵 api key -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28c25faffe7f9e07ac51f11fc80f7e17"></script>
 
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -106,7 +106,7 @@ function getCommentList(currentPage) {
    				Element +="</li>"
    			}else if(result.resultPage.currentPage > result.resultPage.pageUnit){
    				Element +="<li class='page-item'>";
-   				Element +="<a class='page-link' href='javascript:getCommentList'("+(parseInt(result.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>Previous</a>";
+   				Element +="<a class='page-link' href='javascript:getCommentList'("+(parseInt(result.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>";
    				Element +="</li>";
    			}
 			
@@ -150,6 +150,10 @@ function getCommentList(currentPage) {
 }//end of getCommentList
 
 function comment(currentPage){
+	
+	$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
+	
+	
 	$('#commentWrite').on("click", function(){
 				$.ajax({
 					
@@ -241,10 +245,10 @@ function comment(currentPage){
 					"Content-Type" : "application/json"
 				},
 				success: function(){
-					alert('성공했어....')
+// 					alert('성공했어....')
 				},
 				error: function(status,error) {
-					alert("에러발생");
+// 					alert("에러발생");
 				}//success 끝
 			}); //ajax끝
 			
@@ -710,7 +714,7 @@ function comment(currentPage){
 		<div class="cdtl_col_lft">
 				<div class="cdtl_item_image">
 					<span class="cdtl_imgbox imgzoom">
-								<img src= "/resources/image/${preview.previewImage}" width="450" height="600" onerror="this.onerror=null;this.src='http://img.ssgcdn.com/trans.ssg?src=/ui/ssg/img/common/img_ready_500x500.jpg&amp;w=1200&amp;h=1200&amp;t=a00628030fd12db31022d09ae5b97d4b29576a99'" id="mainImg"></span>
+								<img src= "${preview.previewImage}" width="450" height="600" onerror="this.onerror=null;this.src='http://img.ssgcdn.com/trans.ssg?src=/ui/ssg/img/common/img_ready_500x500.jpg&amp;w=1200&amp;h=1200&amp;t=a00628030fd12db31022d09ae5b97d4b29576a99'" id="mainImg"></span>
 				</div>
 	
 			</div><!-- div.cdtl_col_lft끝 -->
@@ -742,7 +746,8 @@ function comment(currentPage){
 					</div>
                 
                 <div class="trailer">
-                	Trailer 넣는곳
+                <iframe id="player" class="embed-responsive-item" width="550" height="300"
+			        		src=""></iframe>
                 </div>
 	 		</div> <!-- cdtl_prd_infot끝 -->
 	   
@@ -865,8 +870,8 @@ function getWinnerList(previewNo){
 			$('#winnerArea').empty();
 			for (var i = 0; i < JSONData.list.length; i++) {
 				console.log(JSONData.list[i]);
-				$('#winnerArea').append("<h4><h5>[회원이름] "+JSONData.uList[i].userName+
-						"[전화번호]  "+JSONData.uList[i].phone+"</h4><br>");
+				$('#winnerArea').append("<h5>[회원이름] "+JSONData.uList[i].userName+
+						"[전화번호]  "+JSONData.uList[i].phone+"</h5><br>");
 			}
 		}
 	}); //ajax끝
@@ -878,14 +883,24 @@ function getWinnerList(previewNo){
 	
 		var place = $.trim($("span#previewPlace").text())
 		console.log(place)
-		searchTheater(place);
+
 	});
+	
+	$("#outerMotdal").on('shown.bs.modal', function (e) {
+		searchTheater(place);
+	})
+	
+	
 	function searchTheater(keyword){	  
 		/* 맵에 현재 위치 찍기 */
-		if(navigator.geolocation) {
-	           
-	           navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true, maximumAge : 0});
-		}//end of if
+		$.getJSON('https://ipinfo.io/geo', function(response) { 
+		    var loc = response.loc.split(',');
+		    var coords = {
+		        latitude: loc[0],
+		        longitude: loc[1]
+		    };
+		    success(coords)
+		});
 	        
 		
 		// 현재 위치 불러오는게 성공했다면	

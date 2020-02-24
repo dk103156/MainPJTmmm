@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,6 +92,7 @@
   	
   </style>
 <title>Insert title here</title>
+
 </head>
 <body>
 
@@ -97,7 +100,14 @@
 		<div class="row navBar">
 			<ul class="col-12 header">                
 					<li style="text-align: right; padding-top: 7px; padding-bottom: 7px; padding-right: 5px;"> 
-						<a href="#" id="mainLoginBtn" class="login borderRight"><span>LOGIN</span></a>
+						<c:choose> 
+					    <c:when test="${not empty sessionScope.user }">   
+					       <a href="/user/logout" class="login">LOGOUT</a>
+					    </c:when>
+					    <c:otherwise>    
+					       <a href="/user/login" id=mainLoginBtn class="login"><span>LOGIN</span></a>
+					    </c:otherwise>                  
+					</c:choose>
 						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span>JOIN</span></a>
 						<a href="/mypage/mypage" class="myPage borderRight"><span>MY PAGE</span></a>
 						<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span>CUSTOMER CENTER</span></a>
@@ -112,7 +122,7 @@
 					<div class="col-6 px-0 headerLogo text-center">
 						<span>
 							<a href="#" title="MMM">
-								<img src="../resources/image/logo/movmovmov.jpg" alt="MMM" width=68>
+								<img src="../resources/image/logo/logo.png" alt="MMM" width=68>
 							</a>	
 						</span>
 					</div><!-- endof headerLogo -->
@@ -126,8 +136,8 @@
 						      MOVIE
 						    </button>
 						    <div class="dropdown-menu" aria-labelledby="firstDropdown" id="firstDropdownMenu">
-						      <a class="dropdown-item" href="/movie/getBoxOfficeList">�ڽ� ���ǽ�</a>
-						      <a class="dropdown-item" href="/movie/getExpectedMovieList">�� ������</a>
+						      <a class="dropdown-item" href="/movie/getBoxOfficeList">박스 오피스</a>
+						      <a class="dropdown-item" href="/movie/getExpectedMovieList">상영 예정작</a>
 						    </div>
 						  </div><!-- end of First Dropdown -->
 					</div>
@@ -137,8 +147,8 @@
 						      TICKETING
 						    </button>
 						    <div class="dropdown-menu" aria-labelledby="secondDropdown" id="secondDropdownMenu">
-						      <a class="dropdown-item" href="/ticketing/addTicketing">�Ϲݿ���</a>
-						      <a class="dropdown-item" href="/ticketing/addCompareTicketing">���庰 �񱳿���</a>
+						      <a class="dropdown-item" href="/ticketing/addTicketing">일반예매</a>
+						      <a class="dropdown-item" href="/ticketing/addCompareTicketing">극장별 비교예매</a>
 						    </div>
 						  </div><!-- end of Second Dropdown -->					
 					</div>
@@ -148,8 +158,8 @@
 						      STORE
 						    </button>
 						    <div class="dropdown-menu" aria-labelledby="thirdDropdown" id="thirdDropdownMenu">
-						      <a class="dropdown-item" href="/product/getVoucherList">��ǰ��</a>
-						      <a class="dropdown-item" href="/product/getSnackProductList">����</a>
+						      <a class="dropdown-item" href="/product/getVoucherList">상품권</a>
+						      <a class="dropdown-item" href="/product/getSnackProductList">스낵</a>
 						    </div>
 						  </div><!-- end of Third Dropdown -->						
 					</div>
@@ -159,9 +169,9 @@
 						      EVENT
 						    </button>
 						    <div class="dropdown-menu" aria-labelledby="fouthDropdown" id="fouthDropdownMenu">
-						      <a class="dropdown-item" href="/event/getPreviewList">�û�ȸ�̺�Ʈ</a>
-						      <a class="dropdown-item" href="/event/getQuizList">����Ǯ��</a>
-						      <a class="dropdown-item" href="/event/addAttendance">�⼮üũ</a>
+						      <a class="dropdown-item" href="/event/getPreviewList">시사회이벤트</a>
+						      <a class="dropdown-item" href="/event/getQuizList">퀴즈풀기</a>
+						      <a class="dropdown-item" href="/event/addAttendance">출석체크</a>
 						    </div>
 						  </div><!-- end of Fouth Dropdown -->						
 					</div>

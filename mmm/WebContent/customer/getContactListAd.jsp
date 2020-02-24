@@ -18,7 +18,6 @@
 
 <script type="text/javascript">
 function Pagination(currentPage) {
-	console.log('fncGetList에 왔거든여');
 	$("#currentPage").val(currentPage);
 	console.log($("#currentPage").val());
 	$("form").attr("method","POST").attr("action", "/customer/getContactList").submit();
@@ -1786,7 +1785,7 @@ input {
 <form autocomplete="off">
 <div class="container">
 <div id="contents">
-	<h2 class="tit">나의 문의내역</h2>
+	<h2 class="tit">관리자 문의내역 관리</h2>
 <!-- 	<div class="tab-block"> -->
 <!-- 		<ul> -->
 <!-- 			<li data-url="/mypage/myinquiry?cd=INQD01"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li> -->
@@ -1801,9 +1800,7 @@ input {
 			<!-- <li>문의하시기 전 <a href="/support/faq" class="a-link"><strong>자주묻는질문</strong></a>을 확인하시면 궁금증을 더욱 빠르게 해결하실 수 있습니다</li> -->
 		</ul>
 
-		<div class="btn-group right">
-			<a href="#" class="button" id="inqBtn" title="1:1 문의하기">1:1 문의하기</a>
-		</div>
+	
 	</div>
 
 	<div class="board-list-util mb10">

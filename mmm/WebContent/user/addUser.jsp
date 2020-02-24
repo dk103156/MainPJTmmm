@@ -6,7 +6,7 @@
 <html>
 <head>
 <!-- 카카오 맵 api key -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28c25faffe7f9e07ac51f11fc80f7e17"></script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -458,19 +458,27 @@ $(function(){
 	$("#outerMotdal").on('shown.bs.modal', function (e) {
 		activeMap();
 	})
+	
+	
+
+	  
 	function activeMap(){
-		/* 맵에 현재 위치 찍기 */
-		if(navigator.geolocation) {
-	           
-	           navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true, maximumAge : 0});
-		}//end of if
-	        
+
 		
+		$.getJSON('https://ipinfo.io/geo', function(response) { 
+		    var loc = response.loc.split(',');
+		    var coords = {
+		        latitude: loc[0],
+		        longitude: loc[1]
+		    };
+		    success(coords)
+		});
+		  
 		// 현재 위치 불러오는게 성공했다면	
-		function success(position) {
+		function success(coords) {
 			var container = document.getElementById('map');
 			var options = {
-				center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
+				center: new kakao.maps.LatLng(coords.latitude, coords.longitude),
 				level: 3,
 				keyboardShortcuts : true
 			};
@@ -884,25 +892,27 @@ $(function(){
 				});//end of #addtheater click
 		};//end of success
 		
-		function showPopup(url){
-			
-			window.open(url, "a", "width=400, height=300, left=100, top=50");
-		}
-	
-		// 현재 위치 불러오는게 실패했다면
-		function error(err) {
-	  		console.warn('ERROR(' + err.code + '): ' + err.message);
-		};	  
-		
-		function otherModal(){
-			$("button[data-dismiss=modal2]").click(function () {
-			    $('#myModal').modal('hide');
-			});
-			
-			$('#myModal').trigger("click");
-		}
 
+	}//end of activeMap()
+	
+	function showPopup(url){
+		
+		window.open(url, "a", "width=400, height=300, left=100, top=50");
 	}
+
+	// 현재 위치 불러오는게 실패했다면
+	function error(err) {
+  		console.warn('ERROR(' + err.code + '): ' + err.message);
+	};	  
+	
+	function otherModal(){
+		$("button[data-dismiss=modal2]").click(function () {
+		    $('#myModal').modal('hide');
+		});
+		
+		$('#myModal').trigger("click");
+	}
+	
 	/* 마커 클릭하면 정보 보이고, 버튼 누를시에 선호 극장으로 데이터 전송하기 */
 	</script>
 	

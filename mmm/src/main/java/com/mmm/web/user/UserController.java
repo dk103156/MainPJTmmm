@@ -258,7 +258,7 @@ public class UserController {
 		session.setAttribute("user", user);
 		
 	
-		return "redirect:/index.jsp";
+		return "redirect:/main/main";
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.GET)
@@ -289,7 +289,7 @@ public class UserController {
 			//회원정보가 없거나  비회원일 경우
 			  if(dbUser == null || dbUser.getRole().trim().equals("unUser")) {
 				  
-				  return "redirect:/main.jsp?status=failed"; 
+				  return "redirect:/main/main.jsp?status=failed"; 
 			  }
 			  
 			 //탈퇴한 회원일 경우
@@ -304,14 +304,14 @@ public class UserController {
 				session.setAttribute("user", dbUser);	
 				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 			}else {//로그인 실패시 
-				return "redirect:/main.jsp?status=failed";
+				return "redirect:/main/main.jsp?status=failed";
 			}
 		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/main.jsp";
+		return "redirect:/main/main";
 	}
 	
 	@RequestMapping(value = "unUserLogin" , method=RequestMethod.GET)
@@ -352,7 +352,7 @@ public class UserController {
 		}else {//로그인 실패시 
 			return "redirect:/user/unUserLogin.jsp?status=failed";
 		}
-		return "redirect:/main.jsp";
+		return "redirect:/main/main";
 	}
 	
 	@RequestMapping(value ="logout", method=RequestMethod.GET)
@@ -362,7 +362,7 @@ public class UserController {
 		
 		session.invalidate();
 		
-		return "redirect:/main.jsp";
+		return "redirect:/main/main";
 	}
 	
 	@RequestMapping(value = "findPw" , method=RequestMethod.POST)
@@ -553,7 +553,7 @@ public class UserController {
 			model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			return "forward:/user/addUser.jsp";	
 		}else{
-			return "redirect:/index.jsp";
+			return "redirect:/main/main";
 		}
 		
 	}
@@ -572,7 +572,7 @@ public class UserController {
 			model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			return "forward:/user/addUser.jsp";
 		}else{
-			return "redirect:/index.jsp";
+			return "redirect:/main/main";
 		}
 		
 	}

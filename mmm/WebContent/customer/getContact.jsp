@@ -33,8 +33,8 @@
 		});
 		
 		$('#okBtn').on("click", function(){
-			alert('ok버튼이 클릭됨');
-			history.go(-1);
+// 			alert('ok버튼이 클릭됨');
+			self.location="/customer/getPreviewList";
 		});
 		
 		//답변달기 모달 띄우기
@@ -92,7 +92,7 @@
 	
 
 	function fncAddReply(){
-		alert('도착?')
+// 		alert('도착?')
 		var articleTitle = $("input[name='articleTitle']").val();
 		var content = $("textarea[name='content']").val();
 		console.log(content);
@@ -209,9 +209,8 @@
 
 <body>
 <div class="container">
-
 	<div class="page-header text-dark">
-	       <h3>고객센터</h3>
+	       <h3><i class="fas fa-comments"></i>고객센터</h3>
 	       <hr>
 	    </div>
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
@@ -228,7 +227,7 @@
 	<div class="header p-0"> 
 	
 	
-	<div class="border-bottom bg-secondary text-white mb-2 p-3 h-100">   <!-- 문의 제목, 일시 -->
+	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#fee00e; font-weight:bold;">   <!-- 문의 제목, 일시 -->
 		<div class="inline left">${article.articleTitle}</div>
 		<div class="inline rightt date"> ${article.articleDate}</div>
  	</div>	
@@ -322,7 +321,10 @@
 		<div class="text-center m-2">
 			<button id="delBtn"" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
 			<button id="okBtn" type="button" class="btn btn-secondary write">목 &nbsp;록</button>
+			
+			<c:if test="${user.role eq 'admin'}">
 			<button id="addAnswer" type="button" class="btn btn-secondary write">답변추가</button>
+			</c:if>
 		</div>
 
 	</div>

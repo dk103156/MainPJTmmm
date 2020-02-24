@@ -10,15 +10,20 @@
 <meta charset="EUC-KR">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+ <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
  
- <title>getQuizList</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
+<!-- fontawesome-->
+<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 <script type="text/javascript">
 
 	
@@ -55,30 +60,51 @@
 				
 		).done(function(JSONData){
 			
-			alert(JSONData.partCnt)
+			//alert(JSONData.partCnt)
 			//이미참여했을때
 			if(JSONData.result==2){
 				
-				alert('이미 참여했다 얘야...');
-				self.location = "/event/getQuizList?userNo="+userNo;
+				Swal.fire({
+					text: '이미 참여하셨습니다.',
+					icon: 'error',
+					confirmButtonText: "confirm"
+				}).then((confirm)=>{
+					self.location="/event/getQuizList?userNo="+userNo;
+				})
 				
 			}else{
 				
 				if(JSONData.result==0){
-					alert('정답이다')
-					$("form").attr("method","POST").attr("action", "/event/addWinQuiz").submit();
+					
+					Swal.fire({
+						text: '정답입니다',
+						icon: 'success',
+						confirmButtonText: "confirm"
+					}).then((confirm)=>{
+						$("form").attr("method","POST").attr("action", "/event/addWinQuiz").submit();
+					})
+					
+					
 				}else if(JSONData.result==1){
-					alert('정답이 아니다');
-					$("form").attr("method","POST").attr("action", "/event/addLoseQuiz").submit();				
-				}
-				
-			}
+					
+					
+					Swal.fire({ 
+						text: '정답이 아닙니다.',
+						icon: 'error',
+						confirmButtonText: "confirm"
+					}).then((confirm)=>{
+						$("form").attr("method","POST").attr("action", "/event/addLoseQuiz").submit();
+					})
 			
-		});
+				}
+			
+		}
+			
 		
+		
+	});
+
 	}
-
-
 
 	$(function(){
 		
@@ -94,7 +120,7 @@
 	})
 
 
- 	function fncGetList(currentPage) {
+ 	function Pagination(currentPage) {
  		console.log('fncGetList에 왔거든여');
  		$("#currentPage").val(currentPage);
 		console.log($('#currentPage').val());
@@ -106,25 +132,34 @@
 </script>
 
 <style>
+
+	a.crtPage{
+		background-color: black;
+	}
+
+	body {
+			font-family: 'Noto Sans KR', sans-serif;	
+			}
+			
      #header{ 
       	width:750px;
       	height:auto;
       	padding: 20px;
-      	background-color:#E4DBBF;
+      	background-color:white;
         margin: 10px auto;
-        border: 1px solid #bcbcbc;
-        color: #383127;
+        border: 1px solid black;
+        color:  black;
         }
         
        .qLogin ul{
    		 position: absolute;
-	  	 right: 14px;
+	  	 right: 18px;
 	   	 top: 11px;
 		}
 		
 		.qLogin ul li {
 	  	  float: left;
-	 	  padding-left: 12px;  
+	 	  padding-left: 18px;  
          }
          
 		.qLogin ul li P{
@@ -132,14 +167,14 @@
 	     background: #fff;
 	     text-align: center;
 	     line-height: 19px;
-	     font-size: 14px;
+	     font-size: 16px;
 		}
 		
 		.qLogin ul li p span{
 	    display: block;
     	padding-bottom: 11px;
     	font-weight: 650;
-    
+    	 border: 1px solid #bcbcbc;
 		}
 		
         p{
@@ -157,7 +192,7 @@
           .qLogin{
       	 width:808px;
      	 height: 119px;
-     	 background: #70AB8F;
+     	 background:#fee00e;
          margin: 10px auto;
          position: relative;
          border: 1px solid #bcbcbc;
@@ -168,20 +203,57 @@
 	    padding-left: 45px;
 	    pqeeint-bottom: 28px;
 	    font-size: 18px;
-	    color: #454545;
+	    color: black;
 	    line-height: 20px;
 	    font-weight: 650;
-	    background-color: #70AB8F;
+	    background-color: #fee00e;
 	  }
 	  
+	  
+	 .btn{
+	
+	width:70px;
+
+    background-color: #cecfc6;
+   
+    border: none;
+
+    color:#000000;
+
+    padding: 10px 0;
+    
+	/* float: right; */
+    text-align: center;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 15px;
+
+    margin: 6px;
+
+    cursor: pointer;
+
+	border-radius:40px;
+	}
+	.btn:hover {
+    background-color: #fee50e;
+	}
+	
+	.page-item.active .page-link {
+    z-index: 1;
+    color: #4e4c4c;
+    background-color: #fee00e;
+    border-color: #d6cece;
 </style>
 </head>
 <body>
 
 <div class="container">
  		<br>
-		<div class="page-header text-secondary">
-	       <h3>퀴즈 목록조회</h3>
+		<div class="page-header">
+	       <h3><i class="far fa-check-square"></i> 영화퀴즈</h3>
 	    </div>
 		<br>	
 		
@@ -192,6 +264,7 @@
 		<br>
 		</p>
 		<ul>
+		
 			<li><p>참여수<br>${totalCount}</p></li>
 			<li><p>정답수<br>${winCount}</p></li>
 			<li><p>정답률<br><fmt:formatNumber value="${winRate}" pattern=".00" /></p></li>
@@ -209,17 +282,23 @@
 		<div id="header" name="headBox"> 
 		<script type="text/javascript">
 		var partFlag = ${quiz.partFlag}
-		if(partFlag==0){
-			$("div[name='headBox']").css( "color", "#70AB8F" )
-		}
+		
+		
+			
+		
 		</script>
 		<div class="jj"></div> 
-		  <div><p>
-		${quiz.quizStDate}의 퀴즈
+		
+		<div>
+		<c:if test="${quiz.partFlag eq 1}">
+		<span style="color: red;"> <i class="far fa-smile"></i> 참여완료 </span>
+		</c:if>
+		<p>
+		<span style="font-weight: 600;">${quiz.quizStDate}의 퀴즈</span>
 		</p>
 		</div>
-		<div><p>${quiz.question}</p>
-		<ul class="mqli">
+		<div><p style="font-weight: bold; font-size:18px; background-color:white;">${quiz.question}</p>
+		<ul class="mqli" style="font-size:18px;">
 		<li><input type="radio"  name="option" value="1" /><label for="quiz_2020010031_1">${quiz.optionFirst}</label></li>
 		<li><input type="radio"  name="option" value="2" /><label for="quiz_2020010031_2">${quiz.optionSecond}</label></li>
 		<li><input type="radio"  name="option" value="3" /><label for="quiz_2020010031_3">${quiz.optionThird}</label></li>
@@ -229,7 +308,7 @@
 		<div class="text-center">
 		<input type="hidden" name="quizNo" value="${quiz.quizNo}"/> 
 		<input type="hidden" name="userNo" value="${user.userNo}"/> 
-		<button name="qBtn" type="button" class="btn btn-secondary" >퀴즈풀기</button>
+		<button name="qBtn" type="button" class="btn" >채점하기</button>
 
 		</div>
 		</div>
@@ -242,54 +321,55 @@
  
 <div class="container text-center">
 		 
-		 <nav>
-		  <!-- 크기조절 :  pagination-lg pagination-sm-->
-		  <ul class="pagination" >
-		    
-		    <!--  <<== 좌측 nav -->
-		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-		 		<li class="disabled">
-			</c:if>
-			<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
-				<li>
-			</c:if>
-			<li>
-		      <a href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    
-		    <!--  중앙  -->
-			<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
-				
-				<c:if test="${ resultPage.currentPage == i }">
-					<!--  현재 page 가르킬경우 : active -->
-				    <li class="active">
-				    	<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
-				    </li>
-				</c:if>	
-				
-				<c:if test="${ resultPage.currentPage != i}">	
-					<li>
-						<a href="javascript:fncGetList('${ i }');">${ i }</a>
-					</li>
-				</c:if>
-			</c:forEach>
-		    
-		     <!--  우측 nav==>> -->
-		     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">
-		  		<li class="disabled">
-			</c:if>
-			<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
-				<li>
-			</c:if>
-			<li>
-		      <a href="javascript:fncGetList('${resultPage.endUnitPage+1}')" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
+		<c:if test="${!empty list}">
+	<!-- pagination -->
+	<div class="ticketingPagination row">
+			  		<div class="col-4"></div>
+			  		<div class="col-4 ">
+					  <ul class="pagination d-flex justify-content-center ">
+		   				 <!--  <<== 좌측 nav -->
+		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
+		  					    <li class="page-item disabled">
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>
+   								 </li>
+		  				</c:if>
+		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
+					   		<li class="page-item">
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i>   							</li>
+						</c:if>
+						
+					    <!--  중앙  -->
+						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
+							<c:if test="${ resultPage.currentPage == i }">
+								<!--  현재 page 가르킬경우 : active -->
+							    <li class="page-item active" aria-current="page">
+      								<a class="page-link" href="javascript:Pagination('${ i }')">${ i }<span class="sr-only">(current)</span></a>
+   								 </li>
+							</c:if>	
+							
+							<c:if test="${ resultPage.currentPage != i}">	
+								<li class="page-item">
+									<a class="page-link" href="javascript:Pagination('${ i }')">${ i }</a>
+								</li>
+							</c:if>
+						</c:forEach>
+					     <!--  우측 nav==>> -->
+					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
+					    	<li class="page-item disabled">
+					    		<a class="page-link" href="#"><i class='fas fa-angle-right'></i></a>
+    						</li>
+					      </c:if>
+					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
+					      	    <li class="page-item">
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') "><i class='fas fa-angle-right'></i></a>
+    							</li>
+						 </c:if>	
+					  </ul><!-- end of pagination -->
+					 </div><!-- end of middle col --> 
+					 <div class="col-4"></div>
+			  </div><!-- end of ticketingPagination -->
+	<!--// pagination -->
+</c:if>
 		
 </div>
 </div>

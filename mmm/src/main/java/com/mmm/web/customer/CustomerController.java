@@ -313,7 +313,7 @@ public class CustomerController {
 		
 		model.addAttribute("article", article);
 		model.addAttribute("writer", writer);
-		
+		model.addAttribute("user",user);
 		
 		return "forward:/customer/getContact.jsp";
 	}
@@ -326,6 +326,8 @@ public class CustomerController {
 		String returnPage = "";
 		System.out.println("/customer/getContactList");
 
+		
+		System.out.println("search>>>>>>>>>>>>>>>>>>"+search);
 		if(search.getCurrentPage()==0) {
 			search.setCurrentPage(1);
 		}

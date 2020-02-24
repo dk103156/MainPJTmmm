@@ -243,35 +243,33 @@
 						<div class="row mx-0">
 							<div class="col-12 row">
 								<div class="postImage col-12 mb-2 text-center">
-									<img width="430" height="345" src="http://demo.aa-team.com/tf/omb/wp-content/uploads/2015/09/news_detail1-430x345.jpg" class="attachment-omb-news-list size-omb-news-list wp-post-image" alt="">
+									<img width="430" height="345" src="/resources/image/para.jpg" class="attachment-omb-news-list size-omb-news-list wp-post-image" alt="">
 								</div>
 								
 								<div class="postHeader col-12 mb-2 text-center">
 									<h4>
-										<a href="#">asdflkjasdf</a>
+										<a style="color:black;" href="/event/getQuizList">클릭 영화퀴즈 </a>
 									</h4>
 								</div>
 								
 								<div class="postContent col-12 mb-2">
-									<p>넘 슬퍼.. 근데 왜 안드로이드 프로그래밍 Android Studio를 활용한 우재남, 박길식 지음asdfjklasdjflkasjdflkasdjfklajsdflkjaskldfjasdlkfjasdklfjaklsdjflaksjdflkasdjflaksdjflaksdfjlaksdjfasdlkasdfㅁ나일먼이ㅏ런ㅁ아ㅣ런ㅁ아ㅣ런ㅁ이ㅏ런ㅁ아ㅣ러마ㅣㄴㅇ런ㅇ마ㅣ럼나ㅣㅇ러마니어리남어리ㅏㅁㄴㅇ러미낭런ㅁ이ㅏ러
-									<a class="more" href="#">상세보기</a></p>
+									<p>퀴즈 풀고 포인트 받자</p>
 								</div>
 							</div>
-							
+							<br><br>
 							<div class="col-12 row">
 								<div class="postImage col-12 mb-2 text-center">
-									<img width="430" height="345" src="http://demo.aa-team.com/tf/omb/wp-content/uploads/2015/09/news_detail1-430x345.jpg" class="attachment-omb-news-list size-omb-news-list wp-post-image" alt="">
+									<img width="430" height="345" src="/resources/image/attend.jpg" class="attachment-omb-news-list size-omb-news-list wp-post-image" alt="">
 								</div>
 								
 								<div class="postHeader col-12 mb-2 text-center">
 									<h4>
-										<a href="#">뭘쳐다보나요</a>
+										<a style="color:black;"href="/event/addAttendance">출첵 이벤트</a>
 									</h4>
 								</div>
 								
 								<div class="postContent col-12 mb-2">
-									<p>어차피 내용은 아직없는데 채워넣어야 되는데 말이지 css 알아서 적용하고 그치?
-									<a class="more" href="#">상세보기</a></p>
+									<p>매일매일 뭅뭅뭅 출첵하면 포인트가 왕창</p>
 								</div>
 							</div>							
 						</div>	
@@ -279,20 +277,20 @@
 					</div><!-- end of issueContent -->
 					
 					<div id="eventContent" class="col-5">
-						<h5>시사회 정보<a href="#" class="more">더 보기</a></h5>
+						<h5><a href="/event/getPreviewList" class="more">이벤트 페이지로 가기</a></h5>
 						
 						<hr>
 						<div class="col-12">
 							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 							  <div class="carousel-inner">
 							    <div class="carousel-item active">
-							      <img src="../resources/image/mainPage/preview/1.jpg" class="d-block w-100" alt="...">
+							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block w-100" alt="...">
 							    </div>
 							    <div class="carousel-item">
-							      <img src="../resources/image/mainPage/preview/2.jpg" class="d-block w-100" alt="...">
+							      <img src="/resources/image/mainPage/preview/ccc.PNG" class="d-block w-100" alt="...">
 							    </div>
 							    <div class="carousel-item">
-							      <img src="../resources/image/mainPage/preview/3.png" class="d-block w-100" alt="...">
+							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block w-100" alt="...">
 							    </div>
 							  </div>
 							  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
