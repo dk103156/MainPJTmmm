@@ -27,7 +27,12 @@
  
  }
  
- 
+ .d-block{
+  width:350px;
+  height:auto;
+  margin-top:0;
+  margin-left:100px;
+ }
  .carousel-inner > .item > img {
   width:640px;
   height:360px;
@@ -65,6 +70,40 @@
  	 -webkit-box-orient: vertical;
  }
  
+ 	.img.quiz{
+        position: relative;
+        width: 500px;
+        height: 345px;
+        background-image: url(/resources/image/mainPage/preview/quiz_img.jpg);                                                               
+        background-size: cover;
+    }
+ 	.img.attend{ 									
+        position: relative;
+        width: 500px;
+        height: 345px;
+        background-image: url(/resources/image/mainPage/preview/attend.jpg);                                                               
+        background-size: cover;
+    }
+
+    .img-cover{
+       position: absolute;
+       height: 100%;
+       width: 100%;
+       background-color: rgba(0, 0, 0, 0.7);                                                                 
+       z-index:1;
+    }
+
+    .img .content{
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);                                                                   
+         font-size:6rem;
+         color: white;
+         font-weight: 600px;
+         z-index: 2;
+         text-align: center;
+    }
 /* 슬라이더 */
  	
     
@@ -230,39 +269,47 @@
 				<div class="col-12 row mb-5">
 					<div class="col-1"></div>
 					<div id="issueContent" class="col-5">
-						<h5>이슈 정보<a href="#" class="more">더 보기</a></h5>
 						
 						<hr>
 						<div class="row mx-0">
 							<div class="col-12 row">
 								<div class="postImage col-12 mb-2 text-center">
-									<img width="430" height="345" src="/resources/image/para.jpg" class="attachment-omb-news-list size-omb-news-list wp-post-image" alt="">
+								<div class="img quiz">
+								   <div class="content">
+									<h1>MOVMOVMOV</h1>
+									<h2>MOVIE 퀴즈</h2>
+								  </div>
+								<div class="img-cover"></div>
+								</div>
 								</div>
 								
 								<div class="postHeader col-12 mb-2 text-center">
 									<h4>
-										<a style="color:black;" href="/event/getQuizList">클릭 영화퀴즈 </a>
+										<a style="color:black;" href="/event/getQuizList"> </a>
 									</h4>
 								</div>
 								
 								<div class="postContent col-12 mb-2">
-									<p>퀴즈 풀고 포인트 받자</p>
+									<p></p>
 								</div>
 							</div>
 							<br><br>
 							<div class="col-12 row">
 								<div class="postImage col-12 mb-2 text-center">
-									<img width="430" height="345" src="/resources/image/attend.jpg" class="attachment-omb-news-list size-omb-news-list wp-post-image" alt="">
+									<div class="img attend">
+								   <div class="content">
+									<h2>매일매일 출석체크</h2>
+									<h2>이벤트</h2>
+								  </div>
+								<div class="img-cover"></div>
+								</div>
 								</div>
 								
 								<div class="postHeader col-12 mb-2 text-center">
-									<h4>
-										<a style="color:black;"href="/event/addAttendance">출첵 이벤트</a>
-									</h4>
 								</div>
 								
 								<div class="postContent col-12 mb-2">
-									<p>매일매일 뭅뭅뭅 출첵하면 포인트가 왕창</p>
+									<p></p>
 								</div>
 							</div>							
 						</div>	
@@ -270,20 +317,23 @@
 					</div><!-- end of issueContent -->
 					
 					<div id="eventContent" class="col-5">
-						<h5><a href="/event/getPreviewList" class="more">이벤트 페이지로 가기</a></h5>
+						<h5><a style="color:black;" href="/event/getPreviewList" class="more">이벤트 더보기</a></h5>
 						
 						<hr>
 						<div class="col-12">
 							<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 							  <div class="carousel-inner">
 							    <div class="carousel-item active">
-							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block w-100" alt="...">
+							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block" id="preview1" alt="...">
+							    	<input type="hidden" name="previewNo1" value=""> 
 							    </div>
 							    <div class="carousel-item">
-							      <img src="/resources/image/mainPage/preview/ccc.PNG" class="d-block w-100" alt="...">
+							      <img src="/resources/image/mainPage/preview/ccc.PNG" class="d-block" id="preview2" alt="...">
+							    	<input type="hidden" name="previewNo2" value=""> 
 							    </div>
 							    <div class="carousel-item">
-							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block w-100" alt="...">
+							      <img src="/resources/image/mainPage/preview/www.PNG" class="d-block" id="preview3" alt="...">
+							    	<input type="hidden" name="previewNo3" value=""> 
 							    </div>
 							  </div>
 							  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -515,10 +565,29 @@
 						$("#movieInfo > div > div > p").text(movie.summary);
 						
 					}) 
-	  
-	  
-	  
   });
+  
+  
+  getPreviewInfo();
+  
+  async function getPreviewInfo(){
+	  
+	  var result = await ajaxPromise("/event/json/getPreviewInfo", {});
+	 
+	  $("#preview1").attr("src", result[0].previewImage);
+	  $("#preview2").attr("src", result[1].previewImage);
+	  $("#preview3").attr("src", result[2].previewImage);
+  }
+  
+  $(".img.attend").on("click", function(){
+	 self.location="/event/addAttendance"; 
+  });
+  
+  $(".img.quiz").on("click", function(){
+	 self.location="/event/getQuizList"; 
+  })
+  
+  
   
   </script>
   
