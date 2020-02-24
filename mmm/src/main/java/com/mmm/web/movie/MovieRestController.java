@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.executor.ReuseExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -153,42 +152,29 @@ public class MovieRestController {
 		}
 		
 		
-//		안쓰게 되었다...
 		@RequestMapping(value = "json/getBoxOfficeList", method = RequestMethod.POST)
-		public Map<String, Object> getBoxOfficeList( @RequestBody Search search,
-														HttpSession session)throws Exception{
+		public List<Movie> getBoxOfficeList()throws Exception{
 			
-//			1. Business Logic Layer의 getBoxOfficeList()의 Parameter 'search' 세팅 작업///////////////////////////// 
-//			만일 Get방식으로 처음 접근해서 currentPage가 없는 경우.. currentPage Default 설정
-			if(search.getCurrentPage() ==0 ) {
-				search.setCurrentPage(1);
-			}
-			
-//			개봉한 영화 플래그
-			search.setOnBoxOfficeFlag(1);
-			
-			System.out.println("  sessionUser ::" +session.getAttribute("user"));
-			
-			
-//			@Value로 갖고 있는 field pageSize 세팅
-			search.setPageSize(pageSize);
-			System.out.println("------------search"+ search);
-			
-//			2. Business Logic 수행 ///////////////////////////////////////////////////
-//			List<Object> list, int totlaCnt IN MAP 
-			HashMap<String, Object> outputMap = movieService.getBoxOfficeList(search);
-			
-//			3. return Page로 보낼 model 들 작업 //////////////////////////////////////////
-//			페이지 관련  만들어주기
-			Page resultPage = new Page(search.getCurrentPage(), ((Integer)outputMap.get("totalCnt")).intValue(),
-					pageUnit, pageSize);
-			
-			Map<String, Object> returnMap = new HashMap<String, Object>();
-			returnMap.put("list", outputMap.get("list"));
-			returnMap.put("search", search);
-			returnMap.put("resultPage", resultPage);
-			
-			return returnMap;			
+//		****BoxOffice 불러오기 ... 그냥 복붙
+		Search search = new Search();
+		
+		if(search.getCurrentPage() ==0 ) {
+			search.setCurrentPage(1);
+		}
+		
+//		개봉한 영화 플래그
+		search.setOnBoxOfficeFlag(1);
+		
+//		@Value로 갖고 있는 field pageSize 세팅	--> 10개 고정
+		search.setPageSize(10);
+		
+//		2. Business Logic 수행 ///////////////////////////////////////////////////
+		HashMap<String, Object> outputMap = movieService.getBoxOfficeList(search);
+		
+		List<Movie> list = (List<Movie>) outputMap.get("list");
+		System.out.println("-----------list : " + list);
+		
+		return list;		
 		}
 		
 		@RequestMapping(value = "json/getExpectedMovieList", method = RequestMethod.POST)
@@ -260,6 +246,7 @@ public class MovieRestController {
 			return returnMap;	
 		}
 		
+		@RequestMapping(value = "json/getOnelineList", method = RequestMethod.POST)
 		public Map<String, Object> getOnelineList(@RequestBody Search search)throws Exception{
 			
 			if (search.getCurrentPage() == 0) {
@@ -290,6 +277,9 @@ public class MovieRestController {
 			
 			return returnMap;	
 		}
+		
+		
+
 		
 		
 }

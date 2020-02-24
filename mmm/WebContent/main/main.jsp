@@ -478,13 +478,14 @@
 
 	
   async function getMovieInfo(){
-	  <!-- 여길바꾸렴 지행아 --><!-- 여길바꾸렴 지행아 --><!-- 여길바꾸렴 지행아 --><!-- 여길바꾸렴 지행아 -->
-	   var result =await ajaxPromise("/ticketing/json/getMovieList",{ } );
+	   var result =await ajaxPromise("/movie/json/getBoxOfficeList",{ } );
 	  
+	   console.log('result  : ' + JSON.stringify(result));
+	   
 	   result.forEach( (value,index)=> {
 		   
 		   var Element= "<div class='slide_content slide01 mr-3'>"
-			   Element+="<p><img src='"+value.poster+"' width=184 height=200></p>"
+			   Element+="<p><img name='poster' value='"+value.movieNo+"' src='"+value.poster+"' width=184 height=200></p>"
 			   Element+="</div>"
 		   
 		   $("div.slide_list").append(Element)

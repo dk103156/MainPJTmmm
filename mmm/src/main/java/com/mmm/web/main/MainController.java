@@ -1,5 +1,8 @@
 package com.mmm.web.main;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mmm.common.Search;
 import com.mmm.service.datetime.DateTimeService;
+import com.mmm.service.domain.Movie;
 import com.mmm.service.inventory.InventoryService;
 import com.mmm.service.movie.MovieService;
 import com.mmm.service.product.ProductService;
@@ -41,8 +46,6 @@ public class MainController {
 	
 	@RequestMapping(value="", method=RequestMethod.GET) 
 	public String mainPage() throws Exception {
-		
-		
 		
 		
 		return "forward:/main/main.jsp";

@@ -266,7 +266,6 @@ public class MovieController {
 			User user = (User) session.getAttribute("user");
 			System.out.println("-----------user : "+ user);
 			
-//		Test용..(위에 RequestParam userNo 도 지워야한다.)
 			search.setUserNo(user.getUserNo());
 			
 		}
