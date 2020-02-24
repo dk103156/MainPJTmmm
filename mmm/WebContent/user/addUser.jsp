@@ -6,7 +6,7 @@
 <html>
 <head>
 <!-- 카카오 맵 api key -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28c25faffe7f9e07ac51f11fc80f7e17"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 
 <!-- Required meta tags -->
 <meta charset="utf-8">
