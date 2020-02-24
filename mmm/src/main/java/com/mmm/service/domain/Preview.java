@@ -28,7 +28,7 @@ public class Preview {
 	private Timestamp previewRegDate; //시사회 이벤트 등록 일시
 	private String preRegDate;
 	private int applyCount; //응모자 수
-	private String previewFlag; //시사회 이벤트 상태(0:진행중 1:마감)
+	private String previewFlag; //시사회 이벤트 상태(0:시작전1:진행중2:마감)
 	
 	
 	public String getTrailer() {

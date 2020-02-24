@@ -27,7 +27,7 @@ public class Search {
 	private int articleType; //1: 일대일문의,  2: 공지사항,  3: 자주찾는질문,  4: 영화리뷰
 	private int category; //0: 전체, 1: 예매&매표 , 2: 스토어,  3: 결제,  4: 할인혜택,  5: 홈페이지,  6: 이벤트
 	private String userId; 
-	private int previewFlag; //0: 진행중  1:마감
+	private int previewFlag; //0: 시작전  1:진행중 2:마감
 	private int commentType; //0: 1: 2: 
 	private int parent; // 부모글 
 	private int cartUserNo; // 상품 & 구매 전용

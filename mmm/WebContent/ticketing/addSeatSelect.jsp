@@ -30,6 +30,13 @@
 <title></title>
 
 <style>
+
+	  .mb-2, .my-2 {
+	    margin-bottom: .5rem!important;
+	    margin-top: .5rem !important;
+	  }
+	  
+	  
  	  body {
  	  	font-family: 'Noto Sans KR', sans-serif !important;
  	  }
@@ -71,7 +78,7 @@ ul {
     
 }
 
-li {
+#numberSelector > div.group > ul > li {
 	margin: 0 0 0 0;
     padding: 0 0 0 0;
     border : 0;
@@ -103,7 +110,7 @@ li {
 	letter-spacing: -0.1em;
 }
 
-.selected {
+#numberSelector > div.group > ul > li.selected {
 	background-color : black;
 	color : white;
 }
@@ -432,6 +439,7 @@ cursor: pointer;
 </head>
 <body>
 	
+	<jsp:include page="/layout/header.jsp"></jsp:include>
  
     <div class="container">
     <!-- 좌석 선택 -->
