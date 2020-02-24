@@ -136,6 +136,8 @@ public class UserController {
 	
 	System.out.println("userIdentity@@@@@@@:::::: "+user.getIdentity());
 	
+	
+	
 	//Business Logic
 	userService.extraAddUser(user);
 	
@@ -237,8 +239,8 @@ public class UserController {
 	@RequestMapping(value = "addUnUserView" , method=RequestMethod.GET)
 	public String addUnUserView() throws Exception{
 		
-		System.out.println("/user/addUnUserView : POST");
-	
+		System.out.println("/user/addUnUserView : GET");
+			
 		return "redirect:/user/addUnUserView.jsp";
 	}
 	
@@ -758,6 +760,7 @@ public class UserController {
 				user.setIdentity(1);
 				
 				model.addAttribute("user",user);
+				
 				
 				return "forward:/user/extraAddUser.jsp";
 			}

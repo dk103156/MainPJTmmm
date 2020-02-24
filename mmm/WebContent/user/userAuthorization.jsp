@@ -447,21 +447,21 @@ $(function(){
 </form>
 
 <!--  화면구성 div Start /////////////////////////////////////-->
-<div class="container" style="margin-top: 10px; width: 600px;">
+<div class="container" style="margin-top: 60px; width: 600px;">
 
 	<h1 class="bg-default text-center" style="background-color:#fee50e;">본 인 인 증</h1><br>
-		<h4 class="bg-default text-center"> 본인 인증단계 입니다.<br><br>
+		<h5 class="bg-default text-center"> 본인 인증단계 입니다.<br>
 			원하시는 인증 방법을 선택해주세요. <br>
-		</h4>	
+		</h5>	
 		<div class="row" style="margin-top: 20px;"> 
 			<div class="col-md-6" ><a href="#" data-toggle="modal" data-target="#phoneModal"><img style="float: right;width: 200px;height: 230px;" alt="" src="/resources/image/user/phone_img.png"></a></div>
 			<div class="col-md-6" ><a href="#" data-toggle="modal" data-target="#emailModal"><img style="padding-top: 30px; width: 190px; height: 200px;" alt="" src="/resources/image/user/email_img.png"></a></div>
-		</div>
-			<h4 class="bg-default text-center" >
-				14세 미만 어린이는 보호자 인증을 추가로 완료한 후 가입이 가능합니다.<br>
-				 본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며, <br>
+		</div><br>
+			<h5 class="bg-default text-center" >
+				14세 미만 어린이는 보호자 인증을 추가로 완료한 후 <br> 가입이 가능합니다.<br>
+				 본인인증 시 제공되는 정보는 해당 인증기관에서 직접 <br> 수집하며, 
 				인증 이외의 용도로 이용 또는 저장되지 않습니다. 
-			</h4><br>
+			</h5><br>
 </div>	<!-- container -->	
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-md-2"></div> -->

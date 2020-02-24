@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
@@ -266,6 +267,7 @@ public class EventRestController {
 	
 	
 //한줄평 등록하기	
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="json/addExpectLine")
 	public void addExpectLine(@RequestBody Map<String, Object> map) throws Exception {
 		
@@ -387,12 +389,9 @@ public class EventRestController {
 	//출첵기록 가져오기 
 		@RequestMapping(value="json/getAttendanceRecord")
 		public List<Point> getAttendanceRecord(HttpSession session) throws Exception {
-			System.out.println("/event/json/getAttendanceRecord");
-			
 			
 			User user = (User)session.getAttribute("user");
 			int userNo = user.getUserNo();
-			
 			
 			Map<String, Object> returnMap = new HashMap<String,Object>();
 			List<Point> checkList = paymentService.checkList(userNo);
@@ -419,4 +418,21 @@ public class EventRestController {
 			
 			return returnList;
 		}	
+		
+		@RequestMapping(value="json/getPreviewInfo")
+		public List<Preview> getPreviwInfo() throws Exception{
+		
+			List<Preview> list = eventService.getAllPreview();
+			List<Preview> returnList = new ArrayList<Preview>();
+			
+			for(Preview p: list) {
+				
+				if(p.getPreviewFlag().equals("1")) {
+					//System.out.println("진행중");
+					returnList.add(p);
+				}
+			}
+			
+			return returnList;
+		}
 }

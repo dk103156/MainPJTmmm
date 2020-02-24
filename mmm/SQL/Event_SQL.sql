@@ -18,43 +18,43 @@ CREATE SEQUENCE seq_preview_preview_no     	INCREMENT BY 1 START WITH 10000 maxV
 commit;
 
 CREATE TABLE preview ( 
-	preview_no		 NUMERIC(5)	 		NOT NULL,
-	preview_name 	 VARCHAR2(120)	 	NOT NULL,
-	preview_place	 VARCHAR2(100)	 	NOT NULL,
-	preview_date	 TIMESTAMP 			NOT NULL,
-	image_file	 	 VARCHAR2(4000) 	NOT NULL,
-	start_date		 TIMESTAMP	 		NOT NULL,
-	end_date		 TIMESTAMP	 		NOT NULL,
-	winner_count 	 NUMERIC(3)	 		NOT NULL,
-	winner_date	 	 TIMESTAMP	 		NOT NULL,
-	preview_regdate	 TIMESTAMP	 		NOT NULL,
-	preview_status	 NUMERIC(2)	 		DEFAULT 0,
+	preview_no 		 NUMERIC(5)  		NOT NULL,
+	preview_name  	 VARCHAR2(120) 	 	NOT NULL,
+	preview_place 	 VARCHAR2(100) 	 	NOT NULL,
+	preview_date 	 TIMESTAMP  		NOT NULL,
+	image_file 	 	 VARCHAR2(4000)  	NOT NULL,
+	start_date 		 TIMESTAMP 	 		NOT NULL,
+	end_date 		 TIMESTAMP 	 		NOT NULL,
+	winner_count  	 NUMERIC(3)	 		NOT NULL,
+	winner_date  	 TIMESTAMP 	 		NOT NULL,
+	preview_regdate  TIMESTAMP 	 		NOT NULL,
+	preview_status 	 NUMERIC(2)  		DEFAULT 0,
 	PRIMARY KEY(preview_no)
 );
 
 CREATE TABLE quiz ( 
-	quiz_no			 NUMERIC(5)	 		NOT NULL,
-	question		 VARCHAR2(500)	 	NOT NULL,
-	option1			 VARCHAR2(200)	 	NOT NULL,
-	option2			 VARCHAR2(200)	 	NOT NULL,
-	option3	 		 VARCHAR2(200)	 	NOT NULL,
-	option4			 VARCHAR2(200)		NOT NULL,
-	answer			 NUMERIC(2)			NOT NULL,
-	start_date	 	 TIMESTAMP	 		NOT NULL,
-	end_date		 TIMESTAMP	 		NOT NULL,
-	quiz_date		 TIMESTAMP	 		NOT NULL,
-	quiz_status	     NUMERIC(2)		 	DEFAULT 0,
+	quiz_no 		 NUMERIC(5) 		NOT NULL,
+	question 		 VARCHAR2(500) 	  	NOT NULL,
+	option1 		 VARCHAR2(200) 	 	NOT NULL,
+	option2 		 VARCHAR2(200) 	 	NOT NULL,
+	option3  		 VARCHAR2(200) 	 	NOT NULL,
+	option4 		 VARCHAR2(200) 		NOT NULL,
+	answer 			 NUMERIC(2) 		NOT NULL,
+	start_date 	 	 TIMESTAMP 	 		NOT NULL,
+	end_date 		 TIMESTAMP 	 		NOT NULL,
+	quiz_date 		 TIMESTAMP 	 		NOT NULL,
+	quiz_status      NUMERIC(2) 		DEFAULT 0,
 	PRIMARY KEY(quiz_no)
 );
 
 CREATE TABLE participation ( 
-	part_no			 NUMERIC(5)	 		NOT NULL,
-	quiz_no	 		 NUMERIC(5)	 		REFERENCES quiz(quiz_no) on delete cascade,
-	preview_no		 NUMERIC(5)	 		REFERENCES preview(preview_no) on delete cascade,
-	user_no			 NUMERIC(5)	 		REFERENCES users(user_no) on delete cascade,
-	part_type		 NUMERIC(1)	 		NOT NULL,
-	winning_flag	 NUMERIC(2)	 		DEFAULT 0,
-	part_date		 TIMESTAMP 			NOT NULL,
+	part_no  		 NUMERIC(5)  		NOT NULL, 
+	quiz_no 	 	 NUMERIC(5)  		REFERENCES quiz(quiz_no) on delete cascade, 
+	preview_no 		 NUMERIC(5)  		REFERENCES preview(preview_no) on delete cascade, 
+	user_no	 		 NUMERIC(5)  		REFERENCES users(user_no) on delete cascade, 
+	part_type 		 NUMERIC(1)  		NOT NULL, 
+	winning_flag 	 NUMERIC(2)  		DEFAULT 0, 
+	part_date 		 TIMESTAMP 			NOT NULL, 
 	PRIMARY KEY(part_no)
 );
 
@@ -88,6 +88,7 @@ VALUES(seq_quiz_quiz_no.nextval, '지푸라기라도 잡고 싶은 짐승들’�
 INSERT INTO QUIZ 
 VALUES(seq_quiz_quiz_no.nextval, '분노의 질주의 새로운 빌런이 공개됐다. WWE 슈퍼스타 이기도한 이 배우는?', '랜디 오튼', '브록 레스너', '바티스타', '존 시나', 4, TIMESTAMP '2020-02-24 00:00:00.000000', sysdate, 0)
 
+
 INSERT INTO QUIZ 
 VALUES(seq_quiz_quiz_no.nextval, '영화 ‘기생충’이 오스카 레이스 막바지에 접어들었다. 제92회 아카데미 최고 영예상인 작품상 후보가 아닌 작품은?', '포드 V 페라리', '결혼 이야기', '겨울왕국2', '아이리시맨', 3, TIMESTAMP '2020-02-24 00:00:00.000000', sysdate, 0)
 
@@ -99,3 +100,29 @@ VALUES(seq_quiz_quiz_no.nextval, '영화 ‘조조 래빗’을 연출한 타이
 
 INSERT INTO QUIZ 
 VALUES(seq_quiz_quiz_no.nextval, '샘 멘데스 감독의 작품 1917에서 열연을 펼친 두 주연 배우 중, 드라마 왕좌의 게임에서 극중 심약한 왕자 토멘 바라테온을 연기한 배우는?', '조지 맥케이', '딘 찰스 채프먼', '로저 디킨', '베네딕트 컴버배치', 2, TIMESTAMP '2020-02-24 00:00:00.000000', sysdate, 0)
+
+
+
+INSERT INTO MMM.PREVIEW
+(PREVIEW_NO, PREVIEW_NAME, PREVIEW_PLACE, PREVIEW_DATE, IMAGE_FILE, START_DATE, END_DATE, WINNER_COUNT, WINNER_DATE, PREVIEW_REGDATE, PREVIEW_STATUS, MOVIE_NO)
+VALUES(10004, '돌아온 ㅇㅇㅇㅇ시사회', 'CGV 송파', TIMESTAMP '2020-02-28 13:30:00.000000', 'http://file.koreafilm.or.kr/thm/02/00/05/47/tn_DPF020074.jpg', TIMESTAMP '2020-02-24 00:00:00.000000', TIMESTAMP '2020-02-25 00:00:00.000000', 2, TIMESTAMP '2020-02-26 00:00:00.000000', TIMESTAMP '2020-02-24 04:35:44.000000', 2, 10038);
+
+INSERT INTO MMM.PREVIEW
+(PREVIEW_NO, PREVIEW_NAME, PREVIEW_PLACE, PREVIEW_DATE, IMAGE_FILE, START_DATE, END_DATE, WINNER_COUNT, WINNER_DATE, PREVIEW_REGDATE, PREVIEW_STATUS, MOVIE_NO)
+VALUES(10010, '테스트용', 'CGV 송파', TIMESTAMP '2020-02-28 13:30:00.000000', 'http://file.koreafilm.or.kr/thm/02/00/05/47/tn_DPF020074.jpg', TIMESTAMP '2020-02-24 00:00:00.000000', TIMESTAMP '2020-02-25 00:00:00.000000', 2, TIMESTAMP '2020-02-26 00:00:00.000000', TIMESTAMP '2020-02-24 04:35:44.000000',2, 10038);
+
+INSERT INTO MMM.PREVIEW
+(PREVIEW_NO, PREVIEW_NAME, PREVIEW_PLACE, PREVIEW_DATE, IMAGE_FILE, START_DATE, END_DATE, WINNER_COUNT, WINNER_DATE, PREVIEW_REGDATE, PREVIEW_STATUS, MOVIE_NO)
+VALUES(10001, '돌아온 ㅇㅇㅇㅇ시사회', 'CGV 송파', TIMESTAMP '2020-02-28 13:30:00.000000', 'http://file.koreafilm.or.kr/thm/02/00/05/47/tn_DPF020074.jpg', TIMESTAMP '2020-02-24 00:00:00.000000', TIMESTAMP '2020-02-25 00:00:00.000000', 2, TIMESTAMP '2020-02-26 00:00:00.000000', TIMESTAMP '2020-02-24 04:35:44.000000', 2, 10038);
+
+INSERT INTO MMM.PREVIEW
+(PREVIEW_NO, PREVIEW_NAME, PREVIEW_PLACE, PREVIEW_DATE, IMAGE_FILE, START_DATE, END_DATE, WINNER_COUNT, WINNER_DATE, PREVIEW_REGDATE, PREVIEW_STATUS, MOVIE_NO)
+VALUES(10010, '테스트용', 'CGV 송파', TIMESTAMP '2020-02-28 13:30:00.000000', 'http://file.koreafilm.or.kr/thm/02/00/05/47/tn_DPF020074.jpg', TIMESTAMP '2020-02-24 00:00:00.000000', TIMESTAMP '2020-02-25 00:00:00.000000', 2, TIMESTAMP '2020-02-26 00:00:00.000000', TIMESTAMP '2020-02-24 04:35:44.000000',2, 10038);
+
+INSERT INTO MMM.PREVIEW
+(PREVIEW_NO, PREVIEW_NAME, PREVIEW_PLACE, PREVIEW_DATE, IMAGE_FILE, START_DATE, END_DATE, WINNER_COUNT, WINNER_DATE, PREVIEW_REGDATE, PREVIEW_STATUS, MOVIE_NO)
+VALUES(10005, '돌아온 ㅇㅇㅇㅇ시사회', 'CGV 송파', TIMESTAMP '2020-02-28 13:30:00.000000', 'http://file.koreafilm.or.kr/thm/02/00/05/47/tn_DPF020074.jpg', TIMESTAMP '2020-02-24 00:00:00.000000', TIMESTAMP '2020-02-25 00:00:00.000000', 2, TIMESTAMP '2020-02-26 00:00:00.000000', TIMESTAMP '2020-02-24 04:35:44.000000', 2, 10038);
+
+INSERT INTO MMM.PREVIEW
+(PREVIEW_NO, PREVIEW_NAME, PREVIEW_PLACE, PREVIEW_DATE, IMAGE_FILE, START_DATE, END_DATE, WINNER_COUNT, WINNER_DATE, PREVIEW_REGDATE, PREVIEW_STATUS, MOVIE_NO)
+VALUES(10011, '테스트용', 'CGV 송파', TIMESTAMP '2020-02-28 13:30:00.000000', 'http://file.koreafilm.or.kr/thm/02/00/05/47/tn_DPF020074.jpg', TIMESTAMP '2020-02-24 00:00:00.000000', TIMESTAMP '2020-02-25 00:00:00.000000', 2, TIMESTAMP '2020-02-26 00:00:00.000000', TIMESTAMP '2020-02-24 04:35:44.000000',2, 10038);

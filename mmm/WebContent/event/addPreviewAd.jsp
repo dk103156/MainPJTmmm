@@ -154,58 +154,57 @@
 			
 					
 		</script>
-		
-		 <style type="text/css">
-		
-				.pinkstyle{
-				 color:#495057;
-				 font-size:25px;
-				}
-				
-				.time{
-				 display:inline;
-				}
-			
-				
-				input:focus {
-				outline: none;
-				}
-				
-				#fileUpload{
-				font-size: 23px;
-				position: absolute;
-				right: 0px;
-				top: 0px;
-				opacity: 0;
 
-				}
-				
-			 
-			#fileUpload
-			{
-			font-size: 50px;
-			position: absolute;
-			right: 0px;
-			top: 0px;
-			opacity: 0;
-			 
-			filter: alpha(opacity=0);
-			-ms-filter: "alpha(opacity=0)";
-			-khtml-opacity: 0;
-			-moz-opacity: 0;
-			}
-			
-			.btn{
-			 border-color: #d6cece;
-			 color: #4e4c4c;
-			 background-color: #fee00e;
-			}
+<style type="text/css">
+
+	.pinkstyle{
+	 color:#495057;
+	 font-size:25px;
+	}
 	
+	.time{
+	 display:inline;
+	}
+
 	
-			th{
-			width: 25%;
-			}
-		</style>
+	input:focus {
+	outline: none;
+	}
+	
+	#fileUpload{
+	font-size: 23px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	opacity: 0;
+
+	}
+	
+	#fileUpload
+	{
+	font-size: 50px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	opacity: 0;
+	 
+	filter: alpha(opacity=0);
+	-ms-filter: "alpha(opacity=0)";
+	-khtml-opacity: 0;
+	-moz-opacity: 0;
+	}
+
+.btn{
+ border-color: #d6cece;
+ color: #4e4c4c;
+ background-color: #fee00e;
+}
+
+
+th{
+width: 25%;
+}
+</style>
 </head> 
 
 <body>

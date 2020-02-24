@@ -31,10 +31,15 @@
 
 <style>
 
-
+	  .mb-2, .my-2 {
+	    margin-bottom: .5rem!important;
+	    margin-top: .5rem !important;
+	  }
+	  
 	  body {
  	  	font-family: 'Noto Sans KR', sans-serif !important;
  	  }
+ 	  
 	  ul li {
 	    list-style-type:none;
 	  }
@@ -353,6 +358,48 @@
 		width: 113px;
 	}
 	 
+	 
+
+		/* 일반예매 or 극장별 비교예매 전환 */	
+		.container {
+			width:960px;
+			margin:0 auto;
+		}		
+		.tab {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+		.tab li {
+			float: left;
+		}
+		.tab li a {
+			display: inline-block;
+			color: #000;
+			text-align: center;
+			text-decoration: none;
+			padding: 14px 16px;
+			font-size: 17px;
+			transition:0.3s;
+		}
+		.tabcontent {
+			display: none;
+			background-color:rgb(0,154,200);
+			padding: 6px 12px;
+			color:#fff;
+		}
+		ul.tab li.current{
+			background-color: rgb(0,154,200);
+			color: #222;
+		}
+		.tabcontent.current {
+			display: block;
+		}	 
+	 
+	 
+	 
+	 
 </style>
 
 <script>
@@ -373,21 +420,44 @@ $(function(){
 			$(item).trigger("click");
 		}
 	})
+	
+	/* 일반예매 or 극장별 비교예매 전환 */	
+		$("a[href='#']:contains('일반예매')").on('click',function(){			
+			$("body").load("/ticketing/addTicketing",function(){
+				$('.dropdown-toggle').dropdown('toggle')
+				$('.dropdown-toggle').dropdown('hide')				
+			});
+		})
+	
+		$("a[href='#']:contains('극장별 비교예매')").on('click',function(){			
+			$("body").load("/ticketing/addCompareTicketing",function(){
+				$('.dropdown-toggle').dropdown('toggle')
+				$('.dropdown-toggle').dropdown('hide')				
+			});
+		})
 
 });
 
 </script>
 </head>
+
 <body>
 
-	<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/layout/header.jsp"></jsp:include>	
 	
    <div class="container">
+
       <!-- 비교 예매 -->
-      <div class="compareTicketing">
+      <div class="addTicketing">
         <!-- 타이틀 -->
-     <div class="row mb-2">
-     	<div class="col-12 navi" style="margin-left: 15px;">
+     <div class="row mb-2" style="height: 53px;">
+        <div style="z-index: 2;">
+	   		<ul class="tab">
+				<li class="current" data-tab="tab1"><a href="#">일반예매</a></li>
+				<li data-tab="tab2"><a href="/ticketing/addCompareTicketing">극장별 비교예매</a></li>
+			</ul>
+		</div>
+     	<div class="col-12 navi" style="z-index: 1; margin-left: 15px; width: 330px !important; bottom: 32px;">
      		<div class="resetSelection" style="clear:both; float:right; height:30px"></div>
      	</div>
      </div>
@@ -561,7 +631,7 @@ $(function(){
           </div><!-- end of col -->
          </div><!-- end of steps -->
 		</div><!-- end of row -->
-	</div><!-- end of compareTicketing -->
+	</div><!-- end of addTicketing -->
 	</div><!-- end of container -->
 	
 <div class="loading" id="ticket_loading" style="display: none;">

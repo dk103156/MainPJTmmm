@@ -50,7 +50,6 @@ body {
 
 h2.tit {
     padding: 0 0 26px 0;
-    font-size: 1.8666em;
     font-weight: 400;
     letter-spacing: -1px;
     line-height: 1.1;
@@ -637,6 +636,7 @@ $(function(){
 
 	//회원정보 수정
 	$("#updateBtn").on("click",function(){
+		alert("클릭!")
 		if(!validate()){ //이메일 유효성 오류 : false, 정상 : true
 			return;
 		}
@@ -743,6 +743,40 @@ $(function(){
 			})//ajax 끝
 	})//회원탈퇴 끝
 	
+	// 이메일중복체크(1 = 중복 / 0 != 중복)
+	$('#email').keyup(function() {
+		console.log("클릭!!!")
+		var email = $('#email').val();
+		console.log(email);
+		$.ajax({
+			url : '/user/json/emailCheckDupl/',
+			method : "post" ,
+			datatype : "json" ,
+			headers : {
+				"Accept" : "application/json" ,
+				"Content-Type" : "application/json"
+			} ,
+			data : JSON.stringify({
+				email : email
+			}), 
+			success : function(data) {
+				console.log("false = 중복o / true = 중복x : "+ data);							
+				
+				if (data == 0) {
+						// 0 : 이메일이 중복되는 문구
+						alert("등록된 이메일입니다 :p");
+						//$("#confirmNum1").text("등록된 이메일입니다 :p");
+						//$("#confirmNum1").css("color", "red");
+						$("#updateBtn").attr("disabled", true);
+				}else{
+					$("#confirmNum1").text("");
+					$("#updateBtn").attr("disabled", false);
+				} 
+			}, error : function() {
+					console.log("실패");
+				}
+			})//ajax 끝
+		});//중복체크 끝
 	
 	
 	
@@ -756,9 +790,11 @@ $(function(){
 <body>
 
 <!--container-->
-<div class="container">
+<div class="container" style="margin-top: 40px;">
 	<div id="contents">
-		<h2 class="tit">개인정보 수정</h2>
+		<h2 class="tit">
+		<strong>개인정보 수정</strong>
+		</h2>
 
 		<ul class="dot-list mb10">
 			<li>회원님의 정보를 정확히 입력해주세요.</li>

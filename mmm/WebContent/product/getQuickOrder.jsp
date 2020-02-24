@@ -8,69 +8,30 @@
 <html lang="ko">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
-  <!-- Bootstrap Extended Color -->
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
-  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
-
-    <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
-  <!-- font awesome -->
-  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>	
-
-<style>
-	#body {
-		margin-top: 10px;
-		 font-family: 'Noto Sans KR', sans-serif;
-	  }
-  
-	hr{
-		background-color:black;
-		height:2px;
-	   }
-	   
-	#shoppingCart{
-		width : 50px;
-		position:fixed;
-		right:10px;
-		bottom:0px;
-		z-index:1000
-	}
+	  <!-- Required meta tags -->
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	form > div > div > span.name{
-		width : 166px;	
-	}  
-	#productList{
-	margin-top: 10px;
-	float:left;
-	margin: 10px 35px;
-	border: 3px solid #fee50e;
-	border-radius: 30px 40px 20px 40px / 30px 40px 20px 40px;
-	} 
-	#img{
-	width: 200px;
-	height: 200px;
-	}
-	#modalhead{
-	background-color: #fee50e;
-	}
-	#modal{
-	border-color: #fee50e;
-	}
-</style>  
-
+	  <!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	  
+	  <!-- Bootstrap Extended Color -->
+	  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
+	  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
+	
+	    <!-- Optional JavaScript -->
+	  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+	
+	  <!-- font awesome -->
+	  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>	
 		
-	</head>
+	  <!--     Common Css -->
+	  <link rel="stylesheet" href="/resources/css/product.css">	
+</head>
+
 
 <body id="body">
  		 	 
@@ -87,13 +48,13 @@
  		
 	<div class="row" id="row">
  		<c:forEach var="product" items="${list}">
-				<div class="thumb-wrapper" id="productList">
+				<div class="thumb-wrapper" id="QuickProdList">
 	 				<div class="img-box text-center">
-						<img src="/resources/image/${product.prodImage}"  class="img-circle img-responsive productImage" id="img">
+						<img src="/resources/image/${product.prodImage}"  class="img-circle img-responsive productImage" id="QuickProdImg">
 						<input name="prodNo" type="hidden" value = "${product.prodNo}">
 						<input name="prodPrice" type="hidden" value= "${product.prodPrice }">
 						<div class="content-box">
-							<h4 style="text-align:center;"><strong>${product.prodName}</strong></h4><br>
+							<h5 style="text-align:center;">${product.prodName}</h5><br>
 							<h5 style="text-align:center;">${product.prodPrice}원</h5>
 		 				</div> 
 					</div>
@@ -108,8 +69,8 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content"  id="modal">
-      <div class="modal-header"  id="modalhead">
+    <div class="modal-content"  id="QuickModal">
+      <div class="modal-header"  id="QuickModalhead">
         <h5 class="modal-title" id="exampleModalCenterTitle">추가 입력</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -123,8 +84,8 @@
       	</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">추가 선택하기</button>
-        <button type="button" class="btn btn-primary" id="toPayment">결제단계로</button>
+        <button type="button" class="btn btn-outline-warning" data-dismiss="modal">추가 선택하기</button>
+        <button type="button" class="btn btn-outline-dark" id="toPayment">결제단계로</button>
       </div>
     </div>
   </div>

@@ -1782,6 +1782,7 @@ input {
 </head>
 
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <form autocomplete="off">
 <div class="container">
 <div id="contents">

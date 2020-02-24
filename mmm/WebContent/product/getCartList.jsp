@@ -26,14 +26,11 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   
+  <!--     Common Css -->
+  <link rel="stylesheet" href="/resources/css/product.css">
+  
 <title>Insert title here</title>
 
-<style>
-#body {
-      margin-top: 10px;
-       font-family: 'Noto Sans KR', sans-serif;
-     }
-</style>
 </head>
 <body id="body">
 
@@ -41,21 +38,21 @@
 		<div class="row mx-0">
 			<div class="cartHeader col-12 ">
 			<br>
-				<h1><strong><span>장바구니</span></strong></h1>
+				<h2><strong><span>장바구니</span></strong></h2>
 			</div>
 		</div>
 		
-		<hr  style="height: 2px; background-color: black; ">
+		<hr  style="background-color: black; ">
 		
 		<div class="cartContentHeader row mx-0">
 		<div class="prodNoHeader col-2"><span>상품번호</span></div>  
 <!--			<div class="prodNoHeader col-2"><h4><span>번호</span></h4></div>	 -->	
-			<div class="prodNameHeader col-6"><h4><span>상품명</span></h4></div>
-			<div class="prodPriceHeader col-2"><h4><span>가격</span></h4></div>
-			<div class="prodQuantityHeader col-2"><h4><span>수량</span></h4></div>
+			<div class="prodNameHeader col-6"><h5><span>상품명</span></h5></div>
+			<div class="prodPriceHeader col-2"><h5><span>가격</span></h5></div>
+			<div class="prodQuantityHeader col-2"><h5><span>수량</span></h5></div>
 		</div>
 		
-		<hr  style="height: 2px; background-color: black; ">
+		<hr  style=" background-color: black; ">
 		
 		<div class="cartContent">
 		
@@ -127,7 +124,7 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 				Element+= "<div class='prodNo col-1' style='margin-top: 55px;'><span><kbd>"+prodNoList[i]+"</kbd></span></div>"
 //				Element+= "<div class='prodNo col-1'><span><h3 style='margin-top: 55px;'>"+[i+1]+"</h3></span></div>"
 			Element+= "<div class='prodName col-6'>"
-			Element+= "<span><img src='../resources/image/"+prodImageList[i]+"' width=150></span>"
+			Element+= "<span><img src='../resources/image/"+prodImageList[i]+"' width=170 height=150 ></span>"
 			Element+= "<span>"+prodNameList[i]+"</span>"
 			Element+= "</div>"
 			Element+= "<div class='prodPrice col-3'><span><input name='prodPrice' type='text' style='margin-top: 55px;' initialValue='"+prodPriceList[i]+"'value='"+prodPriceList[i]+"' readonly> 원</span></div>"

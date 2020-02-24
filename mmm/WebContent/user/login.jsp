@@ -91,6 +91,7 @@ h3.tit {
 <script type="text/javascript">
 $(function(){	
 	
+	$('#loginModal').modal ({ keyboard: false, backdrop: 'static' });
 	
 	$("#loginModal").modal("show");
 	
@@ -98,6 +99,13 @@ $(function(){
 	$("#btn").on("click",function(){
 		history.go(-1);
 	})
+	
+	
+	
+
+
+
+출처: https://shuming.tistory.com/entry/modal-안-닫히게-하기-esc-막기-배경-안눌리게하기 [일기장]
 	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);

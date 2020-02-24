@@ -27,39 +27,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
 	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style>
-	img{
-	border: 3px solid #ece1fc;
-    margin-top: 10px;
-	float:left;
-	}
-     #body {
-            margin-top: 10px;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-      div.group{
-      	margin-left: 170px;
-      }
-      #div{
-      margin-top: 25px;
-      margin-bottom: 55px;
-      border: 3px solid #fee50e;
-      border-radius: 50px 40px 50px 50px / 50px 40px 50px 50px;
-      width: 836px;
-      }
-      #btn{
-	background-color: #fee50e;
-	color: black;
-	outline-color: #fee50e;
-	}
-  	 </style>
-   
-   
-
-	<!-- <link rel="stylesheet" href="/css/admin.css" type="text/css"> -->
-
-
+	<!--     Common Css -->
+    <link rel="stylesheet" href="/resources/css/product.css">
+	
+	
+	
+	
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
@@ -123,7 +96,7 @@
 	
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
- 	<div class="container" id="div" >
+ 	<div class="container" id="addProdDiv" >
  	<br/><br/><br/>
  		<h1 class=" text-center" >상 품 등 록</h1>
  		
@@ -132,12 +105,12 @@
  		 <!-- form Start-->
 		 <form class="form-horizontal" enctype="multipart/form-data" >
 		 
-			<div class="group">
+			<div class="group" id="addProdDivGroup">
 				<div class="row mx-0 mb-2">
 					<label class=" col-4 control-label">
-						<img src="/resources/image/no_image.jpg" style= "width: 450px; height: 360px;"/> 
+						<img src="/resources/image/no_image.jpg" id="addProdImage"  style= "width: 450px; height: 360px;"/> 
 							<input type="file" class="form-control"   name="prodImage" style="padding-right: 0px;  padding-left: 20px;  
-							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;  ">
+							margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: ridge;">
 					</label>
 				</div>
 											
@@ -145,17 +118,16 @@
 											
 				<label for="prodName" class=" col-4 control-label">상품명</label>
 				<div class="col-6">
-					<input type="text" class="form-control"  name="prodName" placeholder="상품명을 입력해주세요." style="padding-right: 0px;  
-						padding-left: 20px; margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;">
+					<input type="text" class="form-control"  name="prodName" placeholder="상품명을 입력해주세요." id="addProdInput">
 				</div>
 											
 											<br/>
 											
 											
-				<div class="col-6">
-					<label for="prodPrice" class="col-6 control-label">상품가격</label>
-						<input type="text" class="form-control"  name="prodPrice" placeholder="상품 가격을 입력해주세요." style="padding-right: 0px; 
-						 padding-left: 20px; margin-top: 0px; margin-left: 0px;  margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;">
+				
+					<label for="prodPrice" class="col-4 control-label">상품가격</label>
+				<div class="col-6">	
+						<input type="text" class="form-control"  name="prodPrice" placeholder="상품 가격을 입력해주세요." id="addProdInput">
 				</div>
 										
 											<br/>
@@ -164,8 +136,7 @@
 											
 				<label for="prodDetail" class="col-4 control-label">상품구성</label>
 					<div class="col-6">
-						<input type="text" class="form-control"  name="prodDetail" placeholder="상품 설명을 입력해주세요." style="padding-right: 0px; 
-						padding-left: 20px; margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;">
+						<input type="text" class="form-control"  name="prodDetail" placeholder="상품 설명을 입력해주세요." id="addProdInput">
 					</div>
 											
 											<br/>
@@ -174,8 +145,7 @@
 										
 				<label for="franType" class="col-4 control-label">프랜차이즈    </label>
 					<div class="col-6">
-						<select class="form-control" name="franType"style="padding-right: 0px; 
-							 padding-left: 20px; margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;">
+						<select class="form-control" name="franType" id="addProdInput">
 									<option selected>프랜차이즈</option>
 									<option value="0">CGV</option>
 									<option value="1">롯데시네마</option>
@@ -188,8 +158,7 @@
 										 
 				<label for="prodType" class="col-4 control-label">상품종류</label>
 					<div class="col-6">
-						<select class="form-control" name="prodType"style="padding-right: 0px; 
-							padding-left: 20px; margin-top: 0px;   margin-right: 40px;border-right-width: 1px;  width: 421px; border: solid #fee50e;">
+						<select class="form-control" name="prodType" id="addProdInput">
 									<option selected>상품종류</option>
 									<option value="0">영화관람권</option>
 									<option value="1">스토어이용권</option>
@@ -202,8 +171,8 @@
 					
 					<div class="form-group">
 					    <div class="col-8 text-center">
-					      <button  type="button"  id="btn" class="btn"  >등&nbsp;록</button>
-							  <a class="btn"  href="#"  id="btn" role="button">취&nbsp;소</a>
+					      <button  type="button"  id="addProdBtn" class="btn"  >등&nbsp;록</button>
+							  <a class="btn"  href="#"  id="addProdBtn" role="button">취&nbsp;소</a>
 								<br><br>		   
 					   </div>
 				    </div>
