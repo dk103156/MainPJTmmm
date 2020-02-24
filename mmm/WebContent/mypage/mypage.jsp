@@ -225,7 +225,6 @@ $(function(){
 			$('.dropdown-toggle').dropdown('toggle')
 			$('.dropdown-toggle').dropdown('hide')
 		});
-		<!--빼면 드랍다운 뻑납니다 -->
 		
 	})
 	
