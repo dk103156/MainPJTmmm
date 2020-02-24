@@ -31,9 +31,7 @@
     margin: 0;
     padding: 0 0 0 0;
 }
-* {
-    box-sizing: border-box;
-}
+
 
 div {
     display: block;
@@ -44,7 +42,7 @@ body {
     overflow-y: scroll;
     letter-spacing: 0;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 16px;
     color: #444;
     font-weight: 400;
     font-family: 'Noto Sans KR', sans-serif;
