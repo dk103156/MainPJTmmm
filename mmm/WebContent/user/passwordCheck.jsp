@@ -269,7 +269,7 @@ $(function(){
 			<span>MovMovMov 로그인 시 사용하시는 비밀번호를 입력해 주세요.</span>
 
 			<input type="password" title="비밀번호 입력" class="input-text large w380px" id="pwd" name="pwd" maxlength="20" autocomplete="new-password" />
-			<h6 id="chkPw" style="color: red;"></h6>
+			<h6 id="chkPw" style="color: red; padding-left:20px; red; margin-top: 8px;"></h6>
 		</div>
 
 		<div style="text-align: center; padding-top: 30px;">

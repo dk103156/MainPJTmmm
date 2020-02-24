@@ -500,7 +500,7 @@ public class UserRestController {
 		// 본인인증을 위한 state를 메일로 발송 
 	    contents.append("<h2><p>" + state +"</p></h2>");
 	    messageHelper.setText(contents.toString(), true);
-	    FileSystemResource file = new FileSystemResource(new File("C:/Users/user/git/MainPJTmmm/mmm/WebContent/resources/image/user/boxoffice.jpg"));
+	    FileSystemResource file = new FileSystemResource(new File("C:/Users/user/git/MainPJTmmm/mmm/WebContent/resources/image/logo/logo.png"));
 	    messageHelper.addInline("boxoffice.jpg", file);
 	    mailSender.send(message);
 		

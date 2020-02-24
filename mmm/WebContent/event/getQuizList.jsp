@@ -35,11 +35,9 @@
 		var choice = qBtn.parent().parent().find('input[name="option"]:checked').val();
 		console.log($("input[name='quizNo']").val(quizNo));
 		
-		
 		console.log("quizNo>>"+quizNo);
 		console.log("userNo>>"+userNo);
 		console.log("choice>>"+choice);
-		
 
 		$.ajax(
 				{
@@ -133,13 +131,11 @@
 
 <style>
 
-	a.crtPage{
+		a.crtPage{
 		background-color: black;
-	}
+		}
 
-
-			
-     #header{ 
+   		#header{ 
       	width:750px;
       	height:auto;
       	padding: 20px;
@@ -174,20 +170,12 @@
     	font-weight: 650;
     	 border: 1px solid #bcbcbc;
 		}
-		
-        p{
-        display: block;
-	    margin-block-start: 1em;
-	    margin-block-end: 1em;
-	    margin-inline-start: 0px;
-	    margin-inline-end: 0px;
-        }
-        
+   
         ul, ol{
         list-style: none;
         } 
         
-          .qLogin{
+         .qLogin{
       	 width:808px;
      	 height: 119px;
      	 background:#fee00e;
@@ -206,44 +194,32 @@
 	    font-weight: 650;
 	    background-color: #fee00e;
 	  }
-	  
-	  
-	 .btn{
-	
-	width:70px;
-
-    background-color: #cecfc6;
-   
-    border: none;
-
-    color:#000000;
-
-    padding: 10px 0;
-    
-	/* float: right; */
-    text-align: center;
-
-    text-decoration: none;
-
-    display: inline-block;
-
-    font-size: 15px;
-
-    margin: 6px;
-
-    cursor: pointer;
-
-	border-radius:40px;
-	}
-	.btn:hover {
-    background-color: #fee50e;
-	}
-	
-	.page-item.active .page-link {
-    z-index: 1;
-    color: #4e4c4c;
-    background-color: #fee00e;
-    border-color: #d6cece;
+  
+		  
+		.btn{ 
+		width:70px;
+	    background-color: #cecfc6;
+	    border: none;
+	    color:#000000;
+	    padding: 10px 0;
+	    text-align: center;
+	    text-decoration: none;
+	    display: inline-block;
+	    font-size: 16px !important;
+	    margin: 6px;
+	    cursor: pointer;
+		border-radius:40px;
+		}
+		
+		.btn:hover {
+	    background-color: #fee50e;
+		}
+		
+		.page-item.active .page-link {
+	    z-index: 1;
+	    color: #4e4c4c;
+	    background-color: #fee00e;
+	    border-color: #d6cece;
 </style>
 </head>
 <body>
@@ -251,7 +227,7 @@
 <div class="container">
  		<br>
 		<div class="page-header">
-	       <h3><i class="far fa-check-square"></i> 영화퀴즈</h3>
+	       <h2><i class="far fa-check-square"></i> 영화퀴즈</h2>
 	    </div>
 		<br>	
 		
