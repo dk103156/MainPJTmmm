@@ -1890,56 +1890,56 @@ input {
 		<button type="button" id="delBtn" class="">삭제</button>
 		</c:if>
 		</div>
-<c:if test="${!empty list}">
-	<!-- pagination -->
-	<div class="ticketingPagination row">
-			  		<div class="col-4"></div>
-			  		<div class="col-4 ">
-					  <ul class="pagination d-flex justify-content-center ">
-		   				 <!--  <<== 좌측 nav -->
-		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-		  					    <li class="page-item disabled">
-     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-   								 </li>
-		  				</c:if>
-		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
-					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
-   							</li>
-						</c:if>
+<%-- <c:if test="${!empty list}"> --%>
+<!-- 	<!-- pagination --> 
+<!-- 	<div class="ticketingPagination row"> -->
+<!-- 			  		<div class="col-4"></div> -->
+<!-- 			  		<div class="col-4 "> -->
+<!-- 					  <ul class="pagination d-flex justify-content-center "> -->
+<!-- 		   				  <<== 좌측 nav -->
+<%-- 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }"> --%>
+<!-- 		  					    <li class="page-item disabled"> -->
+<!--      								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a> -->
+<!--    								 </li> -->
+<%-- 		  				</c:if> --%>
+<%-- 		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }"> --%>
+<!-- 					   		<li class="page-item"> -->
+<%-- 					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a> --%>
+<!--    							</li> -->
+<%-- 						</c:if> --%>
 						
-					    <!--  중앙  -->
-						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
-							<c:if test="${ resultPage.currentPage == i }">
-								<!--  현재 page 가르킬경우 : active -->
-							    <li class="page-item active" aria-current="page">
-      								<a class="page-link" href="javascript:Pagination('${ i }')">${ i }<span class="sr-only">(current)</span></a>
-   								 </li>
-							</c:if>	
+<!-- 					     중앙  -->
+<%-- 						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1"> --%>
+<%-- 							<c:if test="${ resultPage.currentPage == i }"> --%>
+<!-- 								 현재 page 가르킬경우 : active -->
+<!-- 							    <li class="page-item active" aria-current="page"> -->
+<%--       								<a class="page-link" href="javascript:Pagination('${ i }')">${ i }<span class="sr-only">(current)</span></a> --%>
+<!--    								 </li> -->
+<%-- 							</c:if>	 --%>
 							
-							<c:if test="${ resultPage.currentPage != i}">	
-								<li class="page-item">
-									<a class="page-link" href="javascript:Pagination('${ i }')">${ i }</a>
-								</li>
-							</c:if>
-						</c:forEach>
-					     <!--  우측 nav==>> -->
-					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
-					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#">Next</a>
-    						</li>
-					      </c:if>
-					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
-					      	    <li class="page-item">
-     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
-    							</li>
-						 </c:if>	
-					  </ul><!-- end of pagination -->
-					 </div><!-- end of middle col --> 
-					 <div class="col-4"></div>
-			  </div><!-- end of ticketingPagination -->
-	<!--// pagination -->
-</c:if>
+<%-- 							<c:if test="${ resultPage.currentPage != i}">	 --%>
+<!-- 								<li class="page-item"> -->
+<%-- 									<a class="page-link" href="javascript:Pagination('${ i }')">${ i }</a> --%>
+<!-- 								</li> -->
+<%-- 							</c:if> --%>
+<%-- 						</c:forEach> --%>
+<!-- 					      우측 nav==>> -->
+<%-- 					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						 --%>
+<!-- 					    	<li class="page-item disabled"> -->
+<!-- 					    		<a class="page-link" href="#">Next</a> -->
+<!--     						</li> -->
+<%-- 					      </c:if> --%>
+<%-- 					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }"> --%>
+<!-- 					      	    <li class="page-item"> -->
+<%--      							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a> --%>
+<!--     							</li> -->
+<%-- 						 </c:if>	 --%>
+<!-- 					  </ul>end of pagination -->
+<!-- 					 </div>end of middle col  -->
+<!-- 					 <div class="col-4"></div> -->
+<!-- 			  </div>end of ticketingPagination -->
+<!-- 	<!--// pagination --> 
+<%-- </c:if> --%>
 </div>
 
 </div>

@@ -355,7 +355,7 @@ public class EventRestController {
 	
 //출첵하기 
 	@RequestMapping(value="json/addAttendance")
-	public void addAttendance(@RequestBody Map<String, Object> map) throws Exception {
+	public int addAttendance(@RequestBody Map<String, Object> map) throws Exception {
 		System.out.println("/event/json/addAttendance");
 		
 		int userNo = Integer.parseInt((String)map.get("userNo"));
@@ -380,7 +380,7 @@ public class EventRestController {
 			System.out.println("출첵할수업써");
 		}
 		
-		
+		return attendanceCnt;
 	}
 	
 	
@@ -407,7 +407,10 @@ public class EventRestController {
 				String startDate = JavaUtil.convertDateFormat(p.getPointDate());
 //				String startDate = new SimpleDateFormat("yyyy-MM-dd").format(p.getPointDate());
 				map.put("start",startDate);
-				map.put("color", "#f5f50c");
+				map.put("end",startDate);
+				map.put("allday","allday");
+				map.put("color","#fee00e");
+				map.put("imageurl", "../resources/image/goodStamp.jpg");
 				returnList.add(map);
 			}
 			

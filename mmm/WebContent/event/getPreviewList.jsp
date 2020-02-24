@@ -42,7 +42,7 @@
 
 				var previewNo = $(this).parent().find("input[name='pn']").val();
 				
-				alert(previewNo)
+				//alert(previewNo)
 				
 				self.location = "/event/getPreview?previewNo="+previewNo;
 			
@@ -56,9 +56,10 @@
 				
 			});
 			
-			$("#doneMore").on("click", function(){
+			$("div[name='thumbImage']").on("click", function(){
 				
-				self.location = "/event/getDoneList";
+				var doneNo = $(this).parent().find("input[name='pn']").val();
+				self.location = "/event/getPreview?previewNo="+doneNo;
 				
 			})
 		})
@@ -77,6 +78,8 @@
 
 	h5{
 		font-family: 'Noto Sans KR', sans-serif;
+		
+	
 	}
 	
 	*{
@@ -172,18 +175,7 @@
    	  	}
     
     
-    	div.left {
-        width: 40%;
-        float: left;
-        height: 300px;
-        }
-     
-     	div.right {
-        width: 40%;
-        float: right;
-        height: 300px;
-     	 }
- 
+
 		ul{
 		   list-style:none;
 	 	  }
@@ -214,14 +206,26 @@
 		color: #666;
 		}
 		
-		#doneMore{
-		font-size : 20px;
+			.thumbnail{        
+		    width: 300px; 
+		    // width : 100%;
+		    height: auto;
+		    text-align :center;
 		}
-		span{
-     display: block;
+
+		.img-thumbnail.mx-auto.d-block{
+		    width: 300px;
+		    height: auto;
+		    display: block;
+		    text-align :center;
 		}
 		
-		
+		#thumbImage {
+			width: 300px;
+			height: auto;
+			margin: 0px auto;
+			text-align : center;
+		}
 </style>
 
 </head> 
@@ -238,7 +242,7 @@
 
 <div class="container ">
 		<div>
-		<h5>진행중인 이벤트</h5>
+		<h5 style="font-weight:bold;">진행중인 이벤트</h5>
 		<br/><br/>
 	<div class="row">
 	
@@ -256,12 +260,12 @@
 				<div class="item">
 		      	<div class="card" name="cardImg">
 		     	<figure>
-          		  <img name="preImg" src= "/resources/image/${preview.previewImage}" alt="" class="card-img-top" />
+          		  <img name="preImg" src= "${preview.previewImage}" alt="" class="card-img-top" />
                   <div class="overlay">
 		        	<div class="description" style="line-height:170%">
 		        	<span style="font-size:1.5em;">${preview.previewName}</span><br>
-		        	<span style="font-size:1.5em;">${preview.previewPlace}</span>
-		        	<span style="font-size:1.5em;">${preview.preDate}</span>
+		        	<span style="font-size:1.5em;">${preview.previewPlace}</span><br>
+		        	<span style="font-size:1.5em;">${preview.preDate}</span><br>
 		        	<span style="font-size:1.5em;">${preview.previewTime}</span>
 		     <input type="hidden" name="pn" value="${preview.previewNo}">
 		        	</div>
@@ -289,45 +293,44 @@
 	</div>
 
 </div>
-<br><br><br>
-<div class="row">
-	    	
-	    <div class="second mt-6">
-        <div class="left border-bottom-1" >
-        
-        <h5>마감된 이벤트<i class="fas fa-plus-circle float-right"><span id="doneMore">more</span></i></h5>
-        
+<br><br><br><br><br>
+ <div class="second mt-6">
+        <h5 style="font-weight:bold;">마감된 이벤트</h5>
         <br>
+        
+	<div class="row text-align-center ">
+
 		<c:set var="i" value="0" />
-		 <c:forEach var="preview" items="${doneList}"  begin="0" end="5">
+		 <c:forEach var="preview" items="${doneList}">
+		  <div class="col-sm-6 col-md-4"">
+		    <div class="thumbnail">
+	    	<div name="thumbImage">
+	    	<figure>
+	    	
+		 		<img class="img-thumbnail mx-auto d-block" src= "${preview.previewImage}" >
+		        <div class="overlay">
+		        	<div class="description">
+		        	<span style="font-size:1.2em;">${preview.previewName}</span><br>
+		        	<span style="font-size:1.2em;">${preview.previewPlace}</span><br>
+		        	<span style="font-size:1.2em;">${preview.preDate}</span><br>
+		        	<span style="font-size:1.2em;">${preview.previewTime}</span>
+		        
+		     <input type="hidden" name="pn" value="${preview.previewNo}">
+		        	</div>
+		        </div>
+		 	</figure>
 		 
-		 <ul>
-			 <li>
-			 	<img class="doneImg" src= "/resources/image/${preview.previewImage}" style="display:inline;" /> 
-			    <span>${preview.previewName}</span>
-			 </li>
-		 </ul>
-		     <input type="hidden" name="pn" value="${preview.previewNo}"  style="display:inline;">
+		 	</div> 
+		   </div> 
+		  </div>
 		   </c:forEach>
-        </div>
-        
-        <div class="right">
-        <h5>시사회 후기<i class="fas fa-plus-circle float-right">more</i></h5>
-        <br>
-        
-        DSADSD
         </div>
     </div>
 
 
-
-
+</div>
 </div>
 
-</div>
-
-
-</div>
  </body>
  
  </html>

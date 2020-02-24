@@ -42,7 +42,6 @@ $(document).ready(function() {
 	
 
 	function fncAddNotice(){
-		alert('도착?')
 		var articleTitle = $("input[name='articleTitle']").val();
 		var content = $("textarea[name='content']").val();
 		console.log(content);
@@ -117,7 +116,7 @@ $(document).ready(function() {
 
 		$("button[name='updtUser']").on("click", function(){
 			console.log(userNo);
-			self.location="/user/passwordCheck";
+			self.location="/user/updateUser";
 		});
 		
 	});  
@@ -197,6 +196,7 @@ $(document).ready(function() {
 	
 	<div id="header"> 
 	<div>
+<!-- 	<button name="updtUser" class="btn btn-outline-secondary btn-sm">수정</button> -->
 					<table class="table table-borderless">
 				     <tbody>
 					<tr>
@@ -219,9 +219,7 @@ $(document).ready(function() {
 					<td>${user.phone}</td>
 					</tr>	
 					
-					 <tr>
-					<button name="updtUser" class="btn btn-outline-danger btn-sm">수정</button></td>
-					 </tr>
+				
 				</tbody>
 				</table>
 				

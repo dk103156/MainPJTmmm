@@ -7,6 +7,7 @@
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
 <title>addQuizAd</title> 
 <meta charset="utf-8">
+ <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <!-- bootstrap 4 CDN -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -100,7 +101,7 @@
 	
 			$(".datepicker").on("change", function () {
 		        var fromdate = $(this).val();
-		        alert(fromdate);
+// 		        alert(fromdate);
 		    });
 		
 		});
@@ -111,8 +112,13 @@
 
 	
 	 <style type="text/css">
-				.pinkstyle{color:#f68181;font-size:28px;}
-				.qOrder{display:inline;}
+	.pinkstyle{color:#f68181;font-size:28px;}
+	.qOrder{display:inline;}
+				
+	body {
+	font-family: 'Noto Sans KR', sans-serif;	
+	}
+				
 	</style>
 				
 </head> 
@@ -122,7 +128,7 @@
 
 <div class="container">
 <br>
-		<div class="page-header text-secondary">
+		<div class="page-header">
 	        <h3>퀴즈 등록</h3>
 	    </div>
 			
@@ -131,7 +137,7 @@
 		
     
 	<form autocomplete="off">
-	
+	<div>
 		<div class="form-inline form-group">
 			<label for="title" class="col-sm-2 control-label">Question</label>
 			<div class="form-group col-sm-10">
@@ -140,26 +146,26 @@
         </div>
 		<div class="form-inline form-group">
 			<label for="title" class="col-sm-2 control-label">Option1</label>
-			<div class="col-sm-10">
+			<div class="form-group col-sm-10" >
 			<input type="text" class="form-control" name="optionFirst"  placeholder="Option1">
         </div>
 		</div>	
         <div class="form-inline form-group">
 			<label for="title" class="col-sm-2 control-label">Option2</label>
-				<div class="col-sm-10">
+				<div class="form-group col-sm-10">
 			<input type="text" class="form-control" name="optionSecond" placeholder="Option2">
 			</div>
         </div>
         <div class="form-inline form-group">
 			<label for="title" class="col-sm-2 control-label">Option3</label>
-				<div class="col-sm-10">
+				<div class="form-group col-sm-10">
 			<input type="text" class="form-control" name="optionThird" placeholder="Option3">
 			</div>
 			
         </div>
         <div class="form-inline form-group">
 			<label for="title" class="col-sm-2 control-label">Option4</label>
-				<div class="col-sm-10">
+				<div class="form-group col-sm-10">
 			<input type="text" class="form-control" name="optionFourth" placeholder="Option4">
 			</div>
         </div>
@@ -167,7 +173,7 @@
         <!-- 제품 컬럼 추가 -->
         <div class="form-inline form-group">
             <label for="area" class="col-sm-2 control-label">Answer</label>
-            <div class="col-sm-10">
+            <div class="form-group col-sm-10">
                     <select class="form-control"  name="answer">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -179,7 +185,7 @@
         <!-- 제품 컬럼 종료 -->
    		<div class="form-inline form-group">
 			<label for="title" class="col-sm-2 control-label">시작일자</label>
-			<div class="col-sm-10">
+			<div class="form-group col-sm-10">
 			<div class='input-group date' data-provide="datepicker">
  				 <input placeholder="Selected date" type="text" name="quizStartDate" class="form-control datepicker" >                    
  				 <div class="input-group-addon pinkstyle">
@@ -187,6 +193,7 @@
                 </div>
                  </div>			
 			</div>	
+        </div>
         </div>
 		<br>
 		<div class="text-center">

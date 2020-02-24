@@ -9,12 +9,15 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
  
- <title>getPreviewList</title>
  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<!-- 	SweetAlert2 CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
 
@@ -22,8 +25,9 @@
 		
 		$('#updateBtn').on('click', function(){
 			
-			self.location="/user/getUser";
-			
+			Swal("Are you sure you want to do this?", {
+				  buttons: ["Oh noez!", true],
+				});
 		})
 		
 		$('#applyBtn').on('click', function(){
@@ -54,13 +58,24 @@
 				},
 				success : function(JSONData, status){
 					
-					alert(status);
+					//alert(status);
 					console.log(JSONData.result);
 					if(JSONData.result==0){
 						$("form").attr("method","POST").attr("action", "/event/addPartPrev").submit();
-						alert('응모완료했습니다');
+						Swal.fire({
+							text: '응모가 완료되었습니다.',
+							icon: 'success',
+							confirmButtonText: "confirm",
+							timer: 5000
+						}).then((confirm)=>{
+			    			self.location="/event/addPartPrev";
+			    		});
 					}else{
-						alert('이미 응모한 이벤트입니다')
+						Swal.fire({
+							text: '이미 응모하신 이벤트입니다.',
+							icon: 'error',
+							confirmButtonText: "confirm"
+						});
 					}
 				}	
 				
@@ -148,13 +163,9 @@
 				<div class="col-md-3">		    
 					<div>
 			    	<c:forEach var = "image" items ="${fileArr}">
-			    		<img src="/resources/image/${image}"/>
+			    		<img src="${image}"/>
 			    	<br/>
 			    	</c:forEach>
-			    	<c:if test="${!empty preview.previewImage}">
-									
-					</c:if> 
-					
 					</div>	
 				</div>
 				
@@ -189,7 +200,7 @@
 	
 			<div class="text-center">
 				<button id="applyBtn" class="btn btn-dafault write" type="button">응모하기</button>
-				<button id="updateBtn" class="btn btn-dafault write" type="button">수정하기</button>
+<!-- 				<button id="updateBtn" class="btn btn-dafault write" type="button">수정하기</button> -->
 			</div>
 			<br>
 		

@@ -14,7 +14,8 @@ public class Preview {
 	private Timestamp previewDate; //시사회 일자
 	private String preDate;
 	private String previewTime; //시사회 상영시간
-	
+	private int movieNo; //시사회 영화 관리번호
+	private String trailer; //트레일러
 	private String previewImage; //시사회 이미지 URI
 	private List<MultipartFile> file; //시사회 이미지 파일   
 	private Timestamp winnerDate; // 당첨자 발표 일자
@@ -30,6 +31,19 @@ public class Preview {
 	private String previewFlag; //시사회 이벤트 상태(0:진행중 1:마감)
 	
 	
+	public String getTrailer() {
+		return trailer;
+	}
+	public void setTrailer(String trailer) {
+		this.trailer = trailer;
+	}
+
+	public int getMovieNo() {
+		return movieNo;
+	}
+	public void setMovieNo(int movieNo) {
+		this.movieNo = movieNo;
+	}
 	public String getPreRegDate() {
 		return preRegDate;
 	}
@@ -173,15 +187,52 @@ public class Preview {
 	
 	@Override
 	public String toString() {
-		return "Preview [previewNo=" + previewNo + ", previewName=" + previewName + ", previewPlace=" + previewPlace
-				+ ", previewDate=" + previewDate + ", preDate=" + preDate + ", previewTime=" + previewTime
-				+ ", previewImage=" + previewImage + ", file=" + file + ", winnerDate=" + winnerDate + ", winDate="
-				+ winDate + ", winnerCount=" + winnerCount + ", previewStartDate=" + previewStartDate + ", preStDate="
-				+ preStDate + ", previewEndDate=" + previewEndDate + ", preEdDate=" + preEdDate + ", previewRegDate="
-				+ previewRegDate + ", applyCount=" + applyCount + ", previewFlag=" + previewFlag + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Preview [previewNo=");
+		builder.append(previewNo);
+		builder.append(", previewName=");
+		builder.append(previewName);
+		builder.append(", previewPlace=");
+		builder.append(previewPlace);
+		builder.append(", previewDate=");
+		builder.append(previewDate);
+		builder.append(", preDate=");
+		builder.append(preDate);
+		builder.append(", previewTime=");
+		builder.append(previewTime);
+		builder.append(", movieNo=");
+		builder.append(movieNo);
+		builder.append(", previewImage=");
+		builder.append(previewImage);
+		builder.append(", file=");
+		builder.append(file);
+		builder.append(", winnerDate=");
+		builder.append(winnerDate);
+		builder.append(", winDate=");
+		builder.append(winDate);
+		builder.append(", winnerCount=");
+		builder.append(winnerCount);
+		builder.append(", previewStartDate=");
+		builder.append(previewStartDate);
+		builder.append(", preStDate=");
+		builder.append(preStDate);
+		builder.append(", previewEndDate=");
+		builder.append(previewEndDate);
+		builder.append(", preEdDate=");
+		builder.append(preEdDate);
+		builder.append(", previewRegDate=");
+		builder.append(previewRegDate);
+		builder.append(", preRegDate=");
+		builder.append(preRegDate);
+		builder.append(", applyCount=");
+		builder.append(applyCount);
+		builder.append(", previewFlag=");
+		builder.append(previewFlag);
+		builder.append("]");
+		return builder.toString();
 	}
-
 	
-
+	
+	
 	
 }

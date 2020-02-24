@@ -29,7 +29,9 @@
 <script src='../resources/javascript/timegrid.js'></script>
 <script src='../resources/javascript/interaction.js'></script>
 
-
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
 	
 	
@@ -56,15 +58,23 @@ document.addEventListener('DOMContentLoaded', function() {
 	       if(check < today){
 	    	   //previous date
 	    	   //sweet alert 처리
-	    	   console.log('이전은 클릭안됨')
+	    		Swal.fire({
+					text: '오늘 날짜로만 출석체크가 가능합니다.',
+					icon: 'error',
+					confirmButtonText: "confirm"
+				});
 	       }else if(check == today){
 	    	   //right date
-	    	   console.log('출첵가능')
+	    	   console.log('날짜ok')
 	    	   addAttendance();
 	       }else{
 				//future date
 				//sweet alert 처리
-				console.log('미래는 클릭안됨')
+	    		Swal.fire({
+					text: '오늘 날짜로만 출석체크가 가능합니다.',
+					icon: 'error',
+					confirmButtonText: "confirm"
+				});
 	       }
 	    },
 	    defaultView: 'dayGridMonth',
@@ -75,15 +85,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	      center: 'title',
 	      right: ''
 	    },
-	    eventBorderColor : '#5c6a96',
 	     eventBackgroundColor : '#ffffff' ,
 	     eventColor : '#5c6a96',
 	     titleFormat : function(date) { // title 설정
-	    	  return date.date.year +"년 "+(date.date.month +1)+"월"; 
+	    	  return date.date.year +". "+(date.date.month +1); 
 	    	    },
    	    columnHeaderText : function(date) { 
    	    	  return weekList[date.getDay()]; // 헤더 var weekList = ['일','월','화','수','목','금','토']; 
-   	    },     
+   	    },
+   	 displayEventTime:false,
    	    
 	  eventSources: 
 		  [{
@@ -97,16 +107,28 @@ document.addEventListener('DOMContentLoaded', function() {
 					
 			          success : function(doc) {
 			              callback(doc);
-// 			              console.log(doc);
-
+ 			              console.log(doc);
+ 			              
+			        
 			          }//end of success
 			      
 			      });//end of ajax
 			      
 			     
-			  } //end of events
+			  },
+			  color: 'yellow',   // an option!
+			  textColor: 'black' // an option!//end of events
 			  
 		  }], //end of eventSources 
+		  
+		  
+		  eventRender:function(event, eventElement) {
+              if(event.imageurl) {
+                  eventElement.find("span.fc-title").prepend("<center><img src='" + event.imageurl + "'><center>");
+              }
+          }
+
+		
 	  });
 	 
 	  calendar.render();
@@ -128,8 +150,27 @@ function addAttendance(){
 	
 	ajaxPromise("/event/json/addAttendance", datas).then(
   	
-	()=> {
-		console.log("성공");
+	(result)=> {
+		if(result ==0){
+			
+			Swal.fire({
+				text: '출석체크 완료! 10P 적립',
+				icon: 'success',
+				confirmButtonText: "confirm"
+			}).then((confirm)=>{
+				self.location="/event/addAttendance";
+			})
+			
+			
+		}else{
+			
+			Swal.fire({
+				text: '이미 하셨습니다.',
+				icon: 'error',
+				confirmButtonText: "confirm"
+			});
+		}
+	
 	}//end of arrow function
    );//end of then
 }
@@ -148,6 +189,7 @@ function ajaxPromise(url, datas) {
 			},
 			success : function(result, status) {
 				//데이터를 받으면 resolve()호출
+				
 				resolve(result);
 				console.log(status)
 			}//end of success
@@ -162,7 +204,10 @@ function ajaxPromise(url, datas) {
 
 ///////////////////////////////////////////////
  
-
+$(function(){
+	
+	$('.fc-event').css('font-size', '2.5em');
+})
 
 
 
@@ -187,30 +232,36 @@ function ajaxPromise(url, datas) {
 		
 }
  #calendar{
-  max-width: 900px;
-  margin: 40px auto;
+  max-width: 800px;
+  margin: 30px auto;
  }
  
- #contents {
-	    width: 100%;
-	    margin: 0;
-	    padding: 40px 0 0 0;
-	}
+	
+			p.lbtxt{	
+		letter-spacing: -0.05em !important;
+		font-family: 'Nanum Gothic';
+		margin: 0;
+		padding: 0;
+		padding-bottom: 17px;
+		line-height: 19px;
+		font-size: 14px;
+		color: #666;
+		}
+		
 
 </style>
 
 </head>
 <body>
 <div class="container">
-<div class="contents">
-<h3><i class="fas fa-calendar-check">${user.userId} 님의 출석체크</i></h3>
-
-
-
+<br/><br/>
+<h4><i class="fas fa-calendar-check"></i>&nbsp;매일매일 출첵 이벤트</h4>
+<p class="lbtxt">뭅뭅뭅 출첵하고 10포인트 받자 </p>
+<hr>
+<br/>
  <input type="hidden" name="userNo" value="${user.userId}">
 <div id="calendar">
 
-</div>
 </div>
 </div>
 

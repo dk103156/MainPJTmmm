@@ -13,16 +13,25 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mmm.common.JavaUtil;
@@ -83,6 +92,14 @@ public class EventController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
+	//google Key	
+	String googleKey = "AIzaSyDzyK2Q-0hj5aKytkaDkqS7ZwZgr-zaPDg"; //지행이꺼
+	//String googleKey = "AIzaSyBFmfGtQWLpaZoGfJQcE2g7ChUaLsvIYMw";	//지민이꺼
+	String urlGoogleSearch ="https://www.googleapis.com/youtube/v3/search?key="+googleKey;
+	
+	//외부 Http 연결을 용이하게 하기 위한 template
+	HttpEntity<?> headers;
+	RestTemplate template = new RestTemplate();
 	
 	
 	
@@ -114,20 +131,21 @@ public class EventController {
 	
 	//시사회이벤트 등록하기
 	@RequestMapping(value="addPreviewAd", method=RequestMethod.POST)
-	public String addPreviewAd(@RequestParam Map<String, Object> map,@RequestParam("previewImage") MultipartFile[] file, Model model) throws Exception {
+	public String addPreviewAd(@RequestParam Map<String, Object> map, Model model) throws Exception {
 		System.out.println("/event/addPreviewAd:POST");
 		System.out.println(map);
 	
-		
-		String filesName =System.currentTimeMillis()+"";
-		List<String> fn = new ArrayList();
+//시사회 사진은 가져다쓴다	
+//		String filesName =System.currentTimeMillis()+"";
+//		List<String> fn = new ArrayList();
 		
 		
 		Preview preview2 = new Preview();
 		
+		preview2.setPreviewImage((String)map.get("previewImage"));
 		preview2.setPreviewName((String)map.get("previewName"));
 		preview2.setPreviewPlace((String)map.get("previewPlace"));
-		
+		preview2.setMovieNo(Integer.parseInt((String)map.get("movieNo")));
 		
 		String previewDate = (String)map.get("previewDate")+" "+(String)map.get("previewHH")+":"+(String)map.get("previewMM");
 		preview2.setPreviewDate(JavaUtil.ymdhmToTimestamp(previewDate));
@@ -140,27 +158,28 @@ public class EventController {
 		preview2.setPreviewEndDate(JavaUtil.ymdToTimestamp((String)map.get("previewEndDate")));
 		preview2.setWinnerDate(JavaUtil.ymdToTimestamp((String)map.get("winnerDate")));
 		preview2.setWinnerCount(Integer.parseInt((String)map.get("winnerCount")));
+		preview2.setWinnerCount(Integer.parseInt((String)map.get("winnerCount")));
 		
-		String saveName = "";
-		if(file!=null) {
-			if(file.length>1) {
-				System.out.println("길이가 1보다 크면 ");
-				for(int i=0; i<file.length; i++) {
-				
-					saveName += saveFile(file[i])+",";
-				}
-			}else if(file.length==1) {
-				System.out.println("길이가 1보다 작으면 ");
-					saveName = saveFile(file[0]);
-			}
-			System.out.println(saveName);
-			preview2.setPreviewImage(saveName);
-		}
-		
-		String[] fileArr = saveName.split(",");
-		
-		model.addAttribute("fileArr", fileArr);
-
+//		String saveName = "";
+//		if(file!=null) {
+//			if(file.length>1) {
+//				System.out.println("길이가 1보다 크면 ");
+//				for(int i=0; i<file.length; i++) {
+//				
+//					saveName += saveFile(file[i])+",";
+//				}
+//			}else if(file.length==1) {
+//				System.out.println("길이가 1보다 작으면 ");
+//					saveName = saveFile(file[0]);
+//			}
+//			System.out.println(saveName);
+//			preview2.setPreviewImage(saveName);
+//		}
+//		
+//		String[] fileArr = saveName.split(",");
+//		
+//		model.addAttribute("fileArr", fileArr);
+//
 		eventService.addPreviewAd(preview2);
 		model.addAttribute("preview", preview2);
 	
@@ -208,13 +227,23 @@ public class EventController {
 			model.addAttribute("user", user);
 		}
 		
-		Preview preview = eventService.getPreviewAd(previewNo);
 
+		
+		Preview preview = eventService.getPreviewAd(previewNo);
+		
+		
+		Movie movie = new Movie();
+		movie.setMovieNo(preview.getMovieNo());
+		movie = movieService.getMovieByMovieNo(movie);
+		System.out.println("movieeeeeeeeeeeeee"+movie);
+//		트레일러...youtube API Method 호출 
+//		String videoId = getYoutube(movie.getMovieTitle());
+//		preview.setTrailer(videoId);
+		
 		model.addAttribute("preview" , preview);
 		
-		String[] fileArr = preview.getPreviewImage().split(",");
-		
-		model.addAttribute("fileArr", fileArr);
+//		String[] fileArr = preview.getPreviewImage().split(",");
+//		model.addAttribute("fileArr", fileArr);
 		
 		return "forward:/event/getPreviewAd.jsp";
 	}
@@ -416,21 +445,39 @@ public class EventController {
 	}
 	
 	
-	//getPreview 이거 근데 restController 가야할것같음===>나중에..
+	//
 	@RequestMapping(value="getPreview", method=RequestMethod.GET)
-	public String getPreview(@RequestParam int previewNo, Model model) throws Exception{
+	public String getPreview(@RequestParam int previewNo, Model model, HttpSession session) throws Exception{
 		
 		System.out.println("/event/getPreview:GET start");
 		
+		if(session.getAttribute("user")!=null) {
+			User user = (User)session.getAttribute("user");
+			model.addAttribute("user", user);
+		}
+		
+
+		
 		Preview preview = eventService.getPreviewAd(previewNo);
 		
+		
+		Movie movie = new Movie();
+		movie.setMovieNo(preview.getMovieNo());
+		movie = movieService.getMovieByMovieNo(movie);
+		System.out.println("movieeeeeeeeeeeeee"+movie);
+//		트레일러...youtube API Method 호출 
+		String videoId = getYoutube(movie.getMovieTitle());
+		preview.setTrailer(videoId);
+		
 		model.addAttribute("preview" , preview);
-		String[] fileArr = preview.getPreviewImage().split(",");
-		model.addAttribute("fileArr", fileArr);
+		
+//		String[] fileArr = preview.getPreviewImage().split(",");
+//		model.addAttribute("fileArr", fileArr);
+		
 		
 		System.out.println("/event/getPreview:GET end");
-
 		return "forward:/event/getPreviewAd.jsp";
+
 	}
 		
 	
@@ -458,6 +505,7 @@ public class EventController {
 	//응모하기 버튼 눌렀을 시 리얼 데이터 들어가는거
 	@RequestMapping(value="addPartPrev", method=RequestMethod.POST)
 	public String addPartPrev(@ModelAttribute("participation") Participation participation, Model model) throws Exception{
+		
 		System.out.println("/event/addPartPrev:POST");
 		eventService.addPartPrev(participation);
 		participation = eventService.getParticiation(participation.getPartNo());
@@ -502,7 +550,7 @@ public class EventController {
 	@RequestMapping(value="addQuizAd", method=RequestMethod.GET)
 	public String addQuizAdView() {
 		System.out.println("/event/addQuizAd:GET");
-		return "redirect:/event/addQuizAd.jsp";
+		return "forward:/event/addQuizAd.jsp";
 	}
 	
 	
@@ -518,11 +566,11 @@ public class EventController {
 		quiz.setOptionFourth((String)map.get("optionFourth"));
 		quiz.setAnswer(Integer.parseInt((String)map.get("answer")));
 		quiz.setQuizStartDate(JavaUtil.ymdToTimestamp((String)map.get("quizStartDate")));
-		quiz.setQuizEndDate(JavaUtil.ymdToTimestamp((String)map.get("quizEndDate")));
 		
 	
 		eventService.addQuizAd(quiz);
 		model.addAttribute("quiz", quiz);
+		
 		return "forward:/event/getQuizAd.jsp";
 	}
 	
@@ -1015,5 +1063,52 @@ public class EventController {
 		
 	}
 	
+	
+	public String getYoutube(String movieTitle)throws Exception{
+//		유튜브 API에서 search 결과로 주는 videoId를 가져오자
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+//		Youtube API 다녀오기/////////////////////////////////////////////////////////////////////////////////////////////
+//		header정보 
+		MultiValueMap<String, String> headerMap = new LinkedMultiValueMap<>();
+		headerMap.add("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+		
+//		403 Forbidden..해결이 안된다.
+//		headerMap.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+		this.headers = new HttpEntity<>(headerMap);
+		
+//		url 및 title 세팅
+		
+		String part = "&part=snippet";		// snippet으로 해야 response JSON에 영상뿐만 아니라 영상에 대한 정보도 같이 온다
+		String q = "&q="+movieTitle.trim()+" 예고편 official";	// 검색어
+		String order = "&order=relevance";	// 조회 기준 .... relevance(관련성) default
+		String safeSearch = "&safeSearch=moderate";	//제한된 컨텐츠 포함 여부 ... 
+		String type = "&type=video";				//검색 결과의 타입..  channel, playlist, video..
+		String videoDefinition = "&videoDefinition=high";	// 화질종류.. any, high, standard
+		String videoDuration = "&videoDuration=short"; 		// 비디오 길이..
+//		String videoType = "&videoType=movie";				// 특정 동영상 유형이라는데 ... 안되면 주석처리하자 ^^^^^^
+		
+//		API url에 파라미터추가 
+		String urlYoutube = urlGoogleSearch+part+q+order+safeSearch+type+videoDefinition+videoDuration;
+		System.out.println("-------------------urlYoutube"+ urlYoutube);
+		
+//		google API 다녀오자
+		ResponseEntity<String> responseEntity = template.exchange(urlYoutube, HttpMethod.GET, headers, String.class);
+//		System.out.println("-----------------------responseEntity"+ responseEntity);
+		
+//		response Data에서 video ID 뽑기..
+		HashMap<String, Object> searchResult = mapper.readValue(responseEntity.getBody(), new TypeReference<HashMap<String, Object>>() {});
+//		System.out.println("---------------searchResult.get(\"items\") : " + searchResult.get("items"));
+		List<Object> items = (List<Object>) searchResult.get("items");
+//		System.out.println("----------------items[0]"+ items.get(0));
+		Map<String, Object> items1 =  (Map<String, Object>) items.get(0);
+//		System.out.println("---------------------idMap   "+items1);
+		Map<String, String> idMap = (Map<String, String>) items1.get("id");
+		String videoId = idMap.get("videoId");
+		System.out.println("--------------videoId  : " + videoId);
+		
+		return  videoId;
+	}
 	
 }

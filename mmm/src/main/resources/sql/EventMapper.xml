@@ -35,6 +35,7 @@
 	<result property = "winnerDate" column="winner_date" jdbcType="TIMESTAMP" />
 	<result property = "previewRegDate" column="preview_regdate" jdbcType="TIMESTAMP" />
 	<result property = "previewFlag" column="preview_status" jdbcType="VARCHAR" />
+	<result property = "movieNo" column="movie_no" jdbcType="NUMERIC" />
 
 	</resultMap>
 	
@@ -79,8 +80,7 @@
 	<!-- SQL : 퀴즈 가져오기 -->
 	<select id="getQuizAd" parameterType="int" resultMap="quizSelectMap">
 		SELECT
-		quiz_no, question, option1, option2, option3, option4, 
-		answer, start_date, end_date, quiz_date, quiz_status
+		*
 		FROM quiz
 		WHERE quiz_no = #{value}
 	</select>
@@ -116,7 +116,7 @@
 	<!-- SQL : INSERT -->
 	<insert id="addPreview" parameterType="com.mmm.service.domain.Preview">
 		INSERT
-		INTO preview( preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, winner_count, winner_date, preview_regdate, preview_status )
+		INTO preview( preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, winner_count, winner_date, preview_regdate, preview_status, movie_no )
 		VALUES ( seq_preview_preview_no.nextval,
 				 #{previewName},
 				 #{previewPlace},
@@ -127,7 +127,9 @@
                  #{winnerCount},
                  #{winnerDate},
                  SYSDATE,
-                 0  )
+                 0,
+                 #{movieNo}
+                   )
 	</insert>
 	
 	
@@ -135,8 +137,7 @@
 	<!-- SQL : SELECT ONE -->
 	<select id="getPreviewAd" parameterType="int" resultMap="previewSelectMap">
 		SELECT
-		preview_no, preview_name, preview_place, preview_date, image_file, start_date, 
-		end_date, winner_count, winner_date, preview_regdate, preview_status
+		*
 		FROM preview
 		WHERE preview_no = #{value}
 	</select>
@@ -208,8 +209,7 @@
 	 <!-- SQL : SELECTLIST -->
 		<select  id="getPreviewListAd"  parameterType="com.mmm.common.Search"	resultMap="previewSelectMap">
 	  		SELECT 
-	  		preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
-			winner_count, winner_date, preview_regdate, preview_status
+	  		*
 	  		FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  				FROM (	
 	  					<include refid="srchPrev"/>	
@@ -221,8 +221,7 @@
 	 
 	 <sql id="srchPrev">	 
 		 SELECT
-		 	preview_no, preview_name, preview_place, preview_date, image_file, start_date, end_date, 
-			winner_count, winner_date, preview_regdate, preview_status
+		 	*
 		 FROM preview
 			<if test="searchCondition!= null">
 			  <where>
@@ -251,8 +250,7 @@
 	 
 	  <sql id="srchQuiz">	 
 		 SELECT
-		 	quiz_no, question, option1, option2, option3, option4, answer, start_date, 
-				end_date, quiz_date, quiz_status
+		 	*
 		 FROM quiz
 			  <where>
 <!-- 				 end_date <![CDATA[ >= ]]> SYSDATE -->
@@ -283,8 +281,7 @@
  	 <!-- SQL : SELECTLIST -->
 	<select  id="getQuizListAd"  parameterType="com.mmm.common.Search"	resultMap="quizSelectMap">
   		SELECT 
-  			quiz_no, question, option1, option2, option3, option4, answer, start_date, 
-			end_date, quiz_date, quiz_status
+  			*
   		FROM (	SELECT inner_table.* , ROWNUM AS row_seq
   				FROM (	
   					<include refid="srchQuiz"/>	

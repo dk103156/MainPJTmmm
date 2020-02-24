@@ -82,7 +82,6 @@
 
 			
 			function check(re, what, message) {
-				alert('호출됨');
 		    	if(re.test(what)) {
 		        return true;
 		    	}
@@ -106,6 +105,9 @@
 				var winnerCount = $("input[name='winnerCount']").val();
 				var previewHH = $("input[name='previewHH']").val();
 				var previewMM = $("input[name='previewMM']").val();
+				var movieNo = $("input[name='movieNo']").val();
+				
+				alert(movieNo);
 				
 				if(previewName == null || previewName.length<1) {
 					alert("시사회 이름은 반드시 입력하셔야 합니다.")
@@ -242,7 +244,7 @@
 <body>
 <form enctype="multipart/form-data" autocomplete="off">
 	<br>
-		<div class="page-header text-secondary">
+		<div class="page-header">
 	        <h3><i class="fas fa-grip-lines-vertical"></i>시사회이벤트 등록</h3>
 	    </div>
 			
@@ -257,12 +259,12 @@
  
 				<div class=file_input_div>
 				
-				<i class="file_input_button fas fa-file-image">search file</i>
+<!-- 				<i class="file_input_button fas fa-file-image">search file</i> -->
 <!-- 				<input type="button" value="search Files" class="file_input_button" /> -->
-				<input type="file" id="fileUpload" name="previewImage" >
 				</div>
-				
-				<img id="blah" src="/resources/image/default_img.jpg" alt="이미지 준비중" width="300" height="400" />
+				<input type="hidden" name="previewImage" value="${movie.poster}"> 
+				<input type="hidden" name="movieNo" value="${movie.movieNo}"> 
+				<img id="blah" src="${movie.poster}"   alt="" width="300" height="400" />
 			</div>
 			
 			<div class="col">
@@ -274,7 +276,7 @@
 				</tr>
 				<tr>
 					<th scope="row">영화제목</th>
-					<td><input type="text" class="form-control" name="movieTitle" value=""></td>
+					<td><input type="text" class="form-control" name="movieTitle" value="${movie.movieTitle}"></td>
 				</tr>
 				<tr>
 					<th scope="row">시사회장소</th>
