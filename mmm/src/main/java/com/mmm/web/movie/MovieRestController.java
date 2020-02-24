@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
@@ -72,6 +73,7 @@ public class MovieRestController {
 		
 		
 //		보고싶어요 활성화 
+		@CheckAuth(role="user,admin")
 		@RequestMapping(value = "json/addWish", method = RequestMethod.POST )
 		public Map<String, Object> addWish(@RequestBody WishStarRating wishStarRating, HttpSession session) throws Exception {
 			System.out.println("--- --- /movie/addWish : POST");
@@ -101,6 +103,7 @@ public class MovieRestController {
 		}
 		
 //		보고싶어요 삭제
+		@CheckAuth(role="user,admin")
 		@RequestMapping(value = "json/deleteWish", method = RequestMethod.POST)
 		public Map<String, Object> deleteWish(@RequestBody WishStarRating wishStarRating, HttpSession session) throws Exception{
 			System.out.println("--- --- /movie/deleteWish : POST");
@@ -125,6 +128,7 @@ public class MovieRestController {
 		}
 		
 //		평점 등록
+		@CheckAuth(role="user,admin")
 		@RequestMapping(value = "json/addStarRating", method = RequestMethod.POST)
 		public Map<String, Object> addStarRating(@RequestBody WishStarRating wishStarRating, HttpSession session)throws Exception{
 			System.out.println("--- --- /movie/addStarRating : POST");
@@ -149,6 +153,7 @@ public class MovieRestController {
 		}
 		
 //		평점 수정, 삭제 ( 0 일 경우 삭제... in Dao)
+		@CheckAuth(role="user,admin")
 		@RequestMapping(value = "json/updateStarRating", method = RequestMethod.POST)
 		public Map<String, Object> updateStarRating(@RequestBody WishStarRating wishStarRating, HttpSession session)throws Exception{
 			System.out.println("--- --- /movie/updateStarRating : POST");
@@ -249,6 +254,7 @@ public class MovieRestController {
 		}
 		
 //		한줄평 등록하는 method
+		@CheckAuth(role="user,admin")
 		@RequestMapping(value = "json/addOneline", method = RequestMethod.POST)
 		public Map<String, Object> addOneline(@RequestBody Comment comment, HttpSession session)throws Exception{
 			
