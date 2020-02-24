@@ -33,7 +33,6 @@ body {
 	width: 800px;
 	display: inline-block;
 	vertical-align: middle;
-	text-align: center;
 } 
 
 .col-left{
@@ -275,9 +274,9 @@ $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자�
 	<!--container-->
 	<div id="contaniner" style="margin-top: 50px;">
 		<div class="row">
-			<div class="col-md-12" style="text-align: left;">
+			<div class="col-md-12">
 				<div>
-					<h2>위시 리스트</h2>
+					<h2 style="font-size : 28px;"><strong>위시 리스트</strong></h2>
 					<p><strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b> 건</strong></p>
 				</div>
 			</div>
