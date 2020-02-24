@@ -26,6 +26,7 @@
 		FROM POINTT
 		<where>
 		USER_NO = #{userNo}
+		AND NVL(POINT_CANCEL_FLAG, 0) = 0
 		</where>
 		ORDER BY POINT_NO DESC	
 	</sql>
@@ -59,6 +60,14 @@
 				SYSDATE		)
 	</insert>
 	
+	<select id="getSavingPoint" parameterType="int" resultMap="pointSelectMap">
+		SELECT * FROM POINTT WHERE PAYMENT_NO = #{paymentNo} AND UPPER(POINT_STATUS) = 'S0'
+	</select>
+	
+	<select id="getUsingPoint" parameterType="int" resultMap="pointSelectMap">
+		SELECT * FROM POINTT WHERE PAYMENT_NO = #{paymentNo} AND UPPER(POINT_STATUS) = 'U0'
+	</select>
+	
 <!-- 	해당 유저의 사용가능한 포인트 조회 -->
 	<select id="getTotalPoint"
 			parameterType="int"
@@ -67,6 +76,7 @@
 		SELECT SUM(PART_POINT)
 		FROM POINTT
 		WHERE USER_NO = #{userNo:NUMERIC}
+			AND NVL(POINT_CANCEL_FLAG, 0) = 0
 	
 	</select>
 	
@@ -79,6 +89,8 @@
 		FROM POINTT
 		WHERE USER_NO = #{userNo:NUMERIC}
 		    AND UPPER(point_status) IN('S0', 'S1', 'S2')
+		    AND NVL(POINT_CANCEL_FLAG, 0) = 0
+		    
 	</select>
 
 <!-- 	해당 유저의 포인트 사용내역 조회 -->
@@ -109,6 +121,16 @@
 			<include refid="select-PointList"/>
 		 ) countTable
 	</select>
+	
+	<update id="cancelPoint" parameterType="int">
+		UPDATE POINTT
+		<set>
+			POINT_CANCEL_FLAG = 1,
+			POINT_CANCLE_DATE = SYSDATE
+		</set>
+		WHERE point_no = #{pointNo}
+	
+	</update>
 	
 <!-- 	출석체크 중복 확인을 위한 ... -->
 	<select id="checkAttendance"

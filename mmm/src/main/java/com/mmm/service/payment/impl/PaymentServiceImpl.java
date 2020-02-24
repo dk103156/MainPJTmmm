@@ -1,6 +1,9 @@
 package com.mmm.service.payment.impl;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +15,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.mmm.common.Search;
+import com.mmm.service.datetime.DateTimeDao;
+import com.mmm.service.domain.DateTime;
 import com.mmm.service.domain.Inventory;
 import com.mmm.service.domain.Payment;
 import com.mmm.service.domain.Point;
@@ -52,6 +58,10 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	@Qualifier("inventoryDaoImpl")
 	private InventoryDao inventoryDao;
+	
+	@Autowired
+	@Qualifier("dateTimeDaoImpl")
+	private DateTimeDao dateTimeDao;
 	
 	public static final String impKey = "6944686805011226";
 	public static final String impSecret = "ZXtPf4IT38iJVVxXvy4CNmejclGC3qu2oYRD2Ax6IQQELnBgWGTK383fuKRxamAzkscn2KtKAjplH0CE";
@@ -106,12 +116,30 @@ public class PaymentServiceImpl implements PaymentService {
 //		DB에 넣기( 예매,	 구매,	결제).. transaction 관리를 위해 여기서..
 		if (payment.getPayObjectFlag()==0) {
 			ticketingDao.addTicketing(ticketing);
+			
+//			좌석 추가
+			Map<Object,Object> ticketingInfo = new HashMap<Object,Object>();
+			
+			ticketingInfo.put("dateTimeNo", ticketing.getDateTimeNo());
+			ticketingInfo.put("headCount", ticketing.getHeadCount());
+			ticketingInfo.put("totalSeat", ticketing.getTotalSeat());
+			dateTimeDao.addTicketing(ticketingInfo);
+			
 		}else if (payment.getPayObjectFlag()==1) {
 			
 			this.fncAddPurchaseAndInven(purchase);
 		
 		}else if (payment.getPayObjectFlag()==2) {
 			ticketingDao.addTicketing(ticketing);
+			
+//			좌석 추가
+			Map<Object,Object> ticketingInfo = new HashMap<Object,Object>();
+			
+			ticketingInfo.put("dateTimeNo", ticketing.getDateTimeNo());
+			ticketingInfo.put("headCount", ticketing.getHeadCount());
+			ticketingInfo.put("totalSeat", ticketing.getTotalSeat());
+			dateTimeDao.addTicketing(ticketingInfo);			
+			
 			this.fncAddPurchaseAndInven(purchase);
 		}
 		paymentDao.addPayment(payment);
@@ -175,7 +203,111 @@ public class PaymentServiceImpl implements PaymentService {
 		
 	@Override
 	public void cancelPayment(Payment payment) throws Exception {
+		
+		////// 포인트 되돌리기....( 적립, 사용 )
+		////// 사용한 voucher 되돌리기 (inven table 활성화... )
+		////// 실제 아이엠포트 환불
+		
+		System.out.println("-----------  PaymentService의 payment  ::" + payment);
+		
+//		1. 포인트 되돌리기
+		Map<String, Point> pointMap =  paymentDao.getPoints(payment.getPaymentNo());
+		Point savingPoint =  pointMap.get("savingPoint");
+		Point usingPoint =  pointMap.get("usingPoint");
+		
+		int payMethod = payment.getPayMethod();
+		
+//		1-1. savingPoint 차감하기 (결제시 현금 사용한 경우).. flag 변경
+		if(payMethod == 0 || payMethod == 3 || payMethod == 4 || payMethod ==6) {
+			paymentDao.cancelPoint(savingPoint.getPointNo());
+		}
+		
+//		1-2. usingPoint 더하기 (결제시 포인트 사용한 경우).. flag 변경
+		if(payMethod == 1 || payMethod == 3 || payMethod == 5 || payMethod ==6) {
+			paymentDao.cancelPoint(usingPoint.getPointNo());
+		}
+		
+//		2. voucher 돌리기
+//		Inventory Status Updatng...from 1 to 0
+		if (payment.getUsingVoucherFirst() != null) {
+			Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherFirst()));
+			inventory.setInventoryStatus("0");
+			inventoryDao.updateInventory(inventory);
+		}
+		if (payment.getUsingVoucherSecond() != null) {
+			Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherSecond()));
+			inventory.setInventoryStatus("0");
+			inventoryDao.updateInventory(inventory);
+		}
+		if (payment.getUsingVoucherThird() != null) {
+			Inventory inventory = inventoryDao.getInventoryForPay(Integer.parseInt(payment.getUsingVoucherThird()));
+			inventory.setInventoryStatus("0");
+			inventoryDao.updateInventory(inventory);
+		}
+			
+//		3. ticketing 되돌리기
+		if (payment.getTicketing() != null) {
+			Ticketing ticketing = ticketingDao.getTicketing(payment.getTicketing().getTicketingNo());
+			System.out.println("---------- ticketing  : " + ticketing);
+			
+			// 예매 정보로 상영일시 정보를 가져온다.
+			DateTime dateTime = dateTimeDao.getDateTime(ticketing.getDateTimeNo());
+			System.out.println("\n"+dateTime);
+			System.out.println("list불러오기");
+			System.out.println("abcd123 :"+dateTime.getSelectedSeat().split(","));
+			List<String> reservedTotal =Arrays.asList(dateTime.getSelectedSeat().split(",")); // 예매된 좌석 전체
+			List<String> reserved=Arrays.asList(ticketing.getSeatNo().split(",")); // 티켓 정보에서 가지고 있는 좌석 정보
+			System.out.println("reservedTotal \n"+reservedTotal);
+			System.out.println("reserved \n"+reserved);
+			System.out.println("list불러오기 끝");
+			//뺀 글자
+			List<String> result = new ArrayList<String>();
+			// 예매된 좌석 전체에서, 티켓 정보에서 가지고 있는 좌석을 뺀다.
+			for(int i=0; i<reservedTotal.size(); i++) {
+				//지금 조회하는 글자를 티켓 정보에서 가지고있지 않다면
+				if(reserved.indexOf(reservedTotal.get(i))==-1) {
+					result.add(reservedTotal.get(i));
+				}
+			}
+			String toString="";
+			for(int j=0; j<result.size(); j++) {
+				if(j==result.size()-1) {
+					toString+=result.get(j);
+				}else {
+					toString+=result.get(j)+",";
+				}
+			}
+			System.out.println(toString);
+			Map<Object,Object> ticketingInfo = new HashMap<Object,Object>();
+			ticketingInfo.put("dateTimeNo", ticketing.getDateTimeNo());
+			ticketingInfo.put("headCount", ticketing.getHeadCount());		
+			ticketingInfo.put("totalSeat", toString);
+			ticketingInfo.put("ticketingStatus", 1);
+			
+			ticketingDao.updateTicketing(ticketing);
+			dateTimeDao.cancelTicketing(ticketingInfo);
+			
+			ticketingDao.updateTicketing(ticketing);
+		}
+		
+		
+//		4. purchase 되돌리기
+		if (payment.getPurchase() != null) {
+			Purchase purchase= purchaseDao.getPurchase(payment.getPurchase().getPurchaseNo());
+			System.out.println("---------- purchase  : " + purchase);
+			
+			purchase.setPurchaseStatus(2);
+			purchase.setCancelDate(new Timestamp(new Date().getTime()));
+			
+			purchaseDao.updatePurchase(purchase);
+		}
+		
+//		5. payment 되돌리기
 		paymentDao.cancelPayment(payment);
+		
+//		6. import 취소
+		
+		cancelImport(payment.getImpUid());
 	}
 
 	@Override
@@ -227,7 +359,8 @@ public class PaymentServiceImpl implements PaymentService {
 		System.out.println("--------------obj : " + jsonObject);
 		
 		JSONObject response = (JSONObject) jsonObject.get("response");
-		System.out.println("--------------response : " + response);
+		
+		System.out.println("--------------response.get(\"code\") : " + response.get("code"));
 		
 		accessToken = response.get("access_token").toString();
 		System.out.println("--------------accessToken : " + accessToken);
@@ -274,6 +407,32 @@ public class PaymentServiceImpl implements PaymentService {
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(responseEntity.getBody().toString());
 		
 		System.out.println(jsonObject);
+	}
+	
+	public void cancelImport(String impUid)throws Exception{
+		this.getToken();
+		
+		String url = "https://api.iamport.kr/payments/cancel";
+		
+		MultiValueMap<String, String> headerMap = new LinkedMultiValueMap<>();
+		headerMap.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+		headerMap.add("Content-Type", MediaType.APPLICATION_JSON_VALUE);
+		headerMap.add("Authorization", this.accessToken);
+		
+		
+		JSONObject requestBody = new JSONObject();
+		requestBody.put("imp_uid", impUid);
+		System.out.println("-----------requestBody.toString()   : " + requestBody.toString() );
+		
+		HttpEntity<String> request = new HttpEntity<>( requestBody.toString() , headerMap);
+		
+		ResponseEntity<String> responseEntity = template.exchange(url, HttpMethod.POST, request, String.class);
+		
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(responseEntity.getBody().toString());
+		
+		System.out.println(jsonObject);		
+		
+		
 	}
 
 
