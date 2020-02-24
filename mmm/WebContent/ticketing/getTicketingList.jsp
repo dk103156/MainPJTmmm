@@ -31,9 +31,10 @@
 
 <style>
 
-body {
+#body {
+	
 	font-family: 'Noto Sans KR', sans-serif !important;
-	font-size : 16px;
+
 }
 
 div.ticketingHeader h3 {
@@ -55,11 +56,16 @@ div.ticketingBody div div.ticketingTitle.row div.col-6 {
   border-left: 1px solid rgba(0,0,0,.1);
   margin-left: 80px;
 }
+
+div.container.getTicketingList {
+	margin-top : 47px;
+
+}
 </style>
 </head>
-<body>
+<body id="body">
 	
-	<div class="container">
+	<div class="container getTicketingList">
 		<div class="getTicketingList">
 				<div class="ticketingHeader row">
 						<h3 class="mb-0"><strong>나의 예매내역</strong></h3><h6 class="mb-0">(항목을 <kbd>Click</kbd>하여, 상세확인 가능합니다)</h6>

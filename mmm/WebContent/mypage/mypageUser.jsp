@@ -31,9 +31,7 @@
     margin: 0;
     padding: 0 0 0 0;
 }
-* {
-    box-sizing: border-box;
-}
+
 
 div {
     display: block;
