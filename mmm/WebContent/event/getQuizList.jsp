@@ -7,12 +7,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
- 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  <!-- Bootstrap Extended Color -->
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
+  <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
+   
+   <!-- google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+   
+    <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
 <!-- 	SweetAlert2 CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -192,7 +204,7 @@
 	  }
   
 		  
-		.btn{ 
+		button.quiz.btn{ 
 		width:70px;
 	    background-color: #cecfc6;
 	    border: none;
@@ -230,7 +242,7 @@
 		
    		<div class="qLogin">
 		<p class="qltx">
-		<span style="font-size:16px;">${user.userId}님의 응모내역</span>
+		<span>${user.userId}님의 응모내역</span>
 		<br>
 		</p>
 		<ul>
@@ -261,7 +273,7 @@
 		
 		<div>
 		<c:if test="${quiz.partFlag eq 1}">
-		<span style="color: red; font-size:15px;"> <i class="far fa-smile"></i> 참여완료 </span>
+		<span style="color: red;"> <i class="far fa-smile"></i> 참여완료 </span>
 		</c:if>
 		<p>
 		<span style="font-weight: 600;">${quiz.quizStDate}의 퀴즈</span>
@@ -278,7 +290,7 @@
 		<div class="text-center">
 		<input type="hidden" name="quizNo" value="${quiz.quizNo}"/> 
 		<input type="hidden" name="userNo" value="${user.userNo}"/> 
-		<button name="qBtn" type="button" class="btn" >채점하기</button>
+		<button name="qBtn" type="button" class="quiz btn" >채점하기</button>
 
 		</div>
 		</div>
@@ -340,10 +352,8 @@
 			  </div><!-- end of ticketingPagination -->
 	<!--// pagination -->
 </c:if>
-		
 </div>
 </div>
-	
-	
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

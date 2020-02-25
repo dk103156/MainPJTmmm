@@ -432,9 +432,9 @@
 		}) //end of Promise
 		
 	}//end of function - ajaxPromise
-
 </script>
-</body>
 
+<%-- <jsp:include page="/layout/footer.jsp"></jsp:include> --%>
+</body>
 
 </html>
