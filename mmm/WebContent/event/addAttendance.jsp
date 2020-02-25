@@ -10,12 +10,12 @@
 <!-- font -->
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 
 <!-- fontawesome-->
 <script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
@@ -238,6 +238,7 @@ $(function(){
 </head>
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
+
 <div class="container">
 <br/><br/>
 <h4><i class="fas fa-calendar-check"></i>&nbsp;매일매일 출첵 이벤트</h4>
@@ -250,6 +251,6 @@ $(function(){
 </div>
 </div>
 
-
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

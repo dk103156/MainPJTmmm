@@ -251,6 +251,7 @@ $(document).ready(function() {
 	</div> <!--#header 닫는애 -->
 	</div> <!-- container 닫는애 -->
 </form>
+<jsp:include page="/layout/footer.jsp"></jsp:include>
  </body>
  
  </html>

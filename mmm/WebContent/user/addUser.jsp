@@ -14,7 +14,6 @@
 
 <!-- 	SweetAlert2 CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -315,6 +314,10 @@ $(function(){
 </script>
 </head>
 <body>
+	<!-- ToolBar Start /////////////////////////////////////-->
+		<jsp:include page="/layout/header.jsp" />
+   	<!-- ToolBar End /////////////////////////////////////-->
+   	
 <!--  화면구성 div Start /////////////////////////////////////-->
 	<div class="container" style="width: 600px;">
 	

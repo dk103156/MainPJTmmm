@@ -138,10 +138,8 @@
 	
 			</div>
 	 <div class="row">
-		   
 	</div>
 		
-	  
 		<div class="text-center">
 			<button id="updateBtn"" class="btn btn-secondary write" type="button">수 &nbsp;정</button>
 			<button id="delBtn" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>

@@ -42,4 +42,5 @@ public interface MovieService {
 	public int updateReleasedMovie()throws Exception;
 	
 	public List<String> getAllofMovieTitle()throws Exception;
+	
 }

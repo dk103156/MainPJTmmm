@@ -227,9 +227,9 @@ $(function(){
 	    </div>
 	    <div class="foo_div1" style="margin-right: 70px;">
 		    <div class="3Sa_Logo">	    
-		    	<a href="http://www.cgv.co.kr/"><img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
-		    	<a href="https://www.megabox.co.kr/"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
-		    	<a href="https://www.lottecinema.co.kr/"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a>
+		    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
+		    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
+		    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a>
 		    </div>	
 		    <div class="copyright">    
 		    	<span>(주) MMM</span> <span> | </span>
