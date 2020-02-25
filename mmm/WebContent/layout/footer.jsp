@@ -10,8 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
+<!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ -->  
   <!-- Bootstrap Extended Color -->
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
@@ -242,7 +242,7 @@ $(function(){
 		    <div class="copyright">    
 		    	<span>(주) MMM</span> <span> | </span>
 		    	<span>대표 :  GETSET 조</span> <span> | </span>
-		    	<span>사업자 등록번호 : 000-00-00000</span> <span> | </span>
+		    	<span>사업자 등록번호 : 000-00-00000</span>
 		    	<p>주소 : 대한민국 어디엔가 사는!</p>
 		    	<p style="padding-left: 138px;">뭅 ? 뭅 ! 뭅</p>
 	    	</div>
