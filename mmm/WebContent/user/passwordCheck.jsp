@@ -261,7 +261,7 @@ $(function(){
 <body>
 
 
-<div id="contents">
+<div id="contents" style="margin-top: 30px;">
 		<h2 class="tit"><strong>회원정보</strong></h2>
 
 		<div class="intro-pwd">

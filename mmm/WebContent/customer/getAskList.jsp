@@ -355,7 +355,7 @@
 				
 				Element = "<div class='col-4'></div>"
 		  		Element +="<div class='col-4'>"
-				Element +="<ul class='pagination'>"
+				Element +="<ul class='pagination justify-content-center'>"
 	   			if(data.resultPage.currentPage <= data.resultPage.pageUnit){
 	   				Element +="<li class='page-item disabled'>"
 	   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>"
