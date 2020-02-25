@@ -39,12 +39,12 @@
 			<div class="purchaseHeader col-12 text-center">
 			<br><br>
 				<c:if test="${search.purchaseStatus eq 0 }">
-				<h3  class="text-left"><span>구매 목록</span></h3>
+				<h3  class="text-left"><strong><span>구매 목록</span></strong></h3>
 				<hr style="background-color: #c0c0c0;">
 				</c:if>
 				
 				<c:if test="${search.purchaseStatus eq 2 }">
-				<h3  class="text-left"><span>구매 취소 목록</span></h3>
+				<h3  class="text-left"><strong><span>구매 취소 목록</span></strong></h3>
 				<hr style="background-color: #c0c0c0;">
 				</c:if>
 
