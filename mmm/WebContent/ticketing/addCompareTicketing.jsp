@@ -406,7 +406,12 @@
 		}
 		.tabcontent.current {
 			display: block;
-		}	   
+		}	  
+		
+		div.calendar ul.list-group {
+			overflow : auto;
+			height : 400px;
+		} 
 	  	  
   </style>
   
@@ -1690,7 +1695,54 @@
     			 console.log("극장 정렬조건이 없습니다")
     		 }
 		 
-
+    		 //(시간 정렬)
+    		 try{
+    			 func=getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,franchiseThirdCheck,theaterFirstCheck,theaterSecondCheck,theaterThirdCheck);
+    			 func.then(function(data){
+    				  // resolve()의 결과 값이 여기로 전달됨
+    				  var searchArray = new Array();	
+    				  
+    				  for(var j in data){
+    					  searchArray.push(formatDates(new Date(data[j].screenDate).getDate()));
+    				  }
+    				  
+    				  
+    				  var timeArray =document.querySelectorAll("div.steps-body.text-center > div > ul > li > div > span.date");
+    				  $(timeArray).parent().parent().removeClass("off")
+    				  for(var i=0; i<timeArray.length; i++){
+    					  if(searchArray.indexOf(timeArray[i].innerText)==-1){
+    						 $(timeArray[i]).parent().parent().addClass("off")
+    					  }//end of if
+    				  }//end of for
+    				  
+    			 })//end of then	 
+    		 }catch(e){
+    			console.log("날짜 정렬조건이 없습니다")
+    		 }     		 //(시간 정렬)
+    		 try{
+    			 func=getDateList(movieFirstCheck,franchiseFirstCheck,franchiseSecondCheck,franchiseThirdCheck,theaterFirstCheck,theaterSecondCheck,theaterThirdCheck);
+    			 func.then(function(data){
+    				  // resolve()의 결과 값이 여기로 전달됨
+    				  var searchArray = new Array();	
+    				  
+    				  for(var j in data){
+    					  searchArray.push(formatDates(new Date(data[j].screenDate).getDate()));
+    				  }
+    				  
+    				  
+    				  var timeArray =document.querySelectorAll("div.steps-body.text-center > div > ul > li > div > span.date");
+    				  $(timeArray).parent().parent().removeClass("off")
+    				  for(var i=0; i<timeArray.length; i++){
+    					  if(searchArray.indexOf(timeArray[i].innerText)==-1){
+    						 $(timeArray[i]).parent().parent().addClass("off")
+    					  }//end of if
+    				  }//end of for
+    				  
+    			 })//end of then	 
+    		 }catch(e){
+    			console.log("날짜 정렬조건이 없습니다")
+    		 } 
+    		 
     	 //전부 클릭했을 때
     	 if( movieName==true && franchise==true && theaterName==true && screenTime == true){
     		 $("div.steps-body.text-center > div > div.placeholder").css("display", "none");
@@ -1899,28 +1951,31 @@
    	 array = formatToDate(array);
    	 array = array();
    	 var Elements = $("div.steps-body.text-center > div > ul > li.month");
-   	 
-   	 for(var i in array){  		
+	 //console.log(original)
+   	 //console.log(array)
+   	 for(var i=array.length-1; i>=0; i--){  		
+   		 	//console.log(new Date(array[i]));
       	  var yoil="<li class='list-group-item py-2 date'>"
    	  		yoil+="<div>"
    	  		yoil+="<span class='day'>"+week[new Date(original[i]).getDay()]+"</span>&nbsp;"
    	  		yoil+="<span class='date'>"+array[i].substring(3,5)+"</span>"
    	  		yoil+="</div>"
    	  		yoil+="</li>"
-   	  		for(var j=0; j<Elements.length; j++){
-	   		 if(parseInt(array[i].substring(0,2))==j+parseInt(array[i].substring(0,2))){
-	   			$(Elements[j]).after(yoil);
-	   		 }
-   	  		}
-   	 }
+
+   	  		Elements.each(function(index,value){
+   	  			if( $(value).find("span.month").text()==array[i].substring(0,2)){
+   	  				$(Elements[index]).after(yoil);
+   	  			}//end of if
+   	  			});//end of each
+   	 }//end of for array
    	dayColorChange() // 2020-02-14
 	$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").on("click",function(){
 		$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").removeClass("active");
 		
 		$(this).addClass("active");
-		finalYear=$(this).siblings().first().children().children().first().text();
+		finalYear=$($(this).prevAll("li.month")[0]).children().children().first().text()
 		var date=$.trim($(this).children().children().first().next().text())//일 
-		var Month=$(this).siblings().first().children().children().first().next().text()//월
+		var Month=$($(this).prevAll("li.month")[0]).children().children("span.month").text()//월
 		
     	 //극장 선택 div 없애기 
     	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");

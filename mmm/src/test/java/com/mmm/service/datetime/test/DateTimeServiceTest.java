@@ -202,7 +202,7 @@ public class DateTimeServiceTest {
 	            										while(true) {
 	            											try {
 				            									synchronized(lc) {
-				            										lc.wait(500);
+				            										lc.wait(1000);
 				            									}			
 			            										lc.click();
             										

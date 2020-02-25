@@ -30,7 +30,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		
 		// 3. @CheckAuth 받아오기
 		CheckAuth auth = handlerMethod.getMethodAnnotation(CheckAuth.class);
-		
+
 		// 4. method에 @CheckAuth가 없는 경우, 즉 인증이 필요 없는 요청
 		if( auth == null ) {
 			System.out.println("=== [Non CheckAuth] AuthInterceptor ===");
