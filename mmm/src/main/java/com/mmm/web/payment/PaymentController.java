@@ -354,10 +354,13 @@ public class PaymentController {
 		return "forward:/ticketing/completeTicketing.jsp";
 	}//end of addPayment()
 	
-	@RequestMapping(value = "/cancelPayment", method = RequestMethod.GET)
+	@RequestMapping(value = "/cancelPayment", method = RequestMethod.POST)
 	public String cancelPayment(@RequestParam(value = "ticketingNo", required=false) String ticketingNo,
-								@RequestParam(value = "purchaseNo", required=false) int purchaseNo,
+								@RequestParam(value = "purchaseNo", required=false) String purchaseNostr,
 								HttpSession session, Model model)throws Exception{
+		
+		System.out.println("-----------------------------ticketingNo : "+ticketingNo);
+		System.out.println("-----------------------------purchaseNo : "+purchaseNostr);
 		
 		Payment payment = new Payment();
 		
@@ -365,9 +368,9 @@ public class PaymentController {
 			System.out.println("===========> 예매, 예매+구매 취소");
 			payment = paymentService.getPaymentbyTicketingNo(Integer.parseInt(ticketingNo));
 			return "redirect:/mypage/mypage?condition=1";
-		}else if (purchaseNo != 0) {
+		}else if (purchaseNostr != null) {
 			System.out.println("==========> 구매 취소");
-			payment = paymentService.getPaymentbyPurchaseNo(purchaseNo);
+			payment = paymentService.getPaymentbyPurchaseNo(Integer.parseInt(purchaseNostr));
 			return "redirect:/mypage/mypage?condition=2";
 		}
 		
