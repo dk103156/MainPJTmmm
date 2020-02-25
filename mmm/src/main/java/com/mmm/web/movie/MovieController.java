@@ -111,7 +111,7 @@ public class MovieController {
 	
 	
 //	하루에 한번씩 실행되는 메소드...
-//	@Scheduled(cron = "*/10 * * * * *")	//매 10초마다 실행
+//	@Scheduled(cron = "*/20 * * * * *")	//매 10초마다 실행
 	public void addMovieAndUpdateReleasedMovie()throws Exception{
 		this.addMovie();			//다음에서 상영예정작 크롤링하고, JMDB API에서 해당 영화의 정보를 긁어와서 DB에 추가
 		this.updateReleasedMovie();	//개봉일이 지난 영화들 onBoxOfficeFlagfmf 0--> 1변경
@@ -135,8 +135,8 @@ public class MovieController {
 //		크롤링할 페이지 수 2개로 고정
 		for (int i = 0; i < 2; i++) {
 			//웹페이지 설정하기(자동화된 어쩌구 저쩌구..*************************************************************************************************
-			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
-//			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
+//			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
+			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
 			
 	//		Css Selector로 Element 요소 잡아오기 1 ____영화제목
 			List<WebElement> list = webDriver.findElements(By.cssSelector("#mArticle > ul.list_movie.\\#movie > li> div.wrap_movie > div > a"));

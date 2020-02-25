@@ -469,7 +469,9 @@ $(function(){
 								    
 					    			
 					    			//예매 취소 버튼 추가
-					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
+// 					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
+					    			Element  = "<form action='/payment/cancelPayment' 'method='post'>"
+					    			Element  = "<input type='hidden' name='ticketingNo' value='"+data.ticketingList[i].ticketingNo+"'>"
 				    				Element += "<input class='btn btn-primary' type='submit' value='예매취소'></button>"
 				    				Element += "</form>"
 				    				

@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
@@ -478,6 +479,7 @@ public class EventController {
 	
 	
 	//addPartPrev.jsp 응모하기 띄워주는거
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="addPartPrev", method=RequestMethod.GET)
 	public String addPartPrevView(@RequestParam int previewNo, HttpSession session, Model model) throws Exception{
 		
@@ -571,6 +573,7 @@ public class EventController {
 	
 	
 	//getQuizListAd
+	
 	@RequestMapping(value="getQuizListAd")
 	public String getQuizListAd(@ModelAttribute("search") Search search, Model model) throws Exception{
 		System.out.println("/event/getQuizListAd");
@@ -593,7 +596,7 @@ public class EventController {
 		return "forward:/event/getQuizListAd.jsp";
 	}
 	
-
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="getQuizList")
 	public String getQuizList(@ModelAttribute("search") Search search, HttpSession session ,Model model) throws Exception{
 		System.out.println("/event/getQuizList");
@@ -970,6 +973,7 @@ public class EventController {
 	
 	
 	//출첵 페이지로 이동
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="addAttendance")
 	public String addAttendance(HttpSession session, Model model) throws Exception {
 	

@@ -188,5 +188,6 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	},50)
 
 </script>
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>
