@@ -39,7 +39,7 @@
 	//============= "등록"  Event 연결 =============
 	 $(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$( "button.btn" ).on("click" , function() {
+		$( "#addProdBtn" ).on("click" , function() {
 			
 			Swal.fire({
 				  icon: 'success',
@@ -171,7 +171,7 @@
 					
 					<div class="form-group">
 					    <div class="col-8 text-center">
-					      <button  type="button"  id="addProdBtn" class="btn"  >등&nbsp;록</button>
+					      <button  type="button"  id="addProdBtn" class="btn" >등&nbsp;록</button>
 							  <a class="btn"  href="#"  id="addProdBtn" role="button">취&nbsp;소</a>
 								<br><br>		   
 					   </div>
@@ -183,5 +183,6 @@
 		<br/>
  			 
 	 </div>
+	 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>
