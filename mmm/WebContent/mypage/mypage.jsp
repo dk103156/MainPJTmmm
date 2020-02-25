@@ -276,7 +276,7 @@ $(function(){
 		<!-- left side bar end -->
 		
 		<!-- contents Start -->
-		<div class="col-md-9" style=" height: 200px;" id="plusPage">	
+		<div class="col-md-9" id="plusPage" style="padding-bottom: 30px">	
 		<!--다른 페이지 로딩 되는 부분  -->
 
 		</div>	
