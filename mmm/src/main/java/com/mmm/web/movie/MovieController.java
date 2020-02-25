@@ -466,7 +466,7 @@ public class MovieController {
 //		로그인한 회원 정보 from session
 		User user = (User)session.getAttribute("user");
 		System.out.println("----------- user.getUserNo() : "+user.getUserNo());
-		search.setUserNo(user.getUserNo());		
+		search.setUserId(user.getUserId());		
 
 //		search.currentPage setting...
 		if(search.getCurrentPage() ==0 ) {
@@ -480,7 +480,7 @@ public class MovieController {
 		
 		HashMap<String, Object> outputMap = (HashMap<String, Object>) boardService.getCommentList(search);
 		
-		Page resultPage = new Page(search.getCurrentPage(), ((Integer)outputMap.get("totalCnt")).intValue(),
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer)outputMap.get("totalCount")).intValue(),
 				pageUnit, pageSize);
 		System.out.println("------- resultPage : " + resultPage);
 		
