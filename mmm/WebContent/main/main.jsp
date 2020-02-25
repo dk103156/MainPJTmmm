@@ -355,7 +355,7 @@
 		</div> <!-- end of pageContent -->
 	</div> <!-- end of container-fluid -->	
 	
-	<jsp:include page="/layout/footer.jsp"></jsp:include>
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 	
 <jsp:include page="/layout/sideBar.jsp"></jsp:include>
 

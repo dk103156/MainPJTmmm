@@ -204,6 +204,10 @@
 				cmt_type = 2 
 				AND movie_no = #{movieNo}
 			</if>
+			<if test="commentType==3 "> <!-- 임시 작업(한줄평 개수) -->
+				cmt_type = 2 
+				AND user_id = #{userId}
+			</if>
 		 </if>
 		 
 		

@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -185,16 +186,20 @@ public class TicketingController {
 		
 		if(search.getSearchCondition().equals("2")) {
 			
+			List<String> dateTimeNoList = new ArrayList<String>();
 			List<DateTime> dtList = new ArrayList<DateTime>();
 			
 			for(Ticketing t: list) {
-				t.getDateTimeNo();
-				
-				DateTime dateTime= dateTimeService.getDateTime(t.getDateTimeNo());	
+				dateTimeNoList.add(t.getDateTimeNo());
+			}
+			
+			HashSet<String> distinctData = new HashSet<String>(dateTimeNoList);
+			dateTimeNoList = new ArrayList<String>(distinctData);
+			
+			for(String dateTimeNo : dateTimeNoList) {
+				DateTime dateTime= dateTimeService.getDateTime(dateTimeNo);
 				dtList.add(dateTime);
-				System.out.println(dateTime);
-				
-			}	
+			}
 			
 			model.addAttribute("dateTimeList",dtList);
 			
