@@ -9,13 +9,9 @@
 <head>
 <meta charset="EUC-KR">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 
 <!-- 	SweetAlert2 CDN -->
@@ -234,7 +230,7 @@
 		
    		<div class="qLogin">
 		<p class="qltx">
-		<span>${user.userId}님의 응모내역</span>
+		<span style="font-size:16px;">${user.userId}님의 응모내역</span>
 		<br>
 		</p>
 		<ul>
@@ -265,7 +261,7 @@
 		
 		<div>
 		<c:if test="${quiz.partFlag eq 1}">
-		<span style="color: red;"> <i class="far fa-smile"></i> 참여완료 </span>
+		<span style="color: red; font-size:15px;"> <i class="far fa-smile"></i> 참여완료 </span>
 		</c:if>
 		<p>
 		<span style="font-weight: 600;">${quiz.quizStDate}의 퀴즈</span>

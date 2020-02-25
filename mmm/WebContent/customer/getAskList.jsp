@@ -64,33 +64,31 @@
 	  }
 	}
 	
-	body {
+	body { 
 		font-family: 'Noto Sans KR', sans-serif;
+		font-weight: bold;
 		}
 		
-	th{
-		background-color: #fee00e;
-	}	
-	td{
-		background-color: #f9f9f9;
+	.button {
+	    display: inline-block;
+	    height: 36px;
+	    margin: 0;
+	    padding: 0 15px;
+	    text-align: center;
+	    line-height: 34px;
+	    color: #503396;
+	    font-weight: 400;
+	    border-radius: 4px;
+	    text-decoration: none;
+	    border: 1px solid #282828;
+	    vertical-align: middle;
+	    background-color: #fff;
+	    cursor: pointer;
 	}
 	
-	.button {
-    display: inline-block;
-    height: 36px;
-    margin: 0;
-    padding: 0 15px;
-    text-align: center;
-    line-height: 34px;
-    color: #503396;
-    font-weight: 400;
-    border-radius: 4px;
-    text-decoration: none;
-    border: 1px solid #282828;
-    vertical-align: middle;
-    background-color: #fff;
-    cursor: pointer;
-}
+	.table{
+		font-size: 14px;
+	}
 </style>
 </head>
 <body>
@@ -98,15 +96,15 @@
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 
-	<div class="page-header text-dark">
-	       <h3><i class="fas fa-comments"></i>고객센터</h3>
+	<div class="page-header text-dark mt-3">
+	       <h3>고객센터</h3>
 	       <hr>
 	    </div>
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-		<button type="button" name="ask" class="btn btn-outline-secondary active">자주찾는질문</button>
-	    <button type="button" name="contact" class="btn btn-outline-secondary">일대일문의</button>
-	    <button type="button" name="notice" class="btn btn-outline-secondary">공지사항</button>
+		<button type="button" name="ask" class="btn"><i class="fas fa-question-circle">자주찾는질문</i></button>
+	    <button type="button" name="contact" class="btn"><i class="fas fa-comment">일대일문의</i></button>
+	    <button type="button" name="notice" class="btn"><i class="fas fa-info-circle">공지사항</i></button>
 	  </div>
 	</div>
 
@@ -127,11 +125,11 @@
 
 <br>
 <div class="categoryBtn">
-	<div><p class="text-dark">
-	전체  ${resultPage.totalCount} 건 </p>
+	<div><p class="text-dark" style="font-size:15px;">
+	전체 <i style='color:#5da3d9'> ${resultPage.totalCount} </i>건 </p>
 	</div>
 	
-      <table class="table table-hover table-bordered table-sm" >
+      <table class="table table-hover table-sm" >
         <thead class="table-active">
           <tr>
             <th  scope="col"align="center">구분</th>
@@ -145,12 +143,12 @@
 			<tr>
 			 
 			  <td scope="col" align="left" >
-			  <c:if test="${ask.category==1}">예매/매표</c:if>
-			  <c:if test="${ask.category==2}">스토어</c:if>
-			  <c:if test="${ask.category==3}">결제</c:if>
-			  <c:if test="${ask.category==4}">할인혜택</c:if>
-			  <c:if test="${ask.category==5}">홈페이지</c:if>
-			  <c:if test="${ask.category==6}">이벤트</c:if>
+			  <c:if test="${ask.category==1}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">예매/매표</label></div></c:if>
+			  <c:if test="${ask.category==2}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">스토어</label></div></c:if>
+			  <c:if test="${ask.category==3}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">결제</label></div></c:if>
+			  <c:if test="${ask.category==4}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">할인혜택</label></div></c:if>
+			  <c:if test="${ask.category==5}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">홈페이지</label></div></c:if>
+			  <c:if test="${ask.category==6}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">이벤트</label></div></c:if>
 			  
 	  	    	<input type="hidden" id="articleNo" value="${ask.articleNo}"/>
 			  </td>
@@ -162,11 +160,11 @@
           </c:forEach>
         </tbody>
       </table>
-			  <div class="hee"></div>
+			  <div class="askDetail"></div>
       </div>
 
 
- <div class="ticketingPagination row">
+ <div class="pagination row">
 			  		<div class="col-4"></div>
 			  		<div class="col-4">
 					  <ul class="pagination">
@@ -272,7 +270,6 @@
 		})
 			console.log(datas)
 		
-		
 		ajaxPromise("/customer/json/getAsk", datas).then(
 			data=> {
 				
@@ -283,12 +280,14 @@
 				console.log(data.article.articleTitle)
 				console.log(data.article.content)
 			
-				$(".hee").empty();
+				$(".askDetail").empty();
 				
-				var html ="<div>"+ data.article.content+"</div>"
+				var html ="<td colspan='2' class='p-2'><div class='inner p-2'>"+data.article.content
+					html +="</div></td>"
 			
-				//$(".hee").append(html);
 				$("#"+data.article.articleNo).html(html)
+				$("#"+data.article.articleNo).css('background-color','pink');
+				$("div.inner").css('background-color','white');
 				
 				
 			}
@@ -312,8 +311,8 @@
 				
 				if(data.askList.length!=0){
 					
-					var html ="	<div><p class='text-dark'>전체  "+ data.resultPage.totalCount+" 건 </p></div>"
-						html +="<div><table class='table table-hover table-bordered table-sm'>"
+					var html ="	<div><p class='text-dark' style='font-size:15px;'>전체 <i style='color:#5da3d9'>"+ data.resultPage.totalCount+"</i> 건 </p></div>"
+						html +="<div><table class='table table-hover table-sm'>"
 			        	html +="<thead class='table-active'><tr>"		
 			         	html +="<th scope='col' align='center'>구분</th><th scope='col' align='left'>질문</th></tr></thead>"
 						html +="<tbody class='getTranInfo'>"
@@ -323,26 +322,26 @@
 						html +="<tr><td scope='col' align='left'>";
 						
 						if (data.askList[i].category==1) {
-							html += "예매/매표";
+							html += "<div class='text-center'><label class='btn btn-sm p-1 font-size-5' style='background-color:#fee00e'> 예매/매표</label></div>";
 						}else if (data.askList[i].category==2) {
-							html += "스토어";
+							html += "<div class='text-center'><label class='btn btn-sm p-1 font-size-5' style='background-color:#fee00e'> 스토어</label></div>";
 						}else if (data.askList[i].category==3) {
-							html += "결제";
+							html +=  "<div class='text-center'><label class='btn btn-sm p-1 font-size-5' style='background-color:#fee00e'> 결제</label></div>";
 						}else if (data.askList[i].category==4) {
-							html += "할인혜택";
+							html +=  "<div class='text-center'><label class='btn btn-sm p-1 font-size-5' style='background-color:#fee00e'> 할인혜택</label></div>";
 						}else if (data.askList[i].category==5) {
-							html += "홈페이지";
+							html += "<div class='text-center'><label class='btn btn-sm  p-1 font-size-5' style='background-color:#fee00e'> 홈페이지</label></div>";
 						}else if (data.askList[i].category==6) {
-							html += "이벤트";
+							html += "<div class='text-center'><label class='btn btn-sm p-1 font-size-5' style='background-color:#fee00e'> 이벤트</label></div>";
 						}
 						
 						html +="<input type='hidden' id='articleNo' value='"+data.askList[i].articleNo+"'/>"
 						html +="</td><td scope='col' align='left'>"+data.askList[i].articleTitle  
-						html +="</td></tr>"
+						html +="</td></tr><tr id='"+data.askList[i].articleNo+"'></tr>"
 					
 					}
 					
-					html += "</tbody></table></div>"
+					html += "</tbody></table></div><td colspan='2' class='hee'></td></div>";
 					
 							$(".categoryBtn").append(html);
 					
@@ -352,7 +351,7 @@
 				
 				
 				//페이지네이션 추가
-				$("div.ticketingPagination.row").empty();
+				$("div.pagination.row").empty();
 				
 				Element = "<div class='col-4'></div>"
 		  		Element +="<div class='col-4'>"
@@ -398,7 +397,7 @@
 				Element+= "<input type='hidden' id='category' name='category' value='"+data.search.category+"'/>"
 				Element+= "</form>"
 				
-				$("div.ticketingPagination").append(Element);
+				$("div.pagination").append(Element);
 				
 				$("#searchCondition").val(data.search.category);
 				
@@ -436,7 +435,6 @@
 
 </script>
 </body>
-
 
 
 </html>
