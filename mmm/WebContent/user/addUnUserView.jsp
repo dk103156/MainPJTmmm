@@ -253,8 +253,12 @@ $(function(){
 </script>
 <body>
 
+	<!-- ToolBar Start /////////////////////////////////////-->
+		<jsp:include page="/layout/header.jsp" />
+   	<!-- ToolBar End /////////////////////////////////////-->
+   	
 <!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container" style="width: 600px;">
+	<div class="container" style=" margin-top: 50px; width: 600px;">
 	
 		<h1 class="bg-default text-center" style="margin-top: 10px; background-color:#fee50e">비 회 원 예 매 </h1>
 		
@@ -321,7 +325,7 @@ $(function(){
 			    <label class="form-check-label" for="agreeCheck" >개인정보수집 및 이용 동의</label>
 			</div>	
 			<div class="form-group row">
-				<div class="col-sm-12 text-center">
+				<div class="col-sm-12 text-center" style="margin-bottom: 40px;"	>
 					<button type="button" id="addUserBtn" class="button large purple" >비회원 예매하기</button>
       				<a class="button large" href="#" id="cancelBtn" role="button">취&nbsp;소</a>
 			 	</div>
@@ -331,6 +335,10 @@ $(function(){
 
 	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
+	
+<!-- Header Start /////////////////////////////////////-->
+		<jsp:include page="/layout/footer.jsp" />
+<!-- Header End /////////////////////////////////////-->
 
 </body>
 </html>

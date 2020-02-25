@@ -264,9 +264,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.GET)
-	public String login(HttpSession session) throws Exception{
+	public String login(HttpSession session ,HttpServletRequest request) throws Exception{
 		
 		System.out.println("/user/login : GET");
+		
 		
 		return "redirect:/user/login.jsp";
 		
