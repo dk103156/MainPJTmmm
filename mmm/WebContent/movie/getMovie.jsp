@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="/resources/css/common.css?aedfr">
      
     <style type="text/css">
-    	img { max-width: 100%; height: auto; }
+    	.img-cs { max-width: 100%; height: auto; }
     	
     	.starR1{
 	    background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
@@ -304,7 +304,7 @@
 	    	<div class="col moviebody mt-5">
 			    <div class="row border-bottom pb-3">
 	   		        <div class="col-md-4 text-center">
-			        	<img id="poster" src="${movie.poster}" alt="">
+			        	<img class="img-cs" id="poster" src="${movie.poster}" alt="">
 			        </div>
 			    
 			        <div class="col-md-8">

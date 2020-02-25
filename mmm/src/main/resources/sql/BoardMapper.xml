@@ -187,26 +187,34 @@
 <!--  -->	
 	<sql id="search-cmt">	 
 		 SELECT
-		 	 cmt_no, cmt_type, user_id, sup_cmt_no, article_no,
-	 		 movie_no, cmt_content, cmt_date, cmt_count, blind_flag, blind_reason, blind_date
-		 FROM commentt
+		 	 c.cmt_no, c.cmt_type, c.user_id, c.sup_cmt_no, c.article_no,
+	 		 c.movie_no, c.cmt_content, c.cmt_date, c.cmt_count, c.blind_flag, c.blind_reason, c.blind_date
+		 <if test="commentType != null and commentType ==3 ">
+		 ,m.movie_title
+		 </if>
+		 FROM commentt c
+		 <if test="commentType != null and commentType ==3 ">
+		 ,movie m
+		 </if>
+		 
 		<where>
 		 <if test="commentType!=null">
 		 	<if test="commentType==0 ">   
-				cmt_type = 0 
-				AND article_no = #{parent}
+				c.cmt_type = 0 
+				AND c.article_no = #{parent}
 		   </if>
 			<if test="commentType==1 "> 
-				cmt_type = 1
-				AND movie_no = #{parent}
+				c.cmt_type = 1
+				AND c.movie_no = #{parent}
 			</if>
 			<if test="commentType==2 "> 
-				cmt_type = 2 
-				AND movie_no = #{movieNo}
+				c.cmt_type = 2 
+				AND c.movie_no = #{movieNo}
 			</if>
 			<if test="commentType==3 "> <!-- 임시 작업(한줄평 개수) -->
-				cmt_type = 2 
-				AND user_id = #{userId}
+				c.cmt_type = 2 
+				AND c.user_id = #{userId}
+				AND c.movie_no = m.movie_no
 			</if>
 		 </if>
 		 

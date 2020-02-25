@@ -31,7 +31,6 @@
 	<!--     Common Css -->
     <link rel="stylesheet" href="/resources/css/common.css?aaffr">
 	    
-    <link rel="stylesheet" href="/resources/css/payment.css?atfr">
     
 <title>Insert title here</title>
 </head>
