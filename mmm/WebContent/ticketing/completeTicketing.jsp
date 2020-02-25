@@ -42,6 +42,17 @@
  	  	background-color: 
  	  }
 
+	.col-10{
+        margin-bottom : 200px;
+	}
+	.table{
+		table-layout:fixed;
+		word-break:break-all;
+	}
+	.head-cs{
+		width: 30%;
+	}
+
 </style>
 </head>
 <body>
@@ -61,48 +72,48 @@
 		<div class="col-1"></div>
 		<div class="col-7">		
 			<div class="row mb-4">
-				<div class="col-3">예매 PIN NO</div>
+				<div class="col-3 border-right border-warning">예매 PIN NO</div>
 				<div class="col-9">${ticketing.ticketingPinNo }</div>
 			</div>
 			<div class="row mb-4 ">
-				<div class="col-3">영화제목</div>
+				<div class="col-3 border-right border-warning">영화제목</div>
 				<div class="col-9">${ticketing.movieName}</div>
 			</div>
 			<div class="row mb-4 ">
-				<div class="col-3">극장</div>
+				<div class="col-3 border-right border-warning">극장</div>
 				<div class="col-9">${ticketing.theaterName }</div>
 			</div>
 			<div class="row mb-4">
-				<div class="col-3">상영일시</div>
+				<div class="col-3 border-right border-warning">상영일시</div>
 				<div class="col-9">${ticketing.screenTime }</div>
 			</div>	
 			<div class="row mb-4">
-				<div class="col-3">인원수</div>
+				<div class="col-3 border-right border-warning">인원수</div>
 				<div class="col-9">${ticketing.headCount } 명</div>
 			</div>
 			<div class="row mb-4">
-				<div class="col-3">좌석번호</div>
+				<div class="col-3 border-right border-warning">좌석번호</div>
 				<div class="col-9">${ticketing.seatNo }</div>
 			</div>
 			
 	</c:if> 
 	<c:if test="${payment.payObjectFlag==1 || payment.payObjectFlag==2 }" >
 			<div class="row mb-4 ">
-				<div class="col-3">상품명</div>
+				<div class="col-3 border-right border-warning">상품명</div>
 				<div id="prodName" class="col-9"></div>
 			</div>
 			<div class="row mb-4">
-				<div class="col-3">상품개수</div>
+				<div class="col-3 border-right border-warning">상품개수</div>
 				<div class="col-9">${purchase.purchaseProductQuantity }</div>
 			</div>
 	</c:if> 			
 			<div class="row mb-4">
-				<div class="col-3">결제금액</div>
+				<div class="col-3 border-right border-warning">결제금액</div>
 				<div class="col-9">${payment.totalPrice}원</div>
 			</div>
 			<div class="row mb-4 ">
-				<div class="col-3">결제수단</div>
-				<div class="col-9">
+				<div class="col-3 border-right border-warning">결제수단</div>
+				<div class="col-9 p-0">
 				<c:choose>
 					<c:when test="${payment.payMethod==0}">
 						<div class="col">현금 ${payment.cash}원</div>
@@ -136,8 +147,8 @@
 			
 			<c:if test="${payment.payMethod==0 || payment.payMethod==3 || payment.payMethod==4 || payment.payMethod==6}">
 				<div class="row ">
-					<div class="col-3">적립포인트</div>
-					<div class="col-9">${payment.savingPoint}원</div>
+					<div class="col-3 border-right border-warning">적립포인트</div>
+					<div class="col-9">${payment.savingPoint}p</div>
 				</div>
 			</c:if>
 		</div>

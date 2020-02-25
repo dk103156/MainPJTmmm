@@ -376,7 +376,8 @@ public class PaymentController {
 	
 	
 	
-	@RequestMapping(value = "/getPointList", method = RequestMethod.GET)
+//	@RequestMapping(value = "/getPointList", method = RequestMethod.GET)
+	@RequestMapping(value = "/getPointList")
 	public String getPointList( @ModelAttribute(value = "search") Search search,
 								HttpSession session, Model model
 								)throws Exception{

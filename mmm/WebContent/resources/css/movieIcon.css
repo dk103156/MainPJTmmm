@@ -1,4 +1,4 @@
-/* 		summary hover 효과를 위한.... CSS */
+/* 		summary hover �슚怨쇰�� �쐞�븳.... CSS */
 figure.snip1384 {
   position: relative;
   overflow: hidden;
@@ -138,13 +138,13 @@ figure.snip1384.hover i {
     text-indent: -9999px;
 }
 
-body, th, td, input, select, textarea, button {
-    font-size: 12px;
-    line-height: 1.5;
-    font-family: AppleSDGothicNeo-Regular, "Malgun Gothic", "占쏙옙占쏙옙 占쏙옙占�", dotum, 占쏙옙占쏙옙, sans-serif;
-    color: rgb(34, 34, 34);
-    letter-spacing: -0.05em;
-}
+/* body, th, td, input, select, textarea, button { */
+/*     font-size: 12px; */
+/*     line-height: 1.5; */
+/*     font-family: AppleSDGothicNeo-Regular, "Malgun Gothic", "�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝占�", dotum, �뜝�룞�삕�뜝�룞�삕, sans-serif; */
+/*     color: rgb(34, 34, 34); */
+/*     letter-spacing: -0.05em; */
+/* } */
 
 
 		
