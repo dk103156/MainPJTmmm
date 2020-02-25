@@ -149,6 +149,11 @@ public class PaymentDaoImpl implements PaymentDao {
 	}
 	
 	public int getAccPoint(int userNo) throws Exception {
+		
+		if (sqlSession.selectOne("PointMapper.getAccPoint", userNo) == null) {
+			return 0;
+		} 
+		
 		return sqlSession.selectOne("PointMapper.getAccPoint", userNo);
 	}
 

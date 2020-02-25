@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
@@ -173,6 +174,7 @@ public class CustomerController {
 	
 	//일대일문의===========================================================================
 	
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="addContact", method=RequestMethod.GET)
 	public String getAddContact(HttpSession session, Model model) {
 		System.out.println("/customer/addContactAd : GET");

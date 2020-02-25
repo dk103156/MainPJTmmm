@@ -163,18 +163,18 @@
 	<div class="row mt-5">
 		<div class="col-3"></div>
 		<div class="col-2 text-center">
-			<button type="button" class="btn btn-yellow-cs font-bolder-cs">예매정보 출력</button>
 		</div>
 		<div class="col-2 text-center">
-			<button type="button" class="btn  btn-secondary">결과 SMS 발송</button>
+			<button type="button" class="btn  btn-dark confirm">예매 확인/취소</button>		
 		</div>
 		<div class="col-2 text-center">
-			<button type="button" class="btn  btn-dark confirm">예매 확인/취소</button>
 		</div>
 		<div class="col-3"></div>
 	</div>
 
 </div><!-- end of container -->
+
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 
 <script>
 $.ajaxSetup({async:false}); //전역 ajax 동기로
@@ -209,7 +209,7 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 </c:if>
 
 $("button.confirm").on("click",function(){
-	self.location="/ticketing/getTicketingList";
+	self.location="/mypage/mypage?condition=1";
 });
 
 </script>

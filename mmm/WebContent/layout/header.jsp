@@ -37,6 +37,11 @@
   <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
   <link rel="stylesheet" href="../resources/css/owl.theme.default.min.css">
   
+  <!-- datepicker -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+	
+  
   <style>
   body {
   	font-family: 'Noto Sans KR', sans-serif !important;
@@ -121,7 +126,7 @@
 					    </c:otherwise>                  
 					</c:choose>
 						<a href="/user/userAuthorization.jsp?type=addUser" class="join borderRight"><span style="margin-left: 5px;">JOIN</span></a>
-						<a href="/mypage/mypage" class="myPage borderRight"><span style="margin-left: 7px;">MY PAGE</span></a>
+						<a href="/mypage/mypage?condition=0" class="myPage borderRight"><span style="margin-left: 7px;">MY PAGE</span></a>
 						<a href="/customer/getAskList" class="customer" style="color: #242424; padding-left: 1px;"><span style="margin-left: 4px;">CUSTOMER CENTER</span></a>
 					</li>
 			</ul>

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -72,10 +73,12 @@ public class MypageController {
 	
 	@CheckAuth(role="user,admin")
 	@RequestMapping(value ="mypage", method = RequestMethod.GET)
-	public String mypage() throws Exception{
+	public String mypage(@ModelAttribute("condition") String condition, Model model) throws Exception{
 		
 		System.out.println("/mypage/mypage : GET ");
-			
+		
+		System.out.println("condition  값은 ?+ \n :"+condition);
+		model.addAttribute("condition",condition);
 		return "forward:/mypage/mypage.jsp";
 	}
 	

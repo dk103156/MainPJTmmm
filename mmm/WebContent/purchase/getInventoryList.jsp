@@ -27,7 +27,13 @@
 	  
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
-  
+
+<style>
+	.modal-backdrop {
+	    background-color: rgba(0, 0, 0, 0.2);
+	    opacity: 1;
+	}
+</style>  
 
 </head>
 <body id="body">
@@ -35,7 +41,7 @@
 		<div class="row mx-0">
 			<div class="inventoryHeader col-12 text-center">
 			<br><br>
-			<h3 class="text-left"><span>${user.userName}님의 보관함</span></h3> 	
+			<h3 class="text-left"><strong><span>${user.userName}님의 보관함</span></strong></h3> 	
 			<hr style="background-color: #c0c0c0;">
 				<br>
 			</div>

@@ -354,24 +354,28 @@ public class PaymentController {
 		return "forward:/ticketing/completeTicketing.jsp";
 	}//end of addPayment()
 	
-	@RequestMapping(value = "/cancelPayment", method = RequestMethod.GET)
-	public String cancelPayment(@RequestParam(value = "ticketingNo") String ticketingNo,
-								@RequestParam(value = "purchaseNo") int purchaseNo,
+	@RequestMapping(value = "/cancelPayment", method = RequestMethod.POST)
+	public String cancelPayment(@RequestParam(value = "ticketingNo", required=false) String ticketingNo,
+								@RequestParam(value = "purchaseNo", required=false) String purchaseNostr,
 								HttpSession session, Model model)throws Exception{
+		
+		System.out.println("-----------------------------ticketingNo : "+ticketingNo);
+		System.out.println("-----------------------------purchaseNo : "+purchaseNostr);
 		
 		Payment payment = new Payment();
 		
 		if (ticketingNo != null) {
 			System.out.println("===========> 예매, 예매+구매 취소");
 			payment = paymentService.getPaymentbyTicketingNo(Integer.parseInt(ticketingNo));
-		}else if (purchaseNo != 0) {
+			return "redirect:/mypage/mypage?condition=1";
+		}else if (purchaseNostr != null) {
 			System.out.println("==========> 구매 취소");
-			payment = paymentService.getPaymentbyPurchaseNo(purchaseNo);
-			
+			payment = paymentService.getPaymentbyPurchaseNo(Integer.parseInt(purchaseNostr));
+			return "redirect:/mypage/mypage?condition=2";
 		}
 		
 		
-		return "forward:/ticketing/completeTicketing.jsp";
+		return "redirect:/mypage/mypage.jsp";
 	}// end of cancelPayment()
 	
 	

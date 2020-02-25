@@ -8,32 +8,18 @@
 <title>addQuizAd</title> 
 <meta charset="utf-8">
  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
-<!-- bootstrap 4 CDN -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- Popper JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	
-<!-- datepicker CDN -->
+	<!-- datepicker CDN -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
-	<script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
-	
-	
-<!-- fontawesome CDN -->
-	    <script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
-	    
-
+	<!-- fontawesome CDN -->
+    <script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 	
 	<script type="text/javascript">
 	
@@ -201,7 +187,7 @@
 	</form>
 </div>
 
-
+<jsp:include page="/layout/footer.jsp"></jsp:include>
  </body>
  
  </html>
