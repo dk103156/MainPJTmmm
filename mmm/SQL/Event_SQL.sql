@@ -41,7 +41,6 @@ CREATE TABLE quiz (
 	option4 		 VARCHAR2(200) 		NOT NULL,
 	answer 			 NUMERIC(2) 		NOT NULL,
 	start_date 	 	 TIMESTAMP 	 		NOT NULL,
-	end_date 		 TIMESTAMP 	 		NOT NULL,
 	quiz_date 		 TIMESTAMP 	 		NOT NULL,
 	quiz_status      NUMERIC(2) 		DEFAULT 0,
 	PRIMARY KEY(quiz_no)

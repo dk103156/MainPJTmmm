@@ -336,7 +336,7 @@
 					GROUP BY MOVIE_NO					) s, movie m
 					WHERE m.movie_no = t.movie_no
 						AND m.MOVIE_NO = s.movie_no
-<!-- 						AND NVL(m.onBoxOffice_flag, 0) = '1' -->
+						AND NVL(m.onBoxOffice_flag, 0) = '1'
 					ORDER BY t.cnt DESC , s.star_rate DESC						) o,
 			(
 			SELECT MOVIE_NO, COUNT(wish_no) wish_no
@@ -357,10 +357,10 @@
 		t.movie_no, t.poster, t.movie_title, t.movie_rating, t.STAR_RATE
 		FROM(	SELECT m.movie_no, m.poster, m.movie_title, m.movie_rating, AVG(s.STAR_RATE) STAR_RATE
 				FROM MOVIE m, STAR_RATING s
-				WHERE m.movie_no = s.MOVIE_NO
-<!-- 					AND	NVL(m.onBoxOffice_flag, 0) = 1 -->
+				WHERE m.movie_no = s.MOVIE_NO(+)
+				AND	NVL(m.onBoxOffice_flag, 0) = 1 
 				GROUP BY m.MOVIE_NO, m.movie_no, m.poster, m.movie_title, m.movie_rating
-				ORDER BY AVG(s.STAR_RATE) DESC 
+				ORDER BY AVG(s.STAR_RATE) DESC, m.MOVIE_NO DESC 
 				) t
 		WHERE ROWNUM = 1
 	

@@ -85,9 +85,7 @@ body {
 </head>
 <body>
 
-<footer id="footer" style="
-    top: 25px;
-">
+<footer id="footer" style="top: 25px;">
 	    <div class="foo_div">
 	    	<a href="/main" title="MMM"><img src="../resources/image/logo/logo.png"></a>
 	    </div>
@@ -106,8 +104,6 @@ body {
 	    	</div>
 	    </div>
 </footer>
-    
- 
     
 </body>
 </html>

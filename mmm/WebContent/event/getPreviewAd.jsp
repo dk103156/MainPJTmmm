@@ -695,7 +695,6 @@ function comment(currentPage){
 <jsp:include page="/layout/header.jsp"></jsp:include>	
 <div class="container">
 
-
  	<div id="contents">
  	
 	<div class="event-detail">	
@@ -1058,7 +1057,7 @@ function getWinnerList(previewNo){
 	    </div>
 	  </div>
 	</div>	
-<%-- 	<jsp:include page="/layout/footer.jsp"></jsp:include> --%>
+	<jsp:include page="/layout/footer.jsp"></jsp:include>
  </body>
  
  </html>

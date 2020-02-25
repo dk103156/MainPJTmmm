@@ -27,7 +27,13 @@
 	  
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
-  
+
+<style>
+	.modal-backdrop {
+	    background-color: rgba(0, 0, 0, 0.2);
+	    opacity: 1;
+	}
+</style>  
 
 </head>
 <body id="body">
