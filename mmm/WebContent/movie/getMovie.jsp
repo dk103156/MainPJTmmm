@@ -37,10 +37,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
     
 <!--     movie css -->
-    <link rel="stylesheet" href="/resources/css/movieIcon.css?aefr">
+    <link rel="stylesheet" href="/resources/css/movieIcon.css?aedfr">
     
 <!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?aefr">
+    <link rel="stylesheet" href="/resources/css/common.css?aedfr">
      
     <style type="text/css">
     	img { max-width: 100%; height: auto; }
@@ -189,7 +189,7 @@
 	function fncTicketing(ticketing_btn){
 // 		var movieName = $.trim($('#movieTitle').text()).replace(/ /g, '');;
 		var movieName = $('#movieTitle').text();
-		alert(movieName);
+// 		alert(movieName);
 		self.location = "/ticketing/addTicketing?movieName="+movieName
 	};
 	
@@ -369,11 +369,11 @@
 									<div class="col"><h6><i class="fas fa-star font-yellow-cs"></i> 평점 : ${movie.starRating}</h6></div>
 								</div>
 								<div class="text-left p-2">
-									<p>- <span class="font-weight-bold">감독 :</span> ${movie.director}  
-									/ <span class="font-weight-bold">배우 :</span> ${movie.actor}</p>
-									<p>- <span class="font-weight-bold">장르 :</span> ${movie.genreString} 
-									/ <span class="font-weight-bold">런닝타임 : </span>${movie.runningTime} 분</p>
-									<p>- <span class="font-weight-bold">개봉일자 :</span> ${movie.releaseDate}</p>
+									<p class="mb-2">- <span class="font-weight-bold">감독 :</span> ${movie.director}</p>
+									<p class="mb-2">- <span class="font-weight-bold">배우 :</span> ${movie.actor}</p>
+									<p class="mb-2">- <span class="font-weight-bold">장르 :</span> ${movie.genreString} 
+									<p class="mb-2">- <span class="font-weight-bold">런닝타임 :</span>${movie.runningTime} 분 
+									<p class="mb-2">- <span class="font-weight-bold">개봉일자 :</span> ${movie.releaseDate}</p>
 								</div>
 								
 								<div>
@@ -415,10 +415,10 @@
 			    </div>
 <!-- 			    한줄평 및 리뷰  -->
 				<div class="row border-bottom pb-3 mt-3">
-					<div class="col">
+					<div class="col-8 div-center-cs">
 					  <div id="cmt-table" class="bg-dark-cs p-3 text-center  mb-3"><h6 class="m-0">한줄평</h6></div>
 					  
-						<table class="table table-sm table-hover text-center">
+						<table class=" table table-sm table-hover text-center col-9 div-center-cs">
 						  <tbody>
 					          
 					<!--         list size만큼 for문으로 Point 내역 출력  -->
@@ -443,6 +443,8 @@
 					          
 						  </tbody>
 						</table>
+						
+				
 					  
 					</div>
 				</div>

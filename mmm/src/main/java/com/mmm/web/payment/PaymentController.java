@@ -354,8 +354,30 @@ public class PaymentController {
 		return "forward:/ticketing/completeTicketing.jsp";
 	}//end of addPayment()
 	
+	@RequestMapping(value = "/cancelPayment", method = RequestMethod.GET)
+	public String cancelPayment(@RequestParam(value = "ticketingNo") String ticketingNo,
+								@RequestParam(value = "purchaseNo") int purchaseNo,
+								HttpSession session, Model model)throws Exception{
+		
+		Payment payment = new Payment();
+		
+		if (ticketingNo != null) {
+			System.out.println("===========> 예매, 예매+구매 취소");
+			payment = paymentService.getPaymentbyTicketingNo(Integer.parseInt(ticketingNo));
+		}else if (purchaseNo != 0) {
+			System.out.println("==========> 구매 취소");
+			payment = paymentService.getPaymentbyPurchaseNo(purchaseNo);
+			
+		}
+		
+		
+		return "forward:/ticketing/completeTicketing.jsp";
+	}// end of cancelPayment()
 	
-	@RequestMapping(value = "/getPointList", method = RequestMethod.GET)
+	
+	
+//	@RequestMapping(value = "/getPointList", method = RequestMethod.GET)
+	@RequestMapping(value = "/getPointList")
 	public String getPointList( @ModelAttribute(value = "search") Search search,
 								HttpSession session, Model model
 								)throws Exception{

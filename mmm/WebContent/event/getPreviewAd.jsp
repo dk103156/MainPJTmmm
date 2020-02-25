@@ -6,7 +6,7 @@
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> 
   <!-- 카카오 맵 api key -->
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=28c25faffe7f9e07ac51f11fc80f7e17"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -854,6 +854,8 @@ function comment(currentPage){
 </script>
 <script>
 
+var place = "";
+
 function getWinnerList(previewNo){
 
 		$.ajax({
@@ -881,33 +883,31 @@ function getWinnerList(previewNo){
 		
 		$("div#modal3").modal("show");
 	
-		var place = $.trim($("span#previewPlace").text())
+		place = $.trim($("span#previewPlace").text())
 		console.log(place)
 
 	});
 	
-	$("#outerMotdal").on('shown.bs.modal', function (e) {
+	$("div#modal3").on('shown.bs.modal', function (e) {
 		searchTheater(place);
 	})
 	
 	
 	function searchTheater(keyword){	  
-		/* 맵에 현재 위치 찍기 */
-		$.getJSON('https://ipinfo.io/geo', function(response) { 
-		    var loc = response.loc.split(',');
+		
 		    var coords = {
-		        latitude: loc[0],
-		        longitude: loc[1]
+		        latitude: 37.499526740945925,
+		        longitude: 127.02925836185794
 		    };
-		    success(coords)
-		});
+		    success(coords,keyword)
+		};
 	        
 		
 		// 현재 위치 불러오는게 성공했다면	
-		function success(position) {
+		function success(coords,keyword) {
 			var container = document.getElementById('map');
 			var options = {
-				center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
+				center: new kakao.maps.LatLng(coords.latitude, coords.longitude),
 				level: 1,
 				keyboardShortcuts : true
 			};
@@ -932,7 +932,7 @@ function getWinnerList(previewNo){
 			    image: icon
 			}); 
 			// 지도에 마커를 표시합니다
-			//marker.setMap(map);
+			marker.setMap(map);
 			
 			var cgvLogo ="../resources/image/kakaoMapIcon/CGV.png";
 			var lotteLogo ="../resources/image/kakaoMapIcon/lotte.png";
@@ -941,7 +941,7 @@ function getWinnerList(previewNo){
 			//theater List ajax로 불러오고 Marker로 표시
 			var theaterMarkerArray = new Array();
 			var jqxhr = $.getJSON( "/ticketing/json/getTheaterByName/"+encodeURI(keyword), function() {
-				  console.log( "success" );
+				  //console.log( "success" );
 				})
 				  .done( 
 				    	theater => {
@@ -966,7 +966,7 @@ function getWinnerList(previewNo){
 				    		//theaterMarker.setMap(new kakao.maps.LatLng(theater.positionY, theater.positionX));
 							
 				    		
-				    		
+				    		map.panTo(new kakao.maps.LatLng(theater.positionY, theater.positionX));
 				    	    var infowindow = new kakao.maps.InfoWindow({
 				    	        content: "<span id='infoWindow'>"+theater.theaterName+"</span>" // 인포윈도우에 표시할 내용
 				    	    });
@@ -1016,7 +1016,7 @@ function getWinnerList(previewNo){
 		function error(err) {
 	  		console.warn('ERROR(' + err.code + '): ' + err.message);
 		};	  
-	}
+	
 
 	/* 마커 클릭하면 정보 보이고, 버튼 누를시에 선호 극장으로 데이터 전송하기 */
 	</script>

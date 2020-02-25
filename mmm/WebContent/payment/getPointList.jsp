@@ -39,13 +39,18 @@
 
 <div class="container point" style="margin-top : 47px;">
   <div class="row">
-    <div class="col d-inline">
-		<h2><Strong>Point List</Strong></h2>
-	</div>
-	<div class="col d-inline">
-		<h5 class="text-right">보유 포인트 : ${totalPoint} p</h5>
-   		<p class="text-right text-muted">(누적 포인트 : ${accPoint} p)</p>
-	</div>
+     <form action="">
+     
+<!--      	pagination을 위한 hidden input -->
+       <input type="hidden" id="currentPage" name="currentPage" value=""/>
+       <div class="col d-inline">
+  	 	<h2><Strong>Point List</Strong></h2>
+  	   </div>
+  	  </form>
+  	   <div class="col d-inline text-right">
+  	 		<h5>보유 포인트 : ${totalPoint} p</h5>
+      		<p class="text-muted mb-0">(누적 포인트 : ${accPoint} p)</p>
+  	   </div>
   </div>
 	<div>
 		<table class="table table-hover text-center">
@@ -88,8 +93,74 @@
 	          
 		  </tbody>
 		</table> 
+		
+<!-- 		Pagination -->
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination pagination-sm justify-content-center">
+		  
+<!-- 		  previos -->
+		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
+		 		<li class="page-item disabled">
+			</c:if>
+			<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
+				<li class="page-item">
+			</c:if>
+		      <a class="page-link" href="javascript:fncGetList('${resultPage.currentPage-1}')"
+		      	 aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		      </a>
+		    </li>
+		    
+		    
+<!-- 		    center -->
+			<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
+			
+				<c:if test="${ resultPage.currentPage == i }">
+			   		<li class="page-item active" aria-current="page">
+			   			<a class="page-link" href="javascript:fncGetList('${ i }');">
+			   				${ i }<span class="sr-only">(current)</span></a>
+			   		</li>
+				</c:if>
+				<c:if test="${ resultPage.currentPage != i}">	
+			   		<li class="page-item">
+			   			<a class="page-link" href="javascript:fncGetList('${ i }');">${ i }</a>
+			   		</li>
+				</c:if>
+					
+    		</c:forEach>
+		    
+		    
+<!-- 		    Next -->
+   		     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">
+		  		<li class="page-item disabled">
+			</c:if>
+			<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
+			    <li class="page-item">
+			</c:if>
+		      <a class="page-link" href="javascript:fncGetList('${resultPage.endUnitPage+1}')"
+		      	 aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		      </a>
+		    </li>
+		  </ul>
+		</nav>
+<!-- 		Pagination  END -->		
+		
 	</div>
 </div>    
+
+<script type="text/javascript">
+
+function fncGetList(currentPage) {
+	
+// 	alert('pagination' + currentPage);
+	
+	$("#currentPage").val(currentPage);
+// 	$("form").attr("method", "POST").attr("action", "/payment/getPointList").submit();
+	$("#plusPage").load("/payment/getPointList",$("#currentPage").serialize());
+}
+
+</script>
 
 </body>
 </html>

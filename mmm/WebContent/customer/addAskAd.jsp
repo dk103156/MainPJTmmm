@@ -49,7 +49,6 @@
 				
 				
 				$('#regBtn').on("click", function(){
-// 					alert('눌렸어!!!!!!!!!!!!!!!!!!!!!!!');
 					fncAddNotice();
 				});
 				
@@ -118,27 +117,12 @@
 		
 	</script>
 	
-	 <style type="text/css">
-		
-		@media (min-width: 768px) {
-	 	 .container {
-	     width: 750px;
-	  }
-	}
-	
-		@media (min-width: 992px) {
-		 .container {
-	     width: 940px;
-	  }
-	}
 
-
-	</style>
 	
 </head> 
 
 <body>
-
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 
 	<div class="page-header text-dark">

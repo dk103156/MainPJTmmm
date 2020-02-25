@@ -42,3 +42,8 @@ container.point, th, td, input, select, textarea, button {
 .btn-outline-light:hover {
     background-color: #ffe007;
 }
+
+.div-center-cs{
+	float: none;
+	margin: 0 auto;
+}

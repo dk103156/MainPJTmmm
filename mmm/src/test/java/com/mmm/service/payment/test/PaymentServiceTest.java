@@ -203,18 +203,29 @@ public class PaymentServiceTest {
 //		System.out.println("=========accPoint  : " + accPoint);
 //	}
 	
+//	@Test
+//	public void testGetPayment()throws Exception{
+//		
+//		int ticketingNo = 10003;
+//		int purchaseNo = 10001;
+//		
+//		Payment pay = paymentService.getPaymentbyTicketingNo(ticketingNo);
+//		Payment pay1 = paymentService.getPaymentbyPurchaseNo(purchaseNo);
+//		
+//		
+//		System.out.println("=========pay  : " + pay);
+//		System.out.println("=========pay1  : " + pay1);
+//	}
+	
 	@Test
-	public void testGetPayment()throws Exception{
+	public void testCancelPoint() throws Exception{
 		
-		int ticketingNo = 10003;
-		int purchaseNo = 10001;
-		
-		Payment pay = paymentService.getPaymentbyTicketingNo(ticketingNo);
-		Payment pay1 = paymentService.getPaymentbyPurchaseNo(purchaseNo);
+		Payment pay = paymentService.getPaymentbyTicketingNo(10158);
+		System.out.println( "---pay   : " + pay);
 		
 		
-		System.out.println("=========pay  : " + pay);
-		System.out.println("=========pay1  : " + pay1);
+		paymentService.cancelPayment(pay);
+		
 	}
 	
 }

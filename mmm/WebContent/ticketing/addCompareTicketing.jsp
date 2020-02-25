@@ -284,7 +284,7 @@
 	  
 	  div.remainingSeat > div > div > ul {
 	  	overflow : auto;
-	  	height : 319px;
+	  	height : 303px;
 	  }
 	  
 	  div.remainingSeat > div > div > ul::-webkit-scrollbar {
@@ -371,21 +371,20 @@
 	  
 	  
 	  
+		/* 일반예매 or 극장별 비교예매 전환 */	
 		.container {
 			width:960px;
 			margin:0 auto;
-		}
+		}		
 		.tab {
 			list-style: none;
 			margin: 0;
 			padding: 0;
 			overflow: hidden;
 		}
-		/* Float the list items side by side */
 		.tab li {
 			float: left;
 		}
-		/* Style the links inside the list items */
 		.tab li a {
 			display: inline-block;
 			color: #000;
@@ -395,7 +394,6 @@
 			font-size: 17px;
 			transition:0.3s;
 		}
-		/* Style the tab content */
 		.tabcontent {
 			display: none;
 			background-color:rgb(0,154,200);
@@ -408,7 +406,7 @@
 		}
 		.tabcontent.current {
 			display: block;
-		}	 	  
+		}	   
 	  	  
   </style>
   
@@ -422,7 +420,9 @@
 			window.location.reload();		
 		
 		});
-	
+		
+		
+		/* 일반예매 or 극장별 비교예매 전환 */	
 		$("a[href='#']:contains('극장별 비교예매')").on('click',function(){			
 			$("body").load("/ticketing/addCompareTicketing",function(){
 				$('.dropdown-toggle').dropdown('toggle')
@@ -446,15 +446,18 @@
 <jsp:include page="/layout/header.jsp"></jsp:include>
   		
     <div class="container">
-   		<ul class="tab">
-			<li class="current" data-tab="tab1"><a href="/ticketing/addCompareTicketing">극장별 비교예매</a></li>
-			<li data-tab="tab2"><a href="/ticketing/addTicketing">일반예매</a></li>
-		</ul>
+
       <!-- 비교 예매 -->
       <div class="compareTicketing">
         <!-- 타이틀 -->
-     <div class="row mb-2 compare">
-     	<div class="col-12 navi" style="margin-left: 11px;">
+     <div class="row mb-2 compare" style="height: 53px;">
+        <div style="z-index: 2;">
+	   		<ul class="tab">
+				<li class="current" data-tab="tab1"><a href="/ticketing/addCompareTicketing">극장별 비교예매</a></li>
+				<li data-tab="tab2"><a href="/ticketing/addTicketing">일반예매</a></li>
+			</ul>
+		</div>
+     	<div class="col-12 navi" style="z-index: 1; margin-left: 11px; width: 330px !important; bottom: 32px;">
      		<div class="resetSelection" style="clear:both; float:right; height:30px"></div>
      	</div>
      </div>
@@ -1449,7 +1452,7 @@
     	 		
     		 
     		 if( movieName==true && franchise==true && theaterName==true && screenTime == true){
-    		
+    			 $("div.steps-body.text-center > div > div.placeholder").css("display", "none");
 	    	 $.ajax({
 	    		  type: "POST",
 	    		  url: "/ticketing/json/getTimeList",
@@ -1687,7 +1690,7 @@
 
     	 //전부 클릭했을 때
     	 if( movieName==true && franchise==true && theaterName==true && screenTime == true){
-    		
+    		 $("div.steps-body.text-center > div > div.placeholder").css("display", "none");
 	    	 $.ajax({
 	    		  type: "POST",
 	    		  url: "/ticketing/json/getTimeList",

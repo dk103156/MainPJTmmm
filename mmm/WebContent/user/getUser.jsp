@@ -50,7 +50,6 @@ body {
 
 h2.tit {
     padding: 0 0 26px 0;
-    font-size: 1.8666em;
     font-weight: 400;
     letter-spacing: -1px;
     line-height: 1.1;
@@ -637,6 +636,7 @@ $(function(){
 
 	//회원정보 수정
 	$("#updateBtn").on("click",function(){
+		alert("클릭!")
 		if(!validate()){ //이메일 유효성 오류 : false, 정상 : true
 			return;
 		}
@@ -790,9 +790,11 @@ $(function(){
 <body>
 
 <!--container-->
-<div class="container">
+<div class="container" style="margin-top: 40px;">
 	<div id="contents">
-		<h2 class="tit">개인정보 수정</h2>
+		<h2 class="tit">
+		<strong>개인정보 수정</strong>
+		</h2>
 
 		<ul class="dot-list mb10">
 			<li>회원님의 정보를 정확히 입력해주세요.</li>

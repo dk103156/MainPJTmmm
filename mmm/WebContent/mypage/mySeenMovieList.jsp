@@ -221,8 +221,6 @@ a {
 		<div class="my-saw-movie mt10 mySeenMovie myMovieStory">
 			<ul class="mySawMovie" id="mySawMovie">
 				<c:forEach var="j" items="${dateTimeList}">
-				<c:forEach var="i" items="${ticketingList}">
-				<c:if test= "${i.dateTimeNo eq j.dateTimeNo}">
 					<script>
 						var cnt = $("#mySeenMovieCnt").html();
 						$("#mySeenMovieCnt").html(parseInt(cnt)+1);
@@ -233,7 +231,7 @@ a {
 						</p>
 						<div class="cont">        
 							<p class="tit">
-								<a href="" title="${i.movieName} 상세보기">${i.movieName}</a>
+								<a href="" title="${j.movieName} 상세보기">${j.movieName}</a>
 							</p>        
 							<div class="theater">        
 								<p>${j.theaterName}</p>            
@@ -244,13 +242,60 @@ a {
 							</div>    
 						</div>
 					</li>
-				</c:if>
-				</c:forEach>
 				</c:forEach>
 			</ul>
 		</div><!--// my-saw-movie -->
 	
-		<nav class="pagination mySeenMovie myMovieStory"></nav><!--// 나의 본영화 -->
+		<div class="pagination row">
+			  		<div class="col-4"></div>
+			  		<div class="col-4">
+					  <ul class="pagination">
+		   				 <!--  <<== 좌측 nav -->
+		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
+		  					    <li class="page-item disabled">
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+   								 </li>
+		  				</c:if>
+		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
+					   		<li class="page-item">
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true" style="background-color: #fee50e; color:#333; border-color: #fee50e;">Previous</a>
+   							</li>
+						</c:if>
+						
+					    <!--  중앙  -->
+						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
+							<c:if test="${ resultPage.currentPage == i }">
+								<!--  현재 page 가르킬경우 : active -->
+							    <li class="page-item active" aria-current="page">
+      								<a class="page-link" href="javascript:Pagination('${ i }')" style="background-color: #fee50e; color:#333; border-color: #fee50e;">${ i }<span class="sr-only">(current)</span></a>
+   								 </li>
+							</c:if>	
+							
+							<c:if test="${ resultPage.currentPage != i}">	
+								<li class="page-item">
+									<a class="page-link" href="javascript:Pagination('${ i }')" style="background-color: #fee50e; color:#333; border-color: #fee50e;">${ i }</a>
+								</li>
+							</c:if>
+						</c:forEach>
+					     <!--  우측 nav==>> -->
+					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
+					    	<li class="page-item disabled">
+					    		<a class="page-link" href="#">Next</a>
+    						</li>
+					      </c:if>
+					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
+					      	    <li class="page-item">
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
+    							</li>
+						 </c:if>	
+					  </ul><!-- end of pagination -->
+					 </div><!-- end of middle col --> 
+					 <div class="col-4"></div>
+					 <form>
+					 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
+					 	<input type="hidden" id="searchCondition" name="searchCondition" value="${search.searchCondition }"/>
+					 </form>
+			  </div><!-- end of ticketingPagination -->
 	
 	</div><!--// contents -->
 </div><!--// container -->
