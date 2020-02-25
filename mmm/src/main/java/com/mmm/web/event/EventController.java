@@ -28,12 +28,14 @@ import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
@@ -477,6 +479,7 @@ public class EventController {
 	
 	
 	//addPartPrev.jsp 응모하기 띄워주는거
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="addPartPrev", method=RequestMethod.GET)
 	public String addPartPrevView(@RequestParam int previewNo, HttpSession session, Model model) throws Exception{
 		
@@ -570,6 +573,7 @@ public class EventController {
 	
 	
 	//getQuizListAd
+	
 	@RequestMapping(value="getQuizListAd")
 	public String getQuizListAd(@ModelAttribute("search") Search search, Model model) throws Exception{
 		System.out.println("/event/getQuizListAd");
@@ -592,7 +596,7 @@ public class EventController {
 		return "forward:/event/getQuizListAd.jsp";
 	}
 	
-
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="getQuizList")
 	public String getQuizList(@ModelAttribute("search") Search search, HttpSession session ,Model model) throws Exception{
 		System.out.println("/event/getQuizList");
@@ -750,52 +754,70 @@ public class EventController {
 	
 	
 	//퀴즈등록
-	@RequestMapping(value="addWinQuiz", method=RequestMethod.POST)
-	public String addWinQuiz(@ModelAttribute("participation") Participation participation, Model model) throws Exception{
+	@RequestMapping(value="addWinQuiz/{quizNo}", method=RequestMethod.GET)
+	public String addWinQuiz(@PathVariable(value = "quizNo")int quizNo,  Model model, HttpSession session) throws Exception{
 		
 		System.out.println("/event/addWinQuiz");
-		System.out.println("quizNo::"+participation.getQuizNo());
-		System.out.println("궁금하다고!!!!!!!!!!!!!"+participation.getUserNo());
+		User user = (User)session.getAttribute("user");
+		int userNo = user.getUserNo();
+		
+		//System.out.println("quizNo::"+participation.getQuizNo());
+		//System.out.println("궁금하다고!!!!!!!!!!!!!"+participation.getUserNo());
+		Participation participation = new Participation();
+		participation.setQuizNo(quizNo);
+		participation.setUserNo(userNo);
 		eventService.addPartQuiz(participation);
+		
 		Map<String, Object> updateMap = new HashMap<String,Object>();
 
 		Point point = new Point();
 		point.setPointStatus("S2");
-		point.setUserNo(participation.getUserNo());
+		point.setUserNo(userNo);
 		point.setPartPoint(5);
-		
-	
 		System.out.println("point>>>>>>>>>"+point);
+
+		paymentService.savePoint(point); //포인트 적립
 		
-		paymentService.savePoint(point);
-		
-		
-		
-		updateMap.put("user", participation.getUserNo());
-		updateMap.put("quizNo", participation.getQuizNo());
-		
-		System.out.println("userService.getUser(participation.getUserNo())"+userService.getUser(participation.getUserNo()));
-		eventService.updateQuizFlag(updateMap);
+//		
+		updateMap.put("user", userNo);
+		updateMap.put("quizNo", quizNo);
+//		
+		eventService.updateQuizFlag(updateMap); //해당 이벤트 참여 플래그 업데이트
+//		
 		
 		model.addAttribute("participation", participation); 
-		model.addAttribute("user",userService.getUser(participation.getUserNo()));
+		model.addAttribute("user", user);
 		
-		return "redirect:/event/getQuizList?userNo="+participation.getUserNo(); 
+		return "redirect:/event/getQuizList?userNo="+userNo; 
 	}
 	
-	@RequestMapping(value="addLoseQuiz", method=RequestMethod.POST)
-	public String addLoseQuiz(@ModelAttribute("participation") Participation participation, Model model) throws Exception{
+	
+	
+	
+	@RequestMapping(value="addLoseQuiz/{quizNo}", method=RequestMethod.GET)
+	public String addLoseQuiz(@PathVariable(value = "quizNo")int quizNo, Model model, HttpSession session) throws Exception{
 		
 		System.out.println("/event/addLoseQuiz");
-		System.out.println("<<<<<<<<<이벤트컨트롤러 participation>>>>>>"+participation);
-		System.out.println("######################quizNo::"+participation.getQuizNo());
-		System.out.println("<<<<<<<<<<<<<<<<getUser>>>>>>>>>>>>>>>>>>>"+userService.getUser(participation.getUserNo()));
-		System.out.println("궁금하다고!!!!!!!!!!!!!"+participation.getUserNo());
+		
+		User user = (User)session.getAttribute("user");
+		int userNo = user.getUserNo();
+		
+		Participation participation = new Participation();
+		participation.setQuizNo(quizNo);
+		participation.setUserNo(userNo);
 		eventService.addPartQuiz(participation);
-		model.addAttribute("participation", participation); 
-		model.addAttribute("user",userService.getUser(participation.getUserNo()));
+		
+		Map<String, Object> updateMap = new HashMap<String,Object>();
+		
+		updateMap.put("user", userNo);
+		updateMap.put("quizNo", quizNo);
 	
-		return "redirect:/event/getQuizList?userNo="+participation.getUserNo(); 
+		eventService.updateQuizFlag(updateMap); //해당 이벤트 참여 플래그 업데이트
+		
+		model.addAttribute("participation", participation); 
+		model.addAttribute("user", user);
+	
+		return "redirect:/event/getQuizList?userNo="+userNo; 
 	}
 
 	@RequestMapping(value="deleteQuizAd", method=RequestMethod.POST)
@@ -951,6 +973,7 @@ public class EventController {
 	
 	
 	//출첵 페이지로 이동
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="addAttendance")
 	public String addAttendance(HttpSession session, Model model) throws Exception {
 	

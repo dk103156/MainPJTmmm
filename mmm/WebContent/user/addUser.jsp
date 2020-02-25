@@ -30,11 +30,6 @@
 <title>회원가입</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
-
-
-  body > div.container{
-            margin-top: 10px;
-        }
  	
   #infoWindow{
 	  white-space: nowrap; 
@@ -133,14 +128,24 @@ $(function(){
 		}
 		
 		if(pw != checkPw) {
-		    alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+		   // alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
+		    Swal.fire({
+				  icon: 'error', //"info,success,warning,error" 중 택1
+				 // title: 'Oops...',
+				  text: '비밀번호가 다릅니다. 다시 확인해 주세요.'
+				})
 		    $("#password2").val("");
 		    $("#password2").focus();
 		    return;
 		}
 		
 		if(name == "") {
-		    alert("이름을 입력해 주세요");
+		    //alert("이름을 입력해 주세요.");
+		    Swal.fire({
+			  icon: 'error', //"info,success,warning,error" 중 택1
+			 // title: 'Oops...',
+			  text: '이름을 입력해 주세요.'
+			})
 		    $("#userName").focus();
 		    return false;
 		}
@@ -150,14 +155,24 @@ $(function(){
 		}
 		
 		if(birth=="") {
-		    alert("생년월일을 입력해 주세요");
+		  //  alert("생년월일을 입력해 주세요");
+		    Swal.fire({
+			  icon: 'error', //"info,success,warning,error" 중 택1
+			 // title: 'Oops...',
+			  text: '생년월일을 입력해 주세요.'
+			})
 		    console.log(birth);
 		    $("#birth").focus();
 		    return false;
 		}
 		
 		if(email=="") {
-		    alert("이메일을 입력해 주세요");
+		   // alert("이메일을 입력해 주세요");
+		    Swal.fire({
+			  icon: 'error', //"info,success,warning,error" 중 택1
+			 // title: 'Oops...',
+			  text: '이메일을 입력해 주세요.'
+			})
 		    $("#email").focus();
 		    return false;
 		}
@@ -168,7 +183,12 @@ $(function(){
 		}
 		
 		if(!(phone.length==11||phone.length==10)) {
-		    alert("전화번호를 확인해주세요.");
+		   // alert("전화번호를 확인해주세요.");
+		    Swal.fire({
+			  icon: 'error', //"info,success,warning,error" 중 택1
+			 // title: 'Oops...',
+			  text: '전화번호를 확인해주세요.'
+			})
 		    $("#phone").focus();
 		    return false;
 		}
@@ -178,27 +198,37 @@ $(function(){
 		}
 		
 		if(!isChk){
-			alert("개인정보 수집동의 체크해주세요.")
+			//alert("개인정보 수집동의 체크해주세요.")
+			Swal.fire({
+			  icon: 'error', //"info,success,warning,error" 중 택1
+			 // title: 'Oops...',
+			  text: '개인정보 수집동의 체크해주세요.'
+			})
 			return;
 		}
 		
 		
-		swal({
-		    title: "가입성공",
-		    text: "가입을 축하합니다",
-		    icon: "success" //"info,success,warning,error" 중 택1
-		});
-		//alert("가입을 축하합니다.!!!!");
-		$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
+		Swal.fire({
+	           icon: 'success', //"info,success,warning,error" 중 택1
+	          title: '가입 완료',
+	      }).then((result) => {   
+	 		//alert("가입을 축하합니다.!!!!");
+			$("#addUser").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		
-		
+	      });
+
 	}
 
 	function check(re, what, message) {
     	if(re.test(what)) {
         return true;
     	}
-    	alert(message);
+    	Swal.fire({
+		  icon: 'error', //"info,success,warning,error" 중 택1
+		 // title: 'Oops...',
+		  text: message
+		})
+   		//alert(message);
 	}	
 	
 	// 아이디 중복체크(1 = 중복 / 0 != 중복)
@@ -267,8 +297,11 @@ $(function(){
 					
 					if (data == 0) {
 							// 0 : 이메일이 중복되는 문구
-							$("#confirmNum1").text("등록된 이메일입니다 :p");
-							$("#confirmNum1").css("color", "red");
+						Swal.fire({
+						  icon: 'error', //"info,success,warning,error" 중 택1
+						 // title: 'Oops...',
+						  text: '중복된 이메일입니다.'
+						})
 							$("#addUserBtn").attr("disabled", true);
 					}else{
 						$("#confirmNum1").text("");
@@ -319,12 +352,12 @@ $(function(){
    	<!-- ToolBar End /////////////////////////////////////-->
    	
 <!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container" style="width: 600px;">
+	<div class="container" style=" margin-top: 50px; width: 600px;">
 	
 		<h1 class="bg-default text-center"style="margin-top: 10px; background-color:#fee50e">회 원 가 입</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form>
+		<form id="addUser">
 			<div class="form-group row" style="text-align: center;">
 			    <label for="userId" class="col-sm-3 col-form-label">아이디</label>
 			    <div class="col-sm-9">
@@ -529,7 +562,7 @@ $(function(){
 			    <label class="form-check-label" for="agreeCheck">개인정보수집 및 이용 동의</label>
 			</div>	
 			<div class="form-group row">
-				<div class="col-sm-12 text-center">
+				<div class="col-sm-12 text-center" style="margin-bottom: 20px;">
 					<button type="button" id="addUserBtn" class="button large purple" >가&nbsp;입</button>
       				<a class="button large" href="#" role="button">취&nbsp;소</a>
     			</div>
@@ -540,6 +573,11 @@ $(function(){
 
 	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
+	
+<!-- Header Start /////////////////////////////////////-->
+<jsp:include page="/layout/footer.jsp" />
+<!-- Header End /////////////////////////////////////-->		
+			
 	
 	<div class="modal fade bd-example-modal-xl" id="outerMotdal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">

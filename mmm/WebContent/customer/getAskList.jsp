@@ -69,14 +69,9 @@
 		font-weight: bold;
 		}
 		
-	.button {
+	.label {
 	    display: inline-block;
-	    height: 36px;
-	    margin: 0;
-	    padding: 0 15px;
 	    text-align: center;
-	    line-height: 34px;
-	    color: #503396;
 	    font-weight: 400;
 	    border-radius: 4px;
 	    text-decoration: none;
@@ -84,10 +79,31 @@
 	    vertical-align: middle;
 	    background-color: #fff;
 	    cursor: pointer;
+	    font-size: 90%;
 	}
 	
-	.table{
-		font-size: 14px;
+		.table{
+			font-size: 13px;
+			float: none;
+			margin: 0 auto;
+		}
+	
+		.page-item .active {
+	    z-index: 3;
+	    color: #fff;
+	    background-color: #feca0e;
+	    border-color: #feca0e;
+	}
+
+	.page-link {
+	    position: relative;
+	    display: block;
+	    padding: .5rem .75rem;
+	    margin-left: -1px;
+	    line-height: 1.25;
+	    color: #414548;
+	    background-color: #fff;
+	    border: 1px solid #dee2e6;
 	}
 </style>
 </head>
@@ -125,15 +141,17 @@
 
 <br>
 <div class="categoryBtn">
+	<div class="row">
+	
 	<div><p class="text-dark" style="font-size:15px;">
 	전체 <i style='color:#5da3d9'> ${resultPage.totalCount} </i>건 </p>
 	</div>
-	
-      <table class="table table-hover table-sm" >
+    
+      <table class="table table-hover table-sm text-center col-10" >
         <thead class="table-active">
           <tr>
-            <th  scope="col"align="center">구분</th>
-            <th  scope="col" align="left" >질문</th>
+            <th  scope="col" align="center" style="width:100px; text-align:center;" class="align-middle">구분</th>
+            <th  scope="col" align="left" class="align-middle" >질문</th>
           </tr>
         </thead>
 		<tbody class="getTranInfo">
@@ -142,7 +160,7 @@
 			<c:set var="i" value="${ i+1 }"/>
 			<tr>
 			 
-			  <td scope="col" align="left" >
+			  <td scope="col" class="align-middle" >
 			  <c:if test="${ask.category==1}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">예매/매표</label></div></c:if>
 			  <c:if test="${ask.category==2}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">스토어</label></div></c:if>
 			  <c:if test="${ask.category==3}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">결제</label></div></c:if>
@@ -152,7 +170,7 @@
 			  
 	  	    	<input type="hidden" id="articleNo" value="${ask.articleNo}"/>
 			  </td>
-			  <td scope="col" align="left" id="" >  ${ask.articleTitle} 
+			  <td scope="col" class="align-middle" id="" >  ${ask.articleTitle} 
 			  </td>
 			</tr>
 			<tr id="${ask.articleNo}">
@@ -160,6 +178,7 @@
           </c:forEach>
         </tbody>
       </table>
+      </div>
 			  <div class="askDetail"></div>
       </div>
 
@@ -355,7 +374,7 @@
 				
 				Element = "<div class='col-4'></div>"
 		  		Element +="<div class='col-4'>"
-				Element +="<ul class='pagination'>"
+				Element +="<ul class='pagination justify-content-center'>"
 	   			if(data.resultPage.currentPage <= data.resultPage.pageUnit){
 	   				Element +="<li class='page-item disabled'>"
 	   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>"
@@ -434,7 +453,7 @@
 	}//end of function - ajaxPromise
 </script>
 
-<%-- <jsp:include page="/layout/footer.jsp"></jsp:include> --%>
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 
 </html>

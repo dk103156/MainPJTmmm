@@ -38,14 +38,14 @@
 	
 	function checkAnswer(qBtn){
 		
-		var quizNo =qBtn.parent().children('input[name="quizNo"]').val();
-		var userNo =qBtn.parent().children('input[name="userNo"]').val();
+ 		var quizNo =qBtn.parent().children('input[name="quizNo"]').val();
+ 		var userNo =qBtn.parent().children('input[name="userNo"]').val();
 		var choice = qBtn.parent().parent().find('input[name="option"]:checked').val();
-		console.log($("input[name='quizNo']").val(quizNo));
+// 		console.log($("input[name='quizNo']").val(quizNo));
 		
-		console.log("quizNo>>"+quizNo);
-		console.log("userNo>>"+userNo);
-		console.log("choice>>"+choice);
+ 		console.log("quizNo>>"+quizNo);
+ 		console.log("userNo>>"+userNo);
+ 		console.log("choice>>"+choice);
 
 		$.ajax(
 				{
@@ -82,26 +82,37 @@
 				
 				if(JSONData.result==0){
 					
-					Swal.fire({
-						text: '정답입니다',
-						icon: 'success',
-						confirmButtonText: "confirm"
-					}).then((confirm)=>{
-						$("form").attr("method","POST").attr("action", "/event/addWinQuiz").submit();
-					})
+// 					Swal.fire({
+// 						text: '정답입니다',
+// 						icon: 'success',
+// 						confirmButtonText: "confirm"
+// 					}).then((confirm)=>{
+						alert('정답')
+					//	$("form").attr("method","POST").attr("action", "/event/addWinQuiz").submit();
+					//	console.log(quizNo);
+						var quizNo2 = qBtn.parent().children('input[name="quizNo"]').val();
+					//	console.log(quizNo2);
+						//var quizNo = $(this).parent().first();
+						//alert(quizNo);
+						//console.log(quizNo)
+						self.location="/event/addWinQuiz/"+quizNo2;
+// 					})
 					
 					
 				}else if(JSONData.result==1){
 					
 					
-					Swal.fire({ 
-						text: '정답이 아닙니다.',
-						icon: 'error',
-						confirmButtonText: "confirm"
-					}).then((confirm)=>{
-						$("form").attr("method","POST").attr("action", "/event/addLoseQuiz").submit();
-					})
-			
+// 					Swal.fire({ 
+// 						text: '정답이 아닙니다.',
+// 						icon: 'error',
+// 						confirmButtonText: "confirm"
+// 					}).then((confirm)=>{
+						alert('오답')
+						//$("form").attr("method","POST").attr("action", "/event/addLoseQuiz").submit();
+// 					})
+						var quizNo2 = qBtn.parent().children('input[name="quizNo"]').val();
+						console.log(quizNo2)
+						self.location="/event/addLoseQuiz/"+quizNo2;
 				}
 			
 		}
@@ -139,97 +150,96 @@
 
 <style>
 
-		a.crtPage{
-		background-color: black;
+		a.crtPage {
+			background-color: black;
 		}
 
-   		#header{ 
-      	width:750px;
-      	height:auto;
-      	padding: 20px;
-      	background-color:white;
-        margin: 10px auto;
-        border: 1px solid black;
-        color:  black;
+   		#header { 
+	      	width:750px;
+	      	height:auto;
+	      	padding: 20px;
+	      	background-color:white;
+	        margin: 10px auto;
+			border-top:1px solid darkgray;
+			border-bottom:1px solid darkgray;
+	        color:  black;
         }
         
-       .qLogin ul{
-   		 position: absolute;
-	  	 right: 18px;
-	   	 top: 11px;
+       .qLogin ul { 
+	   		 position: absolute;
+		  	 right: 18px;
+		   	 top: 11px;
 		}
 		
 		.qLogin ul li {
-	  	  float: left;
-	 	  padding-left: 18px;  
+		  	  float: left;
+		 	  padding-left: 18px;  
          }
          
-		.qLogin ul li P{
-	 	 padding: 15px 40px 22px;
-	     background: #fff;
-	     text-align: center;
-	     line-height: 19px;
-	     font-size: 16px;
+		.qLogin ul li P {
+		 	 padding: 15px 40px 22px;
+		     background: #fff;
+		     text-align: center;
+		     line-height: 19px;
+		     font-size: 16px;
 		}
 		
-		.qLogin ul li p span{
-	    display: block;
-    	padding-bottom: 11px;
-    	font-weight: 650;
-    	 border: 1px solid #bcbcbc;
+		.qLogin ul li p span {
+		    display: block;
+	    	padding-bottom: 11px;
+	    	font-weight: 650;
 		}
    
-        ul, ol{
-        list-style: none;
+        ul, ol {
+       		 list-style: none;
         } 
         
-         .qLogin{
-      	 width:808px;
-     	 height: 119px;
-     	 background:#fee00e;
-         margin: 10px auto;
-         position: relative;
-         border: 1px solid #bcbcbc;
+         .qLogin {
+	      	 width:808px;
+	     	 height: 119px;
+	         margin: 10px auto;
+	         position: relative;
 	   }
     
        .qLogin .qltx{
-        padding-top: 30px;
-	    padding-left: 45px;
-	    pqeeint-bottom: 28px;
-	    font-size: 18px;
-	    color: black;
-	    line-height: 20px;
-	    font-weight: 650;
-	    background-color: #fee00e;
+	        padding-top: 30px;
+		    padding-left: 45px;
+		    pqeeint-bottom: 28px;
+		    font-size: 18px;
+		    color: black;
+		    line-height: 20px;
+		    font-weight: 650;
 	  }
   
 		  
 		button.quiz.btn{ 
-		width:70px;
-	    background-color: #cecfc6;
-	    border: none;
-	    color:#000000;
-	    padding: 10px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 16px !important;
-	    margin: 6px;
-	    cursor: pointer;
-		border-radius:40px;
+			background-color: #fee50e!important;
+	   		color: #212529;
+	    	border-color: #fcfaf5;
+	    	font-size: 13px;
 		}
 		
-		.btn:hover {
-	    background-color: #fee50e;
+		button.quiz.btn:hover {
+		     color: #f8f9fa;
+		     background-color: #e0a800;
+		     border-color: #040404;
 		}
+		
+		
+		
 		
 		.page-item.active .page-link {
-	    z-index: 1;
-	    color: #4e4c4c;
-	    background-color: #fee00e;
-	    border-color: #d6cece;
+		    z-index: 1;
+		    color: #4e4c4c;
+		    background-color: #fee00e;
+		    border-color: #d6cece;
+		 }
+
 </style>
+
 </head>
+
+
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
@@ -245,14 +255,12 @@
 		<span>${user.userId}님의 응모내역</span>
 		<br>
 		</p>
-		<ul>
 		
-			<li><p>참여수<br>${totalCount}</p></li>
-			<li><p>정답수<br>${winCount}</p></li>
-			<li><p>정답률<br><fmt:formatNumber value="${winRate}" pattern=".00" /></p></li>
-			<li><p>남은퀴즈<br>${leftQuiz}</p></li>
-		</ul>
-		  
+		<p style="margin-left:3em;">
+		       참여수 ${totalCount} | 
+			정답수 ${winCount} | 정답률<fmt:formatNumber value="${winRate}" pattern=".00" />% | 
+			남은퀴즈 ${leftQuiz}
+		</p>
 		
 	</div>		
 	<form>
@@ -286,7 +294,7 @@
 		<li><input type="radio"  name="option" value="3" /><label for="quiz_2020010031_3">${quiz.optionThird}</label></li>
 		<li><input type="radio"  name="option" value="4" /><label for="quiz_2020010031_4">${quiz.optionFourth}</label></li>
 		</ul>
-
+		      
 		<div class="text-center">
 		<input type="hidden" name="quizNo" value="${quiz.quizNo}"/> 
 		<input type="hidden" name="userNo" value="${user.userNo}"/> 
@@ -317,7 +325,7 @@
 		  				</c:if>
 		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i>   							</li>
+					   		 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>					</li>
 						</c:if>
 						
 					    <!--  중앙  -->

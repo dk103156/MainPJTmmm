@@ -547,7 +547,7 @@ cursor: pointer;
 									<span class="screenDate">${screenDate}</span>
 									<span class="screenDay">(${screenDay})</span>
 									<span class="screenTime">${screenTime}</span>
-									<span class="endTime">~</span>
+									<!-- <span class="endTime">~</span> -->
 								</div>
 						  </div>
 		              </div>
@@ -832,7 +832,7 @@ cursor: pointer;
 <!-- 하단 진행 바  -->     
 	
 	
-	
+	<jsp:include page="/layout/footer.jsp" />	 
 
 
 <!-- 이벤트  -->

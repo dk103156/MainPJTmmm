@@ -95,9 +95,9 @@
  	<!-- SQL : INSERT -->
 	<insert id="addUser" parameterType="User">
 	INSERT
-	INTO users(user_no , user_id , user_name , password , role, birth , gender , phone , email , addr , like_genre1 , 
+	INTO users(user_no , user_id , user_name , password , role, birth , gender , phone , email , like_genre1 , 
 				like_genre2 , like_genre3 , like_theater1 , like_theater2 , like_theater3 , user_date, identity)
-	VALUES	( seq_users_user_no.NEXTVAL , #{userId} , #{userName:VARCHAR} , #{password} ,#{role:VARCHAR}, #{birth} , #{gender} , #{phone} , #{email:VARCHAR} ,  #{addr:VARCHAR} ,
+	VALUES	( seq_users_user_no.NEXTVAL , #{userId} , #{userName:VARCHAR} , #{password} ,#{role:VARCHAR}, #{birth} , #{gender} , #{phone} , #{email:VARCHAR} ,
 			  #{likeGenre1:VARCHAR} , #{likeGenre2:VARCHAR} , #{likeGenre3:VARCHAR} , #{likeTheater1:VARCHAR} , #{likeTheater2:VARCHAR} ,
 			  #{likeTheater3:VARCHAR} , SYSTIMESTAMP, #{identity} )
 	</insert>
@@ -105,9 +105,9 @@
 	<!-- SQL : INSERT -->
 	<insert id="extraAddUser" parameterType="User">
 	INSERT
-	INTO users(user_no , user_id , user_name , password, birth , gender , phone , email , addr , like_genre1 , 
+	INTO users(user_no , user_id , user_name , password, birth , gender , phone , email , like_genre1 , 
 				like_genre2 , like_genre3 , like_theater1 , like_theater2 , like_theater3 , user_date, identity)
-	VALUES	( seq_users_user_no.NEXTVAL , #{userId} , #{userName:VARCHAR} , #{password}, #{birth} , #{gender} , #{phone} , #{email:VARCHAR} ,  #{addr:VARCHAR} ,
+	VALUES	( seq_users_user_no.NEXTVAL , #{userId} , #{userName:VARCHAR} , #{password}, #{birth} , #{gender} , #{phone} , #{email:VARCHAR} ,
 			  #{likeGenre1:VARCHAR} , #{likeGenre2:VARCHAR} , #{likeGenre3:VARCHAR} , #{likeTheater1:VARCHAR} , #{likeTheater2:VARCHAR} ,
 			  #{likeTheater3:VARCHAR} , SYSTIMESTAMP, #{identity} )
 	</insert>

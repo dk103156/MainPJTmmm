@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mmm.service.ticketing.TicketingService;
-import com.mmm.common.CheckAuth;
 import com.mmm.common.JavaUtil;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
@@ -125,7 +124,7 @@ public class TicketingController {
 		
 		return "forward:/ticketing/addCompareTicketing.jsp";
 	}
-	@CheckAuth(role="user,admin")
+	
 	@RequestMapping(value="/addSeatSelect", method=RequestMethod.POST)
 	public String addSeatSelect(@RequestParam Map<String, Object> map, Model model) throws Exception {
 		System.out.println(map);

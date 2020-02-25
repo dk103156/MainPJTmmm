@@ -185,9 +185,9 @@ $(function(){
 <body>
 <body>
 <!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container" style="width: 600px;">
+	<div class="container" style=" margin-top: 50px; width: 600px;">
 	
-		<h1 class="bg-default text-center"style="margin-top: 10px; background-color:#fee50e">회 원 가 입</h1>
+		<h1 class="bg-default text-center"style="margin-top: 10px; background-color:#fee50e">추가 정보 입력</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form>
