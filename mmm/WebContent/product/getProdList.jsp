@@ -198,9 +198,10 @@
 				       	<input type="hidden" value = "${product.prodNo}">
 				       </div>
 				       	<div class="prodName col-12" id="getProdListProdName"><h4><span>${product.prodName}</span></h4>
-				       	<div class="prodPrice col-10" id="getProdListProdPrice"><h4>${product.prodPrice}원</h4>
-				       	</div>	
-      				</div>
+					       	<div class="prodPrice col-10" id="getProdListProdPrice"><h5>${product.prodPrice} 원</h5>
+					       	</div>	
+      					</div>
+      					<hr>
       				</div>
     		
     	
@@ -273,6 +274,5 @@
 			}
 		});
 	  </script>
-		<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

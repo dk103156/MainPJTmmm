@@ -40,32 +40,6 @@
 
 <script type="text/javascript">
 
-	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	$( function() {
-		$( "#mov" ).on("click" , function() {
-			self.location = "/product/getVoucherList";
-		});
-	});
-	
-	
-	
-	$( function() {
-		$( "#voucher" ).on("click" , function() {
-			self.location = "/product/getVoucherList";
-			});
-		});
-	 
-	
-	$( function() {
-		$( "#snack" ).on("click" , function() {
-			self.location = "/product/getSnackProductList"
-		});
-	});
-	
-	
-	
-	
-	<!--  /////////////////////////////////////////////////// -->
 	
 	$( function() {
 		$( "#addProduct" ).on("click" , function() {
@@ -103,30 +77,7 @@
 				</div>
 				
 				
-				
-				
-				
-			<!--<c:if test="${sessionScope.user.role == 'user'}">
-			
-				<div class="col-4" style="text-align:center;">
-				</div>
-				
-				
-				<div class="col-1" style="text-align:center;">
-					<h6 id="addProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>등록</strong></h6>
-				</div>
-				
-				<div class="col-1" style="text-align:center;">
-					<h6 id="updateProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>수정</strong></h6>
-				</div>
-				
-				<div class="col-1" style="text-align:center;">
-					<h6 id="deleteProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>삭제</strong></h6>
-				</div>
-				
-			</c:if>	
-				
-			-->	
+			<c:if test="${sessionScope.user.role == 'admin'}">
 			
 				<div class="col-4" style="text-align:center;">
 				</div>
@@ -143,6 +94,11 @@
 				<div class="col-1" style="text-align:center;">
 					<h6 id="deleteProduct"  style="color: #242424; margin: 15px 0px;"><strong>삭제</strong></h6>
 				</div>
+				
+			</c:if>	
+				
+			
+				
 			
 		</div>	
 </body>

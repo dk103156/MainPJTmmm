@@ -5,7 +5,7 @@ DROP SEQUENCE seq_users_user_no;
 
 CREATE SEQUENCE seq_users_user_no INCREMENT BY 1 START WITH 10000 MAXVALUE 99999
 NOCACHE;
-
+ 
 CREATE TABLE users ( 
 	user_no			 	NUMERIC(5)		 	NOT NULL, 
 	user_id 		 	VARCHAR2(20)	 	UNIQUE, 

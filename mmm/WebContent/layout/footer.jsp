@@ -10,8 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
+<!--   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ -->  
   <!-- Bootstrap Extended Color -->
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors.css" />
   <link rel="stylesheet" href="https://bootstrap-colors-extended.herokuapp.com/bootstrap-colors-themes.css" />
@@ -26,8 +26,14 @@
 body {
 	font-family: 'Noto Sans KR', sans-serif !important;
 }
- 
-footer {
+
+#footer {
+    position: relative;
+    min-width: 1100px;
+    width: 100%;
+    height: 184px;
+    margin: 0;
+    padding: 0;
 	background-color:  #333;
 }
 
@@ -35,7 +41,7 @@ footer {
     width: 109px;
     height: 107px;
     border-radius: 50%;
-    margin-top: 32px;
+    margin-top: 40px;
     margin-left: 30px;
 }
 
@@ -133,7 +139,7 @@ $(function(){
 // 	$("#btn").on('click',function(){	
 // 		self.location="/user/login";
 // 	})
-	
+	 
 	
 	//======================"로그인" Event 연결==========
 		
@@ -221,22 +227,24 @@ $(function(){
 </head>
 <body>
 
-<footer>
+<footer id="footer" style="
+    top: 25px;
+">
 	    <div class="foo_div">
 	    	<a href="/main" title="MMM"><img src="../resources/image/logo/logo.png"></a>
 	    </div>
-	    <div class="foo_div1" style="margin-right: 70px;">
+	    <div class="foo_div1" style="margin-right: 88px;">
 		    <div class="3Sa_Logo">	    
 		    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
-		    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
-		    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a>
+		    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
+		    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a>
 		    </div>	
 		    <div class="copyright">    
 		    	<span>(주) MMM</span> <span> | </span>
 		    	<span>대표 :  GETSET 조</span> <span> | </span>
-		    	<span>사업자 등록번호 : 000-00-00000</span> <span> | </span>
+		    	<span>사업자 등록번호 : 000-00-00000</span>
 		    	<p>주소 : 대한민국 어디엔가 사는!</p>
-		    	<p style="margin-bottom: auto; padding-left: 138px;">뭅 ? 뭅 ! 뭅</p>
+		    	<p style="padding-left: 138px;">뭅 ? 뭅 ! 뭅</p>
 	    	</div>
 	    </div>
 </footer>

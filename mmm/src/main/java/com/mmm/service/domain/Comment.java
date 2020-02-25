@@ -9,6 +9,7 @@ public class Comment {
 	private int userNo;
 	private int supCommentNo;
 	private int movieNo;
+	private String movieTitle;
 	private int articleNo;
 	private String commentContent;
 	private String commentDate;
@@ -53,6 +54,13 @@ public class Comment {
 	}
 	public void setArticleNo(int articleNo) {
 		this.articleNo = articleNo;
+	}
+	
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 	public String getUserId() {
 		return userId;
@@ -106,6 +114,8 @@ public class Comment {
 		builder.append(supCommentNo);
 		builder.append(", movieNo=");
 		builder.append(movieNo);
+		builder.append(", movieTitle=");
+		builder.append(movieTitle);
 		builder.append(", articleNo=");
 		builder.append(articleNo);
 		builder.append(", commentContent=");

@@ -59,9 +59,16 @@
 
 <div class="container mb-3 border-bottom p-3">
 	<div class="row mt-5 mb-5">
+	<c:if test="${payment.payObjectFlag==0 || payment.payObjectFlag==2 }">
 		<div class="col-12 text-center bg-dark-cs p-3 mb-0">
 			<span><h2>예매가 완료 되었습니다.</h2></span>
 		</div>
+	</c:if>
+	<c:if test="${payment.payObjectFlag==1 }">
+		<div class="col-12 text-center bg-dark-cs p-3 mb-0">
+			<span><h2>구매가 완료 되었습니다.</h2></span>
+		</div>
+	</c:if>	
 	</div><!-- end of row -->
 	<c:if test="${payment.payObjectFlag==0 || payment.payObjectFlag==2 }">
 	<div class="row">
