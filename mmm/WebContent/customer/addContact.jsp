@@ -176,17 +176,19 @@ $(document).ready(function() {
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 
-	<div class="page-header text-dark">
-	       <h3><i class="fas fa-comments"></i>고객센터</h3>
+	<div class="page-header text-dark mt-3">
+	       <h3>고객센터</h3>
 	       <hr>
 	    </div>
-	  <div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
+	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-	    <button type="button" name="ask" class="btn btn-outline-secondary">자주찾는질문</button>
-	    <button type="button" name="contact" class="btn btn-outline-secondary active">일대일문의</button>
-	    <button type="button" name="notice" class="btn btn-outline-secondary ">공지사항</button>
+		<button type="button" name="ask" class="btn"><i class="fas fa-question-circle">자주찾는질문</i></button>
+	    <button type="button" name="contact" class="btn"><i class="fas fa-comment">일대일문의</i></button>
+	    <button type="button" name="notice" class="btn"><i class="fas fa-info-circle">공지사항</i></button>
 	  </div>
 	</div>
+	<br>
+<br>
 
 </div>
 	  

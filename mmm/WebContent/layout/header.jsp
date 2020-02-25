@@ -29,8 +29,13 @@
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
   
     <!-- summer notes -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+
+	<!-- carousel -->
+  <script src="../resources/javascript/owl.carousel.min.js"></script>
+  <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../resources/css/owl.theme.default.min.css">
   
   <style>
   body {
@@ -104,7 +109,7 @@
 <body>
 
 	<div class="container-fluid">
-		<div class="row navBar">
+		<div class="row">
 			<ul class="col-12 header">                
 					<li style="text-align: right; padding-top: 7px; padding-bottom: 7px; padding-right: 5px;"> 
 						<c:choose> 
