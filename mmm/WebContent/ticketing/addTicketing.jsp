@@ -461,7 +461,7 @@ $(function(){
      		<div class="resetSelection" style="clear:both; float:right; height:30px"></div>
      	</div>
      </div>
-
+     
         <!-- 메인 컨텐츠  -->
 
         <div class="steps">

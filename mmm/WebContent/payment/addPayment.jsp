@@ -38,9 +38,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?aftr">
-	    
-    <link rel="stylesheet" href="/resources/css/payment.css?aftr">	
+    <link rel="stylesheet" href="/resources/css/common.css?atddr">
+	
+<!-- 	Payment Css -->
+    <link rel="stylesheet" href="/resources/css/payment.css?afddr">	
+    
+    <!--     movie css -->
+    <link rel="stylesheet" href="/resources/css/movieIcon.css?aefdr">
 	
 	
 	
@@ -49,13 +53,24 @@
 /* 	div 안에 element들 가운데 정렬 */
 	.row div {
 		float: none;
-		margin: 0 auto;
+/* 		margin: 0 auto; */
 	}
 	
 /* 	하단바 마이너스 모양 흰색으로.. */
 	.whiteSym{
 		color : white;
 	}
+	.col-10{
+        margin-bottom : 200px;
+	}
+	.table{
+		table-layout:fixed;
+		word-break:break-all;
+	}
+	.head-cs{
+		width: 30%;
+	}
+
     </style>
     
 	<script type="text/javascript">
@@ -490,7 +505,7 @@
 	    <div class="container">
 	    
 	    
-	      <div class="col-lg-10" style="margin: 0px 0px 200px 0px">
+	      <div class="col-10 div-center-cs" >
 	   		<div>
 	   		  <h3>결제하기</h3>
 	   		  <div class="row border-bottom mb-2"></div>
@@ -509,7 +524,7 @@
 			   		<c:set var="i" value="${i+1}"/>
 				  </div>
 				  <div class="card-body">
-				     <div class="row mb-3 ">
+				     <div class="row mb-3 align-items-center">
 					     <div class="col-md-4 text-center">
 					      <c:if test="${movie.poster != null }">
 				        	<img id='poster' height="200" width="144" src="${movie.poster}"/>
@@ -520,28 +535,43 @@
 				         </div>
 				         <div class="col-md-6 m-3 ">
 				           <div class="border-bottom p-2">
-				              <span class="col-md-4"><h5 class="d-inline">${movie.movieTitle}</h5></span> 
-				              <span class="col-md-2">${movie.movieRating}</span></div>
-				           <table class="table table-borderless table-sm m-2">
+				              <span class="col-md-4"><h5 class="d-inline font-bolder-cs">${movie.movieTitle}</h5></span> 
+				              <span class="col-md-2">
+				              		<c:choose>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='전체관람가'}">
+											<em class = "ico_movie allrating">${movie.movieRating}</em>
+										</c:when>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='12세이상관람가'}">
+											<em class = "ico_movie rating12">${movie.movieRating}</em>
+										</c:when>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='15세이상관람가'}">
+											<em class = "ico_movie rating15">${movie.movieRating}</em>
+										</c:when>
+										<c:when test="${movie.movieRating ne null && movie.movieRating=='청소년관람불가'}">
+											<em class = "ico_movie rating19">${movie.movieRating}</em>
+										</c:when>
+									</c:choose>
+				              </span></div>
+				          
+				           <table class="table table-borderless table-sm m-2 ">
 							  <tbody>
 							    <tr>
-							      <th scope="row">극장</th>
-							      <td>${ticketing.theaterName}</td>
+							      <th class="head-cs">극장</th>
+							      <td scope="col">${ticketing.theaterName}</td>
 							    </tr>
 							    <tr>
-							    
 							    
 	<!-- 						    규비쓰꺼 날 짜 형식 변환 가져다 쓰기  -->
-							      <th scope="row">상영일시</th>
-							      <td>${ticketing.screenTime}</td>
+							      <th class="head-cs">상영일시</th>
+							      <td scope="col">${ticketing.screenTime}</td>
 							    </tr>
 							    <tr>
-							      <th scope="row">관객 정보</th>
-							      <td>${ticketing.headCount} / ${ticketing.audienceType}</td>
+							      <th class="head-cs">관객 정보</th>
+							      <td scope="col">${ticketing.headCount} <br> ${ticketing.audienceType}</td>
 							    </tr>
 							    <tr>
-							      <th scope="row">좌석 정보</th>
-							      <td> ${ticketing.seatNo}/ ${ticketing.seatType}</td>
+							      <th class="head-cs">좌석 정보</th>
+							      <td scope="col"> ${ticketing.seatNo} <br> ${ticketing.seatType}</td>
 							    </tr>
 							  </tbody>
 							</table>
@@ -574,11 +604,11 @@
 						  <table class="table table-hover text-center">
 							  <thead class="thead">
 							    <tr >
-							      <th scope="col">상품 이미지</th>
-							      <th scope="col">상품명</th>
-							      <th scope="col">상품 가격</th>
-							      <th scope="col">수량</th>
-							      <th scope="col">총 가격</th>
+							      <th scope="col" class="align-middle">상품 이미지</th>
+							      <th scope="col" class="align-middle">상품명</th>
+							      <th scope="col" class="align-middle">상품 가격</th>
+							      <th scope="col" class="align-middle">수량</th>
+							      <th scope="col" class="align-middle">총 가격</th>
 							    </tr>
 							  </thead>
 							  <tbody>
@@ -587,10 +617,10 @@
 						  	<c:forEach var="prod" items="${prodList}">
 						      <tr >
 						        <th scope="col"><img src="/resources/image/${prod.prodImage}" width="70px" height="70px" /></th>
-						        <td scope="col">${prod.prodName}</td>
-						        <td scope="col"  class="text-right">${prod.prodPrice}원</td>
-						        <td scope="col">${prod.quantity}개</td>
-						        <td scope="col" class="text-right font-weight-bold">${prod.quantity * prod.prodPrice}원</td>
+						        <td scope="col" class="align-middle">${prod.prodName}</td>
+						        <td scope="col"  class="text-right align-middle" >${prod.prodPrice}원</td>
+						        <td scope="col" class="align-middle">${prod.quantity}개</td>
+						        <td scope="col" class="text-right font-weight-bold align-middle">${prod.quantity * prod.prodPrice}원</td>
 						      </tr>					  	
 					       </c:forEach> 
 				       
@@ -655,51 +685,59 @@
 			
 <!-- 			하단 진행바 -->
 			<div class="fixed-bottom p-3 bg-dark text-center ">
-	   		  <div class="row col-auto align-items-center">
+	   		  <div class="row col-auto align-items-center div-center-cs">
 	   		  
 <!-- 	    총결제금액 -->
-	   		    <div class="card col-md-3 mb-2 p-0">
-	   		      <h6 class="p-2 border-bottom border-warning"> 총 결제금액 </h6>
-	   		      
+	   		    <div class="card col-md-3 mb-2 p-0 div-center-cs">
+	   		      <div class ="card-header bg-yellow-cs">
+	   		        <h6 class="p-0 m-0 font-bolder-cs" > 총 결제금액 </h6>
+	   		      </div>  
 <!-- 	   		      얘네 분기문 처리 해줘야... -->
-				  <div class="text-right border-bottom border-dark">
+				  <div class="card-body text-right p-2 ">
 	   		        <p class="small m-1">(+) 예매 금액 : <span name="barTicketingPrice"></span>원<p>
 	   		        <p class="small m-1">(+) 구매 금액 : <span name="barPurchasePrice"></span>원<p>
 				  </div>
-				  <div class="p-2 mb-2">
+				  <div class="card-footer p-2">
 	   		        <h6 >(+) 총 결제금액 : <span name="barTotalPrice"></span>원<h6>
 				  </div>
 	   		    </div>
 	   		    
 <!-- 	     마이너스  -->
-	   		    <div>
+	   		    <div class="col-1">
 	   		      <i class="fas fa-minus-circle whiteSym"></i>
 	   		    </div>
 	   		    
 <!-- 	      총할인금액 -->
-	   		    <div class="card col-md-3 mb-2 p-0">
-	   		      <h6 class="p-2 border-bottom border-warning"> 총 할인금액 </h6>
+	   		    <div class="card col-md-3 mb-2 p-0 div-center-cs">
+	   		     <div class ="card-header bg-yellow-cs">
+	   		        <h6 class="p-0 m-0 font-bolder-cs"> 총 할인금액 </h6>
+	   		      </div>  
 	   		      
-	   		      <div class="text-right border-bottom border-dark">
+	   		      <div class="card-body text-right p-2 ">
 	   		        <p class="small m-1">(-) 상품권 금액 : <span id="barVoucherPrice"></span>원<p>
 	   		        <p class="small m-1">(-) 사용 포인트 : <span id="barPartPoint"></span>원<p>
 				  </div>
-				  <div class="p-2 mb-2">
+				  <div class="card-footer p-2">
 	   		        <h6 >(-) 총 할인금액 : <span id="barTotalDiscount"></span>원</h6>
 				  </div>
 	   		    </div>
 	   		    
 <!-- 	   	 이퀄 -->
-	   		    <div>
+	   		    <div class="col-1">
 	   		      <i class="fas fa-equals whiteSym"></i>
 	   		    </div>
 	   		    
 <!-- 	     최종결제금액 -->
-	   		    <div class="card col-md-3 mb-2 pb-4 pt-1">
-	   		      <h6 class="p-2 border-bottom border-warning"> 최종결제금액 </h6>
-	   		      <h5> <span id="barCash"></span>원 </h5>
-	   		      <input type="hidden" id="impPrice">
-	   		      <button type="button" id="imp-btn" class="btn btn-yellow-cs btn-sm">결제하기</button>
+<!-- 	   		    <div class="card col-md-3 mb-2 pb-4 pt-1"> -->
+   	   		    <div class="card col-md-3 mb-2 p-0 div-center-cs">
+	   		      <div class ="card-header bg-yellow-cs">
+	   		     	 <h6 class="p-0 m-0 font-bolder-cs"> 최종결제금액 </h6>
+	   		      </div>  
+	   		      <div class="card-body  p-2 ">
+	   		      	<h5 text-right> <span id="barCash"></span>원 </h5>
+	   		      	<input type	="hidden" id="impPrice">
+	   		      	<button type="button" id="imp-btn" class="btn btn-warning btn-sm text-center">결제하기</button>
+				  </div>
 	   		    </div>
 	   		    
 	   		  </div>
