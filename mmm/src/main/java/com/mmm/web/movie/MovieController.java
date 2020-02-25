@@ -111,7 +111,7 @@ public class MovieController {
 	
 	
 //	하루에 한번씩 실행되는 메소드...
-//	@Scheduled(cron = "*/10 * * * * *")	//매 10초마다 실행
+//	@Scheduled(cron = "*/20 * * * * *")	//매 10초마다 실행
 	public void addMovieAndUpdateReleasedMovie()throws Exception{
 		this.addMovie();			//다음에서 상영예정작 크롤링하고, JMDB API에서 해당 영화의 정보를 긁어와서 DB에 추가
 		this.updateReleasedMovie();	//개봉일이 지난 영화들 onBoxOfficeFlagfmf 0--> 1변경

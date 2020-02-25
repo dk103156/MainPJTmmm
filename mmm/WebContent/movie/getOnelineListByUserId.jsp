@@ -141,7 +141,7 @@ function fncGetList(currentPage) {
 	
 	$("#currentPage").val(currentPage);
 // 	$("form").attr("method", "POST").attr("action", "/payment/getPointList").submit();
-	$("#plusPage").load("/payment/getPointList",$("#currentPage").serialize());
+	$("#plusPage").load("/movie/getOnelineListByUserId",$("#currentPage").serialize());
 }
 
 </script>
