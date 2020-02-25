@@ -58,7 +58,6 @@
 							text: '응모가 완료되었습니다.',
 							icon: 'success',
 							confirmButtonText: "confirm",
-							timer: 5000
 						}).then((confirm)=>{
 			    			self.location="/event/addPartPrev";
 			    		});
@@ -195,6 +194,7 @@
 	</form>
  </div>
 	<!-- 	container 닫는 애  -->
+<jsp:include page="/layout/footer.jsp"></jsp:include>
  </body>
  
  </html>

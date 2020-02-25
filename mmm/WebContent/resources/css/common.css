@@ -47,3 +47,20 @@ container.point, th, td, input, select, textarea, button {
 	float: none;
 	margin: 0 auto;
 }
+/* 페이지네이션 */
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #feca0e;
+    border-color: #feca0e;
+}
+.page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #414548;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}

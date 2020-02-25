@@ -208,10 +208,6 @@ public class PaymentServiceImpl implements PaymentService {
 	@Override
 	public void cancelPayment(Payment payment) throws Exception {
 		
-		////// 포인트 되돌리기....( 적립, 사용 )
-		////// 사용한 voucher 되돌리기 (inven table 활성화... )
-		////// 실제 아이엠포트 환불
-		
 		System.out.println("-----------  PaymentService의 payment  ::" + payment);
 		
 //		1. 포인트 되돌리기
