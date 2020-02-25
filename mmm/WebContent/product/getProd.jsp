@@ -235,7 +235,6 @@
 		
 		//장바구니 추가 클릭
 		$("#addCart").on("click",function(){
-			alert("장바구니 추가 완료했습니다")
 			var quantity= parseInt( $("#quantity").val() );
 			var timestamp= new Date().getTime();
 			var userNo = '${user.userNo}'

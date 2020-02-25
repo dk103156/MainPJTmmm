@@ -169,8 +169,8 @@
  			
  			 <div class="form" id="updateProdForm">
 		   		<div class="col-11 text-center">
-				      <button  type="button"  id="addButton" class="btn"  >등&nbsp;록</button>
-						  <a class="btn"  id="cancelButton"   href="#" role="button">취&nbsp;소</a>
+				      <button  type="button"  id="addButton" class="btn btn-outline-warning"  >등&nbsp;록</button>
+						  <a class="btn btn-outline-warning"  id="cancelButton"   href="#" role="button">취&nbsp;소</a>
 								<br><br>		   
 				 </div>
 		   </div> 

@@ -29,9 +29,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?aaffr">
+    <link rel="stylesheet" href="/resources/css/common.css?affr">
 	    
-    <link rel="stylesheet" href="/resources/css/payment.css?atfr">
+    <link rel="stylesheet" href="/resources/css/payment.css?afr">
     
 <title>Insert title here</title>
 </head>

@@ -48,7 +48,7 @@ container.point, th, td, input, select, textarea, button {
 	margin: 0 auto;
 }
 /* 페이지네이션 */
-.page-item .active .page-link {
+.page-item .active {
     z-index: 3;
     color: #fff;
     background-color: #feca0e;

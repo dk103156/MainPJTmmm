@@ -28,11 +28,7 @@
       box-shadow: 5px 5px 5px 3px gray;
 }
 
-#addProdBtn{
-	background-color: #fee50e;
-	color: black;
-	outline-color: #fee50e;
-	}
+
 	
 #addProdInput{
 		padding-right: 0px; 
@@ -61,11 +57,10 @@
 }
 
 #updateProdDiv{
-      margin-top: 45px;
+     margin-top: 25px;
       margin-bottom: 55px;
-      border: 2px solid;
-      border-radius: 50px 40px 50px 50px / 50px 40px 50px 50px;
-       width: 836px;
+      width: 836px;
+      box-shadow: 5px 5px 5px 3px gray;
 }
 
 #updateProdDivGroup{
@@ -196,9 +191,6 @@ form > div > div > span.name{
 	border-color: #fee50e;
 }
 
-#exampleModalCenter{
-	background-color: #fee50e;
-}
 
 
 /*                        getPurchaseList.jsp                            */
