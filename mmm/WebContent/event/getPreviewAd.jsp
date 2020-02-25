@@ -57,8 +57,8 @@ function getCommentList(currentPage) {
 		success : function(result) {
 			
 			//alert(result.list.length)
-			
-			
+				console.log(result)
+
 				$(".reply_box").empty()
 				var html = "<p class='num'>"+ result.resultPage.totalCount+" Comments</p>";
 				html+= "<input type='hidden' id='currentPage' value=''/>"
@@ -67,7 +67,7 @@ function getCommentList(currentPage) {
 				html+= "<input type='hidden' name='userId' value='${user.userId}'>"
 				html+= "<div class='textarea_box'>"
 				html+="<textarea name='commentContent' rows='5' cols='50' class='textarea' onfocus=''></textarea>"
-				html+="<a id='commentWrite' class='btn_write' >쓰기</a></div>"
+				html+="<a id='commentWrite' class='btn_write'>쓰기</a></div>"
 			
 				
 			if(result.list.length!=0){
@@ -105,7 +105,7 @@ function getCommentList(currentPage) {
    				Element +="</li>"
    			}else if(result.resultPage.currentPage > result.resultPage.pageUnit){
    				Element +="<li class='page-item'>";
-   				Element +="<a class='page-link' href='javascript:getCommentList'("+(parseInt(result.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>";
+   				Element +="<a class='page-link' href='javascript:getCommentList("+(parseInt(result.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>";
    				Element +="</li>";
    			}
 			
@@ -128,7 +128,7 @@ function getCommentList(currentPage) {
   				Element+="</li>";
   			}else if(result.resultPage.endUnitPage < result.resultPage.maxPage){
   				Element+="<li class='page-item'>";
-  				Element+="<a class='page-link' href='javascript:getCommentList("+(parseInt(data.resultPage.endUnitPage)+1)+") '><i class='fas fa-angle-right'></i></a>";
+  				Element+="<a class='page-link' href='javascript:getCommentList("+(parseInt(result.resultPage.endUnitPage)+1)+") '><i class='fas fa-angle-right'></i></a>";
   				Element+="</li>";
   			}
 				
@@ -152,6 +152,7 @@ function comment(currentPage){
 	
 	$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
 	
+	$('#commentWrite').off("click")
 	
 	$('#commentWrite').on("click", function(){
 				$.ajax({
@@ -162,7 +163,8 @@ function comment(currentPage){
 					articleNo : $("input[name='articleNo']").val(),
 					commentType : $("input[name='commentType']").val(),
 					userId : $("input[name='userId']").val(),
-					commentContent : $("textarea[name='commentContent']").val()
+					commentContent : $("textarea[name='commentContent']").val(),
+					currentPage :currentPage,
 				}),
 				headers:{
 					"Accept" : "application/json",
@@ -182,8 +184,6 @@ function comment(currentPage){
 	$(function(){
 		
 		getCommentList(1);
-		
-		comment(1);
 		
 		//처리 버튼을 누름
 		$(document).on("click", "a[name='btn_spam']" ,function() { 
@@ -395,7 +395,7 @@ function comment(currentPage){
 	body {
 		
 	    overflow: auto;
-	    overflow-y: scroll;
+
 	    letter-spacing: 0;
 	    line-height: 1.5;
 	    font-size: 15px;
@@ -645,8 +645,7 @@ function comment(currentPage){
 	i.fas.fa-pastafarianism{
 		color:#545454;
 	}
-	
-	button.btn {
+	button.btn.getPreviewAd {
 	background-color:#fee50e ;
 	color:#545454;
 	border: 1px solid #dedede;
@@ -727,10 +726,10 @@ function comment(currentPage){
                         </div>
             
             <c:if test="${preview.previewFlag==1}">
-               <button class="btn float-right" id="doApply">응모하기</button>
+               <button class="btn float-right getPreviewAd" id="doApply">응모하기</button>
             </c:if>
             <c:if test="${preview.previewFlag==2}">
-               <button class="btn float-right" id="viewWinner">당첨자보기</button>
+               <button class="btn float-right getPreviewAd" id="viewWinner">당첨자보기</button>
             </c:if>
             
             
@@ -799,7 +798,7 @@ function comment(currentPage){
 		<div class="modal-content">
 			<div class="modal-header">
 			<p class="modal-title" id="myModalLabel"><i class="fas fa-pastafarianism yellowTheme"></i> 블라인드 처리</p>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<button type="button" class="close  getPreviewAd" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 		
 			<div class="modal-body">
@@ -828,8 +827,8 @@ function comment(currentPage){
 			</div>
 		
 			<div class="modal-footer">
-				<button type="button" class="btn" id="addBlindBtn">확인</button>
-				<button type="button" class="btn" id="closeModalBtn">취소</button>
+				<button type="button" class="btn getPreviewAd" id="addBlindBtn">확인</button>
+				<button type="button" class="btn getPreviewAd" id="closeModalBtn">취소</button>
 			</div>
 		</div>
 	</div>
@@ -987,7 +986,7 @@ function getWinnerList(previewNo){
 				    			var bodyHtml = "<p>주소  : "+theater.address+"</p>"
 				    				bodyHtml+= "<p>도로명 주소 : "+theater.roadAddress+"</p>"
 				    				bodyHtml+= "<p>전화번호 : "+theater.theaterPhone+"</p>"
-				    				bodyHtml+= "<button type='button' id='myModalBodyButton' class='btn btn-link p-0'>상세정보</button>"
+				    				bodyHtml+= "<button type='button' id='myModalBodyButton' class='btn btn-link p-0 getPreviewAd'>상세정보</button>"
 				    			$("#myModalBody").html(bodyHtml);
 				    			$("#myModalBodyButton").on("click",function(){
 				    				showPopup(theater.placeUrl);
@@ -1059,7 +1058,7 @@ function getWinnerList(previewNo){
 	    </div>
 	  </div>
 	</div>	
-	<jsp:include page="/layout/footer.jsp"></jsp:include>
+<%-- 	<jsp:include page="/layout/footer.jsp"></jsp:include> --%>
  </body>
  
  </html>
