@@ -205,7 +205,7 @@ $(function(){
 		console.log('클릭');
 		window.open('/naver/openWindow.jsp',
 					'popWin',
-					'left=700, top=90, width=537, height=750, marginwidth=0, marginheight=0, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
+					'left=400, top=90, width=775, height=700, marginwidth=0, marginheight=0, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
 	})
 	
 	//===================kakao Login============
@@ -213,7 +213,7 @@ $(function(){
 		console.log('클릭');
 		window.open('/kakao/openWindow.jsp',
 					'popWin',
-					'left=700, top=90, width=537, height=750, marginwidth=0, marginheight=0, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
+					'left=400, top=90, width=775, height=700, marginwidth=0, marginheight=0, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
 	})
 	
 	//===================google Login============
@@ -221,7 +221,7 @@ $(function(){
 		console.log('클릭');
 		window.open('/google/openWindow.jsp',
 					'popWin',
-					'left=700, top=90, width=537, height=750, marginwidth=0, marginheight=0, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
+					'left=400, top=90, width=775, height=700, marginwidth=0, marginheight=0, fullscreen=no, scrollbars=yes, scrolling=yes, menubar=no, resizable=no');
 	})
 	
 });

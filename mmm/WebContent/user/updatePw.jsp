@@ -26,7 +26,7 @@
     width: calc(100% - 260px);
 }
 #contents.location-fixed {
-    padding-top: 82px;
+    padding-top: 60px;
 }
 #contents {
     width: 100%;
@@ -379,61 +379,65 @@ $(function(){
 </script>
 </head>
 <body>
-
-<form id="pwchange" method="post">
-
-	<div id="contents">
-		<h2 class="tit">비밀번호 변경</h2>
 	
-		<ul class="dot-list mb10">
-			<li>현재 비밀번호를 입력한 후 새로 사용할 비밀번호를 입력하세요.</li>
-		</ul>
-	
-		<div class="table-wrap mb20">
-			<table class="board-form">
-				<caption>현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 항목을 가진 표</caption>
-				<colgroup>
-					<col style="width:180px;">
-					<col>
-				</colgroup>
-				<tbody>
-					<tr>
-						<th scope="row"><label for="pwnow">현재 비밀번호</label></th>
-						<td>
-							<input type="password" id="password" class="input-text w150px" />
-							<h6 id="chkPw" style="color: red;"></h6>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="pwnew">새 비밀번호</label></th>
-						<td>
-							<input type="password" id="pwnew" name="password" class="input-text w150px" />
-							<input type="hidden" name="userNo" value="${user.userNo }" />
-							<div class="ml10 font-size-14" style="font-size:12px;">※ 비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.</div>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row"><label for="repwnew">새 비밀번호 재입력</label></th>
-						<td>
-							<input type="password" id="repwnew" class="input-text w150px" />
-							<div class="ml10 font-size-14" style="font-size:12px;">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	
-		<ul class="dot-list">
-			<li>생년월일, 전화번호 등 개인 정보와 관련된 숫자, 연속된 숫자와 같이 쉬운 비밀번호는 다른 사람이 쉽게 알아낼 수 있으니 사용을 자제해 주세요.</li>
-			<li>비밀번호는 3-6개월마다 꼭 바꿔 주세요.</li>
-			<li>비밀번호 변경시 모바일 기기와 홈페이지에서 모두 로그아웃됩니다. 변경한 비밀번호로 다시 로그인해주세요.</li>
-		</ul>
-	
-		<div class="pt40" style="text-align: center; margin-bottom:20px;">
-			<button class="button large" type="button" id="cancelBtn">취소</button>
-			<button class="button purple large" type="button" id="updateBtn">수정</button>
-		</div>
+	<div id="container" style="margin-top: 10px;" >
+		<form id="pwchange" method="post">
+		
+			<div id="contents">
+				<h2 class="tit">
+				<strong>비밀번호 변경</strong>
+				</h2>
+			
+				<ul class="dot-list mb10">
+					<li>현재 비밀번호를 입력한 후 새로 사용할 비밀번호를 입력하세요.</li>
+				</ul>
+			
+				<div class="table-wrap mb20">
+					<table class="board-form">
+						<caption>현재 비밀번호, 새 비밀번호, 새 비밀번호 확인 항목을 가진 표</caption>
+						<colgroup>
+							<col style="width:180px;">
+							<col>
+						</colgroup>
+						<tbody>
+							<tr>
+								<th scope="row"><label for="pwnow">현재 비밀번호</label></th>
+								<td>
+									<input type="password" id="password" class="input-text w150px" />
+									<h6 id="chkPw" style="color: red;"></h6>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="pwnew">새 비밀번호</label></th>
+								<td>
+									<input type="password" id="pwnew" name="password" class="input-text w150px" />
+									<input type="hidden" name="userNo" value="${user.userNo }" />
+									<div class="ml10 font-size-14" style="font-size:12px;">※ 비밀번호는 5~15자의 영문 소문자와 숫자,특수문자를 포함하여 입력해주세요.</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="repwnew">새 비밀번호 재입력</label></th>
+								<td>
+									<input type="password" id="repwnew" class="input-text w150px" />
+									<div class="ml10 font-size-14" style="font-size:12px;">※ 비밀번호 확인을 위해 한 번 더 입력해 주시기 바랍니다.</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			
+				<ul class="dot-list">
+					<li>생년월일, 전화번호 등 개인 정보와 관련된 숫자, 연속된 숫자와 같이 쉬운 비밀번호는 다른 사람이 쉽게 알아낼 수 있으니 사용을 자제해 주세요.</li>
+					<li>비밀번호는 3-6개월마다 꼭 바꿔 주세요.</li>
+					<li>비밀번호 변경시 모바일 기기와 홈페이지에서 모두 로그아웃됩니다. 변경한 비밀번호로 다시 로그인해주세요.</li>
+				</ul>
+			
+				<div class="pt40" style="text-align: center; margin-bottom:20px;">
+					<button class="button large" type="button" id="cancelBtn">취소</button>
+					<button class="button purple large" type="button" id="updateBtn">수정</button>
+				</div>
+			</div>
+		</form>
 	</div>
-</form>
 </body>
 </html>

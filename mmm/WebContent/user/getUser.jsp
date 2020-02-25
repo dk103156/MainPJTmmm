@@ -789,6 +789,7 @@ $(function(){
 </head>
 <body>
 
+
 <!--container-->
 <div class="container" style="margin-top: 40px;">
 	<div id="contents">
@@ -990,10 +991,6 @@ $(function(){
 	
 </div>
 <!-- container end-->
-
-
-
-
 
 
 </body>

@@ -257,20 +257,19 @@ $(function(){
 		if(phone == null || phone.length <1){
 			//$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
 			Swal.fire({
-			  icon: 'error',
-			  //title: 'Oops...',
-			  text: 'Something went wrong!'
+			  icon: 'error', //"info,success,warning,error" 중 택1
+			  //title: 'Oops...', 
+			  text: '휴대폰 번호는 반드시 입력하셔야 합니다.'
 			})
 			
 			return;//"info,success,warning,error" 중 택1
 		}else if(phone != "" && phone.length <11 ){
 			//$("#confirmNum1").text("휴대폰번호를 확인해주세요.");
 			Swal.fire({
-			  icon: 'error',
+			  icon: 'error', //"info,success,warning,error" 중 택1
 			 // title: 'Oops...',
 			  text: '휴대폰번호를 확인해주세요.'
 			})
-			
 		    return;	
 		}else if(re5.test(phone)){
 				$("#confirmNum1").text("");
@@ -303,7 +302,14 @@ $(function(){
 		var phone = $('#phone').val();
 		var len = numStr.length
 		if(len != 6){
-			$("#confirmNum2").text("인증번호를 확인해주세요.");
+			//$("#confirmNum2").text("인증번호를 확인해주세요.");
+			
+			Swal.fire({
+			  icon: 'error', //"info,success,warning,error" 중 택1
+			 // title: 'Oops...',
+			  text: '인증번호를 확인해주세요.'
+			})
+			
 		}else {
 			$.ajax({ 
 				url : "/user/json/authSMS/" + numStr ,
@@ -321,24 +327,37 @@ $(function(){
 					
 					if(JSONData == 0){
 						//0: 인증번호가 틀림
-						$('confirmNum2'),text('인증번호를 확인해주세요.');
-						$("#confirmNum2").css("color", "red");
+						//$('confirmNum2'),text('인증번호를 확인해주세요.');
+						//$("#confirmNum2").css("color", "red");
+						Swal.fire({
+						  icon: 'error', //"info,success,warning,error" 중 택1
+						 // title: 'Oops...',
+						  text: '인증번호를 확인해주세요.'
+						})
+
 						$("#chkBtn").attr("disabled", true);
 					}else{
 						$("#confirmNum2").text("인증이 완료되었습니다.");
-						$("#chkBtn").attr("disabled", false);
-						
-						if(type=="addUser"){
-							self.location= "/user/addUser";
-						
-						} else if(type=="addUnUserView" ){
-							self.location= "/user/addUnUserView";
 							
-						}else{
-							nextPage(phone, "phone");
-						}
-						
-					}
+							Swal.fire({
+						           icon: 'success', //"info,success,warning,error" 중 택1
+						          title: '인증 완료',
+						          text: '가입을 계속 진행해주세요.',					          
+						      }).then( result => {   
+						         
+					    		$("#chkBtn").attr("disabled", false);
+								
+								if(type=="addUser"){
+									self.location= "/user/addUser";
+								
+								} else if(type=="addUnUserView" ){
+									self.location= "/user/addUnUserView";
+									
+								}else{
+									nextPage(phone, "phone");
+								} 
+						      });
+					}//else
 				}, error : function() {
 					console.log("실패");
 				}
@@ -359,10 +378,22 @@ $(function(){
 	// 입력한 이메일 유효성 검사 
 	// 단 존재하지 않는 이메일을 보냈을 때에도 이메일 형식에만 맞는다면 동작한다 
 		if( email == null || email.length <1){
-			$("#confirmNum3").text("이메일은 반드시 입력하셔야 합니다.");		
+		//	$("#confirmNum3").text("이메일은 반드시 입력하셔야 합니다.");
+			Swal.fire({
+				  icon: 'error', //"info,success,warning,error" 중 택1
+				 // title: 'Oops...',
+				  text: '이메일은 반드시 입력하셔야 합니다.'
+				})
+			
+			
 			return;
 		}else if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			$("#confirmNum3").text("이메일 형식이 아닙니다.");
+		//	$("#confirmNum3").text("이메일 형식이 아닙니다.");
+			Swal.fire({
+				  icon: 'error', //"info,success,warning,error" 중 택1
+				 // title: 'Oops...',
+				  text: '이메일 형식이 아닙니다.'
+				})
 
 	    	return;
 		}else if(re2.test(email)){
@@ -389,9 +420,21 @@ $(function(){
 				console.log(result);
 				console.log(status);
 				if(result){
-					$("#confirmNum3").text("인증메일이 발송되었습니다."); 
+				//	$("#confirmNum3").text("인증메일이 발송되었습니다."); 
+					Swal.fire({
+					  icon: 'info', //"info,success,warning,error" 중 택1
+					 // title: 'Oops...',
+					  text: '인증메일이 발송되었습니다.'
+					})
+
 				}else{
-					$("#confirmNum3").text("메일주소를 확인해주세요.!!!"); 
+				//	$("#confirmNum3").text("메일주소를 확인해주세요.!!!"); 
+					Swal.fire({
+						  icon: 'error', //"info,success,warning,error" 중 택1
+						 // title: 'Oops...',
+						  text: '메일주소를 확인해주세요.'
+						})
+
 				}
  			}
 		}) 			
@@ -418,24 +461,38 @@ $(function(){
 					
 					if(JSONData == 0){
 						//0: 인증번호가 틀림
-						$('confirmNum2'),text('인증번호를 확인해주세요.');
-						$("#confirmNum2").css("color", "red");
+						//$('confirmNum2'),text('인증번호를 확인해주세요.');
+						//$("#confirmNum2").css("color", "red");
+						Swal.fire({
+							  icon: 'error', //"info,success,warning,error" 중 택1
+							 // title: 'Oops...',
+							  text: '인증번호를 확인해주세요.'
+							})
+						
 						$("#chkBtn2").attr("disabled", true);
 					}else{
-						$("#confirmNum2").text("인증이 완료되었습니다.");
-						$("#chkBtn2").attr("disabled", false);
+						//$("#confirmNum2").text("인증이 완료되었습니다.");
 						
-						if(type=="addUser"){
-							self.location= "/user/addUser";
 						
-						} else if(type=="addUnUserView" ){
-							self.location= "/user/addUnUserView";
+						Swal.fire({
+					           icon: 'success', //"info,success,warning,error" 중 택1
+					          title: '인증 완료',
+					          text: '가입을 계속 진행해주세요.',					          
+					      }).then( result => {   
+					         
+					    	  $("#chkBtn2").attr("disabled", false);
 							
-						}else{
-							nextPage(email, "email");
-						}
-						
-					}
+							if(type=="addUser"){
+								self.location= "/user/addUser";
+							
+							} else if(type=="addUnUserView" ){
+								self.location= "/user/addUnUserView";
+								
+							}else{
+								nextPage(phone, "email");
+							} 
+					      });
+					}//else
 				}, error : function() {
 					console.log("실패");
 				}
@@ -464,7 +521,7 @@ $(function(){
 </form>
 
 <!--  화면구성 div Start /////////////////////////////////////-->
-<div class="container" style="margin-top: 60px; width: 600px;">
+<div class="container" style="margin-top: 50px; width: 600px;">
 
 	<h1 class="bg-default text-center" style="background-color:#fee50e;">본 인 인 증</h1><br>
 		<h5 class="bg-default text-center"> 본인 인증단계 입니다.<br>
@@ -474,7 +531,7 @@ $(function(){
 			<div class="col-md-6" ><a href="#" data-toggle="modal" data-target="#phoneModal"><img style="float: right;width: 200px;height: 230px;" alt="" src="/resources/image/user/phone_img.png"></a></div>
 			<div class="col-md-6" ><a href="#" data-toggle="modal" data-target="#emailModal"><img style="padding-top: 30px; width: 190px; height: 200px;" alt="" src="/resources/image/user/email_img.png"></a></div>
 		</div><br>
-			<h5 class="bg-default text-center" >
+			<h5 class="bg-default text-center" style="margin-bottom: 10px;">
 				14세 미만 어린이는 보호자 인증을 추가로 완료한 후 <br> 가입이 가능합니다.<br>
 				 본인인증 시 제공되는 정보는 해당 인증기관에서 직접 <br> 수집하며, 
 				인증 이외의 용도로 이용 또는 저장되지 않습니다. 
@@ -630,7 +687,7 @@ $(function(){
 		</div> <!-- email 인증  -->
 	
 <!-- Header Start /////////////////////////////////////-->
-<jsp:include page="/layout/footer.jsp" />
+	<jsp:include page="/layout/footer.jsp" />
 <!-- Header End /////////////////////////////////////-->		
 		
 
