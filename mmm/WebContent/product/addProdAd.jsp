@@ -177,8 +177,8 @@
 					
 					<div class="form-group">
 					    <div class="col-8 text-center">
-					      <button  type="button"  id="addProdBtn" class="btn" >등&nbsp;록</button>
-							  <a class="btn"  href="#"  id="addProdBtn" role="button">취&nbsp;소</a>
+					      <button  type="button"  id="addBtn" class="btn btn-outline-warning" >등&nbsp;록</button>
+							  <a class="btn btn-outline-warning"  href="#"  id="addBtn" role="button">취&nbsp;소</a>
 								<br><br>		   
 					   </div>
 				    </div>
