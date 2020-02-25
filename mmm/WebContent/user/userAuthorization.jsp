@@ -8,9 +8,14 @@
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+
+<!--google font  -->
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -250,10 +255,22 @@ $(function(){
 		console.log(phone)
 		
 		if(phone == null || phone.length <1){
-			$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
-			return;
+			//$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
+			Swal.fire({
+			  icon: 'error',
+			  //title: 'Oops...',
+			  text: 'Something went wrong!'
+			})
+			
+			return;//"info,success,warning,error" 중 택1
 		}else if(phone != "" && phone.length <11 ){
-			$("#confirmNum1").text("휴대폰번호를 확인해주세요.");
+			//$("#confirmNum1").text("휴대폰번호를 확인해주세요.");
+			Swal.fire({
+			  icon: 'error',
+			 // title: 'Oops...',
+			  text: '휴대폰번호를 확인해주세요.'
+			})
+			
 		    return;	
 		}else if(re5.test(phone)){
 				$("#confirmNum1").text("");
@@ -463,6 +480,7 @@ $(function(){
 				인증 이외의 용도로 이용 또는 저장되지 않습니다. 
 			</h5><br>
 </div>	<!-- container -->	
+
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col-md-2"></div> -->
 <!-- 			<div class="col-md-4" style="height: 300px; font-size: 14pt; padding-top: 7px; border: 1px solid purple; background-color: beige;"> -->
@@ -610,33 +628,11 @@ $(function(){
 				</div>
 			</div>
 		</div> <!-- email 인증  -->
-	</div>	<!-- row  -->
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+<!-- Header Start /////////////////////////////////////-->
+<jsp:include page="/layout/footer.jsp" />
+<!-- Header End /////////////////////////////////////-->		
+		
 
 </body>
 </html>
