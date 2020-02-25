@@ -40,6 +40,7 @@ import com.mmm.common.Search;
 import com.mmm.service.board.BoardService;
 import com.mmm.service.domain.Comment;
 import com.mmm.service.domain.Movie;
+import com.mmm.service.domain.Point;
 import com.mmm.service.domain.User;
 import com.mmm.service.movie.MovieService;
 
@@ -455,6 +456,48 @@ public class MovieController {
 		model.addAttribute("movie", movieFromKmdb);
 		
 		return "forward:/movie/getMovie.jsp";
+	}
+	
+	@RequestMapping(value = "/getOnelineListByUserId")
+	public String getOnelineListByUserId(@ModelAttribute(value = "search") Search search,
+										HttpSession session, Model model)throws Exception{
+		
+		
+//		로그인한 회원 정보 from session
+		User user = (User)session.getAttribute("user");
+		System.out.println("----------- user.getUserNo() : "+user.getUserNo());
+		search.setUserNo(user.getUserNo());		
+
+//		search.currentPage setting...
+		if(search.getCurrentPage() ==0 ) {
+			search.setCurrentPage(1);
+		}
+//		search.pageSize 세팅
+		search.setPageSize(pageSize);
+		
+		search.setCommentType(3);
+		System.out.println("------------search"+ search);
+		
+		HashMap<String, Object> outputMap = (HashMap<String, Object>) boardService.getCommentList(search);
+		
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer)outputMap.get("totalCnt")).intValue(),
+				pageUnit, pageSize);
+		System.out.println("------- resultPage : " + resultPage);
+		
+		for(Comment cmt : (List<Comment>)outputMap.get("list")) {
+			System.out.println("--------- cmt : " + cmt);
+		}
+		
+		List<Comment> list = (List<Comment>) outputMap.get("list");
+		
+		System.out.println("------------------list.size() : " + list.size());
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("search",search);
+		model.addAttribute("resultPage",resultPage);
+		
+		return "forward:/movie/getOnelineListByUserId.jsp";
 	}
 	
 	
