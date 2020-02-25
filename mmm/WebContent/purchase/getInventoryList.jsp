@@ -34,8 +34,8 @@
 	<div class="container">
 		<div class="row mx-0">
 			<div class="inventoryHeader col-12 text-center">
-			<br><br><br>
-			<h4 class="text-left"><span>${user.userName}님의 보관함</span></h4> 	
+			<br><br>
+			<h3 class="text-left"><span>${user.userName}님의 보관함</span></h3> 	
 			<hr style="background-color: #c0c0c0;">
 				<br>
 			</div>
@@ -92,7 +92,7 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
-        <button type="button" id="btn" class="btn" data-dismiss="modal">닫 기</button>
+        <button type="button" id="btn" class="btn btn-outline-warning" data-dismiss="modal">닫 기</button>
 <!--      <button type="button" id="btn"  class="btn">Save changes</button>  -->    
       </div>
     </div>

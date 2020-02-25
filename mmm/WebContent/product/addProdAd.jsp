@@ -96,7 +96,7 @@
 	
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
- 	<div class="container" id="addProdDiv" >
+ 	<div class="container" id="addProdDiv">
  	<br/><br/><br/>
  		<h1 class=" text-center" >상 품 등 록</h1>
  		
