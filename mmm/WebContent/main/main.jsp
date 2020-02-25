@@ -192,7 +192,7 @@
 	
 	<div class="container-fluid">
 		<div class="pageContent row">
-			<div class="col-12 movieSelection row mx-3">
+			<div class="col-12 movieSelection row mr-3">
 				<div id="movieSelected" class="col-12 row mb-5">
 					<div class="col-1"></div>
 					<div class="col-5 pr-0" id="movieInfo">
@@ -270,7 +270,7 @@
 	
 	<div class="container-fluid">
 		<div class="pageContent row">
-			<div class="col-12 row mx-3">
+			<div class="col-12 row mr-3">
 				<div class="col-12 row mb-5">
 					<div class="col-1"></div>
 					<div id="issueContent" class="col-5">

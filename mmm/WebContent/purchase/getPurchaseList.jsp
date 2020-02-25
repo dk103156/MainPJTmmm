@@ -36,15 +36,15 @@
 	<div class="container">
 		<div class="row mx-0">
 			<div class="purchaseHeader col-12 text-center">
-			<br><br><br>
+			<br><br>
 				<c:if test="${search.purchaseStatus eq 0 }">
-				<h4  class="text-left"><span>구매 목록</span></h4>
-				<hr style="background-color: black;">
+				<h3  class="text-left"><span>구매 목록</span></h3>
+				<hr style="background-color: #c0c0c0;">
 				</c:if>
 				
 				<c:if test="${search.purchaseStatus eq 2 }">
-				<h4  class="text-left"><span>구매 취소 목록</span></h4>
-				<hr style="background-color: black;">
+				<h3  class="text-left"><span>구매 취소 목록</span></h3>
+				<hr style="background-color: #c0c0c0;">
 				</c:if>
 
 			</div>
@@ -204,6 +204,8 @@
 <script>
 $(function(){
 	
+
+	
 	
 });
 $.ajaxSetup({async:false}); //전역 ajax 동기로
@@ -313,11 +315,13 @@ purchaseQuantityList.forEach( (x,y) => {
 			 
 			 if(!useFlag){
 				 
-				 var Element ="<img class='cancelButton' src='/resources/image/cancel.PNG' width=95>"
+			//	 var Element ="<img class='cancelButton' src='/resources/image/cancel.PNG' width=95>"
+				 
+				 var Element ="<button type='button' class='btn btn-outline-warning'>CANCEL</button>"
 				 
 				 $($("div.purchaseCancel")[index]).append(Element);
 				 
-				 $("div:nth-child("+(parseInt(index)+1)+") > div.purchaseCancel img.cancelButton").on("click",function(){
+				 $("div:nth-child("+(parseInt(index)+1)+") > div.purchaseCancel button.btn.btn-outline-warning").on("click",function(){
 					 
 					 $(this).prev().submit();
 				 });
@@ -330,8 +334,9 @@ purchaseQuantityList.forEach( (x,y) => {
 function Pagination(currentPage) {
 	
 	$("#currentPage").val(currentPage)
-	$("#pagination").attr("method","POST").attr("action", "/purchase/getPurchaseList").submit();
-	//$("#plusPage").load("/ticketing/getTicketingList",$("#currentPage").serialize());
+	//$("#pagination").attr("method","POST").attr("action", "/purchase/getPurchaseList").submit();
+	$("#plusPage").load("getPurchaseList",$("#currentPage").serialize());
+	
 	
 }
 </script> 	

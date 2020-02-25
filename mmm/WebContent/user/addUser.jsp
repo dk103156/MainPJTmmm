@@ -12,6 +12,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
+
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -95,7 +99,8 @@ $(function(){
 	
 	//============= "취소"  Event 처리 및  연결 ===========
 	$("a[href='#']").on("click",function(){
-		$("form")[0].reset();
+		//$("form")[0].reset();
+		self.location="/main/main";
 	});		
 
 
@@ -178,7 +183,13 @@ $(function(){
 			return;
 		}
 		
-		alert("가입을 축하합니다.!!!!");
+		
+		swal({
+		    title: "가입성공",
+		    text: "가입을 축하합니다",
+		    icon: "success" //"info,success,warning,error" 중 택1
+		});
+		//alert("가입을 축하합니다.!!!!");
 		$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		
 		
