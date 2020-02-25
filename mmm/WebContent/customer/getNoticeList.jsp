@@ -190,7 +190,7 @@
 					 <div class="col-4"></div>
 			  </div>
 			  
-			  </div>
-<jsp:include page="/layout/footer.jsp"></jsp:include>			  
+			  </div> 
+<%-- <jsp:include page="/layout/footer.jsp"></jsp:include>	 --%>		  
 </body>
 </html>
