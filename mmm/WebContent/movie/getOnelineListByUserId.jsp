@@ -63,6 +63,7 @@
 		  </thead>
 		  <tbody>
 	          
+	          
 	<!--         list size만큼 for문으로 Point 내역 출력  -->
 	        <c:forEach var="oneline" items="${list}">
 		      <tr >
