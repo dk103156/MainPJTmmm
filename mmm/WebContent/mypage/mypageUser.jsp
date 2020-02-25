@@ -584,7 +584,7 @@ a:link {
 .my-megabox-main .link-movie-story a span {
     display: block;
     padding: 3px 0 0 0;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .my-megabox-main .column .col.right {
@@ -890,7 +890,8 @@ $(function(){
 	
 	//내가본영화
 	$("#sawMovie").on('click',function(){
-		$("#plusPage").load("/mypage/myMovieList");
+		var ticketerPhone = $("#ticketerPhone").val();
+		$("#plusPage").load("/ticketing/getTicketingList?searchCondition=2&ticketerPhone="+ticketerPhone);
 	});
 	
 	//위시리스트
@@ -1086,24 +1087,20 @@ $(function(){
 				</div>
 
 				<div class="box-border link-movie-story">
-					<a href="#" id=sawMovie title="본 영화 탭으로 이동">
+					<a href="#" id=sawMovie title="본 영화 탭으로 이동" style="margin-left : 35px;">
+					<input type="hidden" id="ticketerPhone" value="${user.phone}" >
 						<em>${mySeeMovieCnt}</em>
 						<span>본 영화</span>
 					</a>
 
-					<a href="#" id="wishList" title="위시리스트 탭으로 이동" >
+					<a href="#" id="wishList" title="위시리스트 탭으로 이동" style="margin-left : 20px; margin-right: 20px;" >
 						<em>${wishMovieCnt}</em>
 						<span>위시리스트</span>
 					</a>
 
-					<a href="/mypage/moviestory?cd=lm" title="한줄평 탭으로 이동">
+					<a href="/mypage/" title="한줄평 탭으로 이동">
 						<em>${commentCnt }</em>
 						<span>한줄평</span>
-					</a>
-
-					<a href="/mypage/moviestory?cd=mp" title="리뷰 탭으로 이동">
-						<em>0</em>
-						<span>리뷰</span>
 					</a>
 				</div>
 			</div>

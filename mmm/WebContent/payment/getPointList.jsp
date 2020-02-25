@@ -29,9 +29,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?after">
+    <link rel="stylesheet" href="/resources/css/common.css?aftedfr">
 	    
-    <link rel="stylesheet" href="/resources/css/payment.css?after">
+    <link rel="stylesheet" href="/resources/css/payment.css?aftdfr">
     
 <title>Insert title here</title>
 </head>
@@ -44,7 +44,7 @@
 <!--      	pagination을 위한 hidden input -->
        <input type="hidden" id="currentPage" name="currentPage" value=""/>
        <div class="col d-inline">
-  	 	<h2><Strong>Point List</Strong></h2>
+  	 	<h2><Strong>포인트 내역</Strong></h2>
   	   </div>
   	  </form>
   	   <div class="col d-inline text-right">

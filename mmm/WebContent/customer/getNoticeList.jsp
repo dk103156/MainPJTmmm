@@ -68,39 +68,39 @@
 		font-family: 'Noto Sans KR', sans-serif;
 		}
 		
-		th{
-			background-color: #fee00e;
-		}	
+		.table{
+		font-size: 14px;
+		}
 		td{
 			background-color: #f9f9f9;
 		}
 </style>
+
 </head>
+<body>
 <body>
 
 <jsp:include page="/layout/header.jsp"></jsp:include>
 
 <div class="container">
 
-	<div class="page-header text-dark">
-	       <h3><i class="fas fa-comments"></i>고객센터</h3>
+
+	<div class="page-header text-dark mt-3">
+	       <h3>고객센터</h3>
 	       <hr>
 	    </div>
-	    
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-	     <button type="button" name="ask" class="btn btn-outline-secondary">자주찾는질문</button>
-	    <button type="button" name="contact" class="btn btn-outline-secondary">일대일문의</button>
-	    <button type="button" name="notice" class="btn btn-outline-secondary active">공지사항</button>
+		<button type="button" name="ask" class="btn"><i class="fas fa-question-circle">자주찾는질문</i></button>
+	    <button type="button" name="contact" class="btn"><i class="fas fa-comment">일대일문의</i></button>
+	    <button type="button" name="notice" class="btn"><i class="fas fa-info-circle">공지사항</i></button>
 	  </div>
 	</div>
-
-
-
+	<br>
 <br>
 <!-- 		<div class="row"> -->
 	<div><p class="text-dark">
-	전체  ${resultPage.totalCount} 건 </p>
+	전체 <i style='color:#5da3d9'>${resultPage.totalCount}</i> 건 </p>
 	</div>
 	
 	
@@ -122,37 +122,40 @@
 			<c:set var="i" value="${ i+1 }"/>
 			<tr>
 			 
-			  <td class="" align="left" >${ i }
+			  <td class="" align="left" style="width:50px;" >${ i }
 	  	    	<input type="hidden" id="articleNo" value="${notice.articleNo}"/>
 			  </td>
-			  <td  align="left" id="" >  ${notice.articleTitle} 
+			  <td  align="left" id="" style="width:450px;" >  ${notice.articleTitle} 
 			  </td>
-			  <td  align="left" id="" >  ${notice.articleDate}
+			  <td  align="left" id="" style="width:150px;">  ${notice.articleDate}
 				</td>
-			  <td align="left" id="" > ${notice.viewCount}
+			  <td align="left" id="" style="width:50px;"> ${notice.viewCount}
 				</td>
+			</tr>
+			<tr id="${notice.articleNo}">
 			</tr>
           </c:forEach>
         </tbody>
       </table>
-					 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
+       <div class="askDetail"></div>
+	   <input type="hidden" id="currentPage" name="currentPage" value=""/>
  	</form>
 <!--           </div> -->
 <!-- 	  </div> -->
 
- <div class="ticketingPagination row">
+ <div class="pagination row">
 			  		<div class="col-4"></div>
 			  		<div class="col-4">
 					  <ul class="pagination">
 		   				 <!--  <<== 좌측 nav -->
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">
-     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>
    								 </li>
 		  				</c:if>
 		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>
    							</li>
 						</c:if>
 						
@@ -174,12 +177,12 @@
 					     <!--  우측 nav==>> -->
 					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
 					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#">Next</a>
+					    		<a class="page-link" href="#"><i class='fas fa-angle-right'></i></a>
     						</li>
 					      </c:if>
 					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 					      	    <li class="page-item">
-     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') "><i class='fas fa-angle-right'></i></a>
     							</li>
 						 </c:if>	
 					  </ul><!-- end of pagination -->
@@ -188,5 +191,7 @@
 			  </div>
 			  
 			  </div>
+			  
+			  
 </body>
 </html>
