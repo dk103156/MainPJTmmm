@@ -29,64 +29,48 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?affr">
+    <link rel="stylesheet" href="/resources/css/common.css?aaffr">
 	    
-    <link rel="stylesheet" href="/resources/css/payment.css?afr">
     
 <title>Insert title here</title>
 </head>
 <body>
 
-<div class="container point" style="margin-top : 47px;">
-  <div class="row">
+<div class="container" style="margin-top : 47px;">
+  <div class="">
      <form action="">
      
 <!--      	pagination을 위한 hidden input -->
        <input type="hidden" id="currentPage" name="currentPage" value=""/>
-       <div class="col d-inline">
-  	 	<h2><Strong>포인트 내역</Strong></h2>
+       <div class="">
+  	 	<h2><Strong>한줄평 조회</Strong></h2>
   	   </div>
   	  </form>
-  	   <div class="col d-inline text-right">
-  	 		<h5>보유 포인트 : ${totalPoint} p</h5>
-      		<p class="text-muted mb-0">(누적 포인트 : ${accPoint} p)</p>
+  	   <div class="text-right mb-2">
+  	 		<h6 class="d-inline">"${user.userId}"</h6>
+      		<p class="text-muted mb-0 d-inline">이 작성하신 댓글이에요.</p>
   	   </div>
   </div>
 	<div>
 		<table class="table table-hover text-center">
 		  <thead class="thead-dark">
 		    <tr >
-		      <th scope="col">적립/사용 일자</th>
-		      <th scope="col">포인트 구분</th>
-		      <th scope="col">적립/사용 포인트</th>
+		      <th scope="col">영화 제목</th>
+		      <th scope="col">한줄평 내용</th>
+		      <th scope="col">작성일자</th>
+		      <th scope="col">비 고</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 	          
+	          
 	<!--         list size만큼 for문으로 Point 내역 출력  -->
-	        <c:forEach var="point" items="${list}">
+	        <c:forEach var="oneline" items="${list}">
 		      <tr >
-		        <th scope="col">${point.pointDate}</th>
-		        <td scope="col">
-		        
-		        <c:set var = "pointStatus" value="${point.pointStatus}"/>
-		        <c:if test="${fn:contains(pointStatus, '적립')}">
-			       <div class = "badge saving text-wrap" style="width: 6rem;"> ${point.pointStatus}</div>
-		        </c:if>
-		        <c:if test="${fn:contains(pointStatus, '사용')}">
-			       <div class = "badge using text-wrap" style="width: 6rem;"> ${point.pointStatus}</div>
-		        </c:if>
-		        
-		        </td>
-		        <td scope="col">
-		        
-   		        <c:if test="${fn:contains(pointStatus, '적립')}">
-			       <div class = ""> ${point.partPoint} (p)</div>
-		        </c:if>
-		        <c:if test="${fn:contains(pointStatus, '사용')}">
-			       <div class = "text-danger"> ${point.partPoint} (p)</div>
-		        </c:if>
-		        </td>
+		        <th scope="col">${oneline.movieTitle}</th>
+		        <td scope="col">${oneline.commentContent }</td>
+		        <td scope="col">${oneline.commentDate }</td>
+		        <td scope="col"></td>
 		      </tr>
 	        </c:forEach>  
 	          
