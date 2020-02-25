@@ -136,6 +136,8 @@ public class UserController {
 	
 	System.out.println("userIdentity@@@@@@@:::::: "+user.getIdentity());
 	
+	
+	
 	//Business Logic
 	userService.extraAddUser(user);
 	
@@ -237,8 +239,8 @@ public class UserController {
 	@RequestMapping(value = "addUnUserView" , method=RequestMethod.GET)
 	public String addUnUserView() throws Exception{
 		
-		System.out.println("/user/addUnUserView : POST");
-	
+		System.out.println("/user/addUnUserView : GET");
+			
 		return "redirect:/user/addUnUserView.jsp";
 	}
 	
@@ -484,15 +486,16 @@ public class UserController {
 		try {
 			System.out.println("/user/updateUser : POST");
 		
-			//Business Logic
-			User sessionUser = ((User)session.getAttribute("user"));
-			
-		
-			if(sessionUser.getUserNo() == user.getUserNo()) {
+			if(session != null) {
+				//Business Logic
+				User sessionUser = ((User)session.getAttribute("user"));
+				
+				user.setUserNo(sessionUser.getUserNo());
 				userService.updateUser(user);
 				
 				session.setAttribute("user", userService.getUser(user.getUserNo()));
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -758,6 +761,7 @@ public class UserController {
 				user.setIdentity(1);
 				
 				model.addAttribute("user",user);
+				
 				
 				return "forward:/user/extraAddUser.jsp";
 			}

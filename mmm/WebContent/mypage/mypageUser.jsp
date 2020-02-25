@@ -908,7 +908,17 @@ $(function(){
 		var likeGenre2 =$("#likeGenre2").val();
 		var likeGenre3 =$("#likeGenre3").val();
 		
-		$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
+		$("#likeGenreForm").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
+	});
+	
+	$("#addTheaterBtn").on('click',function(){
+		var likeTheater1 =$("#likeTheater1").val();
+		var likeTheater2 =$("#likeTheater2").val();
+		var likeTheater3 =$("#likeTheater3").val();
+		$("#likeTheater1_input").val(likeTheater1);
+		$("#likeTheater2_input").val(likeTheater2);
+		$("#likeTheater3_input").val(likeTheater3);
+		$("#likeTheaterForm").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 	});
 	
 		
@@ -976,8 +986,8 @@ $(function(){
 
 					<div class="cont-area" style="padding-left: 50px;">
 						<div class="total">
-							<p class="now">${user.totalPoint}P</p><br><br>
-							<p>누적포인트 : ${user.accPoint}P</p>
+							<p class="now"><fmt:formatNumber value="${user.totalPoint}" pattern="#,###" />P</p><br><br>
+							<p>누적포인트 : <fmt:formatNumber value="${user.accPoint}" pattern="#,###" />P</p>
 						</div>
 					</div>
 				</div>
@@ -1013,7 +1023,7 @@ $(function(){
 		
 		
 		<!-- 선호극장 Modal -->
-	<form>
+	<form id="likeTheaterForm">
 		<div class="modal fade" id="theaterChoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -1026,7 +1036,7 @@ $(function(){
 					<div class="modal-body">
 						<div class="form-group row" style="text-align: center;">
 		 					<div class="col-sm-4">
-								<select class="form-control" id="likeTheater1" name="likeTheater1">
+								<select class="form-control" id="likeTheater1">
 										<option selected>극장선택</option>
 									<c:forEach var="i" items="${getTheaterList}">
 						   				<option value="${i.theaterName}">${i.theaterName}</option>
@@ -1034,7 +1044,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control" id="likeTheater2" name="likeTheater2">
+								<select class="form-control" id="likeTheater2">
 										<option selected>극장선택</option>
 									<c:forEach var="i" items="${getTheaterList}">
 						   				<option value="${i.theaterName}">${i.theaterName}</option>
@@ -1042,7 +1052,7 @@ $(function(){
 								</select>
 							</div>
 							<div class="col-sm-4">
-								<select class="form-control" id="likeTheater3" name="likeTheater3">
+								<select class="form-control" id="likeTheater3">
 										<option selected>극장선택</option>
 									<c:forEach var="i" items="${getTheaterList}">
 						   				<option value="${i.theaterName}">${i.theaterName}</option>
@@ -1051,12 +1061,15 @@ $(function(){
 							</div>
 								</div>
 								<div style="text-align:center;">
+								<input type="hidden" id="likeTheater1_input" name="likeTheater1">
+								<input type="hidden" id="likeTheater2_input" name="likeTheater2">
+								<input type="hidden" id="likeTheater3_input" name="likeTheater3">
 								<button type="button" id="mapModal" class="button large purple" data-toggle="modal" data-target=".bd-example-modal-xl">지도로 선택</button>
 						</div>
 				      </div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-				        <button type="button" class="btn btn-primary" id="addGenreBtn">등록</button>
+				        <button type="button" class="btn btn-primary" id="addTheaterBtn">등록</button>
 				      </div>
 				    </div>
 				  </div>
@@ -1074,17 +1087,17 @@ $(function(){
 
 				<div class="box-border link-movie-story">
 					<a href="#" id=sawMovie title="본 영화 탭으로 이동">
-						<em>0</em>
+						<em>${mySeeMovieCnt}</em>
 						<span>본 영화</span>
 					</a>
 
 					<a href="#" id="wishList" title="위시리스트 탭으로 이동" >
-						<em>0</em>
+						<em>${wishMovieCnt}</em>
 						<span>위시리스트</span>
 					</a>
 
 					<a href="/mypage/moviestory?cd=lm" title="한줄평 탭으로 이동">
-						<em>0</em>
+						<em>${commentCnt }</em>
 						<span>한줄평</span>
 					</a>
 
@@ -1118,7 +1131,7 @@ $(function(){
 					</ul>
 				</div>
 				<!-- Modal -->
-				 <form>
+				 <form id="likeGenreForm">
 				 <input type= "hidden" name= "userNo" value="${user.userNo }" >
 					<div class="modal fade" id="genreChoice" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					  <div class="modal-dialog" role="document">
