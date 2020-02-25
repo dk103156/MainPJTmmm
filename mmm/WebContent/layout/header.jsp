@@ -37,6 +37,11 @@
   <link rel="stylesheet" href="../resources/css/owl.carousel.min.css">
   <link rel="stylesheet" href="../resources/css/owl.theme.default.min.css">
   
+  <!-- datepicker -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+	
+  
   <style>
   body {
   	font-family: 'Noto Sans KR', sans-serif !important;

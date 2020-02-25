@@ -21,8 +21,8 @@ function Pagination(currentPage) {
 	console.log('fncGetList에 왔거든여');
 	$("#currentPage").val(currentPage);
 	console.log($("#currentPage").val());
-	$("form").attr("method","POST").attr("action", "/customer/getContactList").submit();
-
+	//$("form").attr("method","POST").attr("action", "/customer/getApplyList").submit();
+	$("#plusPage").load("/customer/getApplyList",$("#currentPage").serialize());
 	
 }
 

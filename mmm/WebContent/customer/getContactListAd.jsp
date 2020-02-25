@@ -1782,22 +1782,15 @@ input {
 </head>
 
 <body>
-<jsp:include page="/layout/header.jsp"></jsp:include>
 <form autocomplete="off">
 <div class="container">
 <div id="contents">
+<br><br>
 	<h2 class="tit">관리자 문의내역 관리</h2>
-<!-- 	<div class="tab-block"> -->
-<!-- 		<ul> -->
-<!-- 			<li data-url="/mypage/myinquiry?cd=INQD01"><a href="#" class="btn" data-cd="INQD01" title="1:1 문의내역 탭으로 이동">1:1 문의내역</a></li> -->
-<!-- 			<li data-url="/mypage/myinquiry?cd=INQD03"><a href="#" class="btn" data-cd="INQD03" title="단체관람/대관 문의내역 탭으로 이동">단체관람/대관 문의내역</a></li> -->
-<!-- 			<li data-url="/mypage/myinquiry?cd=INQD02"><a href="#" class="btn" data-cd="INQD02" title="분실물 문의내역 탭으로 이동">분실물 문의내역</a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
 
 	<div class="mypage-infomation mt20">
 		<ul class="dot-list mb20">
-			<li id="tabDesc">  고객센터를 통해 남기신 1:1 문의내역을 확인하실 수 있습니다.</li>
+			<li id="tabDesc"> </li>
 			<!-- <li>문의하시기 전 <a href="/support/faq" class="a-link"><strong>자주묻는질문</strong></a>을 확인하시면 궁금증을 더욱 빠르게 해결하실 수 있습니다</li> -->
 		</ul>
 
