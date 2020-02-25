@@ -132,7 +132,7 @@
 	.slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	.slide_btn_box > .slide_btn_prev { left: -100px; }
 	.slide_btn_box > .slide_btn_next { right: -100px; }
-	.slide_pagination { position: relative; left: 70%; bottom: -20px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	.slide_pagination { position: relative; left: 90%; bottom: -20px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
 	.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
@@ -155,21 +155,21 @@
 		  </ol>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img src="../resources/image/mainPage/first.jpg" class="d-block w-100" alt="..." width=1048 height=518 >
+		      <img src="../resources/image/mainPage/first.jpg" class="d-block w-100" alt="..." >
 		      <div class="carousel-caption d-none d-md-block">
 		        <h5>First slide label</h5>
 		        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
 		      </div>
 		    </div>
 		    <div class="carousel-item">
-		      <img src="../resources/image/mainPage/second.jpg" class="d-block w-100" alt="..." width=1048 height=518 >
+		      <img src="../resources/image/mainPage/second.jpg" class="d-block w-100" alt="..." >
 		      <div class="carousel-caption d-none d-md-block">
 		        <h5>Second slide label</h5>
 		        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 		      </div>
 		    </div>
 		    <div class="carousel-item">
-		      <img src="../resources/image/mainPage/third.jpg" class="d-block w-100" alt="..." width=1048 height=518 >
+		      <img src="../resources/image/mainPage/third.jpg" class="d-block w-100" alt="..." >
 		      <div class="carousel-caption d-none d-md-block">
 		        <h5>Third slide label</h5>
 		        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>

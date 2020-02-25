@@ -30,6 +30,7 @@
 	  
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
+</head>
 	  
 <body id="body">
 
@@ -104,7 +105,7 @@
 						<div class="purchaseRegDate col-3"><span>${Month } &nbsp; (${Day })</span></div>					
 					</c:if>
 					<div class="purchaseCancel col-2">
-					   	<form action="/purchase/cancelTest/${i.purchaseNo}" method="post">
+					   	<form action="/payment/cancelPayment?purchaseNo=${i.purchaseNo}" method="post">
 						</form>
 					</div>
 				</div>
