@@ -31,8 +31,8 @@
 	
 	
 <style>
-	header {
-    background-color: #242424;
+	#prodHeader{
+    background-color: white;
     height: 3.0rem;
     font-family: 'Noto Sans KR', sans-serif;
 	}
@@ -97,20 +97,11 @@
 	</head>
 
 <body>
-	
-	<header>
-		<div class="row mx-0" >
-				<div class="col-2">
-					<h3 id="mov" style="color: #ffffff;  margin: 10px 5px; ">스토어</h3>
+	<jsp:include page="/layout/header.jsp"/>
+		<div class="row mx-0" id="prodHeader">
+				<div class="col-4">
 				</div>
 				
-				<div class="col-1" style="text-align:left;">
-					<h6 id="voucher" style="color: #ffffff;margin: 15px 0px;"><strong>바우처</strong></h6>
-				</div>
-				
-				<div class="col-1" style="text-align:left;">
-					<h6 id="snack" style="color: #ffffff; margin: 15px 0px;"><strong>스낵</strong></h6>
-				</div>
 				
 				
 				
@@ -142,18 +133,17 @@
 				
 				
 				<div class="col-1" style="text-align:center;">
-					<h6 id="addProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>등록</strong></h6>
+					<h6 id="addProduct"  style="color: #242424; margin: 15px 0px;"><strong>등록</strong></h6>
 				</div>
 				
 				<div class="col-1" style="text-align:center;">
-					<h6 id="updateProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>수정</strong></h6>
+					<h6 id="updateProduct"  style="color: #242424; margin: 15px 0px;"><strong>수정</strong></h6>
 				</div>
 				
 				<div class="col-1" style="text-align:center;">
-					<h6 id="deleteProduct"  style="color: #ffffff; margin: 15px 0px;"><strong>삭제</strong></h6>
+					<h6 id="deleteProduct"  style="color: #242424; margin: 15px 0px;"><strong>삭제</strong></h6>
 				</div>
 			
 		</div>	
-	</header>
 </body>
 </html>

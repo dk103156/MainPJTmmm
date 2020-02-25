@@ -31,7 +31,7 @@ footer {
 	background-color:  #333;
 }
 
-.foo_div > img {
+.foo_div > a > img {
     width: 109px;
     height: 107px;
     border-radius: 50%;
@@ -62,7 +62,7 @@ footer {
 	margin-bottom: 10px;
 }
 
-.foo_div1 div > img{
+.foo_div1 div > a > img{
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
@@ -223,13 +223,13 @@ $(function(){
 
 <footer>
 	    <div class="foo_div">
-	    	<img src="../resources/image/logo/logo.png">
+	    	<a href="/main" title="MMM"><img src="../resources/image/logo/logo.png"></a>
 	    </div>
-	    <div class="foo_div1">
+	    <div class="foo_div1" style="margin-right: 70px;">
 		    <div class="3Sa_Logo">	    
-		    	<img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;">           
-		    	<img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;">
-		    	<img alt="" src="../resources/image/logo/MegaBox.jpg">
+		    	<a href="http://www.cgv.co.kr/"><img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
+		    	<a href="https://www.megabox.co.kr/"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
+		    	<a href="https://www.lottecinema.co.kr/"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a>
 		    </div>	
 		    <div class="copyright">    
 		    	<span>(주) MMM</span> <span> | </span>

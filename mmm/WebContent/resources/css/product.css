@@ -24,9 +24,8 @@
  #addProdDiv{
       margin-top: 25px;
       margin-bottom: 55px;
-      border: 2px solid #302f24;
-      border-radius: 50px 40px 50px 50px / 50px 40px 50px 50px;
       width: 836px;
+      box-shadow: 5px 5px 5px 3px gray;
 }
 
 #addProdBtn{
@@ -195,6 +194,10 @@ form > div > div > span.name{
 
 #inventoryModal{
 	border-color: #fee50e;
+}
+
+#exampleModalCenter{
+	background-color: #fee50e;
 }
 
 
