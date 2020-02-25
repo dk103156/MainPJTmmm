@@ -84,7 +84,7 @@ INSERT
 	
 	
 INSERT
-	INTO users(user_no , user_id , user_name , password , birth , gender , phone , email , addr , like_genre1 , 
+	INTO users(user_no , user_id , user_name , password , birth , gender , phone , email  , like_genre1 , 
 				like_genre2 , like_genre3 , like_theater1 , like_theater2 , like_theater3 , user_date, identity)
 	VALUES	( seq_users_user_no.NEXTVAL , 'user07', '홍길동', '5a8ef7d08c184f726cf77577dce32119affd1a1f9284c3e906bb0b9cc11dd5ba', NULL,'M','01077777777','hong@naver.com',
 			 '공포(호러)','어드벤처','뮤지컬','CGV 강남','메가박스 강남','메가박스 강남', SYSTIMESTAMP ,0);	
