@@ -28,6 +28,10 @@
   <!-- 카카오 맵 api key -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
   
+    <!-- summer notes -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+  
   <style>
   body {
   	font-family: 'Noto Sans KR', sans-serif !important;
