@@ -133,7 +133,7 @@ $(function(){
 // 	$("#btn").on('click',function(){	
 // 		self.location="/user/login";
 // 	})
-	
+	 
 	
 	//======================"로그인" Event 연결==========
 		
