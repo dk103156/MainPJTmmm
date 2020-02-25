@@ -486,15 +486,16 @@ public class UserController {
 		try {
 			System.out.println("/user/updateUser : POST");
 		
-			//Business Logic
-			User sessionUser = ((User)session.getAttribute("user"));
-			
-		
-			if(sessionUser.getUserNo() == user.getUserNo()) {
+			if(session != null) {
+				//Business Logic
+				User sessionUser = ((User)session.getAttribute("user"));
+				
+				user.setUserNo(sessionUser.getUserNo());
 				userService.updateUser(user);
 				
 				session.setAttribute("user", userService.getUser(user.getUserNo()));
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,5 +1,11 @@
 package com.mmm.web.mypage;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +19,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mmm.common.CheckAuth;
 import com.mmm.common.Search;
+import com.mmm.service.board.BoardService;
 import com.mmm.service.datetime.DateTimeService;
+import com.mmm.service.domain.Comment;
+import com.mmm.service.domain.DateTime;
+import com.mmm.service.domain.Ticketing;
 import com.mmm.service.domain.User;
+import com.mmm.service.movie.MovieService;
 import com.mmm.service.payment.PaymentService;
+import com.mmm.service.ticketing.TicketingService;
 import com.mmm.service.user.UserService;
+import com.mmm.web.user.UserRestController;
 
 //==>마이페이지 Controller
 @Controller
@@ -37,6 +50,15 @@ public class MypageController {
 	
 	@Autowired
 	private DateTimeService dateTimeService;
+	
+	@Autowired
+	private TicketingService ticketingService;
+	
+	@Autowired
+	private MovieService movieService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	///Constructor
 	public MypageController() {
@@ -75,6 +97,9 @@ public class MypageController {
 		
 		session.setAttribute("user", userService.getUser(user.getUserNo()));
 		model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
+		model.addAttribute("mySeeMovieCnt", mySeeMovieCnt(user.getPhone()));
+		model.addAttribute("wishMovieCnt", wishMovieCnt(user.getUserNo()));
+		model.addAttribute("commentCnt", commentCnt(user.getUserId()));
 		
 		return "forward:/mypage/mypageUser.jsp";
 	}
@@ -95,6 +120,111 @@ public class MypageController {
 		System.out.println("/mypage/wishList : GET ");
 		
 		return "forward:/mypage/wishList.jsp";
+	}
+	
+	// 한줄평 개수 가져오기
+	public int commentCnt(String userId) {
+		
+		int commentCnt = 0;
+		
+		try {
+			Search search = new Search();
+			search.setStartRowNum(1);
+			search.setCurrentPage(1);
+			search.setPageSize(10);
+			search.setCommentType(3);
+			search.setUserId(userId);
+		
+			Map<String, Object> resultMap = boardService.getCommentList(search);
+			
+			System.out.println("commentCnt : "+resultMap);
+			
+			if(resultMap != null) {
+				List<Comment> list = (List<Comment>) resultMap.get("list");
+				commentCnt = (int)resultMap.get("totalCount");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+
+		return commentCnt;
+		
+	}
+	
+	// 위시리스트 개수 가져오기
+	public int wishMovieCnt(int userNo) {
+		
+		int wishMovieCnt = 0;
+		
+		try {
+			Search search = new Search();
+			search.setStartRowNum(1);
+			search.setCurrentPage(1);
+			search.setPageSize(10);
+			
+			HashMap<String, Object> inputData = new HashMap<String, Object>();
+			inputData.put("userNo", userNo);
+			inputData.put("search", search);
+			
+			HashMap<String, Object> result = movieService.getWishMovieList(inputData);
+			
+			System.out.println(result);
+			
+			if(result != null) {
+				wishMovieCnt = (int) result.get("totalCnt");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return wishMovieCnt;
+	}
+	
+	// 내가 본 영화 개수 가져오기
+	public int mySeeMovieCnt(String ticketerPhone) {
+		
+		int mySeeMovieCnt = 0;
+		
+		try {
+			
+			// 1. 티켓팅 리스트를 가져오기 위해서 Search 셋팅(폰번호)
+			Search search = new Search();
+			search.setTicketerPhone(ticketerPhone);
+			search.setSearchCondition("2");
+			search.setCurrentPage(1);
+			search.setPageSize(8);
+			
+			// 2. 티켓팅 리스트 가져오기
+			Map<String, Object> map = ticketingService.getTicketingList(search);
+			List<Ticketing> list = (List<Ticketing>)map.get("list");
+			
+			// 3. 티켓팅한 영화상영 정보를 담을 리스트 생성
+			List<String> dateTimeNoList = new ArrayList<String>();
+			
+			// 4. 티켓팅의 영화상영번호 리스트에 저장
+			for(Ticketing t: list) {
+				dateTimeNoList.add(t.getDateTimeNo());
+			}
+			
+			// 5. 영화상영번호 중복 제거
+			HashSet<String> distinctData = new HashSet<String>(dateTimeNoList);
+			dateTimeNoList = new ArrayList<String>(distinctData);
+			
+			// 6. 중복제거된 영화상영정보의 사이즈가 곧 내가 본 영화의 수
+			mySeeMovieCnt = dateTimeNoList.size();
+			
+			return mySeeMovieCnt;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mySeeMovieCnt;
+		
 	}
 
 }
