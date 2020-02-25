@@ -31,20 +31,25 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   
+  <!--     Common Css -->
+  <link rel="stylesheet" href="/resources/css/common.css?aer">
+  
   	
 <title>Insert title here</title>
 <style>
 	  body {
  	  	font-family: 'Noto Sans KR', sans-serif !important;
+ 	  	background-color: 
  	  }
 
 </style>
 </head>
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 
-<div class="container">
-	<div class="row mt-3 mb-5">
-		<div class="col-12 text-center">
+<div class="container mb-3 border-bottom p-3">
+	<div class="row mt-5 mb-5">
+		<div class="col-12 text-center bg-dark-cs p-3 mb-0">
 			<span><h2>예매가 완료 되었습니다.</h2></span>
 		</div>
 	</div><!-- end of row -->
@@ -59,11 +64,11 @@
 				<div class="col-3">예매 PIN NO</div>
 				<div class="col-9">${ticketing.ticketingPinNo }</div>
 			</div>
-			<div class="row mb-4">
+			<div class="row mb-4 ">
 				<div class="col-3">영화제목</div>
 				<div class="col-9">${ticketing.movieName}</div>
 			</div>
-			<div class="row mb-4">
+			<div class="row mb-4 ">
 				<div class="col-3">극장</div>
 				<div class="col-9">${ticketing.theaterName }</div>
 			</div>
@@ -82,11 +87,11 @@
 			
 	</c:if> 
 	<c:if test="${payment.payObjectFlag==1 || payment.payObjectFlag==2 }" >
-			<div class="row mb-4">
+			<div class="row mb-4 ">
 				<div class="col-3">상품명</div>
 				<div id="prodName" class="col-9"></div>
 			</div>
-						<div class="row mb-4">
+			<div class="row mb-4">
 				<div class="col-3">상품개수</div>
 				<div class="col-9">${purchase.purchaseProductQuantity }</div>
 			</div>
@@ -95,7 +100,7 @@
 				<div class="col-3">결제금액</div>
 				<div class="col-9">${payment.totalPrice}원</div>
 			</div>
-			<div class="row mb-4">
+			<div class="row mb-4 ">
 				<div class="col-3">결제수단</div>
 				<div class="col-9">
 				<c:choose>
@@ -140,14 +145,14 @@
 	
 	<div class="row mt-5">
 		<div class="col-3"></div>
-		<div class="col-2">
-			<button type="button" class="btn btn-primary">예매정보 출력</button>
+		<div class="col-2 text-center">
+			<button type="button" class="btn btn-yellow-cs font-bolder-cs">예매정보 출력</button>
 		</div>
-		<div class="col-2">
-			<button type="button" class="btn btn-secondary">결과 SMS 발송</button>
+		<div class="col-2 text-center">
+			<button type="button" class="btn  btn-secondary">결과 SMS 발송</button>
 		</div>
-		<div class="col-2">
-			<button type="button" class="btn btn-dark confirm">예매 확인/취소</button>
+		<div class="col-2 text-center">
+			<button type="button" class="btn  btn-dark confirm">예매 확인/취소</button>
 		</div>
 		<div class="col-3"></div>
 	</div>

@@ -2,6 +2,7 @@ package com.mmm.service.payment;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.mmm.common.Search;
 import com.mmm.service.domain.Payment;
@@ -29,7 +30,11 @@ public interface PaymentDao {
 	
 	public HashMap<String, Object> getPointList(Search search)throws Exception;
 	
+	public Map<String, Point> getPoints(int paymentNo)throws Exception;
+	
 	public void addPoint(Point point)throws Exception;
+	
+	public void cancelPoint(int pointNo)throws Exception;
 	
 	public int checkAttedance(int userNo)throws Exception;
 	
