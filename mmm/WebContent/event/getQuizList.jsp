@@ -150,94 +150,94 @@
 
 <style>
 
-		a.crtPage{
-		background-color: black;
+		a.crtPage {
+			background-color: black;
 		}
 
-   		#header{ 
-      	width:750px;
-      	height:auto;
-      	padding: 20px;
-      	background-color:white;
-        margin: 10px auto;
-		border-top:1px solid darkgray;
-		border-bottom:1px solid darkgray;
-        color:  black;
+   		#header { 
+	      	width:750px;
+	      	height:auto;
+	      	padding: 20px;
+	      	background-color:white;
+	        margin: 10px auto;
+			border-top:1px solid darkgray;
+			border-bottom:1px solid darkgray;
+	        color:  black;
         }
         
-       .qLogin ul{
-   		 position: absolute;
-	  	 right: 18px;
-	   	 top: 11px;
+       .qLogin ul { 
+	   		 position: absolute;
+		  	 right: 18px;
+		   	 top: 11px;
 		}
 		
 		.qLogin ul li {
-	  	  float: left;
-	 	  padding-left: 18px;  
+		  	  float: left;
+		 	  padding-left: 18px;  
          }
          
-		.qLogin ul li P{
-	 	 padding: 15px 40px 22px;
-	     background: #fff;
-	     text-align: center;
-	     line-height: 19px;
-	     font-size: 16px;
+		.qLogin ul li P {
+		 	 padding: 15px 40px 22px;
+		     background: #fff;
+		     text-align: center;
+		     line-height: 19px;
+		     font-size: 16px;
 		}
 		
-		.qLogin ul li p span{
-	    display: block;
-    	padding-bottom: 11px;
-    	font-weight: 650;
+		.qLogin ul li p span {
+		    display: block;
+	    	padding-bottom: 11px;
+	    	font-weight: 650;
 		}
    
-        ul, ol{
-        list-style: none;
+        ul, ol {
+       		 list-style: none;
         } 
         
-         .qLogin{
-      	 width:808px;
-     	 height: 119px;
-         margin: 10px auto;
-         position: relative;
+         .qLogin {
+	      	 width:808px;
+	     	 height: 119px;
+	         margin: 10px auto;
+	         position: relative;
 	   }
     
        .qLogin .qltx{
-        padding-top: 30px;
-	    padding-left: 45px;
-	    pqeeint-bottom: 28px;
-	    font-size: 18px;
-	    color: black;
-	    line-height: 20px;
-	    font-weight: 650;
+	        padding-top: 30px;
+		    padding-left: 45px;
+		    pqeeint-bottom: 28px;
+		    font-size: 18px;
+		    color: black;
+		    line-height: 20px;
+		    font-weight: 650;
 	  }
   
 		  
 		button.quiz.btn{ 
-		width:70px;
-	    background-color: #cecfc6;
-	    border: none;
-	    color:#000000;
-	    padding: 10px 0;
-	    text-align: center;
-	    text-decoration: none;
-	    display: inline-block;
-	    font-size: 16px !important;
-	    margin: 6px;
-	    cursor: pointer;
-		border-radius:40px;
+			background-color: #fee50e!important;
+	   		color: #212529;
+	    	border-color: #fcfaf5;
+	    	font-size: 13px;
 		}
 		
-		.btn:hover {
-	    background-color: #fee50e;
+		button.quiz.btn:hover {
+		     color: #f8f9fa;
+		     background-color: #e0a800;
+		     border-color: #040404;
 		}
+		
 		
 		.page-item.active .page-link {
-	    z-index: 1;
-	    color: #4e4c4c;
-	    background-color: #fee00e;
-	    border-color: #d6cece;
+		    z-index: 1;
+		    color: #4e4c4c;
+		    background-color: #fee00e;
+		    border-color: #d6cece;
+		 }
+
 </style>
+
 </head>
+
+
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
@@ -256,7 +256,7 @@
 		
 		<p style="margin-left:3em;">
 		       참여수 ${totalCount} | 
-			정답수 ${winCount} | 정답률<fmt:formatNumber value="${winRate}" pattern=".00" /> | 
+			정답수 ${winCount} | 정답률<fmt:formatNumber value="${winRate}" pattern=".00" />% | 
 			남은퀴즈 ${leftQuiz}
 		</p>
 		
@@ -360,6 +360,6 @@
 </c:if>
 </div>
 </div>
-<%-- <jsp:include page="/layout/footer.jsp"></jsp:include> --%>
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>
