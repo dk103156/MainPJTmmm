@@ -119,7 +119,7 @@ div.container.getTicketingList {
 									    	</div>
 									    	<div class="afterButton col-3">
 									    	    <c:if test="${ i.ticketingStatus==0 }">
-									    	    	<form action="/ticketing/cancelTest/${i.ticketingNo}" method="post">
+									    	    	<form action="/payment/cancelPayment?ticketingNo=${i.ticketingNo}" method="GET">
 									    				<input class="btn btn-primary" type="submit" value="예매취소"></button>
 									    			</form>
 									    		</c:if>

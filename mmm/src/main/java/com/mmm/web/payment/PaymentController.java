@@ -371,7 +371,7 @@ public class PaymentController {
 		}
 		
 		
-		return "forward:/ticketing/completeTicketing.jsp";
+		return "redirect:/mypage/mypage.jsp";
 	}// end of cancelPayment()
 	
 	
