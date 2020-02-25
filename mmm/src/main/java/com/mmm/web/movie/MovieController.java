@@ -485,7 +485,9 @@ public class MovieController {
 		System.out.println("------- resultPage : " + resultPage);
 		
 		for(Comment cmt : (List<Comment>)outputMap.get("list")) {
-			System.out.println("--------- cmt : " + cmt);
+			
+//			System.out.println("--------- cmt : " + cmt);
+			cmt.setCommentDate(JavaUtil.convertDateFormat(cmt.getCommentDate()));
 		}
 		
 		List<Comment> list = (List<Comment>) outputMap.get("list");

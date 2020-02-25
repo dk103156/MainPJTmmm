@@ -48,7 +48,8 @@
 		<result property="articleNo"				column="article_no"			jdbcType="NUMERIC"/>
 		<result property="commentContent"			column="cmt_content"		jdbcType="VARCHAR"/>
 		<result property="commentDate"				column="cmt_date"			jdbcType="TIMESTAMP"/>
-		<result property="blindStatus"				column="blind_flag"		jdbcType="NUMERIC"/>
+		<result property="blindStatus"				column="blind_flag"			jdbcType="NUMERIC"/>
+		<result property="movieTitle"				column="movie_title"			jdbcType="VARCHAR"/>
 	</resultMap>
 
 
@@ -172,8 +173,7 @@
 <!-- 댓글 /한줄평 읽기 -->	
 	<select id="getCommentList" parameterType="Search" resultMap="cmtSelectMap">
 	SELECT 
-	 cmt_no, cmt_type, user_id, sup_cmt_no, article_no,	 movie_no, cmt_content, cmt_date, 
-	 cmt_count, blind_flag, blind_reason, blind_date
+	 *
 	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
   				FROM (	
   					<include refid="search-cmt"/>	
@@ -190,7 +190,7 @@
 		 	 c.cmt_no, c.cmt_type, c.user_id, c.sup_cmt_no, c.article_no,
 	 		 c.movie_no, c.cmt_content, c.cmt_date, c.cmt_count, c.blind_flag, c.blind_reason, c.blind_date
 		 <if test="commentType != null and commentType ==3 ">
-		 ,m.movie_title
+		 ,m.movie_title movie_title
 		 </if>
 		 FROM commentt c
 		 <if test="commentType != null and commentType ==3 ">
@@ -220,6 +220,7 @@
 		 
 		
 		</where>
+		ORDER BY cmt_date DESC
  </sql>
 
 
