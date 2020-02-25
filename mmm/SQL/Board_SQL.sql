@@ -56,7 +56,7 @@ CREATE TABLE commentt(
 CREATE TABLE likee ( 
 	like_no		 	NUMERIC(5) 	 	NOT NULL,
 	user_id	 		VARCHAR2(10) 	NOT NULL REFERENCES users(user_id),
-	article_no		NUMERIC(5) 	 	REFERENCES article(article_no),
+	article_no	 	NUMERIC(5) 	 	REFERENCES article(article_no),
 	cmt_no		 	NUMERIC(5)  	REFERENCES commentt(cmt_no),		 
 	ref_type	 	NUMERIC(1) 	 	,
 	PRIMARY KEY(like_no)

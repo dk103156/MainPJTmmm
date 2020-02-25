@@ -347,7 +347,7 @@ public class ProductController {
 			System.out.println("addCart.jsp 로 갑니당!");
 
 			
-			return "forward:/product/getProdMainList.jsp";
+			return "forward:/product/getSnackProductList";
 			
 		}
 		
