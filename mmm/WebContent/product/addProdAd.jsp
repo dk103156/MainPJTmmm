@@ -41,13 +41,8 @@
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$( "#addProdBtn" ).on("click" , function() {
 			
-			Swal.fire({
-				  icon: 'success',
-				  title: '상품등록이 완료 되었습니다.',
-				  timer: 3000
-				}).then(function () {
+			
 					fncAddProduct();	
-					})			
 			
 		});
 	});	
@@ -78,9 +73,20 @@
 		alert("가격은 반드시 입력하셔야 합니다.");
 		return;
 	}
-
-	$("form").attr("method" , "POST").attr("action" , "/product/addProduct").attr("enctype","multipart/form-data").submit();
-}
+	
+	Swal.fire({
+		  icon: 'success',
+		  title: '상품등록이 완료 되었습니다.',
+		  timer: 3000
+		}).then( result => {
+			$("form").attr("method" , "POST").attr("action" , "/product/addProduct").attr("enctype","multipart/form-data").submit();		
+			
+		});
+	
+	
+	
+	
+	}
 	
 	
 	
@@ -183,6 +189,5 @@
 		<br/>
  			 
 	 </div>
-	 <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>
