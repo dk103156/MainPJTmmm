@@ -1753,5 +1753,9 @@ function getDateList(movieCheck,franchiseCheck,theaterCheck){
 }//end of getDateList()
 </script>
 
+<!-- Header Start /////////////////////////////////////-->
+<jsp:include page="/layout/footer.jsp" />
+<!-- Header End /////////////////////////////////////-->	
+
 </body>
 </html>
