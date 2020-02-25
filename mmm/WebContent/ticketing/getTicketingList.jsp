@@ -31,6 +31,11 @@
 
 <style>
 
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+}
+
 #body {
 	
 	font-family: 'Noto Sans KR', sans-serif !important;
@@ -464,7 +469,7 @@ $(function(){
 								    
 					    			
 					    			//예매 취소 버튼 추가
-					    			Element  = "<form action='/ticketing/cancelTest/"+data.ticketingList[i].ticketingNo+" 'method='post'>"
+					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
 				    				Element += "<input class='btn btn-primary' type='submit' value='예매취소'></button>"
 				    				Element += "</form>"
 				    				

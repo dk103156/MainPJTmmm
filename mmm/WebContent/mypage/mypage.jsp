@@ -152,7 +152,7 @@ p.mypages {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 $(function(){
-	
+
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -232,7 +232,15 @@ $(function(){
 		
 	})
 	
-	$("#MypageHome").trigger("click");
+	//$("#MypageHome").trigger("click");
+	
+	var condition = parseInt('${condition}');
+	//console.log("조건은 ? :"+condition);
+	if(condition==0){
+		$("#MypageHome").trigger("click");
+	}else{
+		$($("#lnb > a")[condition-1]).trigger("click");
+	}
 	
 });
 </script>

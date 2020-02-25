@@ -90,8 +90,10 @@
 	<div class="container-fluid px-0">
 		<div class="row px-0 mx-0">
 			<div class="aside col-12 px-0 mb-3 text-center">
+				<a href="/mypage/mypage?condition=0">
 				<img class="aside" src="../resources/image/mainPage/aside/myPage.png" width=80 >
-				<a href="/mypage/mypage"><span class="aside">마이 페이지</span></a>
+				<span class="aside">마이 페이지</span>
+				</a>
 			</div>
 			<div class="aside col-12 px-0 mb-3 text-center">
 				<a href="/ticketing/addTicketing">
@@ -100,7 +102,7 @@
 				</a>
 			</div>
 			<div class="aside col-12 px-0 mb-3 text-center">
-				<a href="/mypage/mypage">
+				<a href="/mypage/mypage?condition=1">
 					<img class="aside"  src="../resources/image/mainPage/aside/getTicketingList.png" width=80 >
 					<span class="aside">예매내역</span>
 				</a>

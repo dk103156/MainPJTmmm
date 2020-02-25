@@ -774,6 +774,9 @@
     <jsp:include page="/ticketing/progressBar.jsp" />	 
 <!-- 하단 진행 바  -->     
 
+
+	<jsp:include page="/layout/footer.jsp" />
+	
      <!-- 변수 모음 -->
      <script>
      //첫번째

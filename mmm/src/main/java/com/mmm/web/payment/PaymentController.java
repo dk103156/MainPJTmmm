@@ -355,8 +355,8 @@ public class PaymentController {
 	}//end of addPayment()
 	
 	@RequestMapping(value = "/cancelPayment", method = RequestMethod.GET)
-	public String cancelPayment(@RequestParam(value = "ticketingNo") String ticketingNo,
-								@RequestParam(value = "purchaseNo") int purchaseNo,
+	public String cancelPayment(@RequestParam(value = "ticketingNo", required=false) String ticketingNo,
+								@RequestParam(value = "purchaseNo", required=false) int purchaseNo,
 								HttpSession session, Model model)throws Exception{
 		
 		Payment payment = new Payment();
@@ -364,10 +364,11 @@ public class PaymentController {
 		if (ticketingNo != null) {
 			System.out.println("===========> 예매, 예매+구매 취소");
 			payment = paymentService.getPaymentbyTicketingNo(Integer.parseInt(ticketingNo));
+			return "redirect:/mypage/mypage?condition=1";
 		}else if (purchaseNo != 0) {
 			System.out.println("==========> 구매 취소");
 			payment = paymentService.getPaymentbyPurchaseNo(purchaseNo);
-			
+			return "redirect:/mypage/mypage?condition=2";
 		}
 		
 		

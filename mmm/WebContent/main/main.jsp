@@ -132,7 +132,7 @@
 	.slide_btn_box > button { position: absolute; top: 50%; margin-top: -45px; width: 60px; height: 60px; font-size: 16px; color: #999; background: none; border: 1px solid #ddd; cursor: pointer; }
 	.slide_btn_box > .slide_btn_prev { left: -100px; }
 	.slide_btn_box > .slide_btn_next { right: -100px; }
-	.slide_pagination { position: relative; left: 70%; bottom: -20px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
+	.slide_pagination { position: relative; left: 90%; bottom: -20px; list-style: none; margin: 0; padding: 0; transform: translateX(-50%); }
 	.slide_pagination .dot { display: inline-block; width: 15px; height: 15px; margin: 0 5px; overflow: hidden; background: #ddd; border-radius: 50%; transition: 0.3s; }
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
