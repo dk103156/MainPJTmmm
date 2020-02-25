@@ -331,7 +331,7 @@ public class PaymentController {
 		}else if (payment.getPayObjectFlag() == 1) {	// 2: only 구매
 			model.addAttribute(purchase);
 			
-			return "forward:/";
+			return "forward:/ticketing/completeTicketing.jsp";
 			
 		}else if (payment.getPayObjectFlag() == 2) {	//3 : 예매 + 구매
 			
@@ -403,9 +403,9 @@ public class PaymentController {
 				pageUnit, pageSize);
 		System.out.println("------- resultPage : " + resultPage);
 		
-		for(Point point : (List<Point>)outputMap.get("list")) {
-			System.out.println("--------- point : " + point);
-		}
+//		for(Point point : (List<Point>)outputMap.get("list")) {
+//			System.out.println("--------- point : " + point);
+//		}
 		
 		List<Point> list = (List<Point>) outputMap.get("list");
 		
