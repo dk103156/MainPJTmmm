@@ -220,7 +220,7 @@ public class PaymentServiceTest {
 	@Test
 	public void testCancelPoint() throws Exception{
 		
-		Payment pay = paymentService.getPaymentbyTicketingNo(10099);
+		Payment pay = paymentService.getPaymentbyTicketingNo(10158);
 		System.out.println( "---pay   : " + pay);
 		
 		
