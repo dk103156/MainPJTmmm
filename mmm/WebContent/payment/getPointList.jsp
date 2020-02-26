@@ -40,14 +40,15 @@
 <div class="container point" style="margin-top : 47px;">
   <div class="row">
      <form action="">
-     
 <!--      	pagination을 위한 hidden input -->
        <input type="hidden" id="currentPage" name="currentPage" value=""/>
+     </form>
+     
        <div class="col d-inline">
   	 	<h2><Strong>포인트 내역</Strong></h2>
   	   </div>
-  	  </form>
-  	   <div class="col d-inline text-right">
+  	  
+  	   <div class="col d-inline text-right mb-2">
   	 		<h5>보유 포인트 : ${totalPoint} p</h5>
       		<p class="text-muted mb-0">(누적 포인트 : ${accPoint} p)</p>
   	   </div>
