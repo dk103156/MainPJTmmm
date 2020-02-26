@@ -351,7 +351,7 @@ public class UserRestController {
             
             StringEntity se = new StringEntity(json, "UTF-8");
             httpPost.setEntity(se);
-/*
+
             HttpResponse httpResponse = client.execute(httpPost, context);
             System.out.println(httpResponse.getStatusLine().getStatusCode());
 
@@ -372,7 +372,7 @@ public class UserRestController {
             resultInnerList = (List)resultList.get(0);
             System.out.println("----------------------resultInnerList ? : " + resultInnerList); 
     		System.out.println("----------------------resultInnerList.get(1) ? : " + resultInnerList.get(1)); 
-       */
+       
             
         } catch (Exception e) {
             System.err.println("Error: "+e.getLocalizedMessage());

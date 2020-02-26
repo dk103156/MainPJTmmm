@@ -216,7 +216,7 @@ $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자�
 	getWishMovieList(startRowNum, currentPage, pageSize); // 초기 1 페이지 호출
 	
 	$(document).on("click", ".cancleWishBtn", function(){ // 위시리스트 취소 이벤트
-		if(confirm("취소 하갓소?")){
+		if(confirm("취소 하시겠습니까?")){
 			
 			var movieNo = $(this).attr("id");
 			
