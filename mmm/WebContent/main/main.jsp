@@ -207,7 +207,7 @@
 					<div class="col-5 pl-0" id='trailer'>
 						<div class="row mx-0 mb-5">
 							<div id='trailer' class="col-12 embed-responsive embed-responsive-16by9">
-					  			<iframe id="player" class="embed-responsive-item" src="https://www.youtube.com/embed/JNlnQwHWSYw" allowfullscreen></iframe>
+					  			<iframe id="player" class="embed-responsive-item"  allowfullscreen></iframe>
 							</div>
 						</div>
 						<div class="row mx-0">					
@@ -547,7 +547,7 @@
 			$("img[name='poster']").attr('src',movie.poster );
 			
 //			영상갈아끼기
-			$('#player').attr("src","http://www.youtube.com/embed/"+ "${movie.trailer}");
+			$('#player').attr("src","http://www.youtube.com/embed/"+movie.trailer);
 			
 //			제목, 평점, 개봉일, 줄거리 갈아끼기
 			$("#movieInfo > div > div > h5").text(movie.movieTitle);
@@ -590,7 +590,7 @@
 						$("img[name='poster']").attr('src',movie.poster );
 						
 // 						영상갈아끼기
-						$('#player').attr("src","http://www.youtube.com/embed/"+ "${movie.trailer}");
+						$('#player').attr("src","http://www.youtube.com/embed/"+movie.trailer);
 						
 // 						제목, 평점, 개봉일, 줄거리 갈아끼기
 						$("#movieInfo > div > div > h5").text(movie.movieTitle);

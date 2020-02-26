@@ -56,7 +56,7 @@ public class MovieRestController {
 		int pageUnit;
 		
 		//google Key	
-		String googleKey = "AIzaSyDzyK2Q-0hj5aKytkaDkqS7ZwZgr-zaPDg";	//내꺼
+		String googleKey = "AIzaSyBQU9Xc7L0Vjs0EVFagqZX3xaocpkBr6r4";	//내꺼
 //		String googleKey = "AIzaSyCYkM_LbtXdbyGh6pxT4S3we3c6Lte2A9A";	//지민이꺼
 		String urlGoogleSearch ="https://www.googleapis.com/youtube/v3/search?key="+googleKey;
 		
@@ -316,8 +316,8 @@ public class MovieRestController {
 			Movie movie = movieService.getMovieByMovieNo(inputMovie);
 			
 //			트레일러...youtube API Method 호출 
-//			String videoId = getYoutube(movie.getMovieTitle());
-//			movie.setTrailer(videoId);	
+			String videoId = getYoutube(movie.getMovieTitle());
+			movie.setTrailer(videoId);	
 			
 			return movie;
 		}
