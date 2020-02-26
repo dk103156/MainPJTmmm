@@ -412,6 +412,21 @@
 			overflow : auto;
 			height : 400px;
 		} 
+		
+		div.calendar ul.list-group::-webkit-scrollbar {
+	  	width: 7px;
+	  }
+	  
+	  div.calendar ul.list-group::-webkit-scrollbar-thumb {
+	    background-color: #2f3542;
+	    border-radius: 10px;	  	
+	  }
+	  
+	  div.calendar ul.list-group::-webkit-scrollbar-track {
+	    background-color: grey;
+	    border-radius: 10px;
+	    box-shadow: inset 0px 0px 5px white;	  	
+	  }
 	  	  
   </style>
   
