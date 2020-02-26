@@ -998,8 +998,9 @@ franchiseSelect();
 	 array = formatToDate(array);
 	 array = array();
    	 var Elements = $("div.steps-body.text-center > div > ul > li.month");
-
-   	 for(var i in array){  		
+	 //console.log(original)
+   	 //console.log(array)
+   	 for(var i=array.length-1; i>=0; i--){  		
    		 	//console.log(new Date(array[i]));
       	  var yoil="<li class='list-group-item py-2 date'>"
    	  		yoil+="<div>"
@@ -1007,21 +1008,22 @@ franchiseSelect();
    	  		yoil+="<span class='date'>"+array[i].substring(3,5)+"</span>"
    	  		yoil+="</div>"
    	  		yoil+="</li>"
-   	  		for(var j=0; j<Elements.length; j++){
-	   		 if(parseInt(array[i].substring(0,2))==j+parseInt(array[i].substring(0,2))){
-	   			$(Elements[j]).after(yoil);
-	   		 }
-   	  		}
-   	 }
+
+   	  		Elements.each(function(index,value){
+   	  			if( $(value).find("span.month").text()==array[i].substring(0,2)){
+   	  				$(Elements[index]).after(yoil);
+   	  			}//end of if
+   	  			});//end of each
+   	 }//end of for array
    	dayColorChange() // 2020-02-14
    	
  	$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").on("click",function(){
 		$("div.steps-body.text-center > div.calendar > ul > li.list-group-item.date").removeClass("active");
 		
 		$(this).addClass("active");
-		finalYear=$(this).siblings().first().children().children().first().text();
+		finalYear=$($(this).prevAll("li.month")[0]).children().children().first().text()
 		var date=$.trim($(this).children().children().first().next().text())//일 
-		var Month=$(this).siblings().first().children().children().first().next().text()//월
+		var Month=$($(this).prevAll("li.month")[0]).children().children("span.month").text()//월
 		
 	   	 //극장 선택 div 없애기 
 	   	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
@@ -1385,10 +1387,12 @@ function check(){
 			  var searchArray = new Array();	
 			  
 			  for(var j in data){
-				  searchArray.push(formatDates(new Date(data[j].screenDate).getDate()));
+				  //console.log(new Date(data[j].screenDate).getDate())
+				  searchArray.push(new Date(data[j].screenDate).getDate());
 			  }
 			  
 			  var timeArray =document.querySelectorAll("div.steps-body.text-center > div > ul > li > div > span.date");
+			  
 			  $(timeArray).parent().parent().removeClass("off")
 			  for(var i=0; i<timeArray.length; i++){
 				  if(searchArray.indexOf(parseInt(timeArray[i].innerText))==-1){

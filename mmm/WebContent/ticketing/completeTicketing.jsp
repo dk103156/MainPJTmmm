@@ -165,7 +165,12 @@
 		<div class="col-2 text-center">
 		</div>
 		<div class="col-2 text-center">
-			<button type="button" class="btn  btn-dark confirm">예매 확인/취소</button>		
+			<c:if test="${payment.payObjectFlag==0 || payment.payObjectFlag==2}">
+			<button type="button" class="btn  btn-dark confirm">예매 확인/취소</button>
+			</c:if>
+			<c:if test="${payment.payObjectFlag==1 }">
+				<button type="button" class="btn  btn-dark confirm">구매 확인/취소</button>
+			</c:if>		
 		</div>
 		<div class="col-2 text-center">
 		</div>
@@ -207,11 +212,17 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	fullName = fullName.substring(0, fullName.length-1);
 	$("div#prodName").text(fullName);
 </c:if>
+<c:if test="${payment.payObjectFlag==1 }">
+	$("button.confirm").on("click",function(){
+		self.location="/mypage/mypage?condition=2";
+	});
+</c:if>
 
+<c:if test="${payment.payObjectFlag==0 || payment.payObjectFlag==2 }" >
 $("button.confirm").on("click",function(){
 	self.location="/mypage/mypage?condition=1";
 });
-
+</c:if>
 </script>
 </body>
 </html>

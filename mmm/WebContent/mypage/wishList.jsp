@@ -177,7 +177,7 @@ function getWishMovieList(startRowNum, currentPage, pageSize){ // 위시리스�
 				$("#wishList").append(
 					'<div class="no-my-movie-list myLikeMovie myMovieStory" id="noDataDiv">'+
 						'<i class="iconset ico-movie-see"></i>'+
-						'<p>보고싶은 영화를 담아주세요.</p>'+
+						'<h3><p>보고싶은 영화를 담아주세요.</p></h3>'+
 					'</div>'		
 				)
 			}

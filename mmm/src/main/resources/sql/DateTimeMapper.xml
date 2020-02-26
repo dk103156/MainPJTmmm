@@ -223,7 +223,7 @@
 				 and</if>
 				<if test="movieName !=null">movie_name = #{movieName} and</if>
 			</trim>
-			order by screen_date desc
+			order by screen_date asc
 	 </select>
 	
 	 <select id="getTimeList" parameterType="Search" resultMap="dateTimeSelectMap">

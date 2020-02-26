@@ -239,7 +239,11 @@ $(function(){
 	if(condition==0){
 		$("#MypageHome").trigger("click");
 	}else{
+		//$("#MypageHome").trigger("click");
+		$('.dropdown-toggle').dropdown('toggle')
+		$('.dropdown-toggle').dropdown('hide')
 		$($("#lnb > a")[condition-1]).trigger("click");
+		
 	}
 	
 });
