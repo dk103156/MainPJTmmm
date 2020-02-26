@@ -6,7 +6,7 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
-<title>addPreviewAd</title> 
+<title>MMM</title> 
 <meta charset="utf-8">
 
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -48,12 +48,15 @@
 			});
 			
 			$('#cancelBtn').on("click", function(){
-				self.location="/movie/getMovie"; //나중에 관리자 페이지로 이동
+				self.location="/movie/getExpectedMovieList"; //나중에 관리자 페이지로 이동
 			});
 	
 			$("#fileUpload").on("change", function (){
 				readURL(this);
+
 			});
+			
+	
 			
 			
 		});
@@ -99,7 +102,7 @@
 				var previewMM = $("input[name='previewMM']").val();
 				var movieNo = $("input[name='movieNo']").val();
 				
-				alert(movieNo);
+				//alert(movieNo);
 				
 				if(previewName == null || previewName.length<1) {
 					alert("시사회 이름은 반드시 입력하셔야 합니다.")

@@ -131,23 +131,25 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "extraAddUser" , method=RequestMethod.POST)
-	public String extraAddUser(@ModelAttribute("user") User user) throws Exception{
+	public String extraAddUser(@ModelAttribute("user") User user, HttpSession session) throws Exception{
 		
-	System.out.println("/user/extraAddUser : POST");
-	
-	System.out.println("userIdentity@@@@@@@:::::: "+user.getIdentity());
-	
-	//비밀번호 암호화
-	String password = user.getPhone();
-	String cryptoPassword = CryptoUtil.cryptoText(password);
-	user.setPassword(cryptoPassword);
-	user.setUserId(user.getPhone());
-	userService.addUser(user);
-	
-	//Business Logic
-	userService.extraAddUser(user);
-	
-	return "redirect:/user/login.jsp";   
+		System.out.println("/user/extraAddUser : POST");
+		
+		System.out.println("userIdentity@@@@@@@:::::: "+user.getIdentity());
+		
+		if(session != null) {
+			//비밀번호 암호화
+			String password = user.getPassword();
+			String cryptoPassword = CryptoUtil.cryptoText(password);
+			user.setPassword(cryptoPassword);
+			userService.extraAddUser(user);
+			
+			session.setAttribute("user", userService.getUser(user.getUserNo()));
+			
+			return "redirect:/user/afterExtraAddUser.jsp";   
+		}
+		return "redirect:/user/login";  
+
 	}
 	
 	@RequestMapping(value = "addProfile" , method=RequestMethod.POST)
@@ -301,7 +303,7 @@ public class UserController {
 			//회원정보가 없거나  비회원일 경우
 			  if(dbUser == null || dbUser.getRole().trim().equals("unUser")) {
 				  
-				  return "redirect:/main/main.jsp?status=failed"; 
+				  return "redirect:/user/login.jsp?status=failed"; 
 			  }
 			  
 			 //탈퇴한 회원일 경우
@@ -327,7 +329,7 @@ public class UserController {
 				session.setAttribute("user", dbUser);
 				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 			}else {//로그인 실패시 
-				return "redirect:/main/main.jsp?status=failed";
+				return "redirect:/user/login.jsp?status=failed";
 			}
 		
 		} catch (Exception e) {

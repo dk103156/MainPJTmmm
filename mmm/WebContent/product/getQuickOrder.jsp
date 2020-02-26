@@ -64,7 +64,7 @@
 	
 	
 </div><!-- end of container -->
-<img id="shoppingCart" src="../resources/image/productIcon/shoppingcart_80945.png">
+<img id="shoppingCart" src="../resources/image/productIcon/shoppingcart_pd.png" class="rounded-circle">
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

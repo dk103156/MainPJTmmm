@@ -30,37 +30,38 @@
   <link rel="stylesheet" href="/resources/css/product.css">
 	
 	<style>
-		/* 장바구니 */
+/* 장바구니 */
   #shoppingCart{
-		width : 50px;
+		width : 60px;
 		position:fixed;
-		right:10px;
+		right:30px;
 		bottom:0px;
-		z-index:1000;
+		z-index:2000;
 		cursor : pointer;
 	}
 	
   div.shoppingCart{
 		position:fixed;
 		right:-200px;
-		bottom:180px;
+		bottom:12%;
 		z-index:1000;
 		transition-property: right;
 		transition-duration: 1s;
-		width : 200px;
-		height : 550px;
+		width : 150px;
+		height : 500px;
 		border : 4px dashed #bcbcbc;
 		overflow : auto;
 	}
-	
+ 
   aside {
- 	border:3px solid #4D5155; 
+ 	border:3px solid #4D5155;
+	z-index:2000; 
  	border-radius: 30px;
- 	height: 450px; 
+ 	height: 420px; 
  	width:100px; 
  	right:10px; 
  	position: fixed;
- 	bottom : 30%;
+ 	bottom : 12%;
  	background-color : #333;
 	transition-property: right;
 	transition-duration: 1s; 	
@@ -78,6 +79,8 @@
  
  span.aside {
  	color : #fff;
+ 	font-size: 13px;
+ 	cursor : pointer;
  } 
 	</style>
 
@@ -230,7 +233,7 @@
 	</div>
 
 
-	<img id="shoppingCart" src="../resources/image/productIcon/shoppingcart_80945.png">
+	<img id="shoppingCart" src="../resources/image/productIcon/shoppingcart_pd.png" class="rounded-circle">
 	
 	  <!-- 장바구니 -->
 	  <script>
@@ -256,7 +259,7 @@
 					.done( x =>{
 							var Image =x.product.prodImage
 							
-							var Element ="<div class='product' style='background-color : white;'><span><img class='prodImage' src='../resources/image/"+Image+"' width=155><img class='removeCart'src='../resources/image/productIcon/close-button.jpg' width=20><span>";
+							var Element ="<div class='product' style='background-color : white;'><span><img class='prodImage' src='../resources/image/"+Image+"' width=100><img class='removeCart'src='../resources/image/productIcon/close-button.jpg' width=20><span>";
 								Element+="<input class='cartNo' type='hidden' value='"+data.cartNo+"'</div>"
 							$("div.shoppingCart").append(Element);
 							

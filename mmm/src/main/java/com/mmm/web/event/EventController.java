@@ -115,7 +115,9 @@ public class EventController {
 
 	//시사회이벤트 등록 폼 가져오기
 	@RequestMapping(value="addPreviewAd", method=RequestMethod.GET)
-	public String addPreviewAdView(Model model, @RequestParam int movieNo) throws Exception{ 
+	public String addPreviewAdView(Model model, @RequestParam int movieNo, HttpSession session) throws Exception{ 
+		
+		User user = (User)session.getAttribute("user");
 		System.out.println("/event/addPreviewAd:GET");
 		Movie movie = new Movie();
 		movie.setMovieNo(movieNo);
@@ -125,6 +127,10 @@ public class EventController {
 		
 		System.out.println("dateTimeService.getTheaterList(new Search())>>>"+dateTimeService.getTheaterList(new Search())); //영화관을 가져오기 위해
 		
+		
+		
+		
+		model.addAttribute("user", user);
 		model.addAttribute("movie", movie);
 		model.addAttribute("getTheaterList", dateTimeService.getTheaterList(new Search()));
 		
@@ -455,7 +461,6 @@ public class EventController {
 			User user = (User)session.getAttribute("user");
 			model.addAttribute("user", user);
 		}
-		
 		Preview preview = eventService.getPreviewAd(previewNo);
 		
 		Movie movie = new Movie();

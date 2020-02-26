@@ -402,13 +402,13 @@ public class EventRestController {
 			for(Point p : checkList) {
 				Map map = new HashMap();
 				
-				map.put("title", "출석");
+				map.put("title", "출첵완료");
 				String startDate = JavaUtil.convertDateFormat(p.getPointDate());
 //				String startDate = new SimpleDateFormat("yyyy-MM-dd").format(p.getPointDate());
 				map.put("start",startDate);
 				map.put("end",startDate);
 				map.put("allday","allday");
-				map.put("color","#fee00e");
+				map.put("color","#ffedad");
 				map.put("imageurl", "../resources/image/goodStamp.jpg");
 				returnList.add(map);
 			}

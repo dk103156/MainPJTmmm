@@ -1,38 +1,48 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 
 	<meta charset="EUC-KR">
 	
-	<title>Ä«Ä«¿À ·Î±×ÀÎ ÆË¾÷Ã¢ Ã³¸® jsp</title>
+	<title>mmm</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<link rel="stylesheet" href="/resources/demos/style.css">
   	
+  	<!-- 	SweetAlert2 CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
 	<script type="text/javascript">
-		// ÀÌµ¿ ½Ã ºÎ¸ğ Ã¢ »õ·Î°íÄ§(main.jsp·Î ÀÌµ¿)°ú ÆË¾÷Ã¢ Á¾·á¸¦ À§ÇÑ ±¸°£ 
+		// ì´ë™ ì‹œ ë¶€ëª¨ ì°½ ìƒˆë¡œê³ ì¹¨(main.jspë¡œ ì´ë™)ê³¼ íŒì—…ì°½ ì¢…ë£Œë¥¼ ìœ„í•œ êµ¬ê°„ 
 		$(function(){
+			
+		    Swal.fire({
+				  icon: 'error', //"info,success,warning,error" ì¤‘ íƒ1
+				 // title: 'Oops...',
+				  text: 'ë¡œê·¸ì¸ì„ í•´ì£¼ì„¸ìš”.'
+				}).then( result => { 
 			opener.parent.location="/main/main";
 			window.open("about:blank","_self").close();
+				});
 		})
 	</script>
 
 <head>
 <meta charset="EUC-KR">
-<title>¹Ù·Î »ç¶óÁö±â ¶§¹®¿¡ ÀÇ¹Ì ¾ø´Â jspÀÔ´Ï´Ù.</title>
+<title>SNS ê°€ì…í›„ì— ë„¤ë¹„ê²Œì´ì…˜í•˜ëŠ” jsp.</title>
 </head>
 <body>
-¾ÆÀÌ°í ÀÇ¹Ì¾ø´Ù 
+
 </body>
 </html>

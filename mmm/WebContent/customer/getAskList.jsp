@@ -26,7 +26,10 @@
 	
 	
 	$(function(){
-	
+		
+		$('.dropdown-toggle').dropdown('toggle')
+		$('.dropdown-toggle').dropdown('hide')
+		
 		$(document).on("click",".getTranInfo td:nth-child(2)" ,function() { //로드 당시에 없었던 요소들도 이벤트 걸어줌
 		
 			console.log("눌렀어");
@@ -108,8 +111,8 @@
 </style>
 </head>
 <body>
-
-<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/customer/CustomerToolBar.jsp" />
+<%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
 <div class="container">
 
 	<div class="page-header text-dark mt-3">
@@ -142,12 +145,13 @@
 <br>
 <div class="categoryBtn">
 	<div class="row">
-	
-	<div><p class="text-dark" style="font-size:15px;">
-	전체 <i style='color:#5da3d9'> ${resultPage.totalCount} </i>건 </p>
-	</div>
-    
+	<br><br>
+<!--     	<div><p class="text-dark" style="font-size:15px;"> -->
+<%-- 		전체 <i style='color:#5da3d9'> ${resultPage.totalCount} </i>건 </p> --%>
+<!-- 		</div> -->
       <table class="table table-hover table-sm text-center col-10" >
+      
+
         <thead class="table-active">
           <tr>
             <th  scope="col" align="center" style="width:100px; text-align:center;" class="align-middle">구분</th>
