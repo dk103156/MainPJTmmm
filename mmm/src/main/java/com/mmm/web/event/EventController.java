@@ -95,8 +95,8 @@ public class EventController {
 	int pageSize;
 	
 	//google Key	
-	String googleKey = "AIzaSyDzyK2Q-0hj5aKytkaDkqS7ZwZgr-zaPDg"; //지행이꺼
-	//String googleKey = "AIzaSyBFmfGtQWLpaZoGfJQcE2g7ChUaLsvIYMw";	//지민이꺼
+	String googleKey = "";	//내꺼
+	//String googleKey = "";	//지민이꺼
 	String urlGoogleSearch ="https://www.googleapis.com/youtube/v3/search?key="+googleKey;
 	
 	//외부 Http 연결을 용이하게 하기 위한 template
@@ -453,7 +453,7 @@ public class EventController {
 	}
 	
 	
-	//
+
 	@RequestMapping(value="getPreview", method=RequestMethod.GET)
 	public String getPreview(@RequestParam int previewNo, Model model, HttpSession session) throws Exception{
 		
@@ -963,6 +963,10 @@ public class EventController {
 		Map<String, Object> map = eventService.getPartList(search); 
 		
 		List<Participation> list = (List<Participation>)map.get("list");
+		for(Participation p: list) {
+			System.out.println("날짜확인하라~!!"+p.getPartStrDate()); 	
+		}
+		
 		Page resultPage	= 
 				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		

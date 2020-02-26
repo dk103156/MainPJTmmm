@@ -5,6 +5,7 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> 
+ <title>MMM</title>
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>	 -->

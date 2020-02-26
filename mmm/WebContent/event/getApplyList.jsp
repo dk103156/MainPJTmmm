@@ -8,16 +8,15 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<title>MMM</title>
  
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <script type="text/javascript">
 function Pagination(currentPage) {
+
 	console.log('fncGetList에 왔거든여');
 	$("#currentPage").val(currentPage);
 	console.log($("#currentPage").val());
@@ -37,11 +36,11 @@ $(function(){
 		
 	
 	
-	$(".askBody td:nth-child(3)").on("click",function(){
+	$(".askBody td:nth-child(2)").on("click",function(){
 		var articleNo = $(this).parent().find('input[name="articleNo"]').val();
 		alert(articleNo)
 		console.log(articleNo);
-		self.location="/customer/getContact?articleNo="+articleNo;	
+		self.location="/customer/getPreview?articleNo="+articleNo;	
 	});
 	
 	$('#delBtn').on("click", function(){
@@ -1394,18 +1393,25 @@ input {
 			<tr>
 					
 			  <td  class="col" >
-	  	    	<input type="hidden" name="partNo" value="${participation.partNo}"/>${ i}
+	  	    	<input type="hidden" name="partNo" value="${participation.partNo}"/>${i}
 			  </td>
+			  
+			  <input type="hidden" name="previewNo" value="${participation.previewNo}"/>
 			  
 			  <td class="col">  ${participation.previewName} 
 			  </td>
+			
 			  <td class="col" > 
-			  <span class="btn btn-secondary btn-sm"><small>
-				  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 0}">미당첨</c:if>
-				  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 1}">당첨</c:if>
-				</small></span>
+			 
+			 <div>
+			  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 0}">
+			   <span>미당첨</span></c:if>
+			  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 1}">
+			  <span>당첨</span></c:if>
+			  </div>
 				</td>
-			  <td class="col"  > ${participation.partDate}
+
+			  <td class="col"  > ${participation.partStrDate}
 				</td>
 			   
 			</tr>

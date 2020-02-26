@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> 
+  <title>MMM</title>
   <!-- 카카오 맵 api key -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 
@@ -146,7 +147,7 @@ function getCommentList(currentPage) {
 }//end of getCommentList
 function comment(currentPage){
 	
-	$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
+
 	
 	$('#commentWrite').off("click")
 	
@@ -176,6 +177,8 @@ function comment(currentPage){
 		}); //click 이벤트 끝
 }//end of comment()
 	$(function(){
+		
+		$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
 		
 		getCommentList(1);
 		

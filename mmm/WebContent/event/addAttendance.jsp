@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>MMM</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <!-- font -->
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	     eventBackgroundColor : '#ffffff' ,
 	     eventColor : '#5c6a96',
 	     titleFormat : function(date) { // title 설정
-	    	  return date.date.year +". "+(date.date.month +1); 
+	    	  return date.date.year +"년 "+(date.date.month +1)+ "월"; 
 	    	    },
    	    columnHeaderText : function(date) { 
    	    	  return weekList[date.getDay()]; // 헤더 var weekList = ['일','월','화','수','목','금','토']; 
@@ -240,11 +240,16 @@ $(function(){
 <jsp:include page="/layout/header.jsp"></jsp:include>
 
 <div class="container">
-<br/><br/>
-<h4><i class="fas fa-calendar-check"></i>&nbsp;매일매일 출첵 이벤트</h4>
+
+	<br>
+		<div class="page-header" style="margin-left:180px; margin-top:50px;">
+	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 매일매일 출첵이벤트</span>
 <p class="lbtxt">뭅뭅뭅 출첵하고 10포인트 받자 </p>
-<hr>
-<br/>
+	    </div>
+		<br>	
+<!-- <h4><i class="fas fa-calendar-check"></i>&nbsp;매일매일 출첵 이벤트</h4> -->
+<!-- <hr> -->
+<!-- <br/> -->
  <input type="hidden" name="userNo" value="${user.userId}">
 <div id="calendar">
 

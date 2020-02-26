@@ -284,7 +284,7 @@ public class UserRestController {
       CredentialsProvider credsProvider = new BasicCredentialsProvider();
       credsProvider.setCredentials(
     		new AuthScope(hostname, 443, AuthScope.ANY_REALM),
-            new UsernamePasswordCredentials("mmmm3", "40fd6a124c7611ea80f10cc47a1fcfae")
+            new UsernamePasswordCredentials("byeol", "a1c36bc2546811eab4b90cc47a1fcfae")
         );
       
         // Create AuthCache instance
@@ -333,7 +333,7 @@ public class UserRestController {
 	        System.out.println("난수!!!"+numStr);
             
             Map<String, Object>smsMap = new HashMap<String,Object>();
-            smsMap.put("sender", "01033294725");
+            smsMap.put("sender", "01085239856");
             smsMap.put("content","MovMovMov 본인확인 인증번호["+numStr+"]입니다. 정확히 입력해주세요.");
             
             List<String>receivers = new ArrayList<String>();
@@ -351,7 +351,7 @@ public class UserRestController {
             
             StringEntity se = new StringEntity(json, "UTF-8");
             httpPost.setEntity(se);
-/*
+
             HttpResponse httpResponse = client.execute(httpPost, context);
             System.out.println(httpResponse.getStatusLine().getStatusCode());
 
@@ -372,7 +372,7 @@ public class UserRestController {
             resultInnerList = (List)resultList.get(0);
             System.out.println("----------------------resultInnerList ? : " + resultInnerList); 
     		System.out.println("----------------------resultInnerList.get(1) ? : " + resultInnerList.get(1)); 
-       */
+       
             
         } catch (Exception e) {
             System.err.println("Error: "+e.getLocalizedMessage());

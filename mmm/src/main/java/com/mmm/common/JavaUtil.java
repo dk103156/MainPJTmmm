@@ -69,4 +69,12 @@ public class JavaUtil {
 		Date date = inputFomat.parse(string);
 		return outputFormat.format(date);
 	}
+	
+	
+	public static String convertDateFormatNoSecond(String string)throws ParseException{
+		SimpleDateFormat inputFomat = new SimpleDateFormat("yyyy-MM-dd.HH.mm.ss");
+ 		SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+ 		Date date = inputFomat.parse(string);
+		return outputFormat.format(date);
+	}
 }

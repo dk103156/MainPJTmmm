@@ -435,7 +435,7 @@
 				winner_count, winner_date, preview_regdate, preview_status, TO_CHAR(END_DATE, 'yyyyMMdd') 
 		 FROM preview
 		 WHERE preview_status = 1
-	     AND TO_CHAR(END_DATE, 'yyyyMMdd') = TO_CHAR(SYSDATE,'yyyyMMdd') 
+	     AND TO_CHAR(END_DATE+1, 'yyyyMMdd') = TO_CHAR(SYSDATE,'yyyyMMdd') 
   </select>
 
   

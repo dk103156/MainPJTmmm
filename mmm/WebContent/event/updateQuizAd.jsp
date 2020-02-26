@@ -5,7 +5,7 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
-<title>addQuizAd</title> 
+<title>MMM</title> 
 <!-- bootstrap 4 CDN -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- jQuery library -->
