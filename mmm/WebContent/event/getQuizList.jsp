@@ -242,8 +242,8 @@
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
  		<br>
-		<div class="page-header">
-	       <h2><i class="far fa-check-square"></i> 영화퀴즈</h2>
+		<div class="page-header" style="margin-left:180px; margin-top:50px;">
+	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 영화퀴즈</span>
 	    </div>
 		<br>	
 		

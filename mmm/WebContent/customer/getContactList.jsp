@@ -1442,10 +1442,12 @@ input {
 			  <td class="col">  ${notice.articleTitle} 
 			  </td>
 			  <td class="col" > 
-			  <span class="btn btn-secondary btn-sm"><small>
+			  <label class="btn btn-secondary btn-sm">
+			  
 				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
 				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
-				</small></span>
+				
+				</label>
 				</td>
 			  <td class="col"  > ${notice.articleDate}
 				</td>

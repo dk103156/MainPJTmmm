@@ -146,7 +146,7 @@ function getCommentList(currentPage) {
 }//end of getCommentList
 function comment(currentPage){
 	
-	$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
+
 	
 	$('#commentWrite').off("click")
 	
@@ -176,6 +176,8 @@ function comment(currentPage){
 		}); //click 이벤트 끝
 }//end of comment()
 	$(function(){
+		
+		$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
 		
 		getCommentList(1);
 		
