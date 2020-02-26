@@ -274,7 +274,7 @@ div.container.getTicketingList {
       </div>
       <div class="modal-body">
        	 예매를 취소하시겠습니까?
-      </div>
+      </div> 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
         <button type="button" class="btn btn-primary" onclick='cancelTicketing()'>네</button>
@@ -290,12 +290,16 @@ function cancelTicketing(){
 	$("form#cancelForm").submit();
 }
 
-$(function(){
+function activeCancle(){
 	$("div.afterButton > button").on("click",function(){
 		$("div#ticketingCancel").modal("show")
 	})
-	
+}
 
+$(function(){
+
+	
+	activeCancle();
 	
 	detail();
 	
@@ -468,7 +472,7 @@ $(function(){
 					$(".ticketingContent").empty();					
 						if(data.ticketingList.length!=0){
 							for(var i=0; i<data.ticketingList.length; i++){
-								var Element = "<div class='ticketingContentIn row' data-toggle='modal' data-target='#exampleModalScrollable'>"	
+								var Element = "<div class='ticketingContentIn row'>"	
 								    Element+= "<div class='col-6 border'>"
 									Element+= "<div class='row'>"
 									Element+= "<div class='col-5'>"
@@ -506,7 +510,7 @@ $(function(){
 					    			//예매 취소 버튼 추가
 // 					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
 					    			Element  = "<form action='/payment/cancelPayment' 'method='post'>"
-					    			Element  = "<input type='hidden' name='ticketingNo' value='"+data.ticketingList[i].ticketingNo+"'>"
+
 				    				Element += "<input class='btn btn-primary' type='submit' value='예매취소'></button>"
 				    				Element += "</form>"
 				    				
@@ -578,7 +582,7 @@ $(function(){
 								$("div.ticketingPagination").append(Element);
 								
 								$("#searchCondition").val(data.search.searchCondition);
-								
+								activeCancle()
 								detail()
 						}//end of if
 					}//end of arrow function
@@ -601,7 +605,7 @@ $(function(){
 					$(".ticketingContent").empty();
 					if(data.ticketingList.length!=0){
 						for(var i=0; i<data.ticketingList.length; i++){
-							var Element = "<div class='ticketingContentIn row' data-toggle='modal' data-target='#exampleModalScrollable'>"	
+							var Element = "<div class='ticketingContentIn row'>"	
 							    Element+= "<div class='col-6 border'>"
 								Element+= "<div class='row'>"
 								Element+= "<div class='col-5'>"
