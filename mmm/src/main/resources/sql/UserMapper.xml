@@ -17,7 +17,6 @@
 		<result property="gender" column="gender" jdbcType="VARCHAR"/>
 		<result property="phone" column="phone" jdbcType="VARCHAR"/>
 		<result property="email" column="email" jdbcType="VARCHAR"/>
-		<result property="addr" column="addr" jdbcType="VARCHAR"/>
 		<result property="likeGenre1" column="like_genre1" jdbcType="VARCHAR"/>
 		<result property="likeGenre2" column="like_genre2" jdbcType="VARCHAR"/>
 		<result property="likeGenre3" column="like_genre3" jdbcType="VARCHAR"/>
@@ -34,6 +33,12 @@
 		<result property="userGrade" column="user_grade" jdbcType="INTEGER"/>
 		<result property="totalPoint" column="total_point" jdbcType="INTEGER"/>
 		<result property="accPoint" column="acc_point" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="seenMovieSelectMap">
+		<result javaType="java.lang.String" column="MOVIE_NAME" property="movieName"/>
+		<result javaType="java.lang.String" column="POSTER" property="poster"/>
+		<result javaType="java.lang.String" column="MOVIE_NO" property="movieNo"/>
 	</resultMap>
 	
  	<!-- SQL : SELECT ONE -->
@@ -118,8 +123,7 @@
 		 <trim prefix="SET" suffixOverrides=",">
 	      <if test="password != null">password= #{password},</if>
 	      <if test="userName != null">user_name= #{userName},</if>
-	      <if test="gender != null">gender= #{gender},</if>   
-	      <if test="addr != null">addr= #{addr},</if>   
+	      <if test="gender != null">gender= #{gender},</if>     
 	      <if test="phone != null">phone= #{phone},</if>   
 	      <if test="email != null">email= #{email},</if>
 	      <if test="likeGenre1 != null">like_genre1= #{likeGenre1},</if>
@@ -204,7 +208,41 @@
 						</if> ) countTable						
 	 </select>
 
-
+	<select id="getSeenMovieList" parameterType="search" resultMap="seenMovieSelectMap">	
+		SELECT MOVIE_NAME, POSTER, MOVIE_NO
+		FROM
+			(
+			SELECT MOVIE_NAME, POSTER, MOVIE_NO, ROWNUM RNUM
+			FROM
+				(SELECT DISTINCT MOVIE_NAME, POSTER, MOVIE_NO
+				FROM
+					(
+						(SELECT dt.MOVIE_NAME, dt.POSTER, m.MOVIE_NO, t.TICKETING_DATE
+							FROM DATE_TIME dt, MOVIE m, TICKETING t
+							WHERE 
+								dt.MOVIE_NAME = m.MOVIE_TITLE
+								AND dt.DATE_TIME_NO = t.DATE_TIME_NO
+								AND t.TICKETER_PHONE = #{ticketerPhone}
+							ORDER BY t.TICKETING_DATE DESC)
+					)
+				)
+			)
+		WHERE RNUM BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<select id="getSeenMovieCnt" parameterType="String" resultType="int">
+	SELECT count(DISTINCT MOVIE_NAME) totalCnt
+	FROM
+		(
+			(SELECT dt.MOVIE_NAME, dt.POSTER, m.MOVIE_NO, t.TICKETING_DATE
+				FROM DATE_TIME dt, MOVIE m, TICKETING t
+				WHERE 
+					dt.MOVIE_NAME = m.MOVIE_TITLE
+					AND dt.DATE_TIME_NO = t.DATE_TIME_NO
+					AND t.TICKETER_PHONE = #{value}
+				ORDER BY t.TICKETING_DATE DESC)
+		)
+	</select>
 
 
 

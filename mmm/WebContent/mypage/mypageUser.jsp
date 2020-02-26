@@ -891,12 +891,17 @@ $(function(){
 	//내가본영화
 	$("#sawMovie").on('click',function(){
 		var ticketerPhone = $("#ticketerPhone").val();
-		$("#plusPage").load("/ticketing/getTicketingList?searchCondition=2&ticketerPhone="+ticketerPhone);
+		$("#plusPage").load("/mypage/mySeenMovie");
 	});
 	
 	//위시리스트
 	$("#wishList").on('click',function(){
 		$("#plusPage").load("/mypage/wishList");
+	});
+	
+	//한줄평
+	$("#oneLine").on('click',function(){
+		$("#plusPage").load("/movie/getOnelineListByUserId");
 	});
 	
 	//포인트내역
@@ -957,13 +962,13 @@ $(function(){
 					<p class="name">
 					
 					${user.userName}님은 
-					<c:if test="${user.userGrade == 0}">	
+					<c:if test="${user.accPoint < 10000}">	
 						일반회원 
 					</c:if>
-					<c:if test="${user.userGrade == 1}">
+					<c:if test="${user.accPoint >= 10000 && user.accPoint < 20000}">
 						VIP	
 					</c:if>
-					<c:if test="${user.userGrade == 2}">
+					<c:if test="${user.accPoint  >= 20000}">
 						VVIP	
 					</c:if>
 					 입니다.<br>
@@ -1098,7 +1103,7 @@ $(function(){
 						<span>위시리스트</span>
 					</a>
 
-					<a href="/mypage/" title="한줄평 탭으로 이동">
+					<a href="#" id="oneLine" title="한줄평 탭으로 이동">
 						<em>${commentCnt }</em>
 						<span>한줄평</span>
 					</a>

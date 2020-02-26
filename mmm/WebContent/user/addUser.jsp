@@ -363,7 +363,7 @@ $(function(){
 			    <div class="col-sm-9">
 		      		<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" >
 		      		<input type="hidden" class="form-control" id="role" name="role" value="user" >
-		      		<h6 id="checkId" style="color: red;"></h6>
+		      		<h6 id="checkId" style="margin-top:10px; color:red;"></h6>
 		    	</div>
 			</div>
 			<div class="form-group row" style="text-align: center;">
@@ -375,7 +375,7 @@ $(function(){
 			<div class="form-group row" style="text-align: center;">
 				<label for="password2" class="col-sm-3 col-form-label">비밀번호확인</label>
 				<div class="col-sm-9">
-					<input type="password" class="form-control" id="password2" placeholder="비밀번호">
+					<input type="password" class="form-control" id="password2" placeholder="비밀번호 확인">
 				</div>
 			</div>
 		  	<div class="form-group row" style="text-align: center;">

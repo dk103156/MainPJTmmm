@@ -236,6 +236,7 @@ public class UserRestController {
 
 		if(sessionUser.getUserNo() == user.getUserNo()) {
 			userService.updateUser(user);
+			session.setAttribute("user", userService.getUser(userNo));
 			return result;
 		}else{
 			result= false;
@@ -350,7 +351,7 @@ public class UserRestController {
             
             StringEntity se = new StringEntity(json, "UTF-8");
             httpPost.setEntity(se);
-
+/*
             HttpResponse httpResponse = client.execute(httpPost, context);
             System.out.println(httpResponse.getStatusLine().getStatusCode());
 
@@ -371,7 +372,7 @@ public class UserRestController {
             resultInnerList = (List)resultList.get(0);
             System.out.println("----------------------resultInnerList ? : " + resultInnerList); 
     		System.out.println("----------------------resultInnerList.get(1) ? : " + resultInnerList.get(1)); 
-       
+       */
             
         } catch (Exception e) {
             System.err.println("Error: "+e.getLocalizedMessage());
@@ -740,6 +741,28 @@ public class UserRestController {
 		
 	}
 	
+	@CheckAuth(role="user,admin")
+	@RequestMapping(value="json/mySeenMovieList", method=RequestMethod.POST)
+	public Map<String, Object> mySeenMovieList(@RequestBody Search search, HttpSession session) {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		try {
+			if(session != null) {
+				User user = (User) session.getAttribute("user");
+				search.setTicketerPhone(user.getPhone());
+				List<Map<String, Object>> mySeenMovieList = userService.getSeenMovieList(search);
+				int totalCnt = userService.getSeenMovieCnt(user.getPhone());
+				
+				result.put("mySeenMovieList", mySeenMovieList);
+				result.put("totalCnt", totalCnt);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
 	
 
 }
