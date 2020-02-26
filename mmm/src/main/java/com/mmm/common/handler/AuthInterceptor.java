@@ -1,5 +1,7 @@
 package com.mmm.common.handler;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -43,7 +45,14 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 		if( user == null ) {
 			System.out.println("=== [Null Session] AuthInterceptor ===");
 			// 로그인 화면으로 이동
-			response.sendRedirect(request.getContextPath() + "/user/login");
+            response.setContentType("text/html");
+            response.setCharacterEncoding("utf8");
+            response.setStatus(300);
+            response.setHeader("Location", "/user/login");
+            PrintWriter pw=response.getWriter();
+            pw.println("<script>location.href='/user/login';</script>");
+            pw.close();
+			//response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		} else {
 			

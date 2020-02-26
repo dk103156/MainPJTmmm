@@ -13,6 +13,9 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
 
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -86,7 +89,6 @@ $(function(){
 	
 		var name = $("#userName").val();
 		var birth = $("#birth").val(); 
-		var addr = $("#addr").val(); 
 		var email = $("#email").val(); 
 		var phone = $("#phone").val().replace(/-/gi,''); 
 		var isChk = $("#agreeCheck").is(":checked");
@@ -163,8 +165,13 @@ $(function(){
 				
 				if (data == 0) {
 						// 0 : 휴대폰번호가 중복되는 문구
-						$("#confirmNum1").text("등록된 아이디가 있습니다. 로그인 해주세요 :p ");
-						$("#confirmNum1").css("color", "red");
+						//$("#confirmNum1").text("등록된 번호가 있습니다. 로그인 해주세요 :p ");
+						//$("#confirmNum1").css("color", "red");
+						Swal.fire({
+							  icon: 'error', //"info,success,warning,error" 중 택1
+							 // title: 'Oops...',
+							  text: '등록된 번호가 있습니다. 로그인 해주세요 :p'
+						})
 						$("#addUserBtn").attr("disabled", true);
 				}else{
 					$("#confirmNum1").text("");
@@ -175,6 +182,44 @@ $(function(){
 				}
 			})//ajax 끝
 		});//중복체크 끝
+		
+		// 이메일중복체크(1 = 중복 / 0 != 중복)
+		$('#email').keyup(function() {
+			console.log("클릭!!!")
+			var email = $('#email').val();
+			console.log(email);
+			$.ajax({
+				url : '/user/json/emailCheckDupl/',
+				method : "post" ,
+				datatype : "json" ,
+				headers : {
+					"Accept" : "application/json" ,
+					"Content-Type" : "application/json"
+				} ,
+				data : JSON.stringify({
+					email : email
+				}), 
+				success : function(data) {
+					console.log("false = 중복o / true = 중복x : "+ data);							
+					
+					if (data == 0) {
+							// 0 : 이메일이 중복되는 문구
+						Swal.fire({
+						  icon: 'error', //"info,success,warning,error" 중 택1
+						 // title: 'Oops...',
+						  text: '중복된 이메일입니다.'
+						})
+							$("#addUserBtn").attr("disabled", true);
+					}else{
+						$("#confirmNum1").text("");
+						$("#addUserBtn").attr("disabled", false);
+					} 
+				}, error : function() {
+						console.log("실패");
+					}
+				})//ajax 끝
+			});//중복체크 끝	
+		
 	
 });
 
@@ -229,12 +274,14 @@ $(function(){
     			<label for="email" class="col-sm-3 col-form-label">이메일</label>
     			<div class="col-sm-9">
       				<input type="email" class="form-control" id="email" name="email" placeholder="이메일">
+      				<h6 id="confirmNum2" style="margin-top:10px; color:red;"></h6>
     			</div>
   			</div> 
 			<div class="form-group row" style="text-align: center;">
     			<label for="phone" class="col-sm-3 col-form-label">휴대전화번호</label>
     			<div class="col-sm-9">
       				<input type="text" class="form-control" id="phone" name="phone" placeholder="-없이 입력해주세요.">
+      				<h6 id="confirmNum1" style="margin-top:10px; color:red;"></h6>
     			</div>
   			</div>
   			<div class="form-group row" style="text-align: center;">

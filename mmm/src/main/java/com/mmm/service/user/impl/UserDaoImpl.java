@@ -1,6 +1,7 @@
 package com.mmm.service.user.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,16 @@ public class UserDaoImpl implements UserDao {
 		  sqlSession.update("UserMapper.updateUserStatus",user);
 	  
 	  }
+
+	@Override
+	public List<Map<String, Object>> getSeenMovieList(Search search) throws Exception {
+		return sqlSession.selectList("UserMapper.getSeenMovieList", search);
+	}
+
+	@Override
+	public int getSeenMovieCnt(String phone) throws Exception {
+		return sqlSession.selectOne("UserMapper.getSeenMovieCnt", phone);
+	}
 	 
 
 }

@@ -383,7 +383,6 @@ col {
 .chk-num .line {
     position: relative;
     height: 36px;
-    padding: 0 50px 0 0;
     border: 1px solid #d8d9db;
     background-color: #fff;
 }
@@ -603,22 +602,22 @@ $(function(){
 				"Content-Type" : "application/json"
 			} ,
 			success : function( JSONData , status ) {
-				console.log("동작");
+				console.log("/user/json/updateUser/ 동작! 변경된 휴대폰번호 : "+phone);
 				console.log(status);
-				$("#phone").html(phone);
-				
+				console.log(JSONData);
+				$("#phoneNumber").html(phone);
+				$("#newPhone").hide();
+				$("#inputPhone").hide();
+				$("#chPhone").val("");
+				$("#chkNum").val("");
 			}, error : function() {
 				console.log("실패");
 			}
-		})//ajax	
-		$("#plusPage").load("/user/getUser");
+		})//ajax
+		//$("#plusPage").load("/user/getUser");
 	});
 		
-	
-	
-	
-	
-	
+
 	//비밀번호 입력창
 	$("#chgPwBtn").on("click",function(){
 		//$("#pwModal").modal("show");
@@ -626,17 +625,9 @@ $(function(){
 		$("#plusPage").load("/user/updatePw");
 
 	});
-	
-
-	
-	
-
-	
-	
 
 	//회원정보 수정
 	$("#updateBtn").on("click",function(){
-		alert("클릭!")
 		if(!validate()){ //이메일 유효성 오류 : false, 정상 : true
 			return;
 		}
@@ -656,28 +647,45 @@ $(function(){
 				userNo: ${user.userNo}
 			}), 
 			success : function(data) {
-				console.log( data);								
+				console.log( data);
+				alert("회원정보가 수정되었습니다.");
+				$("#plusPage").load("/user/passwordCheck");
 			}, error : function() {
 					console.log("실패");
 				}
 			})//ajax 끝
 		})//회원정보 수정 끝
-	
+		
+		//취소버튼
+		$("#cancelBtn").on("click",function(){
+			$("#plusPage").load("/mypage/mypageUser");
+		});
 	
 	
 	
 	// 파일 선택 후 액션
     $('#profileTarget').on('change', function(e) {
+    	
+ 		//프로필 사진 유효성 체크
+ 		var fileNm = $("#profileTarget").val();
+ 		if (fileNm != "") {
+ 		    var ext = fileNm.slice(fileNm.lastIndexOf(".") + 1).toLowerCase();
+ 		    if (!(ext == "gif" || ext == "jpg" || ext == "png")) {
+ 		        alert("이미지파일 (.jpg, .png, .gif ) 만 업로드 가능합니다.");
+ 		        $("#profileTarget").val("");
+ 		        return false;
+ 		    }
+ 		}
+    	
     	var fileSize = this.files[0].size;
 		var maxSize = 360 * 360;
  		if(fileSize > maxSize) {
 			alert("파일용량을 초과하였습니다.");
-			$("#preview").html("");
 			return;
 		}else{
-			
 			readImg(this);
 		}
+ 		
 	})
 
 	function readImg(input){
@@ -702,6 +710,12 @@ $(function(){
 	$('#addProfileImgBtn').on('click', function() {
 	    $('#profileTarget').click();
 	});
+	
+	
+
+
+	
+	
 	
 	
 	//모달창에서 엔터키 안눌리게
@@ -734,7 +748,7 @@ $(function(){
 					
 				}else{
 					$("#passwordChk").text("");
-					alert("정말 탈퇴 하실?")
+					alert("정말 탈퇴 하실건가요?")
 					self.location="/user/logout";
 				} 
 			}, error : function() {
@@ -814,7 +828,7 @@ $(function(){
 							<td>
 							<div class="profile-photo">
 								<form name="fileForm" id="fileForm">
-									<input type="file"  class="profileTarget" id="profileTarget" name="image" accept="image/*" style="display: none;">
+									<input type="file"  class="profileTarget" id="profileTarget" name="image" accept="image/gif,image/jpeg,image/png" style="display: none;">
 									<input type="hidden" name="userNo" id="userNo" value="${user.userNo}">
 									
 									<div class="profile-img" id="preview">
@@ -914,11 +928,11 @@ $(function(){
 						</tr>
 						<tr>
 							<th scope="row">
-							    <label for="num">휴대폰</label> <em class="font-orange">*</em>
+							    <label for="num" id="phoneCol">휴대폰</label> <em class="font-orange">*</em>
 							</th>
 								<td>
 									<div class="clearfix">
-										<p class="reset float-l w170px lh32 changeVal" id="phone" data-name="phoneNo">
+										<p class="reset float-l w170px lh32 changeVal" id="phoneNumber">
 										    ${user.phone}
 										</p>
 									    <div class="float-l">

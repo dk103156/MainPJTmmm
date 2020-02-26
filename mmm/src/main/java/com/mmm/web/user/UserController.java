@@ -137,7 +137,12 @@ public class UserController {
 	
 	System.out.println("userIdentity@@@@@@@:::::: "+user.getIdentity());
 	
-	
+	//비밀번호 암호화
+	String password = user.getPhone();
+	String cryptoPassword = CryptoUtil.cryptoText(password);
+	user.setPassword(cryptoPassword);
+	user.setUserId(user.getPhone());
+	userService.addUser(user);
 	
 	//Business Logic
 	userService.extraAddUser(user);
@@ -192,7 +197,7 @@ public class UserController {
 		session.setAttribute("user", newUser);
 		
 		
-		return "redirect:/mypage/mypage.jsp";
+		return "redirect:/mypage/mypage?condition=0";
 	}
 
 
