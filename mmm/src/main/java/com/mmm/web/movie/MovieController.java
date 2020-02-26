@@ -90,7 +90,7 @@ public class MovieController {
 	String urlKmdb = "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey="+kmdbKey;
 	
 	//google Key	
-	String googleKey = "AIzaSyDzyK2Q-0hj5aKytkaDkqS7ZwZgr-zaPDg";	//내꺼
+	String googleKey = "AIzaSyBQU9Xc7L0Vjs0EVFagqZX3xaocpkBr6r4";	//내꺼
 //	String googleKey = "AIzaSyCYkM_LbtXdbyGh6pxT4S3we3c6Lte2A9A";	//지민이꺼
 	String urlGoogleSearch ="https://www.googleapis.com/youtube/v3/search?key="+googleKey;
 	
@@ -135,8 +135,8 @@ public class MovieController {
 //		크롤링할 페이지 수 2개로 고정
 		for (int i = 0; i < 2; i++) {
 			//웹페이지 설정하기(자동화된 어쩌구 저쩌구..*************************************************************************************************
-//			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
-			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
+			webDriver.get("https://movie.daum.net/premovie/scheduled?opt=release&page="+(i+1));	//상영 예정작
+//			webDriver.get("https://movie.daum.net/premovie/released?opt=release&page="+(i+1));	//현재 상영작
 			
 	//		Css Selector로 Element 요소 잡아오기 1 ____영화제목
 			List<WebElement> list = webDriver.findElements(By.cssSelector("#mArticle > ul.list_movie.\\#movie > li> div.wrap_movie > div > a"));
@@ -426,7 +426,7 @@ public class MovieController {
 		}
 		
 //		트레일러...youtube API Method 호출 
-//		String videoId = getYoutube(movie.getMovieTitle());
+		String videoId = getYoutube(movie.getMovieTitle());
 		
 //		VO에 값 세팅
 		movieFromKmdb.setMovieNo(movie.getMovieNo());
@@ -442,7 +442,7 @@ public class MovieController {
 		movieFromKmdb.setStarByUser(movie.getStarByUser());
 		movieFromKmdb.setStarUserFlag(movie.getStarUserFlag());
 		movieFromKmdb.setTicketingRate(movie.getTicketingRate());
-//		movieFromKmdb.setTrailer(videoId);						///////////  youtube API 한도......T.T
+		movieFromKmdb.setTrailer(videoId);						///////////  youtube API 한도......T.T
 		
 		System.out.println("---------------movieFromKmdb  : " + movieFromKmdb);
 
