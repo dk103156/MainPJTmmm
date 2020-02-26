@@ -22,8 +22,11 @@
 <!--      jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     
-<!--     daum icon css -->
-    <link rel="stylesheet" href="/resources/css/movieIcon.css">
+<!--     movie css -->
+    <link rel="stylesheet" href="/resources/css/movieIcon.css?aer">
+    
+<!--     Common Css -->
+    <link rel="stylesheet" href="/resources/css/common.css?afgr">
        
     <style type="text/css">
     	img { max-width: 100%; height: auto; }
@@ -421,11 +424,11 @@
   </head>
   <body>
 	<jsp:include page="/layout/header.jsp"></jsp:include>    
-		  <div align="right">
-		  	<span id="boxOfficePage" class="p-2 ">박스오피스</span> <span id="expectedMoviePage" class="p-2 border-bottom border-danger border-1 text-danger">상영예정작</span>
+		  <div align="center">
+		  	<span id="boxOfficePage" class="p-2 ">박스오피스</span> <span id="expectedMoviePage" class="p-2 bg-danger border-bottom  border-1 text-white font-bold-cs">상영예정작</span>
 		  </div>
 		  
-		  <div class="album py-5 bg-light">
+		  <div class="album py-5 ">
 		    <div class="container">
 		
 		      <c:set var="i" value="0"/>
