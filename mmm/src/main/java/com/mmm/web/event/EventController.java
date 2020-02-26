@@ -453,7 +453,7 @@ public class EventController {
 	}
 	
 	
-	//
+
 	@RequestMapping(value="getPreview", method=RequestMethod.GET)
 	public String getPreview(@RequestParam int previewNo, Model model, HttpSession session) throws Exception{
 		
@@ -963,6 +963,10 @@ public class EventController {
 		Map<String, Object> map = eventService.getPartList(search); 
 		
 		List<Participation> list = (List<Participation>)map.get("list");
+		for(Participation p: list) {
+			System.out.println("날짜확인하라~!!"+p.getPartStrDate()); 	
+		}
+		
 		Page resultPage	= 
 				new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		

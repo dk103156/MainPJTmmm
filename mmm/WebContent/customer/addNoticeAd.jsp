@@ -8,7 +8,7 @@
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
 <title>addPreviewAd</title> 
 <meta charset="utf-8">
-
+	 <title>MMM</title>
 <!-- bootstrap 4 CDN -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Latest compiled and minified CSS -->
