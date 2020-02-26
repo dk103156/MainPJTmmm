@@ -185,7 +185,7 @@ $(function(){
 				})//ajax 끝
 			});//중복체크 끝
 			
-	} else {// 기존회원의 아이디/비번 찾기
+	} else { // 기존회원의 아이디/비번 찾기
 		// 휴대폰중복체크(1 = 중복 / 0 != 중복)
 		$('#phone').keyup(function() {
 			console.log("클릭!!!")
@@ -255,22 +255,13 @@ $(function(){
 		console.log(phone)
 		
 		if(phone == null || phone.length <1){
-			//$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
-			Swal.fire({
-			  icon: 'error', //"info,success,warning,error" 중 택1
-			  //title: 'Oops...', 
-			  text: '휴대폰 번호는 반드시 입력하셔야 합니다.'
-			})
+			$("#confirmNum1").text("휴대폰 번호는 반드시 입력하셔야 합니다.");
+			return;
 			
-			return;//"info,success,warning,error" 중 택1
 		}else if(phone != "" && phone.length <11 ){
-			//$("#confirmNum1").text("휴대폰번호를 확인해주세요.");
-			Swal.fire({
-			  icon: 'error', //"info,success,warning,error" 중 택1
-			 // title: 'Oops...',
-			  text: '휴대폰번호를 확인해주세요.'
-			})
+			$("#confirmNum1").text("휴대폰번호를 확인해주세요.");
 		    return;	
+		    
 		}else if(re5.test(phone)){
 				$("#confirmNum1").text("");
 				$("#smsBtn").attr("disabled", false);
@@ -302,14 +293,8 @@ $(function(){
 		var phone = $('#phone').val();
 		var len = numStr.length
 		if(len != 6){
-			//$("#confirmNum2").text("인증번호를 확인해주세요.");
-			
-			Swal.fire({
-			  icon: 'error', //"info,success,warning,error" 중 택1
-			 // title: 'Oops...',
-			  text: '인증번호를 확인해주세요.'
-			})
-			
+			$("#confirmNum2").text("인증번호를 확인해주세요.");
+					
 		}else {
 			$.ajax({ 
 				url : "/user/json/authSMS/" + numStr ,
@@ -327,14 +312,9 @@ $(function(){
 					
 					if(JSONData == 0){
 						//0: 인증번호가 틀림
-						//$('confirmNum2'),text('인증번호를 확인해주세요.');
-						//$("#confirmNum2").css("color", "red");
-						Swal.fire({
-						  icon: 'error', //"info,success,warning,error" 중 택1
-						 // title: 'Oops...',
-						  text: '인증번호를 확인해주세요.'
-						})
-
+						$('confirmNum2'),text('인증번호를 확인해주세요.');
+						$("#confirmNum2").css("color", "red");
+						
 						$("#chkBtn").attr("disabled", true);
 					}else{
 						$("#confirmNum2").text("인증이 완료되었습니다.");
