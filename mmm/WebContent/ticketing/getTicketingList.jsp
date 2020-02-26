@@ -93,7 +93,7 @@ div.container.getTicketingList {
 							<fmt:formatDate var="cancelDay" value="${i.cancelDate }" pattern="E"/> 
 							<fmt:formatDate var="ticketingHM" value="${i.ticketingDate }" pattern="HH:mm"/>
 							<fmt:formatDate var="cancelHM" value="${i.cancelDate }" pattern="HH:mm"/>
-							<div class="ticketingContentIn row"  data-toggle="modal" data-target="#exampleModalScrollable">	
+							<div class="ticketingContentIn row" >	
 									<div class="col-6 border">
 										<div class="row">
 											<div class="col-5">
@@ -285,15 +285,17 @@ div.container.getTicketingList {
 
 <!-- ajax 모음 -->	  
 <script>
+function cancelTicketing(){
+	console.log("취소 버튼 작동함")
+	$("form#cancelForm").submit();
+}
+
 $(function(){
-	$("button.cancelButton").on("click",function(){
+	$("div.afterButton > button").on("click",function(){
 		$("div#ticketingCancel").modal("show")
 	})
 	
-	function cancelTicketing(){
-		
-		$("form#cancelForm").submit();
-	}
+
 	
 	detail();
 	
@@ -309,7 +311,7 @@ $(function(){
 	
 	//상세 내역
 	function detail(){
-		$("div.ticketingContentIn.row").on("click",function(){
+		$("div.ticketingContent > div > div:nth-child(1)").on("click",function(){
 			
 			var ticketingNo = $(this).find("span.contentPinNo").text().substring(6);
 			
@@ -448,6 +450,7 @@ $(function(){
 					}
 			
 			);//end of then 
+			$("#exampleModalScrollable").modal("show")
 		});//end of function
 	}
 	//예매 내역 클릭
