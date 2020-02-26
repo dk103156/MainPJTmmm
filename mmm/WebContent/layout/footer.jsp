@@ -109,12 +109,12 @@ body {
 <footer id="footer"  style="top: 25px;">
 	<div class="row h-100 align-items-center pr-5 pl-5">
 	    <div class="col-2 foo_div text-center">
-	    	<a href="/main" class="center-div" title="MMM"><img src="../resources/image/logo/logo.png"></a>
+	    	<a href="/main" class="center-div" title="MMM"><img src="/resources/image/logo/logo.png"></a>
 	    </div>
 	    <div class="col-3 logos align-self-center">	    
-	    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
-	    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
-	    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a>
+	    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
+	    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
+	    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/MegaBox.jpg"></a>
 	    </div>	
 	    <div class="col-7 copyright text-right">   
 	    	<p>   
