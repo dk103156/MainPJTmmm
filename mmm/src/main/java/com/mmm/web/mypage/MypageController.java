@@ -82,7 +82,7 @@ public class MypageController {
 		return "forward:/mypage/mypage.jsp";
 	}
 	
-	@CheckAuth(role="user,admin")
+	
 	@RequestMapping(value ="mypageUser", method = RequestMethod.GET)
 	public String mypageUser(Model model,HttpSession session) throws Exception{
 		

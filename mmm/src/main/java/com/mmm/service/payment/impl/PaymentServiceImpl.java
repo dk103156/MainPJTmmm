@@ -300,6 +300,17 @@ public class PaymentServiceImpl implements PaymentService {
 			purchase.setCancelDate(new Timestamp(new Date().getTime()));
 			
 			purchaseDao.updatePurchase(purchase);
+			
+			Search search = new Search();
+			
+			search.setInventoryPurchaseNo(purchase.getPurchaseNo());
+			
+			List<Inventory> inventoryList= inventoryDao.getInventoryList(search);
+			
+			for(Inventory iv : inventoryList) {
+				
+				inventoryDao.deleteInventory(iv.getInventoryNo());
+			}
 		}
 		
 //		5. payment 되돌리기

@@ -316,8 +316,8 @@ public class MovieRestController {
 			Movie movie = movieService.getMovieByMovieNo(inputMovie);
 			
 //			트레일러...youtube API Method 호출 
-			String videoId = getYoutube(movie.getMovieTitle());
-			movie.setTrailer(videoId);	
+//			String videoId = getYoutube(movie.getMovieTitle());
+//			movie.setTrailer(videoId);	
 			
 			return movie;
 		}

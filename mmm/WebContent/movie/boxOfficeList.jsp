@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="/resources/css/movieIcon.css?aer">
     
 <!--     Common Css -->
-    <link rel="stylesheet" href="/resources/css/common.css?aer">
+    <link rel="stylesheet" href="/resources/css/common.css?afgr">
 
      
        
@@ -419,12 +419,12 @@
 	    
     	<input type="hidden" id="currentPage" value=""/>
     
-		  <div align="right">
-		  	<span id="boxOfficePage" class="p-2 border-bottom border-danger border-1 text-danger">박스오피스</span> <span id="expectedMoviePage" class="p-2">상영예정작</span>
+		  <div align="center">
+		  	<span id="boxOfficePage" class="p-2 bg-warning border-bottom  border-1 text-white font-bold-cs">박스오피스</span> <span id="expectedMoviePage" class="p-2">상영예정작</span>
 		  </div>
 		   
 		  
-		  <div class="album py-5 bg-light">
+		  <div class="album py-5 ">
 		    <div class="container">
 		
 		      <c:set var="i" value="0"/>
@@ -434,7 +434,19 @@
 					<div class="col-sm-6 col-md-3 mb-4">
 			          <div class="card mb-4 shadow-sm h-100" >
 	                    <div class="card-header text-center bg-dark text-white" >
-						   <h4 class="mb-0">rank.${i}</h4>
+						   <c:if test="${i eq 1}">
+						   	 <h4 class="mb-0"><i class="fas fa-trophy text-yellow"></i></h4>
+						   </c:if>
+						   <c:if test="${i eq 2}">
+						   	 <h4 class="mb-0"><i class="fas fa-trophy text-gray-light"></i></h4>
+						   </c:if>
+						   <c:if test="${i eq 3}">
+						   	 <h4 class="mb-0"><i class="fas fa-trophy text-brown-light"></i></h4>
+						   </c:if>
+						   <c:if test="${i ne 1 && i ne 2 && i ne 3 }">
+						  	 <h4 class="mb-0">rank.${i}</h4>
+						   </c:if>
+						   
 						</div>
 
 <!-- 						hover 효과를 위해.. CSS, JS 확 -->

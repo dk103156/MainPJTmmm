@@ -161,19 +161,20 @@
 		  </ol>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img src="../resources/image/mainPage/main_image01.png" class="d-block w-100" alt="..." width=1048 height=518 >
-		      <div class="carousel-caption d-none d-md-block">
-		        <h5>3사 예매 사이트를 비교하시기 번거롭지 않으신가요?</h5>
-		        <p>CGV, MOVIEBOX, LOTTE CINEMA 3사의 예매 정보를 한눈에 확인할 수 있어요.</p>
-		      </div>
-		    </div>
-		    <div class="carousel-item">
 		      <img src="../resources/image/mainPage/main_image03.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">
 		        <h5>팝콘을 기다리는 동안 코로나 걸려버린다면?</h5>
 		        <p>MovMovMov의 QuickOrder Service를 이용해보세요. 누구보다 빠르게 팝콘을 입에 넣으실 수 있어요.</p>
 		      </div>
 		    </div>
+		    <div class="carousel-item ">
+		      <img src="../resources/image/mainPage/main_image01.png" class="d-block w-100" alt="..." width=1048 height=518 >
+		      <div class="carousel-caption d-none d-md-block">
+		        <h5>3사 예매 사이트를 비교하시기 번거롭지 않으신가요?</h5>
+		        <p>mmm에서는 CGV, MOVIEBOX, LOTTE CINEMA 3사의 예매 정보를 한눈에 확인할 수 있어요.</p>
+		      </div>
+		    </div>
+
 		    <div class="carousel-item">
 		      <img src="../resources/image/mainPage/main_image04.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">

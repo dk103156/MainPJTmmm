@@ -234,12 +234,12 @@ $(function(){
 	
 	//$("#MypageHome").trigger("click");
 	
-	var condition = parseInt('${condition}');
+	//var condition = parseInt('${condition}');
 	//console.log("조건은 ? :"+condition);
-	if(condition==0){
+	if(condition==99){
 		$("#MypageHome").trigger("click");
 	}else{
-		//$("#MypageHome").trigger("click");
+		$("#MypageHome").trigger("click");
 		$('.dropdown-toggle').dropdown('toggle')
 		$('.dropdown-toggle').dropdown('hide')
 		$($("#lnb > a")[condition-1]).trigger("click");
