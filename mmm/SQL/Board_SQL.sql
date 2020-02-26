@@ -40,7 +40,7 @@ CREATE TABLE commentt(
 	cmt_type	 	 NUMERIC(1)	 	,
 	user_id			 VARCHAR2(10) 		REFERENCES users(user_id), 
 	sup_cmt_no		 NUMERIC(5) 		REFERENCES commentt(cmt_no),
-	article_no		 NUMERIC(5)	 		REFERENCES article(article_no),
+	article_no		 NUMERIC(5)	 		,
 	movie_no		 NUMERIC(5) 		REFERENCES movie(movie_no),
 	cmt_content	 	 VARCHAR2(300),
 	cmt_date		 TIMESTAMP,

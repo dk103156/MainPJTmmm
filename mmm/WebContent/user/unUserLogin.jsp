@@ -21,7 +21,7 @@
 <style>
 </style>
 
-<title>비회원 예매확인</title>
+<title>mmm</title>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">

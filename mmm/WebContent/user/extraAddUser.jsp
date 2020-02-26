@@ -26,7 +26,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 
 
-<title>추가정보 입력</title>
+<title>mmm</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
   body > div.container{
@@ -170,7 +170,7 @@ $(function(){
 						Swal.fire({
 							  icon: 'error', //"info,success,warning,error" 중 택1
 							 // title: 'Oops...',
-							  text: '등록된 번호가 있습니다. 로그인 해주세요 :p'
+							  text: '등록된 회원정보가 있습니다. 번호를 확인해주세요.'
 						})
 						$("#addUserBtn").attr("disabled", true);
 				}else{
@@ -236,6 +236,10 @@ $(function(){
 		
 		<!-- form Start /////////////////////////////////////-->
 		<form>
+		<input type="hidden" class="form-control" 	name="userId" value="${user.userId}" >
+		<input type="hidden" class="form-control"  name="password" value="${user.password}" >
+		<input type="hidden" class="form-control"  name="identity" value="${user.identity}" >
+		
 		  	<div class="form-group row" style="text-align: center;">
 		    	<label for="userName" class="col-sm-3 col-form-label">이름</label>
 		    	<div class="col-sm-9">
@@ -273,7 +277,7 @@ $(function(){
   			<div class="form-group row" style="text-align: center;">
     			<label for="email" class="col-sm-3 col-form-label">이메일</label>
     			<div class="col-sm-9">
-      				<input type="email" class="form-control" id="email" name="email" placeholder="이메일">
+      				<input type="email" class="form-control" id="email" name="email" value="${user.email}" placeholder="이메일">
       				<h6 id="confirmNum2" style="margin-top:10px; color:red;"></h6>
     			</div>
   			</div> 

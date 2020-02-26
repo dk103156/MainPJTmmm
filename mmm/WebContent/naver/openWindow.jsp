@@ -5,7 +5,7 @@
 <head>
 	<meta charset="EUC-KR">
 	
-	<title>네이버 로그인 요청화면</title>
+	<title>mmm</title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	

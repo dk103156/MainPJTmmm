@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -85,6 +86,19 @@
 
 	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
+	
+	$(function() {				
+		
+		//==> Enter 키 검색
+		$("input[name='searchKeyword']").on("keydown" , function(event) {						
+			if(event.keyCode == '13'){
+				fncGetProductList(1);
+			}
+		});
+	
+			
+	});
+
 
 	$(function() {
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -201,7 +215,10 @@
 				       	<input type="hidden" value = "${product.prodNo}">
 				       </div>
 				       	<div class="prodName col-12" id="getProdListProdName"><h4><span>${product.prodName}</span></h4>
-					       	<div class="prodPrice col-10" id="getProdListProdPrice"><h5>${product.prodPrice} 원</h5>
+					       	<div class="prodPrice col-10" id="getProdListProdPrice">
+					       		<h5>
+					       			<fmt:formatNumber value="${product.prodPrice}" type="currency" currencySymbol=""/>원
+					       		</h5>
 					       	</div>	
       					</div>
       					<hr>
