@@ -45,7 +45,7 @@ public class TheaterServiceTest {
 	
 	@Test
 	public void testAddTheater() throws Exception {
-		
+		 
 		
 		
 		KakaoAPI api = new KakaoAPI();
