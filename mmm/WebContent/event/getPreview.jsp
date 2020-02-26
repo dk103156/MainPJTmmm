@@ -139,7 +139,7 @@
 
 
 		<div class="text-center">
-			<button id="updateBtn"" class="btn btn-outline-secondary" type="button">수 &nbsp;정</button>
+			<button id="updateBtn" class="btn btn-outline-secondary" type="button">수 &nbsp;정</button>
 			<button id="okBtn" type="button" class="btn btn-outline-secondary">확 &nbsp;인</button>
 			<button id="ranBtn" type="button" class="btn btn-outline-secondary">추첨하기</button>
 			<button class="btn btn-outline-secondary" id="doApply">응모하기</button>

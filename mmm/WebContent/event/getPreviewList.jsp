@@ -31,6 +31,8 @@
 
 
 		$(document).ready(function(){
+			$('.dropdown-toggle').dropdown('toggle')
+			$('.dropdown-toggle').dropdown('hide')
 		    $(".owl-carousel").owlCarousel();
 		});
 
@@ -72,11 +74,10 @@
 	}
 
 	div.previewList{
-		font-family: 'Noto Sans KR', sans-serif;
-		font-weight bold;
-		}
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight bold;
+	}
 
-	
 	
 	.owl-carousel .item{
 		width: 290px;
@@ -155,7 +156,7 @@
 		}
 		
      	body#previewList div{
-        width: 100%;
+       	 width: 100%;
    	  	}
     
 
@@ -189,37 +190,37 @@
 		color: #666;
 		}
 		
-			.thumbnail{        
-		    width: 300px; 
-		    // width : 100%;
-		    height: auto;
-		    text-align :center;
+		.thumbnail{        
+	    width: 300px; 
+	    // width : 100%;
+	    height: auto;
+	    text-align :center;
 		}
 
 		.img-thumbnail.mx-auto.d-block{
-		    width: 300px;
-		    height: auto;
-		    display: block;
-		    text-align :center;
+	    width: 300px;
+	    height: auto;
+	    display: block;
+	    text-align :center;
 		}
 		
 		#thumbImage {
-			width: 300px;
-			height: auto;
-			margin: 0px auto;
-			text-align : center;
+		width: 300px;
+		height: auto;
+		margin: 0px auto;
+		text-align : center;
 		}
 </style>
 
 </head> 
 
 <body>
-
-<jsp:include page="/layout/header.jsp"></jsp:include>
+<jsp:include page="/event/EventToolBar.jsp" />
+<%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
 
 <div class="container previewList">
 <br/><br/>
-<h4><i class="fas fa-trophy"></i>시사회 이벤트</h4>
+<h4><i class="fas fa-trophy"></i><span style="font-weight:bold;">시사회 이벤트</span></h4>
 <p class="lbtxt">개봉 전  누구보다 먼저 영화를 만나는 방법</p>
 <hr>
 <br/>
