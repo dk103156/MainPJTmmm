@@ -124,7 +124,7 @@ $(function(){
 		$("#emailArea").hide();
 	}
 	
-	if(type=="addUser"||type=="addUnUserView"){ //회원가입
+	if(type=="addUser"||type=="addUnUserView"){ //신규 회원가입
 		// 휴대폰중복체크(1 = 중복 / 0 != 중복)
 		$('#phone').keyup(function() {
 			console.log("클릭!!!")
@@ -184,6 +184,7 @@ $(function(){
 					}
 				})//ajax 끝
 			});//중복체크 끝
+			
 	} else {// 기존회원의 아이디/비번 찾기
 		// 휴대폰중복체크(1 = 중복 / 0 != 중복)
 		$('#phone').keyup(function() {
@@ -342,7 +343,7 @@ $(function(){
 						           icon: 'success', //"info,success,warning,error" 중 택1
 						          title: '인증 완료',
 						          text: '가입을 계속 진행해주세요.',					          
-						      }).then( result => {   
+						      }).then((result) => {  
 						         
 					    		$("#chkBtn").attr("disabled", false);
 								
@@ -351,6 +352,9 @@ $(function(){
 								
 								} else if(type=="addUnUserView" ){
 									self.location= "/user/addUnUserView";
+									
+								}else if(type=="findId" ){
+									self.location= "/user/findId";
 									
 								}else{
 									nextPage(phone, "phone");
@@ -476,8 +480,8 @@ $(function(){
 						Swal.fire({
 					           icon: 'success', //"info,success,warning,error" 중 택1
 					          title: '인증 완료',
-					          text: '가입을 계속 진행해주세요.',					          
-					      }).then( result => {   
+					          text: ' 계속 진행해주세요.',					          
+					      }).then((result) => {   
 					         
 					    	  $("#chkBtn2").attr("disabled", false);
 							
@@ -486,6 +490,9 @@ $(function(){
 							
 							} else if(type=="addUnUserView" ){
 								self.location= "/user/addUnUserView";
+								
+							}else if(type=="findId" ){
+								self.location= "/user/findId";
 								
 							}else{
 								nextPage(phone, "email");

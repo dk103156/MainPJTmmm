@@ -18,6 +18,7 @@
 
 <script type="text/javascript">
 function Pagination(currentPage) {
+
 	console.log('fncGetList에 왔거든여');
 	$("#currentPage").val(currentPage);
 	console.log($("#currentPage").val());
@@ -37,11 +38,11 @@ $(function(){
 		
 	
 	
-	$(".askBody td:nth-child(3)").on("click",function(){
+	$(".askBody td:nth-child(2)").on("click",function(){
 		var articleNo = $(this).parent().find('input[name="articleNo"]').val();
 		alert(articleNo)
 		console.log(articleNo);
-		self.location="/customer/getContact?articleNo="+articleNo;	
+		self.location="/customer/getPreview?articleNo="+articleNo;	
 	});
 	
 	$('#delBtn').on("click", function(){
@@ -1394,17 +1395,21 @@ input {
 			<tr>
 					
 			  <td  class="col" >
-	  	    	<input type="hidden" name="partNo" value="${participation.partNo}"/>${ i}
+	  	    	<input type="hidden" name="partNo" value="${participation.partNo}"/>${i}
 			  </td>
+			  
+			  <input type="hidden" name="previewNo" value="${participation.previewNo}"/>
 			  
 			  <td class="col">  ${participation.previewName} 
 			  </td>
+			
 			  <td class="col" > 
-			  <span class="btn btn-secondary btn-sm"><small>
-				  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 0}">미당첨</c:if>
-				  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 1}">당첨</c:if>
-				</small></span>
+			  <label class="label label-warning">
+			  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 0}">미당첨</c:if>
+			  <c:if test="${participation.winningFlag ne null && participation.winningFlag eq 1}">당첨</c:if>
+			  </label>
 				</td>
+
 			  <td class="col"  > ${participation.partDate}
 				</td>
 			   

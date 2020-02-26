@@ -95,8 +95,8 @@ public class EventController {
 	int pageSize;
 	
 	//google Key	
-	String googleKey = "AIzaSyDzyK2Q-0hj5aKytkaDkqS7ZwZgr-zaPDg"; //지행이꺼
-	//String googleKey = "AIzaSyBFmfGtQWLpaZoGfJQcE2g7ChUaLsvIYMw";	//지민이꺼
+	String googleKey = "";	//내꺼
+	//String googleKey = "";	//지민이꺼
 	String urlGoogleSearch ="https://www.googleapis.com/youtube/v3/search?key="+googleKey;
 	
 	//외부 Http 연결을 용이하게 하기 위한 template

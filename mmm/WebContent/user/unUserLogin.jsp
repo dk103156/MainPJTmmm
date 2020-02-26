@@ -169,7 +169,7 @@ $(function(){
 								<input autocomplete="off" id="phone" name="phone" maxlength="20" type="text" placeholder="휴대폰 번호" title="휴대폰 번호를 입력하세요" class="input-text strTrim"><br>
 								<input autocomplete="off" id="password" name="password" maxlength="20" type="password" placeholder="비밀번호" title="비밀번호를 입력하세요" class="input-text mt15" style="margin-top: 15px;">
 								<button id="chkBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px;  border: 0; width: 100%; 
-									cursor: default; background-color:#fee50e; margin-top: 10px;" disabled="disabled">로그인<!--로그인--></button>
+									cursor: default; background-color:#fee50e; margin-top: 10px;">로그인<!--로그인--></button>
 					
 								<div class="link" style="padding-top: 20px; padding-bottom: 30px; text-align: center;">
 									<a href="/user/userAuthorization?type=findPw" title="PW 찾기 선택" style=" margin-left:10px; position: relative; color: #333;">PW 찾기<!--ID/PW 찾기--></a>

@@ -377,7 +377,7 @@ public class UserController {
 		}else {//로그인 실패시 
 			return "redirect:/user/unUserLogin.jsp?status=failed";
 		}
-		return "redirect:/main/main";
+		return "redirect:/mypage/mypage?condition=1";
 	}
 	
 	@RequestMapping(value ="logout", method=RequestMethod.GET)
