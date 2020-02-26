@@ -367,10 +367,13 @@ public class PaymentController {
 		if (ticketingNo != null) {
 			System.out.println("===========> 예매, 예매+구매 취소");
 			payment = paymentService.getPaymentbyTicketingNo(Integer.parseInt(ticketingNo));
+			paymentService.cancelPayment(payment);
+			
 			return "redirect:/mypage/mypage?condition=1";
 		}else if (purchaseNostr != null) {
 			System.out.println("==========> 구매 취소");
 			payment = paymentService.getPaymentbyPurchaseNo(Integer.parseInt(purchaseNostr));
+			paymentService.cancelPayment(payment);
 			return "redirect:/mypage/mypage?condition=2";
 		}
 		

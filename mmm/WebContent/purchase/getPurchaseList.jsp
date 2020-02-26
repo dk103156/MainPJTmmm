@@ -291,8 +291,19 @@ purchaseQuantityList.forEach( (x,y) => {
 			$("#modal").modal("show");
 	});
 
-
+	
 	purchaseNoList.forEach( (value,index) => {
+		var payObjectFlag = false
+		 $.getJSON("/payment/json/getPaymentbyPurchaseNo/"+value)
+		 .done(data => {
+			 try{
+				if(data.payment.payObjectFlag==2 || data.payment.payObjectFlag==0){
+					payObjectFlag = true
+				}
+			 }catch(error){
+				 
+			 }
+		 })
 		 $.ajax({
 			  type: "POST",
 			  url: "/purchase/json/getInventoryList/",
@@ -303,12 +314,13 @@ purchaseQuantityList.forEach( (x,y) => {
 		        "Content-Type": "application/json"
 		      },
 		 }).done(data => {
+			
 			 //받아온 인벤토리 리스트를 배열로 돌려 한 구매 내역에 해당하는 핀 넘버에 사용한것이 있는지 없는지 체크한다.
 			 /* 나중에 꼭 결제 정보도 추가해주자 */ /* 나중에 꼭 결제 정보도 추가해주자 */
 			 /* 나중에 꼭 결제 정보도 추가해주자 */ /* 나중에 꼭 결제 정보도 추가해주자 */
-			 var useFlag= false
+			 var useFlag=false
 			 data.forEach( (value,sequence) => {
-				 
+				
 				 if(value.inventoryStatus==1){
 					 useFlag=true
 				 }

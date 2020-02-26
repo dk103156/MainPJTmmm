@@ -98,17 +98,17 @@
 			<if test="searchCondition != null">
 				<if test="searchCondition==0">
 						WHERE cancel_date IS NULL and ticketer_phone = ${ticketerPhone}
-						order by ticketing_date
+						order by ticketing_date desc
 				</if>
 	
 				<if test="searchCondition==1">
 						WHERE cancel_date IS NOT NULL and ticketer_phone = ${ticketerPhone}
-						order by cancel_date
+						order by cancel_date desc
 				</if>
 				
 				<if test="searchCondition==2">
 						WHERE cancel_date IS NULL and ticketer_phone = ${ticketerPhone}
-						order by ticketing_date
+						order by ticketing_date desc
 				</if>
 				
 			</if>
