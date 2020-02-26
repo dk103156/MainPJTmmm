@@ -186,7 +186,7 @@ $(function(){
 	$("a[href='#']:contains('내가 본 영화')").on('click',function(){	
 		var ticketerPhone = $("#ticketerPhone").val();
 	
-		$("#plusPage").load("/ticketing/getTicketingList?searchCondition=2&ticketerPhone="+ticketerPhone);
+		$("#plusPage").load("/mypage/mySeenMovie");
 	})
 	
 	$("a[href='#']:contains('구매 내역')").on('click',function(){		
@@ -239,7 +239,11 @@ $(function(){
 	if(condition==0){
 		$("#MypageHome").trigger("click");
 	}else{
+		//$("#MypageHome").trigger("click");
+		$('.dropdown-toggle').dropdown('toggle')
+		$('.dropdown-toggle').dropdown('hide')
 		$($("#lnb > a")[condition-1]).trigger("click");
+		
 	}
 	
 });

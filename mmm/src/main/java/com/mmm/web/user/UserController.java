@@ -15,6 +15,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
@@ -94,7 +95,7 @@ public class UserController {
 		
 		System.out.println("/user/passwordCheck : GET ");
 			
-		return "redirect:/user/passwordCheck.jsp";
+		return "forward:/user/passwordCheck.jsp";
 	}
 	
 	
@@ -136,7 +137,12 @@ public class UserController {
 	
 	System.out.println("userIdentity@@@@@@@:::::: "+user.getIdentity());
 	
-	
+	//비밀번호 암호화
+	String password = user.getPhone();
+	String cryptoPassword = CryptoUtil.cryptoText(password);
+	user.setPassword(cryptoPassword);
+	user.setUserId(user.getPhone());
+	userService.addUser(user);
 	
 	//Business Logic
 	userService.extraAddUser(user);
@@ -191,7 +197,7 @@ public class UserController {
 		session.setAttribute("user", newUser);
 		
 		
-		return "redirect:/mypage/mypage.jsp";
+		return "redirect:/mypage/mypage?condition=0";
 	}
 
 
@@ -241,7 +247,7 @@ public class UserController {
 		
 		System.out.println("/user/addUnUserView : GET");
 			
-		return "redirect:/user/addUnUserView.jsp";
+		return "forward:/user/addUnUserView.jsp";
 	}
 	
 	@RequestMapping(value = "addUnUser" , method=RequestMethod.POST)
@@ -268,13 +274,16 @@ public class UserController {
 		
 		System.out.println("/user/login : GET");
 		
+		String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevPage", referrer);
+		System.out.println("[login prevPage] >>> "+referrer);
 		
-		return "redirect:/user/login.jsp";
+		return "forward:/user/login.jsp";
 		
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user,Model model, HttpSession session){
+	public String login(@ModelAttribute("user") User user, Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session){
 		
 		try {
 			System.out.println("/user/login : POST");
@@ -304,7 +313,18 @@ public class UserController {
 			
 			//회원일 경우
 			if(user.getPassword().equals(dbUser.getPassword())) {
-				session.setAttribute("user", dbUser);	
+
+				if(session != null) {
+					String prevPage = (String) session.getAttribute("prevPage");
+					String[] redirectUrl = prevPage.split("8080");
+					if (redirectUrl != null) {
+						session.setAttribute("user", dbUser);
+		                session.removeAttribute("prevPage");
+		                return "redirect:"+redirectUrl[1];
+		            }
+				}
+				
+				session.setAttribute("user", dbUser);
 				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 			}else {//로그인 실패시 
 				return "redirect:/main/main.jsp?status=failed";

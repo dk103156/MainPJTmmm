@@ -152,7 +152,6 @@ li.col-md-6 {
 
 
 .my-saw-movie ul li .img {
-    position: absolute;
     left: 29px;
     top: 30px;
     width: 90px;
@@ -198,10 +197,106 @@ a {
 .my-saw-movie ul li .cont .theater p {
     padding: 6px 0 0 0;
 }
-
-
-
 </style>
+<script type="text/javascript">
+function getSeenMovieList(startRowNum, currentPage, pageSize){ // 내가본영화 가져오는 함수
+	$.ajax({
+		url : '/user/json/mySeenMovieList',
+		method : "post",
+		datatype : "json",
+		headers : {
+			"Accept" : "application/json",
+			"Content-Type" : "application/json"
+		},
+		data : JSON.stringify({
+			startRowNum : startRowNum,
+			currentPage : currentPage,
+			pageSize : pageSize
+		}),
+		success : function(data) {
+			
+			$("#mySawMovie").empty();
+			
+			var totalCnt = data.totalCnt;
+			var mySeenMovieList = data.mySeenMovieList;
+			
+			$("#mySeenMovieCnt").html(totalCnt);
+			
+			for(var i=0; i<mySeenMovieList.length; i++){
+				$("#mySawMovie").append(
+					'<li class="col-md-4" style="text-align:center; height: 300px;">'
+						+'<a href="/movie/getMovie/'+mySeenMovieList[i].movieNo+'" style="text-decoration:none;">'
+							+'<img src="'+mySeenMovieList[i].poster+'" width="200" height="250">'
+							+'<br> <h4>'+mySeenMovieList[i].movieName+'</h4>'
+						+'</a>'
+					+'</li>'
+				);
+			} // for end
+			
+			pagination(startRowNum, currentPage, pageSize, totalCnt);
+			
+			return totalCnt;
+			
+		}, error : function() {
+			console.log("=== getSeenMovieList error ===");
+		}
+	}); //ajax 끝
+}
+
+function pagination(startRowNum, currentPage, pageSize, totalCnt){ // 페이징 하는 함수
+	console.log("pagination 함수 호출");
+	console.log("> startRowNum : "+startRowNum);
+	console.log("> currentPage : "+currentPage);
+	console.log("> pageSize : "+pageSize);
+	console.log("> totalCnt : "+totalCnt);
+	$("#pagination").empty();
+	var maxPage = Math.ceil(totalCnt/pageSize); // 페이지의 수
+	$("#pagination").append("<button class='btn btn-default pageBtn'>&#60;</button>");
+	for(var i=1; i<=maxPage; i++){ // 페이지 찍기
+		if(currentPage==i){
+			$("#pagination").append("<button class='btn btn-default pageBtn' style='background-color: #fee50e'>"+i+"</button>");
+		} else {
+			$("#pagination").append("<button class='btn btn-default pageBtn'>"+i+"</button>");
+		}
+	}
+	$("#pagination").append("<button class='btn btn-default pageBtn'>&#62;</button>");
+}
+
+$(function(){
+	
+	var startRowNum = 1;
+	var currentPage = 1;
+	var pageSize = 9;
+	
+	getSeenMovieList(startRowNum, currentPage, pageSize);
+	
+	$(document).on("click", ".pageBtn", function(){ // 페이지 버튼 이벤트
+		
+		var pageVal = $(this).html(); // 선택한 페이지 버튼의 값 가져오기
+		var totalCnt = parseInt($("#mySeenMovieCnt").html()); // 전체 위시리스트 건수 가져오기
+		var maxPage = Math.ceil(totalCnt/pageSize); // 마지막 페이지
+		
+		if(pageVal == "&lt;"){ // < 버튼 일때
+			if(currentPage > 1){
+				currentPage = currentPage - 1;
+				pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출
+				getSeenMovieList(startRowNum, currentPage, pageSize); // 위시리스트 호출	
+			}
+		} else if (pageVal == "&gt;"){ // > 버튼 일때
+			if(currentPage < maxPage){
+				currentPage = currentPage + 1;
+				pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출
+				getSeenMovieList(startRowNum, currentPage, pageSize); // 위시리스트 호출
+			}
+		} else { // 숫자 버튼 일때
+			currentPage = parseInt(pageVal); // 선택한 페이지 번호 가져오기
+			pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출
+			getSeenMovieList(startRowNum, currentPage, pageSize); // 위시리스트 호출
+		}
+	})
+	
+});
+</script>
 
 </head>
 <body>
@@ -220,82 +315,13 @@ a {
 		<!-- my-saw-movie -->
 		<div class="my-saw-movie mt10 mySeenMovie myMovieStory">
 			<ul class="mySawMovie" id="mySawMovie">
-				<c:forEach var="j" items="${dateTimeList}">
-					<script>
-						var cnt = $("#mySeenMovieCnt").html();
-						$("#mySeenMovieCnt").html(parseInt(cnt)+1);
-					</script>
-					<li class="col-md-6">
-						<p class="img posterImg" data-mno="01207400" style="cursor: pointer">
-						<img src="${j.poster}" onerror="noImg(this)" alt="">
-						</p>
-						<div class="cont">        
-							<p class="tit">
-								<a href="" title="${j.movieName} 상세보기">${j.movieName}</a>
-							</p>        
-							<div class="theater">        
-								<p>${j.theaterName}</p>            
-								<p>${j.screenName}</p> 
-								<p><fmt:formatDate var="screenDate" value="${j.screenDate }" pattern="yyyy-MM-dd"/>
-								   	<fmt:formatDate var="screenTime" value="${j.screenTime }" pattern="HH:mm"/>
-									${screenDate} ${screenTime}</p>           
-							</div>    
-						</div>
-					</li>
-				</c:forEach>
+
 			</ul>
 		</div><!--// my-saw-movie -->
-	
-		<div class="pagination row">
-			  		<div class="col-4"></div>
-			  		<div class="col-4">
-					  <ul class="pagination">
-		   				 <!--  <<== 좌측 nav -->
-		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-		  					    <li class="page-item disabled">
-     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-   								 </li>
-		  				</c:if>
-		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
-					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true" style="background-color: #fee50e; color:#333; border-color: #fee50e;">Previous</a>
-   							</li>
-						</c:if>
-						
-					    <!--  중앙  -->
-						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
-							<c:if test="${ resultPage.currentPage == i }">
-								<!--  현재 page 가르킬경우 : active -->
-							    <li class="page-item active" aria-current="page">
-      								<a class="page-link" href="javascript:Pagination('${ i }')" style="background-color: #fee50e; color:#333; border-color: #fee50e;">${ i }<span class="sr-only">(current)</span></a>
-   								 </li>
-							</c:if>	
-							
-							<c:if test="${ resultPage.currentPage != i}">	
-								<li class="page-item">
-									<a class="page-link" href="javascript:Pagination('${ i }')" style="background-color: #fee50e; color:#333; border-color: #fee50e;">${ i }</a>
-								</li>
-							</c:if>
-						</c:forEach>
-					     <!--  우측 nav==>> -->
-					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
-					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#">Next</a>
-    						</li>
-					      </c:if>
-					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
-					      	    <li class="page-item">
-     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
-    							</li>
-						 </c:if>	
-					  </ul><!-- end of pagination -->
-					 </div><!-- end of middle col --> 
-					 <div class="col-4"></div>
-					 <form>
-					 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
-					 	<input type="hidden" id="searchCondition" name="searchCondition" value="${search.searchCondition }"/>
-					 </form>
-			  </div><!-- end of ticketingPagination -->
+		
+		<br>
+		
+		<div id="pagination" style="text-align: center"></div>
 	
 	</div><!--// contents -->
 </div><!--// container -->

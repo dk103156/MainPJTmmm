@@ -194,7 +194,7 @@
 			<c:set var="i" value="${ i }" />
       				<div class="thumb-wrapper" id="productList">
       					<div class="img-box text-center">
- 						<img src="/resources/image/${product.prodImage}" id="getProdListImg"class="img-circle img-responsive">
+ 						<img src="/resources/image/${product.prodImage}" id="getProdListImg"class="img-circle img-responsive" style="cursor: pointer;">
 				       	<input type="hidden" value = "${product.prodNo}">
 				       </div>
 				       	<div class="prodName col-12" id="getProdListProdName"><h4><span>${product.prodName}</span></h4>
@@ -274,5 +274,6 @@
 			}
 		});
 	  </script>
+	  <jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

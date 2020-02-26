@@ -124,8 +124,9 @@ div.container.getTicketingList {
 									    	</div>
 									    	<div class="afterButton col-3">
 									    	    <c:if test="${ i.ticketingStatus==0 }">
-									    	    	<form action="/payment/cancelPayment?ticketingNo=${i.ticketingNo}" method="GET">
+									    	    	<form action="/payment/cancelPayment" method="POST">
 									    				<input class="btn btn-primary" type="submit" value="예매취소"></button>
+										    			<input type='hidden' name='ticketingNo' value='${i.ticketingNo}'>
 									    			</form>
 									    		</c:if>
 									    	</div>
@@ -469,7 +470,9 @@ $(function(){
 								    
 					    			
 					    			//예매 취소 버튼 추가
-					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
+// 					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
+					    			Element  = "<form action='/payment/cancelPayment' 'method='post'>"
+					    			Element  = "<input type='hidden' name='ticketingNo' value='"+data.ticketingList[i].ticketingNo+"'>"
 				    				Element += "<input class='btn btn-primary' type='submit' value='예매취소'></button>"
 				    				Element += "</form>"
 				    				
