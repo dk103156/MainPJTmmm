@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -113,7 +114,11 @@
 				<div class="row mx-0 mb-2">
 				<br><br>
 					<div class="col-3"><strong class="pl-3">상품가격 </strong></div>
-					<div class="col-9"><span>${product.prodPrice}원</span></div>
+					<div class="col-9">
+						<span>
+							<fmt:formatNumber value="${product.prodPrice}" type="currency" currencySymbol=""/>원
+						</span>
+					</div>
 				</div>
 				<div class="row mx-0 mb-2">
 				<br><br>
