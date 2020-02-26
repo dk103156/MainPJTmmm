@@ -24,6 +24,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
 
+
+
+
 <script type="text/javascript">
 
 	$(function(){
@@ -58,13 +61,13 @@
 					//alert(status);
 					console.log(JSONData.result);
 					if(JSONData.result==0){
-						$("form").attr("method","POST").attr("action", "/event/addPartPrev").submit();
+						
 						Swal.fire({
 							text: '응모가 완료되었습니다.',
 							icon: 'success',
 							confirmButtonText: "confirm",
 						}).then((confirm)=>{
-			    			self.location="/event/addPartPrev";
+							$("form").attr("method","POST").attr("action", "/event/addPartPrev").submit();
 			    		});
 					}else{
 						Swal.fire({
@@ -102,6 +105,19 @@
 	div.text-muted {
 		font-size:1rem;
 	}	
+	
+		.btn.btn-dafault.write{ 
+			background-color: #fee50e!important;
+	   		color: #212529;
+	    	border-color: #fcfaf5;
+	    	font-size: 13px;
+		}
+		
+		.btn.btn-dafault.write:hover {
+		     color: #f8f9fa;
+		     background-color: #e0a800;
+		     border-color: #040404;
+		}
 	
 </style>
 
@@ -155,7 +171,7 @@
 				<div class="col-md-3">		    
 					<div>
 <%-- 			    	<c:forEach var = "image" items ="${fileArr}"> --%>
-			    		<img class="prevImg" src="${image}"/>
+			    		<img class="prevImg" src="${preview.previewImage}"/>
 			    	<br/>
 <%-- 			    	</c:forEach> --%>
 					</div>	
@@ -191,7 +207,7 @@
 	<!-- 		 row 닫는 애! -->
 	
 			<div class="text-center">
-				<button id="applyBtn" class="btn btn-dafault write" type="button">응모하기</button>
+				<button id="applyBtn" class="btn btn-dafault write" type="button" style="margin-top:15px;">응모하기</button>
 <!-- 				<button id="updateBtn" class="btn btn-dafault write" type="button">수정하기</button> -->
 			</div>
 			<br>

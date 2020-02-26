@@ -93,7 +93,7 @@ div.container.getTicketingList {
 							<fmt:formatDate var="cancelDay" value="${i.cancelDate }" pattern="E"/> 
 							<fmt:formatDate var="ticketingHM" value="${i.ticketingDate }" pattern="HH:mm"/>
 							<fmt:formatDate var="cancelHM" value="${i.cancelDate }" pattern="HH:mm"/>
-							<div class="ticketingContentIn row"  data-toggle="modal" data-target="#exampleModalScrollable">	
+							<div class="ticketingContentIn row" >	
 									<div class="col-6 border">
 										<div class="row">
 											<div class="col-5">
@@ -124,8 +124,9 @@ div.container.getTicketingList {
 									    	</div>
 									    	<div class="afterButton col-3">
 									    	    <c:if test="${ i.ticketingStatus==0 }">
-									    	    	<form action="/payment/cancelPayment" method="POST">
-									    				<input class="btn btn-primary" type="submit" value="예매취소"></button>
+									    	    	<button class="cancelButton" type="button" class="btn btn-primary">Cancel</button>
+									    	    	<form id="cancelForm" action="/payment/cancelPayment" method="POST">
+									    				
 										    			<input type='hidden' name='ticketingNo' value='${i.ticketingNo}'>
 									    			</form>
 									    		</c:if>
@@ -260,9 +261,45 @@ div.container.getTicketingList {
 			</div><!-- end of modal -->			  
 		  </div><!-- end of getTicketingList -->	
 	  </div><!-- end of Container -->
+
+<!-- Modal -->
+<div class="modal fade" id="ticketingCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">안내 창</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       	 예매를 취소하시겠습니까?
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+        <button type="button" class="btn btn-primary" onclick='cancelTicketing()'>네</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ajax 모음 -->	  
 <script>
+function cancelTicketing(){
+	console.log("취소 버튼 작동함")
+	$("form#cancelForm").submit();
+}
+
+function activeCancle(){
+	$("div.afterButton > button").on("click",function(){
+		$("div#ticketingCancel").modal("show")
+	})
+}
+
 $(function(){
+
+	
+	activeCancle();
 	
 	detail();
 	
@@ -278,7 +315,7 @@ $(function(){
 	
 	//상세 내역
 	function detail(){
-		$("div.ticketingContentIn.row").on("click",function(){
+		$("div.ticketingContent > div > div:nth-child(1)").on("click",function(){
 			
 			var ticketingNo = $(this).find("span.contentPinNo").text().substring(6);
 			
@@ -417,6 +454,7 @@ $(function(){
 					}
 			
 			);//end of then 
+			$("#exampleModalScrollable").modal("show")
 		});//end of function
 	}
 	//예매 내역 클릭
@@ -434,7 +472,7 @@ $(function(){
 					$(".ticketingContent").empty();					
 						if(data.ticketingList.length!=0){
 							for(var i=0; i<data.ticketingList.length; i++){
-								var Element = "<div class='ticketingContentIn row' data-toggle='modal' data-target='#exampleModalScrollable'>"	
+								var Element = "<div class='ticketingContentIn row'>"	
 								    Element+= "<div class='col-6 border'>"
 									Element+= "<div class='row'>"
 									Element+= "<div class='col-5'>"
@@ -472,7 +510,7 @@ $(function(){
 					    			//예매 취소 버튼 추가
 // 					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
 					    			Element  = "<form action='/payment/cancelPayment' 'method='post'>"
-					    			Element  = "<input type='hidden' name='ticketingNo' value='"+data.ticketingList[i].ticketingNo+"'>"
+
 				    				Element += "<input class='btn btn-primary' type='submit' value='예매취소'></button>"
 				    				Element += "</form>"
 				    				
@@ -544,7 +582,7 @@ $(function(){
 								$("div.ticketingPagination").append(Element);
 								
 								$("#searchCondition").val(data.search.searchCondition);
-								
+								activeCancle()
 								detail()
 						}//end of if
 					}//end of arrow function
@@ -567,7 +605,7 @@ $(function(){
 					$(".ticketingContent").empty();
 					if(data.ticketingList.length!=0){
 						for(var i=0; i<data.ticketingList.length; i++){
-							var Element = "<div class='ticketingContentIn row' data-toggle='modal' data-target='#exampleModalScrollable'>"	
+							var Element = "<div class='ticketingContentIn row'>"	
 							    Element+= "<div class='col-6 border'>"
 								Element+= "<div class='row'>"
 								Element+= "<div class='col-5'>"

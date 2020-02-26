@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		  
 		  eventRender:function(event, eventElement) {
               if(event.imageurl) {
-                  eventElement.find("span.fc-title").prepend("<center><img src='" + event.imageurl + "'><center>");
+                  eventElement.find("span.fc-title").prepend("<center><img src='"+event.imageurl+"'><center>");
               }
           }
 
@@ -204,7 +204,7 @@ function ajaxPromise(url, datas) {
  
 $(function(){
 	
-	$('.fc-event').css('font-size', '2.5em');
+	$('.fc-event').css('font-size', '1em');
 })
 
 

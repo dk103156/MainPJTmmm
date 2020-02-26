@@ -451,28 +451,28 @@
 			</div>
 		</div>
 		
-		<!-- 한줄평 등록 Modal -->
-<div class="modal fade" id="modal-addOneline" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-yellow-cs">
-        <h5 class="modal-title" id="exampleModalCenterTitle">한줄평 작성</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-	      <div class="modal-body">
-	        <input class="form-control form-control-lg" name="commentContent" type="text" placeholder="한줄평을 작성하세요.">
-	        <input type="hidden" name="movieNo" value="${movie.movieNo}">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        <button type="button" name="btn-addOneline" class="btn btn-yellow-cs">등록</button>
-	      </div>
-    </div>
-  </div>
-</div>
-		
+				<!-- 한줄평 등록 Modal -->
+		<div class="modal fade" id="modal-addOneline" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header bg-yellow-cs">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">한줄평 작성</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+			      <div class="modal-body">
+			        <input class="form-control form-control-lg" name="commentContent" type="text" placeholder="한줄평을 작성하세요.">
+			        <input type="hidden" name="movieNo" value="${movie.movieNo}">
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+			        <button type="button" name="btn-addOneline" class="btn btn-yellow-cs">등록</button>
+			      </div>
+		    </div>
+		  </div>
+		</div>
+	<jsp:include page="/layout/footer.jsp"></jsp:include>	
   	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <!--     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
   </body>

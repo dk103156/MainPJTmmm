@@ -226,8 +226,6 @@
 		}
 		
 		
-		
-		
 		.page-item.active .page-link {
 		    z-index: 1;
 		    color: #4e4c4c;

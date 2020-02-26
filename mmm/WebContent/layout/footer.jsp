@@ -36,13 +36,17 @@ body {
     padding: 0;
 	background-color:  #333;
 }
+.center-div{
+	float: none;
+	margin: 0 auto;
+}
 
 .foo_div > a > img {
     width: 109px;
     height: 107px;
     border-radius: 50%;
-    margin-top: 40px;
-    margin-left: 30px;
+/*     margin-top: 40px; */
+/*     margin-left: 30px; */
 }
 
 .foo_div {
@@ -68,11 +72,28 @@ body {
 	margin-bottom: 10px;
 }
 
-.foo_div1 div > a > img{
+.logos > a > img{
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 	margin-top: 15px;
+}
+.copyright{
+    font-size: 11px; 
+    line-height: 1.2;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #f5f5f5;
+    letter-spacing : normal;
+}
+.copyright > p > span{
+	border-right : 2px solid orange;
+	border-left : 3px solid orange;
+	padding-right : 7px;
+	padding-left : 7px;
+}
+.yellow-blank-box{
+	height : 15px;
+	background-color:  #f5d920;
 }
 
 </style>
@@ -85,24 +106,50 @@ body {
 </head>
 <body>
 
-<footer id="footer" style="top: 25px;">
-	    <div class="foo_div">
-	    	<a href="/main" title="MMM"><img src="../resources/image/logo/logo.png"></a>
+<footer id="footer"  style="top: 25px;">
+	<div class="row h-100 align-items-center pr-5 pl-5">
+	    <div class="col-2 foo_div text-center">
+	    	<a href="/main" class="center-div" title="MMM"><img src="/resources/image/logo/logo.png"></a>
 	    </div>
-	    <div class="foo_div1" style="margin-right: 88px;">
-		    <div class="3Sa_Logo">	    
-		    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
-		    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
-		    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a>
-		    </div>	
-		    <div class="copyright">    
-		    	<span>(주) MMM</span> <span> | </span>
-		    	<span>대표 :  GETSET 조</span> <span> | </span>
-		    	<span>사업자 등록번호 : 000-00-00000</span>
-		    	<p>주소 : 대한민국 어디엔가 사는!</p>
-		    	<p style="padding-left: 138px;">뭅 ? 뭅 ! 뭅</p>
-	    	</div>
-	    </div>
+	    <div class="col-3 logos align-self-center">	    
+	    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
+	    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
+	    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/MegaBox.jpg"></a>
+	    </div>	
+	    <div class="col-7 copyright text-right">   
+	    	<p>   
+	    	   <span>(04377)서울특별시 용산구 한강대로 23길 55, 아이파크몰 6층(한강로동)</span>
+	    	</p>
+	    	<p>
+	    	   <span>대표이사 : 조규비</span>
+		       <span>사업자 등록번호 : 000-00-00000</span>
+		       <span>통신판매업신고번호 : 2020-서울비트-0001</span>
+	    	</p> 
+	    	<p>
+	    	   <span>개인정보보호 책임자 : 김수정</span>
+		       <span>대표이메일 : movmovmov6@gmail.com</span>
+		       <span>MMM 고객센터 : 1544-1111</span>
+	    	</p> 
+	    	<p>
+	    	   <span>© mmm. All Rights Reserved</span>
+	    	</p> 
+    	</div>
+<!-- 	    <div class="foo_div1" style="margin-right: 88px;"> -->
+<!-- 		    <div class="3Sa_Logo">	     -->
+<!-- 		    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/CGV.png" style="margin-right: 50px;"></a>  -->
+<!-- 		    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a> -->
+<!-- 		    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="../resources/image/logo/MegaBox.jpg"></a> -->
+<!-- 		    </div>	 -->
+<!-- 		    <div class="copyright">     -->
+<!-- 		    	<span>(주) MMM</span> <span> | </span> -->
+<!-- 		    	<span>대표 :  GETSET 조</span> <span> | </span> -->
+<!-- 		    	<span>사업자 등록번호 : 000-00-00000</span> -->
+<!-- 		    	<p>주소 : 대한민국 어디엔가 사는!</p> -->
+<!-- 		    	<p style="padding-left: 138px;">뭅 ? 뭅 ! 뭅</p> -->
+<!-- 	    	</div> -->
+<!-- 	    </div> -->
+	</div>
+	<div class="yellow-blank-box"></div>
 </footer>
     
 </body>

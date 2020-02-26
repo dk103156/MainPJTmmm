@@ -32,9 +32,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script type="text/javascript">
-
-
-
 function getCommentList(currentPage) {
 	
 	var parent = ${preview.previewNo};
@@ -57,11 +54,11 @@ function getCommentList(currentPage) {
 		success : function(result) {
 			
 			//alert(result.list.length)
+			
 				console.log(result)
-
 				$(".reply_box").empty()
 				var html = "<p class='num'>"+ result.resultPage.totalCount+" Comments</p>";
-				html+= "<input type='hidden' id='currentPage' value=''/>"
+				html+= "<input type='hidden' id='currentPage' value=''/>" 
 				html+= "<input type='hidden' name='articleNo' value='${preview.previewNo}'>"
 				html+= "<input type='hidden' name='commentType' value='0'>"
 				html+= "<input type='hidden' name='userId' value='${user.userId}'>"
@@ -147,7 +144,6 @@ function getCommentList(currentPage) {
 	
 	})//end of ajax
 }//end of getCommentList
-
 function comment(currentPage){
 	
 	$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
@@ -179,8 +175,6 @@ function comment(currentPage){
 			}); //ajax끝
 		}); //click 이벤트 끝
 }//end of comment()
-
-
 	$(function(){
 		
 		getCommentList(1);
@@ -190,7 +184,6 @@ function comment(currentPage){
 			
 			
 			var today = new Date();   
-
 			var commentDate = 	today.toLocaleDateString()+" "+today.toLocaleTimeString();	
 			var articleNo =${preview.previewNo};
 			var userId = $(this).parent().find("div[name='userId']").text();
@@ -201,7 +194,6 @@ function comment(currentPage){
 			$("#content").html(commentContent);
 			$("#cmtDate").html(commentDate);
 			$("input[name='commentNo']").val(commentNo);
-
 			
 			$('#modalBox').modal('show');
 		
@@ -256,8 +248,6 @@ function comment(currentPage){
 			
 			self.location = "";
 		});
-
-
 		
 		$('#okBtn').on("click", function(){
 			self.location="/event/getPreviewListAd";
@@ -265,7 +255,6 @@ function comment(currentPage){
 		
 		
 		$('#doApply').on("click", function(){
-
 			var status =${preview.previewFlag};
 			console.log(status);
 			
@@ -345,10 +334,6 @@ function comment(currentPage){
 	.distanceInfo {position:relative;top:5px;left:5px;list-style:none;margin:0;}
 	.distanceInfo .label {display:inline-block;width:50px;}
 	.distanceInfo:after {content:none;}
-
-
-
-
 	.issue{
 	height: 500px;
 	border: 1px solid black;
@@ -362,14 +347,12 @@ function comment(currentPage){
 	dispaly: table;
 	clear: both;
 	height: 30px;
-
-
 	}
-
 	.event-detail .event-detail-date {
 	    overflow: hidden;
 	    width: 1100px;
 	    margin: 0 auto 30px auto;
+	    font-weight: bold;
 	    padding: 15px 0 25px 0;
 	    line-height: 1.1;
 	    border-bottom: 1px solid #555;
@@ -395,7 +378,6 @@ function comment(currentPage){
 	body {
 		
 	    overflow: auto;
-
 	    letter-spacing: 0;
 	    line-height: 1.5;
 	    font-size: 15px;
@@ -410,7 +392,6 @@ function comment(currentPage){
     	 margin: 0;
   		 padding: 40px 0 0 0;
 	}
-
 	.event-detail h2.tit {
 	    width: 1100px;
 	    margin: 0 auto;
@@ -443,7 +424,7 @@ function comment(currentPage){
 	
 		div.prevInfo {
 		padding: 0px;
-		font-size: 1.5em;
+		font-size: 1.1em;
 	    font-weight: 400;
 	    letter-spacing: -1px;
 	    line-height: 1.1;
@@ -490,7 +471,6 @@ function comment(currentPage){
 	font-weight: bold;
 	font-size: 12px;
 	margin: 10px 0 25px;
-
 	}
 	
 	p {
@@ -515,7 +495,6 @@ function comment(currentPage){
 	    height: 70px;
 	    width: 100%;
 	}
-
 	.comment_area .textarea_box a.btn_write {
 	    position: absolute;
 	    right: 0;
@@ -589,7 +568,6 @@ function comment(currentPage){
 	    color: #828282;
 	    font-size: 14px;
 	}
-
 	li {
 	    text-align: -webkit-match-parent;
 	}
@@ -623,7 +601,6 @@ function comment(currentPage){
 	.cmtPagination a {
 	    display: inline-block;
 	}
-
 	
 	li.blindCmt{
 		height: 82.76px;
@@ -684,7 +661,6 @@ function comment(currentPage){
 	.btn{
 	border: 1px solid #dedede;
 	}
-
 </style>
 
 
@@ -698,7 +674,8 @@ function comment(currentPage){
  	<div id="contents">
  	
 	<div class="event-detail">	
-	<h2 class="tit">${preview.previewName}</h2>
+	<h2 class="tit">
+	<span style="font-weight:bold;">${preview.previewName}</span></h2>
 	<p class="event-detail-date">
 				<span>기간</span>
 				<em>${preview.preStDate} ~ ${preview.preEdDate}</em>
@@ -725,7 +702,7 @@ function comment(currentPage){
                         </div>
             
             <c:if test="${preview.previewFlag==1}">
-               <button class="btn float-right getPreviewAd" id="doApply">응모하기</button>
+               <button class="btn float-right getPreviewAd" id="doApply" style="margin-right:40px;">응모하기</button>
             </c:if>
             <c:if test="${preview.previewFlag==2}">
                <button class="btn float-right getPreviewAd" id="viewWinner">당첨자보기</button>
@@ -733,16 +710,16 @@ function comment(currentPage){
             
             
             <div class="cdtl_prd_info"> <!-- 시사회 정보 -->
-                <div class="prevInfo">
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사회 이름</span> ${preview.previewName}</p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">장소</span>  <span id="previewPlace">${preview.previewPlace}</span> <i id="mapIcon" class="far fa-map"></i></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사 일자</span> ${preview.preDate}</p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">상영 시간 </span> ${preview.previewTime}</p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">인원수  </span> ${preview.winnerCount}</p>
+                <div class="prevInfo" style="margin-top:25px;">
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사회 이름</span><span style="margin-left:15px;">${preview.previewName}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">장소</span><span id="previewPlace"><span style="margin-left:15px;">${preview.previewPlace}</span></span> <i id="mapIcon" class="far fa-map"></i></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사 일자</span><span style="margin-left:15px;">${preview.preDate}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">상영 시간 </span><span style="margin-left:15px;">${preview.previewTime}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">인원수  </span><span style="margin-left:15px;">${preview.winnerCount}</span></p>
 					
 					</div>
                 
-                <div class="trailer">
+                <div class="trailer" style="margin-top:55px;">
                 <iframe id="player" class="embed-responsive-item" width="550" height="300"
 			        		src=""></iframe>
                 </div>
@@ -846,15 +823,10 @@ function comment(currentPage){
 
 <script>
 	
-
-
 </script>
 <script>
-
 var place = "";
-
 function getWinnerList(previewNo){
-
 		$.ajax({
 		url: "/event/json/getWinnerList/"+previewNo,
 		method:"GET",
@@ -882,7 +854,6 @@ function getWinnerList(previewNo){
 	
 		place = $.trim($("span#previewPlace").text())
 		console.log(place)
-
 	});
 	
 	$("div#modal3").on('shown.bs.modal', function (e) {
@@ -1014,7 +985,6 @@ function getWinnerList(previewNo){
 	  		console.warn('ERROR(' + err.code + '): ' + err.message);
 		};	  
 	
-
 	/* 마커 클릭하면 정보 보이고, 버튼 누를시에 선호 극장으로 데이터 전송하기 */
 	</script>
 
