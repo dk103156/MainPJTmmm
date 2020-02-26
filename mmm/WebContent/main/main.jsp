@@ -137,8 +137,14 @@
 	.slide_pagination .dot.dot_active { background: #333; }
 	.slide_pagination .dot a { display: block; width: 100%; height: 100%; }
  
-
-
+	.carousel{
+/* 		pointer-events: none; */
+		z-index : 500;
+	}
+	.mb-8{
+		margin-bottom: 7rem!important;
+	}
+	
 </style>
 </head>
 <body>
@@ -146,7 +152,7 @@
 	<jsp:include page="/layout/header.jsp"></jsp:include>
 
 	
-	<div class="container-fluid px-0 mb-5">
+	<div class="container-fluid px-0 mb-8">
 		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		  <ol class="carousel-indicators">
 		    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -157,22 +163,22 @@
 		    <div class="carousel-item active">
 		      <img src="../resources/image/mainPage/main_image01.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">
-		        <h5>First slide label</h5>
-		        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+		        <h5>3사 예매 사이트를 비교하시기 번거롭지 않으신가요?</h5>
+		        <p>CGV, MOVIEBOX, LOTTE CINEMA 3사의 예매 정보를 한눈에 확인할 수 있어요.</p>
 		      </div>
 		    </div>
 		    <div class="carousel-item">
 		      <img src="../resources/image/mainPage/main_image03.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">
-		        <h5>Second slide label</h5>
-		        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+		        <h5>팝콘을 기다리는 동안 코로나 걸려버린다면?</h5>
+		        <p>MovMovMov의 QuickOrder Service를 이용해보세요. 누구보다 빠르게 팝콘을 입에 넣으실 수 있어요.</p>
 		      </div>
 		    </div>
 		    <div class="carousel-item">
 		      <img src="../resources/image/mainPage/main_image04.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">
-		        <h5>Third slide label</h5>
-		        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+		        <h5>당신을 위한 맞춤형 영화 추천</h5>
+		        <p>당신의 취향에 맞는 작품을 선별하여 추천해드려요 :).</p>
 		      </div>
 		    </div>
 		  </div>
@@ -190,7 +196,7 @@
 		<h3 class="mainPage"><img class="introTag" src="http://img.cgv.co.kr/R2014/images/title/h3_movie_selection.gif" alt="MOVIE SELECTION"></h3>
 	</div>
 	
-	<div class="container-fluid">
+	<div class="container-fluid mb-8">
 		<div class="pageContent row">
 			<div class="col-12 movieSelection row mr-3">
 				<div id="movieSelected" class="col-12 row mb-5">
