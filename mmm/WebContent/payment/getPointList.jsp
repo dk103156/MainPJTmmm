@@ -72,10 +72,10 @@
 		        
 		        <c:set var = "pointStatus" value="${point.pointStatus}"/>
 		        <c:if test="${fn:contains(pointStatus, '적립')}">
-			       <div class = "badge saving text-wrap" style="width: 6rem;"> ${point.pointStatus}</div>
+			       <div class = "badge saving text-wrap" style="height: 20px;"> ${point.pointStatus}</div>
 		        </c:if>
 		        <c:if test="${fn:contains(pointStatus, '사용')}">
-			       <div class = "badge using text-wrap" style="width: 6rem;"> ${point.pointStatus}</div>
+			       <div class = "badge using text-wrap" style="height: 20px;"> ${point.pointStatus}</div>
 		        </c:if>
 		        
 		        </td>
