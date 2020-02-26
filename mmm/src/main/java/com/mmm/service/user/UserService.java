@@ -1,5 +1,6 @@
 package com.mmm.service.user;
 
+import java.util.List;
 import java.util.Map;
 
 import com.mmm.common.Search;
@@ -44,9 +45,11 @@ public interface UserService {
 	//회원정보리스트 (admin)
 	public Map<String,Object> getUserList(Search search)throws Exception;
 	
+	//내가본영화
+	public List<Map<String, Object>> getSeenMovieList(Search search) throws Exception;
 	
-	
-	
+	//내가본영화 전체수
+	public int getSeenMovieCnt(String phone) throws Exception;
 	
 	
 	

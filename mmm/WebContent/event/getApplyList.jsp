@@ -375,7 +375,6 @@ user agent stylesheet
 b {
     font-weight: bold;
 }
-user agent stylesheet
 strong {
     font-weight: bold;
 }
@@ -445,33 +444,6 @@ button, input, optgroup, select, textarea {
 user agent stylesheet
 select:not(:-internal-list-box) {
     overflow: visible !important;
-}
-user agent stylesheet
-z
-    -webkit-writing-mode: horizontal-tb !important;
-    text-rendering: auto;
-    color: -internal-light-dark-color(black, white);
-    letter-spacing: normal;
-    word-spacing: normal;
-    text-transform: none;
-    text-indent: 0px;
-    text-shadow: none;
-    display: inline-block;
-    text-align: start;
-    -webkit-appearance: menulist;
-    box-sizing: border-box;
-    align-items: center;
-    white-space: pre;
-    -webkit-rtl-ordering: logical;
-    background-color: -internal-light-dark-color(white, black);
-    cursor: default;
-    margin: 0em;
-    font: 400 13.3333px Arial;
-    border-radius: 0px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(169, 169, 169);
-    border-image: initial;
 }
 
 .bootstrap-select>.dropdown-toggle.bs-placeholder, .bootstrap-select>.dropdown-toggle.bs-placeholder:active, .bootstrap-select>.dropdown-toggle.bs-placeholder:focus, .bootstrap-select>.dropdown-toggle.bs-placeholder:hover {
@@ -734,7 +706,6 @@ button, input, optgroup, select, textarea {
     font-size: 1em;
     line-height: 1.15;
 }
-user agent stylesheet
 button {
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
@@ -1134,7 +1105,6 @@ table caption {
 * {
     box-sizing: border-box;
 }
-user agent stylesheet
 caption {
     display: table-caption;
     text-align: -webkit-center;
@@ -1143,7 +1113,8 @@ caption {
 .board-list {
     line-height: 1.3;
 }
-user agent stylesheet
+
+
 table {
     border-collapse: separate;
     border-spacing: 2px;
@@ -1198,16 +1169,13 @@ table td, table th {
     padding: 0;
 }
 
-user agent stylesheet
 th {
     display: table-cell;
     vertical-align: inherit;
     font-weight: bold;
     text-align: -internal-center;
 }
-.a-c {
-    text-align: center!important;
-}
+
 .board-list {
     line-height: 1.3;
 }
@@ -1257,7 +1225,6 @@ article, aside, figcaption, figure, footer, header, main, nav, section {
     display: block;
 }
 
-user agent stylesheet
 section {
     display: block;
 }

@@ -121,6 +121,17 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public List<Map<String, Object>> getSeenMovieList(Search search) throws Exception {
+		return userDao.getSeenMovieList(search);
+	}
+
+
+	@Override
+	public int getSeenMovieCnt(String phone) throws Exception {
+		return userDao.getSeenMovieCnt(phone);
+	}
+
 	
 
 }
