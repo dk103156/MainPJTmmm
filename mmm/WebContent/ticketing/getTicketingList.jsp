@@ -124,8 +124,9 @@ div.container.getTicketingList {
 									    	</div>
 									    	<div class="afterButton col-3">
 									    	    <c:if test="${ i.ticketingStatus==0 }">
-									    	    	<form action="/payment/cancelPayment" method="POST">
-									    				<input class="btn btn-primary" type="submit" value="예매취소"></button>
+									    	    	<button class="cancelButton" type="button" class="btn btn-primary">Cancel</button>
+									    	    	<form id="cancelForm" action="/payment/cancelPayment" method="POST">
+									    				
 										    			<input type='hidden' name='ticketingNo' value='${i.ticketingNo}'>
 									    			</form>
 									    		</c:if>
@@ -260,9 +261,39 @@ div.container.getTicketingList {
 			</div><!-- end of modal -->			  
 		  </div><!-- end of getTicketingList -->	
 	  </div><!-- end of Container -->
+
+<!-- Modal -->
+<div class="modal fade" id="ticketingCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">안내 창</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       	 예매를 취소하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+        <button type="button" class="btn btn-primary" onclick='cancelTicketing()'>네</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ajax 모음 -->	  
 <script>
 $(function(){
+	$("button.cancelButton").on("click",function(){
+		$("div#ticketingCancel").modal("show")
+	})
+	
+	function cancelTicketing(){
+		
+		$("form#cancelForm").submit();
+	}
 	
 	detail();
 	
