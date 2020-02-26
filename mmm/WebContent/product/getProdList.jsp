@@ -157,7 +157,7 @@
 
 		
 		</script>
-		
+		<title>mmm</title>
 	</head>
 
 <body id="body">
@@ -165,14 +165,14 @@
 	<jsp:include page="/product/prodToolBar.jsp" />
 	
 	
- 		<br/><br/><br/>
+ 		<br/>
  		 	
 	
  	<!--  화면구성 div Start /////////////////////////////////////-->
  	
  	
  	<div class="container" id = "container">
- 		<br/><br/><br/>
+ 		<br/>
  		 	 <div class="row mx-0">
 	    
 			<div class="col-6">
@@ -214,8 +214,8 @@
  						<img src="/resources/image/${product.prodImage}" id="getProdListImg"class="img-circle img-responsive" style="cursor: pointer;">
 				       	<input type="hidden" value = "${product.prodNo}">
 				       </div>
-				       	<div class="prodName col-12" id="getProdListProdName"><h4><span>${product.prodName}</span></h4>
-					       	<div class="prodPrice col-10" id="getProdListProdPrice">
+				       	<div class="prodName col-11 text-center" id="getProdListProdName"><h4><span>${product.prodName}</span></h4>
+					       	<div class="prodPrice col-9 text-center" id="getProdListProdPrice">
 					       		<h5>
 					       			<fmt:formatNumber value="${product.prodPrice}" type="currency" currencySymbol=""/>원
 					       		</h5>

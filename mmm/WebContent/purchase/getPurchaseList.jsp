@@ -30,6 +30,7 @@
 	  
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
+	  <title>mmm</title>
 </head>
 	  
 <body id="body">
