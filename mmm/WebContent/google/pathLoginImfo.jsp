@@ -1,12 +1,12 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <meta charset="EUC-KR">
 
-<title>Ä«Ä«¿À ·Î±×ÀÎ ÆË¾÷Ã¢ Ã³¸® jsp</title>
+<title>ì¹´ì¹´ì˜¤ ë¡œê·¸ì¸ íŒì—…ì°½ ì²˜ë¦¬ jsp</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -21,18 +21,18 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-// ÀÌµ¿ ½Ã ºÎ¸ğ Ã¢ »õ·Î°íÄ§(main.jsp·Î ÀÌµ¿)°ú ÆË¾÷Ã¢ Á¾·á¸¦ À§ÇÑ ±¸°£ 
+// ì´ë™ ì‹œ ë¶€ëª¨ ì°½ ìƒˆë¡œê³ ì¹¨(main.jspë¡œ ì´ë™)ê³¼ íŒì—…ì°½ ì¢…ë£Œë¥¼ ìœ„í•œ êµ¬ê°„ 
 $(function(){
-	opener.parent.location="/index.jsp";
+	opener.parent.location="/main/main";
 	window.open("about:blank","_self").close();
 })
 </script>
 
 <head>
 <meta charset="EUC-KR">
-<title>¹Ù·Î »ç¶óÁö±â ¶§¹®¿¡ ÀÇ¹Ì ¾ø´Â jspÀÔ´Ï´Ù.</title>
+<title>ë°”ë¡œ ì‚¬ë¼ì§€ê¸° ë•Œë¬¸ì— ì˜ë¯¸ ì—†ëŠ” jspì…ë‹ˆë‹¤.</title>
 </head>
 <body>
-¾ÆÀÌ°í ÀÇ¹Ì¾ø´Ù 
+ì•„ì´ê³  ì˜ë¯¸ì—†ë‹¤ 
 </body>
 </html>

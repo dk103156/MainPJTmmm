@@ -11,13 +11,17 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 
-<title>로그인</title>
+<title>mmm</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 
@@ -119,6 +123,8 @@ function getCookie(cookieName) {
 
 $(function(){	
 	
+	
+	
 	$('#loginModal').modal ({ keyboard: false, backdrop: 'static' });
 	
 	$("#loginModal").modal("show");
@@ -142,8 +148,14 @@ $(function(){
 	var status = getParam("status");
 	
 	if(status=="failed"){
-		alert("로그인 정보가 올바르지 않습니다.");
+		//alert("로그인 정보가 올바르지 않습니다.");
+		Swal.fire({
+		  icon: 'error', //"info,success,warning,error" 중 택1
+		 // title: 'Oops...',
+		  text: '로그인 정보가 올바르지 않습니다.'
+		})
 	}
+
 	
 	function validate() {
 	    var re =  /^[0-9a-z]{5,15}$/;  // 아이디가 적합한지 검사할 정규식
@@ -199,14 +211,16 @@ $(function(){
 	
 	
 	//======================"로그인" Event 연결==========
-		
+
 	$("#password").on("keydown",function (event) {
+		
 		 if(event.keyCode == 13){//키가 13이면 실행 (엔터는 13)
 			console.log("클릭");
 			id= $('#userId').val();
 			pw= $('#password').val();
 			validate();
 			
+		
 			if(id == '' || id ==null||pw == '' || pw ==null){
 				alert('아이디와 비밀번호를 입력하세요.');
 				// $('#loginBtn').attr("disabled", true);
@@ -227,6 +241,10 @@ $(function(){
 		console.log("클릭");
 		id= $('#userId').val();
 		pw= $('#password').val();
+		
+		if(!check){
+			return;
+		}
 		
 		if(id == '' || id ==null||pw == '' || pw ==null){
 			alert('아이디와 비밀번호를 입력하세요.');
