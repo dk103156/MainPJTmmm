@@ -188,46 +188,25 @@ public class MypageController {
 	}
 	
 	// 내가 본 영화 개수 가져오기
-	public int mySeeMovieCnt(String ticketerPhone) {
+	public int mySeeMovieCnt(String phone) {
 		
 		int mySeeMovieCnt = 0;
 		
-		try {
-			
-			// 1. 티켓팅 리스트를 가져오기 위해서 Search 셋팅(폰번호)
-			Search search = new Search();
-			search.setTicketerPhone(ticketerPhone);
-			search.setSearchCondition("2");
-			search.setCurrentPage(1);
-			search.setPageSize(8);
-			
-			// 2. 티켓팅 리스트 가져오기
-			Map<String, Object> map = ticketingService.getTicketingList(search);
-			List<Ticketing> list = (List<Ticketing>)map.get("list");
-			
-			// 3. 티켓팅한 영화상영 정보를 담을 리스트 생성
-			List<String> dateTimeNoList = new ArrayList<String>();
-			
-			// 4. 티켓팅의 영화상영번호 리스트에 저장
-			for(Ticketing t: list) {
-				dateTimeNoList.add(t.getDateTimeNo());
-			}
-			
-			// 5. 영화상영번호 중복 제거
-			HashSet<String> distinctData = new HashSet<String>(dateTimeNoList);
-			dateTimeNoList = new ArrayList<String>(distinctData);
-			
-			// 6. 중복제거된 영화상영정보의 사이즈가 곧 내가 본 영화의 수
-			mySeeMovieCnt = dateTimeNoList.size();
-			
-			return mySeeMovieCnt;
-			
+		try {		
+			mySeeMovieCnt = userService.getSeenMovieCnt(phone);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return mySeeMovieCnt;
 		
+	}
+	
+	@CheckAuth(role="user,admin")
+	@RequestMapping(value ="mySeenMovie", method = RequestMethod.GET)
+	public String mySeenMovie(Model model) throws Exception{
+		System.out.println("/mypage/mySeenMovie : GET ");
+		return "forward:/mypage/mySeenMovieList.jsp";
 	}
 
 }

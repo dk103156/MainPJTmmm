@@ -1,6 +1,7 @@
 package com.mmm.service.user;
 
 import java.util.List;
+import java.util.Map;
 
 import com.mmm.common.Search;
 import com.mmm.service.domain.User;
@@ -46,7 +47,10 @@ public interface UserDao {
 	//회원 목록 page 처리를 위한 전체 Row(totalCount) return
 	public int getTotalCount(Search search) throws Exception;
 	
+	//내가본영화
+	public List<Map<String, Object>> getSeenMovieList(Search search) throws Exception;
 	
-	
+	//내가본영화 전체수
+	public int getSeenMovieCnt(String phone) throws Exception;
 
 }

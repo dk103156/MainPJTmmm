@@ -387,7 +387,7 @@
 		}
 		.tab li a {
 			display: inline-block;
-			color: #000;
+			color: #333;
 			text-align: center;
 			text-decoration: none;
 			padding: 14px 16px;
@@ -401,7 +401,7 @@
 			color:#fff;
 		}
 		ul.tab li.current{
-			background-color: rgb(0,154,200);
+			background-color: rgb(254, 229, 14);
 			color: #222;
 		}
 		.tabcontent.current {
@@ -1989,8 +1989,8 @@
 		
 		$(this).addClass("active");
 		finalYear=$($(this).prevAll("li.month")[0]).children().children().first().text()
-		var date=$.trim($(this).children().children().first().next().text())//일 
-		var Month=$($(this).prevAll("li.month")[0]).children().children("span.month").text()//월
+		date=$.trim($(this).children().children().first().next().text())//일 
+		Month=$($(this).prevAll("li.month")[0]).children().children("span.month").text()//월
 		
     	 //극장 선택 div 없애기 
     	 $("#ticket_tnb > div > div.info.theater > div.placeholder").css("display","none");
@@ -2007,14 +2007,14 @@
 	  	$(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")
 	  	
 		// 상태바 "날짜(일시)" 찍기! 
-		yearrr = $("div > ul > li.month > div > span.year").text()
+/* 		yearrr = $("div > ul > li.month > div > span.year").text()
 		monthhh = $("div > ul > li.month > div > span.month").text()
-		dateee = $("div > ul > li.list-group-item.py-2.date.active > div > span.date").text()
+		dateee = $("div > ul > li.list-group-item.py-2.date.active > div > span.date").text() */
 		dayyy = $("div > ul > li.list-group-item.py-2.date.active > div > span.day").text()
 		
-		$("#date").children().first().next().text(yearrr+"."+monthhh+"."+dateee+"("+dayyy+")");
+		$("#date").children().first().next().text(finalYear+"."+Month+"."+date+"("+dayyy+")");
 		// 상태바 "날짜(일시)" 타이틀 찍기!
-		$("#date").children().first().next().attr("title", yearrr+"."+monthhh+"."+dateee+"("+dayyy+")");	  
+		$("#date").children().first().next().attr("title", finalYear+"."+Month+"."+date+"("+dayyy+")");	  
 		
 		// 시간 선택 이벤트 해제시 "상영관" 텍스트 "제거"
 		$("#screen").children().first().next().text("");
@@ -2071,9 +2071,9 @@
 
 	    	  // 상태바 "날짜(일시) 의 시간" 찍기!
 	    	  timeee = $("div > div > ul > li.list-group-item.time.active > span:nth-child(1)").text()
-	    	  $("#date").children().first().next().text(yearrr+"."+monthhh+"."+dateee+"("+dayyy+")"+" "+timeee);
+	    	  $("#date").children().first().next().text(finalYear+"."+Month+"."+date+"("+dayyy+")"+" "+timeee);
 			  // 상태바 "날짜(일시)" 타이틀 찍기!
-			  $("#date").children().first().next().attr("title", yearrr+"."+monthhh+"."+dateee+"("+dayyy+")"+" "+timeee);	  
+			  $("#date").children().first().next().attr("title", finalYear+"."+Month+"."+date+"("+dayyy+")"+" "+timeee);	  
 			  
 			  
 		      //극장 선택 div 없앤 후 상영관 띄워주기!
@@ -2120,9 +2120,9 @@
 
 	    	  // 상태바 "날짜(일시) 의 시간" 찍기!
 	    	  timeee = $("div > div > ul > li.list-group-item.time.active > span:nth-child(1)").text()
-	    	  $("#date").children().first().next().text(yearrr+"."+monthhh+"."+dateee+"("+dayyy+")"+" "+timeee);
+	    	  $("#date").children().first().next().text(finalYear+"."+Month+"."+date+"("+dayyy+")"+" "+timeee);
 			  // 상태바 "날짜(일시)" 타이틀 찍기!
-			  $("#date").children().first().next().attr("title", yearrr+"."+monthhh+"."+dateee+"("+dayyy+")"+" "+timeee);	  
+			  $("#date").children().first().next().attr("title", finalYear+"."+Month+"."+date+"("+dayyy+")"+" "+timeee);	  
 			  
 			  
 			  //극장 선택 div 없앤 후 상영관 띄워주기!
@@ -2173,9 +2173,9 @@
 	    	  
 	    	  // 상태바 "날짜(일시) 의 시간" 찍기!
 	    	  timeee = $("div > div > ul > li.list-group-item.time.active > span:nth-child(1)").text()
-	    	  $("#date").children().first().next().text(yearrr+"."+monthhh+"."+dateee+"("+dayyy+")"+" "+timeee);
+	    	  $("#date").children().first().next().text(finalYear+"."+Month+"."+date+"("+dayyy+")"+" "+timeee);
 			  // 상태바 "날짜(일시)" 타이틀 찍기!
-			  $("#date").children().first().next().attr("title", yearrr+"."+monthhh+"."+dateee+"("+dayyy+")"+" "+timeee);	  
+			  $("#date").children().first().next().attr("title", finalYear+"."+Month+"."+date+"("+dayyy+")"+" "+timeee);	  
 			  
 			  
 			  //극장 선택 div 없앤 후 상영관 띄워주기!

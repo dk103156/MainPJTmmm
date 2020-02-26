@@ -184,30 +184,7 @@ public class TicketingController {
 		model.addAttribute("ticketingList",list);
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-		
-		
-		if(search.getSearchCondition().equals("2")) {
-			
-			List<String> dateTimeNoList = new ArrayList<String>();
-			List<DateTime> dtList = new ArrayList<DateTime>();
-			
-			for(Ticketing t: list) {
-				dateTimeNoList.add(t.getDateTimeNo());
-			}
-			
-			HashSet<String> distinctData = new HashSet<String>(dateTimeNoList);
-			dateTimeNoList = new ArrayList<String>(distinctData);
-			
-			for(String dateTimeNo : dateTimeNoList) {
-				DateTime dateTime= dateTimeService.getDateTime(dateTimeNo);
-				dtList.add(dateTime);
-			}
-			
-			model.addAttribute("dateTimeList",dtList);
-			
-		return "forward:/mypage/mySeenMovieList.jsp";
-		}
-				
+						
 		return "forward:/ticketing/getTicketingList.jsp";
 		
 		

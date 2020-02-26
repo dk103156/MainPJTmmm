@@ -29,7 +29,8 @@ CREATE TABLE preview (
 	winner_date  	 TIMESTAMP 	 		NOT NULL,
 	preview_regdate  TIMESTAMP 	 		NOT NULL,
 	preview_status 	 NUMERIC(2)  		DEFAULT 0,
-	PRIMARY KEY(preview_no)
+	movie_no 		 NUMERIC(5),  
+	PRIMARY KEY(preview_no)  
 );
 
 CREATE TABLE quiz ( 

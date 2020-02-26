@@ -213,7 +213,8 @@ $(function(){
 	
 	$('#cancelBtn').on("click",function(){
 		console.log('click');
-		history.go(-1);
+		//history.go(-1);
+		$("#plusPage").load("/mypage/mypageUser");
 	});
 	
 

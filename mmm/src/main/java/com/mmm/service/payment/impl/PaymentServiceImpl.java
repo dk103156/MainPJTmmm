@@ -308,6 +308,8 @@ public class PaymentServiceImpl implements PaymentService {
 //		6. import 취소
 		
 		cancelImport(payment.getImpUid());
+		
+		System.out.println("-------- end of cancelPayment()...----------------------");
 	}
 
 	@Override
@@ -430,7 +432,8 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(responseEntity.getBody().toString());
 		
-		System.out.println(jsonObject);		
+		System.out.println(jsonObject);
+		System.out.println("=================== End of Imp Cancel...");
 		
 		
 	}

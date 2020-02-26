@@ -374,16 +374,15 @@ function comment(currentPage){
 	    line-height: 1.1;
 	    border-bottom: 1px solid #555;
 		}
-	
-	* {
-	    box-sizing: border-box;
-		}
+
 	.page-item.active .page-link {
     z-index: 3;
     color:  #4e4c4c;
     background-color: #fee00e;
     border-color: #d6cece;
-}
+	}
+	
+	
 	p {
 	    display: block;
 	    margin-block-start: 1em;
