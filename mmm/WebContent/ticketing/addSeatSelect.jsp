@@ -430,6 +430,10 @@ span.resetAllseats{
 cursor: pointer;
 
 }
+
+#ticket_tnb {
+	margin-bottom: 25px;
+}
 </style>
 
 
