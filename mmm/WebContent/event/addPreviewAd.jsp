@@ -163,40 +163,24 @@
 	input:focus {
 	outline: none;
 	}
-	
-	#fileUpload{
-	font-size: 23px;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	opacity: 0;
 
-	}
-	
-	#fileUpload
-	{
-	font-size: 50px;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	opacity: 0;
-	 
-	filter: alpha(opacity=0);
-	-ms-filter: "alpha(opacity=0)";
-	-khtml-opacity: 0;
-	-moz-opacity: 0;
+
+
+	.btn.btn-yellow-cs {
+		background-color: #fee50e!important;
+   		color: #212529;
+   		border-color: #fcfaf5;
 	}
 
-.btn{
- border-color: #d6cece;
- color: #4e4c4c;
- background-color: #fee00e;
-}
+	.btn.btn-yellow-cs:hover {
+	    color: #f8f9fa;
+	    background-color: #e0a800;
+	    border-color: #040404;
+	}
 
-
-th{
-width: 25%;
-}
+	th{
+	width: 25%;
+	}
 </style>
 </head> 
 
@@ -312,8 +296,8 @@ width: 25%;
 		</div> <!-- row 닫는 애! -->
 
 		<div class="text-center mt-4">
-			<button id="regBtn" class="btn mr-1">등&nbsp;록</button>
-			<button id="cancelBtn" type="button" class="btn ml-1">취 &nbsp;소</button>
+			<button id="regBtn" class="btn btn-yellow-cs">등&nbsp;록</button>
+			<button id="cancelBtn" type="button" class="btn btn-yellow-cs ">취 &nbsp;소</button>
 		</div>
 		<br>
 	
