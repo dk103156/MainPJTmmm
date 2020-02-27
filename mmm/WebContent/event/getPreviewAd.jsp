@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> 
+  <title>MMM</title>
   <!-- 카카오 맵 api key -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 

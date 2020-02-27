@@ -327,7 +327,7 @@ $(function(){
 							<a href="/user/userAuthorization?type=findId" title="ID 찾기 선택" style=" margin-left:10px; color: #333; ">ID 찾기<!--ID/PW 찾기--></a>
 							<a href="/user/userAuthorization?type=findPw" title="PW 찾기 선택" style=" margin-left:10px; position: relative; color: #333;">PW 찾기<!--ID/PW 찾기--></a>
 							<a href="/user/userAuthorization.jsp?type=addUser" title="회원가입 선택"style=" margin-left:10px; relative; position: relative; color: #333;">회원가입<!--회원가입--></a>
-							<a href="/user/userAuthorization?type=addUnUserView" title="비회원 예매"style=" margin-left:10px; position: relative; color: #333;">비회원 예매<!--비회원 예매--></a>
+							<a href="/user/addUnUserView" title="비회원 예매"style=" margin-left:10px; position: relative; color: #333;">비회원 예매<!--비회원 예매--></a>
 							<a href="/user/unUserLogin" title="비회원 예매확인 선택"style=" margin-left:10px; position: relative; color: #333;">비회원 예매확인<!--비회원 예매확인--></a>
 						</div>
 			

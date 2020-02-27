@@ -8,7 +8,7 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>getContact</title> 
+<title>MMM</title> 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
@@ -149,7 +149,7 @@
       	padding: 20px;
         margin: 10px auto;
         border: 1px solid #000000;
-        }
+       }
         
 	 .replyBox{ 
       	width:780px;
@@ -157,7 +157,7 @@
       	padding: 20px;
         margin: 10px auto;
         border: 1px solid #000000;
-        }
+       }
          
 	  .content{
 	  	height:auto;
@@ -182,22 +182,21 @@
 	  }
 	  
 	   div.left{
-	  	width: 50%;
-	  	float: left;
-	  	box-sizing: border-box;
+	  	 width: 50%;
+	  	 float: left;
+	  	 box-sizing: border-box;
 	  }
 	    div.right{
-	  	width: 50%;
-	  	float: rightt;
-	  	box-sizing: border-box;
-	  	
+	     width: 50%;
+	     float: rightt;
+	   	 box-sizing: border-box;
 	  }
 		div.inline.rightt.date {
-		text-align: right;
+	    	text-align: right;
 		}
 		
 		body {
-		font-family: 'Noto Sans KR', sans-serif;
+	    	font-family: 'Noto Sans KR', sans-serif;
 		}
 
 </style>
@@ -209,27 +208,32 @@
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
-	<div class="page-header text-dark">
-	       <h3><i class="fas fa-comments"></i>고객센터</h3>
+
+	<div class="page-header text-dark mt-3">
+	       <h3>고객센터</h3>
 	       <hr>
 	    </div>
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-		<button type="button" name="ask" class="btn btn-outline-secondary ">자주찾는질문</button>
-	    <button type="button" name="contact" class="btn btn-outline-secondary active">일대일문의</button>
-	    <button type="button" name="notice" class="btn btn-outline-secondary ">공지사항</button>
+		<button type="button" name="ask" class="btn"><i class="fas fa-question-circle">자주찾는질문</i></button>
+	    <button type="button" name="contact" class="btn"><i class="fas fa-comment">일대일문의</i></button>
+	    <button type="button" name="notice" class="btn"><i class="fas fa-info-circle">공지사항</i></button>
 	  </div>
 	</div>
+	<br>
+<br>
 
 </div>
 
-	<div class="container">
+<div class="container">
+
 	<div class="header p-0"> 
 	
 	
-	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#fee00e; font-weight:bold;">   <!-- 문의 제목, 일시 -->
-		<div class="inline left">${article.articleTitle}</div>
-		<div class="inline rightt date"> ${article.articleDate}</div>
+	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#eae9e1; font-weight:bold;">   <!-- 문의 제목, 일시 -->
+		<div class="inline left"><span class="align-center" style="font-weight:bold; font-size:20px;">Q. </span>
+		${article.articleTitle}</div>
+		<div class="inline rightt date"> <span style="font-size:10px;">${article.articleDate}</span></div>
  	</div>	
  	
  	
@@ -317,7 +321,7 @@
 
 	
 		
-	  
+	
 		<div class="text-center m-2">
 			<button id="delBtn"" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
 			<button id="okBtn" type="button" class="btn btn-secondary write">목 &nbsp;록</button>

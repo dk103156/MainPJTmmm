@@ -30,6 +30,10 @@
 	  
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
+
+	  <title>mmm</title>
+</head>
+
 	  
 	  <!-- font Awesome -->
 	  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>	  
