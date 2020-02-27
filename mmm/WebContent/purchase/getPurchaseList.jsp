@@ -30,26 +30,27 @@
 	  
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
+	  
+	  <!-- font Awesome -->
+	  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>	  
 
 	  <title>mmm</title>
 </head>
 
 	  
-	  <!-- font Awesome -->
-	  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>	  
+
 </head>
 	 
 <style>
 	button.cancelButton {
-		background: #503396;
-		outline: 1px dotted #000;
-		background-color: #351f67;
-		color: #fff;
+		outline: 1px hidden #000;
+		background-color: white;
+		color: black;
 		display: block;
 		float: left;
 		width: 100%;
 		position : relative;
-		top : 85px;
+		top : 86px;
 	
 	}
 	
@@ -177,12 +178,12 @@
 	  				 <!--  <<== 좌측 nav -->
 	 				<c:if test="${ map.resultPage.currentPage <= map.resultPage.pageUnit }">
 	 					    <li class="page-item disabled">
-	  								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+	  								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">«</a>
 									 </li>
 	 				</c:if>
 	 				<c:if test="${ map.resultPage.currentPage > map.resultPage.pageUnit }">
 			   		<li class="page-item">
-			   				 <a class="page-link" href="javascript:Pagination('${map.resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
+			   				 <a class="page-link" href="javascript:Pagination('${map.resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">«</a>
 								</li>
 				</c:if>
 				
@@ -204,12 +205,12 @@
 			     <!--  우측 nav==>> -->
 			     <c:if test="${ map.resultPage.endUnitPage >= map.resultPage.maxPage }">						
 			    	<li class="page-item disabled">
-			    		<a class="page-link" href="#">Next</a>
+			    		<a class="page-link" href="#">»</a>
 	 						</li>
 			      </c:if>
 			      <c:if test="${ map.resultPage.endUnitPage < map.resultPage.maxPage }">
 			      	    <li class="page-item">
-	  							 <a class="page-link" href="javascript:Pagination('${map.resultPage.endUnitPage+1}') ">Next</a>
+	  							 <a class="page-link" href="javascript:Pagination('${map.resultPage.endUnitPage+1}') ">»</a>
 	 							</li>
 				 </c:if>	
 			  </ul><!-- end of pagination -->
@@ -246,8 +247,29 @@
 	    </div>
 	  </div>
 	</div>
+<!-- Modal -->
+<div class="modal fade" id="purchaseCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">안내 창</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       	 구매를 취소하시겠습니까?
+      </div> 
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
+        <button id="modalButton" type="button" class="btn btn-primary" >네</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-	<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="1000000">
+
+	<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
 	  <div class="toast-header">
 	    <i class="far fa-bell"></i>
 	    <strong class="mr-auto">알림</strong>
@@ -257,13 +279,31 @@
 	    </button>
 	  </div>
 	  <div class="toast-body">
-	           <strong>결제 취소가 완료되었습니다.</strong>
+	           <strong>구매 취소가 완료되었습니다.</strong>
 	  </div>
 	</div>
 	
 <script>
+function cancelTicketing(jqueryElement){
+	$("#modalButton").off("click");
+	$("#modalButton").on("click",function(){
+		jqueryElement.prev().submit();
+	});
+	//$("form#cancelForm").submit();
+}
+
+function activeCancel(){
+	$("div.afterButton > button").on("click",function(){
+		$("div#purchaseCancel").modal("show")
+		
+		cancelTicketing($(this));
+	})
+}
+
 $(function(){
-	$('#cancelToast').toast('show')	
+	<c:if test="${alarm eq '1'}">
+		$('#cancelToast').toast('show')
+	</c:if>
 
 	
 	
@@ -393,9 +433,11 @@ purchaseQuantityList.forEach( (x,y) => {
 					
 				 $($("div.purchaseCancel")[index]).append(Element);
 				 
-				 $("div:nth-child("+(parseInt(index)+1)+") > div.purchaseCancel button.btn.btn-outline-warning").on("click",function(){
+				 $("div.purchaseCancel > button").on("click",function(){
+						$("div#purchaseCancel").modal("show")
+						
+						cancelTicketing($(this));
 					 
-					 $(this).prev().submit();
 				 });
 			 }
 		 })	
@@ -407,9 +449,13 @@ function Pagination(currentPage) {
 	
 	$("#currentPage").val(currentPage)
 	//$("#pagination").attr("method","POST").attr("action", "/purchase/getPurchaseList").submit();
-	$("#plusPage").load("getPurchaseList",$("#currentPage").serialize());
-	
-	
+	<c:if test="${purchaseStatus eq 0 }">
+		$("#plusPage").load("/purchase/getPurchaseList?purchaseStatus=0",$("#currentPage").serialize());
+	</c:if>
+		
+	<c:if test="${purchaseStatus eq 2 }">
+		$("#plusPage").load("/purchase/getPurchaseList?purchaseStatus=2",$("#currentPage").serialize());
+	</c:if>
 }
 </script> 	
 </body>

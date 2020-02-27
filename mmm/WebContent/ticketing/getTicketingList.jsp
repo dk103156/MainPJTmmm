@@ -71,10 +71,9 @@ div.container.getTicketingList {
 }
 
 button.cancelButton {
-	background: #503396;
-	outline: 1px dotted #000;
-	background-color: #351f67;
-	color: #fff;
+	outline: 1px hidden #000;
+	background-color: white;
+	color: black;
 	display: block;
 	float: left;
 	width: 100%;
@@ -185,12 +184,12 @@ button.cancelButton {
 		   				 <!--  <<== 좌측 nav -->
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">
-     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">«</a>
    								 </li>
 		  				</c:if>
 		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">«</a>
    							</li>
 						</c:if>
 						
@@ -212,12 +211,12 @@ button.cancelButton {
 					     <!--  우측 nav==>> -->
 					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
 					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#">Next</a>
+					    		<a class="page-link" href="#">»</a>
     						</li>
 					      </c:if>
 					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 					      	    <li class="page-item">
-     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">»</a>
     							</li>
 						 </c:if>	
 					  </ul><!-- end of pagination -->
@@ -322,7 +321,7 @@ button.cancelButton {
   </div>
 </div>
 
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="1000000">
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
   <div class="toast-header">
     <i class="far fa-bell"></i>
     <strong class="mr-auto">알림</strong>
@@ -332,7 +331,7 @@ button.cancelButton {
     </button>
   </div>
   <div class="toast-body">
-           <strong>결제 취소가 완료되었습니다.</strong>
+           <strong>예매 취소가 완료되었습니다.</strong>
   </div>
 </div>
 
@@ -356,10 +355,13 @@ function activeCancel(){
 }
 
 $(function(){
-	$('#cancelToast').toast('show')
 	
+	<c:if test="${alarm eq '1'}">
+		$('#cancelToast').toast('show')
+	</c:if>
+		
 	activeCancel();
-	
+
 	detail();
 	
 	//기본 화면일때 img추가 하기
@@ -599,11 +601,11 @@ $(function(){
 								Element +="<ul class='pagination'>"
 					   			if(data.resultPage.currentPage <= data.resultPage.pageUnit){
 					   				Element +="<li class='page-item disabled'>"
-					   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>Previous</a>"
+					   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>«</a>"
 					   				Element +="</li>"
 					   			}else if(data.resultPage.currentPage > data.resultPage.pageUnit){
 					   				Element +="<li class='page-item'>"
-					   				Element +="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>Previous</a>"
+					   				Element +="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>«</a>"
 					   				Element +="</li>"
 					   			}
 								
@@ -622,11 +624,11 @@ $(function(){
 								
 					  			if(data.resultPage.endUnitPage >= data.resultPage.maxPage){
 					  				Element+="<li class='page-item disabled'>"
-					  				Element+="<a class='page-link' href='#'>Next</a>"
+					  				Element+="<a class='page-link' href='#'>»</a>"
 					  				Element+="</li>"
 					  			}else if(data.resultPage.endUnitPage < data.resultPage.maxPage){
 					  				Element+="<li class='page-item'>"
-					  				Element+="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.endUnitPage)+1)+") '>Next</a>"
+					  				Element+="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.endUnitPage)+1)+") '>»</a>"
 					  				Element+="</li>"
 					  			}
 								
@@ -724,11 +726,11 @@ $(function(){
 						Element +="<ul class='pagination'>"
 			   			if(data.resultPage.currentPage <= data.resultPage.pageUnit){
 			   				Element +="<li class='page-item disabled'>"
-			   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>Previous</a>"
+			   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>«</a>"
 			   				Element +="</li>"
 			   			}else if(data.resultPage.currentPage > data.resultPage.pageUnit){
 			   				Element +="<li class='page-item'>"
-			   				Element +="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>Previous</a>"
+			   				Element +="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>«</a>"
 			   				Element +="</li>"
 			   			}
 						
@@ -747,11 +749,11 @@ $(function(){
 						
 			  			if(data.resultPage.endUnitPage >= data.resultPage.maxPage){
 			  				Element+="<li class='page-item disabled'>"
-			  				Element+="<a class='page-link' href='#'>Next</a>"
+			  				Element+="<a class='page-link' href='#'>»</a>"
 			  				Element+="</li>"
 			  			}else if(data.resultPage.endUnitPage < data.resultPage.maxPage){
 			  				Element+="<li class='page-item'>"
-			  				Element+="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.endUnitPage)+1)+")'>Next</a>"
+			  				Element+="<a class='page-link' href='javascript:Pagination("+(parseInt(data.resultPage.endUnitPage)+1)+")'>»</a>"
 			  				Element+="</li>"
 			  			}
 						

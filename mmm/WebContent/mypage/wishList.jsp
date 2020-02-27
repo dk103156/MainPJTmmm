@@ -196,7 +196,7 @@ function pagination(startRowNum, currentPage, pageSize, totalCnt){ // 페이징 
 	console.log("> totalCnt : "+totalCnt);
 	$("#pagination").empty();
 	var maxPage = Math.ceil(totalCnt/pageSize); // 페이지의 수
-	$("#pagination").append("<button class='btn btn-default pageBtn'>&#60;</button>");
+	$("#pagination").append("<button class='btn btn-default pageBtn'>«</button>");
 	for(var i=1; i<=maxPage; i++){ // 페이지 찍기
 		if(currentPage==i){
 			$("#pagination").append("<button class='btn btn-default pageBtn' style='background-color: #fee50e'>"+i+"</button>");
@@ -204,7 +204,7 @@ function pagination(startRowNum, currentPage, pageSize, totalCnt){ // 페이징 
 			$("#pagination").append("<button class='btn btn-default pageBtn'>"+i+"</button>");
 		}
 	}
-	$("#pagination").append("<button class='btn btn-default pageBtn'>&#62;</button>");
+	$("#pagination").append("<button class='btn btn-default pageBtn'>»</button>");
 }
 
 $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자바스크립트는 구동되라
@@ -248,13 +248,13 @@ $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자�
 		var totalCnt = parseInt($("#mySeenMovieCnt").html()); // 전체 위시리스트 건수 가져오기
 		var maxPage = Math.ceil(totalCnt/pageSize); // 마지막 페이지
 		
-		if(pageVal == "&lt;"){ // < 버튼 일때
+		if(pageVal == "«"){ // < 버튼 일때
 			if(currentPage > 1){
 				currentPage = currentPage - 1;
 				pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출
 				getWishMovieList(startRowNum, currentPage, pageSize); // 위시리스트 호출	
 			}
-		} else if (pageVal == "&gt;"){ // > 버튼 일때
+		} else if (pageVal == "»"){ // > 버튼 일때
 			if(currentPage < maxPage){
 				currentPage = currentPage + 1;
 				pagination(startRowNum, currentPage, pageSize, totalCnt); // 페이지 함수 호출

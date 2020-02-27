@@ -153,7 +153,7 @@ public class TicketingController {
 	}
 	
 	@RequestMapping(value="/getTicketingList")
-	public String getTicketingList(Model model, @ModelAttribute("search") Search search, HttpServletRequest request) throws Exception {
+	public String getTicketingList(Model model, @ModelAttribute("search") Search search, HttpServletRequest request,@ModelAttribute("alarm") String alarm) throws Exception {
 		
 		//회원 전용
 		
@@ -184,7 +184,7 @@ public class TicketingController {
 		model.addAttribute("ticketingList",list);
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
-						
+		model.addAttribute("alarm", alarm);				
 		return "forward:/ticketing/getTicketingList.jsp";
 		
 		

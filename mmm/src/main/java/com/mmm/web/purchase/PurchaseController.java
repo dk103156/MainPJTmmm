@@ -129,7 +129,7 @@ public class PurchaseController {
 	
 	// 내 구매목록으로
 	@RequestMapping(value="getPurchaseList")
-	public String getPurchaseList(@ModelAttribute Search search, HttpServletRequest request, Model model) throws Exception{
+	public String getPurchaseList(@ModelAttribute Search search, HttpServletRequest request, Model model,@ModelAttribute("alarm") String alarm) throws Exception{
 		
 		User user = (User) request.getSession().getAttribute("user");
 		search.setUserNo(user.getUserNo());
@@ -149,7 +149,8 @@ public class PurchaseController {
 		map.put("search", search);
 		
 		model.addAttribute("map",map);
-	
+		model.addAttribute("alarm", alarm);	
+		model.addAttribute("purchaseStatus",search.getPurchaseStatus());
 		return "forward:/purchase/getPurchaseList.jsp";
 	}
 	

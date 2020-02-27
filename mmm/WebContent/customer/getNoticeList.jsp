@@ -150,12 +150,12 @@
 		   				 <!--  <<== 좌측 nav -->
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">
-     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">«</a>
    								 </li>
 		  				</c:if>
 		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true"><i class='fas fa-angle-left'></i></a>
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">«</a>
    							</li>
 						</c:if>
 						
@@ -177,12 +177,12 @@
 					     <!--  우측 nav==>> -->
 					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
 					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#"><i class='fas fa-angle-right'></i></a>
+					    		<a class="page-link" href="#">»</a>
     						</li>
 					      </c:if>
 					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 					      	    <li class="page-item">
-     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') "><i class='fas fa-angle-right'></i></a>
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">»</a>
     							</li>
 						 </c:if>	
 					  </ul><!-- end of pagination -->

@@ -238,6 +238,12 @@ $(function(){
 	//console.log("조건은 ? :"+condition);
 	if(condition==99){
 		$("#MypageHome").trigger("click");
+	}else if(condition==11){
+		$("#plusPage").load("/ticketing/getTicketingList?alarm=1");
+	
+	}else if(condition==12){
+		$("#plusPage").load("/purchase/getPurchaseList?purchaseStatus=0&alarm=1");
+
 	}else{
 		$("#MypageHome").trigger("click");
 		$('.dropdown-toggle').dropdown('toggle')

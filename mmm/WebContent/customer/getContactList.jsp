@@ -1472,12 +1472,12 @@ input {
 					  <ul class="pagination d-flex justify-content-center ">
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">
-     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">«</a>
    								 </li>
 		  				</c:if>
 		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
 					   		<li class="page-item">
-					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">Previous</a>
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">«</a>
    							</li>
 						</c:if>
 						
@@ -1496,12 +1496,12 @@ input {
 						</c:forEach>
 					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
 					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#">Next</a>
+					    		<a class="page-link" href="#">»</a>
     						</li>
 					      </c:if>
 					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
 					      	    <li class="page-item">
-     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">Next</a>
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">»</a>
     							</li>
 						 </c:if>	
 					  </ul>
