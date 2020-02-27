@@ -77,6 +77,10 @@
     background-color: #fff;
     cursor: pointer;
 }
+
+.font-orange {
+    color: #e63e30!important;
+}
       
 </style>
 
@@ -369,7 +373,7 @@ $(function(){
 			<div class="form-group row" style="text-align: center;">
 				<label for="password" class="col-sm-3 col-form-label">비밀번호</label>
 				<div class="col-sm-9">
-					<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
+					<input type="password" class="form-control" id="password" name="password" placeholder="5~15자의 영문 소문자와 숫자,특수문자를 포함해주세요.">
 		    	</div>
 			</div>
 			<div class="form-group row" style="text-align: center;">

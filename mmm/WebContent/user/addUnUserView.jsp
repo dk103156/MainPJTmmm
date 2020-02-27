@@ -21,6 +21,12 @@
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+
+body {
+    font-weight: 400;
+    font-family:'Noto Sans KR', sans-serif;
+}
+
 .button.purple {
     color: #333;
     line-height: 36px;
@@ -29,7 +35,6 @@
 }
 .button.large {
     height: 46px;
-    padding: 0 30px;
     line-height: 44px;
 }
 
@@ -52,6 +57,13 @@
     font-weight: bold;
 }
 
+ 
+h3.tit {
+    color: #333;
+    font-size: 1.2em;
+    line-height: 1.1;
+} 
+
 </style>
 
 <title>mmm</title>
@@ -60,17 +72,22 @@
 <script type="text/javascript">
 $(function(){
 	
+	$('#unUserModal').modal ({ keyboard: false, backdrop: 'static' });
+	
+	$("#unUserModal").modal("show");
+	
+	//모달창 엑스
+	$("#btn").on("click",function(){
+		history.go(-1);
+	})
+	
+
+	
 	$('#addUserBtn').on("click",function(){
 		console.log('click');
 		validate();
 	});
-	
-	$('#cancelBtn').on("click",function(){
-		console.log('click');
-		history.go(-1);
-	});
-	
-	
+		
 	
 	function validate() {
 	    var re =  /^[0-9]{4}$/;  // 패스워드가 적합한지 검사할 정규식
@@ -166,7 +183,7 @@ $(function(){
 		})//ajax 끝
 	});//중복체크 끝  
 	
-	/* 
+
 	///////////////////////휴대폰번호 인증///////////////////////////////////
 	$("#smsBtn").on("click", function(){
 		console.log("클릭!")
@@ -201,6 +218,7 @@ $(function(){
 			} ,
 			success : function( JSONData , status ) {
 				console.log("동작");
+				alert("문자가 발송되었습니다.")
 				console.log(JSONData.status);
 				$("div").text(JSONData.status); 
 			}
@@ -209,7 +227,7 @@ $(function(){
 	})
 		
 		
-	$(document).on("click", "#smsChkBtn", function() {
+	$(document).on("click", "#chkBtn", function() {
 		var numStr = $("#numStr").val();
 		var len = numStr.length
 		if(len != 6){
@@ -243,7 +261,7 @@ $(function(){
 				}
 			})//ajax 끝	
 		}	
-	})//폰번호인증 끝 */
+	})//폰번호인증 끝 
 	
 })
 
@@ -253,92 +271,192 @@ $(function(){
 </script>
 <body>
 
-	<!-- ToolBar Start /////////////////////////////////////-->
-		<jsp:include page="/layout/header.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+<!-- 	<!-- ToolBar Start /////////////////////////////////////--> -->
+<%-- 		<jsp:include page="/layout/header.jsp" /> --%>
+<!--    	ToolBar End ///////////////////////////////////// -->
    	
-<!--  화면구성 div Start /////////////////////////////////////-->
-	<div class="container" style=" margin-top: 50px; width: 600px;">
+<!-- <!--  화면구성 div Start /////////////////////////////////////--> 
+<!-- 	<div class="container" style=" margin-top: 50px; width: 600px;"> -->
 	
-		<h1 class="bg-default text-center" style="margin-top: 10px; background-color:#fee50e">비 회 원 예 매 </h1>
+<!-- 		<h1 class="bg-default text-center" style="margin-top: 10px; background-color:#fee50e">비 회 원 예 매 </h1> -->
 		
-		<!-- form Start /////////////////////////////////////-->
-		<form>
-			<div class="form-group row" style="text-align: center;">
-    			<label for="birth" class="col-sm-3 col-form-label">생년월일</label>
-    			<div class="col-sm-9">
-      				<input type="date" class="form-control" id="birth" name="birth" placeholder="ex)20200101">
-      				<input type="hidden" class="form-control" id="role" name="role" value="unUser">
-    			</div>
-			</div>
-			<fieldset class="form-group">
-				<div class="row" >
-					<legend class="col-form-label col-sm-4 pt-0" style="padding-left: 57px;" >성별</legend>
+<!-- 		<!-- form Start /////////////////////////////////////--> 
+<!-- 		<form> -->
+<!-- 			<div class="form-group row" style="text-align: center;"> -->
+<!--     			<label for="birth" class="col-sm-3 col-form-label">생년월일</label> -->
+<!--     			<div class="col-sm-9"> -->
+<!--       				<input type="date" class="form-control" id="birth" name="birth" placeholder="ex)20200101"> -->
+<!--       				<input type="hidden" class="form-control" id="role" name="role" value="unUser"> -->
+<!--     			</div> -->
+<!-- 			</div> -->
+<!-- 			<fieldset class="form-group"> -->
+<!-- 				<div class="row" > -->
+<!-- 					<legend class="col-form-label col-sm-4 pt-0" style="padding-left: 57px;" >성별</legend> -->
 					
-						<div class="col-sm-4" style="text-align: center;" >
-							<div class="form-check" style=" padding-left: 0px;">
-		          				<input class="form-check-input" type="radio" id="male" name="gender" value="M" checked>
-		          				<label class="form-check-label" for="Male">
-		                           	남	
-		          				</label>
-	          				</div>
-	        			</div>
-		        			<div class="col-sm-4" style="text-align: center;" >
-								<div class="form-check" style=" padding-left: 0px;">
-									<input class="form-check-input" type="radio" id="female" name="gender" value="F">
-									<label class="form-check-label" for="female">
-										여	
-			          				</label>
-								</div>
-		      				</div>
-				</div>
-		  	</fieldset>
-		  	<div class="form-group row" style="font-size: 12pt; text-align: center; ">
-				<label for="staticEmail" class="col-sm-3 col-form-label">휴대전화번호</label>
-				<div class="col-sm-9">
-					<c:choose> 
-					    <c:when test="${not empty sessionScope.phone }">   
-					       <input type="text" class="form-control" id="phone" name="phone" value="${sessionScope.phone}" readonly>
-					    </c:when>
-					    <c:otherwise>    
-							<input type="text" class="form-control" id="phone" name="phone" placeholder="- 없이 입력해주세요.">
-							<h6 id="confirmNum2" style="color: red; margin-top: 8px;"></h6>
-					    </c:otherwise>                  
-					</c:choose>
-				</div>
-				<h6 id="confirmNum1" style="color: red;"></h6>
-			</div>
-			<div class="form-group row" style="text-align: center;">
-				<label for="password" class="col-sm-3 col-form-label">비밀번호</label>
-				<div class="col-sm-9">
-					<input type="password" class="form-control" id="password" name="password" placeholder="Password">
-		    	</div>
-			</div>
-			<div class="form-group row" style="text-align: center;">
-				<label for="password2" class="col-sm-3 col-form-label">비밀번호확인</label>
-				<div class="col-sm-9">
-					<input type="password" class="form-control" id="password2" placeholder="Password">
-				</div>
-			</div>
-			<div class="form-check" style=" margin-bottom: 10px;">
-			    <input type="checkbox" class="form-check-input" id="agreeCheck">
-			    <label class="form-check-label" for="agreeCheck" >개인정보수집 및 이용 동의</label>
-			</div>	
-			<div class="form-group row">
-				<div class="col-sm-12 text-center" style="margin-bottom: 40px;"	>
-					<button type="button" id="addUserBtn" class="button large purple" >비회원 예매하기</button>
-      				<a class="button large" href="#" id="cancelBtn" role="button">취&nbsp;소</a>
-			 	</div>
-			</div>
-		</form>
-		<!-- form end /////////////////////////////////////-->
+<!-- 						<div class="col-sm-4" style="text-align: center;" > -->
+<!-- 							<div class="form-check" style=" padding-left: 0px;"> -->
+<!-- 		          				<input class="form-check-input" type="radio" id="male" name="gender" value="M" checked> -->
+<!-- 		          				<label class="form-check-label" for="Male"> -->
+<!-- 		                           	남	 -->
+<!-- 		          				</label> -->
+<!-- 	          				</div> -->
+<!-- 	        			</div> -->
+<!-- 		        			<div class="col-sm-4" style="text-align: center;" > -->
+<!-- 								<div class="form-check" style=" padding-left: 0px;"> -->
+<!-- 									<input class="form-check-input" type="radio" id="female" name="gender" value="F"> -->
+<!-- 									<label class="form-check-label" for="female"> -->
+<!-- 										여	 -->
+<!-- 			          				</label> -->
+<!-- 								</div> -->
+<!-- 		      				</div> -->
+<!-- 				</div> -->
+<!-- 		  	</fieldset> -->
+<!-- 		  	<div class="form-group row" style="font-size: 12pt; text-align: center; "> -->
+<!-- 				<label for="staticEmail" class="col-sm-3 col-form-label">휴대전화번호</label> -->
+<!-- 				<div class="col-sm-9"> -->
+<%-- 					<c:choose>  --%>
+<%-- 					    <c:when test="${not empty sessionScope.phone }">    --%>
+<%-- 					       <input type="text" class="form-control" id="phone" name="phone" value="${sessionScope.phone}" readonly> --%>
+<%-- 					    </c:when> --%>
+<%-- 					    <c:otherwise>     --%>
+<!-- 							<input type="text" class="form-control" id="phone" name="phone" placeholder="- 없이 입력해주세요."> -->
+<!-- 							<h6 id="confirmNum2" style="color: red; margin-top: 8px;"></h6> -->
+<%-- 					    </c:otherwise>                   --%>
+<%-- 					</c:choose> --%>
+<!-- 				</div> -->
+<!-- 				<h6 id="confirmNum1" style="color: red;"></h6> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group row" style="text-align: center;"> -->
+<!-- 				<label for="password" class="col-sm-3 col-form-label">비밀번호</label> -->
+<!-- 				<div class="col-sm-9"> -->
+<!-- 					<input type="password" class="form-control" id="password" name="password" placeholder="Password"> -->
+<!-- 		    	</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group row" style="text-align: center;"> -->
+<!-- 				<label for="password2" class="col-sm-3 col-form-label">비밀번호확인</label> -->
+<!-- 				<div class="col-sm-9"> -->
+<!-- 					<input type="password" class="form-control" id="password2" placeholder="Password"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-check" style=" margin-bottom: 10px;"> -->
+<!-- 			    <input type="checkbox" class="form-check-input" id="agreeCheck"> -->
+<!-- 			    <label class="form-check-label" for="agreeCheck" >개인정보수집 및 이용 동의</label> -->
+<!-- 			</div>	 -->
+<!-- 			<div class="form-group row"> -->
+<!-- 				<div class="col-sm-12 text-center" style="margin-bottom: 40px;"	> -->
+<!-- 					<button type="button" id="addUserBtn" class="button large purple" >비회원 예매하기</button> -->
+<!--       				<a class="button large" href="#" id="cancelBtn" role="button">취&nbsp;소</a> -->
+<!-- 			 	</div> -->
+<!-- 			</div> -->
+<!-- 		</form> -->
+<!-- 		<!-- form end /////////////////////////////////////--> 
 
-	</div>
+<!-- 	</div> -->
 	<!--  화면구성 div end /////////////////////////////////////-->
 	
-<!-- Header Start /////////////////////////////////////-->
-		<jsp:include page="/layout/footer.jsp" />
-<!-- Header End /////////////////////////////////////-->
+	<!-- Modal -->
+		<div class="modal fade" id="unUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
+						<h3 class="tit" id="exampleModalLabel">비회원 로그인</h3>
+						<button type="button" class="close" data-dismiss="modal" id="btn1" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="col-wrap">
+								<div class="col left">
+									<div class="form-group row" style="text-align: center;">
+						    			<label for="birth" class="col-sm-3 col-form-label">생년월일</label>
+						    			<div class="col-sm-9">
+						      				<input type="date" class="form-control" id="birth" name="birth" placeholder="ex)20200101">
+						      				<input type="hidden" class="form-control" id="role" name="role" value="unUser">
+						    			</div>
+									</div>
+									<fieldset class="form-group">
+										<div class="row" >
+											<legend class="col-form-label col-sm-4 pt-0" style="padding-left: 57px;" >성별</legend>
+												<div class="col-sm-4" style="text-align: center;" >
+													<div class="form-check" style=" padding-left: 0px;">
+								          				<input class="form-check-input" type="radio" id="male" name="gender" value="M" checked>
+								          				<label class="form-check-label" for="Male">
+								                           	남	
+								          				</label>
+							          				</div>
+							        			</div>
+								        			<div class="col-sm-4" style="text-align: center;" >
+														<div class="form-check" style=" padding-left: 0px;">
+															<input class="form-check-input" type="radio" id="female" name="gender" value="F">
+															<label class="form-check-label" for="female">
+																여	
+									          				</label>
+														</div>
+								      				</div>
+										</div>
+								  	</fieldset>
+								  	<div class="row"> 		
+										<span style="padding-right: 10px; margin-top: 10px;">휴대전화 번호</span>
+										<input type="text" class="form-control" placeholder="-없이 입력해주세요." id="phone" name="phone" style="margin-top: 5px; margin-right: 20px; margin-left: 20px; width: 175px;">
+										
+										<button id="smsBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; text-align:center; padding-left:10px; padding-right: 10px;
+									         width: 120px; height: 46px;  border: 0;  cursor: default; background-color:#fee50e;">인증번호발송</button>
+									         <h6 id="confirmNum1" style=" padding-left:100px; color:red; margin-top: 8px;"></h6>  
+									</div>	
+									<div class="row">
+										<div class="col-sm-3">	
+											<span style="padding-left:5px; padding-right: 10px; width: 97px;">인증번호</span>
+										</div>
+										<div class="col-sm-5">
+											<input type="number" id="numStr" class="form-control" style="width: 150px;" placeholder="인증번호 6자리">
+											<h6 id="confirmNum2" style="color: red; margin-top: 20px;"></h6>
+										</div>
+										<div class="col-sm-4">			
+											<button id="chkBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; padding-right: 10px;
+										        	width: 100px; height: 46px; border: 0; cursor: default; background-color:#fee50e;">확인</button> 
+										</div>
+									</div>
+									<div class="form-group row" style="text-align: center; margin-top: 10px;">
+										<label for="password" class="col-sm-3 col-form-label">비밀번호</label>
+										<div class="col-sm-9">
+											<input type="password" class="form-control" id="password" name="password"  style= " margin-top: 10px; width:250px;" placeholder="Password">
+								    	</div>
+									</div>
+									<div class="form-group row" style="text-align: center; margin-top: 10px;">
+										<label for="password2" class="col-sm-3 col-form-label" style="padding-left: 0;">비밀번호확인</label>
+										<div class="col-sm-9">
+											<input type="password" class="form-control" id="password2"  style="margin-top: 10px; width:250px;" placeholder="Password">
+										</div>
+									</div>
+									<!-- chk-util -->
+									<div class="chk-util">
+										<div class="left">
+											<input id="agreeCheck" type="checkbox"> <label for="agreeCheck">개인정보수집 및 동의</label>
+										</div>
+									</div>
+									<!--// chk-util -->
+						
+									<button id="addUserBtn" type="button" class="button purple large btn-login" style="border-radius: 4px; color:#333; height: 46px; 
+									 border: 0; width: 100%; cursor: default; background-color:#fee50e;">확인</button>
+								</div>
+							</div>
+						</form>
+					</div><!--modal-body -->
+				</div>
+			</div>
+		</div>
+			
+	
+	
+	
+	
+	
+	
+	
+<!-- <!-- Header Start /////////////////////////////////////--> 
+<%-- 		<jsp:include page="/layout/footer.jsp" /> --%>
+<!-- <!-- Header End /////////////////////////////////////--> 
 
 </body>
 </html>

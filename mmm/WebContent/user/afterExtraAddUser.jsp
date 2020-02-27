@@ -28,10 +28,10 @@
 		$(function(){
 			
 		    Swal.fire({
-				  icon: 'error', //"info,success,warning,error" 중 택1
+				  icon: 'success', //"info,success,warning,error" 중 택1
 				 // title: 'Oops...',
 				  text: '로그인을 해주세요.'
-				}).then( result => { 
+				}).then((result) => {  
 			opener.parent.location="/main/main";
 			window.open("about:blank","_self").close();
 				});
