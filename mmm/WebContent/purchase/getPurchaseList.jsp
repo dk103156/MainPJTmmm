@@ -30,8 +30,47 @@
 	  
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
-</head>
 	  
+	  <!-- font Awesome -->
+	  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>	  
+</head>
+	 
+<style>
+	button.cancelButton {
+		background: #503396;
+		outline: 1px dotted #000;
+		background-color: #351f67;
+		color: #fff;
+		display: block;
+		float: left;
+		width: 100%;
+		position : relative;
+		top : 85px;
+	
+	}
+	
+	#cancelToast {
+		width : 300px;
+		position:fixed;
+		right:30px;
+		bottom:0px;
+		z-index:2000;
+		cursor : pointer;
+	}
+
+
+	#cancelToast > div.toast-header > i {
+			position : relative;
+			top : 1px;	
+			right : 2px;
+	}
+	
+	#cancelToast > div.toast-header {
+			background-color : #fee50e;
+			color: #333;
+	}
+
+</style>	 
 <body id="body">
 
 	<div class="container">
@@ -105,8 +144,11 @@
 						<div class="purchaseRegDate col-3"><span>${Month } &nbsp; (${Day })</span></div>					
 					</c:if>
 					<div class="purchaseCancel col-2">
-					   	<form action="/payment/cancelPayment?purchaseNo=${i.purchaseNo}" method="post">
-						</form>
+						
+						<form id="cancelForm" action="/payment/cancelPayment" method="POST">
+		    				
+			    			<input type='hidden' name='purchaseNo' value='${i.purchaseNo}'>
+		    			</form>
 					</div>
 				</div>
 				<hr>	
@@ -201,10 +243,23 @@
 	  </div>
 	</div>
 
-
+	<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="1000000">
+	  <div class="toast-header">
+	    <i class="far fa-bell"></i>
+	    <strong class="mr-auto">알림</strong>
+	    <small>방금</small>
+	    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+	      <span aria-hidden="true">&times;</span>
+	    </button>
+	  </div>
+	  <div class="toast-body">
+	           <strong>결제 취소가 완료되었습니다.</strong>
+	  </div>
+	</div>
+	
 <script>
 $(function(){
-	
+	$('#cancelToast').toast('show')	
 
 	
 	
@@ -330,8 +385,8 @@ purchaseQuantityList.forEach( (x,y) => {
 				 
 			//	 var Element ="<img class='cancelButton' src='/resources/image/cancel.PNG' width=95>"
 				 
-				 var Element ="<button type='button' class='btn btn-outline-warning'>CANCEL</button>"
-				 
+				 var Element =" <button class='cancelButton' type='button' class='btn btn-primary'><strong>구매 취소</strong></button>"
+					
 				 $($("div.purchaseCancel")[index]).append(Element);
 				 
 				 $("div:nth-child("+(parseInt(index)+1)+") > div.purchaseCancel button.btn.btn-outline-warning").on("click",function(){

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-	<meta charset="EUC-KR">
+	<meta charset="utf-8">
 	
 	<title>mmm</title>
 	
@@ -39,7 +39,7 @@
 	</script>
 
 <head>
-<meta charset="EUC-KR">
+
 <title>SNS 가입후에 네비게이션하는 jsp.</title>
 </head>
 <body>

@@ -18,7 +18,6 @@ import com.mmm.service.movie.MovieService;
 import com.mmm.service.product.ProductService;
 
 @Controller
-@RequestMapping("/main/*")
 public class MainController {
 
 	///Field
@@ -44,7 +43,7 @@ public class MainController {
 	@Value("#{commonProperties['pageUnit']}")
 	int pageUnit;	
 	
-	@RequestMapping(value="", method=RequestMethod.GET) 
+	@RequestMapping(value="/", method=RequestMethod.GET) 
 	public String mainPage() throws Exception {
 		
 		

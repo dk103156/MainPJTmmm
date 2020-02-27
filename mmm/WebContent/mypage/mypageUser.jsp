@@ -1681,8 +1681,15 @@ $(function(){
 							)//end of each		
 					}else{
 						alert("선호 극장이 모두 선택되었습니다.");
-						$("#myModal").modal('hide')
-						$("#outerMotdal").modal('hide')
+						$("#myModal > div > div > div.modal-footer > button.btn.btn-secondary").trigger("click");
+						$("#outerMotdal").modal('toggle')
+						$("#theaterChoice").on('hidden.bs.modal',function(){
+							$('body').removeClass('modal-open');
+							$('.modal-backdrop').remove();		
+						})
+						
+						
+					
 					}
 				});//end of #addtheater click
 				

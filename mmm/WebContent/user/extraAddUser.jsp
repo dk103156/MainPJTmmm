@@ -855,6 +855,8 @@ $(function(){
 						alert("선호 극장이 모두 선택되었습니다.");
 						$("#myModal").modal('hide')
 						$("#outerMotdal").modal('hide')
+						$('body').removeClass('modal-open');
+						$('.modal-backdrop').remove();
 					}
 				});//end of #addtheater click
 				
