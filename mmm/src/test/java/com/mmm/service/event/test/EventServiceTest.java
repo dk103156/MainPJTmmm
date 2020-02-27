@@ -105,31 +105,31 @@ public class EventServiceTest {
 			
 		}
 		
-		//@Test
-		public void testAddQuizAd() throws Exception {
-			
-			Quiz quiz = new Quiz();
-			quiz.setQuestion("내가 좋아하는 동물은?");
-			quiz.setOptionFirst("강아지");
-			quiz.setOptionSecond("박쥐");
-			quiz.setOptionThird("박쥐");
-			quiz.setOptionFourth("쥐");
-			quiz.setAnswer(1);
-			quiz.setQuizFlag(0);
-			
-			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-			java.util.Date quizStart = fmt.parse("2020-02-02 13:30");
-			Timestamp qs = new Timestamp(quizStart.getTime());
-			quiz.setQuizStartDate(qs);
-			
-			java.util.Date quizEnd = fmt.parse("2020-02-19 13:30");
-			Timestamp qe = new Timestamp(quizEnd.getTime());
-			quiz.setQuizEndDate(qe);
-			
-			eventService.addQuizAd(quiz);
-			System.out.println("testAddQuiz():quiz>>"+ quiz);
-			
-		}
+//		//@Test
+//		public void testAddQuizAd() throws Exception {
+//			
+//			Quiz quiz = new Quiz();
+//			quiz.setQuestion("내가 좋아하는 동물은?");
+//			quiz.setOptionFirst("강아지");
+//			quiz.setOptionSecond("박쥐");
+//			quiz.setOptionThird("박쥐");
+//			quiz.setOptionFourth("쥐");
+//			quiz.setAnswer(1);
+//			quiz.setQuizFlag(0);
+//			
+//			SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+//			java.util.Date quizStart = fmt.parse("2020-02-02 13:30");
+//			Timestamp qs = new Timestamp(quizStart.getTime());
+//			quiz.setQuizStartDate(qs);
+//			
+//			java.util.Date quizEnd = fmt.parse("2020-02-19 13:30");
+//			Timestamp qe = new Timestamp(quizEnd.getTime());
+//			quiz.setQuizEndDate(qe);
+//			
+//			eventService.addQuizAd(quiz);
+//			System.out.println("testAddQuiz():quiz>>"+ quiz);
+//			
+//		}
 		
 		//@Test
 		public void testGetQuizAd() throws Exception{

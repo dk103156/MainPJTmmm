@@ -8,13 +8,12 @@
 <meta charset="EUC-KR">
 <title>MMM</title>
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
- 
- <title>getQuizList</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+
+ <!-- google Fonts -->
+ <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 
 
@@ -82,32 +81,30 @@
 
 <style type="text/css">
 		
-		@media (min-width: 768px) {
-	 	 .container {
-	     width: 750px;
-	  }
-	}
-	
-		@media (min-width: 992px) {
-		 .container {
-	     width: 940px;
-	  }
-	}
-	
+		
+	.table{
+			font-size: 13px;
+			float: none;
+			margin: 0 auto;
+		}		
 	.checkBox {float:left; width:30px;}
 	.checkBox input{width:16px; height:16px;}
 
-
+	.container {
+		font-family: 'Noto Sans KR', sans-serif;
+		font-size: 1.2rem;
+	}
 	</style>
 </head>
-<body>
 
+<body>
+<jsp:include page="/layout/header.jsp" />
 <div class="container">
  		<br>
-		<div class="page-header text-secondary">
-	       <h3>퀴즈 목록조회</h3>
+		<div class="page-header" style="margin-top:30px;">
+	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 퀴즈 관리</span>
 	    </div>
-	    
+		<br>	
 	    
 		    	<p class="text-primary">
 		    		총  ${resultPage.totalCount} 개의 퀴즈가 있습니다
@@ -131,14 +128,17 @@
 		  }
 		  
 	  });
+	  
 	  </script>
-      <table class="table table-hover table-striped" >
+	  
+	  
+      <table class="table table-hover" >
         <thead>
           <tr>
-            <th align="center">번호</th>
-            <th align="left" >문제</th>
-            <th align="left">정답</th>
-            <th align="left">등록일시</th>
+            <th scope="col" align="center" style="width:25px;">번호</th>
+            <th scope="col" align="left" style="width:25px;">문제</th>
+            <th scope="col" align="left" style="width:25px;">정답</th>
+            <th scope="col" align="left"  style="width:25px;">등록일시</th>
           </tr>
         </thead>
        
@@ -151,7 +151,7 @@
 			<tr>
 			
 			 
-			  <td class="col-sm-1"  align="left" id="quizNo" >
+			  <td align="left" id="quizNo" >
 			  <input type="checkBox" class="chBox" name="chBox" data-quizNo = "${quiz.quizNo}" id="" />${ i }
 			  <script>
 			  $(".chBox").click(function(){
@@ -159,14 +159,14 @@
 			  });
 			  </script>
 			  </td>
-			  <td class="col-sm-5" align="left" id="" >${quiz.question}
+			  <td align="left" id="" >${quiz.question}
 			  	<input type="hidden" id="quizNo" value="${quiz.quizNo}"/>
 			  </td>
 			  
-			  <td class="col-sm-1" align="left" id="" >${quiz.answer}
+			  <td align="left" id="" >${quiz.answer}
 			    <input type="hidden" id="answer" value="${quiz.answer}"/>
 			  </td>
-			  <td class="col-sm-3" align="left" id="" >${quiz.qDate}
+			  <td align="left" id="" >${quiz.qDate}
 			  </td>
 			
 			</tr>
@@ -177,11 +177,13 @@
 	  
 
  
-<div class="container text-center">
+ 
+ 
+<div class="text-center">
 		 
 		 <nav>
 		  <!-- 크기조절 :  pagination-lg pagination-sm-->
-		  <ul class="pagination" >
+		  <ul class="pagination justify-content-center" >
 		    
 		    <!--  <<== 좌측 nav -->
 		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
@@ -229,8 +231,10 @@
 		</nav>
 		
 </div>
+
+
+
 </div>
-	
-	
+<jsp:include page="/layout/footer.jsp" />
 </body>
 </html>

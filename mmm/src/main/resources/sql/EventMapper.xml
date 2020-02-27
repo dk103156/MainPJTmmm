@@ -16,7 +16,6 @@
 	<result property = "optionFourth" column="option4" jdbcType="VARCHAR" />
 	<result property = "answer" column="answer" jdbcType="NUMERIC" />
 	<result property = "quizStartDate" column="start_date" jdbcType="TIMESTAMP" />
-	<result property = "quizEndDate" column="end_date" jdbcType="TIMESTAMP" />
 	<result property = "quizDate" column="quiz_date" jdbcType="TIMESTAMP" />
 	<result property = "quizFlag" column="quiz_status" jdbcType="NUMERIC" />
 
