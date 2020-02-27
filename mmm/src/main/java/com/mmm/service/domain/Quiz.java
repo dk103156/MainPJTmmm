@@ -12,8 +12,6 @@ public class Quiz {
 	private String optionFourth; //보기 4번
 	private Timestamp quizStartDate; //퀴즈 참여 시작 일자
 	private String quizStDate;
-	private Timestamp quizEndDate; //퀴즈 참여 종료 일자 
-	private String quizEdDate;
 	private int answer; //정답 (1번:1, 2번:2 ...)
 	private Timestamp quizDate; //퀴즈 등록 일시
 	private String qDate;
@@ -89,15 +87,7 @@ public class Quiz {
 			quizStDate = quizStartDate.toString().substring(0,10);
 		}
 	}
-	public Timestamp getQuizEndDate() {
-		return quizEndDate;
-	}
-	public void setQuizEndDate(Timestamp quizEndDate) {
-		this.quizEndDate = quizEndDate;
-		if(quizEndDate!=null) {
-			quizEdDate = quizEndDate.toString().substring(0,10);
-		}
-	}
+
 	public int getAnswer() {
 		return answer;
 	}
@@ -132,12 +122,9 @@ public class Quiz {
 	public void setQuizStDate(String quizStDate) {
 		this.quizStDate = quizStDate;
 	}
-	public String getQuizEdDate() {
-		return quizEdDate;
-	}
-	public void setQuizEdDate(String quizEdDate) {
-		this.quizEdDate = quizEdDate;
-	}
+	
+	
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -157,10 +144,6 @@ public class Quiz {
 		builder.append(quizStartDate);
 		builder.append(", quizStDate=");
 		builder.append(quizStDate);
-		builder.append(", quizEndDate=");
-		builder.append(quizEndDate);
-		builder.append(", quizEdDate=");
-		builder.append(quizEdDate);
 		builder.append(", answer=");
 		builder.append(answer);
 		builder.append(", quizDate=");
@@ -169,6 +152,8 @@ public class Quiz {
 		builder.append(qDate);
 		builder.append(", partFlag=");
 		builder.append(partFlag);
+		builder.append(", quizStatus=");
+		builder.append(quizStatus);
 		builder.append(", quizFlag=");
 		builder.append(quizFlag);
 		builder.append(", earningPoint=");
@@ -176,12 +161,7 @@ public class Quiz {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 
-	
-	
-	
 	
 	
 }

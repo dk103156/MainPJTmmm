@@ -234,7 +234,7 @@ $(function(){
 	
 	//$("#MypageHome").trigger("click");
 	
-	//var condition = parseInt('${condition}');
+	var condition = parseInt('${condition}');
 	//console.log("조건은 ? :"+condition);
 	if(condition==99){
 		$("#MypageHome").trigger("click");

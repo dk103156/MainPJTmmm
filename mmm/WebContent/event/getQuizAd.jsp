@@ -20,88 +20,60 @@
 		});
 		
 		$('#okBtn').on("click", function(){
-			self.location = "/event/getPreviewList";
+			self.location = "/event/getQuizListAd";
 		});
 	});  
 
 </script>
+
+<style>
+
+span.title{
+		 font-size: 20px;
+		 font-weight: bold;
+		}
+.qBox{
+        border: 4px dashed #bcbcbc;
+	}		
+	
+button.btn.write { 
+		background-color: #fee50e!important;
+   		color: #212529;
+    	border-color: #fcfaf5;
+    	font-size: 13px;
+	}
+	
+button.btn.write:hover {
+     color: #f8f9fa;
+     background-color: #e0a800;
+     border-color: #040404;
+}  		
+</style>
 </head> 
 
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
+	
 	<div class="container">
-		<br>
-		<div class="page-header text-secondary">
-		       <h3>퀴즈 상세조회</h3>
-		 </div>
-		<br>	
-		
-	 <div class="row">
-		    
-		<table class="table">
-			<tr>
-			<td class="form-inline form-group">
-				<label class="col-sm-2 control-label" for="title">Question</label>
-				<div class="form-group col-sm-10">
-					${quiz.question}
-				</div>	
-	        </td>
-	       </tr> 
-	       <tr>
-			<td class="form-inline form-group">
-				<label class="col-sm-2 control-label" for="title">Option1</label>
-				<div class="form-group col-sm-10">
-					${quiz.optionFirst}
-				</div>	
-	        </td>
-	        </tr>
-	        <tr>
-	        <td class="form-inline form-group">
-				<label class="col-sm-2 control-label" for="title">Option2</label>
-				<div class="form-group col-sm-10">
-					${quiz.optionSecond}
-				</div>	
-	        </td>
-	        </tr>
-	        <tr>
-	        <td class="form-inline form-group">
-				<label class="col-sm-2 control-label" for="title">Option3</label>
-				<div class="form-group col-sm-10">
-					${quiz.optionThird}
-				</div>	
-	        </td>
-	        </tr>
-	        <tr>
-	        <td class="form-inline form-group">
-				<label class="col-sm-2 control-label"  for="title">Option4</label>
-				<div class="form-group col-sm-10">
-					${quiz.optionFourth}
-				</div>	
-	        </td>
-	        </tr>
-	        <tr>
-	           <td class="form-inline form-group">
-				<label class="col-sm-2 control-label" for="answer">answer</label>
-				<div class="form-group col-sm-10">
-					${quiz.answer}
-				</div>	
-	        </td>
-	        </tr>
-	        <tr>
-	         <td class="form-inline form-group">
-				<label class="col-sm-2 control-label" for="quizStartDate">quizStartDate</label>
-				<div class="form-group col-sm-10">
-					${quiz.quizStDate}
-				</div>	
-	        </td>
-	        </tr>
-		</table>
+	
+	<div class="m-4">
+	<span class="title">퀴즈 상세조회</span>
 	</div>
 		
+		<div class='qBox p-3'>
+		<div class='p-2'><span>Q.</span>${quiz.question}</div>
+		<div class='p-2'><span>1.</span>${quiz.optionFirst}</div>
+		<div class='p-2'><span>2.</span>${quiz.optionSecond}</div>
+		<div class='p-2'><span>3.</span>${quiz.optionThird}</div>
+		<div class='p-2'><span>4.</span>${quiz.optionFourth}</div>
+		<div class='p-2'><span>정답.</span>${quiz.answer}</div>
+		<div class='p-2'><span>시작날짜</span>${quiz.quizStDate}</div>
+		</div>
+		
 	  
-		<div class="text-center">
-			<button id="updateBtn"" class="btn btn-dafault write" type="button">수 &nbsp;정</button>
-			<button id="okBtn" type="button" class="btn btn-dafault write">확 &nbsp;인</button>
+		<div class="text-center mt-3">
+			<button id="updateBtn" class="btn write" type="button">수 &nbsp;정</button>
+			<button id="okBtn" type="button" class="btn write">확 &nbsp;인</button>
 		</div>
 
 	</div>

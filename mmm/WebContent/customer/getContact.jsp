@@ -198,6 +198,20 @@
 		body {
 	    	font-family: 'Noto Sans KR', sans-serif;
 		}
+		
+		button.btn.write { 
+			background-color: #fee50e!important;
+	   		color: #212529;
+	    	border-color: #fcfaf5;
+	    	font-size: 13px;
+		}
+		
+		button.btn.write:hover {
+		     color: #f8f9fa;
+		     background-color: #e0a800;
+		     border-color: #040404;
+		}  
+	
 
 </style>
 
@@ -230,10 +244,10 @@
 	<div class="header p-0"> 
 	
 	
-	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#eae9e1; font-weight:bold;">   <!-- 문의 제목, 일시 -->
-		<div class="inline left"><span class="align-center" style="font-weight:bold; font-size:20px;">Q. </span>
-		${article.articleTitle}</div>
-		<div class="inline rightt date"> <span style="font-size:10px;">${article.articleDate}</span></div>
+	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#333; font-weight:bold;">   <!-- 문의 제목, 일시 -->
+		<div class="inline left"><span class="align-center" style="font-weight:bold; font-size:20px; color:white;">Q. </span>
+		<span style="color:white;">${article.articleTitle}</span></div>
+		<div class="inline rightt date"> <span style="font-size:13px; color:white;">${article.articleDate}</span></div>
  	</div>	
  	
  	
@@ -320,19 +334,18 @@
 
 
 	
-		
-	
-		<div class="text-center m-2">
-			<button id="delBtn"" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
+		<div class="text-center m-4">
+			<button id="delBtn" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
 			<button id="okBtn" type="button" class="btn btn-secondary write">목 &nbsp;록</button>
 			
 			<c:if test="${user.role eq 'admin'}">
 			<button id="addAnswer" type="button" class="btn btn-secondary write">답변추가</button>
 			</c:if>
 		</div>
+</div>
+	
+</div>
 
-	</div>
-	</div>
 <jsp:include page="/layout/footer.jsp"></jsp:include>
  </body>
  

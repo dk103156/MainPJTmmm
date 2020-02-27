@@ -69,7 +69,11 @@
 				fncAddQuiz();
 			});
 
-		
+		$(function(){
+			$('#cancelBtn').on("click", function(){
+				history.go(-1);
+			});
+		})
 	});
 	
 	</script>
@@ -207,7 +211,7 @@
 
 <div class="text-center m-4">
 			<button id="regBtn" class="btn write" type="button">등 &nbsp;록</button>
-			<button type="button" class="btn write">취 &nbsp;소</button>
+			<button id="cancelBtn" type="button" class="btn write">취 &nbsp;소</button>
 </div>
 
 
