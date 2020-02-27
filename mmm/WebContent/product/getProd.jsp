@@ -84,7 +84,7 @@
  	cursor : pointer;
  } 
 	</style>
-		
+	<title>mmm</title>	
 </head>
 
 	<body id="body">
@@ -144,29 +144,27 @@
 				
 				
 				<div class="row mx-0 mb-6">
-				<div class="col-sm-6"></div>
-					<div class="col-sm-6">
-					<br>
-						<h5 style="text-align: left: ;"><strong> 총 구매 금액 </strong></h5>
+					<div class="col-5" style="left: 15px;">
+						<br>
+						<h4 style="text-align: left ;"><strong> 총 구매 금액 </strong></h4>
+						
+						<form>
+							<input id='price' type='text' name='purchasePrice' value='${product.prodPrice}'  class="name text-right purchasePrice"  style="width: 120px; "readonly> 원 <br> 
+							<input id='quantity' type='number' name='purchaseProductQuantity'     class="name text-right purchaseProductQuantity"   style="width: 120px; "  value='1'  min='1' step="1"> 개
+							<input type='hidden' name='purchaseProductNo' value="${product.prodNo}">
+						</form>	
 					</div>
-				<div class="col-sm-6">
-						<div class="col-sm-3">
-								<label class="control-label">
-									<img src="/resources/image/addPurchase.PNG" style="width: 200px; height:50px; margin-right: 20px;" id="addPurchase"/>
-								</label>
-						</div>						
-						<div class="col-sm-3">
-							<label class=" col-sm-3 control-label">
-	 							<img src="/resources/image/addCart.PNG" style="width: 200px; height:50px; margin-left:-15px;" id="addCart"/>
-							</label>			
-						</div>	
-				</div>
-					<form>
-						<input id='price' type='text' name='purchasePrice' value='${product.prodPrice}' readonly> 원 <br> 
-						<input id='quantity' type='number' name='purchaseProductQuantity' value='1'  min='1' step="1"> 개
-						<input type='hidden' name='purchaseProductNo' value="${product.prodNo}">
-					</form>				
+					
+					
+					<div class="col-5" style="top: 21px;">
+						<br>
+						<img src="../resources/image/addPurchase.png" style="width: 80px; height:80px; margin-left:15px; margin-right: 20px;" id="addPurchase"/>
+						<img src="../resources/image/productIcon/shoppingcart_pd.png" style="width: 80px; height:80px; " id="addCart"/>
+					</div>
+								
 				</div><!-- end of row -->	
+				
+				
 				
 			</div><!-- end of #productInfo -->
 		</div>	<!-- end of row -->
@@ -176,12 +174,12 @@
 		<div id='caution'class="row mx-0">
 			<div class="col-12 pageHeader">
 			<br>
-				<h2>상품 이용 안내</h2>
+				<h4>상품 이용 안내</h4>
 			</div>
 			
 			<div class="col-12 pageContent">
 				<span>
-					<h5><p>영화관람권 기프트콘은 CGV모바일, 홈페이지, 오프라인 극장에서 영화를 예매할 수 있는 온라인 상품권입니다.<br>
+					<h6><p>영화관람권 기프트콘은 CGV모바일, 홈페이지, 오프라인 극장에서 영화를 예매할 수 있는 온라인 상품권입니다.<br>
 						- 구매 후 전송받으신 기프트콘은,<br>
 						- 지정된 상영타입의 영화만 예매 가능합니다.(ex. 3D 관람권으로는 3D 영화만 예매 가능합니다)<br>
 						- 금액권이 아니므로 차액 환급이 불가합니다. (ex.조조영화/청소년 관람 시 차액환급 불가)<br>
@@ -193,16 +191,16 @@
 						- 사용가능한 CGV의 매점에서 지정된 해당 상품으로만 교환이 가능합니다.<br>
 						- 해당 상품 내에서 팝콘 혹은 음료, 스낵 변경 시 추가 비용이 발생합니다.<br>
 						- 교환 완료한 상품의 환불 및 반품은 불가합니다.<br>
-						- 상기 이미지는 실제와 다를 수 있습니다.</p></h5>
+						- 상기 이미지는 실제와 다를 수 있습니다.</p></h6>
 				</span>
 			</div>
 			<div class="col-12 pageHeader">
-				<h2>환불 규정 안내</h2>
+				<h4>환불 규정 안내</h4>
 			</div>							
 			
 			<div class="col-12 pageContent">
 				<span>
-					<h5><p>
+					<h6><p>
 					- 공연 컨텐츠 전일까지 환불이 가능합니다.<br> 
 					- 공연당일은 환불이 불가능합니다.<br>
 					- 공연 관람시 시작 시간 이후에는 입장이 제한됩니다. <br><br>
@@ -211,7 +209,7 @@
 					- 인터넷 예매하신 내역은 상영시간 전까지는  현장에서 환불이 가능합니다.	<br>		
 					- 스토어용권은 구매하신 날부터 1년까지 사용 가능합니다.<br>
 					- 스토어 상품을 구매하신 후 7일 동안만 환불이 가능합니다.
-					</p></h5>
+					</p></h6>
 				</span>
 			</div>	
 		</div><!-- end of row -->
