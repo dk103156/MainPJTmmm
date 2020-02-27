@@ -86,8 +86,8 @@
 						WHERE purchase_Status = 0 and purchase_user_no = #{userNo}
 				</if>
 				<!-- 선물  -->
-				<if test="purchaseStatus == 1">
-						WHERE purchase_Status = 1 and purchase_user_no = #{userNo} 
+				<if test="purchaseStatus == 2">
+						WHERE purchase_Status = 2 and purchase_user_no = #{userNo} 
 				</if>		
 			)					
 	 </select>  	
