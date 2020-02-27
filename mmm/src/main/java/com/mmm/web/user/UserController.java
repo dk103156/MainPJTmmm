@@ -86,7 +86,7 @@ public class UserController {
 		
 		System.out.println("/user/userAuthorization : GET ");
 			
-		return "redirect:/user/userAuthorization.jsp?type="+type;
+		return "forward:/user/userAuthorization.jsp?type="+type;
 	}
 	
 	@CheckAuth(role="user,admin")
@@ -344,7 +344,7 @@ public class UserController {
 		
 		System.out.println("/user/unUserLogin : GET");
 
-		return "redirect:/user/unUserLogin.jsp";
+		return "forward:/user/unUserLogin.jsp";
 	}
 	
 	@RequestMapping(value = "unUserLogin" , method=RequestMethod.POST)
@@ -366,7 +366,7 @@ public class UserController {
 		//System.out.println("dbUser!!!!111"+dbUser);
 		
 		  if(dbUser == null) {
-			  return "redirect:/user/unUserLogin.jsp?status=failed"; 
+			  return "forward:/user/unUserLogin.jsp?status=failed"; 
 		  }		  
 		 
 		System.out.println(user);
@@ -375,9 +375,9 @@ public class UserController {
 			session.setAttribute("user", dbUser);	
 			System.out.println("!!!!!!"+((User)session.getAttribute("user")).toString());
 		}else {//로그인 실패시 
-			return "redirect:/user/unUserLogin.jsp?status=failed";
+			return "forward:/user/unUserLogin.jsp?status=failed";
 		}
-		return "redirect:/mypage/mypage?condition=1";
+		return "forward:/mypage/mypage?condition=1";
 	}
 	
 	@RequestMapping(value ="logout", method=RequestMethod.GET)
@@ -441,7 +441,7 @@ public class UserController {
 			model.addAttribute("user",user);
 			return "forward:/user/findPw.jsp";
 		} else { //조회된 유저가 없으면
-			return "forward:/user/userAuthorization.jsp";
+			return "forward:/user/userAuthorization.jsp?status=notfound";
 		}
 		
 	}

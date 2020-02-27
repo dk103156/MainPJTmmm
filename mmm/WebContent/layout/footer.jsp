@@ -30,11 +30,12 @@ body {
 #footer {
     position: relative;
     min-width: 1100px;
-    width: 100%;
+    
     height: 184px;
     margin: 0;
     padding: 0;
 	background-color:  #333;
+	
 }
 .center-div{
 	float: none;
@@ -107,7 +108,7 @@ body {
 <body>
 
 <footer id="footer"  style="top: 25px;">
-	<div class="row h-100 align-items-center pr-5 pl-5">
+	<div class="row h-100 align-items-center mx-0">
 	    <div class="col-2 foo_div text-center">
 	    	<a href="/main" class="center-div" title="MMM"><img src="/resources/image/logo/logo.png"></a>
 	    </div>

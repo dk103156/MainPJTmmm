@@ -120,11 +120,37 @@ $(function(){
 	    f.submit();
 	}
 	
-	if(type=="findUnUserPw" || type=="addUnUserView"){
-		$("#emailArea").hide();
+
+	function getParam(key) {
+	    var params = location.search.substr(location.search.indexOf("?") + 1);
+	    var value = "";
+	    params = params.split("&");
+	    for (var i = 0; i < params.length; i++) {
+	        temp = params[i].split("=");
+	        if ([temp[0]] == key) { value = temp[1]; }
+	    }
+	    return value;
+	}
+	var status = getParam("status");
+	
+	if(status=="notfound"){
+		//alert("로그인 정보가 올바르지 않습니다.");
+		Swal.fire({
+		  icon: 'error', //"info,success,warning,error" 중 택1
+		 // title: 'Oops...',
+		  text: '로그인 정보가 올바르지 않습니다.'
+		})
 	}
 	
-	if(type=="addUser"||type=="addUnUserView"){ //신규 회원가입
+	
+	
+	
+	/* if(type=="findUnUserPw" || type=="addUnUserView"){//비회원가입 , 비회원 비번찾기는 휴대폰번호로만 가능
+		//$("#emailArea").hide();
+		
+	} */
+	
+	if(type=="addUser"){ //신규 회원가입
 		// 휴대폰중복체크(1 = 중복 / 0 != 중복)
 		$('#phone').keyup(function() {
 			console.log("클릭!!!")
@@ -280,6 +306,7 @@ $(function(){
 			} ,
 			success : function( JSONData , status ) {
 				console.log("동작");
+				alert("문자가 전송되었습니다.")
 				console.log(JSONData.status);
 				$("div").text(JSONData.status); 
 			}
@@ -330,8 +357,8 @@ $(function(){
 								if(type=="addUser"){
 									self.location= "/user/addUser";
 								
-								} else if(type=="addUnUserView" ){
-									self.location= "/user/addUnUserView";
+								} else if(type=="findPw" ){
+									self.location= "/user/findPw";
 									
 								}else if(type=="findId" ){
 									self.location= "/user/findId";

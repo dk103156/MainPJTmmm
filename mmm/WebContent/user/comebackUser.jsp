@@ -160,7 +160,7 @@ $(function(){
 				}else{
 					$("#passwordChk").text("");
 					alert("복구가 완료 되었습니다.")
-					self.location="/main.jsp";
+					self.location="/main/main";
 				} 
 			}, error : function() {
 					console.log("실패");

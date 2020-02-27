@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-	<meta charset="EUC-KR">
+	<meta charset="utf-8">
 	
 	<title>mmm</title>
 	
@@ -28,10 +28,10 @@
 		$(function(){
 			
 		    Swal.fire({
-				  icon: 'error', //"info,success,warning,error" 중 택1
+				  icon: 'success', //"info,success,warning,error" 중 택1
 				 // title: 'Oops...',
 				  text: '로그인을 해주세요.'
-				}).then( result => { 
+				}).then((result) => {  
 			opener.parent.location="/main/main";
 			window.open("about:blank","_self").close();
 				});
@@ -39,7 +39,7 @@
 	</script>
 
 <head>
-<meta charset="EUC-KR">
+
 <title>SNS 가입후에 네비게이션하는 jsp.</title>
 </head>
 <body>

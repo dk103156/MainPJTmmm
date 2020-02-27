@@ -29,7 +29,7 @@
   <!--     Common Css -->
   <link rel="stylesheet" href="/resources/css/product.css">
   
-<title>Insert title here</title>
+<title>mmm</title>
 
 </head>
 <body id="body">

@@ -2,6 +2,7 @@
 <%@ page pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
@@ -30,10 +31,13 @@
 		
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">	
+	  
+	  <title>mmm</title>
 </head>
 
 
 <body id="body">
+<jsp:include page="/product/prodToolBar.jsp" />
  		 	 
 <div class="container">
 
@@ -55,7 +59,7 @@
 						<input name="prodPrice" type="hidden" value= "${product.prodPrice }">
 						<div class="content-box">
 							<h5 style="text-align:center;">${product.prodName}</h5><br>
-							<h5 style="text-align:center;">${product.prodPrice}원</h5>
+							<h5><fmt:formatNumber value="${product.prodPrice}" type="currency" currencySymbol=""/>원</h5>
 		 				</div> 
 					</div>
 				</div><!-- end of thumb-wrapper -->	
@@ -121,7 +125,7 @@ $(function(){
   		
   		var Element ="<div class='product'>"
   		    Element+="<div class='form-group mb-3'>";
-			Element+="<kbd>상품번호 : <span class='purchaseProductNo'>"+$(this).next().val()+"</span></kbd><span class='name text-center purchasePrice'>"+ $(this).next().next().next().children().first().text()+"</span> <input class='purchaseProductQuantity' type='number' min='1' step='1' value='1'>개수 <input type='text' value="+$(this).next().next().val()+" readonly > 원  &nbsp; <i class='fas fa-times'></i>"
+			Element+="<kbd>상품번호 : <span class='purchaseProductNo'>"+$(this).next().val()+"</span></kbd><span class='name text-center purchasePrice'>"+ $(this).next().next().next().children().first().text()+"</span> <input class='purchaseProductQuantity text-right'   style=' width: 154px;'  type='number' min='1' step='1' value='1'> &nbsp;개수 &nbsp; &nbsp; &nbsp; <input type='text' class='text-right'  style=' width: 154px; border-color: #00ff0000;' value="+$(this).next().next().val()+" readonly > 원  &nbsp;  &nbsp; &nbsp;<i class='fas fa-times'></i>"
   			Element+="</div></div>"
   	  
   			

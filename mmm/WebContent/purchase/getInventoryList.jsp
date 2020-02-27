@@ -28,13 +28,16 @@
 	  <!--     Common Css -->
 	  <link rel="stylesheet" href="/resources/css/product.css">
 
+
 <style>
 	.modal-backdrop {
 	    background-color: rgba(0, 0, 0, 0.2);
 	    opacity: 1;
 	}
-</style>  
+	
 
+</style>  
+	<title>mmm</title>
 </head>
 <body id="body">
 	<div class="container">
@@ -104,9 +107,12 @@
     </div>
   </div>
 </div>
+
+
 	
 <script>
 $(function(){
+	
 	
 	var productList= new Array();
 	var productQuantityList = new Array();

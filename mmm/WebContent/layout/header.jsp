@@ -138,7 +138,7 @@
 					<div class="col-6 px-0"></div>
 					<div class="col-6 px-0 headerLogo text-center">
 						<span>
-							<a href="/main" title="MMM">
+							<a href="/" title="MMM">
 								<img src="/resources/image/logo/logo.png" alt="MMM" width=68>
 							</a>	
 						</span>

@@ -91,7 +91,7 @@
 
 <script type="text/javascript">
 $(function(){	
-	$("#findIdModal").modal("show");
+	$("#findPwModal").modal("show");
 	
 	//모달창 엑스
 	$("#btn").on("click",function(){
@@ -110,7 +110,7 @@ $(function(){
 
 <!-- Modal -->
 	<form>
-		<div class="modal fade" id="findIdModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal fade" id="findPwModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">

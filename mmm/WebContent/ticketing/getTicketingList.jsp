@@ -26,8 +26,11 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
+  
+  <!-- font Awesome -->
+  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>
   	
-<title>Insert title here</title>
+<title>mmm</title>
 
 <style>
 
@@ -66,6 +69,42 @@ div.container.getTicketingList {
 	margin-top : 47px;
 
 }
+
+button.cancelButton {
+	background: #503396;
+	outline: 1px dotted #000;
+	background-color: #351f67;
+	color: #fff;
+	display: block;
+	float: left;
+	width: 100%;
+	position : relative;
+	top : 108px;
+
+}
+
+#cancelToast {
+		width : 300px;
+		position:fixed;
+		right:30px;
+		bottom:0px;
+		z-index:2000;
+		cursor : pointer;
+}
+
+
+#cancelToast > div.toast-header > i {
+		position : relative;
+		top : 1px;	
+		right : 2px;
+}
+
+#cancelToast > div.toast-header {
+		background-color : #fee50e;
+		color: #333;
+}
+
+
 </style>
 </head>
 <body id="body">
@@ -113,7 +152,7 @@ div.container.getTicketingList {
 									</div>
 									<div class="col-6 border">
 										<div class="row">
-											<div class="contentStatus col-9">
+											<div class="contentStatus col-8">
 												<c:if test="${ i.ticketingStatus==0 }">
 									    			<span class="contentStatus">예매완료</span>
 									    		</c:if>
@@ -122,9 +161,9 @@ div.container.getTicketingList {
 									    			<span class="contentCancel">취소일시 : ${cancelDate} (${cancelDay}) ${cancelHM}</span>
 									    		</c:if>									    		
 									    	</div>
-									    	<div class="afterButton col-3">
+									    	<div class="afterButton col-4">
 									    	    <c:if test="${ i.ticketingStatus==0 }">
-									    	    	<button class="cancelButton" type="button" class="btn btn-primary">Cancel</button>
+									    	    	<button class="cancelButton" type="button" class="btn btn-primary"><strong>예매 취소</strong></button>
 									    	    	<form id="cancelForm" action="/payment/cancelPayment" method="POST">
 									    				
 										    			<input type='hidden' name='ticketingNo' value='${i.ticketingNo}'>
@@ -277,29 +316,49 @@ div.container.getTicketingList {
       </div> 
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">아니오</button>
-        <button type="button" class="btn btn-primary" onclick='cancelTicketing()'>네</button>
+        <button id="modalButton" type="button" class="btn btn-primary" >네</button>
       </div>
     </div>
   </div>
 </div>
 
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="1000000">
+  <div class="toast-header">
+    <i class="far fa-bell"></i>
+    <strong class="mr-auto">알림</strong>
+    <small>방금</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+           <strong>결제 취소가 완료되었습니다.</strong>
+  </div>
+</div>
+
+
 <!-- ajax 모음 -->	  
 <script>
-function cancelTicketing(){
-	console.log("취소 버튼 작동함")
-	$("form#cancelForm").submit();
+function cancelTicketing(jqueryElement){
+	$("#modalButton").off("click");
+	$("#modalButton").on("click",function(){
+		jqueryElement.next().submit();
+	});
+	//$("form#cancelForm").submit();
 }
 
-function activeCancle(){
+function activeCancel(){
 	$("div.afterButton > button").on("click",function(){
 		$("div#ticketingCancel").modal("show")
+		
+		cancelTicketing($(this));
 	})
 }
 
 $(function(){
-
+	$('#cancelToast').toast('show')
 	
-	activeCancle();
+	activeCancel();
 	
 	detail();
 	
@@ -487,10 +546,10 @@ $(function(){
 									Element+="</div>"
 									Element+="<div class='col-6 border'>"
 									Element+="<div class='row'>"
-									Element+="<div class='contentStatus col-9'>"
+									Element+="<div class='contentStatus col-8'>"
 													//예매 상태 추가								    		
 								    Element+="</div>"
-								    Element+="<div class='afterButton col-3'>"
+								    Element+="<div class='afterButton col-4'>"
 													//버튼 추가
 								    Element+="</div>"
 								    Element+="</div>"
@@ -508,10 +567,10 @@ $(function(){
 								    
 					    			
 					    			//예매 취소 버튼 추가
-// 					    			Element  = "<form action='/payment/cancelPayment?ticketingNo="+data.ticketingList[i].ticketingNo+" 'method='post'>"
-					    			Element  = "<form action='/payment/cancelPayment' 'method='post'>"
+ 					    			Element  = "<button class='cancelButton' type='button' class='btn btn-primary'><strong>예매 취소</strong></button>"
+					    			Element += "<form id='cancelForm' action='/payment/cancelPayment' method='POST'>"
 
-				    				Element += "<input class='btn btn-primary' type='submit' value='예매취소'></button>"
+				    				Element += "<input type='hidden' name='ticketingNo' value='"+data.ticketingList[i].ticketingNo+"'>"
 				    				Element += "</form>"
 				    				
 				    				$($("div.afterButton")[i]).append(Element);
@@ -582,7 +641,7 @@ $(function(){
 								$("div.ticketingPagination").append(Element);
 								
 								$("#searchCondition").val(data.search.searchCondition);
-								activeCancle()
+								activeCancel()
 								detail()
 						}//end of if
 					}//end of arrow function
