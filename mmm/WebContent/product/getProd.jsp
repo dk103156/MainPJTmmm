@@ -152,7 +152,8 @@
 						<h4 style="text-align: left ;"><strong> 총 구매 금액 </strong></h4>
 						
 						<form>
-							<input id='price' type='text' name='purchasePrice' value='${product.prodPrice}'  class="name text-right purchasePrice"  style="width: 120px; "readonly> 원 <br> 
+							<fmt:formatNumber value="${product.prodPrice}" type="currency" currencySymbol="" var="i"/>
+							<input id='price' type='text' name='purchasePrice' value='${i}'  class="name text-right purchasePrice"  style="width: 120px; "readonly> 원 <br> 
 							<input id='quantity' type='number' name='purchaseProductQuantity'     class="name text-right purchaseProductQuantity"   style="width: 120px; "  value='1'  min='1' step="1"> 개
 							<input type='hidden' name='purchaseProductNo' value="${product.prodNo}">
 						</form>	
