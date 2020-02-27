@@ -5,8 +5,8 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
-<title>MMM</title> 
-<meta charset="utf-8">
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->

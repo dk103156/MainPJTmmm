@@ -23,6 +23,10 @@
 	
 	<!-- include summernote css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+	
+	
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>	
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 		
 	<script type="text/javascript">

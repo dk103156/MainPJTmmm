@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<meta charset="EUC-KR">
-
-<title>카카오 로그인 팝업창 처리 jsp</title>
+<meta charset="utf-8">
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

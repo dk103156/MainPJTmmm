@@ -75,6 +75,21 @@
 			color: #333;
 	}
 
+	div.purchasePagination.row > div:nth-child(2) > ul {
+		position : relative;
+		left : 70px;
+	}
+
+	.page-item.active .page-link {
+	    z-index: 3;
+	    color: #212529;
+	    background-color: #fee50e;
+	    border-color: #fee50e;
+	}
+	
+	.page-link {
+		color: #333;
+	}
 </style>	 
 <body id="body">
 

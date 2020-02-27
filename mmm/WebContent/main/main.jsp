@@ -15,8 +15,8 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
-<title>mmm</title>
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 <style>
  html, body { box-sizing: border-box; padding: 0; margin: 0; text-align: center; }
  
@@ -145,6 +145,26 @@
 		margin-bottom: 7rem!important;
 	}
 	
+	#cancelToast {
+		width : 300px;
+		position:fixed;
+		right:30px;
+		bottom:0px;
+		z-index:2000;
+		cursor : pointer;
+	}
+	
+	
+	#cancelToast > div.toast-header > i {
+			position : relative;
+			top : 1px;	
+			right : 2px;
+	}
+	
+	#cancelToast > div.toast-header {
+			background-color : #fee50e;
+			color: #333;
+	}
 </style>
 </head>
 <body>
@@ -366,7 +386,24 @@
 	
 <jsp:include page="/layout/sideBar.jsp"></jsp:include>
 
-
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
+  <div class="toast-header">
+    <i class="far fa-bell"></i>
+    <strong class="mr-auto">알림</strong>
+    <small>방금</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+  		<c:if test="${alarm eq '0'}">
+  			<strong>로그인이 완료되었습니다.</strong>
+  		</c:if>
+  		<c:if test="${alarm eq '1'}">
+           <strong>로그아웃이 완료되었습니다.</strong>
+        </c:if>   
+  </div>
+</div>
 <!-- 슬라이더 -->
   <script>
   function slider(){
@@ -623,7 +660,12 @@
   })
   
   
-  
+  $(function(){
+	<c:if test="${alarm eq '1' || alarm eq '0'}">
+		$('#cancelToast').toast('show')
+	</c:if>
+	  
+  });
   </script>
   
 

@@ -103,7 +103,17 @@ button.cancelButton {
 		color: #333;
 }
 
+div.ticketingPagination.row > div:nth-child(2) > ul {
+	position : relative;
+	left : 70px;
+}
 
+.page-item.active .page-link {
+    z-index: 3;
+    color: #212529;
+    background-color: #fee50e;
+    border-color: #fee50e;
+}
 </style>
 </head>
 <body id="body">
@@ -355,7 +365,7 @@ function activeCancel(){
 }
 
 $(function(){
-	
+	console.log("${alarm}");
 	<c:if test="${alarm eq '1'}">
 		$('#cancelToast').toast('show')
 	</c:if>
@@ -784,6 +794,7 @@ function Pagination(currentPage) {
 	
 	$("#currentPage").val(currentPage)
 	//$("form").attr("method","POST").attr("action", "/ticketing/getTicketingList").submit();
+	
 	$("#plusPage").load("/ticketing/getTicketingList",$("#currentPage").serialize());
 	
 }

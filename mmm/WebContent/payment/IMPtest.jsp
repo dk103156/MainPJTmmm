@@ -3,7 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 	var impUid = $("input[name='impUid']").val();

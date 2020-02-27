@@ -7,9 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>MMM</title>
+<meta charset="utf-8">
+
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
@@ -221,7 +224,7 @@
 					     <!--  우측 nav==>> -->
 					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
 					    	<li class="page-item disabled">
-					    		<a class="page-link" href="#"><i class='fas fa-angle-right'></i></a>
+					    		<a class="page-link" href="#">»</a>
     						</li>
 					      </c:if>
 					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">

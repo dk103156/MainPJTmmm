@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문자테스트</title>
+<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+<title>mmm</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

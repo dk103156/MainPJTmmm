@@ -5,7 +5,8 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
-<title>MMM</title> 
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 <!-- bootstrap 4 CDN -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- jQuery library -->

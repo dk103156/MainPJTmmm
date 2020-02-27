@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
 import com.mmm.service.cart.CartService;
@@ -57,6 +58,7 @@ public class ProductController {
 	
 	
 	//상품등록
+
 	@RequestMapping(value="addProduct" , method=RequestMethod.GET)
 	public String addProduct() throws Exception {
 		
@@ -134,6 +136,7 @@ public class ProductController {
 	
 	
 	//상품 상세
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="getProduct" , method=RequestMethod.GET)
 	public String getProduct( @RequestParam("prodNo") int prodNo , Model model,  HttpSession session ) throws Exception {
 		
@@ -284,7 +287,6 @@ public class ProductController {
 //		}
 		
 		
-		
 		@RequestMapping(value="getVoucherList")
 		public String getVoucherList(@ModelAttribute("product") Product product , Model model , HttpServletRequest request) throws Exception {
 			
@@ -299,7 +301,6 @@ public class ProductController {
 			
 			return "forward:/product/getProdList.jsp";
 		}
-		
 		
 		
 		@RequestMapping(value="getSnackProductList")

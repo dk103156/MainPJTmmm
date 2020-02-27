@@ -25,7 +25,9 @@
 	<!-- 	SweetAlert2 CDN -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
-	<title>MMM</title>
+	
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 	
 <style>
 	#prodHeader{

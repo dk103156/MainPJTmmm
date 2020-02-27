@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> 
-  <title>MMM</title>
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
   <!-- 카카오 맵 api key -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 
@@ -97,11 +98,11 @@ function getCommentList(currentPage) {
 			Element +="<ul class='pagination justify-content-center'>"
    			if(result.resultPage.currentPage <= result.resultPage.pageUnit){
    				Element +="<li class='page-item disabled'>"
-   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>";
+   				Element +="<a class='page-link' href='#' tabindex='-1' aria-disabled='true'>«</a>";
    				Element +="</li>"
    			}else if(result.resultPage.currentPage > result.resultPage.pageUnit){
    				Element +="<li class='page-item'>";
-   				Element +="<a class='page-link' href='javascript:getCommentList("+(parseInt(result.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'><i class='fas fa-angle-left'></i></a>";
+   				Element +="<a class='page-link' href='javascript:getCommentList("+(parseInt(result.resultPage.beginUnitPage)-1)+")' tabindex='-1' aria-disabled='true'>«</a>";
    				Element +="</li>";
    			}
 			
@@ -120,11 +121,11 @@ function getCommentList(currentPage) {
 			
   			if(result.resultPage.endUnitPage >= result.resultPage.maxPage){
   				Element+="<li class='page-item disabled'>";
-  				Element+="<a class='page-link' href='#'><i class='fas fa-angle-right'></i></a>";
+  				Element+="<a class='page-link' href='#'>»</a>";
   				Element+="</li>";
   			}else if(result.resultPage.endUnitPage < result.resultPage.maxPage){
   				Element+="<li class='page-item'>";
-  				Element+="<a class='page-link' href='javascript:getCommentList("+(parseInt(result.resultPage.endUnitPage)+1)+") '><i class='fas fa-angle-right'></i></a>";
+  				Element+="<a class='page-link' href='javascript:getCommentList("+(parseInt(result.resultPage.endUnitPage)+1)+") '>»</a>";
   				Element+="</li>";
   			}
 				
@@ -651,7 +652,7 @@ function comment(currentPage){
 	    top: 12px;
 	    left: 40px;
 	}
-	span{
+	span.getPreview{
 	 color: #444444;
 	}
 	
@@ -676,9 +677,9 @@ function comment(currentPage){
  	
 	<div class="event-detail">	
 	<h2 class="tit">
-	<span style="font-weight:bold;">${preview.previewName}</span></h2>
-	<p class="event-detail-date">
-				<span>기간</span>
+	<span class="getPreview" style="font-weight:bold;">${preview.previewName}</span></h2>
+	<p class="event-detail-date ">
+				<span class="getPreview">기간</span>
 				<em>${preview.preStDate} ~ ${preview.preEdDate}</em>
 	</p>
 	
@@ -688,7 +689,7 @@ function comment(currentPage){
 	
 		<div class="cdtl_col_lft">
 				<div class="cdtl_item_image">
-					<span class="cdtl_imgbox imgzoom">
+					<span class="cdtl_imgbox imgzoom getPreview">
 								<img src= "${preview.previewImage}" width="450" height="600" onerror="this.onerror=null;this.src='http://img.ssgcdn.com/trans.ssg?src=/ui/ssg/img/common/img_ready_500x500.jpg&amp;w=1200&amp;h=1200&amp;t=a00628030fd12db31022d09ae5b97d4b29576a99'" id="mainImg"></span>
 				</div>
 	
@@ -712,11 +713,11 @@ function comment(currentPage){
             
             <div class="cdtl_prd_info"> <!-- 시사회 정보 -->
                 <div class="prevInfo" style="margin-top:25px;">
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사회 이름</span><span style="margin-left:15px;">${preview.previewName}</span></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">장소</span><span id="previewPlace"><span style="margin-left:15px;">${preview.previewPlace}</span></span> <i id="mapIcon" class="far fa-map"></i></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">시사 일자</span><span style="margin-left:15px;">${preview.preDate}</span></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">상영 시간 </span><span style="margin-left:15px;">${preview.previewTime}</span></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder">인원수  </span><span style="margin-left:15px;">${preview.winnerCount}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">시사회 이름</span><span class="getPreview" style="margin-left:15px;">${preview.previewName}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">장소</span><span class="getPreview" id="previewPlace"><span style="margin-left:15px;">${preview.previewPlace}</span></span> <i id="mapIcon" class="far fa-map"></i></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">시사 일자</span><span class="getPreview" style="margin-left:15px;">${preview.preDate}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">상영 시간 </span><span class="getPreview" style="margin-left:15px;">${preview.previewTime}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">인원수  </span><span class="getPreview" style="margin-left:15px;">${preview.winnerCount}</span></p>
 					
 					</div>
                 
@@ -775,7 +776,7 @@ function comment(currentPage){
 		<div class="modal-content">
 			<div class="modal-header">
 			<p class="modal-title" id="myModalLabel"><i class="fas fa-pastafarianism yellowTheme"></i> 블라인드 처리</p>
-			<button type="button" class="close  getPreviewAd" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<button type="button" class="close  getPreviewAd" data-dismiss="modal" aria-label="Close"><span  class="getPreview" aria-hidden="true">×</span></button>
 			</div>
 		
 			<div class="modal-body">
@@ -794,8 +795,8 @@ function comment(currentPage){
 					 
 					 <input type="hidden" name="commentNo" value="">
 					 <div class="blindInfo mb-2">
-					 <span id="userId"> </span>
-					 <span id="cmtDate"></span>
+					 <span  class="getPreview" id="userId"> </span>
+					 <span  class="getPreview" id="cmtDate"></span>
 					 </div>
 					<div id="content">
 					</div>			
@@ -996,7 +997,7 @@ function getWinnerList(previewNo){
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="myModalTitle"></h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
+	          <span  class="getPreview" aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body" id="myModalBody">
@@ -1016,7 +1017,7 @@ function getWinnerList(previewNo){
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="myModalTitle"></h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
+	          <span  class="getPreview" aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body" id="winnerArea">

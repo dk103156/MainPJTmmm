@@ -27,7 +27,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-<title>mmm</title>
+	 <link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
 body {
@@ -152,7 +153,7 @@ p.mypages {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 $(function(){
-
+	
 	function getParam(key) {
 	    var params = location.search.substr(location.search.indexOf("?") + 1);
 	    var value = "";
@@ -244,8 +245,23 @@ $(function(){
 	}else if(condition==12){
 		$("#plusPage").load("/purchase/getPurchaseList?purchaseStatus=0&alarm=1");
 
+	}else if(condition==21){ //비회원 예매 페이지 
+		$("#plusPage").load("/ticketing/getTicketingList?alarm=0");
+		
+		$("#lnb").css("display","none");
+		$("body > div.container > div > div.col-md-3").remove()
+		$("#plusPage").removeClass('col-md-9').addClass('col-md-12');
+
+	}else if(condition==22){ //비회원 예매 취소시 페이지
+		$("#plusPage").load("/ticketing/getTicketingList?alarm=1");
+		$('#cancelToast').toast('show');
+
+		$("#lnb").css("display","none");
+		$("body > div.container > div > div.col-md-3").remove()
+		$("#plusPage").removeClass('col-md-9').addClass('col-md-12'); 
+
 	}else{
-		$("#MypageHome").trigger("click");
+		//$("#MypageHome").trigger("click");
 		$('.dropdown-toggle').dropdown('toggle')
 		$('.dropdown-toggle').dropdown('hide')
 		$($("#lnb > a")[condition-1]).trigger("click");
@@ -285,6 +301,7 @@ $(function(){
 							<a href="#"	title="나의 이벤트 응모내역">나의 이벤트 응모내역</a>
 							<a href="#"	title="나의 문의내역">나의 문의내역</a>
 							<a href="#" title="회원정보수정">회원정보수정</a>
+						
 							
 						
 					</nav>

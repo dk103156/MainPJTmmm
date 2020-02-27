@@ -65,7 +65,7 @@ public class TicketingController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;	
 	
-	
+
 	@RequestMapping(value="/addTicketing", method=RequestMethod.GET)
 	public String addTicketing(Model model, @ModelAttribute("movieName") String movieName) throws Exception {
 		
@@ -96,7 +96,7 @@ public class TicketingController {
 		
 		return "forward:/ticketing/addTicketing.jsp";
 	}
-	
+
 	@RequestMapping(value="/addCompareTicketing", method=RequestMethod.GET)
 	public String addCompareTicketing(Model model) throws Exception {
 		
@@ -126,8 +126,8 @@ public class TicketingController {
 		
 		return "forward:/ticketing/addCompareTicketing.jsp";
 	}
-	@CheckAuth(role="user,admin")
-	@RequestMapping(value="/addSeatSelect", method=RequestMethod.POST)
+	@CheckAuth(role="user,admin,unUser")
+	@RequestMapping(value="/addSeatSelect")
 	public String addSeatSelect(@RequestParam Map<String, Object> map, Model model) throws Exception {
 		System.out.println(map);
 	

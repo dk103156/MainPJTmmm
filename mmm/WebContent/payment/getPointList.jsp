@@ -12,6 +12,8 @@
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- 	jQuery...  -->
@@ -34,6 +36,20 @@
     <link rel="stylesheet" href="/resources/css/payment.css?afr">
     
 <title>Insert title here</title>
+
+<style>
+	.page-item.active .page-link {
+	    z-index: 3;
+	    color: #212529;
+	    background-color: #fee50e;
+	    border-color: #fee50e;
+	}
+	
+	.page-link {
+		color: #333;
+	}
+
+</style>
 </head>
 <body>
 
@@ -97,7 +113,7 @@
 		
 <!-- 		Pagination -->
 		<nav aria-label="Page navigation example">
-		  <ul class="pagination pagination-sm justify-content-center">
+		  <ul class="pagination pagination-m justify-content-center">
 		  
 <!-- 		  previos -->
 		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">

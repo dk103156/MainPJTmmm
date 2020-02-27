@@ -268,7 +268,7 @@ public class UserController {
 		session.setAttribute("user", user);
 		
 	
-		return "redirect:/main/main";
+		return "redirect:/?alarm=0";
 	}
 	
 	@RequestMapping(value = "login" , method=RequestMethod.GET)
@@ -322,7 +322,16 @@ public class UserController {
 					if (redirectUrl != null) {
 						session.setAttribute("user", dbUser);
 		                session.removeAttribute("prevPage");
-		                return "redirect:"+redirectUrl[1];
+		                if(redirectUrl[1].equals("/ticketing/addSeatSelect")) {
+		                	return "redirect:/ticketing/addTicketing";
+		                }else if(redirectUrl[1].equals("/")) {
+		                	return "redirect:"+redirectUrl[1]+"?alarm=0";
+		                }else if(redirectUrl[1].equals("/?alarm=1")){
+		                	return "redirect:/?alarm=0";
+		                }else {
+		                	return "redirect:"+redirectUrl[1];
+		                }
+		                
 		            }
 				}
 				
@@ -336,7 +345,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
-		return "redirect:/main/main";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "unUserLogin" , method=RequestMethod.GET)
@@ -374,10 +383,11 @@ public class UserController {
 		if(user.getPassword().equals(dbUser.getPassword()) && dbUser.getRole().trim() != "unUser") {
 			session.setAttribute("user", dbUser);	
 			System.out.println("!!!!!!"+((User)session.getAttribute("user")).toString());
+			
 		}else {//로그인 실패시 
 			return "forward:/user/unUserLogin.jsp?status=failed";
 		}
-		return "forward:/mypage/mypage?condition=1";
+		return "forward:/mypage/mypage?condition=21";
 	}
 	
 	@RequestMapping(value ="logout", method=RequestMethod.GET)
@@ -387,7 +397,7 @@ public class UserController {
 		
 		session.invalidate();
 		
-		return "redirect:/main/main";
+		return "redirect:/?alarm=1";
 	}
 	
 	@RequestMapping(value = "findPw" , method=RequestMethod.POST)
@@ -579,7 +589,7 @@ public class UserController {
 			model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			return "forward:/user/addUser.jsp";	
 		}else{
-			return "redirect:/main/main";
+			return "redirect:/";
 		}
 		
 	}
@@ -598,7 +608,7 @@ public class UserController {
 			model.addAttribute("getTheaterList",dateTimeService.getTheaterList(new Search()));
 			return "forward:/user/addUser.jsp";
 		}else{
-			return "redirect:/main/main";
+			return "redirect:/";
 		}
 		
 	}

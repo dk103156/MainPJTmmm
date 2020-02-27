@@ -71,8 +71,8 @@ public class MypageController {
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
 	
-	@CheckAuth(role="user,admin")
-	@RequestMapping(value ="mypage", method = RequestMethod.GET)
+	@CheckAuth(role="user,admin,unUser")
+	@RequestMapping(value ="mypage")
 	public String mypage(@ModelAttribute("condition") String condition, Model model) throws Exception{
 		
 		System.out.println("/mypage/mypage : GET ");

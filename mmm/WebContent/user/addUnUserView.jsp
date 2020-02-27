@@ -7,6 +7,8 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="UTF-8">
+<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+<title>mmm</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -64,6 +66,9 @@ h3.tit {
     line-height: 1.1;
 } 
 
+#confirmNum2 {
+	font-size : 14px;
+}
 </style>
 
 <title>mmm</title>
@@ -71,7 +76,11 @@ h3.tit {
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 $(function(){
+	$("#btn1 > span").on("click",function(){
+		self.location ="/";
+	})
 	
+	$("#loginModal").modal("show");
 	$('#unUserModal').modal ({ keyboard: false, backdrop: 'static' });
 	
 	$("#unUserModal").modal("show");
@@ -271,7 +280,7 @@ $(function(){
 </script>
 <body>
 
-<!-- 	<!-- ToolBar Start /////////////////////////////////////--> -->
+<!-- 	<!-- ToolBar Start /////////////////////////////////////-->
 <%-- 		<jsp:include page="/layout/header.jsp" /> --%>
 <!--    	ToolBar End ///////////////////////////////////// -->
    	

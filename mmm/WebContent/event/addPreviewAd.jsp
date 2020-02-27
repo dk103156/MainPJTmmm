@@ -6,8 +6,8 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
-<title>MMM</title> 
-<meta charset="utf-8">
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- bootstrap 4 CDN -->

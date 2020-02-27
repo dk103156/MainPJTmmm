@@ -368,7 +368,10 @@ public class PaymentController {
 			System.out.println("===========> 예매, 예매+구매 취소");
 			payment = paymentService.getPaymentbyTicketingNo(Integer.parseInt(ticketingNo));
 			paymentService.cancelPayment(payment);
-			
+			User user =(User)session.getAttribute("user");
+			if(user.getRole().equals("unUser")) {
+				return "redirect:/mypage/mypage?condition=22";
+			}
 			return "redirect:/mypage/mypage?condition=11";
 		}else if (purchaseNostr != null) {
 			System.out.println("==========> 구매 취소");

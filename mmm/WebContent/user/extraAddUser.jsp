@@ -7,6 +7,8 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="UTF-8">
+<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+<title>mmm</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -26,7 +28,6 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e195c747986bcc9e0da58dd2ded5409c"></script>
 
 
-<title>mmm</title>
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
   body > div.container{

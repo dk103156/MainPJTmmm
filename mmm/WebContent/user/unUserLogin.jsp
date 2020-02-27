@@ -27,6 +27,9 @@
 <script type="text/javascript">
 
 $(function(){
+	$("#loginModal > div > div > div.modal-header > button").on("click",function(){
+		self.location ="/";
+	})	
 	
 	$("#loginModal").modal("show");
 	

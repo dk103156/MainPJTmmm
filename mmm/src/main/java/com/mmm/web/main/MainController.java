@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,8 +46,8 @@ public class MainController {
 	int pageUnit;	
 	
 	@RequestMapping(value="/", method=RequestMethod.GET) 
-	public String mainPage() throws Exception {
-		
+	public String mainPage(@ModelAttribute("alarm") String alarm, Model model) throws Exception {
+		model.addAttribute("alarm",alarm);
 		
 		return "forward:/main/main.jsp";
 	}

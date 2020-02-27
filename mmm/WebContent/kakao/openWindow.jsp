@@ -3,9 +3,10 @@
 <html lang="ko">
 
 <head>
-<meta charset="EUC-KR">
+<meta charset="utf-8">
 
-<title>네이버 로그인 요청화면</title>
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

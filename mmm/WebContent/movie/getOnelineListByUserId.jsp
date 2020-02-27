@@ -34,6 +34,20 @@
     
 <title>Insert title here</title>
 </head>
+
+<style>
+	.page-item.active .page-link {
+	    z-index: 3;
+	    color: #212529;
+	    background-color: #fee50e;
+	    border-color: #fee50e;
+	}
+	
+	.page-link {
+		color: #333;
+	}
+
+</style>
 <body>
 
 <div class="container" style="margin-top : 47px;">
@@ -80,7 +94,7 @@
 		
 <!-- 		Pagination -->
 		<nav aria-label="Page navigation example">
-		  <ul class="pagination pagination-sm justify-content-center">
+		  <ul class="pagination pagination-m justify-content-center">
 		  
 <!-- 		  previos -->
 		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">

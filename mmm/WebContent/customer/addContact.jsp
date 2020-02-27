@@ -20,7 +20,9 @@
 	
 <script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 	
-		
+	
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>		
 <script type="text/javascript">
 	
 $(document).ready(function() {

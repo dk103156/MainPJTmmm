@@ -5,7 +5,8 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
-<title>addPreview</title> 
+	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>mmm</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js" ></script>	
 	
 </head> 
