@@ -737,9 +737,8 @@ function comment(currentPage){
                 	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 장소 : </span><span class="getPreview" id="previewPlace"><span >${preview.previewPlace}</span></span> <i id="mapIcon" class="far fa-map"></i></p>
                 	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 시사 일자 : </span><span class="getPreview">${preview.preDate}</span></p>
                 	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 상영 시간 : </span><span class="getPreview">${preview.previewTime}</span></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 인원수 : </span><span class="getPreview">${preview.winnerCount}</span></p>
-					
-					</div>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 인원수 : </span><span class="getPreview">${preview.winnerCount} 명</span></p>
+				</div>
                 
                 <div class="trailer" style="margin-top:55px;">
                 <iframe id="player" class="embed-responsive-item" width="550" height="300"

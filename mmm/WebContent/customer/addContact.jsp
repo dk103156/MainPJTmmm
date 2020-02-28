@@ -160,7 +160,7 @@ $(document).ready(function() {
 	  
 	  
 	  th{
-	  	width:300px;
+	  	width:0px;
 	  
 	  }
 
