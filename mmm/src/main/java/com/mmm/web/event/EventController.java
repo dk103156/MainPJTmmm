@@ -453,7 +453,7 @@ public class EventController {
 	}
 	
 	
-
+	@CheckAuth(role="user,admin")
 	@RequestMapping(value="getPreview", method=RequestMethod.GET)
 	public String getPreview(@RequestParam int previewNo, Model model, HttpSession session) throws Exception{
 		

@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8">
 	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
-	<title>mmm</title>itle>
+	<title>mmm</title>
  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

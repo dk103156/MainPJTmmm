@@ -75,7 +75,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			}
 			
 			if(!chkKey) { // 체크 키의 값이 거짓이면(즉 어노테이션의 롤과 세션의 롤이 일치하는게 없다면) 접속 불가
-				response.sendRedirect(request.getContextPath() + "/main/main?status=failed");
+				response.sendRedirect(request.getContextPath() + "/?status=failed");
 				return false;
 			}
 			

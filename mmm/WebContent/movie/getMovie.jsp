@@ -331,7 +331,7 @@
 					        	<p class="blog-post-meta">${movie.movieTitleEng }</p>
 					        	
 				        	</div>
-				        	
+				        	<c:if test="${user.role eq 'user' || user.role eq 'admin' }">
 <!-- 				        	상영예정작은 평점을 내릴 수 없도록.. 분기문 처리  -->
 				        	<c:if test="${movie.onBoxOfficeFlag == 1}">
 					        	<div class="col-md text-center my-auto">
@@ -351,13 +351,15 @@
 <%-- 						        		<span id="starRating"> ${movie.starRating}</span> --%>
 						        		<input id="starUserFlag" type="hidden" value="${movie.starUserFlag}">
 						        	   <input id="starByUser" type="hidden" value="${movie.starByUser}" placeholder="평점 0~10">
-						        	
+						    </c:if>    	
 						        	<!-- Button trigger modal -->
 						        	<div class="mt-1">
-						        	    <button type="button" class="btn btn-sm btn-yellow-cs" name="rate">평점 등록</button>
-										<button type="button" class="btn btn-sm btn-yellow-cs" data-toggle="modal" data-target="#modal-addOneline">
-										  한줄평 작성
-										</button>
+						        		<c:if test="${user.role eq 'user' || user.role eq 'admin' }">
+							        	    <button type="button" class="btn btn-sm btn-yellow-cs" name="rate">평점 등록</button>
+											<button type="button" class="btn btn-sm btn-yellow-cs" data-toggle="modal" data-target="#modal-addOneline">
+											  한줄평 작성
+											</button>
+										</c:if>
 						        	</div>
 						        	
 						        	
@@ -385,8 +387,9 @@
 	<!-- 			                  	좋아요 버튼 --------------------------------------------------------------->
 	<!-- 								wishUserFlag 가 1인 경우==> 좋아요가 눌린 상태 -->
 	<!-- 								wishUserFlag 가 0인 경우==> 좋아요가 눌리지 않은 상태 -->
-									
-				                  	<button type="button" name="wish-btn" class="btn btn-outline-secondary">
+									<c:if test="${user.role eq 'user' || user.role eq 'admin' }">
+				                  		<button type="button" name="wish-btn" class="btn btn-outline-secondary">
+				                  	
 				                 	 <c:if test="${movie.wishUserFlag ne null}">
 					                 	 <c:choose>
 					                 	 	<c:when test="${movie.wishUserFlag eq 1}">
@@ -395,7 +398,8 @@
 					                 	 	<c:otherwise><i class="far fa-heart text-muted"></i> ${movie.wishCnt}</c:otherwise>
 					                 	 </c:choose>
 				                 	 </c:if>
-				                  </button>
+				                  		</button>
+				                  </c:if>
 								</div>
 							</div>
 				        </div>
@@ -425,12 +429,14 @@
 					          
 					<!--         list size만큼 for문으로 Point 내역 출력  -->
 						   <c:if test="${empty resultCmtMap.list}">
-						   	<div class="border-bottom text-center my-auto" style="height: 100px;">
-						   		<p>처음으로 한줄평을 남겨보세요.</p>
-						   		<button type="button" class="btn btn-sm btn-yellow-cs" data-toggle="modal" data-target="#modal-addOneline">
-										  한줄평 작성
-								</button>
-						   	</div>
+						   <c:if test="${user.role eq 'user' || user.role eq 'admin' }">
+							   	<div class="border-bottom text-center my-auto" style="height: 100px;">
+							   		<p>처음으로 한줄평을 남겨보세요.</p>
+							   		<button type="button" class="btn btn-sm btn-yellow-cs" data-toggle="modal" data-target="#modal-addOneline">
+											  한줄평 작성
+									</button>
+							   	</div>
+						   	</c:if>
 						   </c:if>
 						   <c:if test="${! empty resultCmtMap.list}">
 					        <c:forEach var="oneline" items="${resultCmtMap.list}">
