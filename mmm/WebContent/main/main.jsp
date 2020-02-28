@@ -166,6 +166,10 @@
 			background-color : #fee50e;
 			color: #333;
 	}
+	
+	.carousel-indicators > li.active{	
+		background-color: #fee50e;	
+	}
 </style>
 </head>
 <body>
@@ -185,14 +189,14 @@
 		      <img src="../resources/image/mainPage/main_image03.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">
 		        <h5>팝콘을 기다리는 동안 코로나 걸려버린다면?</h5>
-		        <p>MovMovMov의 QuickOrder Service를 이용해보세요. 누구보다 빠르게 팝콘을 입에 넣으실 수 있어요.</p>
+		        <p>MovMovMov의 QuickOrder Service를 이용해보세요. 누구보다 빠르게 팝콘을 입에 넣으실 수 있어요!</p>
 		      </div>
 		    </div>
 		    <div class="carousel-item ">
 		      <img src="../resources/image/mainPage/main_image01.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">
 		        <h5>3사 예매 사이트를 비교하시기 번거롭지 않으신가요?</h5>
-		        <p>mmm에서는 CGV, MOVIEBOX, LOTTE CINEMA 3사의 예매 정보를 한눈에 확인할 수 있어요.</p>
+		        <p>mmm에서는 CGV, 롯데시네마, 메가박스 3사의 예매 정보를 한눈에 확인할 수 있어요!</p>
 		      </div>
 		    </div>
 
@@ -200,7 +204,7 @@
 		      <img src="../resources/image/mainPage/main_image04.png" class="d-block w-100" alt="..." width=1048 height=518 >
 		      <div class="carousel-caption d-none d-md-block">
 		        <h5>당신을 위한 맞춤형 영화 추천</h5>
-		        <p>당신의 취향에 맞는 작품을 선별하여 추천해드려요 :).</p>
+		        <p>당신의 취향에 맞는 작품을 선별하여 추천해드려요 :)</p>
 		      </div>
 		    </div>
 		  </div>

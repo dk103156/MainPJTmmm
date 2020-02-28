@@ -122,7 +122,7 @@
 </head>
 <body>
 <jsp:include page="/layout/header.jsp"/>
-<jsp:include page="/customer/CustomerToolBar.jsp" />
+<jsp:include page="/customer/customerToolBar.jsp" />
 <%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
 <div class="container">
 
