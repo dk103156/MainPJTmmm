@@ -66,7 +66,7 @@
  	bottom : 12%;
  	background-color : #333;
 	transition-property: right;
-	transition-duration: 1s; 	
+	transition-duration: 1s; 
  }
  
  aside div div.row {
@@ -79,10 +79,13 @@
 	
  }
  
+
+ 
  span.aside {
  	color : #fff;
  	font-size: 13px;
  	cursor : pointer;
+ 	text-decoration : none;
  } 
  
 </style>
@@ -93,25 +96,25 @@
 	<div class="container-fluid px-0">
 		<div class="row px-0 mx-0">
 			<div class="aside col-12 px-0 mb-3 text-center">
-				<a href="/mypage/mypage?condition=0">
+				<a href="/mypage/mypage?condition=99" style="text-decoration: none;">
 				<img class="aside" src="../resources/image/mainPage/aside/myPage_pd.png" width=60 >
 				<p><span class="aside">마이 페이지</span></p>
 				</a>
 			</div>
 			<div class="aside col-12 px-0 mb-3 text-center">
-				<a href="/ticketing/addTicketing">
+				<a href="/ticketing/addTicketing" style="text-decoration: none;">
 					<img class="aside"  src="../resources/image/mainPage/aside/addTicketing_pd.png" width=60 >
 					<p><span class="aside">예매하기</span></p>
 				</a>
 			</div>
 			<div class="aside col-12 px-0 mb-3 text-center">
-				<a href="/mypage/mypage?condition=1">
+				<a href="/mypage/mypage?condition=1" style="text-decoration: none;">
 					<img class="aside"  src="../resources/image/mainPage/aside/getTicketingList_pd.png" width=60 >
 					<p><span class="aside">예매내역</span></p>
 				</a>
 			</div>		
 			<div class="aside col-12 px-0 mb-3 text-center">
-				<a href="/product/getVoucherList">
+				<a href="/product/getVoucherList" style="text-decoration: none;">
 					<img class="aside"  src="../resources/image/mainPage/aside/product_pd.png" width=60 >
 					<p><span class="aside">상품권구매</span></p>
 				</a>

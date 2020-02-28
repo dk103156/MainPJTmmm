@@ -46,7 +46,7 @@ public class MainController {
 	int pageUnit;	
 	
 	@RequestMapping(value="/", method=RequestMethod.GET) 
-	public String mainPage(@ModelAttribute("alarm") String alarm, Model model) throws Exception {
+	public String mainPage(@ModelAttribute("alarm") String alarm,  Model model) throws Exception {
 		model.addAttribute("alarm",alarm);
 		
 		return "forward:/main/main.jsp";

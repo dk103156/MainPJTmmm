@@ -100,7 +100,7 @@
 // 	해당 회원이 사용할 수 있는 voucher List
 	if (${! empty voucherJSONArray}) {
 		var voucherList = JSON.parse('${voucherJSONArray}');
-		
+
 		console.log(" voucherList : "+voucherList)
 		console.log(" voucherListddd : "+voucherList[0].invenPrice)
 		console.log(" voucherList.length : "+voucherList.length);
@@ -192,7 +192,15 @@
 		})
 	};
 		
-    
+	//천단위 콤마 String으로
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	// 콤마 찍힌 String에서 콤마제거하고 Number로
+	function removeComma(str){
+	     return parseInt(str.replace(/,/g,""));
+	}
+	
 	$(function(){
 		
 // 		회원 정보 세션에서 가져와서 넣어주자
@@ -239,7 +247,7 @@
 		if (${!empty ticketing.ticketingPrice}) {
 			ticketingPrice = "${ticketing.ticketingPrice}";
 // 			console.log('inner ? : ' + ticketingPrice);
-			$("span[name='barTicketingPrice']").text(ticketingPrice);	
+			$("span[name='barTicketingPrice']").text(numberWithCommas(ticketingPrice));	
 		}
 // 		console.log('outer ? : ' + ticketingPrice);
 		
@@ -253,7 +261,8 @@
 // 		1-2. 구매 가격
 		if (${!empty purchase.purchasePrice}) {
 			purchasePrice = "${purchase.purchasePrice}";
-			$('span[name="barPurchasePrice"]').text(purchasePrice);
+
+			$('span[name="barPurchasePrice"]').text(numberWithCommas(purchasePrice));
 		}
 		if (${empty purchase.purchasePrice}) {
 			purchasePrice = 0;
@@ -269,7 +278,7 @@
 		console.log("   totalPrice  : "+ totalPrice);
 		
 // 		name으로 화면 세팅
-		$('span[name="barTotalPrice"]').text(totalPrice);
+		$('span[name="barTotalPrice"]').text( numberWithCommas(totalPrice) );
 		
 		
 		
@@ -284,8 +293,8 @@
 		
 // 		하단바 (총할인금액, 최종결제금액) 초기 세팅
 		$("#barPartPoint").text(0);
-		$('#barTotalDiscount').text(totalDiscount);
-		$('#barCash').text(cash);
+		$('#barTotalDiscount').text(numberWithCommas(totalDiscount));
+		$('#barCash').text(numberWithCommas(cash));
 		
 
 		$("#partPoint").on("keyup",  function(){
@@ -297,7 +306,7 @@
 				Swal.fire({
 					text: '숫자만 입력하셔야 해요.',
 					icon: 'error',
-					confirmButtonText: "confirm"
+					confirmButtonText: "확인"
 				});
 				$(this).val('');
 			}
@@ -315,7 +324,7 @@
 				Swal.fire({
 					text: '가지고 계신 포인트보다 많은 숫자를 입력하셨어요.',
 					icon: 'error',
-					confirmButtonText: "confirm"
+					confirmButtonText: "확인"
 				});
 				return;
 			}
@@ -329,11 +338,11 @@
 				Swal.fire({
 					text: '총 결제금액보다 더 큰 포인트를 사용하실 수 없어요.',
 					icon: 'error',
-					confirmButtonText: "confirm"
+					confirmButtonText: "확인"
 				});
 			}
 			partPoint = $(this).val();
-			$("#barPartPoint").text($(this).val());
+			$("#barPartPoint").text(numberWithCommas($(this).val()));
 			
 			console.log("partPoint  : " + partPoint)
 			
@@ -346,14 +355,14 @@
 // 				partPoint += Number($(this).val());
 // 			}
 			totalDiscount = (voucherPrice*1 + partPoint*1)*1;
-			$('#barTotalDiscount').text(totalDiscount)
+			$('#barTotalDiscount').text(numberWithCommas(totalDiscount))
 			
 			console.log("totalDiscount  : "+ totalDiscount);
 			
 	// 		3. 최종결제금액
 			cash = totalPrice - totalDiscount;
 			console.log(" cash :  " +cash);
-			$('#barCash').text(cash);
+			$('#barCash').text(numberWithCommas(cash));
 		});
 		
 		
@@ -399,7 +408,7 @@
 				Swal.fire({
 					text: '상품권은 최대 3장까지 사용이 가능해요.',
 					icon: 'error',
-					confirmButtonText: 'confirm'
+					confirmButtonText: '확인'
 				})
 			}
 		});
@@ -437,7 +446,7 @@
 				Swal.fire({
 					text: '총 결제금액보다 더 큰 상품권을 사용하실 수 없어요.',
 					icon: 'error',
-					confirmButtonText: "confirm"
+					confirmButtonText: "확인"
 				});
 				
 				voucherPrice = 0;
@@ -448,7 +457,7 @@
 			
 			
 			
-			$('#barVoucherPrice').text(voucherPrice);
+			$('#barVoucherPrice').text(numberWithCommas(voucherPrice));
 			
 			console.log('voucherPrice  : ' + Number(voucherPrice));
 			console.log("partPoint  : " + partPoint);
@@ -456,7 +465,7 @@
 
 			
 			totalDiscount = (voucherPrice*1 + partPoint*1)*1;
-			$('#barTotalDiscount').text(totalDiscount)
+			$('#barTotalDiscount').text(numberWithCommas(totalDiscount))
 			
 			
 			// 		3. 최종결제금액
@@ -620,9 +629,13 @@
 						      <tr >
 						        <th scope="col"><img src="/resources/image/${prod.prodImage}" width="70px" height="70px" /></th>
 						        <td scope="col" class="align-middle">${prod.prodName}</td>
-						        <td scope="col"  class="text-right align-middle" >${prod.prodPrice}원</td>
+						        <td scope="col"  class="text-right align-middle" >
+						        	<fmt:formatNumber value="${prod.prodPrice}" type="currency" currencySymbol=""/>원
+						        </td>
 						        <td scope="col" class="align-middle">${prod.quantity}개</td>
-						        <td scope="col" class="text-right font-weight-bold align-middle">${prod.quantity * prod.prodPrice}원</td>
+						        <td scope="col" class="text-right font-weight-bold align-middle">
+						        	<fmt:formatNumber value="${prod.quantity * prod.prodPrice}" type="currency" currencySymbol=""/>원	
+						        </td>
 						      </tr>					  	
 					       </c:forEach> 
 				       

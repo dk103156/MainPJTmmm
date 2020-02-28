@@ -223,14 +223,25 @@
 	</div><!-- end of container --> 		
 
 	<script language="JavaScript">
+	
+	//천단위 콤마 String으로
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	// 콤마 찍힌 String에서 콤마제거하고 Number로
+	function removeComma(str){
+	     return parseInt(str.replace(/,/g,""));
+	}
+	
 	$(function(){
 		
 		// 갯수 변경 시 가격 변경
 		$("#quantity").on('change',function(){
 			
 			var price =parseInt('${product.prodPrice}')
+
 			var quantity= parseInt( $("#quantity").val() );
-			$("#price").val( price * quantity );
+			$("#price").val( numberWithCommas( price * quantity ) );
 		});
 		
 		$("#addCart").on("click",function(){
@@ -240,6 +251,10 @@
 		
 		//바로 구매하기 클릭
 		$("#addPurchase").on('click',function(){
+			var StringPrice = $("input#price").val();
+			var NumberPrice = removeComma(StringPrice);
+			$("input#price").val(NumberPrice);
+			
 			$("form").attr("method","post").attr("action","/payment/preparePayment").submit();
 		});
 		

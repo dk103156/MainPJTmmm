@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mmm.common.CheckAuth;
 import com.mmm.common.Page;
 import com.mmm.common.Search;
 import com.mmm.service.domain.Inventory;
@@ -76,7 +77,7 @@ public class PaymentController {
 	//한 화면에 보이는 페이지 갯수
 	@Value("#{commonProperties['pageSize']}")
 	int pageSize;
-	
+
 	@RequestMapping(value = "/preparePayment", method = RequestMethod.POST)
 	public String preparePayment(	@ModelAttribute Ticketing ticketing,
 									@ModelAttribute Purchase purchase,
