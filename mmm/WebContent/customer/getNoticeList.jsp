@@ -154,7 +154,7 @@
  <div class="pagination row">
 			  		<div class="col-4"></div>
 			  		<div class="col-4">
-					  <ul class="pagination">
+					  <ul class="pagination ">
 		   				 <!--  <<== 좌측 nav -->
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">
