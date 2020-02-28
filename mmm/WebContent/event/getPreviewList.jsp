@@ -52,13 +52,14 @@
 			
 			});
 			
-			
-			$('ul li').on('click',function(){
+/*			
+ 			$('ul li').on('click',function(){
 				var previewNo = $(this).parent().next().val();
 				//alert(previewNo)
 				self.location = "/event/getPreview?previewNo="+previewNo;
 				
-			});
+			}); 
+*/
 			
 			$("div[name='thumbImage']").on("click", function(){
 				

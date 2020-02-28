@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    		Swal.fire({
 					text: '오늘 날짜로만 출석체크가 가능합니다.',
 					icon: 'error',
-					confirmButtonText: "confirm"
+					confirmButtonText: "확인"
 				});
 	       }else if(check == today){
 	    	   //right date
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    		Swal.fire({
 					text: '오늘 날짜로만 출석체크가 가능합니다.',
 					icon: 'error',
-					confirmButtonText: "confirm"
+					confirmButtonText: "확인"
 				});
 	       }
 	    },
@@ -155,7 +155,7 @@ function addAttendance(){
 			Swal.fire({
 				text: '출석체크 완료! 10P 적립',
 				icon: 'success',
-				confirmButtonText: "confirm"
+				confirmButtonText: "확인"
 			}).then((confirm)=>{
 				self.location="/event/addAttendance";
 			})
@@ -166,7 +166,7 @@ function addAttendance(){
 			Swal.fire({
 				text: '이미 하셨습니다.',
 				icon: 'error',
-				confirmButtonText: "confirm"
+				confirmButtonText: "확인"
 			});
 		}
 	
@@ -215,6 +215,50 @@ $(function(){
 </script>
 
 <style type="text/css">
+.fc-content{
+	text-align: center;
+}
+
+.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-content, .fc-unthemed .fc-popover, .fc-unthemed .fc-list-view, .fc-unthemed .fc-list-heading td {
+    border-color: #a69b9b82;
+}
+
+#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr{
+    background-color: #dee2e6;
+}
+
+.fc-event-container > a{
+	background-color: #ffc107 !important;
+}
+
+.fc-unthemed td.fc-today{
+    background: #f1ebd0;
+}
+
+#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sat{
+	background-color: #0584ff;
+}
+#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sun{
+	background-color: #ff0400c7;
+}
+
+#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sat > span{
+	color: white;
+}
+#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sun > span{
+	color: white;
+}
+
+#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div > div.fc-content-skeleton > table > thead > tr > td.fc-day-top.fc-sat > span {
+	color: #0584ff;
+}
+#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div > div.fc-content-skeleton > table > thead > tr > td.fc-day-top.fc-sun > span {
+	color: #ff0400c7;
+}
+
+.fc-day-number{
+	font-weight: bold;
+}
 
 
 	 #calendar{
@@ -245,7 +289,7 @@ $(function(){
 	<br>
 		<div class="page-header" style="margin-left:180px; margin-top:50px;">
 	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 매일매일 출첵이벤트</span>
-<p class="lbtxt">뭅뭅뭅 출첵하고 10포인트 받자 </p>
+<p class="lbtxt">뭅뭅뭅 ! 출첵하고 10포인트 받자 ! </p>
 	    </div>
 		<br>	
 <!-- <h4><i class="fas fa-calendar-check"></i>&nbsp;매일매일 출첵 이벤트</h4> -->
