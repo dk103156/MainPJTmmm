@@ -272,8 +272,8 @@
 				      </div>
 				      <!-- end of slide_box -->
 				      <div class="slide_btn_box">
-				        <button type="button" class="slide_btn_prev">Prev</button>
-				        <button type="button" class="slide_btn_next">Next</button>
+				        <button type="button" class="slide_btn_prev">≪</button>
+				        <button type="button" class="slide_btn_next">≫</button>
 				      </div>
 				      <!-- end of slide_btn_box -->
 				      <ul class="slide_pagination text-center"></ul>

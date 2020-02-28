@@ -94,10 +94,7 @@ body {
 	padding-right : 7px;
 	padding-left : 7px;
 }
-.yellow-blank-box{
-	height : 15px;
-	background-color:  #f5d920;
-}
+
 
 </style>
 
@@ -152,7 +149,7 @@ body {
 <!-- 	    	</div> -->
 <!-- 	    </div> -->
 	</div>
-	<div class="yellow-blank-box"></div>
+
 </footer>
     
 </body>

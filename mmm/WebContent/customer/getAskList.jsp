@@ -121,6 +121,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="/layout/header.jsp"/>
 <jsp:include page="/customer/CustomerToolBar.jsp" />
 <%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
 <div class="container">
@@ -200,7 +201,7 @@
  <div class="pagination row">
 			  		<div class="col-4"></div>
 			  		<div class="col-4">
-					  <ul class="pagination">
+					  <ul class="pagination justify-content-center">
 		   				 <!--  <<== 좌측 nav -->
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">

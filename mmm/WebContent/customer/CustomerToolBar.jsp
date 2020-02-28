@@ -31,9 +31,13 @@
 	
 <style>
 	#prodHeader{
-    background-color: white;
-    height: 3.0rem;
-    font-family: 'Noto Sans KR', sans-serif;
+	    background-color: white;
+	    height: 3.0rem;
+	    font-family: 'Noto Sans KR', sans-serif;
+	}
+	
+	#manageContact > strong, #addNotice > strong, #addAsk > strong{
+		cursor : pointer;
 	}
 </style>
 
@@ -71,7 +75,7 @@
 	</head>
 
 <body>
-	<jsp:include page="/layout/header.jsp"/>
+	
 		<div class="row mx-0" id="prodHeader">
 				<div class="col-4">
 				</div>
@@ -92,7 +96,7 @@
 				</div>
 
 				<div class="col-1" style="text-align:center;">
-					<h6 id="addAsk"  style="color: #242424; margin: 15px 0px;"><strong>자찾질등록</strong></h6>
+					<h6 id="addAsk"  style="color: #242424; margin: 15px 0px;"><strong>자주 찾는 질문등록</strong></h6>
 				</div>
 				
 				
