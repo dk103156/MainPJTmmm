@@ -518,7 +518,7 @@
 	    
 	      <div class="col-10 div-center-cs" >
 	   		<div>
-	   		  <h3>결제하기</h3>
+	   		  <h3><strong>결제하기</strong></h3>
 	   		  <div class="row border-bottom mb-2"></div>
 	   		    <p>결제하시기 전에 예매 및 구매 내용을 확인해주세요.</p>
 	   		</div>
@@ -578,7 +578,7 @@
 							    </tr>
 							    <tr>
 							      <th class="head-cs">관객 정보</th>
-							      <td scope="col">${ticketing.headCount} <br> ${ticketing.audienceType}</td>
+							      <td scope="col">${ticketing.headCount} 명<br> ${ticketing.audienceType}</td>
 							    </tr>
 							    <tr>
 							      <th class="head-cs">좌석 정보</th>

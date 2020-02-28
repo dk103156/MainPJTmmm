@@ -9,7 +9,8 @@
     
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
  
- 
+    <!-- font Awesome -->
+  <script src="https://kit.fontawesome.com/b435a047df.js" crossorigin="anonymous"></script>
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -403,6 +404,9 @@
   		<c:if test="${alarm eq '1'}">
            <strong>로그아웃이 완료되었습니다.</strong>
         </c:if>   
+        <c:if test="${status=='failed'}">
+        	<strong><span style="color:red;">비회원</span>으로는 접근불가합니다.</strong>
+        </c:if>
   </div>
 </div>
 <!-- 슬라이더 -->
@@ -570,17 +574,17 @@
   async function getMovieInfo(){
 	   var result =await ajaxPromise("/movie/json/getBoxOfficeList",{ } );
 	  
-	   console.log(result);
-	   console.log(result[1]);
-	   console.log(result[1].movieTitle);
+	   //console.log(result);
+	   //console.log(result[1]);
+	   //console.log(result[1].movieTitle);
 	   
 	   var movieNo = result[1].movieNo;
-	   console.log(movieNo);
+	   //console.log(movieNo);
 	   
 	   ajaxPromise("/movie/json/getMovie" , {movieNo : movieNo}
 		).then(function(movie){
-			console.log(movie)						
-			console.log(movie.summary)		
+			//console.log(movie)						
+			//console.log(movie.summary)		
 			
 //			포스터 갈아끼기
 			$("img[name='poster']").attr('src',movie.poster );
@@ -616,14 +620,14 @@
 //   포스터 클릭 이벤트
   $(document).on("click", "img[name='bottom-poster']", function(){
 	  
-	  console.log(this);
+	  //console.log(this);
 	  var movieNo = $(this).parent().children("input[name='movieNo']").val();
-	  console.log('--- movieNo:  ' + movieNo);
+	  //console.log('--- movieNo:  ' + movieNo);
 	  
 	  var result = ajaxPromise("/movie/json/getMovie" , {movieNo : movieNo}
 					).then(function(movie){
-						console.log(movie)						
-						console.log(movie.summary)		
+						//console.log(movie)						
+						//console.log(movie.summary)		
 						
 // 						포스터 갈아끼기
 						$("img[name='poster']").attr('src',movie.poster );
@@ -662,6 +666,9 @@
   
   
   $(function(){
+	  <c:if test="${status=='failed'}">
+	  	$('#cancelToast').toast('show')
+	  </c:if>
 	<c:if test="${alarm eq '1' || alarm eq '0'}">
 		$('#cancelToast').toast('show')
 	</c:if>
