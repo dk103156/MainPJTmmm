@@ -75,6 +75,13 @@
 		td{
 			background-color: #f9f9f9;
 		}
+		
+	.page-item.active .page-link {
+	    z-index: 3;
+	    color: #212529 !important;
+	    background-color: #fee50e !important;
+	    border-color: #fee50e !important;
+	}	
 </style>
 
 </head>
