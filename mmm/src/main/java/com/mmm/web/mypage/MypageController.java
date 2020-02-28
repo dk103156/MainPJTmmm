@@ -1,8 +1,6 @@
 package com.mmm.web.mypage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,14 +20,10 @@ import com.mmm.common.Search;
 import com.mmm.service.board.BoardService;
 import com.mmm.service.datetime.DateTimeService;
 import com.mmm.service.domain.Comment;
-import com.mmm.service.domain.DateTime;
-import com.mmm.service.domain.Ticketing;
 import com.mmm.service.domain.User;
 import com.mmm.service.movie.MovieService;
 import com.mmm.service.payment.PaymentService;
-import com.mmm.service.ticketing.TicketingService;
 import com.mmm.service.user.UserService;
-import com.mmm.web.user.UserRestController;
 
 //==>마이페이지 Controller
 @Controller
@@ -46,14 +39,10 @@ public class MypageController {
 	@Autowired
 	private PaymentService paymentService;
 	
-	@Autowired
-	private JavaMailSender mailSender;	
 	
 	@Autowired
 	private DateTimeService dateTimeService;
 	
-	@Autowired
-	private TicketingService ticketingService;
 	
 	@Autowired
 	private MovieService movieService;

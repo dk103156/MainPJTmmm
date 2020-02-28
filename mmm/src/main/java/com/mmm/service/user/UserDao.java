@@ -24,7 +24,7 @@ public interface UserDao {
 	public User getPhone(String phone)throws Exception;
 	
 	//SELECT ONE(ID) getEmail
-		public User getEmail(String email)throws Exception;
+	public User getEmail(String email)throws Exception;
 	
 	//ID Duplication
 	public User getUserIdDupl(String userId)throws Exception;

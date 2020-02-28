@@ -18,7 +18,6 @@ public class User {
 	private String gender;
 	private String phone;
 	private String email;
-	private String addr;
 	private String likeGenre1;
 	private String likeGenre2;
 	private String likeGenre3;
@@ -71,9 +70,6 @@ public class User {
 	}
 	public String getEmail() {
 		return email;
-	}
-	public String getAddr() {
-		return addr;
 	}
 	public String getLikeGenre1() {
 		return likeGenre1;
@@ -156,9 +152,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public void setAddr(String addr) {
-		this.addr = addr;
-	}
 	public void setLikeGenre1(String likeGenre1) {
 		this.likeGenre1 = likeGenre1;
 	}
@@ -213,7 +206,7 @@ public class User {
 	public String toString() {
 		return "User [userNo=" + userNo + ", userId=" + userId + ", userName=" + userName + ", password=" + password
 				+ ", role=" + role + ", profile=" + profile + ", image=" + image + ", birth=" + birth + ", gender="
-				+ gender + ", phone=" + phone + ", email=" + email + ", addr=" + addr + ", likeGenre1=" + likeGenre1
+				+ gender + ", phone=" + phone + ", email=" + email + ", addr=" + ", likeGenre1=" + likeGenre1
 				+ ", likeGenre2=" + likeGenre2 + ", likeGenre3=" + likeGenre3 + ", likeTheater1=" + likeTheater1
 				+ ", likeTheater2=" + likeTheater2 + ", likeTheater3=" + likeTheater3 + ", userDate=" + userDate
 				+ ", userByeDate=" + userByeDate + ", lastLoginDate=" + lastLoginDate + ", updateUserDate="

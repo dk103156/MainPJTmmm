@@ -8,7 +8,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -31,7 +30,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -39,7 +37,6 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +45,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.mmm.common.CheckAuth;
 import com.mmm.common.CryptoUtil;
-import com.mmm.common.JavaUtil;
 import com.mmm.common.Search;
 import com.mmm.service.datetime.DateTimeService;
 import com.mmm.service.domain.User;
@@ -64,9 +60,6 @@ public class UserController {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 	//setter Method 구현 하지않음
-	
-	@Autowired
-	private JavaMailSender mailSender;	
 	
 	@Autowired
 	private DateTimeService dateTimeService;
@@ -530,7 +523,6 @@ public class UserController {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/mypage/mypage.jsp";

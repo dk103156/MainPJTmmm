@@ -49,7 +49,6 @@ public class UserServiceTest {
 			user.setGender("F");
 			user.setPhone("01033334444");
 			user.setEmail("su222@naver.com");
-			user.setAddr("경기도");
 			user.setLikeGenre1("스릴러");
 			user.setLikeGenre2("액션");
 			user.setLikeGenre3("코미디");
