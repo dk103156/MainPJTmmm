@@ -53,16 +53,6 @@
 
 <style type="text/css">
 		
-			@media (min-width: 768px) { 
- 		 	 .container { 
- 		     width: 750px; 
- 		      		  } 
- 		} 
-		
-			@media (min-width: 992px) { 
-		 .container { 
-	     width: 940px; 
-	} 
 		
 	  body {
 		font-family: 'Noto Sans KR', sans-serif;

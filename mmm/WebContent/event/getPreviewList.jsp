@@ -218,7 +218,7 @@
 </head> 
 
 <body>
-<jsp:include page="/event/EventToolBar.jsp" />
+<jsp:include page="/event/eventToolBar.jsp" />
 <%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
 
 <div class="container previewList">

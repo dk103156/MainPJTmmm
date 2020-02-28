@@ -75,8 +75,8 @@ function getCommentList(currentPage) {
 					}else{
 					html += "<li><div class='id' name='userId'>"+ result.list[i].userId+ "</div>";
 					html += "<input type='hidden' name='commentNo' value='"+result.list[i].commentNo+"'>";
-					html += "<div class='date' name='date'>"+result.list[i].commentDate+"</div>";
-					html += "<div class='comment' name='content'>"+result.list[i].commentContent+"</div>";
+					
+					html += "<div class='comment' name='content'>"+result.list[i].commentContent+ "<div class='date' name='date'>"+result.list[i].commentDate+"</div>"+"</div>";
 					
 					if('${user.role}'=='admin'){
 						html += "<a type='button' class='btn_spam' name='btn_spam'>처리</a>";
@@ -597,7 +597,7 @@ function comment(currentPage){
 	 li .date {
 	    font-size: 12px;
 	    color: #bebebe;
-	    position: absolute;
+	    position: 0;
 	    top: 12px;
 	    right: 50px;
 	}
@@ -615,6 +615,11 @@ function comment(currentPage){
 	    text-decoration: underline;
 	    color: #000;
 	}
+	#comment_holder > div > ul > li> a {
+		color: #dc3545;
+	}
+	
+	
 	
 	.cmtPagination {
 	    text-align: center;
@@ -626,7 +631,7 @@ function comment(currentPage){
 	
 	li.blindCmt{
 		height: 82.76px;
-		color: #2F4F4F;
+		color: #dc3545;
 		padding-top:30px;
 	}
 	a:visited {
