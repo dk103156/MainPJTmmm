@@ -148,6 +148,15 @@ p.mypages {
     margin-inline-end: 0px;
 }
 
+a.mypage.active{
+	background-color : #333;
+	color : #fff;
+}
+
+a.mypage.on{
+	background-color : #333;
+	color : #fff;
+}
 
 </style> 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->
@@ -268,6 +277,9 @@ $(function(){
 		
 	}
 	
+	
+	
+	
 });
 </script>
 </head>
@@ -289,18 +301,18 @@ $(function(){
 						<input type="hidden" id="userNo" name="userNo" value="${user.userNo}"> 
 			
 
-							<a href="#" title="예매/예매취소내역">예매/예매 취소 내역</a>
-							<a href="#"	title="구매내역">구매 내역</a>
-							<a href="#"	title="구매취소내역">구매 취소 내역</a>
-			                <a href="#" title="보관함">보관함</a>
-							<a href="#" title="포인트 내역">포인트 내역</a>
-							<a href="#" title="내가 본 영화">내가 본 영화</a>
+							<a class="mypage" href="#" title="예매/예매취소내역">예매/예매 취소 내역</a>
+							<a class="mypage"  href="#"	title="구매내역">구매 내역</a>
+							<a class="mypage"  href="#"	title="구매취소내역">구매 취소 내역</a>
+			                <a class="mypage"  href="#" title="보관함">보관함</a>
+							<a class="mypage"  href="#" title="포인트 내역">포인트 내역</a>
+							<a class="mypage"  href="#" title="내가 본 영화">내가 본 영화</a>
 							<input type="hidden"  id="ticketerPhone" name = "ticketerPhone" value="${user.phone}">
-							<a href="#" title="위시리스트">위시리스트</a>
-							<a href="#" title="한줄평 조회">한줄평 조회</a>
-							<a href="#"	title="나의 이벤트 응모내역">나의 이벤트 응모내역</a>
-							<a href="#"	title="나의 문의내역">나의 문의내역</a>
-							<a href="#" title="회원정보수정">회원정보수정</a>
+							<a class="mypage"  href="#" title="위시리스트">위시리스트</a>
+							<a class="mypage"  href="#" title="한줄평 조회">한줄평 조회</a>
+							<a class="mypage"  href="#"	title="나의 이벤트 응모내역">나의 이벤트 응모내역</a>
+							<a class="mypage"  href="#"	title="나의 문의내역">나의 문의내역</a>
+							<a class="mypage"  href="#" title="회원정보수정">회원정보수정</a>
 						
 							
 						

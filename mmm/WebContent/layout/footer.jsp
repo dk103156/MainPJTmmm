@@ -112,7 +112,7 @@ body {
 <footer id="footer"  style="top: 25px;">
 	<div class="row h-100 align-items-center mx-0">
 	    <div class="col-2 foo_div text-center">
-	    	<a href="/main" class="center-div" title="MMM"><img src="/resources/image/logo/logo.png"></a>
+	    	<a href="/" class="center-div" title="MMM"><img src="/resources/image/logo/logo.png"></a>
 	    </div>
 	    <div class="col-3 logos align-self-center">	    
 	    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 

@@ -9,7 +9,7 @@
     
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
  
-
+ 
     <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -384,8 +384,9 @@
 	
 <jsp:include page="/layout/footer.jsp"></jsp:include>
 	
-<jsp:include page="/layout/sideBar.jsp"></jsp:include>
-
+<c:if test="${ user.role eq 'user' || user.role eq 'admin'  }">	
+	<jsp:include page="/layout/sideBar.jsp"></jsp:include>
+</c:if>
 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
   <div class="toast-header">
     <i class="far fa-bell"></i>
@@ -664,7 +665,9 @@
 	<c:if test="${alarm eq '1' || alarm eq '0'}">
 		$('#cancelToast').toast('show')
 	</c:if>
-	  
+	 
+		$('.dropdown-toggle').dropdown('toggle')
+		$('.dropdown-toggle').dropdown('hide')	
   });
   </script>
   

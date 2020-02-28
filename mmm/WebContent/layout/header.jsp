@@ -119,7 +119,7 @@
 		<div class="row">
 			<ul class="col-12 header">                
 					<li style="text-align: right; padding-top: 7px; padding-bottom: 7px; padding-right: 5px;"> 
-						<c:choose> 
+					<c:choose> 
 					    <c:when test="${not empty sessionScope.user }">   
 					       <a href="/user/logout" class="login borderRight">LOGOUT</a>
 					    </c:when>

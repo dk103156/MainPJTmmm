@@ -9,7 +9,7 @@
 <head>
 <meta charset="utf-8">
 	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
-	<title>mmm</title>itle>
+	<title>mmm</title>
  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -75,6 +75,13 @@
 		td{
 			background-color: #f9f9f9;
 		}
+		
+	.page-item.active .page-link {
+	    z-index: 3;
+	    color: #212529 !important;
+	    background-color: #fee50e !important;
+	    border-color: #fee50e !important;
+	}	
 </style>
 
 </head>

@@ -112,10 +112,14 @@
 	<input name="ticketingPrice" type="hidden" value="">
 </form>          
 <script>
-//숫자를 3자리마다 콤마를 찍는 함수
-function numberFormat(inputNumber) {
-	   return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
+//숫자를 3자리마다 콤마를 찍고 String으로 리턴하는 함수
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+// 콤마 포함한 String을 콤마 제거한 Number로 리턴하는 함수
+function removeComma(str){
+     return parseInt(str.replace(/,/g,""));
+}
 //이미지 클릭하여 상세 정보로 이동
 $(function(){
 	
@@ -130,7 +134,7 @@ $(function(){
 
   		var Element ="<div class='product'>"
   		    Element+="<div class='form-group mb-3'>";
-			Element+="<kbd>상품번호 : <span class='purchaseProductNo'>"+$(this).next().val()+"</span></kbd><span class='name text-center purchasePrice'>"+ $(this).next().next().next().children().first().text()+"</span> <input class='purchaseProductQuantity text-right'   style=' width: 154px;'  type='number' min='1' step='1' value='1'> &nbsp;개수 &nbsp; &nbsp; &nbsp; <input type='text' class='text-right'  style=' width: 154px; border-color: #00ff0000;' value="+numberFormat($(this).next().next().val())+" readonly > 원  &nbsp;  &nbsp; &nbsp;<i class='fas fa-times'></i>"
+			Element+="<kbd>상품번호 : <span class='purchaseProductNo'>"+$(this).next().val()+"</span></kbd><span class='name text-center purchasePrice'>"+ $(this).next().next().next().children().first().text()+"</span> <input class='purchaseProductQuantity text-right'   style=' width: 154px;'  type='number' min='1' step='1' value='1'> &nbsp;개수 &nbsp; &nbsp; &nbsp; <input type='text' class='text-right'  style=' width: 154px; border-color: #00ff0000;' value="+numberWithCommas($(this).next().next().val())+" readonly > 원  &nbsp;  &nbsp; &nbsp;<i class='fas fa-times'></i>"
   			Element+="</div></div>"
   	  
   			
@@ -144,6 +148,7 @@ $(function(){
 
  	 });//end of click
  	 
+	
 
  		
  	 // x 클릭하면
@@ -157,7 +162,7 @@ $(function(){
  	 function priceChange(prodPrice){
 		$("input[type='number']").on('change',function(){
 			
-			$(this).next().val(numberFormat(prodPrice*$(this).val()))
+			$(this).next().val( numberWithCommas (prodPrice*$(this).val()))
 		});
  	 }
  	 
@@ -184,7 +189,7 @@ $(function(){
  			
  			//상품가격
  			$("form > div > div > input[type=text]").each(function(index, item){
- 				totalPurchasePrice+= parseInt( $(item).val() )
+ 				totalPurchasePrice+= parseInt( removeComma( $(item).val() ) )
  			});
  			
  			//상품수량

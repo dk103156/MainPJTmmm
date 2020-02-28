@@ -312,6 +312,20 @@ function comment(currentPage){
 	
 </script>
 <style>
+
+#comment_holder > div > div > div > ul > li.page-item.active > a{
+    z-index: 3;
+    color: #212529;
+    background-color: #fee50e;
+    border-color: #fee50e;
+}
+
+	.fa-map:before {
+	    color: chocolate;
+	    content: "\f279";
+	    margin-left: 6px;
+	    cursor: pointer;
+	}
 	
  	#infoWindow{
  		  white-space: nowrap; 
@@ -322,9 +336,13 @@ function comment(currentPage){
  	
  	#doApply{
  	
- 		background-color: #ffc441;
+ 		background-color: #fee50e;
  		font-weight: 900;
  		color: #495057;
+ 	}
+ 	
+ 	div.cdtl_prd_info > div.prevInfo > p > i {
+ 		color: #fee50e;
  	}
  	
  	
@@ -352,7 +370,7 @@ function comment(currentPage){
 	}
 	.event-detail .event-detail-date {
 	    overflow: hidden;
-	    width: 1100px;
+	    width: 1114px;
 	    margin: 0 auto 30px auto;
 	    font-weight: bold;
 	    padding: 15px 0 25px 0;
@@ -363,12 +381,14 @@ function comment(currentPage){
 	* {
 	    box-sizing: border-box;
 		}
+		
 	.page-item.active .page-link {
     z-index: 3;
     color:  #4e4c4c;
     background-color: #fee00e;
     border-color: #d6cece;
 }
+
 	p {
 	    display: block;
 	    margin-block-start: 1em;
@@ -436,7 +456,7 @@ function comment(currentPage){
 		}
 	
 		p{
-		text-indent : 0.5em;
+		text-indent : 0;
 		}
 	
 	.jb-bolder {
@@ -675,11 +695,11 @@ function comment(currentPage){
 
  	<div id="contents">
  	
-	<div class="event-detail">	
+	<div class="event-detail" style="margin-right: 10px;">	
 	<h2 class="tit">
 	<span class="getPreview" style="font-weight:bold;">${preview.previewName}</span></h2>
 	<p class="event-detail-date ">
-				<span class="getPreview">기간</span>
+				<span class="getPreview">기간 : </span>
 				<em>${preview.preStDate} ~ ${preview.preEdDate}</em>
 	</p>
 	
@@ -704,7 +724,7 @@ function comment(currentPage){
                         </div>
             
             <c:if test="${preview.previewFlag==1}">
-               <button class="btn float-right getPreviewAd" id="doApply" style="margin-right:40px;">응모하기</button>
+               <button class="btn float-right getPreviewAd" id="doApply">응모하기</button>
             </c:if>
             <c:if test="${preview.previewFlag==2}">
                <button class="btn float-right getPreviewAd" id="viewWinner">당첨자보기</button>
@@ -713,11 +733,11 @@ function comment(currentPage){
             
             <div class="cdtl_prd_info"> <!-- 시사회 정보 -->
                 <div class="prevInfo" style="margin-top:25px;">
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">시사회 이름</span><span class="getPreview" style="margin-left:15px;">${preview.previewName}</span></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">장소</span><span class="getPreview" id="previewPlace"><span style="margin-left:15px;">${preview.previewPlace}</span></span> <i id="mapIcon" class="far fa-map"></i></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">시사 일자</span><span class="getPreview" style="margin-left:15px;">${preview.preDate}</span></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">상영 시간 </span><span class="getPreview" style="margin-left:15px;">${preview.previewTime}</span></p>
-                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview">인원수  </span><span class="getPreview" style="margin-left:15px;">${preview.winnerCount}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 시사회 이름 : </span><span class="getPreview">${preview.previewName}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 장소 : </span><span class="getPreview" id="previewPlace"><span >${preview.previewPlace}</span></span> <i id="mapIcon" class="far fa-map"></i></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 시사 일자 : </span><span class="getPreview">${preview.preDate}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 상영 시간 : </span><span class="getPreview">${preview.previewTime}</span></p>
+                	<p><i class="fas fa-caret-right"></i><span class="jb-bolder getPreview"> 인원수 : </span><span class="getPreview">${preview.winnerCount}</span></p>
 					
 					</div>
                 
