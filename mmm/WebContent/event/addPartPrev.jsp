@@ -85,6 +85,13 @@
 			
 		});
 		
+
+		$('#updateBtn').on('click', function(){
+			
+			self.location = "/user/getUser";
+		
+		});	
+		
 		
 		
 	})
@@ -209,7 +216,7 @@
 	
 			<div class="text-center">
 				<button id="applyBtn" class="btn btn-dafault write" type="button" style="margin-top:15px;">응모하기</button>
-<!-- 				<button id="updateBtn" class="btn btn-dafault write" type="button">수정하기</button> -->
+				<button id="updateBtn" class="btn btn-dafault write" type="button" style="margin-top:15px; background-color:">수정하기</button>
 			</div>
 			<br>
 		

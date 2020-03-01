@@ -204,12 +204,13 @@ function comment(currentPage){
 		
 		$('#modalBox').on('show.bs.modal', function (e) {
 			console.log("show.bs.modal");
-			
-			});
+		});
+		
 		
 		$('#closeModalBtn').on('click', function(){
 			$('#modalBox').modal('hide');
-			});
+		});
+		
 		
 		
 		
@@ -281,6 +282,12 @@ function comment(currentPage){
 			var previewNo = ${preview.previewNo};
 			$("div#winnerModal").modal("show");
 			getWinnerList(previewNo);
+		});
+		
+		
+		$('#viewDetail').on('click',function(){
+			var movieNo = ${preview.movieNo};
+			self.location = "/movie/getMovie/"+movieNo;
 		});
 		
 		
@@ -363,11 +370,12 @@ function comment(currentPage){
 		
 		
 	.byeFloat {
-/* 	content: '';  */
-	dispaly: table;
-	clear: both;
-	height: 30px;
+	/* 	content: '';  */
+		dispaly: table;
+		clear: both;
+		height: 30px;
 	}
+	
 	.event-detail .event-detail-date {
 	    overflow: hidden;
 	    width: 1114px;
@@ -383,11 +391,11 @@ function comment(currentPage){
 		}
 		
 	.page-item.active .page-link {
-    z-index: 3;
-    color:  #4e4c4c;
-    background-color: #fee00e;
-    border-color: #d6cece;
-}
+	    z-index: 3;
+	    color:  #4e4c4c;
+	    background-color: #fee00e;
+	    border-color: #d6cece;
+	}
 
 	p {
 	    display: block;
@@ -474,33 +482,30 @@ function comment(currentPage){
 	}
 	
 	
-	
-	
-	
 	.comment_area{
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 14px;
-	color: #545454;
-	position: relative;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 14px;
+		color: #545454;
+		position: relative;
 	}
 	
 	.comment_area.num{
-	padding: 0;
-	border: 0;
-	color: #545454;
-	font-weight: bold;
-	font-size: 12px;
-	margin: 10px 0 25px;
+		padding: 0;
+		border: 0;
+		color: #545454;
+		font-weight: bold;
+		font-size: 12px;
+		margin: 10px 0 25px;
 	}
 	
 	p {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+	    display: block;
+	    margin-block-start: 1em;
+	    margin-block-end: 1em;
+	    margin-inline-start: 0px;
+	    margin-inline-end: 0px;
 	}
 	
 	.comment_area .textarea_box {
@@ -646,20 +651,30 @@ function comment(currentPage){
 		color: #545454;
 		font-size: 15px;
 	}
+	
+	
 	i.fas.fa-pastafarianism{
 		color:#545454;
 	}
+	
 	button.btn.getPreviewAd {
-	background-color:#fee50e ;
-	color:#545454;
-	border: 1px solid #dedede;
+		background-color:#fee50e ;
+		color:#545454;
+		border: 1px solid #dedede;
+	}
+	
+
+	button.btn.moreInfo {
+		background-color:#e33030 ;
+		color:#ffffff;
+		border: 1px solid #dedede;
 	}
 	
 	#content{
-	width:90%;
-	margin-left: 21px;
-	height: 100px;
-	border: 1px solid #dedede;
+		width:90%;
+		margin-left: 21px;
+		height: 100px;
+		border: 1px solid #dedede;
 	}
 	
 	#cmtDate{
@@ -677,8 +692,9 @@ function comment(currentPage){
 	    top: 12px;
 	    left: 40px;
 	}
+	
 	span.getPreview{
-	 color: #444444;
+		color: #444444;
 	}
 	
 	div.blindInfo{
@@ -688,6 +704,8 @@ function comment(currentPage){
 	.btn{
 	border: 1px solid #dedede;
 	}
+	
+	
 </style>
 
 
@@ -727,7 +745,7 @@ function comment(currentPage){
 <!--                                    <img src="/resources/image/ddd.PNG" alt=""> -->
 										</div>
                         </div>
-            
+            <button class="btn float-right moreInfo" id="viewDetail">영화상세</button>
             <c:if test="${preview.previewFlag==1}">
                <button class="btn float-right getPreviewAd" id="doApply">응모하기</button>
             </c:if>
