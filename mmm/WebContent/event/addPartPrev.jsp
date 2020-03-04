@@ -99,20 +99,20 @@
 
 </script>
 <style>
-	
-	img.prevImg {
-		width : 180px;
-		max-width :100%;
-		height : auto;
-	}
-
-	div.text-dark {
-		font-size: 2rem;
-	}
 		
-	div.text-muted {
-		font-size:1rem;
-	}	
+		img.prevImg {
+			width : 180px;
+			max-width :100%;
+			height : auto;
+		}
+	
+		div.text-dark {
+			font-size: 2rem;
+		}
+			
+		div.text-muted {
+			font-size:1rem;
+		}	
 	
 		.btn.btn-dafault.write{ 
 			background-color: #fee50e!important;

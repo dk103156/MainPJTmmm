@@ -14,14 +14,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
+	<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
+
 <script type="text/javascript">
 	
 	$(function(){
 		
-		$('#updateBtn').on("click", function(){
-			alert('update버튼이 클릭됨');
-			self.location = "/event/updateQuizAd?quizNo=${quiz.quizNo}";
-		});
 		
 		$('#delBtn').on("click", function(){
 			alert('delBtn버튼이 클릭됨');
@@ -29,6 +27,7 @@
 			console.log(articleNo)
 			self.location="/customer/deleteNotice?articleNo="+articleNo;
 		});
+		
 		
 		$('#okBtn').on("click", function(){
 			alert('ok버튼이 클릭됨');
@@ -96,21 +95,20 @@
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
-
-	<div class="page-header text-dark">
-	       <h3>고객센터</h3>
-	       <hr>
+<br>
+		<div class="page-header mt-3">
+	       <span style="font-weight: bold; font-size:35px; color:black;">고객센터</span>
+	    <hr>
 	    </div>
-	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
+	    
+	 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-	 	<button type="button" name="ask" class="btn btn-outline-secondary">자주찾는질문</button>
-	    <button type="button" name="contact" class="btn btn-outline-secondary">일대일문의</button>
-	    <button type="button" name="notice" class="btn btn-outline-secondary active">공지사항</button>		
+		 <button type="button" name="ask" class="btn"><span style="font-size:20px;"><i class="fas fa-question-circle" style="font-style: normal;">자주찾는질문</i></span></button>
+	    <button type="button" name="contact" class="btn"><span style="font-size:20px;"><i class="fas fa-comment"style="font-style: normal;">일대일문의</i></span></button>
+	    <button type="button" name="notice" class="btn"><span style="font-size:20px;"><i class="fas fa-info-circle" style="font-style: normal;">공지사항</i></span></button>	
 	  </div>
 	</div>
-
-</div>
-<br>
+	    </div>
 	<div class="container">
 	
 	<div id="header"> 
@@ -125,7 +123,7 @@
 	                        <tbody>
 		                        <tr>
 		                        <td colspan="2">
-			                        <div class="content">
+			                        <div class="content mt-3">
 				                        ${article.content}
 			                        </div>
 		                        </td>
@@ -142,9 +140,10 @@
 	</div>
 		
 		<div class="text-center">
-			<button id="updateBtn"" class="btn btn-secondary write" type="button">수 &nbsp;정</button>
-			<button id="delBtn" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
-			<button id="okBtn" type="button" class="btn btn-secondary write">확 &nbsp;인</button>
+		<c:if test="${user.role eq 'admin'}">
+			<button id="delBtn" class="btn btn-warning write" type="button">삭 &nbsp;제</button>
+		</c:if>
+			<button id="okBtn" type="button" class="btn btn-warning write">확 &nbsp;인</button>
 		</div>
 
 	</div>

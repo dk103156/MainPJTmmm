@@ -126,17 +126,19 @@
 <%-- <jsp:include page="/layout/header.jsp"></jsp:include> --%>
 <div class="container">
 
-	<div class="page-header text-dark mt-3">
-	       <h3>고객센터</h3>
-	       <hr>
+		<div class="page-header mt-3">
+	       <span style="font-weight: bold; font-size:35px; color:black;">고객센터</span>
+	    <hr>
 	    </div>
-	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
+	    
+	 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-		<button type="button" name="ask" class="btn"><i class="fas fa-question-circle">자주찾는질문</i></button>
-	    <button type="button" name="contact" class="btn"><i class="fas fa-comment">일대일문의</i></button>
-	    <button type="button" name="notice" class="btn"><i class="fas fa-info-circle">공지사항</i></button>
+		 <button type="button" name="ask" class="btn"><span style="font-size:20px;"><i class="fas fa-question-circle" style="font-style: normal;">자주찾는질문</i></span></button>
+	    <button type="button" name="contact" class="btn"><span style="font-size:20px;"><i class="fas fa-comment"style="font-style: normal;">일대일문의</i></span></button>
+	    <button type="button" name="notice" class="btn"><span style="font-size:20px;"><i class="fas fa-info-circle" style="font-style: normal;">공지사항</i></span></button>	
 	  </div>
 	</div>
+
 
 
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
@@ -320,7 +322,7 @@
 					html +="</div></td>"
 			
 				$("#"+data.article.articleNo).html(html)
-				$("#"+data.article.articleNo).css('background-color','pink');
+				$("#"+data.article.articleNo).css('background-color','#fee00e');
 				$("div.inner").css('background-color','white');
 				
 				

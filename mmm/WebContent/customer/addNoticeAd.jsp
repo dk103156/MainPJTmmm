@@ -6,7 +6,7 @@
 <!DOCTYPE html> <!-- 문서타입 --> 
 <html lang="ko"> <!-- 휴먼랭귀지 --> 
 <head> <meta charset="utf-8"> <!-- 문자셋 --> 
-<title>addPreviewAd</title> 
+<title>mmm</title> 
 <meta charset="utf-8">
 	 <title>MMM</title>
 <!-- bootstrap 4 CDN -->
@@ -20,10 +20,15 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 	
+	 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+	
+	
+	<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
+	  
 	
 	<!-- include summernote css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
-	
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	
 	<link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
 	<title>mmm</title>	
@@ -54,7 +59,6 @@
 				
 				
 				$('#regBtn').on("click", function(){
-					alert('눌렸어!!!!!!!!!!!!!!!!!!!!!!!');
 					fncAddNotice();
 				});
 				
@@ -80,7 +84,7 @@
 					enctype: 'multipart/form-data',	//멀티파트 
 					processData: false,
 					success: function(img) {	//파일 전송 완료시 이미지 파일 url 
-						alert('성공_'+img);
+// 						alert('성공_'+img);
 						$(el).summernote('insertImage', path+img);	//editor.insertImage기능은 이미지 삽입해주는 것 
 						
 					}
@@ -90,12 +94,16 @@
 			
 			
 			function fncAddNotice(){
-				alert('도착?')
+				//alert('도착?')
 				var articleTitle = $("input[name='articleTitle']").val();
 			
 				if(articleTitle == null || articleTitle.length<1) {
-				
-					alert("제목은 반드시 입력하셔야 합니다.")
+					//alert("제목은 반드시 입력하셔야 합니다.")
+						Swal.fire({
+							text: '제목을 반드시 입력하세요.',
+							icon: 'error',
+							confirmButtonText: "confirm",
+						})
 					return;
 				}
 				
@@ -124,18 +132,6 @@
 	
 	 <style type="text/css">
 		
-		@media (min-width: 768px) {
-	 	 .container {
-	     width: 750px;
-	  }
-	}
-	
-		@media (min-width: 992px) {
-		 .container {
-	     width: 940px;
-	  }
-	}
-
 
 	</style>
 	
@@ -146,16 +142,16 @@
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 <br>
-		<div class="page-header text-dark">
-	       <h3>고객센터</h3>
+		<div class="page-header mt-3">
+	       <span style="font-weight: bold; font-size:35px; color:black;">고객센터</span>
 	    <hr>
 	    </div>
 	    
 	 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
- 		<button type="button" name="ask" class="btn btn-outline-secondary">자주찾는질문</button>
-	    <button type="button" name="contact" class="btn btn-outline-secondary">일대일문의</button>
-	    <button type="button" name="notice" class="btn btn-outline-secondary active">공지사항</button>		
+		 <button type="button" name="ask" class="btn"><span style="font-size:20px;"><i class="fas fa-question-circle" style="font-style: normal;">자주찾는질문</i></span></button>
+	    <button type="button" name="contact" class="btn"><span style="font-size:20px;"><i class="fas fa-comment"style="font-style: normal;">일대일문의</i></span></button>
+	    <button type="button" name="notice" class="btn"><span style="font-size:20px;"><i class="fas fa-info-circle" style="font-style: normal;">공지사항</i></span></button>	
 	  </div>
 	</div>
 	    

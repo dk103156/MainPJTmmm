@@ -96,7 +96,7 @@
 				</div>
 
 				<div class="col-1" style="text-align:center;">
-					<h6 id="addAsk"  style="color: #242424; margin: 15px 0px;"><strong>자주 찾는 질문등록</strong></h6>
+					<h6 id="addAsk"  style="color: #242424; margin: 15px 0px;"><strong>QnA 등록</strong></h6>
 				</div>
 				
 				

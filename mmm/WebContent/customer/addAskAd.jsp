@@ -12,13 +12,12 @@
 <!-- bootstrap 4 CDN -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- Popper JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 	
 	<!-- include summernote css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
@@ -127,18 +126,20 @@
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 
-	<div class="page-header text-dark">
-	       <h3>고객센터</h3>
-	       <hr>
+<br>
+		<div class="page-header mt-3">
+	       <span style="font-weight: bold; font-size:35px; color:black;">고객센터</span>
+	    <hr>
 	    </div>
 	    
-	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
+	 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-	   <button type="button" name="ask" class="btn btn-outline-secondary active">자주찾는질문</button>
-	    <button type="button" name="contact" class="btn btn-outline-secondary ">일대일문의</button>
-	    <button type="button" name="notice" class="btn btn-outline-secondary ">공지사항</button>
+		 <button type="button" name="ask" class="btn"><span style="font-size:20px;"><i class="fas fa-question-circle" style="font-style: normal;">자주찾는질문</i></span></button>
+	    <button type="button" name="contact" class="btn"><span style="font-size:20px;"><i class="fas fa-comment"style="font-style: normal;">일대일문의</i></span></button>
+	    <button type="button" name="notice" class="btn"><span style="font-size:20px;"><i class="fas fa-info-circle" style="font-style: normal;">공지사항</i></span></button>	
 	  </div>
 	</div>
+	    
 
 
 <form autocomplete="off">

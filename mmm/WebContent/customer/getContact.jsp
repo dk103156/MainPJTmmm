@@ -34,7 +34,7 @@
 		
 		$('#okBtn').on("click", function(){
 // 			alert('ok버튼이 클릭됨');
-			self.location="/customer/getPreviewList";
+			self.location="/customer/getContactList";
 		});
 		
 		//답변달기 모달 띄우기
@@ -153,30 +153,20 @@
        }
         
 	 .replyBox{ 
-      	width:780px;
+      	width:740px;
       	height:auto;
       	padding: 20px;
         margin: 10px auto;
         border: 1px solid #000000;
+        margin-top: 40px;
        }
          
 	  .content{
-	  	height:auto;
+		height:auto;
+		
 	  }
-	  
 	  		
-		@media (min-width: 768px) {
-	 	 .container {
-	     width: 750px;
-	  }
-	}
-	
-		@media (min-width: 992px) {
-		 .container {
-	     width: 940px;
-	  }
-	}
-  
+
 	  .writerInfo{
 	  	width: 100%;
 	  	height: 50px;
@@ -224,15 +214,15 @@
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
 
-	<div class="page-header text-dark mt-3">
-	       <h3>고객센터</h3>
+	<div class="page-header mt-3">
+	       <span style="font-weight: bold; font-size:35px; color:black;">고객센터</span>
 	       <hr>
 	    </div>
 	<div class="btn-toobar" role="toolbar" aria-label="Toolbar with button groups">
 	  <div class="btn-group" role="group" aria-label="First group">
-		<button type="button" name="ask" class="btn"><i class="fas fa-question-circle">자주찾는질문</i></button>
-	    <button type="button" name="contact" class="btn"><i class="fas fa-comment">일대일문의</i></button>
-	    <button type="button" name="notice" class="btn"><i class="fas fa-info-circle">공지사항</i></button>
+		<button type="button" name="ask" class="btn"><span style="font-size:20px;"><i class="fas fa-question-circle">자주찾는질문</i></span></button>
+	    <button type="button" name="contact" class="btn"><span style="font-size:20px;"><i class="fas fa-comment">일대일문의</i></span></button>
+	    <button type="button" name="notice" class="btn"><span style="font-size:20px;"><i class="fas fa-info-circle">공지사항</i></span></button>
 	  </div>
 	</div>
 	<br>
@@ -245,15 +235,17 @@
 	<div class="header p-0"> 
 	
 	
-	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#333; font-weight:bold;">   <!-- 문의 제목, 일시 -->
-		<div class="inline left"><span class="align-center" style="font-weight:bold; font-size:20px; color:white;">Q. </span>
-		<span style="color:white;">${article.articleTitle}</span></div>
-		<div class="inline rightt date"> <span style="font-size:13px; color:white;">${article.articleDate}</span></div>
+	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#333;">   <!-- 문의 제목, 일시 -->
+		<div class="inline left">
+		<span class="align-center  ml-4" style="font-size:18px; font-weight:800px; color:white;">
+		Q. ${article.articleTitle}</span></div>
+		<div class="inline rightt date"> 
+		<span class="mb-1" style="font-size:15px; color:white;">${article.articleDate}</span></div>
  	</div>	
  	
  	
  	
- 	<div class="writerInfo border-bottom mb-2 p-2 h-100">  <!-- 질문자 정보 -->
+ 	<div class="writerInfo border-bottom ml-4 mb-2 p-2 h-100 font-weight-bold" >  <!-- 질문자 정보 -->
 		<div  class="inline left ">${writer.userName}</div>
 		<div  class="inline right ">${writer.userId}</div>
 		<br>
@@ -262,7 +254,7 @@
 	</div>
 	
 	
-	<div class="body p-2">
+	<div class="body p-4">
 	<div class="content askbox mb-2">
 	
 		<div class="mb-2">${article.content}</div>
@@ -275,15 +267,15 @@
 	   <div class="replyBox p-1">
 	   
 	  			<div class="inline left"> 
-	  				<i class="fab fa-replyd fa-lg" style="color:#b9bdba; text:red" ></i>
+	  				<span style="font-size: 20px; "><i class="fab fa-replyd fa-lg" style="color:#f23d4f;" ></i></span>
 	  				<c:if test="${reArticle.articleTitle ne null}">
-	                   ${reArticle.articleTitle}
+	                  <span style="font-weight:bold;"> ${reArticle.articleTitle} </span>
 	                   </c:if> 
 	                </div>
 	                
 	                <div class="inline rightt date">
 	               	   	<c:if test="${reArticle.articleDate ne null}">
-	           			${reArticle.articleDate}
+	           		   <span style="font-weight:bold;">	${reArticle.articleDate}</span>
 	                    </c:if> 
 	                </div>
                 			<div class="m-3">
@@ -335,13 +327,15 @@
 
 
 	
-		<div class="text-center m-4">
+		<div class="text-center m-2">
 			<button id="delBtn" class="btn btn-secondary write" type="button">삭 &nbsp;제</button>
 			<button id="okBtn" type="button" class="btn btn-secondary write">목 &nbsp;록</button>
 			
-			<c:if test="${user.role eq 'admin'}">
-			<button id="addAnswer" type="button" class="btn btn-secondary write">답변추가</button>
-			</c:if>
+			<c:if test="${reArticle eq null}">
+				<c:if test="${user.role eq 'admin'}">
+				<button id="addAnswer" type="button" class="btn btn-secondary write">답변추가</button>
+				</c:if>
+		</c:if>	
 		</div>
 </div>
 	

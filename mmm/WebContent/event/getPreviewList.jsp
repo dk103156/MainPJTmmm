@@ -223,7 +223,7 @@
 
 <div class="container previewList">
 <br/><br/>
-<h4><i class="fas fa-trophy"></i><span style="font-weight:bold;">시사회 이벤트</span></h4>
+<h4><span style="font-size:30px; font-weight:bold;"><i class="fas fa-trophy"></i>시사회 이벤트</span></h4>
 <p class="lbtxt">개봉 전  누구보다 먼저 영화를 만나는 방법</p>
 <hr>
 <br/>

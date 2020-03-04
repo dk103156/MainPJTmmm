@@ -251,11 +251,11 @@ public class EventRestController {
 		if(partCnt > 0) { //이미 참여했다?
 			result = 2;
 		}else if(partCnt == 0){	//아직 참여한 적 없다
-			if(answer==choice) { result = 0;} //답이 같다면?--> 포인트를...적립하자
+			if(answer==choice) { result = 0;} //정답이라면?--> 포인트를...적립하자
 			else if(answer!=choice) {result = 1;} //다르다면?
 		}
 		
-		System.out.println("result"+result);
+		System.out.println("result==>"+result);
 		Map<String, Object> returnMap = new HashMap<String, Object>();
 		returnMap.put("result", result);
 		returnMap.put("partCnt", partCnt);
@@ -408,8 +408,8 @@ public class EventRestController {
 				map.put("start",startDate);
 				map.put("end",startDate);
 				map.put("allday","allday");
-				map.put("color","#ffedad");
-				map.put("imageurl", "../resources/image/goodStamp.jpg");
+//				map.put("color","#ffedad");
+//				map.put("imageurl", "../resources/image/goodStamp.jpg");
 				returnList.add(map);
 			}
 			

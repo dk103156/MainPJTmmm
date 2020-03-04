@@ -303,6 +303,7 @@ public class CustomerController {
 		System.out.println(date);
 		article.setArticleDate(date);
 		
+		System.out.println(">>>>>>>>>article"+article);
 		
 		Article reArticle = boardService.getReply(article.getArticleNo()); 	//답변글 가져오기
 	

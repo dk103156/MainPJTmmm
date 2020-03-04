@@ -272,9 +272,15 @@ public class EventController {
 
 		System.out.println("dateTimeService.getTheaterList(new Search())>>>"+dateTimeService.getTheaterList(new Search()));
 		
+		Movie movie = new Movie();
+		movie.setMovieNo(preview.getMovieNo());
+		movie = movieService.getMovieByMovieNo(movie);
+		System.out.println("movieeeeeeeeeeeeee"+movie);
+		
 		model.addAttribute("getTheaterList", dateTimeService.getTheaterList(new Search()));
 		model.addAttribute("preview" , preview);
-		model.addAttribute("fileArr", fileArr);
+		model.addAttribute("movie" , movie);
+//		model.addAttribute("fileArr", fileArr);
 		model.addAttribute("hour", hour);
 		model.addAttribute("min", min);
 		
@@ -471,6 +477,7 @@ public class EventController {
 //		preview.setTrailer(videoId);
 		
 		model.addAttribute("preview" , preview);
+		model.addAttribute("movie", movie);
 		
 //		파일업로드가 필요없어졌어
 //		String[] fileArr = preview.getPreviewImage().split(",");
@@ -486,7 +493,7 @@ public class EventController {
 	//addPartPrev.jsp 응모하기 띄워주는거
 	@CheckAuth(role="user,admin")
 	@RequestMapping(value="addPartPrev", method=RequestMethod.GET)
-	public String addPartPrevView(@RequestParam int previewNo, HttpSession session, Model model) throws Exception{
+	public String addPartPrev(@RequestParam int previewNo, HttpSession session, Model model) throws Exception{
 		
 		System.out.println("/event/addPartPrev:GET");
 		System.out.println("eventController에서 addPartPrev>>>>>>>>>>>previewNo"+previewNo);
@@ -787,7 +794,7 @@ public class EventController {
 		updateMap.put("user", userNo);
 		updateMap.put("quizNo", quizNo);
 //		
-		eventService.updateQuizFlag(updateMap); //해당 이벤트 참여 플래그 업데이트
+		eventService.updateQuizFlag(updateMap); //퀴즈 정답
 //		
 		
 		model.addAttribute("participation", participation); 
@@ -816,8 +823,6 @@ public class EventController {
 		
 		updateMap.put("user", userNo);
 		updateMap.put("quizNo", quizNo);
-	
-		eventService.updateQuizFlag(updateMap); //해당 이벤트 참여 플래그 업데이트
 		
 		model.addAttribute("participation", participation); 
 		model.addAttribute("user", user);
@@ -825,6 +830,8 @@ public class EventController {
 		return "redirect:/event/getQuizList?userNo="+userNo; 
 	}
 
+	
+	
 	@RequestMapping(value="deleteQuizAd", method=RequestMethod.POST)
 	public String deleteQuizAd(@ModelAttribute("quiz") Quiz quiz) throws Exception {
 		

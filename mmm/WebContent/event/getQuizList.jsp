@@ -84,37 +84,37 @@
 				
 				if(JSONData.result==0){
 					
-// 					Swal.fire({
-// 						text: '정답입니다',
-// 						icon: 'success',
-// 						confirmButtonText: "confirm"
-// 					}).then((confirm)=>{
-						alert('정답')
-					//	$("form").attr("method","POST").attr("action", "/event/addWinQuiz").submit();
-					//	console.log(quizNo);
+ 					Swal.fire({
+ 						text: '정답입니다',
+						icon: 'success',
+ 						confirmButtonText: "confirm"
+					}).then((confirm)=>{
+						//alert('정답')
+						$("form").attr("method","POST").attr("action", "/event/addWinQuiz").submit();
+						console.log(quizNo);
 						var quizNo2 = qBtn.parent().children('input[name="quizNo"]').val();
-					//	console.log(quizNo2);
+						console.log("정답이야 >>"+quizNo2);
 						//var quizNo = $(this).parent().first();
 						//alert(quizNo);
 						//console.log(quizNo)
 						self.location="/event/addWinQuiz/"+quizNo2;
-// 					})
+				})
 					
 					
 				}else if(JSONData.result==1){
 					
 					
-// 					Swal.fire({ 
-// 						text: '정답이 아닙니다.',
-// 						icon: 'error',
-// 						confirmButtonText: "confirm"
-// 					}).then((confirm)=>{
-						alert('오답')
+ 					Swal.fire({ 
+ 						text: '정답이 아닙니다.',
+ 						icon: 'error',
+						confirmButtonText: "confirm"
+					}).then((confirm)=>{
+						//alert('오답')
 						//$("form").attr("method","POST").attr("action", "/event/addLoseQuiz").submit();
-// 					})
 						var quizNo2 = qBtn.parent().children('input[name="quizNo"]').val();
-						console.log(quizNo2)
+						console.log("오답이야 >>"+quizNo2)
 						self.location="/event/addLoseQuiz/"+quizNo2;
+				})
 				}
 			
 		}
@@ -243,17 +243,18 @@
 <body>
 <jsp:include page="/layout/header.jsp"></jsp:include>
 <div class="container">
- 		<br>
-		<div class="page-header" style="margin-left:180px; margin-top:50px;">
-	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 영화퀴즈</span>
-	    </div>
-		<br>	
-		
+		<br/><br/>
+		<h4><span style="font-size:30px; font-weight:bold;"><i class="fas fa-spell-check"></i> 뭅뭅무비퀴즈</span></h4>
+		<p class="lbtxt">하루에 1번, 영덕이라면 도전! 뭅뭅뭅 클릭 퀴즈</p>
+		<hr>
+		<br/>
+				
 		
    		<div class="qLogin">
 		<p class="qltx">
-		<span>${user.userId}님의 응모내역</span>
+		<span>${user.userId}님의 퀴즈 참여 내역</span>
 		<br>
+		
 		</p>
 		
 		<p style="margin-left:3em;">

@@ -1783,11 +1783,12 @@ input {
 </head>
 
 <body>
+<jsp:include page="/layout/header.jsp"></jsp:include>
 <form autocomplete="off">
 <div class="container">
 <div id="contents">
 <br><br>
-	<h2 class="tit">관리자 문의내역 관리</h2>
+	<h2 class="tit font-weight-bold">관리자 문의내역 관리</h2>
 
 	<div class="mypage-infomation mt20">
 		<ul class="dot-list mb20">
@@ -1860,10 +1861,14 @@ input {
 			  <td class="col">  ${notice.articleTitle} 
 			  </td>
 			  <td class="col" > 
-			  <span class="btn btn-secondary btn-sm"><small>
-				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">답변전</c:if>
-				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">답변완료</c:if>
-				</small></span>
+			  
+				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 0}">
+				  <span class="btn btn-danger btn-sm"><small>답변전</small></span></c:if>
+				  <c:if test="${notice.qnaStatus ne null && notice.qnaStatus eq 1}">
+				  <span class="btn btn-info btn-sm"><small>답변완료
+				  </small></span>
+				  </c:if>
+			
 				</td>
 			  <td class="col"  > ${notice.articleDate}
 				</td>
@@ -1901,8 +1906,8 @@ input {
 						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
 							<c:if test="${ resultPage.currentPage == i }">
 								<!--  현재 page 가르킬경우 : active -->
-							    <li class="page-item active" aria-current="page">
-      								<a class="page-link" href="javascript:Pagination('${ i }')">${ i }<span class="sr-only">(current)</span></a>
+							    <li class="page-item active" aria-current="page" >
+      								<a style="background-color: #fee00e; color: #4e4c4c; border-color: #d6cece;" class="page-link" href="javascript:Pagination('${ i }')">${ i }<span class="sr-only">(current)</span></a>
    								 </li>
 							</c:if>	
 							
@@ -1933,5 +1938,6 @@ input {
 
 </div>
 </form>
+<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>

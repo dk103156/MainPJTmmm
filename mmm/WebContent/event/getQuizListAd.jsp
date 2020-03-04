@@ -21,7 +21,7 @@
 <script type="text/javascript">
 
 
-	function fncGetList(currentPage) {
+	function Paginations(currentPage) {
 		console.log('fncGetList에 왔거든여');
 		$("#currentPage").val(currentPage);
 		console.log($("#currentPage").val());
@@ -89,12 +89,16 @@
 			margin: 0 auto;
 		}		
 	.checkBox {float:left; width:30px;}
+
 	.checkBox input{width:16px; height:16px;}
 
 	.container {
 		font-family: 'Noto Sans KR', sans-serif;
 		font-size: 1.2rem;
 	}
+	
+
+	
 	</style>
 </head>
 
@@ -103,21 +107,18 @@
 <div class="container">
  		<br>
 		<div class="page-header" style="margin-top:30px;">
-	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 퀴즈 관리</span>
+	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 영화퀴즈 관리</span>
 	    </div>
-		<br>	
 	    
-		    	<p class="text-primary">
+		    	<p class="text-secondary">
 		    		총  ${resultPage.totalCount} 개의 퀴즈가 있습니다
-		    	
 		    	</p>
-		<br>	
      
 	<form>
 	
 	  <input type="hidden" id="currentPage" name="currentPage" value=""/> 
 	  <input type="checkbox" name="allCheck" id="allCheck"/><label for="allCheck">모두선택</label>
-	  <button id="delBtn" class="btn btn-secondary write float:right" type="button">삭 &nbsp;제</button>
+	  <button id="delBtn" class="btn btn-danger write btn-sm float:right" type="button">삭 &nbsp;제</button>
 	  <script>
 	  
 	  $("#allCheck").click(function(){
@@ -180,58 +181,52 @@
  
  
  
-<div class="text-center">
-		 
-		 <nav>
-		  <!-- 크기조절 :  pagination-lg pagination-sm-->
-		  <ul class="pagination justify-content-center" >
-		    
-		    <!--  <<== 좌측 nav -->
-		  	<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
-		 		<li class="disabled">
-			</c:if>
-			<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
-				<li>
-			</c:if>
-			<li>
-		      <a href="javascript:fncGetList('${ resultPage.currentPage-1}')" aria-label="Previous">
-		        <span aria-hidden="true">&laquo;</span>
-		      </a>
-		    </li>
-		    
-		    <!--  중앙  -->
-			<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
-				
-				<c:if test="${ resultPage.currentPage == i }">
-					<!--  현재 page 가르킬경우 : active -->
-				    <li class="active">
-				    	<a href="javascript:fncGetList('${ i }');">${ i }<span class="sr-only">(current)</span></a>
-				    </li>
-				</c:if>	
-				
-				<c:if test="${ resultPage.currentPage != i}">	
-					<li>
-						<a href="javascript:fncGetList('${ i }');">${ i }</a>
-					</li>
-				</c:if>
-			</c:forEach>
-		    
-		     <!--  우측 nav==>> -->
-		     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">
-		  		<li class="disabled">
-			</c:if>
-			<c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
-				<li>
-			</c:if>
-			<li>
-		      <a href="javascript:fncGetList('${resultPage.endUnitPage+1}')" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
-		
-</div>
+<div class="ticketingPagination row">
+			  		<div class="col-4"></div>
+			  		<div class="col-4 ">
+					  <ul class="pagination d-flex justify-content-center ">
+		   				 <!--  <<== 좌측 nav -->
+		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
+		  					    <li class="page-item disabled">
+     								 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">«</a>
+   								 </li>
+		  				</c:if>
+		  				<c:if test="${ resultPage.currentPage > resultPage.pageUnit }">
+					   		<li class="page-item">
+					   				 <a class="page-link" href="javascript:Pagination('${resultPage.beginUnitPage-1}')" tabindex="-1" aria-disabled="true">«</a>
+   							</li>
+						</c:if>
+						
+					    <!--  중앙  -->
+						<c:forEach var="i"  begin="${resultPage.beginUnitPage}" end="${resultPage.endUnitPage}" step="1">
+							<c:if test="${ resultPage.currentPage == i }">
+								<!--  현재 page 가르킬경우 : active -->
+							    <li class="page-item active" aria-current="page">
+      								<a class="page-link" href="javascript:Pagination('${ i }')" style="background-color:#fee00e; border:#d6cece; color: #4e4c4c;"s>${ i }<span class="sr-only">(current)</span></a>
+   								 </li>
+							</c:if>	
+							
+							<c:if test="${ resultPage.currentPage != i}">	
+								<li class="page-item">
+									<a class="page-link" href="javascript:Pagination('${ i }')"  style="color: #4e4c4c;" >${ i }</a>
+								</li>
+							</c:if>
+						</c:forEach>
+					     <!--  우측 nav==>> -->
+					     <c:if test="${ resultPage.endUnitPage >= resultPage.maxPage }">						
+					    	<li class="page-item disabled">
+					    		<a class="page-link" href="#">»</a>
+    						</li>
+					      </c:if>
+					      <c:if test="${ resultPage.endUnitPage < resultPage.maxPage }">
+					      	    <li class="page-item">
+     							 <a class="page-link" href="javascript:Pagination('${resultPage.endUnitPage+1}') ">»</a>
+    							</li>
+						 </c:if>	
+					  </ul><!-- end of pagination -->
+					 </div><!-- end of middle col --> 
+					 <div class="col-4"></div>
+			  </div><!-- end of ticketingPagination -->
 
 
 

@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	    timeZone: 'UTC',
 	    select: function(info) {
 	       
-	       var check =moment(info.start).format('YYYY-MM-DD');
+	       var check = moment(info.start).format('YYYY-MM-DD');
 	       var today = moment().format('YYYY-MM-DD');
 	       
 	       if(check < today){
@@ -81,19 +81,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	    defaultDate: new Date(),
 	    header: {
 	      left: '',
-	      center: 'title',
-	      right: ''
+	      center: '',
+	      right: 'title'
 	    },
-	     eventBackgroundColor : '#ffffff' ,
-	     eventColor : '#5c6a96',
 	     titleFormat : function(date) { // title 설정
 	    	  return date.date.year +"년 "+(date.date.month +1)+ "월"; 
 	    	    },
-   	    columnHeaderText : function(date) { 
-   	    	  return weekList[date.getDay()]; // 헤더 var weekList = ['일','월','화','수','목','금','토']; 
-   	    },
+
    	 displayEventTime:false,
-   	    
 	  eventSources: 
 		  [{
 			  events: function(start, callback) {
@@ -106,8 +101,10 @@ document.addEventListener('DOMContentLoaded', function() {
 					
 			          success : function(doc) {
 			              callback(doc);
+			              $('.fc-title').html('<i class="far fa-smile-wink"></i>');
+			              $('.fc-event').css('font-size', '55px');
+			              $('.fc-title').css('color', '#f1c40f');
  			              console.log(doc);
- 			              
 			        
 			          }//end of success
 			      
@@ -115,19 +112,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			      
 			     
 			  },
-			  color: 'yellow',   // an option!
-			  textColor: 'black' // an option!//end of events
 			  
-		  }], //end of eventSources 
+		  }] //end of eventSources 
 		  
-		  
-		  eventRender:function(event, eventElement) {
-              if(event.imageurl) {
-                  eventElement.find("span.fc-title").prepend("<center><img src='"+event.imageurl+"'><center>");
-              }
-          }
-
-		
 	  });
 	 
 	  calendar.render();
@@ -205,7 +192,8 @@ function ajaxPromise(url, datas) {
  
 $(function(){
 	
-	$('.fc-event').css('font-size', '1em');
+	
+	
 })
 
 
@@ -215,68 +203,71 @@ $(function(){
 </script>
 
 <style type="text/css">
-.fc-content{
-	text-align: center;
-}
 
-.fc-unthemed th, .fc-unthemed td, .fc-unthemed thead, .fc-unthemed tbody, .fc-unthemed .fc-divider, .fc-unthemed .fc-row, .fc-unthemed .fc-content, .fc-unthemed .fc-popover, .fc-unthemed .fc-list-view, .fc-unthemed .fc-list-heading td {
-    border-color: #a69b9b82;
-}
+ 	.fc-content{ 
+ 		text-align: center; 
+ 		height: 80px;
+	}  
+	
+	.fc-event{
+		border: none;
+		padding:0;
+		margin:0;
+	}
 
-#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr{
-    background-color: #dee2e6;
-}
 
-.fc-event-container > a{
-	background-color: #ffc107 !important;
-}
+ 	#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr{ 
+ 	    background-color: white;
+ 	} 
 
-.fc-unthemed td.fc-today{
-    background: #f1ebd0;
-}
+    .fc-event-container > a { 
+ 		background-color: #ffffff !important;  
+ 	    font-size:8pt;
+    	font-family: 'Noto Sans KR', sans-serif;
+    }  
 
-#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sat{
-	background-color: #0584ff;
-}
-#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sun{
-	background-color: #ff0400c7;
-}
 
-#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sat > span{
-	color: white;
-}
-#calendar > div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-day-header.fc-widget-header.fc-sun > span{
-	color: white;
-}
+	.fc-widget-header{
+    	background-color: #ecf0f1;
+    	font-size: 15px;
+    	color: #34495e;
+	} 
+	
+	
+	th.ui-widget-header {
+  	    font-size:8pt;
+    	font-family: 'Noto Sans KR', sans-serif;
+	}
+		
 
-#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div > div.fc-content-skeleton > table > thead > tr > td.fc-day-top.fc-sat > span {
-	color: #0584ff;
-}
-#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div > div.fc-content-skeleton > table > thead > tr > td.fc-day-top.fc-sun > span {
-	color: #ff0400c7;
-}
 
-.fc-day-number{
-	font-weight: bold;
-}
+ 	#calendar > div.fc-view-container > div > table > tbody > tr > td > div > div > div > div.fc-content-skeleton > table > thead > tr  {
+ 	 	color: #a4a9b0;  
+	 }   
+
 
 
 	 #calendar{
- 	 	max-width: 800px;
-  		margin: 30px auto;
+ 	 	max-width: 900px;
+  		margin: 0 auto;
 	 }
 	
 	p.lbtxt{	
 		letter-spacing: -0.05em !important;
-		font-family: 'Nanum Gothic';
 		margin: 0;
 		padding: 0;
 		padding-bottom: 17px;
 		line-height: 19px;
-		font-size: 14px;
+		font-size: 10x;
 		color: #666;
-		}
-		
+	}
+	
+	
+	#calendar > div.fc-toolbar.fc-header-toolbar > div.fc-right > h2{
+		font-size: 28px;
+		font-weight: bolder;
+		color: #34495e;
+	}		
 
 </style>
 
@@ -287,8 +278,8 @@ $(function(){
 <div class="container">
 
 	<br>
-		<div class="page-header" style="margin-left:180px; margin-top:50px;">
-	      <span style="font-size:25px; font-weight:bold;"> <i class="far fa-check-square"></i> 매일매일 출첵이벤트</span>
+		<div class="page-header" style="margin-left:50px; margin-top:50px;">
+	      <span style="font-size:30px; font-weight:bold;"> 매일매일 출첵이벤트</span>
 <p class="lbtxt">뭅뭅뭅 ! 출첵하고 10포인트 받자 ! </p>
 	    </div>
 		<br>	

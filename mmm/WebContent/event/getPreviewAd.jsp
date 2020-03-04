@@ -178,7 +178,7 @@ function comment(currentPage){
 	$(function(){
 		
 		$('#player').attr("src","http://www.youtube.com/embed/"+ "${preview.trailer}");
-		
+	
 		getCommentList(1);
 		
 		//처리 버튼을 누름
@@ -257,12 +257,21 @@ function comment(currentPage){
 		});
 		
 		
+		$('#updateBtn').on('click', function(){
+			
+			var previewNo = ${preview.previewNo};
+			self.location = "/event/updatePreviewAd?previewNo="+previewNo;
+	
+		})
+		
+		
+		
 		$('#doApply').on("click", function(){
 			var status =${preview.previewFlag};
 			console.log(status);
 			
 			if(status==2){
-				 alert("마감된 이벤트 입니다");
+// 				 alert("마감된 이벤트 입니다");
 			}
 			
 			var previewNo = ${preview.previewNo};
@@ -670,6 +679,11 @@ function comment(currentPage){
 		border: 1px solid #dedede;
 	}
 	
+	button.btn.update{
+		background-color: pink;
+		color:gray;
+	}
+	
 	#content{
 		width:90%;
 		margin-left: 21px;
@@ -745,6 +759,11 @@ function comment(currentPage){
 <!--                                    <img src="/resources/image/ddd.PNG" alt=""> -->
 										</div>
                         </div>
+
+		 <c:if test="${user.role eq 'admin'}">
+            <button class="btn float-right update" id="updateBtn">수정</button>
+         </c:if>
+         
             <button class="btn float-right moreInfo" id="viewDetail">영화상세</button>
             <c:if test="${preview.previewFlag==1}">
                <button class="btn float-right getPreviewAd" id="doApply">응모하기</button>
@@ -885,8 +904,12 @@ function getWinnerList(previewNo){
 			$('#winnerArea').empty();
 			for (var i = 0; i < JSONData.list.length; i++) {
 				console.log(JSONData.list[i]);
-				$('#winnerArea').append("<h5>[회원이름] "+JSONData.uList[i].userName+
-						"[전화번호]  "+JSONData.uList[i].phone+"</h5><br>");
+// 			var phonePart = JSONData.uList[i].phone;
+// 			console.log(phonePart);
+// 			phonePart.substr(0,4);
+// 			console.log(phonePart);
+				$('#winnerArea').append("<center><h5>"+JSONData.uList[i].userName+
+						" "+JSONData.uList[i].phone+"</h5></center><br>");
 			}
 		}
 	}); //ajax끝
@@ -1057,7 +1080,7 @@ function getWinnerList(previewNo){
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="myModalTitle"></h5>
+	        <h5 class="modal-title" id="myModalTitle" style="font-weight:bold;">당첨자 목록</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span  class="getPreview" aria-hidden="true">&times;</span>
 	        </button>
