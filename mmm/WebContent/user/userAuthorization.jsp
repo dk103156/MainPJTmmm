@@ -276,6 +276,8 @@ $(function(){
 	}
 		
 	///////////////////////휴대폰번호 인증///////////////////////////////////
+	
+	
 	$("#smsBtn").on("click", function(){
 		console.log("클릭!")
 		var phone = $("#phone").val();
@@ -337,38 +339,25 @@ $(function(){
 					console.log("동작");
 					console.log(JSONData.status);
 					console.log(type);
-					//$("div").text(JSONData.status); 
-					
+		
 					if(JSONData == 0){
 						//0: 인증번호가 틀림
-						$('confirmNum2'),text('인증번호를 확인해주세요.');
+						$('#confirmNum2'),text('인증번호를 확인해주세요.');
 						$("#confirmNum2").css("color", "red");
-						
-						$("#chkBtn").attr("disabled", true);
 					}else{
-						$("#confirmNum2").text("인증이 완료되었습니다.");
-							
-							Swal.fire({
-						           icon: 'success', //"info,success,warning,error" 중 택1
-						          title: '인증 완료',
-						          text: '가입을 계속 진행해주세요.',					          
-						      }).then((result) => {  
-						         
-					    		$("#chkBtn").attr("disabled", false);
+						Swal.fire({
+							icon: 'success', //"info,success,warning,error" 중 택1
+							title: '인증 완료',
+							text: '계속 진행해주세요.',
+							}).then((result) => {
 								
 								if(type=="addUser"){
 									self.location= "/user/addUser";
-								
-								} else if(type=="findPw" ){
-									self.location= "/user/findPw";
-									
-								}else if(type=="findId" ){
-									self.location= "/user/findId";
-									
-								}else{
-									nextPage(phone, "phone");
-								} 
-						      });
+
+							}else{
+								nextPage(phone, "phone");
+							}
+							});
 					}//else
 				}, error : function() {
 					console.log("실패");
@@ -381,6 +370,8 @@ $(function(){
 	
 	
 	///////////////////////////////이메일 인증////////////////////////////////////
+	
+		
 	$( "#sendBtn" ).on("click" , function() {
 		console.log("click");
 		var email = $("#email").val();
@@ -483,30 +474,19 @@ $(function(){
 						
 						$("#chkBtn2").attr("disabled", true);
 					}else{
-						//$("#confirmNum2").text("인증이 완료되었습니다.");
-						
-						
 						Swal.fire({
-					           icon: 'success', //"info,success,warning,error" 중 택1
-					          title: '인증 완료',
-					          text: ' 계속 진행해주세요.',					          
-					      }).then((result) => {   
-					         
-					    	  $("#chkBtn2").attr("disabled", false);
-							
-							if(type=="addUser"){
-								self.location= "/user/addUser";
-							
-							} else if(type=="addUnUserView" ){
-								self.location= "/user/addUnUserView";
+							icon: 'success', //"info,success,warning,error" 중 택1
+							title: '인증 완료',
+							text: ' 계속 진행해주세요.',
+							}).then((result) => {   
+								if(type=="addUser"){
+									self.location= "/user/addUser";
+
+								}else{
+									nextPage(email, "email");
+								}
 								
-							}else if(type=="findId" ){
-								self.location= "/user/findId";
-								
-							}else{
-								nextPage(phone, "email");
-							} 
-					      });
+							});
 					}//else
 				}, error : function() {
 					console.log("실패");
@@ -515,6 +495,12 @@ $(function(){
 		
 		
 	})//이메일인증번호 입력후 확인 self.location = "/user/authEmail/" +emailChkNum; 
+	
+	
+	
+	
+	
+	
 	
 	
 	 

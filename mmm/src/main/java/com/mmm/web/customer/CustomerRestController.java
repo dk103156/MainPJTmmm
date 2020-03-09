@@ -21,30 +21,18 @@ import com.mmm.service.board.BoardService;
 import com.mmm.service.domain.Article;
 import com.mmm.service.domain.Quiz;
 import com.mmm.service.domain.User;
-import com.mmm.service.event.EventService;
-import com.mmm.service.payment.PaymentService;
-import com.mmm.service.user.UserService;
 
 @RestController
 @RequestMapping("/customer/*")
 public class CustomerRestController {
 
-	@Autowired
-	@Qualifier("eventServiceImpl")
-	private EventService eventService;
 	
-	@Autowired
-	@Qualifier("userServiceImpl")
-	private UserService userService;
-	
+
 	@Autowired
 	@Qualifier("boardServiceImpl")
 	private BoardService boardService;
 	
-	@Autowired
-	@Qualifier("paymentServiceImpl")
-	private PaymentService paymentService;
-	
+
 	public CustomerRestController(){
 		System.out.println(this.getClass());
 	}

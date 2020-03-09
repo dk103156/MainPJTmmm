@@ -252,7 +252,7 @@ $(function(){
 				
 				if (data == 0) {
 						// 0 : 아이디가 중복되는 문구
-						$("#checkId").text("사용중인 아이디입니다 :p");
+						$("#checkId").text("사용중인 아이디입니다.");
 						$("#checkId").css("color", "red");
 						$("#addUserBtn").attr("disabled", true);
 				} else {
@@ -270,7 +270,7 @@ $(function(){
 							
 						} else {
 							
-							$('#checkId').text("아이디는 소문자와 숫자 5~15자리만 가능합니다 :) :)");
+							$('#checkId').text("아이디는 소문자와 숫자 5~15자리만 가능합니다.");
 							$('#checkId').css('color', 'red');
 							$("#addUserBtn").attr("disabled", true);
 						}
@@ -365,27 +365,27 @@ $(function(){
 		<!-- form Start /////////////////////////////////////-->
 		<form id="addUser">
 			<div class="form-group row" style="text-align: center;">
-			    <label for="userId" class="col-sm-3 col-form-label">아이디</label>
+			    <label for="userId" class="col-sm-3 col-form-label">아이디<em class="font-orange">*</em></label>
 			    <div class="col-sm-9">
-		      		<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" >
+		      		<input type="text" class="form-control" id="userId" name="userId" placeholder="아이디는 소문자와 숫자 5~15자리만 가능합니다." >
 		      		<input type="hidden" class="form-control" id="role" name="role" value="user" >
 		      		<h6 id="checkId" style="margin-top:10px; color:red;"></h6>
 		    	</div>
 			</div>
 			<div class="form-group row" style="text-align: center;">
-				<label for="password" class="col-sm-3 col-form-label">비밀번호</label>
+				<label for="password" class="col-sm-3 col-form-label">비밀번호<em class="font-orange">*</em></label>
 				<div class="col-sm-9">
 					<input type="password" class="form-control" id="password" name="password" placeholder="5~15자의 영문 소문자와 숫자,특수문자를 포함해주세요.">
 		    	</div>
 			</div>
 			<div class="form-group row" style="text-align: center;">
-				<label for="password2" class="col-sm-3 col-form-label">비밀번호확인</label>
+				<label for="password2" class="col-sm-3 col-form-label">비밀번호확인<em class="font-orange">*</em></label>
 				<div class="col-sm-9">
 					<input type="password" class="form-control" id="password2" placeholder="비밀번호 확인">
 				</div>
 			</div>
 		  	<div class="form-group row" style="text-align: center;">
-		    	<label for="userName" class="col-sm-3 col-form-label">이름</label>
+		    	<label for="userName" class="col-sm-3 col-form-label">이름<em class="font-orange">*</em></label>
 		    	<div class="col-sm-9">
 		      		<input type="text" class="form-control" id="userName" name="userName" placeholder="이름">
 		    	</div>
@@ -425,7 +425,7 @@ $(function(){
 <!-- 		    	</div> -->
 <!-- 		  	</div> -->
   			<div class="form-group row" style="text-align: center;">
-    			<label for="email" class="col-sm-3 col-form-label">이메일</label>
+    			<label for="email" class="col-sm-3 col-form-label">이메일<em class="font-orange">*</em></label>
     			<div class="col-sm-9">
 	    			<c:choose> 
 					    <c:when test="${not empty sessionScope.email }">   
@@ -439,7 +439,7 @@ $(function(){
     			</div>
   			</div> 
 			<div class="form-group row" style="text-align: center;">
-    			<label for="phone" class="col-sm-3 col-form-label">휴대전화번호</label>
+    			<label for="phone" class="col-sm-3 col-form-label">휴대전화번호<em class="font-orange">*</em></label>
     			<div class="col-sm-9">
     				<c:choose> 
 					    <c:when test="${not empty sessionScope.phone }">   
@@ -565,7 +565,7 @@ $(function(){
 			</div>
   			<div class="form-check" style="margin-top: 5px; margin-bottom: 5px;">
 			    <input type="checkbox" class="form-check-input" id="agreeCheck">
-			    <label class="form-check-label" for="agreeCheck">개인정보수집 및 이용 동의</label>
+			    <label class="form-check-label" for="agreeCheck">개인정보수집 및 이용 동의<em class="font-orange">*</em></label>
 			</div>	
 			<div class="form-group row">
 				<div class="col-sm-12 text-center" style="margin-bottom: 20px;">
@@ -987,7 +987,7 @@ $(function(){
 				$("#addTheater").on("click",function(){
 					var theaterName = $("#myModalTitle").text();
 					if( $("#likeTheater1 option:selected").val() == "극장선택"){
-						alert("첫번째 선호극장이 선택되었습니다.")
+						//alert("첫번째 선호극장이 선택되었습니다.")
 						$("#likeTheater1 option:selected").removeAttr("selected");
 						$("#likeTheater1 option").each(
 							(index,item) => {
@@ -999,7 +999,7 @@ $(function(){
 							}//end of option		
 						)//end of each
 					}else if( $("#likeTheater2 option:selected").val() == "극장선택"){
-							alert("두번째 선호극장이 선택되었습니다.")
+							//alert("두번째 선호극장이 선택되었습니다.")
 							$("#likeTheater2 option:selected").removeAttr("selected");
 							$("#likeTheater2 option").each(
 									(index,item) => {
@@ -1010,7 +1010,7 @@ $(function(){
 								}//end of option		
 							)//end of each		
 					}else if( $("#likeTheater3 option:selected").val() == "극장선택"){
-							alert("세번째 선호극장이 선택되었습니다.")
+							//alert("세번째 선호극장이 선택되었습니다.")
 							$("#likeTheater3 option:selected").removeAttr("selected");
 							$("#likeTheater3 option").each(
 									(index,item) => {
@@ -1021,7 +1021,7 @@ $(function(){
 								}//end of option		
 							)//end of each		
 					}else{
-						alert("선호 극장이 모두 선택되었습니다.");
+						//alert("선호 극장이 모두 선택되었습니다.");
 						$("#myModal").modal('hide')
 						$("#outerMotdal").modal('hide')
 						$('body').removeClass('modal-open');
@@ -1069,8 +1069,8 @@ $(function(){
 	        ...
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal2" onClick='otherModal()'>닫기</button>
-	        <button type="button" class="btn btn-primary" id="addTheater">선호극장 추가하기</button>
+	        <button type="button" class="button large" style="margin-right: 10px;" data-dismiss="modal2" onClick='otherModal()'>닫기</button>
+	        <button type="button" class="button large purple" style="color: #333; " id="addTheater">선호극장 추가하기</button>
 	      </div>
 	    </div>
 	  </div>

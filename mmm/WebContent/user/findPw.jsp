@@ -131,7 +131,7 @@ $(function(){
 						</div>
 						<div class="modal-footer">
 							<a href="/user/login"><button type="button" class="button large purple" style=" border-radius: 4px; color:#333; height: 46px;  border: 0; background-color:#fee50e; color: #333;">로그인 화면으로 이동</button></a>
-							<a href="/main.jsp"><button type="button" class="button large purple" style=" border-radius: 4px; color:#333; height: 46px;  border: 0; background-color:#fee50e; color: #333; ">메인화면으로 이동</button></a>
+							<a href="/"><button type="button" class="button large purple" style=" border-radius: 4px; color:#333; height: 46px;  border: 0; background-color:#fee50e; color: #333; ">메인화면으로 이동</button></a>
 						</div>
 					</div>
 				</div>

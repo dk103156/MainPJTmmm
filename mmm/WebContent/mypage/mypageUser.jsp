@@ -879,6 +879,18 @@ colgroup {
     display: table-column-group;
 }
 
+.button.purple {
+    color: #fff;
+    line-height: 36px;
+    border: 0;
+    background: #fee50e;
+}
+.button.large {
+    height: 46px;
+    padding: 0 30px;
+    line-height: 44px;
+}
+
 
 </style>
 <script type="text/javascript">
@@ -1075,8 +1087,8 @@ $(function(){
 						</div>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-				        <button type="button" class="btn btn-primary" id="addTheaterBtn">등록</button>
+				        <button type="button" class="button large"  style="margin-right: 10px;" data-dismiss="modal">취소</button>
+				        <button type="button" class="button large purple" style="color: #333; " id="addTheaterBtn">등록</button>
 				      </div>
 				    </div>
 				  </div>
@@ -1228,8 +1240,8 @@ $(function(){
 							</div>
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					        <button type="button" class="btn btn-primary" id="addGenreBtn">등록</button>
+					        <button type="button" class="button large" style="margin-right: 10px;" data-dismiss="modal">취소</button>
+					        <button type="button" class="button large purple" style=" " id="addGenreBtn">등록</button>
 					      </div>
 					    </div>
 					  </div>
@@ -1734,8 +1746,8 @@ $(function(){
 	        ...
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal2" onClick='otherModal()'>닫기</button>
-	        <button type="button" class="btn btn-primary" id="addTheater">선호극장 추가하기</button>
+	        <button type="button" class="button large" style="margin-right: 10px;" data-dismiss="modal2" onClick='otherModal()'>닫기</button>
+	        <button type="button" class="button large purple" style="color: #333; " id="addTheater">선호극장 추가하기</button>
 	      </div>
 	    </div>
 	  </div>
