@@ -119,7 +119,7 @@ p.footerP {
 	    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
 	    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/MegaBox.jpg"></a>
 	    </div>	
-	    <div class="col-7 copyright text-right" style="margin-top: 15px;">   
+	    <div class="col-7 copyright text-right" style="margin-top: 18px;">   
 	    	<p class="footerP">   
 	    	   <span>(04377)서울특별시 용산구 한강대로 23길 55, 아이파크몰 6층(한강로동)</span>
 	    	</p>
