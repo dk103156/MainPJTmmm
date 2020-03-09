@@ -682,6 +682,9 @@ function comment(currentPage){
 	button.btn.update{
 		background-color: pink;
 		color:gray;
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #222;
 	}
 	
 	#content{

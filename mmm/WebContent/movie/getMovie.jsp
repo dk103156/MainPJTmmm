@@ -76,6 +76,12 @@
 		    width: 700px;
 		    margin: 0 auto;
 		}
+		
+		button.swal2-confirm.swal2-styled {
+			background-color: #fee50e;
+			border-color : #fee50e;
+			color : #222;
+		}		
     </style>
     
 	<script type="text/javascript">

@@ -95,7 +95,10 @@ body {
 	padding-left : 7px;
 }
 
-
+p.footerP {
+	margin-top: 0;
+    margin-bottom: 1rem;
+}
 </style>
 
 
@@ -117,20 +120,20 @@ body {
 	    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/MegaBox.jpg"></a>
 	    </div>	
 	    <div class="col-7 copyright text-right">   
-	    	<p>   
+	    	<p class="footerP">   
 	    	   <span>(04377)서울특별시 용산구 한강대로 23길 55, 아이파크몰 6층(한강로동)</span>
 	    	</p>
-	    	<p>
+	    	<p class="footerP">
 	    	   <span>대표이사 : 조규비</span>
 		       <span>사업자 등록번호 : 000-00-00000</span>
 		       <span>통신판매업신고번호 : 2020-서울비트-0001</span>
 	    	</p> 
-	    	<p>
+	    	<p class="footerP">
 	    	   <span>개인정보보호 책임자 : 김수정</span>
 		       <span>대표이메일 : movmovmov6@gmail.com</span>
 		       <span>MMM 고객센터 : 1544-1111</span>
 	    	</p> 
-	    	<p>
+	    	<p class="footerP">
 	    	   <span>© mmm. All Rights Reserved</span>
 	    	</p> 
     	</div>
