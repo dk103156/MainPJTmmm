@@ -118,13 +118,15 @@ div.ticketingPagination.row > div:nth-child(2) > ul {
 #modalButton {
 	background-color: #fee50e;
 	border-color : #fee50e;
-	color : #222;
+	color : #333;
 }
 
 .page-link {
 	color: #212529;
 
 }
+
+
 </style>
 </head>
 <body id="body">

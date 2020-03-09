@@ -14,7 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-	<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/35102316d7.js" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	
@@ -86,6 +86,12 @@
 	  	height:auto;
 	  }
 	  
+	  #okBtn {
+	  	    background-color: #fee50e;
+	  	    border-color: #fee50e;
+	  	    color : #333;
+	  	    
+	  }
 	</style>
 
 

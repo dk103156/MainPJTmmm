@@ -68,7 +68,7 @@
 		
 	.page-item.active .page-link {
 	    z-index: 3;
-	    color: #212529 !important;
+	    color: #333 !important;
 	    background-color: #fee50e !important;
 	    border-color: #fee50e !important;
 	}	
@@ -148,7 +148,7 @@
  <div class="pagination row">
 			  		<div class="col-4"></div>
 			  		<div class="col-4">
-					  <ul class="pagination ">
+					  <ul class="pagination justify-content-center">
 		   				 <!--  <<== 좌측 nav -->
 		  				<c:if test="${ resultPage.currentPage <= resultPage.pageUnit }">
 		  					    <li class="page-item disabled">

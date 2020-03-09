@@ -230,9 +230,13 @@
 		
 		.page-item.active .page-link {
 		    z-index: 1;
-		    color: #4e4c4c;
-		    background-color: #fee00e;
-		    border-color: #d6cece;
+		    color: #333 !important;
+		    background-color: #fee50e !important;
+		    border-color: #fee50e !important;
+		 }
+		 
+		 .page-link {
+		 	color: #333 !important;
 		 }
 
 </style>

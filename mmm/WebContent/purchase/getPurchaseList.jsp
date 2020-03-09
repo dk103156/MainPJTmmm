@@ -90,6 +90,30 @@
 	.page-link {
 		color: #333;
 	}
+	
+	#btn {
+	    color: #333;
+	    background-color: #fee50e;
+	    border-color: #fee50e;		
+	}
+	
+	#modalButton {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #333;
+	}
+	
+	#purchaseListBtn {
+		color: #fff;
+   		background-color: #6c757d;
+   		border-color: #6c757d;
+	}
+	
+	#purchaseCancel > div > div > div.modal-header {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #333;	
+	}
 </style>	 
 <body id="body">
 

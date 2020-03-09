@@ -37,7 +37,17 @@
 	    opacity: 1;
 	}
 	
-
+	#inventoryBtn {
+		color : #333;
+	    background-color: #fee50e;
+	    border-color: #fee50e;		
+	}
+	
+	#btn {
+		color: #fff;
+   		background-color: #6c757d;
+   		border-color: #6c757d;	
+	}
 </style>  
 	<title>mmm</title>
 </head>

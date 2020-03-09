@@ -189,6 +189,12 @@ a.button:active, a.button:focus, a.button:hover, a.button:visited {
     line-height: 44px;
 }
 
+#cancelBtn{
+	color: #fff;
+   	background-color: #6c757d;
+   	border-color: #6c757d;
+}
+
 </style>
 
 <script type="text/javascript">

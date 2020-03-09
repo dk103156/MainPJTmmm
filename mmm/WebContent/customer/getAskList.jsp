@@ -114,10 +114,15 @@
 	
 	.page-item.active .page-link {
 	    z-index: 3;
-	    color: #212529 !important;
+	    color: #333 !important;
 	    background-color: #fee50e !important;
 	    border-color: #fee50e !important;
-	}	
+	}
+	
+	.page-link {
+		color: #333 !important;
+	}
+		
 </style>
 </head>
 <body>

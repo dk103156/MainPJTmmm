@@ -727,7 +727,9 @@ function comment(currentPage){
 	border: 1px solid #dedede;
 	}
 	
-	
+	 .page-link {
+	 	color: #333 !important;
+	 }	
 </style>
 
 
