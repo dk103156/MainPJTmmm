@@ -639,7 +639,7 @@ $(function(){
 								
 					  			for(var i=data.resultPage.beginUnitPage; i<=data.resultPage.endUnitPage; i++){
 					  				if(data.resultPage.currentPage==i){
-					  					Element+="<li class='page-item active' aria-current='page'>"
+					  					Element+="<li class='ge-item active' aria-current='page'>"
 					  					Element+="<a class='page-link' href='javascript:Pagination("+i+")'>"+i+"<span class='sr-only'>(current)</span></a>"
 					  					Element+="</li>"
 					  				}else{
@@ -673,6 +673,10 @@ $(function(){
 								$("#searchCondition").val(data.search.searchCondition);
 								activeCancel()
 								detail()
+								
+								Pagination(1)
+						}else{
+							$("div.ticketingPagination.row").empty();
 						}//end of if
 					}//end of arrow function
 						
@@ -798,6 +802,10 @@ $(function(){
 						$("#searchCondition").val(data.search.searchCondition);		
 						
 						detail()
+						
+						Pagination(1)
+					}else{
+						$("div.ticketingPagination.row").empty();
 					}//end of if
 				}//end of arrow function
 						

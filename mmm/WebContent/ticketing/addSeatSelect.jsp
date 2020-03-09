@@ -2069,7 +2069,7 @@ $(function(){
 				}
 			});
 		}else if(result==0){
-			//alert("좌석을 모두 선택하였습니다.");
+			  alert("좌석을 모두 선택하였습니다. 재선택하려면 다시하기를 선택하세요.");
 	    	  // 좌석 선택 버튼 "빨간불" 들어오게!
 	    	  $(".btn-right").addClass("on");
 	    	  $(".btn-right").css("background", "url(http://img.cgv.co.kr/CGV_RIA/Ticket/image/reservation/tnb/tnb_buttons.png) no-repeat;")			
