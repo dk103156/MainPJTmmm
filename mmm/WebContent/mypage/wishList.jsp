@@ -11,6 +11,8 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -217,30 +219,38 @@ $(function(){ // => 이 페이지가 로딩될때 이 영역 안에 있는 자�
 	getWishMovieList(startRowNum, currentPage, pageSize); // 초기 1 페이지 호출
 	
 	$(document).on("click", ".cancleWishBtn", function(){ // 위시리스트 취소 이벤트
-		if(confirm("취소 하시겠습니까?")){
-			
-			var movieNo = $(this).attr("id");
-			
-			$.ajax({
-				url : "/movie/json/deleteWish",
-				method : "POST",
-				data : JSON.stringify({
-					movieNo : movieNo,
-					userNo : '${user.userNo}' // 이후에 고쳐야할  가능성이 다분하다 다분해!!
-				}),
-				dataType : "json",	//data를 json으로 받았으면 좋겠다.
-				headers : {
-					"Accept" : "application/json",
-					"Content-Type" : "application/json"
-				}
-			}).done(function(responseJSON){
-				getWishMovieList(startRowNum, currentPage, pageSize);
-			}).fail(function(result, status){
-				console.log(result, status);
-			});
-		} else {
-			console.log("안취소!");
-		}			
+		
+		Swal.fire({
+	           icon: 'warning', //"info,success,warning,error" 중 택1
+	          title: '취소하시겠습니까?',
+	      }).then((result) => { 
+	    	  
+			if(confirm("취소 하시겠습니까?")){
+	
+				var movieNo = $(this).attr("id");
+				
+				$.ajax({
+					url : "/movie/json/deleteWish",
+					method : "POST",
+					data : JSON.stringify({
+						movieNo : movieNo,
+						userNo : '${user.userNo}' // 이후에 고쳐야할  가능성이 다분하다 다분해!!
+					}),
+					dataType : "json",	//data를 json으로 받았으면 좋겠다.
+					headers : {
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					}
+				}).done(function(responseJSON){
+					getWishMovieList(startRowNum, currentPage, pageSize);
+				}).fail(function(result, status){
+					console.log(result, status);
+				});
+			} else {
+				console.log("안취소!");
+			}
+		
+		 });//스윗얼랏
 	});
 	
 	$(document).on("click", ".pageBtn", function(){ // 페이지 버튼 이벤트

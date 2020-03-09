@@ -232,9 +232,13 @@
 </div>
 
 <div class="container">
-
+	<div class="row mx-0" style="margin: 10px auto;">
+		<span class="col-2"></span>
+		<span class="col-2" style="position:relative; right:40px;"><strong>글 번호 :</strong> <kbd>${article.articleNo }</kbd></span>
+		<span class="col-6"></span>
+		<span class="col-2"></span>
+	</div>
 	<div class="header p-0"> 
-	
 	
 	<div class="border-bottom text-black mb-2 p-3 h-100" style="background-color:#333;">   <!-- 문의 제목, 일시 -->
 		<div class="inline left">
@@ -271,7 +275,7 @@
 	  				<span style="font-size: 20px; "><i class="fab fa-replyd fa-lg" style="color:#f23d4f;" ></i></span>
 	  				<c:if test="${reArticle.articleTitle ne null}">
 	                  <span style="font-weight:bold;"> ${reArticle.articleTitle} </span>
-	                   </c:if> 
+	                </c:if> 
 	                </div>
 	                
 	                <div class="inline rightt date">

@@ -1453,7 +1453,7 @@ input {
 			  </script>
 			  </td>
 			  <td  class="col" >
-	  	    	<input type="hidden" name="articleNo" value="${notice.articleNo}"/>${ i}
+	  	    	<input type="hidden" name="articleNo" value="${notice.articleNo}"/><kbd>${notice.articleNo}</kbd>
 			  </td>
 			  
 			  <td class="col">  ${notice.articleTitle} 

@@ -31,17 +31,24 @@
   <!--     Common Css -->
   <link rel="stylesheet" href="/resources/css/product.css">
   
+  <link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
+  	
 <style>
 
 input {
 	border: none;
+}
+
+img.removeCart {
+	float : right;
+	cursor : pointer;
 }
 </style>
 
 </head>
 <body id="body">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
-	<div class="container" style="height:496px;">
+	<div class="container" style="height:auto;">
 		<div class="row mx-0">
 			<div class="cartHeader col-12 ">
 			<br>
@@ -102,6 +109,9 @@ function removeComma(str){
 $(function(){
 	$('.dropdown-toggle').dropdown('toggle')
 	$('.dropdown-toggle').dropdown('hide')
+	
+	
+
 });
 $.ajaxSetup({async:false}); //전역 ajax 동기로
 	var prodNoList = new Array();	//상품 번호 
@@ -109,9 +119,10 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	var prodQuantityList = new Array();	// 상품 갯수
 	var prodPriceList = new Array();
 	var prodImageList = new Array();
-
+	var cartNoList = new Array();
 	<c:forEach var='i' items='${cartList }'>
-		console.log('${i}');
+		//console.log('${i.cartNo}');
+		cartNoList.push('${i.cartNo}');
 		prodNoList.push('${i.cartProdNo}');
 		prodQuantityList.push('${i.cartProdQuantity}')	
 	</c:forEach>
@@ -140,14 +151,14 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	prodNoList.forEach( (x,i) => {
 		//console.log(i)
 		var Element = "<div class='cartContentIn row mx-0 mb-2'>"
-				Element+= "<div class='prodNo col-1' style='margin-top: 55px;'><span><kbd>"+prodNoList[i]+"</kbd></span></div>"
+			Element+= "<div class='prodNo col-1' style='margin-top: 55px;'><span><kbd>"+prodNoList[i]+"</kbd></span></div>"
 //				Element+= "<div class='prodNo col-1'><span><h3 style='margin-top: 55px;'>"+[i+1]+"</h3></span></div>"
 			Element+= "<div class='prodName col-6'>"
 			Element+= "<span><img src='../resources/image/"+prodImageList[i]+"' width=170 height=150 ></span>"
 			Element+= "<span>"+prodNameList[i]+"</span>"
 			Element+= "</div>"
 			Element+= "<div class='prodPrice col-3'><span><input class='text-center' name='prodPrice' type='text' style='margin-top: 55px;' initialValue='"+prodPriceList[i]+"'value='"+numberWithCommas( prodPriceList[i] )+"' readonly> 원</span></div>"
-			Element+= "<div class='prodQuantity col-2'><span><input class='text-center' type='number' style='margin-top: 55px;'  value='"+prodQuantityList[i]+"' min='1' step='1' max='99'> 개</span></div>" 
+			Element+= "<div class='prodQuantity col-2'><span><input class='text-center' type='number' style='margin-top: 55px;'  value='"+prodQuantityList[i]+"' min='1' step='1' max='99'> 개</span><img class='removeCart' style='position:relative; top:60px;'src='../resources/image/productIcon/close-button.jpg' width=20><input type='hidden' value='"+cartNoList[i]+"' </div>"
 			Element+= "</div><hr style='background-color: black;'>"		
 			//console.log(Element)
 			
@@ -156,7 +167,9 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	})
 	var sum=0;
 	$("input[name=prodPrice]").each( (index,value) => {
-		sum += parseInt( removeComma( $(value).val() ) )
+		var Quantity = $($("div.prodQuantity > span > input")[index]).val();
+		//console.log( "갯수는 : " +Quantity);
+		sum += parseInt( Quantity * removeComma( $(value).val() ) )
 	});
 	$("input[name=totalPrice]").val( numberWithCommas(sum) )
 	
@@ -208,6 +221,14 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	});	
 	
 	//장바구니 삭제하기 
+	
+	$(".removeCart").on("click",function(){
+		var cartNo= $(this).next().val();
+		$.get("/product/json/removeCart/"+cartNo)
+		.done( () =>{
+			 location.reload(true);
+		})//end of $.get
+	});
 	
 	},50)
 

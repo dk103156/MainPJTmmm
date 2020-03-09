@@ -352,6 +352,7 @@ public class ProductController {
 			
 		}
 		
+		@CheckAuth(role="user,admin")
 		@RequestMapping(value="getCartList", method=RequestMethod.GET)
 		public String getCartList(@ModelAttribute Search search, Model model, HttpServletRequest request) throws Exception {
 			

@@ -673,6 +673,9 @@
 	  <c:if test="${status=='failed'}">
 	  	$('#cancelToast').toast('show')
 	  </c:if>
+	  <c:if test="${alarm eq '1'}">
+	  $('#cancelToast').css("right","30px");
+	  </c:if>
 	<c:if test="${alarm eq '1' || alarm eq '0'}">
 		$('#cancelToast').toast('show')
 	</c:if>
