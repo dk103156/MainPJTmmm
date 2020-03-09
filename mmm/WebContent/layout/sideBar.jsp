@@ -180,6 +180,7 @@
 });// end of function
 
 	$("#shoppingCart").on("click", function(){
+		console.log("작동?")
 		if($("div.shoppingCart").css("right")=="-200px"){
 			$("aside").css("right","-200px");
 			$("div.shoppingCart").css("right","0px");

@@ -650,9 +650,9 @@ function comment(currentPage){
 		color:#545454;
 	}
 	button.btn.getPreviewAd {
-	background-color:#fee50e ;
-	color:#545454;
-	border: 1px solid #dedede;
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #222;
 	}
 	
 	#content{

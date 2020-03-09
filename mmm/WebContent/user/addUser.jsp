@@ -83,6 +83,24 @@
 .font-orange {
     color: #e63e30!important;
 }
+
+#addTheater {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #222;
+}
+
+#myModalBodyButton {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #222;
+} 
+
+button.swal2-confirm.swal2-styled {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #222;
+}
       
 </style>
 
@@ -100,7 +118,7 @@ $(function(){
 	//============= "취소"  Event 처리 및  연결 ===========
 	$("a[href='#']").on("click",function(){
 		//$("form")[0].reset();
-		self.location="/main/main";
+		self.location="/";
 	});		
 
 
@@ -591,6 +609,10 @@ $(function(){
      		<div id="map" style="width:1138px;height:762px;"></div>
 	<script>
 	
+	$(function(){
+		$('.dropdown-toggle').dropdown('toggle')
+		$('.dropdown-toggle').dropdown('hide')
+	});
 	$("#outerMotdal").on('shown.bs.modal', function (e) {
 		activeMap();
 	})
