@@ -41,7 +41,7 @@ input {
 </head>
 <body id="body">
 	<jsp:include page="/layout/header.jsp"></jsp:include>
-	<div class="container">
+	<div class="container" style="height:496px;">
 		<div class="row mx-0">
 			<div class="cartHeader col-12 ">
 			<br>

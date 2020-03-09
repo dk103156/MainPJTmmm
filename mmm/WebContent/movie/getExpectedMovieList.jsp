@@ -44,6 +44,10 @@
 		  
 		  padding: 15px;
 		}
+		
+		#boxOfficePage,#expectedMoviePage {
+			cursor : pointer;
+		}		
     </style>
     
 	<script type="text/javascript">
@@ -452,10 +456,10 @@
 						<!-- 						hover 효과를 위해.. CSS, JS 확 -->
 						<figure class="snip1384">
 						   <c:if test="${movie.poster != null }">
-	                	      <img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}"  height="225" alt="">
+	                	      <img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}" style="height:350px;" alt="">
 			               </c:if>
 			               <c:if test="${movie.poster == null }">
-	                	      <img name="poster" class="img-thumbnail card-img-top"  src="http://placehold.it/163x225/E8117F/ffffff?text=sample"  height="225" alt="">
+	                	      <img name="poster" class="img-thumbnail card-img-top"  src="http://placehold.it/163x225/E8117F/ffffff?text=sample" style="height:350px;" alt="">
 			               </c:if> 
 							
 						   <figcaption>

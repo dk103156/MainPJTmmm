@@ -133,7 +133,7 @@
  		<br/><br/><br/>
  		 	
  			
- <div class="container">
+ <div class="container" style="height:496px;">
 	<div class="col-lg-6 col-sm-6">
 		
 			<div class="col-md-6">

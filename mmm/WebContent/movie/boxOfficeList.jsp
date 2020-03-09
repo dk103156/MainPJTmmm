@@ -47,6 +47,10 @@
 		  padding: 15px;
 		}
 		
+		#boxOfficePage,#expectedMoviePage {
+			cursor : pointer;
+		}
+		
 /* 		.btn-yellow-cs { */
 /* 			background-color: #fee50e!important; */
 /* 		    color: #212529; */
@@ -453,7 +457,7 @@
 
 <!-- 						hover 효과를 위해.. CSS, JS 확 -->
 						<figure class="snip1384">
-							<img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}"  height="225" alt="">
+							<img name="poster" class="img-thumbnail card-img-top"  src="${movie.poster}" style="height:350px;" alt="">
 							
 							<figcaption>
 								<p>${movie.summary}	</p>
