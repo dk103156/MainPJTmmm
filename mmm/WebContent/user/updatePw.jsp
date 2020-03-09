@@ -15,6 +15,9 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
 
+<!-- 	SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -298,8 +301,13 @@ $(function(){
 			alert("리턴")
 			return;
 		}else{
-		alert("비밀번호가 수정되었습니다.");
-		$("form").attr("method","post").attr("action","/user/updatePw").submit();
+			Swal.fire({
+		           icon: 'success', //"info,success,warning,error" 중 택1
+		          title: '변경 완료',
+		      }).then((result) => {   
+		    	  $("form").attr("method","post").attr("action","/user/updatePw").submit();
+		      });
+		
 		}
 	})
 	

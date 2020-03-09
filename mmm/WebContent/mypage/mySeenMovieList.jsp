@@ -228,7 +228,7 @@ function getSeenMovieList(startRowNum, currentPage, pageSize){ // 내가본영�
 					'<li class="col-md-4" style="text-align:center; height: 300px;">'
 						+'<a href="/movie/getMovie/'+mySeenMovieList[i].movieNo+'" style="text-decoration:none;">'
 							+'<img src="'+mySeenMovieList[i].poster+'" width="200" height="250">'
-							+'<br> <h4>'+mySeenMovieList[i].movieName+'</h4>'
+							+'<br> <h6><strong>'+mySeenMovieList[i].movieName+'</strong></h6>'
 						+'</a>'
 					+'</li>'
 				);

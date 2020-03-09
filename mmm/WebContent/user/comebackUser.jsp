@@ -9,18 +9,22 @@
 <meta charset="UTF-8">
 <link href="/resources/image/logo/logo.png" rel="shortcut icon" type="image/x-icon">
 <title>mmm</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
 <style type="text/css">
+
+body {
+    font-family:'Noto Sans KR', sans-serif;
+}
+
 
 .modal-layer {
     overflow-y: scroll;
@@ -68,7 +72,7 @@
     color: #fff;
     padding: 15px 20px 0 20px!important;
     font-size: 1.2em;
-    line-height: 1.1;
+    line-height: 1.1;;
 }	
 
 .modal-layer .wrap .layer-con {
@@ -161,7 +165,7 @@ $(function(){
 				}else{
 					$("#passwordChk").text("");
 					alert("복구가 완료 되었습니다.")
-					self.location="/main/main";
+					self.location="/";
 				} 
 			}, error : function() {
 					console.log("실패");

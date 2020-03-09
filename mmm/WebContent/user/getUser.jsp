@@ -651,7 +651,7 @@ $(function(){
 			success : function(data) {
 				console.log( data);
 				alert("회원정보가 수정되었습니다.");
-				$("#plusPage").load("/user/passwordCheck");
+				$("#plusPage").load("/mypage/mypage?condition=99");
 			}, error : function() {
 					console.log("실패");
 				}
@@ -845,7 +845,7 @@ $(function(){
 								</form>
 								
 								<button type="button" class="button small gray-line" id="addProfileImgBtn">이미지 선택</button>
-								<button type="button" class="button small gray-line" id="updateImgBtn">등록</button>
+								<button type="button" class="button small gray-line " id="updateImgBtn">등록</button>
 								
 								<!-- Button trigger modal -->
 								<button type="button" class="button small member-out" data-toggle="modal" data-target="#staticBackdrop" title="회원탈퇴">회원탈퇴</button>

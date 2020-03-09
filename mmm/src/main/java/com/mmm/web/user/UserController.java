@@ -192,7 +192,7 @@ public class UserController {
 		session.setAttribute("user", newUser);
 		
 		
-		return "redirect:/mypage/mypage?condition=0";
+		return "redirect:/mypage/mypage?condition=99";
 	}
 
 
@@ -293,29 +293,36 @@ public class UserController {
 			System.out.println("Userrrrrrrrrrrr"+user);
 			User dbUser = userService.getUserId(user.getUserId());
 			
+			System.out.println("/user/login dbUser : "+user);
 			//회원정보가 없거나  비회원일 경우
 			  if(dbUser == null || dbUser.getRole().trim().equals("unUser")) {
-				  
-				  return "redirect:/user/login.jsp?status=failed"; 
+				  System.out.println("/user/login 회원정보가 없거나  비회원일 경우");
+				  return "redirect:/user/login?status=failed"; 
 			  }
 			  
 			 //탈퇴한 회원일 경우
 			  if(dbUser.getUserStatus() == 0) {
 				  session.setAttribute("user", dbUser);
+				  System.out.println("/user/login 탈퇴한 회원일 경우");
 				  return "redirect:/user/comebackUser.jsp?status=comeback"; 
 			  }
 		
 			
 			//회원일 경우
 			if(user.getPassword().equals(dbUser.getPassword())) {
+				System.out.println("/user/login 회원일경우");
 
 				if(session != null) {
+					System.out.println("/user/login 회원일경우 세션이 있는 경우");
 					String prevPage = (String) session.getAttribute("prevPage");
 					String[] redirectUrl = prevPage.split("8080");
 					if (redirectUrl != null) {
+						System.out.println("/user/login redirectUrl : "+redirectUrl[1]);
 						session.setAttribute("user", dbUser);
 		                session.removeAttribute("prevPage");
-		                if(redirectUrl[1].equals("/ticketing/addSeatSelect")) {
+		                if(redirectUrl[1].equals("/user/findPw")) {
+		                	return "redirect:/";
+						}else if(redirectUrl[1].equals("/ticketing/addSeatSelect")) {
 		                	return "redirect:/ticketing/addTicketing";
 		                }else if(redirectUrl[1].equals("/")) {
 		                	return "redirect:"+redirectUrl[1]+"?alarm=0";
@@ -331,7 +338,7 @@ public class UserController {
 				session.setAttribute("user", dbUser);
 				System.out.println("세션!!!!!!"+((User)session.getAttribute("user")).toString());
 			}else {//로그인 실패시 
-				return "redirect:/user/login.jsp?status=failed";
+				return "redirect:/user/login?status=failed";
 			}
 		
 		} catch (Exception e) {
@@ -435,11 +442,18 @@ public class UserController {
 	                }
 	            }
 	        }
+	        
+	        tmpPw = "m"+tmpPw+"!";
+	   
 	        System.out.println("임시비밀번호!!!"+tmpPw);
+	        
 	        //비밀번호 암호화
 			String cryptoPassword = CryptoUtil.cryptoText(tmpPw);
+			System.out.println("임시비밀번호 암호화!!!"+cryptoPassword);
 			user.setPassword(cryptoPassword);
+			System.out.println("임시비밀번호 User 111!!!"+user);
 	        userService.updateUser(user);
+	        System.out.println("임시비밀번호 User 222!!!"+user);
 	        user.setPassword(tmpPw);
 			model.addAttribute("user",user);
 			return "forward:/user/findPw.jsp";
@@ -525,7 +539,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/mypage/mypage.jsp";
+		return "redirect:/mypage/mypage?condition=99";
 	}
 		
 	
@@ -563,7 +577,7 @@ public class UserController {
 			String cryptoPassword = CryptoUtil.cryptoText(password);
 			dbUser.setPassword(cryptoPassword);
 			userService.updateUser(dbUser);
-			return "redirect:/mypage/mypage.jsp";
+			return "redirect:/mypage/mypage?condition=99";
 		}else {
 			return "redirect:/user/updatePw.jsp?status=failed";
 		}
