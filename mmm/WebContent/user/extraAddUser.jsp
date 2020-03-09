@@ -62,7 +62,11 @@
     vertical-align: middle;
     background-color: #fff;
     cursor: pointer;
-}        
+}    
+
+.font-orange {
+    color: #e63e30!important;
+}    
         
 </style>
 
@@ -242,7 +246,7 @@ $(function(){
 		<input type="hidden" class="form-control"  name="identity" value="${user.identity}" >
 		
 		  	<div class="form-group row" style="text-align: center;">
-		    	<label for="userName" class="col-sm-3 col-form-label">이름</label>
+		    	<label for="userName" class="col-sm-3 col-form-label">이름<em class="font-orange">*</em></label>
 		    	<div class="col-sm-9">
 		      		<input type="text" class="form-control" id="userName" name="userName" placeholder="이름">
 		    	</div>
@@ -276,14 +280,14 @@ $(function(){
     			</div>
 			</div>
   			<div class="form-group row" style="text-align: center;">
-    			<label for="email" class="col-sm-3 col-form-label">이메일</label>
+    			<label for="email" class="col-sm-3 col-form-label">이메일<em class="font-orange">*</em></label>
     			<div class="col-sm-9">
       				<input type="email" class="form-control" id="email" name="email" value="${user.email}" placeholder="이메일">
       				<h6 id="confirmNum2" style="margin-top:10px; color:red;"></h6>
     			</div>
   			</div> 
 			<div class="form-group row" style="text-align: center;">
-    			<label for="phone" class="col-sm-3 col-form-label">휴대전화번호</label>
+    			<label for="phone" class="col-sm-3 col-form-label">휴대전화번호<em class="font-orange">*</em></label>
     			<div class="col-sm-9">
       				<input type="text" class="form-control" id="phone" name="phone" placeholder="-없이 입력해주세요.">
       				<h6 id="confirmNum1" style="margin-top:10px; color:red;"></h6>
@@ -402,7 +406,7 @@ $(function(){
 			</div>
   			<div class="form-check" style="margin-top: 5px; margin-bottom: 5px;">
 			    <input type="checkbox" class="form-check-input" id="agreeCheck">
-			    <label class="form-check-label" for="agreeCheck">개인정보수집 및 이용 동의</label>
+			    <label class="form-check-label" for="agreeCheck">개인정보수집 및 이용 동의<em class="font-orange">*</em></label>
 			</div>	
 			<div class="form-group row">
 				<div class="col-sm-12 text-center">
@@ -901,8 +905,8 @@ $(function(){
 	        ...
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal2" onClick='otherModal()'>닫기</button>
-	        <button type="button" class="btn btn-primary" id="addTheater">선호극장 추가하기</button>
+	        <button type="button" class="button large" style="margin-right: 10px;" data-dismiss="modal2" onClick='otherModal()'>닫기</button>
+	        <button type="button" class="button large purple" style="color: #333; " id="addTheater">선호극장 추가하기</button>
 	      </div>
 	    </div>
 	  </div>

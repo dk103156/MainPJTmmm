@@ -19,6 +19,9 @@
 
 <!--  ///////////////////////// CSS ////////////////////////// -->
 <style>
+body {
+    font-family:'Noto Sans KR', sans-serif;
+}
 </style>
 
 <title>mmm</title>
@@ -157,7 +160,7 @@ $(function(){
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header" style="height: 48px; text-align: center;  background: #fee50e;">
-				<h3 class="tit" id="exampleModalLabel" style="font-size: 1.2em;">로그인</h3>
+				<h3 class="tit" id="exampleModalLabel" style="font-size: 1.2em;">비회원 예매 확인</h3>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -176,7 +179,7 @@ $(function(){
 					
 								<div class="link" style="padding-top: 20px; padding-bottom: 30px; text-align: center;">
 									<a href="/user/userAuthorization?type=findPw" title="PW 찾기 선택" style=" margin-left:10px; position: relative; color: #333;">PW 찾기<!--ID/PW 찾기--></a>
-									<a href="/user/userAuthorization?type=addUnUserView" title="비회원 예매"style=" margin-left:10px; position: relative; color: #333;">비회원 예매<!--비회원 예매--></a>
+									<a href="/user/addUnUserView" title="비회원 예매"style=" margin-left:10px; position: relative; color: #333;">비회원 예매<!--비회원 예매--></a>
 								</div>
 							</div>
 						</div>
