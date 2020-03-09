@@ -101,7 +101,18 @@ button.swal2-confirm.swal2-styled {
 	border-color : #fee50e;
 	color : #333;
 }
-      
+
+#myModal > div > div > div.modal-footer > button:nth-child(1) {
+	color: #fff;
+   	background-color: #6c757d;
+   	border-color: #6c757d;	
+}
+
+#addUser > div:nth-child(13) > div > a {
+	color: #fff;
+   	background-color: #6c757d;
+   	border-color: #6c757d;		
+}      
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->

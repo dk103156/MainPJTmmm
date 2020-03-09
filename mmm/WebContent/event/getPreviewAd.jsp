@@ -729,6 +729,18 @@ function comment(currentPage){
 	
 	 .page-link {
 	 	color: #333 !important;
+	 }
+	 
+	 #myModal2 > div > div > div.modal-header {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #333;		 	
+	 }
+	 
+	 #winnerModal > div > div > div.modal-header {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #333;		 
 	 }	
 </style>
 

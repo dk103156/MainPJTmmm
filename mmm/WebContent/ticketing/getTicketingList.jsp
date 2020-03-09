@@ -126,6 +126,12 @@ div.ticketingPagination.row > div:nth-child(2) > ul {
 
 }
 
+#ticketingCancel > div > div > div.modal-header{
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #333;
+}
+
 
 </style>
 </head>

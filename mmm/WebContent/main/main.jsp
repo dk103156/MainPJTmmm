@@ -149,7 +149,7 @@
 	#cancelToast {
 		width : 300px;
 		position:fixed;
-		right:30px;
+		right:160px;
 		bottom:0px;
 		z-index:2000;
 		cursor : pointer;
@@ -392,7 +392,7 @@
 <c:if test="${ user.role eq 'user' || user.role eq 'admin'  }">	
 	<jsp:include page="/layout/sideBar.jsp"></jsp:include>
 </c:if>
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
+<div style="" class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
   <div class="toast-header">
     <i class="far fa-bell"></i>
     <strong class="mr-auto">알림</strong>

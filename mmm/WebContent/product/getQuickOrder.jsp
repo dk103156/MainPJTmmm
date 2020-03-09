@@ -35,6 +35,25 @@
 	  <link rel="stylesheet" href="/resources/css/product.css">	
 	  
 	  <title>mmm</title>
+	  
+	  <style>
+	  #QuickModal > div.modal-footer > button.btn.btn-outline-warning {
+		color: #fff;
+	   	background-color: #6c757d;
+	   	border-color: #6c757d;			  	
+	  }
+	  
+	  #toPayment {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #333;		  	
+	  }
+	  
+	  input {
+	  	border : none;
+	  }
+	  
+	  </style>
 </head>
 
 

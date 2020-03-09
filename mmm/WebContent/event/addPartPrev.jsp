@@ -88,7 +88,7 @@
 
 		$('#updateBtn').on('click', function(){
 			
-			self.location = "/user/getUser";
+			self.location = "/mypage/mypage?condition=98";
 		
 		});	
 		

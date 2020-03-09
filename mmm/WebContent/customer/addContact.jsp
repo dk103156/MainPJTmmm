@@ -169,6 +169,12 @@ $(document).ready(function() {
 	color:#545454;
 	border: 1px solid #dedede;
 	}
+	
+	#cancelBtn {
+		color: #fff;
+	   	background-color: #6c757d;
+	   	border-color: #6c757d;			
+	}
 </style>
 
 

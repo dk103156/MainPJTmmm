@@ -268,7 +268,9 @@ $(function(){
 		$("#lnb").css("display","none");
 		$("body > div.container > div > div.col-md-3").remove()
 		$("#plusPage").removeClass('col-md-9').addClass('col-md-12'); 
-
+	}else if(condition==98){
+		
+		$("#plusPage").load("/user/passwordCheck");
 	}else{
 		//$("#MypageHome").trigger("click");
 		$('.dropdown-toggle').dropdown('toggle')

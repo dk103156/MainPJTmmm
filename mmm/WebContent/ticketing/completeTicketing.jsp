@@ -51,7 +51,12 @@
 	.head-cs{
 		width: 30%;
 	}
-
+	
+	body > div.container.mb-3.border-bottom.p-3 > div:nth-child(3) > div:nth-child(3) > button {
+		color: #fff;
+	   	background-color: #6c757d;
+	   	border-color: #6c757d;		
+	}
 </style>
 </head>
 <body>

@@ -98,6 +98,18 @@
 		width: 120px;
 	    max-height: 40px;		
 	}
+	
+	#exampleModalCenter > div > div > div.modal-footer > button.btn.btn-primary {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #333;			
+	}
+	
+	#exampleModalCenter > div > div > div.modal-header {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #333;	
+	}
 	</style>
 
      <!--  ///////////////////////// JavaScript ////////////////////////// -->

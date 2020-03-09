@@ -879,7 +879,6 @@ colgroup {
     display: table-column-group;
 }
 
-<<<<<<< HEAD
 .btn-primary {
 	color : #1d2124;
 	background-color : #fee50e;
@@ -907,21 +906,49 @@ colgroup {
     padding: 0 30px;
     line-height: 44px;
 }
-=======
-.button.purple {
-    color: #fff;
-    line-height: 36px;
-    border: 0;
-    background: #fee50e;
-}
-.button.large {
-    height: 46px;
-    padding: 0 30px;
-    line-height: 44px;
+/* 취소 버튼 */
+#theaterChoice > div > div > div.modal-footer > button:nth-child(1) {
+	color: #fff;
+   	background-color: #6c757d;
+   	border-color: #6c757d;	
 }
 
->>>>>>> refs/heads/su
+#theaterChoice > div > div > div.modal-header {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #333;	
+}
 
+
+#genreChoice > div > div > div.modal-footer > button:nth-child(1) {
+	color: #fff;
+   	background-color: #6c757d;
+   	border-color: #6c757d;	
+}
+
+#genreChoice > div > div > div.modal-header {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #333;	
+}
+
+#myModal > div > div > div.modal-footer > button:nth-child(1) {
+	color: #fff;
+   	background-color: #6c757d;
+   	border-color: #6c757d;		
+}
+
+#myModalBodyButton {
+    background-color: #fee50e;
+    color: #545454;
+    border: 1px solid #dedede;	
+}
+
+#myModal > div > div > div.modal-header {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #333;		
+}
 </style>
 <script type="text/javascript">
 $(function(){
