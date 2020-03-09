@@ -33,7 +33,7 @@ body {
     position: relative;
     min-width: 1100px;
     
-    height: 135px;
+    /* height: 135px; */
     margin: 0;
     padding: 0;
 	background-color:  #333;
@@ -114,12 +114,12 @@ p.footerP {
 	    <div class="col-2 foo_div text-center">
 	    	<a href="/" class="center-div" title="MMM"><img src="/resources/image/logo/logo.png"></a>
 	    </div>
-	    <div class="col-3 logos align-self-center">	    
+	    <div class="col-3 logos align-self-center" style="padding-bottom: 10px;">	    
 	    	<a href="http://www.cgv.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/CGV.png" style="margin-right: 50px;"></a> 
 	    	<a href="https://www.lottecinema.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/LotteCinema.png" style="margin-right: 50px;"></a>
 	    	<a href="https://www.megabox.co.kr/" target="_blank"><img alt="" src="/resources/image/logo/MegaBox.jpg"></a>
 	    </div>	
-	    <div class="col-7 copyright text-right" style="top:8px;">   
+	    <div class="col-7 copyright text-right" style="margin-top: 15px;">   
 	    	<p class="footerP">   
 	    	   <span>(04377)서울특별시 용산구 한강대로 23길 55, 아이파크몰 6층(한강로동)</span>
 	    	</p>
