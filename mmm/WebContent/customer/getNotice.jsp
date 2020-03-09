@@ -22,7 +22,7 @@
 		
 		
 		$('#delBtn').on("click", function(){
-			alert('delBtn버튼이 클릭됨');
+			//alert('delBtn버튼이 클릭됨');
 			var articleNo = ${article.articleNo};
 			console.log(articleNo)
 			self.location="/customer/deleteNotice?articleNo="+articleNo;
@@ -30,7 +30,7 @@
 		
 		
 		$('#okBtn').on("click", function(){
-			alert('ok버튼이 클릭됨');
+			//alert('ok버튼이 클릭됨');
 			self.location="/customer/getNoticeList";
 		});
 		
@@ -117,7 +117,7 @@
 	                        <thead>
 		                        <tr>
 		                        <th>${article.articleTitle}</th>
-		                        <th>${article.articleDate}</th>
+		                        <th class="text-right">${article.articleDate}</th>
 		                        </tr>
 	                        </thead>
 	                        <tbody>
@@ -147,7 +147,7 @@
 		</div>
 
 	</div>
-
+<jsp:include page="/layout/footer.jsp"></jsp:include>
  </body>
  
  </html>

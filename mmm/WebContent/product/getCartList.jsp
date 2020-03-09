@@ -31,11 +31,16 @@
   <!--     Common Css -->
   <link rel="stylesheet" href="/resources/css/product.css">
   
-<title>mmm</title>
+<style>
+
+input {
+	border: none;
+}
+</style>
 
 </head>
 <body id="body">
-
+	<jsp:include page="/layout/header.jsp"></jsp:include>
 	<div class="container">
 		<div class="row mx-0">
 			<div class="cartHeader col-12 ">
@@ -54,7 +59,7 @@
 			<div class="prodQuantityHeader col-2"><h5><span>수량</span></h5></div>
 		</div>
 		
-		<hr  style=" background-color: black; ">
+		<hr  style="background-color: black; ">
 		
 		<div class="cartContent">
 		
@@ -66,7 +71,7 @@
 			<div class="col-6"><span></span></div>
 			<div class="fianlPrice col-2">
 				<h5><span>최종가격</span></h5>
-				<input name="totalPrice" type="text" readonly>
+				<input style="display:inline; text-align:center;" size="9" name="totalPrice" type="text" readonly><span>원</span>
 			</div>			
 			<div class="col-2"><span></span>
 			<br>
@@ -84,8 +89,19 @@
 </form> 
 	
 <script>
+//천단위 콤마 String으로
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+// 콤마 찍힌 String에서 콤마제거하고 Number로
+function removeComma(str){
+     return parseInt(str.replace(/,/g,""));
+}
+
+
 $(function(){
-	
+	$('.dropdown-toggle').dropdown('toggle')
+	$('.dropdown-toggle').dropdown('hide')
 });
 $.ajaxSetup({async:false}); //전역 ajax 동기로
 	var prodNoList = new Array();	//상품 번호 
@@ -95,6 +111,7 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	var prodImageList = new Array();
 
 	<c:forEach var='i' items='${cartList }'>
+		console.log('${i}');
 		prodNoList.push('${i.cartProdNo}');
 		prodQuantityList.push('${i.cartProdQuantity}')	
 	</c:forEach>
@@ -129,8 +146,8 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 			Element+= "<span><img src='../resources/image/"+prodImageList[i]+"' width=170 height=150 ></span>"
 			Element+= "<span>"+prodNameList[i]+"</span>"
 			Element+= "</div>"
-			Element+= "<div class='prodPrice col-3'><span><input name='prodPrice' type='text' style='margin-top: 55px;' initialValue='"+prodPriceList[i]+"'value='"+prodPriceList[i]+"' readonly> 원</span></div>"
-			Element+= "<div class='prodQuantity col-2'><span><input type='number' style='margin-top: 55px;'  value='"+prodQuantityList[i]+"' min='1' step='1' max='99'> 개</span></div>" 
+			Element+= "<div class='prodPrice col-3'><span><input class='text-center' name='prodPrice' type='text' style='margin-top: 55px;' initialValue='"+prodPriceList[i]+"'value='"+numberWithCommas( prodPriceList[i] )+"' readonly> 원</span></div>"
+			Element+= "<div class='prodQuantity col-2'><span><input class='text-center' type='number' style='margin-top: 55px;'  value='"+prodQuantityList[i]+"' min='1' step='1' max='99'> 개</span></div>" 
 			Element+= "</div><hr style='background-color: black;'>"		
 			//console.log(Element)
 			
@@ -139,9 +156,9 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 	})
 	var sum=0;
 	$("input[name=prodPrice]").each( (index,value) => {
-		sum += parseInt( $(value).val() )
+		sum += parseInt( removeComma( $(value).val() ) )
 	});
-	$("input[name=totalPrice]").val(sum)
+	$("input[name=totalPrice]").val( numberWithCommas(sum) )
 	
 	
 	$("input[type=number]").on("change",function(){
@@ -149,20 +166,20 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 		var index = $("input[type=number]").index( $(this) )
 		var price = parseInt( $($("input[type=text]")[index]).attr('initialValue') );
 		var quantity = $(this).val()
-		$($("input[type=text]")[index]).val( price * quantity );
+		$($("input[type=text]")[index]).val( numberWithCommas(price * quantity ) );
 		
 		var sum=0;
 		$("input[name=prodPrice]").each( x => {
-			sum += parseInt( $($("input[name=prodPrice]")[x]).val() )
+			sum += parseInt( removeComma( $($("input[name=prodPrice]")[x]).val() ) )
 		})
 		
-		$("input[name=totalPrice]").val(sum)
+		$("input[name=totalPrice]").val( numberWithCommas(sum) )
 		
 	});
 		
 	$("#toPayment").on("click",function(){
 		
-		var finalPrice = $("div.fianlPrice > input[type=text]").val() //최종 가격
+		var finalPrice = removeComma( $("div.fianlPrice > input[type=text]").val() ) //최종 가격
 		var finalProductNo ="";
 		var finalQuantity = "";
 		$("div.prodNo > span > kbd").each( x => {
@@ -183,9 +200,14 @@ $.ajaxSetup({async:false}); //전역 ajax 동기로
 		$("input[name=purchaseProductQuantity]").val(finalQuantity)
 		$("input[name=purchasePrice]").val(finalPrice)
 		
-		$("form#finalData").attr("action","/payment/preparePayment").attr("method","POST").submit();
+		if($("input[name=purchasePrice]").val()!=0){
+			$("form#finalData").attr("action","/payment/preparePayment").attr("method","POST").submit();
+		}else{
+			alert("장바구니에 상품이 없습니다.")
+		}
 	});	
 	
+	//장바구니 삭제하기 
 	
 	},50)
 

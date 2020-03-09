@@ -29,7 +29,7 @@ function Pagination(currentPage) {
 
 
 $(function(){
-
+	
 	$("#searchBtn").on("click", function(){
 		var searchCondition = $("#custInqStatCd").val();
 		var searchKeyword = $("input[name='searchKeyword']").val();
@@ -45,30 +45,37 @@ $(function(){
 	});
 	
 	$('#delBtn').on("click", function(){
-		var confirm_val = confirm("정말 삭제하시겠습니까?");
-		
-		if(confirm_val){
+		if( $("input[class='chBox']").prop('checked')==true ){
 			
-			var checkArr = new Array();
-			 $("input[class='chBox']:checked").each(function(){
-				    checkArr.push($(this).attr("data-articleNo"));
-				   });
-
-			 console.log(checkArr)
-			 
-				 $.ajax({
-					    url : "/customer/json/deleteContact",
-					    type : "post",
-					    data : { chbox : checkArr },
-					    success : function(result){
-					    	if(result==1){
-					    		alert('삭제완료')
-					    	}else{
-					    		alert('삭제실패')
-					    	}
-					     location.href = "/customer/getContactList";
-					    }
-					  });
+			var confirm_val = confirm("정말 삭제하시겠습니까?");
+			
+			if(confirm_val){
+				
+				var checkArr = new Array();
+				 $("input[class='chBox']:checked").each(function(){
+					    checkArr.push($(this).attr("data-articleNo"));
+					   });
+	
+				 console.log(checkArr)
+				 
+					 $.ajax({
+						    url : "/customer/json/deleteContact",
+						    type : "post",
+						    data : { chbox : checkArr },
+						    success : function(result){
+						    	if(result==1){
+						    		alert('삭제완료')
+						    	}else{
+						    		alert('삭제실패')
+						    	}
+						     location.href = "/mypage/mypage?condition=10";
+						    }
+						  });
+			}
+		}else{//end of if input checked
+			alert("지우려는 내용을 체크해주세요")	
+			
+			
 		}
 	
 		
@@ -1349,15 +1356,24 @@ input {
 	font-family: 'Noto Sans KR', sans-serif;
 	
 	}
+	
 	#delBtn:hover {
-    background-color: #fee50e;
-}
+    	background-color: #fee50e;
+    
+	}
+	
+	.page-item.active .page-link {
+    z-index: 1;
+    color: #4e4c4c !important;
+    background-color: #fee00e !important;
+    border-color: #d6cece !important;
+	}
 
 </style>
 </head>
 
 <body style="font-size : 16px; line-height : 1.5; letter-spacing: 0;">
-	
+
 <form autocomplete="off">
 <div class="container"  style="margin-top : 50px;">
 <div id="contents">
@@ -1515,5 +1531,7 @@ input {
 
 </div>
 </form>
+
+
 </body>
 </html>

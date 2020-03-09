@@ -375,7 +375,7 @@
 				        <div class="row">
 							<div class="col-md  text-center mt-1 p-1">
 								<div class="row m-2">
-									<div class="col"><h6><i class="fas fa-chart-pie font-yellow-cs"></i> 예매율 : ${movie.ticketingRate}</h6></div>
+									<div class="col"><h6><i class="fas fa-chart-pie font-yellow-cs"></i> 예매율 : ${movie.ticketingRate}%</h6></div>
 									<div class="col"><h6><i class="fas fa-star font-yellow-cs"></i> 평점 : ${movie.starRating}</h6></div>
 								</div>
 								<div class="text-left p-2">

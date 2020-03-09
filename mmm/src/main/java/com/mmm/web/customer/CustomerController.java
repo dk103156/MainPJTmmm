@@ -284,7 +284,7 @@ public class CustomerController {
 		System.out.println("resultPage>>>>>>>>>>>>>>>>>>>>>>>>>"+resultPage);
 		model.addAttribute("list",list);
 		model.addAttribute("resultPage", resultPage);
-		return "forward:/customer/getContactList.jsp";
+		return "forward:/mypage/mypage?condition=10";
 	}
 	
 	@RequestMapping(value="getContact", method=RequestMethod.GET)

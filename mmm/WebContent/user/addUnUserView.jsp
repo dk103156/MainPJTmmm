@@ -69,6 +69,13 @@ h3.tit {
 #confirmNum2 {
 	font-size : 14px;
 }
+
+button.swal2-confirm.swal2-styled {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #222;
+}	
+	
 </style>
 
 <title>mmm</title>

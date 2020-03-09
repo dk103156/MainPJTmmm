@@ -151,28 +151,33 @@ function comment(currentPage){
 	$('#commentWrite').off("click")
 	
 	$('#commentWrite').on("click", function(){
-				$.ajax({
-					
-				url: "/event/json/addExpectLine",
-				method:"POST",
-				data: JSON.stringify({
-					articleNo : $("input[name='articleNo']").val(),
-					commentType : $("input[name='commentType']").val(),
-					userId : $("input[name='userId']").val(),
-					commentContent : $("textarea[name='commentContent']").val(),
-					currentPage :currentPage,
-				}),
-				headers:{
-					"Accept" : "application/json",
-					"Content-Type" : "application/json"
-				},
-				success: function(){
-					getCommentList(currentPage);
-				},
-				error: function(status,error) {
-					alert("에러발생");
-				}//success 끝
-			}); //ajax끝
+		
+		if( $("textarea[name='commentContent']").val().length>0){
+					$.ajax({
+						
+					url: "/event/json/addExpectLine",
+					method:"POST",
+					data: JSON.stringify({
+						articleNo : $("input[name='articleNo']").val(),
+						commentType : $("input[name='commentType']").val(),
+						userId : $("input[name='userId']").val(),
+						commentContent : $("textarea[name='commentContent']").val(),
+						currentPage :currentPage,
+					}),
+					headers:{
+						"Accept" : "application/json",
+						"Content-Type" : "application/json"
+					},
+					success: function(){
+						getCommentList(currentPage);
+					},
+					error: function(status,error) {
+						alert("에러발생");
+					}//success 끝
+				}); //ajax끝
+			}else{
+				alert("내용을 입력해주세요")
+			}
 		}); //click 이벤트 끝
 }//end of comment()
 	$(function(){

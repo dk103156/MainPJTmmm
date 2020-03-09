@@ -34,7 +34,8 @@
 		
 		$('#okBtn').on("click", function(){
 // 			alert('ok버튼이 클릭됨');
-			self.location="/customer/getContactList";
+			self.location="/mypage/mypage?condition=10";
+			
 		});
 		
 		//답변달기 모달 띄우기
@@ -239,7 +240,7 @@
 		<div class="inline left">
 		<span class="align-center  ml-4" style="font-size:18px; font-weight:800px; color:white;">
 		Q. ${article.articleTitle}</span></div>
-		<div class="inline rightt date"> 
+		<div class="rightt date text-right"> 
 		<span class="mb-1" style="font-size:15px; color:white;">${article.articleDate}</span></div>
  	</div>	
  	

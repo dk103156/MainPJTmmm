@@ -86,6 +86,9 @@
  	font-size: 13px;
  	cursor : pointer;
  } 
+ input {
+ 	border: none;
+ }
 	</style>
 	<title>mmm</title>	
 </head>
@@ -153,7 +156,8 @@
 						
 						<form>
 							<fmt:formatNumber value="${product.prodPrice}" type="currency" currencySymbol="" var="i"/>
-							<input id='price' type='text' name='purchasePrice' value='${i}'  class="name text-right purchasePrice"  style="width: 120px; "readonly> 원 <br> 
+							<input id='price' type='hidden' name='purchasePrice' value='${i}'  class="name text-right purchasePrice"  style="width: 120px;" readonly> 
+							<div id='prices' class="text-right" style="width:140px;"price="${product.prodPrice}">${i} <span>원</span></div> 
 							<input id='quantity' type='number' name='purchaseProductQuantity'     class="name text-right purchaseProductQuantity"   style="width: 120px; "  value='1'  min='1' step="1"> 개
 							<input type='hidden' name='purchaseProductNo' value="${product.prodNo}">
 						</form>	
@@ -235,13 +239,20 @@
 	
 	$(function(){
 		
+		
+		
+		
 		// 갯수 변경 시 가격 변경
 		$("#quantity").on('change',function(){
 			
 			var price =parseInt('${product.prodPrice}')
-
+			
 			var quantity= parseInt( $("#quantity").val() );
+			
 			$("#price").val( numberWithCommas( price * quantity ) );
+			$("#prices").attr("price",price * quantity);
+			$("#prices").html( numberWithCommas(price * quantity)+" <span>원</span>");
+	
 		});
 		
 		$("#addCart").on("click",function(){
@@ -260,6 +271,7 @@
 		
 		//장바구니 추가 클릭
 		$("#addCart").on("click",function(){
+			alert("장바구니 추가 완료했습니다")
 			var quantity= parseInt( $("#quantity").val() );
 			var timestamp= new Date().getTime();
 			var userNo = '${user.userNo}'
@@ -280,6 +292,8 @@
 					alert("장바구니 추가 완료했습니다")
 				}// end of inner function		
 			);//end of then 
+			
+			location.reload(true);
 		});//end of click
 		
 	}); //end of function  

@@ -93,13 +93,13 @@
 #myModalBodyButton {
 	background-color: #fee50e;
 	border-color : #fee50e;
-	color : #222;
+	color : #333;
 } 
 
 button.swal2-confirm.swal2-styled {
 	background-color: #fee50e;
 	border-color : #fee50e;
-	color : #222;
+	color : #333;
 }
       
 </style>

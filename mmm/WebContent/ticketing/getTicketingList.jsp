@@ -114,6 +114,17 @@ div.ticketingPagination.row > div:nth-child(2) > ul {
     background-color: #fee50e;
     border-color: #fee50e;
 }
+
+#modalButton {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #222;
+}
+
+.page-link {
+	color: #212529;
+
+}
 </style>
 </head>
 <body id="body">
@@ -149,8 +160,7 @@ div.ticketingPagination.row > div:nth-child(2) > ul {
 											</div>
 											<div class="col-7">
 													<span class="contentMoiveName">${i.movieName}</span><br>
-													<span class="contentPinNo"><kbd>예매번호: ${i.ticketingNo}</kbd></span><br>
-													
+													<span class="contentPinNo"><kbd>예매번호: ${i.ticketingNo}</kbd></span><br>	
 													<span class="contentDate">예매일시 : ${ticketingDate} (${ticketingDay}) ${ticketingHM}</span><br>
 												<c:if test="${ cancelDate ne null}">  
 													
@@ -167,7 +177,6 @@ div.ticketingPagination.row > div:nth-child(2) > ul {
 									    		</c:if>
 												<c:if test="${ i.ticketingStatus==1 }">
 									    			<span class="contentStatus">예매취소</span>
-									    			<span class="contentCancel">취소일시 : ${cancelDate} (${cancelDay}) ${cancelHM}</span>
 									    		</c:if>									    		
 									    	</div>
 									    	<div class="afterButton col-4">
@@ -232,7 +241,7 @@ div.ticketingPagination.row > div:nth-child(2) > ul {
 					  </ul><!-- end of pagination -->
 					 </div><!-- end of middle col --> 
 					 <div class="col-4"></div>
-					 <form>
+					 <form name="contents">
 					 	<input type="hidden" id="currentPage" name="currentPage" value=""/>
 					 	<input type="hidden" id="searchCondition" name="searchCondition" value="${search.searchCondition }"/>
 					 </form>
@@ -331,7 +340,7 @@ div.ticketingPagination.row > div:nth-child(2) > ul {
   </div>
 </div>
 
-<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
+<div class="toast" style="display:none;" role="alert" aria-live="assertive" aria-atomic="true" id="cancelToast" data-animation="true" data-delay="10000">
   <div class="toast-header">
     <i class="far fa-bell"></i>
     <strong class="mr-auto">알림</strong>
@@ -367,6 +376,7 @@ function activeCancel(){
 $(function(){
 	console.log("${alarm}");
 	<c:if test="${alarm eq '1'}">
+		$('#cancelToast').css("display","block");
 		$('#cancelToast').toast('show')
 	</c:if>
 		
@@ -645,7 +655,7 @@ $(function(){
 					  			Element+= "</ul>"
 								Element+= "</div>"
 								Element+= "<div class='col-4'></div>"
-								Element+= "<form>"
+								Element+= "<form name='contents'>"
 								Element+= "<input type='hidden' id='currentPage' name='currentPage' value=''/>"
 								Element+= "<input type='hidden' id='searchCondition' name='searchCondition' value='"+data.search.searchCondition+"'/>"
 								Element+= "</form>"
@@ -770,7 +780,7 @@ $(function(){
 			  			Element+= "</ul>"
 						Element+= "</div>"
 						Element+= "<div class='col-4'></div>"
-						Element+= "<form>"
+						Element+= "<form name='contents'>"
 						Element+= "<input type='hidden' id='currentPage' name='currentPage' value=''/>"
 						Element+= "<input type='hidden' id='searchCondition' name='searchCondition' value='"+data.search.searchCondition+"'/>"
 						Element+= "</form>"
@@ -795,7 +805,7 @@ function Pagination(currentPage) {
 	$("#currentPage").val(currentPage)
 	//$("form").attr("method","POST").attr("action", "/ticketing/getTicketingList").submit();
 	
-	$("#plusPage").load("/ticketing/getTicketingList",$("#currentPage").serialize());
+	$("#plusPage").load("/ticketing/getTicketingList",$("form").serialize());
 	
 }
 

@@ -90,6 +90,13 @@ h3.tit {
     line-height: 1.1;
 }
 
+button.swal2-confirm.swal2-styled {
+	background-color: #fee50e;
+	border-color : #fee50e;
+	color : #222;
+}
+
+
 </style>
 
 <title>mmm</title>

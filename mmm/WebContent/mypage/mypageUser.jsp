@@ -879,6 +879,33 @@ colgroup {
     display: table-column-group;
 }
 
+.btn-primary {
+	color : #1d2124;
+	background-color : #fee50e;
+	border-color : #fee50e;
+}
+.btn-primary:hover {
+	color : #1d2124;
+	background-color : #fee50e;
+	border-color : #fee50e;
+}
+.btn-primary:click {
+	color : #1d2124;
+	background-color : #fee50e;
+	border-color : #fee50e;
+}
+
+.button.purple {
+    color: #333;
+    line-height: 36px;
+    border: 0;
+    background: #fee50e;
+}
+.button.large {
+    height: 46px;
+    padding: 0 30px;
+    line-height: 44px;
+}
 
 </style>
 <script type="text/javascript">
@@ -1075,8 +1102,8 @@ $(function(){
 						</div>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-				        <button type="button" class="btn btn-primary" id="addTheaterBtn">등록</button>
+				        <button type="button" class="home btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button type="button" class="home btn btn-primary" id="addTheaterBtn">등록</button>
 				      </div>
 				    </div>
 				  </div>
