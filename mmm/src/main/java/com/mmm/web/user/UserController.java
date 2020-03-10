@@ -564,19 +564,23 @@ public class UserController {
 		
 		System.out.println("/user/updatePw : POST");
 		
-		System.out.println(user);
+		System.out.println("화면단"+user.getPassword());
 		
 		//Business Logic
 		
 		User dbUser = userService.getUser(user.getUserNo());
 		
+		User sessionUser =(User)session.getAttribute("user");
 		int sessionNo = ((User)session.getAttribute("user")).getUserNo();
 		if(sessionNo == user.getUserNo()) {
 			//비밀번호 암호화
 			String password = user.getPassword();
 			String cryptoPassword = CryptoUtil.cryptoText(password);
-			dbUser.setPassword(cryptoPassword);
-			userService.updateUser(dbUser);
+			sessionUser.setPassword(cryptoPassword);
+			userService.updateUser(sessionUser);
+			session.setAttribute("user", sessionUser);
+			System.out.println("업데이트"+sessionUser.getPassword());
+			
 			return "redirect:/mypage/mypage?condition=99";
 		}else {
 			return "redirect:/user/updatePw.jsp?status=failed";

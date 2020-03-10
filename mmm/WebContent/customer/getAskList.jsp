@@ -91,7 +91,6 @@
 		.table{
 			font-size: 13px;
 			float: none;
-			margin: 0 auto;
 		}
 	
 		.page-item .active {
@@ -122,7 +121,10 @@
 	.page-link {
 		color: #333 !important;
 	}
-		
+	
+	.table td {
+		vertical-align: middle !important;
+	}	
 </style>
 </head>
 <body>
@@ -162,46 +164,42 @@
 
 <br>
 <div class="categoryBtn">
-	<div class="row">
-	<br><br>
-<!--     	<div><p class="text-dark" style="font-size:15px;"> -->
-<%-- 		전체 <i style='color:#5da3d9'> ${resultPage.totalCount} </i>건 </p> --%>
-<!-- 		</div> -->
-      <table class="table table-hover table-sm text-center col-10" >
-      
-
-        <thead class="table-active">
-          <tr>
-            <th  scope="col" align="center" style="width:100px; text-align:center;" class="align-middle">구분</th>
-            <th  scope="col" align="left" class="align-middle" >질문</th>
-          </tr>
-        </thead>
-		<tbody class="getTranInfo">
-		  <c:set var="i" value="0" />
-		  <c:forEach var="ask" items="${list}">
-			<c:set var="i" value="${ i+1 }"/>
-			<tr>
-			 
-			  <td scope="col" class="align-middle" >
-			  <c:if test="${ask.category==1}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">예매/매표</label></div></c:if>
-			  <c:if test="${ask.category==2}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">스토어</label></div></c:if>
-			  <c:if test="${ask.category==3}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">결제</label></div></c:if>
-			  <c:if test="${ask.category==4}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">할인혜택</label></div></c:if>
-			  <c:if test="${ask.category==5}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">홈페이지</label></div></c:if>
-			  <c:if test="${ask.category==6}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">이벤트</label></div></c:if>
-			  
-	  	    	<input type="hidden" id="articleNo" value="${ask.articleNo}"/>
-			  </td>
-			  <td scope="col" class="align-middle" id="" >  ${ask.articleTitle} 
-			  </td>
-			</tr>
-			<tr id="${ask.articleNo}">
-			</tr>
-          </c:forEach>
-        </tbody>
-      </table>
-      </div>
-			  <div class="askDetail"></div>
+    	<div><p class="text-dark" style="font-size:15px;"> 
+ 			전체 <i style='color:#5da3d9'> ${resultPage.totalCount} </i>건 </p> 
+ 		</div>
+ 		<div> 
+	      <table class="table table-hover table-sm text-center" >
+	        <thead class="table-active">
+	          <tr>
+	            <th  scope="col" class="align-middle text-left">구분</th>
+	            <th  scope="col" class="align-middle text-left" >질문</th>
+	          </tr>
+	        </thead>
+			<tbody class="getTranInfo">
+			  <c:set var="i" value="0" />
+			  <c:forEach var="ask" items="${list}">
+				<c:set var="i" value="${ i+1 }"/>
+				<tr>
+				 
+				  <td scope="col" class="align-middle" >
+					  <c:if test="${ask.category==1}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">예매/매표</label></div></c:if>
+					  <c:if test="${ask.category==2}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">스토어</label></div></c:if>
+					  <c:if test="${ask.category==3}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">결제</label></div></c:if>
+					  <c:if test="${ask.category==4}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">할인혜택</label></div></c:if>
+					  <c:if test="${ask.category==5}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">홈페이지</label></div></c:if>
+					  <c:if test="${ask.category==6}"><div class="text-center"><label class="btn btn-sm p-1 font-size-5" style="background-color:#fee00e;">이벤트</label></div></c:if>
+				  
+		  	    	<input type="hidden" id="articleNo" value="${ask.articleNo}"/>
+				  </td>
+				  <td scope="col" class="align-middle text-left" id="" >${ask.articleTitle}</td>
+				</tr>
+				<tr id="${ask.articleNo}">
+				</tr>
+	          </c:forEach>
+	        </tbody>
+	      </table>
+	      </div>
+	  <div class="askDetail"></div>
       </div>
 
 
@@ -323,7 +321,7 @@
 			
 				$(".askDetail").empty();
 				
-				var html ="<td colspan='2' class='p-2'><div class='inner p-2'>"+data.article.content
+				var html ="<td colspan='2' class='p-2'><div class='inner p-2 text-left'>"+data.article.content
 					html +="</div></td>"
 			
 				$("#"+data.article.articleNo).html(html)

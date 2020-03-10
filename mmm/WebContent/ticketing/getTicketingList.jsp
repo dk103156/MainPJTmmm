@@ -674,7 +674,7 @@ $(function(){
 								activeCancel()
 								detail()
 								
-								Pagination(1)
+								//Pagination(1)
 						}else{
 							$("div.ticketingPagination.row").empty();
 						}//end of if
@@ -803,7 +803,7 @@ $(function(){
 						
 						detail()
 						
-						Pagination(1)
+						//Pagination(1)
 					}else{
 						$("div.ticketingPagination.row").empty();
 					}//end of if

@@ -31,9 +31,7 @@ body {
     font-family:'Noto Sans KR', sans-serif;
 }
 
-p{
-      text-align: center;
-  }
+
   
 h3.tit {
     color: #333;

@@ -311,7 +311,7 @@
 						<div class="row mx-0">
 							<div class="col-12 row">
 								<div class="postImage col-12 mb-2 text-center">
-								<div class="img quiz">
+								<div class="img quiz" style="cursor:pointer;">
 								   <div class="content">
 									<h4>이런 퀴즈 어때요?</h4>
 								  </div>
@@ -335,7 +335,7 @@
 								   <div class="content">
 									<h4>매일매일 출석체크</h4>
 								  </div>
-								<div class="img-cover"></div>
+								<div class="img-cover" style="cursor:pointer;"></div>
 								</div>
 								</div>
 								

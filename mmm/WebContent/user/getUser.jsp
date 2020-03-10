@@ -475,6 +475,18 @@ label{
 	font-weight: normal;
 }
 
+#cancelBtn {
+	color: #fff;
+	background-color: #6c757d;
+  	border-color: #6c757d;	
+}
+
+/*회원 탈퇴 버튼 */
+#contents > div.table-wrap > table > tbody > tr:nth-child(1) > td > div > button.button.small.member-out {
+	color: #fff;
+	background-color: #6c757d;
+  	border-color: #6c757d;	
+}
 </style>
 
 <!--  ///////////////////////// JavaScript ////////////////////////// -->

@@ -24,6 +24,19 @@
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
+<head>
+<style>
+
+	button.swal2-confirm.swal2-styled {
+		background-color: #fee50e;
+		border-color : #fee50e;
+		color : #222;
+	}
+</style>
+<title>SNS 가입후에 네비게이션하는 jsp.</title>
+</head>
+<body>
+
 	<script type="text/javascript">
 		// 이동 시 부모 창 새로고침(main.jsp로 이동)과 팝업창 종료를 위한 구간 
 		$(function(){
@@ -33,17 +46,11 @@
 				 // title: 'Oops...',
 				  text: '로그인을 해주세요.'
 				}).then((result) => {  
-			opener.parent.location="/main/main";
+			opener.parent.location="/";
 			window.open("about:blank","_self").close();
 				});
 		})
 	</script>
-
-<head>
-
-<title>SNS 가입후에 네비게이션하는 jsp.</title>
-</head>
-<body>
-
+	
 </body>
 </html>

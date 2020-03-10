@@ -270,6 +270,13 @@ colgroup {
     cursor: pointer;
 }
 
+/* 취소 버튼 */
+#cancelBtn {
+		color: #fff;
+   		background-color: #6c757d;
+   		border-color: #6c757d;
+}
+
 
 
 </style>
