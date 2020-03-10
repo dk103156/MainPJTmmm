@@ -11,12 +11,11 @@ public class Movie {
 //	Field
 //	관리번호들
 	private int movieNo;
-	private String kobisCd;
-	private String naverCd;
+//	private String kobisCd;
+//	private String naverCd;
 	private String kmdbCd;
 	private int userNo;
 	
-//	kobis에서 가져오는 Data
 	private String movieTitle;
 	private String movieRating;	// 관람물 등급... 
 	private String releaseDate;
@@ -32,15 +31,15 @@ public class Movie {
 	private List<String> posters;
 	private String summary;
 	private String trailer;
-	private List<String> still;
+//	private List<String> still;
 	private List<String> keywordList;
 	
 	//우리 DB에서 가져오는 Data
-	private int rank;	// 순위.......
+//	private int rank;	// 순위.......
 	private double ticketingRate;	//예매율...
 	private int audienceCnt;
 	private int onBoxOfficeFlag; // null 이라면 예매 가능작, 1인 경우 내린 영화
-	private int dDay;
+//	private int dDay;
 	private double starRating;
 	private int wishCnt;
 	private int wishUserFlag;
@@ -74,26 +73,6 @@ public class Movie {
 
 	public void setMovieNo(int movieNo) {
 		this.movieNo = movieNo;
-	}
-
-
-	public String getKobisCd() {
-		return kobisCd;
-	}
-
-
-	public void setKobisCd(String kobisCd) {
-		this.kobisCd = kobisCd;
-	}
-
-
-	public String getNaverCd() {
-		return naverCd;
-	}
-
-
-	public void setNaverCd(String naverCd) {
-		this.naverCd = naverCd;
 	}
 
 
@@ -137,16 +116,6 @@ public class Movie {
 	}
 
 
-	public int getRunningTime() {
-		return runningTime;
-	}
-
-
-	public void setRunningTime(int runningTime) {
-		this.runningTime = runningTime;
-	}
-
-
 	public String getReleaseDate() {
 		return releaseDate;
 	}
@@ -164,6 +133,26 @@ public class Movie {
 
 	public void setGenreString(String genreString) {
 		this.genreString = genreString;
+	}
+
+
+	public List<String> getGenreList() {
+		return genreList;
+	}
+
+
+	public void setGenreList(List<String> genreList) {
+		this.genreList = genreList;
+	}
+
+
+	public int getRunningTime() {
+		return runningTime;
+	}
+
+
+	public void setRunningTime(int runningTime) {
+		this.runningTime = runningTime;
 	}
 
 
@@ -237,23 +226,23 @@ public class Movie {
 	}
 
 
-	public List<String> getStill() {
-		return still;
+	public List<String> getKeywordList() {
+		return keywordList;
 	}
 
 
-	public void setStill(List<String> still) {
-		this.still = still;
+	public void setKeywordList(List<String> keywordList) {
+		this.keywordList = keywordList;
 	}
 
 
-	public int getRank() {
-		return rank;
+	public double getTicketingRate() {
+		return ticketingRate;
 	}
 
 
-	public void setRank(int rank) {
-		this.rank = rank;
+	public void setTicketingRate(double ticketingRate) {
+		this.ticketingRate = ticketingRate;
 	}
 
 
@@ -274,16 +263,6 @@ public class Movie {
 
 	public void setOnBoxOfficeFlag(int onBoxOfficeFlag) {
 		this.onBoxOfficeFlag = onBoxOfficeFlag;
-	}
-
-
-	public int getdDay() {
-		return dDay;
-	}
-
-
-	public void setdDay(int dDay) {
-		this.dDay = dDay;
 	}
 
 
@@ -336,40 +315,11 @@ public class Movie {
 		this.starUserFlag = starUserFlag;
 	}
 
-	public List<String> getKeywordList() {
-		return keywordList;
-	}
-
-	public void setKeywordList(List<String> keywordList) {
-		this.keywordList = keywordList;
-	}
-
-	public List<String> getGenreList() {
-		return genreList;
-	}
-
-	public void setGenreList(List<String> genreList) {
-		this.genreList = genreList;
-	}
-
-	
-	public double getTicketingRate() {
-		return ticketingRate;
-	}
-
-	public void setTicketingRate(double ticketingRate) {
-		this.ticketingRate = ticketingRate;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Movie [movieNo=");
 		builder.append(movieNo);
-		builder.append(", kobisCd=");
-		builder.append(kobisCd);
-		builder.append(", naverCd=");
-		builder.append(naverCd);
 		builder.append(", kmdbCd=");
 		builder.append(kmdbCd);
 		builder.append(", userNo=");
@@ -400,20 +350,14 @@ public class Movie {
 		builder.append(summary);
 		builder.append(", trailer=");
 		builder.append(trailer);
-		builder.append(", still=");
-		builder.append(still);
 		builder.append(", keywordList=");
 		builder.append(keywordList);
-		builder.append(", rank=");
-		builder.append(rank);
 		builder.append(", ticketingRate=");
 		builder.append(ticketingRate);
 		builder.append(", audienceCnt=");
 		builder.append(audienceCnt);
 		builder.append(", onBoxOfficeFlag=");
 		builder.append(onBoxOfficeFlag);
-		builder.append(", dDay=");
-		builder.append(dDay);
 		builder.append(", starRating=");
 		builder.append(starRating);
 		builder.append(", wishCnt=");
@@ -427,7 +371,8 @@ public class Movie {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
+
 	
 	
 }
