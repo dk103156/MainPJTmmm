@@ -264,7 +264,7 @@
 // 	회원일 경우 .. 선호장르 추천...  첫줄 4번째에 배치하자 
 		if (${!empty user }) {
 // 		console.log('회원이다 선호장르 넣자')
-			
+
 				var preferMovieDisplay = '';
 				
 				preferMovieDisplay += "<div class='col-sm-6 col-md-3 mb-4'>";
@@ -333,8 +333,8 @@
 				preferMovieDisplay += "</div>";
 				preferMovieDisplay += "</div>";
 				preferMovieDisplay += "</div>";
-				
-				$('body > div.album > div > div > div:nth-child(3)').after(preferMovieDisplay);
+			
+				$('body > div > div > div > div:nth-child(3)').after(preferMovieDisplay);
 				
 // 				console.log('붙으셨습니까?');
 		}// 선호장르 추천 end
