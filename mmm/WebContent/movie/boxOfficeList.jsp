@@ -333,8 +333,8 @@
 				preferMovieDisplay += "</div>";
 				preferMovieDisplay += "</div>";
 				preferMovieDisplay += "</div>";
-			
-				$('body > div.album.py-5.bg-light > div > div > div:nth-child(3)').after(preferMovieDisplay);
+				
+				$('body > div.album > div > div > div:nth-child(3)').after(preferMovieDisplay);
 				
 // 				console.log('붙으셨습니까?');
 		}// 선호장르 추천 end
